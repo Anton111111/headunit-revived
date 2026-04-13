@@ -59,6 +59,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - Remove Native-SSL Libraries to reduce filesize
 - Add Permission Checker
 - Settings-Reset Button
+- Touch and Surface size Calibration
 
 ## Known Issues
 - **Google Maps in Portrait Mode:** Touch interactions (searching, scrolling) within Google Maps may not work as expected when using Portrait Mode on some devices. **Fix:** Try reducing the **Pixel density (DPI)** setting to **below 200** (e.g., 190) in the app settings. This often restores full functionality.

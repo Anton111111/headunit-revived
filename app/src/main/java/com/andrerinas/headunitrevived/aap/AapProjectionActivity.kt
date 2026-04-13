@@ -137,6 +137,50 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         }
     }
 
+    private val settingsReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val needsViewRecreate = intent.getBooleanExtra(QuickSettingsFragment.EXTRA_NEEDS_VIEW_RECREATE, false)
+            val needsAudioRestart = intent.getBooleanExtra(QuickSettingsFragment.EXTRA_NEEDS_AUDIO_RESTART, false)
+            val sensorRefresh = intent.getBooleanExtra(QuickSettingsFragment.EXTRA_SENSOR_REFRESH, false)
+
+            if (needsViewRecreate) {
+                recreateProjectionView()
+            }
+            if (sensorRefresh) {
+                sendBroadcast(Intent(AapService.ACTION_REFRESH_SENSORS).apply {
+                    setPackage(packageName)
+                })
+            }
+            if (needsAudioRestart) {
+                sendBroadcast(Intent(AapService.ACTION_RESTART_AUDIO).apply {
+                    setPackage(packageName)
+                })
+            }
+            
+            updateDesaturation(com.andrerinas.headunitrevived.utils.NightModeManager.isNight(context))
+            
+            if (settings.showFpsCounter && fpsTextView == null) {
+                setupFpsCounter()
+            } else if (!settings.showFpsCounter && fpsTextView != null) {
+                fpsTextView?.visibility = View.GONE
+            } else if (settings.showFpsCounter && fpsTextView != null) {
+                fpsTextView?.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun recreateProjectionView() {
+        runOnUiThread {
+            AppLog.i("Recreating projection view due to settings change...")
+            val container = findViewById<FrameLayout>(R.id.container)
+            if (::projectionView.isInitialized) {
+                container.removeView(projectionView as View)
+            }
+            isSurfaceSet = false
+            setupProjectionView()
+        }
+    }
+
     private val nightModeReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val isNight = intent.getBooleanExtra("isNight", false)
@@ -466,6 +510,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         }
         
         options.add(ExitOption(R.string.exit_dialog_background, R.drawable.ic_home, Color.LTGRAY))
+        options.add(ExitOption(R.string.exit_dialog_settings, R.drawable.ic_settings_quick, Color.LTGRAY))
 
         val adapter = object : android.widget.BaseAdapter() {
             override fun getCount(): Int = options.size
@@ -500,10 +545,19 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
                     R.string.exit_dialog_background -> {
                         moveToBackground()
                     }
+                    R.string.exit_dialog_settings -> {
+                        showQuickSettings()
+                    }
                 }
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
+    }
+
+    private fun showQuickSettings() {
+        // We will implement QuickSettingsFragment as a DialogFragment for easy overlay
+        val quickSettings = com.andrerinas.headunitrevived.main.QuickSettingsFragment()
+        quickSettings.show(supportFragmentManager, "quick_settings")
     }
 
     private fun enterPiP() {
