@@ -108,8 +108,8 @@
     <string name="debug_mode_description">切換更多日誌記錄</string>
     <string name="export_logs">匯出日誌</string>
     <string name="export_logs_description">儲存日誌以進行除錯</string>
-    <string name="use_native_ssl">使用原生 SSL</string>
-    <string name="use_native_ssl_description">使用原生 OpenSSL 函式庫 (在舊裝置上速度更快)。 需要重啟。</string>
+
+
     <string name="not_set">尚未設定</string>
     <string name="keymap_description">變更您的主機按鍵綁定</string>
 

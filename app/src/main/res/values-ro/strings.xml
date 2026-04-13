@@ -120,8 +120,8 @@
     <string name="stop_log_capture_description">Înregistrare în curs… apasă pentru a opri</string>
     <string name="export_logs">Exportă logurile</string>
     <string name="export_logs_description">Salvează logurile pentru depanare</string>
-    <string name="use_native_ssl">Folosește SSL Nativ</string>
-    <string name="use_native_ssl_description">Folosește librăria nativă OpenSSL (mai rapidă pe dispozitive vechi). Necesită repornire.</string>
+
+
     <string name="not_set">Nesetat</string>
     <string name="keymap_description">Schimbă asocierile de taste pentru Headunit</string>
 

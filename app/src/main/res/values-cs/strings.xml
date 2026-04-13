@@ -109,8 +109,8 @@
     <string name="debug_mode_description">Povolit podrobnější protokolování (logging)</string>
     <string name="export_logs">Exportovat protokoly</string>
     <string name="export_logs_description">Uložit protokoly pro účely ladění</string>
-    <string name="use_native_ssl">Použít nativní SSL</string>
-    <string name="use_native_ssl_description">Použít nativní knihovnu OpenSSL (rychlejší na starších zařízeních). Vyžaduje restart.</string>
+
+
     <string name="not_set">Nenastaveno</string>
     <string name="keymap_description">Změnit přiřazení kláves pro vaši jednotku</string>
 

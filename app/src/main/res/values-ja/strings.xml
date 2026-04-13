@@ -124,8 +124,8 @@
     <string name="stop_log_capture_description">録画中です...タップして停止</string>
     <string name="export_logs">ログをエクスポート</string>
     <string name="export_logs_description">デバッグのためにログを保存する</string>
-    <string name="use_native_ssl">Native SSLを利用する</string>
-    <string name="use_native_ssl_description">native OpenSSL libraryを利用する(古いデバイスではより高速です）。 再起動が必要です。</string>
+
+
     <string name="not_set">未設定</string>
     <string name="keymap_description">Headunitのキーバインドを変更する</string>
 

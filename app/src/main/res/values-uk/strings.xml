@@ -109,8 +109,8 @@
     <string name="debug_mode_description">Увімкнути розширене логування</string>
     <string name="export_logs">Експортувати журнал подій</string>
     <string name="export_logs_description">Зберегти журнал подій для налагодження</string>
-    <string name="use_native_ssl">Використовувати системний SSL</string>
-    <string name="use_native_ssl_description">Використовувати системний OpenSSL (швидше на старіших пристроях). Потрібне перезавантаження.</string>
+
+
     <string name="not_set">Не задано</string>
     <string name="keymap_description">Змінити призначення клавіш для вашого пристрою</string>
 

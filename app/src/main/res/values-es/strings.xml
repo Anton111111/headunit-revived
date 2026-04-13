@@ -109,8 +109,8 @@
     <string name="debug_mode_description">Activar más registro de eventos</string>
     <string name="export_logs">Exportar registros</string>
     <string name="export_logs_description">Guardar registros para depuración</string>
-    <string name="use_native_ssl">Usar SSL nativo</string>
-    <string name="use_native_ssl_description">Usar biblioteca OpenSSL nativa (más rápido en dispositivos antiguos). Requiere reinicio.</string>
+
+
     <string name="not_set">No establecido</string>
     <string name="keymap_description">Cambiar las asignaciones de teclas para tu radio</string>
 

@@ -109,8 +109,8 @@
     <string name="debug_mode_description">Ativa mais registros de log</string>
     <string name="export_logs">Exportar logs</string>
     <string name="export_logs_description">Salvar logs para depuração</string>
-    <string name="use_native_ssl">Usar SSL nativo</string>
-    <string name="use_native_ssl_description">Usa a biblioteca nativa do OpenSSL (mais rápido em dispositivos antigos). Requer reinício.</string>
+
+
     <string name="not_set">Não definido</string>
     <string name="keymap_description">Altere os atalhos de teclas da sua central multimídia</string>
 

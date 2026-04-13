@@ -108,8 +108,8 @@
     <string name="debug_mode_description">Meer logboekregistratie inschakelen/uitschakelen</string>
     <string name="export_logs">Logs exporteren</string>
     <string name="export_logs_description">Logs opslaan voor debugging</string>
-    <string name="use_native_ssl">Gebruik Native SSL</string>
-    <string name="use_native_ssl_description">Gebruik de native OpenSSL-bibliotheek (sneller op oudere apparaten). Vereist een herstart.</string>
+
+
     <string name="not_set">Niet ingesteld</string>
     <string name="keymap_description">Wijzig de toetsencombinaties voor uw autoradio.</string>
 

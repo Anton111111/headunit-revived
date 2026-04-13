@@ -109,8 +109,8 @@
     <string name="debug_mode_description">تفعيل المزيد من السجلات</string>
     <string name="export_logs">تصدير السجلات</string>
     <string name="export_logs_description">حفظ السجلات لأغراض التصحيح</string>
-    <string name="use_native_ssl">استخدام SSL الأصلي</string>
-    <string name="use_native_ssl_description">استخدام مكتبة OpenSSL الأصلية (أسرع على الأجهزة القديمة). يتطلب إعادة التشغيل.</string>
+
+
     <string name="not_set">غير محدد</string>
     <string name="keymap_description">تغيير اختصارات المفاتيح لوحدة الرأس</string>
 

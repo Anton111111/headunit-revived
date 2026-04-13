@@ -109,8 +109,8 @@
     <string name="debug_mode_description">Włącz bardziej szczegółowe logowanie</string>
     <string name="export_logs">Eksportuj logi</string>
     <string name="export_logs_description">Zapisz logi do debugowania</string>
-    <string name="use_native_ssl">Użyj natywnego SSL</string>
-    <string name="use_native_ssl_description">Użyj natywnej bibliotei OpenSSL (szybsze na starszych urządzeniach). Wymaga restartu.</string>
+
+
     <string name="not_set">Nie ustawiono</string>
     <string name="keymap_description">Zmień przypisanie klawiszy dla Twojej jednostki</string>
 

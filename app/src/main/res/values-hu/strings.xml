@@ -108,8 +108,8 @@
     <string name="debug_mode_description">Naplózás ki- és bekapcsolása.</string>
     <string name="export_logs">Naplók exportálása</string>
     <string name="export_logs_description">Naplók mentése hibakereséshez.</string>
-    <string name="use_native_ssl">Natív SSL használata</string>
-    <string name="use_native_ssl_description">Natív OpenSSL könyvtár használata (régebbi eszközökön gyorsabb).</string>
+
+
     <string name="not_set">Nincs beállítva</string>
     <string name="keymap_description">A fejegység gombkiosztásának módosítása.</string>
 

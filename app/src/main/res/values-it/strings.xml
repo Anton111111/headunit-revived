@@ -124,8 +124,8 @@
     <string name="stop_log_capture_description">Registrazione in corso… tocca per fermare</string>
     <string name="export_logs">Esporta Log</string>
     <string name="export_logs_description">Salva i log per il debug</string>
-    <string name="use_native_ssl">Usa SSL Nativo</string>
-    <string name="use_native_ssl_description">Usa la libreria nativa OpenSSL (più veloce sui dispositivi più vecchi). Richiede il riavvio.</string>
+
+
     <string name="not_set">Non impostato</string>
     <string name="keymap_description">Cambia le associazioni dei tasti per la tua Headunit</string>
 
