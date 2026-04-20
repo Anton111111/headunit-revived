@@ -360,6 +360,10 @@ class Settings(context: Context) {
         get() = prefs.getBoolean("auto-start-on-usb", false)
         set(value) { prefs.edit().putBoolean("auto-start-on-usb", value).apply() }
 
+    var autoStartNativeWifi: Boolean
+        get() = prefs.getBoolean("auto-connect-native-wifi", true)
+        set(value) { prefs.edit().putBoolean("auto-connect-native-wifi", value).apply() }
+
     var autoStartOnBoot: Boolean
         get() = prefs.getBoolean("auto-start-on-boot", false)
         set(value) { prefs.edit().putBoolean("auto-start-on-boot", value).apply() }
@@ -500,11 +504,13 @@ class Settings(context: Context) {
         const val AUTO_CONNECT_LAST_SESSION = "last-session"
         const val AUTO_CONNECT_SELF_MODE = "self-mode"
         const val AUTO_CONNECT_SINGLE_USB = "single-usb"
+        const val AUTO_CONNECT_NATIVE_WIFI = "native-wifi"
 
         val DEFAULT_AUTO_CONNECT_ORDER = listOf(
             AUTO_CONNECT_LAST_SESSION,
             AUTO_CONNECT_SELF_MODE,
-            AUTO_CONNECT_SINGLE_USB
+            AUTO_CONNECT_SINGLE_USB,
+            AUTO_CONNECT_NATIVE_WIFI
         )
 
         private const val DEVICE_PREFS_NAME = "settings_device_protected"

@@ -50,7 +50,8 @@ class AutoConnectFragment : Fragment() {
         initialEnabled = mapOf(
             Settings.AUTO_CONNECT_LAST_SESSION to settings.autoConnectLastSession,
             Settings.AUTO_CONNECT_SELF_MODE to settings.autoStartSelfMode,
-            Settings.AUTO_CONNECT_SINGLE_USB to settings.autoConnectSingleUsbDevice
+            Settings.AUTO_CONNECT_SINGLE_USB to settings.autoConnectSingleUsbDevice,
+            Settings.AUTO_CONNECT_NATIVE_WIFI to settings.autoStartNativeWifi
         )
 
         // Build method list in priority order
@@ -87,6 +88,7 @@ class AutoConnectFragment : Fragment() {
             Settings.AUTO_CONNECT_LAST_SESSION -> R.string.auto_connect_last_session to R.string.auto_connect_last_session_description
             Settings.AUTO_CONNECT_SELF_MODE -> R.string.auto_start_self_mode to R.string.auto_start_self_mode_description
             Settings.AUTO_CONNECT_SINGLE_USB -> R.string.auto_connect_single_usb to R.string.auto_connect_single_usb_description
+            Settings.AUTO_CONNECT_NATIVE_WIFI -> R.string.auto_start_native_wifi to R.string.auto_start_native_wifi_description
             else -> null
         }
     }
@@ -159,6 +161,7 @@ class AutoConnectFragment : Fragment() {
         enabledStates[Settings.AUTO_CONNECT_LAST_SESSION]?.let { settings.autoConnectLastSession = it }
         enabledStates[Settings.AUTO_CONNECT_SELF_MODE]?.let { settings.autoStartSelfMode = it }
         enabledStates[Settings.AUTO_CONNECT_SINGLE_USB]?.let { settings.autoConnectSingleUsbDevice = it }
+        enabledStates[Settings.AUTO_CONNECT_NATIVE_WIFI]?.let { settings.autoStartNativeWifi = it }
 
         // Update snapshot
         initialOrder = orderedIds.toList()

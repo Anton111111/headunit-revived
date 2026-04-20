@@ -625,7 +625,8 @@ class AapService : Service(), UsbReceiver.Listener {
             }
         }
         
-        initWifiModeWithOptionalWait()
+        // Wi‑Fi initialization is controlled by HomeFragment's auto-connect priority
+        // and manual UI actions. Do not auto-start Wi‑Fi here.
         wifiDirectManager?.setCredentialsListener { ssid, psk, ip, bssid ->
             val settings = App.provide(this).settings
             if (settings.wifiConnectionMode == 3) {
@@ -641,7 +642,7 @@ class AapService : Service(), UsbReceiver.Listener {
         carKeyReceiver = CarKeyReceiver()
         silentAudioPlayer = SilentAudioPlayer(this)
 
-        initWifiMode()
+        // Do not auto-init Wi‑Fi here; USB check still runs so wired devices get priority
         checkAlreadyConnectedUsb()
         registerNetworkMonitor()
 
@@ -748,6 +749,11 @@ class AapService : Service(), UsbReceiver.Listener {
         isSwitchingToAccessory.set(false)
         updateNotification()
         acquireWifiLock()
+
+        // Clear any in-progress auto-connect marker when a connection is established.
+        currentAutoConnectMethod = null
+        deferredUsbCheckJob?.cancel()
+        autoConnectMethodTimeoutJob?.cancel()
 
         // Start silent audio hack to keep media focus (helps with steering wheel buttons)
         silentAudioPlayer?.start()
@@ -901,7 +907,12 @@ class AapService : Service(), UsbReceiver.Listener {
                 nativeAaHandshakeManager?.stop()
                 serviceScope.launch {
                     delay(1500) // Give hardware time to settle before re-initializing P2P
-                    initWifiMode(force = true) 
+                    val canAutoStartWireless = settings.autoStartNativeWifi && (Settings.AUTO_CONNECT_NATIVE_WIFI in settings.autoConnectPriorityOrder)
+                    if (canAutoStartWireless) {
+                        initWifiMode(force = true)
+                    } else {
+                        AppLog.i("AapService: Skipping Wi‑Fi re-init after disconnect (auto-start disabled or not in priority order)")
+                    }
                 }
             }
 
@@ -931,6 +942,11 @@ class AapService : Service(), UsbReceiver.Listener {
         val settings = App.provide(this).settings
 
         if (wirelessServer != null) {
+            val canAutoStartWireless = settings.autoStartNativeWifi && (Settings.AUTO_CONNECT_NATIVE_WIFI in settings.autoConnectPriorityOrder)
+            if (!canAutoStartWireless) {
+                AppLog.i("AapService: Disconnected. Wireless server present but native-wifi auto-start disabled; not restarting discovery.")
+                return
+            }
             AppLog.i("AapService: Disconnected. Restarting discovery loop in 2s...")
             serviceScope.launch {
                 delay(2000)
@@ -972,10 +988,15 @@ class AapService : Service(), UsbReceiver.Listener {
         if (!state.isClean) {
             val mode = settings.wifiConnectionMode
             if (mode == 1 && lastType != Settings.CONNECTION_TYPE_USB) {
-                AppLog.i("AapService: Unclean WiFi disconnect in Auto Mode. Retrying discovery in 2s...")
-                serviceScope.launch {
-                    delay(2000)
-                    if (!commManager.isConnected) startDiscovery(oneShot = true)
+                val canAutoStartWireless = settings.autoStartNativeWifi && (Settings.AUTO_CONNECT_NATIVE_WIFI in settings.autoConnectPriorityOrder)
+                if (canAutoStartWireless) {
+                    AppLog.i("AapService: Unclean WiFi disconnect in Auto Mode. Retrying discovery in 2s...")
+                    serviceScope.launch {
+                        delay(2000)
+                        if (!commManager.isConnected) startDiscovery(oneShot = true)
+                    }
+                } else {
+                    AppLog.i("AapService: Unclean WiFi disconnect but native-wifi auto-start disabled; skipping retry.")
                 }
             }
         }
@@ -1390,7 +1411,20 @@ class AapService : Service(), UsbReceiver.Listener {
 
         when (intent?.action) {
             ACTION_START_SELF_MODE       -> startSelfMode()
-            ACTION_START_WIRELESS        -> initWifiMode()
+            ACTION_START_WIRELESS        -> {
+                // If caller provided an auto-connect method label, respect it so
+                // we can coordinate with USB handling (prefer higher-priority).
+                val method = intent?.getStringExtra(EXTRA_AUTO_CONNECT_METHOD)
+                if (!method.isNullOrEmpty()) {
+                    currentAutoConnectMethod = method
+                    autoConnectMethodTimeoutJob?.cancel()
+                    autoConnectMethodTimeoutJob = serviceScope.launch {
+                        delay(20_000) // safety timeout: clear after 20s
+                        currentAutoConnectMethod = null
+                    }
+                }
+                initWifiMode()
+            }
             ACTION_START_WIRELESS_SCAN   -> {
                 val settings = App.provide(this).settings
                 val mode = settings.wifiConnectionMode
@@ -1585,6 +1619,23 @@ class AapService : Service(), UsbReceiver.Listener {
      *              for the startup scan in [onCreate].
      */
     private fun checkAlreadyConnectedUsb(force: Boolean = false) {
+        // If an auto-connect attempt for a higher-priority method is currently
+        // in progress, delay USB handling briefly so the higher-priority attempt
+        // can complete. HomeFragment passes the method via EXTRA_AUTO_CONNECT_METHOD.
+        currentAutoConnectMethod?.let { currentMethod ->
+            try {
+                val settings = App.provide(this).settings
+                val order = settings.autoConnectPriorityOrder
+                val currentIndex = order.indexOf(currentMethod).let { if (it == -1) Int.MAX_VALUE else it }
+                val usbIndex = order.indexOf(Settings.AUTO_CONNECT_SINGLE_USB).let { if (it == -1) Int.MAX_VALUE else it }
+                if (currentIndex < usbIndex) {
+                    // A higher-priority method is running; postpone USB check.
+                    AppLog.i("AapService: Delaying USB auto-check because $currentMethod has higher priority")
+                    scheduleDeferredUsbCheck()
+                    return
+                }
+            } catch (_: Exception) {}
+        }
         val settings = App.provide(this).settings
         val lastSession = settings.autoConnectLastSession
         val singleUsb = settings.autoConnectSingleUsbDevice
@@ -1704,6 +1755,19 @@ class AapService : Service(), UsbReceiver.Listener {
         } else {
             AppLog.i("Single USB auto-connect: device found but no permission, requesting...")
             requestUsbPermission(device)
+        }
+    }
+
+    // Current auto-connect method requested by HomeFragment (or null).
+    private var currentAutoConnectMethod: String? = null
+    private var deferredUsbCheckJob: kotlinx.coroutines.Job? = null
+    private var autoConnectMethodTimeoutJob: kotlinx.coroutines.Job? = null
+
+    private fun scheduleDeferredUsbCheck(delayMs: Long = 5000L) {
+        deferredUsbCheckJob?.cancel()
+        deferredUsbCheckJob = serviceScope.launch {
+            delay(delayMs)
+            checkAlreadyConnectedUsb(force = true)
         }
     }
 
@@ -2257,6 +2321,9 @@ class AapService : Service(), UsbReceiver.Listener {
          * does nothing for this action.
          */
         const val ACTION_CONNECT_SOCKET            = "com.andrerinas.headunitrevived.ACTION_CONNECT_SOCKET"
+
+        /** Extra: indicates which auto-connect method started a given action (e.g. from HomeFragment). */
+        const val EXTRA_AUTO_CONNECT_METHOD = "com.andrerinas.headunitrevived.EXTRA_AUTO_CONNECT_METHOD"
 
         /** Max handshake failures on a stale accessory device before forcing AOA re-enumeration. */
         private const val MAX_STALE_ACCESSORY_RETRIES = 1

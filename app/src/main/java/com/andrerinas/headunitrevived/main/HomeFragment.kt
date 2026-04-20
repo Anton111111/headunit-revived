@@ -62,6 +62,7 @@ class HomeFragment : Fragment() {
     private lateinit var self_mode_text: TextView
     private var hasAttemptedAutoConnect = false
     private var hasAttemptedSingleUsbAutoConnect = false
+    private var hasAttemptedWireless = false
     private var activeDialog: androidx.appcompat.app.AlertDialog? = null
 
     private fun updateWifiButtonFeedback(scanning: Boolean) {
@@ -132,6 +133,16 @@ class HomeFragment : Fragment() {
                         attemptSingleUsbAutoConnect()
                     }
                 }
+                Settings.AUTO_CONNECT_NATIVE_WIFI -> {
+                    if (appSettings.autoStartNativeWifi && !hasAttemptedWireless && !commManager.isConnected) {
+                        hasAttemptedWireless = true
+                        AppLog.i("Auto-connect: Starting Native Wi‑Fi (per priority)")
+                        ContextCompat.startForegroundService(requireContext(), Intent(requireContext(), AapService::class.java).apply {
+                            action = AapService.ACTION_START_WIRELESS
+                            putExtra(AapService.EXTRA_AUTO_CONNECT_METHOD, Settings.AUTO_CONNECT_NATIVE_WIFI)
+                        })
+                    }
+                }
             }
         }
     }
@@ -191,6 +202,7 @@ class HomeFragment : Fragment() {
                     lifecycleScope.launch(Dispatchers.IO) { App.provide(ctx).commManager.connect(ip, 5277) }
                     ContextCompat.startForegroundService(requireContext(), Intent(requireContext(), AapService::class.java).apply {
                         action = AapService.ACTION_CONNECT_SOCKET
+                        putExtra(AapService.EXTRA_AUTO_CONNECT_METHOD, Settings.AUTO_CONNECT_LAST_SESSION)
                     })
                 }
             }
