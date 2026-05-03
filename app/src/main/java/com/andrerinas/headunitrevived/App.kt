@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.os.UserManager
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.multidex.MultiDex
@@ -34,22 +35,27 @@ class App : Application() {
             ConscryptInitializer.initialize()
         }
 
-        val settings = Settings(this) // Create a Settings instance
-        AppLog.init(settings) // Initialize AppLog with settings for conditional logging
+        if (isUserUnlocked()) {
+            val settings = Settings(this) // Create a Settings instance
+            AppLog.init(settings) // Initialize AppLog with settings for conditional logging
 
-        // Sync auto-start settings to device-protected storage so that
-        // BootCompleteReceiver, UsbAttachedActivity, and AutoStartReceiver
-        // can read them during locked boot (before user unlock)
-        Settings.syncAutoStartOnBootToDeviceStorage(this, settings.autoStartOnBoot)
-        Settings.syncAutoStartOnUsbToDeviceStorage(this, settings.autoStartOnUsb)
-        Settings.syncAutoStartBtMacToDeviceStorage(this, settings.autoStartBluetoothDeviceMac)
+            // Sync auto-start settings to device-protected storage so that
+            // BootCompleteReceiver, UsbAttachedActivity, and AutoStartReceiver
+            // can read them during locked boot (before user unlock)
+            Settings.syncAutoStartOnBootToDeviceStorage(this, settings.autoStartOnBoot)
+            Settings.syncAutoStartOnUsbToDeviceStorage(this, settings.autoStartOnUsb)
+            Settings.syncAutoStartBtMacToDeviceStorage(this, settings.autoStartBluetoothDeviceMac)
 
-        // Apply app theme
-        if (AppThemeManager.isStaticMode(settings.appTheme)) {
-            AppThemeManager.applyStaticTheme(settings)
+            // Apply app theme
+            if (AppThemeManager.isStaticMode(settings.appTheme)) {
+                AppThemeManager.applyStaticTheme(settings)
+            } else {
+                appThemeManager = AppThemeManager(this, settings)
+                appThemeManager?.start()
+            }
         } else {
-            appThemeManager = AppThemeManager(this, settings)
-            appThemeManager?.start()
+            AppLog.init(null) // Initialize with default logging if locked
+            AppLog.w("App started in Direct Boot mode (locked). Settings access deferred.")
         }
 
         if (ConscryptInitializer.isAvailable()) {
@@ -85,6 +91,15 @@ class App : Application() {
 
         // Register the main broadcast receiver safely for Android 14+ using ContextCompat
         ContextCompat.registerReceiver(this, AapBroadcastReceiver(), AapBroadcastReceiver.filter, ContextCompat.RECEIVER_NOT_EXPORTED)
+    }
+
+    private fun isUserUnlocked(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val userManager = getSystemService(Context.USER_SERVICE) as UserManager
+            userManager.isUserUnlocked
+        } else {
+            true
+        }
     }
 
     companion object {

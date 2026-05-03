@@ -6,6 +6,8 @@ import android.content.Intent
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import android.os.Bundle
+import android.os.UserManager
+import android.os.Build
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.App
@@ -54,12 +56,17 @@ class UsbAttachedActivity : Activity() {
             return
         }
 
-        val settings = Settings(this)
+        val isLocked = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && 
+                      !(getSystemService(Context.USER_SERVICE) as UserManager).isUserUnlocked
 
-        if (App.provide(this).commManager.connectionState.value is CommManager.ConnectionState.TransportStarted) {
-            AppLog.e("Thread already running")
-            finish()
-            return
+        val settings = if (!isLocked) Settings(this) else null
+
+        if (!isLocked) {
+            if (App.provide(this).commManager.connectionState.value is CommManager.ConnectionState.TransportStarted) {
+                AppLog.e("Thread already running")
+                finish()
+                return
+            }
         }
 
         if (UsbDeviceCompat.isInAccessoryMode(device)) {
@@ -98,8 +105,14 @@ class UsbAttachedActivity : Activity() {
             }
         }
 
-        if (!autoStartOnUsb && !settings.isConnectingDevice(deviceCompat)) {
+        if (settings != null && !autoStartOnUsb && !settings.isConnectingDevice(deviceCompat)) {
             AppLog.i("Skipping device ${deviceCompat.uniqueName} (not allowed and USB auto-start disabled)")
+            finish()
+            return
+        }
+        
+        if (isLocked && !autoStartOnUsb) {
+            AppLog.w("Device is locked and USB auto-start is disabled. Cannot check allowed devices. Finishing.")
             finish()
             return
         }
@@ -134,7 +147,10 @@ class UsbAttachedActivity : Activity() {
 
         AppLog.i(UsbDeviceCompat.getUniqueName(device))
 
-        if (App.provide(this).commManager.connectionState.value !is CommManager.ConnectionState.TransportStarted) {
+        val isLocked = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && 
+                      !(getSystemService(Context.USER_SERVICE) as UserManager).isUserUnlocked
+
+        if (!isLocked && App.provide(this).commManager.connectionState.value !is CommManager.ConnectionState.TransportStarted) {
             if (UsbDeviceCompat.isInAccessoryMode(device)) {
                 AppLog.e("Usb in accessory mode")
                 ContextCompat.startForegroundService(this, Intent(this, AapService::class.java).apply {

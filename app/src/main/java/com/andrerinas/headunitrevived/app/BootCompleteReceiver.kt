@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.aap.AapService
 import com.andrerinas.headunitrevived.utils.AppLog
 import com.andrerinas.headunitrevived.utils.Settings
+import android.os.UserManager
+import android.os.Build
 
 class BootCompleteReceiver : BroadcastReceiver() {
 
@@ -15,6 +17,14 @@ class BootCompleteReceiver : BroadcastReceiver() {
         if (action !in BOOT_ACTIONS) return
 
         AppLog.i("Boot auto-start: received action=$action")
+
+        val isLocked = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && 
+                      !(context.getSystemService(Context.USER_SERVICE) as UserManager).isUserUnlocked
+
+        if (isLocked) {
+            AppLog.w("BootCompleteReceiver: Device is locked. Cannot start AapService yet. Waiting for user unlock.")
+            return
+        }
 
         val bootEnabled = Settings.isAutoStartOnBootEnabled(context)
         val screenOnEnabled = Settings.isAutoStartOnScreenOnEnabled(context)
@@ -54,6 +64,7 @@ class BootCompleteReceiver : BroadcastReceiver() {
             // Standard Android boot
             Intent.ACTION_BOOT_COMPLETED,
             Intent.ACTION_LOCKED_BOOT_COMPLETED,
+            Intent.ACTION_USER_UNLOCKED,
             // Generic / OEM quick boot
             "android.intent.action.QUICKBOOT_POWERON",
             "com.htc.intent.action.QUICKBOOT_POWERON",

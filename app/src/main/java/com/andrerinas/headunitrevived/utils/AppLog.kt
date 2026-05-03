@@ -26,7 +26,7 @@ object AppLog {
 
     private var settings: Settings? = null
 
-    fun init(settings: Settings) {
+    fun init(settings: Settings?) {
         this.settings = settings
     }
 

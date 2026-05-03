@@ -13,7 +13,16 @@ import com.andrerinas.headunitrevived.connection.UsbDeviceCompat
 
 class Settings(context: Context) {
 
-    private val prefs: SharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+    private val _prefs: SharedPreferences? by lazy {
+        try {
+            context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private val prefs: SharedPreferences
+        get() = _prefs ?: throw IllegalStateException("SharedPreferences in credential encrypted storage are not available until after user is unlocked")
 
     fun isConnectingDevice(deviceCompat: UsbDeviceCompat): Boolean {
         val allowDevices = prefs.getStringSet("allow-devices", null) ?: return false

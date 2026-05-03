@@ -13,6 +13,8 @@ import com.andrerinas.headunitrevived.contract.KeyIntent
 import com.andrerinas.headunitrevived.contract.LocationUpdateIntent
 import com.andrerinas.headunitrevived.contract.MediaKeyIntent
 import com.andrerinas.headunitrevived.contract.ProjectionActivityRequest
+import android.os.UserManager
+import android.os.Build
 
 class AapBroadcastReceiver : BroadcastReceiver() {
 
@@ -27,6 +29,11 @@ class AapBroadcastReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
+        val isLocked = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && 
+                      !(context.getSystemService(Context.USER_SERVICE) as UserManager).isUserUnlocked
+        
+        if (isLocked) return
+
         val component = App.provide(context)
         if (intent.action == LocationUpdateIntent.action) {
             val location = LocationUpdateIntent.extractLocation(intent)
