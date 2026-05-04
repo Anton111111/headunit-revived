@@ -24,6 +24,9 @@ class AapNavigation(
     private var lastTurnDetail: NavigationStatus.NextTurnDetail? = null
     private var currentStreet: String = ""
 
+    private var lastNavState: NavigationStatus.NavigationState? = null
+    private var lastCurrentPosition: NavigationStatus.NavigationCurrentPosition? = null
+
     fun process(message: AapMessage): Boolean {
         if (message.channel != Channel.ID_NAV) return false
 
@@ -68,10 +71,76 @@ class AapNavigation(
                     true
                 }
             }
+            NavigationStatus.MsgType.NAVIGATION_STATE_VALUE -> {
+                try {
+                    val state = message.parse(NavigationStatus.NavigationState.newBuilder()).build()
+                    lastNavState = state
+                    val firstStep = state.stepsList.firstOrNull()
+                    if (firstStep != null) {
+                        currentStreet = firstStep.road?.name ?: ""
+                        AppLog.d("Nav: NavigationState road=${currentStreet} type=${firstStep.maneuver?.type}")
+                        
+                        // Trigger initial broadcast for the new step
+                        processNewProtocolUpdate()
+                    }
+                    true
+                } catch (e: Exception) {
+                    AppLog.e("Nav: failed to parse NavigationState", e)
+                    true
+                }
+            }
+            NavigationStatus.MsgType.NAVIGATION_CURRENT_POSITION_VALUE -> {
+                try {
+                    val pos = message.parse(NavigationStatus.NavigationCurrentPosition.newBuilder()).build()
+                    lastCurrentPosition = pos
+                    if (pos.hasCurrentRoad() && pos.currentRoad.name.isNotBlank()) {
+                        currentStreet = pos.currentRoad.name
+                    }
+                    
+                    processNewProtocolUpdate()
+                    true
+                } catch (e: Exception) {
+                    AppLog.e("Nav: failed to parse NavigationCurrentPosition", e)
+                    true
+                }
+            }
             else -> {
                 AppLog.d("Nav: passthrough type ${message.type}")
                 false
             }
+        }
+    }
+
+    private fun processNewProtocolUpdate() {
+        val state = lastNavState ?: return
+        val pos = lastCurrentPosition
+        val firstStep = state.stepsList.firstOrNull() ?: return
+        val maneuver = firstStep.maneuver
+        
+        val distanceMeters = pos?.stepDistance?.distanceM?.toInt()
+        val timeSeconds = pos?.destinationDistancesList?.firstOrNull()?.timeToArrivalS
+        
+        val road = firstStep.road?.name ?: currentStreet
+        val nextEvent = mapNavigationTypeToNextEvent(maneuver?.type ?: NavigationStatus.NavigationManeuver.NavigationType.UNKNOWN)
+        val turnSide = mapNavigationTypeToSide(maneuver?.type ?: NavigationStatus.NavigationManeuver.NavigationType.UNKNOWN)
+        
+        val turnNumber = maneuver?.roundaboutExitNumber
+        val turnAngle = maneuver?.roundaboutExitAngle
+
+        sendNavigationBroadcast(
+            distanceMeters = distanceMeters,
+            timeSeconds = timeSeconds,
+            road = road,
+            nextEventType = nextEvent,
+            turnSide = turnSide,
+            turnNumber = turnNumber,
+            turnAngle = turnAngle
+        )
+
+        if (settings.showNavigationNotifications) {
+            val actionText = nextEventToAction(nextEvent)
+            val street = road.ifBlank { currentStreet }.ifBlank { "—" }
+            showNotification(distanceMeters = distanceMeters, action = actionText, street = street)
         }
     }
 
@@ -81,22 +150,131 @@ class AapNavigation(
         detail: NavigationStatus.NextTurnDetail?
     ) {
         val road = (detail?.road?.takeIf { it.isNotBlank() } ?: currentStreet).ifBlank { "—" }
-        val nextEventType = detail?.nextturn?.number ?: 0
+        val nextEventType = detail?.nextturn ?: NavigationStatus.NextTurnDetail.NextEvent.UNKNOWN
         val turnSide = detail?.side?.number
-        val turnNumber = detail?.takeIf { it.hasTrunnumer() }?.trunnumer
-        val turnAngle = detail?.takeIf { it.hasTurnangel() }?.turnangel
-        val actionText = detail?.let { nextEventToAction(it.nextturn) } ?: context.getString(R.string.nav_action_unknown)
-        val intent = NavigationUpdateIntent(
+        val turnNumber = detail?.takeIf { it.hasTrunnumer() }?.trunnumer?.toInt()
+        val turnAngle = detail?.takeIf { it.hasTurnangel() }?.turnangel?.toInt()
+        
+        sendNavigationBroadcast(
             distanceMeters = distanceMeters,
             timeSeconds = timeSeconds,
             road = road,
             nextEventType = nextEventType,
+            turnSide = turnSide,
+            turnNumber = turnNumber,
+            turnAngle = turnAngle
+        )
+    }
+
+    private fun sendNavigationBroadcast(
+        distanceMeters: Int?,
+        timeSeconds: Int?,
+        road: String,
+        nextEventType: NavigationStatus.NextTurnDetail.NextEvent,
+        turnSide: Int?,
+        turnNumber: Int?,
+        turnAngle: Int?
+    ) {
+        val actionText = nextEventToAction(nextEventType)
+        val intent = NavigationUpdateIntent(
+            distanceMeters = distanceMeters,
+            timeSeconds = timeSeconds,
+            road = road,
+            nextEventType = nextEventType.number,
             actionText = actionText,
             turnSide = turnSide,
             turnNumber = turnNumber,
             turnAngle = turnAngle
         )
         context.applicationContext.sendBroadcast(intent)
+    }
+
+    private fun mapNavigationTypeToNextEvent(type: NavigationStatus.NavigationManeuver.NavigationType): NavigationStatus.NextTurnDetail.NextEvent {
+        return when (type) {
+            NavigationStatus.NavigationManeuver.NavigationType.DEPART -> NavigationStatus.NextTurnDetail.NextEvent.DEPARTE
+            NavigationStatus.NavigationManeuver.NavigationType.NAME_CHANGE -> NavigationStatus.NextTurnDetail.NextEvent.NAME_CHANGE
+            NavigationStatus.NavigationManeuver.NavigationType.KEEP_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.KEEP_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SLIGHT_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SLIGHT_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.SLIGHT_TURN
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_NORMAL_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_NORMAL_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.TURN
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SHARP_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SHARP_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.SHARP_TURN
+            NavigationStatus.NavigationManeuver.NavigationType.U_TURN_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.U_TURN_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.UTURN
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SLIGHT_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SLIGHT_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_NORMAL_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_NORMAL_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SHARP_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SHARP_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_U_TURN_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_U_TURN_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.ONRAMPE
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_SLIGHT_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_SLIGHT_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_NORMAL_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_NORMAL_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.OFFRAMP
+            NavigationStatus.NavigationManeuver.NavigationType.FORK_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.FORK_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.FORME
+            NavigationStatus.NavigationManeuver.NavigationType.MERGE_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.MERGE_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.MERGE_SIDE_UNSPECIFIED -> NavigationStatus.NextTurnDetail.NextEvent.MERGE
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER -> NavigationStatus.NextTurnDetail.NextEvent.ROUNDABOUT_ENTER
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_EXIT -> NavigationStatus.NextTurnDetail.NextEvent.ROUNDABOUT_EXIT
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CW,
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CW_WITH_ANGLE,
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CCW,
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CCW_WITH_ANGLE -> NavigationStatus.NextTurnDetail.NextEvent.ROUNDABOUT_ENTER_AND_EXIT
+            NavigationStatus.NavigationManeuver.NavigationType.STRAIGHT -> NavigationStatus.NextTurnDetail.NextEvent.STRAIGHTE
+            NavigationStatus.NavigationManeuver.NavigationType.FERRY_BOAT -> NavigationStatus.NextTurnDetail.NextEvent.FERRY_BOAT
+            NavigationStatus.NavigationManeuver.NavigationType.FERRY_TRAIN -> NavigationStatus.NextTurnDetail.NextEvent.FERRY_TRAINE
+            NavigationStatus.NavigationManeuver.NavigationType.DESTINATION,
+            NavigationStatus.NavigationManeuver.NavigationType.DESTINATION_STRAIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.DESTINATION_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.DESTINATION_RIGHT -> NavigationStatus.NextTurnDetail.NextEvent.DESTINATION
+            else -> NavigationStatus.NextTurnDetail.NextEvent.UNKNOWN
+        }
+    }
+
+    private fun mapNavigationTypeToSide(type: NavigationStatus.NavigationManeuver.NavigationType): Int {
+        return when (type) {
+            NavigationStatus.NavigationManeuver.NavigationType.KEEP_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SLIGHT_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_NORMAL_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SHARP_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.U_TURN_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SLIGHT_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_NORMAL_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SHARP_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_U_TURN_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_SLIGHT_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_NORMAL_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.FORK_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.MERGE_LEFT,
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CCW,
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CCW_WITH_ANGLE,
+            NavigationStatus.NavigationManeuver.NavigationType.DESTINATION_LEFT -> NavigationStatus.NextTurnDetail.Side.LEFT_VALUE
+
+            NavigationStatus.NavigationManeuver.NavigationType.KEEP_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SLIGHT_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_NORMAL_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.TURN_SHARP_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.U_TURN_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SLIGHT_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_NORMAL_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_SHARP_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ON_RAMP_U_TURN_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_SLIGHT_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.OFF_RAMP_NORMAL_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.FORK_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.MERGE_RIGHT,
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CW,
+            NavigationStatus.NavigationManeuver.NavigationType.ROUNDABOUT_ENTER_AND_EXIT_CW_WITH_ANGLE,
+            NavigationStatus.NavigationManeuver.NavigationType.DESTINATION_RIGHT -> NavigationStatus.NextTurnDetail.Side.RIGHT_VALUE
+
+            else -> NavigationStatus.NextTurnDetail.Side.UNSPECIFIED_VALUE
+        }
     }
 
     private fun showNotification(distanceMeters: Int?, action: String, street: String) {
