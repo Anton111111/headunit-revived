@@ -26,68 +26,59 @@ object SystemUI {
 
         val controllerCompat = WindowInsetsControllerCompat(window, window.decorView)
 
-        // Handle Immersive Mode for modern APIs (30+)
+        // Handle Immersive Mode using modern Compat API
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val controller = window.insetsController
-            if (controller != null) {
-                when (mode) {
-                    Settings.FullscreenMode.IMMERSIVE, Settings.FullscreenMode.IMMERSIVE_WITH_NOTCH -> {
-                        controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                        controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                    }
-                    Settings.FullscreenMode.STATUS_ONLY -> {
-                        controller.hide(WindowInsets.Type.statusBars())
-                        controller.show(WindowInsets.Type.navigationBars())
-                        controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                    }
-                    Settings.FullscreenMode.NONE -> {
-                        controller.show(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                    }
-                }
+            window.setDecorFitsSystemWindows(false)
+        }
+
+        when (mode) {
+            Settings.FullscreenMode.IMMERSIVE, Settings.FullscreenMode.IMMERSIVE_WITH_NOTCH -> {
+                controllerCompat.hide(WindowInsetsCompat.Type.systemBars())
+                controllerCompat.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
-        } else {
-            // Legacy Flags (Jelly Bean API 16 and above)
+            Settings.FullscreenMode.STATUS_ONLY -> {
+                controllerCompat.hide(WindowInsetsCompat.Type.statusBars())
+                controllerCompat.show(WindowInsetsCompat.Type.navigationBars())
+                controllerCompat.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+            Settings.FullscreenMode.NONE -> {
+                controllerCompat.show(WindowInsetsCompat.Type.systemBars())
+            }
+        }
+
+        // Legacy Flags (Layout stability & Fallback for hide)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             @Suppress("DEPRECATION")
+            var flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or 
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or 
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            
             when (mode) {
                 Settings.FullscreenMode.IMMERSIVE, Settings.FullscreenMode.IMMERSIVE_WITH_NOTCH -> {
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-                        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
-                                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                                or View.SYSTEM_UI_FLAG_LOW_PROFILE)
+                    flags = flags or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        flags = flags or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     } else {
-                        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
-                                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                or View.SYSTEM_UI_FLAG_LOW_PROFILE
-                                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+                        // Older than KitKat: use FLAG_FULLSCREEN for reliability
+                        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                        flags = flags or View.SYSTEM_UI_FLAG_LOW_PROFILE
                     }
                 }
                 Settings.FullscreenMode.STATUS_ONLY -> {
+                    flags = flags or View.SYSTEM_UI_FLAG_FULLSCREEN
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-                        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
-                                or View.SYSTEM_UI_FLAG_LOW_PROFILE)
-                    } else {
-                        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
-                                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                or View.SYSTEM_UI_FLAG_LOW_PROFILE
-                                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+                        flags = flags or View.SYSTEM_UI_FLAG_LOW_PROFILE
                     }
                 }
                 Settings.FullscreenMode.NONE -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-                    } else {
-                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
                     }
                 }
             }
+            
+            window.decorView.systemUiVisibility = flags
         }
 
         // Fix for Non-Immersive: Force black bars on older devices
@@ -96,13 +87,13 @@ object SystemUI {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
                 if (Build.VERSION.SDK_INT < 35) {
                     window.statusBarColor = Color.BLACK
-                    if (mode == Settings.FullscreenMode.NONE) {
+                    if (mode == Settings.FullscreenMode.NONE || mode == Settings.FullscreenMode.STATUS_ONLY) {
                         window.navigationBarColor = Color.BLACK
                     }
                 }
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                if (mode == Settings.FullscreenMode.NONE) {
+                if (mode == Settings.FullscreenMode.NONE || mode == Settings.FullscreenMode.STATUS_ONLY) {
                     window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
                 }
             }
