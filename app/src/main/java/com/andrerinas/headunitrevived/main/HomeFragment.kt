@@ -179,6 +179,13 @@ class HomeFragment : Fragment() {
     private fun attemptAutoConnect() {
         val appSettings = App.provide(requireContext()).settings
 
+        // [FIX] Skip manual WiFi connection if Native AA is selected.
+        // Native AA handles its own handshake via Bluetooth/P2P.
+        if (appSettings.wifiConnectionMode == 3) {
+            AppLog.i("HomeFragment: Native AA mode active. Skipping manual auto-connect attempt.")
+            return
+        }
+
         if (!appSettings.autoConnectLastSession ||
             !appSettings.hasAcceptedDisclaimer ||
             commManager.isConnected) {

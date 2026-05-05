@@ -694,7 +694,6 @@ class AapService : Service(), UsbReceiver.Listener {
         carKeyReceiver = CarKeyReceiver()
         silentAudioPlayer = SilentAudioPlayer(this)
 
-        initWifiMode()
         checkAlreadyConnectedUsb()
         registerNetworkMonitor()
     }

@@ -60,6 +60,7 @@ class NativeAaHandshakeManager(
     private var currentPsk: String? = null
     private var currentIp: String? = null
     private var currentBssid: String? = null
+    private var pokeJob: Job? = null
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -153,7 +154,8 @@ class NativeAaHandshakeManager(
         val settings = com.andrerinas.headunitrevived.App.provide(context).settings
         val lastMac = settings.autoStartBluetoothDeviceMac
 
-        scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Wakeup")) {
+        pokeJob?.cancel()
+        pokeJob = scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Wakeup")) {
             AppLog.d("NativeAA: triggerPoke() delay starting (2s)...")
             delay(2000) // Small safety delay before connecting
 
@@ -203,7 +205,8 @@ class NativeAaHandshakeManager(
             val device = adapter.getRemoteDevice(address)
             AppLog.i("NativeAA: Manual poke requested for ${device.name} ($address)")
             
-            scope.launch(Dispatchers.IO + CoroutineName("NativeAa-ManualWakeup")) {
+            pokeJob?.cancel()
+            pokeJob = scope.launch(Dispatchers.IO + CoroutineName("NativeAa-ManualWakeup")) {
                 AppLog.i("NativeAA: Attempting manual A2DP poke to ${device.name}...")
                 try {
                     val socket = device.createRfcommSocketToServiceRecord(A2DP_SOURCE_UUID)
@@ -355,5 +358,7 @@ class NativeAaHandshakeManager(
         currentIp = null
         currentPsk = null
         currentBssid = null
+        pokeJob?.cancel()
+        pokeJob = null
     }
 }
