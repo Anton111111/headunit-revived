@@ -165,19 +165,24 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
 
             // [FIX] Robust BSSID detection for masked MACs (00:00 or 02:00)
             if (bssid == "00:00:00:00:00:00" || bssid == "02:00:00:00:00:00") {
-                // Fallback 1: Use captured localDeviceAddress (from THIS_DEVICE_CHANGED)
-                if (!localDeviceAddress.isNullOrEmpty() && localDeviceAddress != "00:00:00:00:00:00" && localDeviceAddress != "02:00:00:00:00:00") {
+                // Fallback 1: Use last known valid BSSID
+                if (!lastKnownBssid.isNullOrEmpty() && lastKnownBssid != "00:00:00:00:00:00" && lastKnownBssid != "02:00:00:00:00:00") {
+                    AppLog.i("WifiDirectManager: BSSID masked, using lastKnownBssid: $lastKnownBssid")
+                    bssid = lastKnownBssid!!
+                }
+                // Fallback 2: Use captured localDeviceAddress (from THIS_DEVICE_CHANGED or requestDeviceInfo)
+                else if (!localDeviceAddress.isNullOrEmpty() && localDeviceAddress != "00:00:00:00:00:00" && localDeviceAddress != "02:00:00:00:00:00") {
                     AppLog.i("WifiDirectManager: BSSID masked, using localDeviceAddress: $localDeviceAddress")
                     bssid = localDeviceAddress!!
                 } 
-                // Fallback 2: Use group.owner.deviceAddress
+                // Fallback 3: Use group.owner.deviceAddress
                 else {
                     val ownerAddr = group.owner?.deviceAddress
                     if (!ownerAddr.isNullOrEmpty() && ownerAddr != "00:00:00:00:00:00" && ownerAddr != "02:00:00:00:00:00") {
                         AppLog.i("WifiDirectManager: BSSID masked, using group.owner.deviceAddress: $ownerAddr")
                         bssid = ownerAddr
                     } 
-                    // Fallback 3: Shell command "ip link"
+                    // Fallback 4: Shell command "ip link"
                     else {
                         val shellMac = getMacFromShell(group.`interface`)
                         if (shellMac != null) {
