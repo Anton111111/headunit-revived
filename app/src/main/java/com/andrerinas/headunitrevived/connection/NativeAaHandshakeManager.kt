@@ -121,13 +121,9 @@ class NativeAaHandshakeManager(
                 while (isRunning && isActive) {
                     val socket = hfpServerSocket?.accept()
                     if (socket != null) {
-                        // Just consume and close, HFP is only a "presence" signal for us
-                        scope.launch(Dispatchers.IO) {
-                            try {
-                                val buf = ByteArray(1024)
-                                socket.inputStream.read(buf)
-                            } catch (e: Exception) {}
-                            finally { try { socket.close() } catch (e: Exception) {} }
+                        AppLog.i("NativeAA: HFP connection accepted from ${socket.remoteDevice.name}. Starting responder.")
+                        scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpResponder-${socket.remoteDevice.address}")) {
+                            handleHfp(socket)
                         }
                     }
                 }
@@ -135,7 +131,56 @@ class NativeAaHandshakeManager(
                 if (isRunning) AppLog.d("NativeAA: HFP Server socket closed: ${e.message}")
             }
         }
+    }
 
+    /**
+     * Minimal HFP responder to satisfy phones that require a stable HFP connection
+     * during the Android Auto Wireless handshake.
+     */
+    private suspend fun handleHfp(socket: BluetoothSocket) = withContext(Dispatchers.IO) {
+        try {
+            val input = socket.inputStream
+            val output = socket.outputStream
+            val buf = ByteArray(1024)
+            
+            AppLog.i("NativeAA: HFP responder active for ${socket.remoteDevice.name}")
+            
+            while (isRunning && isActive && socket.isConnected) {
+                if (input.available() > 0) {
+                    val read = input.read(buf)
+                    if (read == -1) break
+                    
+                    val cmd = String(buf, 0, read).trim()
+                    AppLog.d("NativeAA: HFP RX: $cmd")
+                    
+                    // Respond to standard HFP initialization commands
+                    when {
+                        cmd.contains("AT+BRSF") -> {
+                            output.write("+BRSF: 20\r\n".toByteArray())
+                            output.write("OK\r\n".toByteArray())
+                        }
+                        cmd.contains("AT+CIND=?") -> {
+                            output.write("+CIND: (\"service\",(0,1)),(\"call\",(0,1))\r\n".toByteArray())
+                            output.write("OK\r\n".toByteArray())
+                        }
+                        cmd.contains("AT+CIND?") -> {
+                            output.write("+CIND: 1,0\r\n".toByteArray())
+                            output.write("OK\r\n".toByteArray())
+                        }
+                        else -> {
+                            output.write("OK\r\n".toByteArray())
+                        }
+                    }
+                    output.flush()
+                }
+                delay(200)
+            }
+        } catch (e: Exception) {
+            AppLog.d("NativeAA: HFP responder error: ${e.message}")
+        } finally {
+            try { socket.close() } catch (e: Exception) {}
+            AppLog.i("NativeAA: HFP socket for ${socket.remoteDevice.address} closed.")
+        }
     }
 
     /**
