@@ -382,6 +382,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onPause() {
+        isForeground = false
         AppLog.i("AapProjectionActivity: onPause")
         super.onPause()
         watchdogHandler.removeCallbacks(watchdogRunnable)
@@ -402,8 +403,9 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onResume() {
-        AppLog.i("AapProjectionActivity: onResume")
         super.onResume()
+        isForeground = true
+        AppLog.i("AapProjectionActivity: onResume")
         applyStickyOrientation()
         watchdogHandler.postDelayed(watchdogRunnable, 2000)
         watchdogHandler.postDelayed(videoWatchdogRunnable, 3000)
@@ -878,6 +880,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
 
     companion object {
         const val EXTRA_FOCUS = "focus"
+        @Volatile var isForeground = false
 
         fun intent(context: Context): Intent {
             val aapIntent = Intent(context, AapProjectionActivity::class.java)
