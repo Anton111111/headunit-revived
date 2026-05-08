@@ -146,7 +146,7 @@ class AudioTrackWrapper(
     }
 
     private fun writeToTrack(buffer: ByteArray) {
-        applyGain(buffer)
+        // applyGain(buffer) // <-- COMMENT THIS OUT! Save massive CPU cycles.
         val result = audioTrack.write(buffer, 0, buffer.size)
         if (result > 0) {
             framesWritten += result / bytesPerFrame
@@ -160,7 +160,7 @@ class AudioTrackWrapper(
         while (isRunning || dataQueue.isNotEmpty()) {
             try {
                 // Use poll to avoid blocking indefinitely if isRunning becomes false
-                val buffer = dataQueue.poll(200, TimeUnit.MILLISECONDS)
+                val buffer = dataQueue.poll(50, TimeUnit.MILLISECONDS)
                 if (buffer != null) {
                     if (isAac && decoder != null) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -216,7 +216,7 @@ class AudioTrackWrapper(
     private fun queueInput(inputData: ByteArray) {
         try {
             // Wait for input buffer (with timeout to avoid deadlock if codec dies)
-            val inputIndex = freeInputBuffers.poll(200, TimeUnit.MILLISECONDS)
+            val inputIndex = freeInputBuffers.poll(50, TimeUnit.MILLISECONDS)
 
             if (inputIndex != null && inputIndex >= 0) {
                 val inputBuffer = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -46,6 +46,24 @@ class StreamVideoExtractor : MediaExtractorInterface {
         sampleFlags = 0
         mFormat = MediaFormat.createVideoFormat("video/avc", width, height)
 
+        // --- INJECT MEDIATEK TWEAKS HERE ---
+        try {
+            // 1. Force Baseline Profile for lower latency decoding
+            mFormat?.setInteger(MediaFormat.KEY_PROFILE, android.media.MediaCodecInfo.CodecProfileLevel.AVCProfileBaseline)
+
+            // 2. Force a smaller max input buffer (1MB) so the chip doesn't get lazy
+            mFormat?.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 1048576)
+
+            // 3. Force Real-Time CPU/GPU priority (requires Android 6.0+)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                mFormat?.setInteger(MediaFormat.KEY_PRIORITY, 0)
+                mFormat?.setInteger(MediaFormat.KEY_OPERATING_RATE, 60)
+            }
+        } catch (e: Exception) {
+            AppLog.e("Failed to apply MediaTek specific MediaFormat tweaks: ${e.message}")
+        }
+        // -----------------------------------
+
         mSampleOffset = findSPS()
         if (mSampleOffset == -1) {
             throw InvalidParameterException("Cannot find SPS in content")
