@@ -46,6 +46,25 @@ class StreamVideoExtractor : MediaExtractorInterface {
         sampleFlags = 0
         mFormat = MediaFormat.createVideoFormat("video/avc", width, height)
 
+        // --- SAFE PERFORMANCE TWEAKS ---
+        try {
+            // 1. Remove KEY_PROFILE to allow the decoder to auto-detect High/Main profiles.
+
+            // 2. Set a safe, generous buffer for 720p 60fps.
+            // 2MB (2097152) is standard for high-bitrate 720p to prevent overflow.
+            mFormat?.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 2097152)
+
+            // 3. Keep the Priority and Operating Rate hints (Android 6.0+)
+            // These don't break compatibility; they just tell the OS to "run fast."
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                mFormat?.setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = Real-time
+                mFormat?.setInteger(MediaFormat.KEY_OPERATING_RATE, 60)
+            }
+        } catch (e: Exception) {
+            AppLog.e("Failed to apply safe MediaFormat tweaks: ${e.message}")
+        }
+        // --------------------------------
+
         mSampleOffset = findSPS()
         if (mSampleOffset == -1) {
             throw InvalidParameterException("Cannot find SPS in content")

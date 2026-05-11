@@ -195,27 +195,27 @@ class MicRecorder(private val micSampleRate: Int, private val context: Context) 
             val audioSessionId = audioRecord?.audioSessionId ?: 0
             if (audioSessionId != 0) {
                 try {
-                    if (NoiseSuppressor.isAvailable()) {
+                    if (settings.micNoiseSuppressor && NoiseSuppressor.isAvailable()) {
                         ns = NoiseSuppressor.create(audioSessionId)
                         ns?.enabled = true
                         AppLog.i("MicRecorder: NoiseSuppressor: ${if (ns?.enabled == true) "ON" else "failed"}")
-                    } else {
+                    } else if (settings.micNoiseSuppressor) {
                         AppLog.i("MicRecorder: NoiseSuppressor: Unsupported on this device")
                     }
                     
-                    if (AutomaticGainControl.isAvailable()) {
+                    if (settings.micAutoGainControl && AutomaticGainControl.isAvailable()) {
                         agc = AutomaticGainControl.create(audioSessionId)
                         agc?.enabled = true
                         AppLog.i("MicRecorder: AutomaticGainControl: ${if (agc?.enabled == true) "ON" else "failed"}")
-                    } else {
+                    } else if (settings.micAutoGainControl) {
                         AppLog.i("MicRecorder: AutomaticGainControl: Unsupported on this device")
                     }
                     
-                    if (AcousticEchoCanceler.isAvailable()) {
+                    if (settings.micEchoCanceler && AcousticEchoCanceler.isAvailable()) {
                         aec = AcousticEchoCanceler.create(audioSessionId)
                         aec?.enabled = true
                         AppLog.i("MicRecorder: AcousticEchoCanceler: ${if (aec?.enabled == true) "ON" else "failed"}")
-                    } else {
+                    } else if (settings.micEchoCanceler) {
                         AppLog.i("MicRecorder: AcousticEchoCanceler: Unsupported on this device")
                     }
                 } catch (e: Exception) {

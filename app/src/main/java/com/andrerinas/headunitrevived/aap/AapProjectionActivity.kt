@@ -185,7 +185,6 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         override fun onReceive(context: Context, intent: Intent) {
             val event: KeyEvent? = IntentCompat.getParcelableExtra(intent, KeyIntent.extraEvent, KeyEvent::class.java)
             event?.let {
-                AppLog.i("AapProjectionActivity: Received key from broadcast: code=${it.keyCode} (isDown=${it.action == KeyEvent.ACTION_DOWN})")
                 onKeyEvent(it.keyCode, it.action == KeyEvent.ACTION_DOWN)
             }
         }
@@ -201,9 +200,6 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            enableEdgeToEdge()
-        }
         super.onCreate(savedInstanceState)
 
         applyOrientationSettings()
@@ -400,6 +396,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onPause() {
+        isForeground = false
         AppLog.i("AapProjectionActivity: onPause")
         super.onPause()
         watchdogHandler.removeCallbacks(watchdogRunnable)
@@ -420,8 +417,9 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onResume() {
-        AppLog.i("AapProjectionActivity: onResume")
         super.onResume()
+        isForeground = true
+        AppLog.i("AapProjectionActivity: onResume")
         applyStickyOrientation()
         watchdogHandler.postDelayed(watchdogRunnable, 2000)
         watchdogHandler.postDelayed(videoWatchdogRunnable, 3000)
@@ -448,6 +446,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
 
         setFullscreen()
     }
+
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
@@ -771,6 +770,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
                     paramsBuilder.setSeamlessResizeEnabled(true)
                 }
 
+                App.isPiPActive = true
                 enterPictureInPictureMode(paramsBuilder.build())
             } catch (e: Exception) {
                 AppLog.e("Failed to enter PiP mode: ${e.message}")
@@ -791,6 +791,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: android.content.res.Configuration) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
+        App.isPiPActive = isInPictureInPictureMode
         if (isInPictureInPictureMode) {
             // Hide UI elements during PiP (like FPS counter, loading overlay)
             findViewById<View>(R.id.loading_overlay)?.visibility = View.GONE
@@ -1016,26 +1017,27 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
-            return super.onKeyDown(keyCode, event)
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        val action = event.action
+        if (action != KeyEvent.ACTION_DOWN && action != KeyEvent.ACTION_UP) {
+            return super.dispatchKeyEvent(event)
         }
-        // Always pass keys to AA during projection, unless they are handled by super (volume/back)
-        commManager.sendKey(keyCode, true)
-        return true
-    }
 
-    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
-            return super.onKeyUp(keyCode, event)
+        // 1. Let the system handle volume and back keys
+        if (event.keyCode == KeyEvent.KEYCODE_BACK || 
+            event.keyCode == KeyEvent.KEYCODE_VOLUME_UP || 
+            event.keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || 
+            event.keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
+            return super.dispatchKeyEvent(event)
         }
-        commManager.sendKey(keyCode, false)
+
+        // 2. Funnel all other keys to CommManager
+        commManager.sendKey(event.keyCode, event.action == KeyEvent.ACTION_DOWN)
         return true
     }
 
     private fun onKeyEvent(keyCode: Int, isPress: Boolean) {
-        // All key events are now funneled through CommManager for centralized 
-        // remapping, state tracking, and debouncing.
+        // Broadcasts (e.g. from CarKeyReceiver) still use this path.
         commManager.sendKey(keyCode, isPress)
     }
 
@@ -1070,11 +1072,13 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         // stopCustomLoadingMedia releases both.
         stopCustomLoadingMedia()
         AppLog.i("AapProjectionActivity.onDestroy called. isFinishing=$isFinishing")
+        App.isPiPActive = false
         videoDecoder.dimensionsListener = null
     }
 
     companion object {
         const val EXTRA_FOCUS = "focus"
+        @Volatile var isForeground = false
 
         /**
          * Optional one-shot override for the loading-screen status text. Set by

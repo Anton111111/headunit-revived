@@ -5,6 +5,22 @@
 - Removed: Old deprecated ssl library written in C-Code for better maintenance, stability and smaller file sizes
 - Added: Direct Logging to file without logcat, thanks to @Anton111111
 
+### v.2.3.0-beta
+- Added some new buttons for keymap
+- Fixed 3 Fatal errors
+- Fixed video decoder settings for allwinner devices
+- Added new navigation intents
+- Included PR #456
+- Added new "Autostart on WiFi" Setting #324
+- Fixed empty bssid on native AA. Should now work on more devices
+- Fixed a new fatal with media sessions
+- Readded fullscreen overlays system icons #351
+- Remap Enter (66) to Dpad Center (23) for Rotary Knob #459
+- Debounce multiple key events if key event is the same in 100ms #465
+- Moved Mic settings to own fragment and added 3 new options for the new mic enhancement from version 2.2.2, which defaults to off for better compatibility
+- Merged PR #481 - Apply MediaTek 60fps and audio optimizations, thanks to @mrkontrast-coder
+- Some rewrite of the AudioTrackWrapper, to enhance stability and minimize stutters
+
 ### v.2.2.2
 - Fixed: Exit on disconnect now stops the carmode too
 - Fixed: Exit intent not closing the app

@@ -29,7 +29,9 @@ object SystemUI {
 
         // Modern Edge-to-Edge for Android 11+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
+            // Only force decor to NOT fit if we are in some kind of immersive mode.
+            // If mode is NONE, we want the system to fit the window naturally.
+            window.setDecorFitsSystemWindows(mode == Settings.FullscreenMode.NONE)
         }
 
         // Apply visibility using Compat API
@@ -51,13 +53,15 @@ object SystemUI {
         // Legacy Flags (Layout stability & Fallback for hiding bars)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             @Suppress("DEPRECATION")
-            var flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or 
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or 
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            var flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             
             when (mode) {
                 Settings.FullscreenMode.IMMERSIVE, Settings.FullscreenMode.IMMERSIVE_WITH_NOTCH -> {
-                    flags = flags or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    flags = flags or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or 
+                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                            View.SYSTEM_UI_FLAG_FULLSCREEN or 
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                         flags = flags or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     } else {
@@ -67,13 +71,14 @@ object SystemUI {
                     }
                 }
                 Settings.FullscreenMode.STATUS_ONLY -> {
-                    flags = flags or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    flags = flags or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_FULLSCREEN
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
                         flags = flags or View.SYSTEM_UI_FLAG_LOW_PROFILE
                     }
                 }
                 Settings.FullscreenMode.NONE -> {
+                    // Reset flags for normal mode
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
                     }
@@ -141,14 +146,20 @@ object SystemUI {
 
         // Set up listener for dynamic system bars (API 21+)
         ViewCompat.setOnApplyWindowInsetsListener(root) { v, insetsCompat ->
-            var typeMask = 0
+            if (mode == Settings.FullscreenMode.NONE) {
+                // In standard mode, let the system handle fitting and don't apply manual padding.
+                // We still update HeadUnitScreenConfig with 0 insets because the window is already resized.
+                HeadUnitScreenConfig.updateInsets(manualL, manualT, manualR, manualB)
+                onInsetsChanged?.invoke()
+                return@setOnApplyWindowInsetsListener insetsCompat
+            }
 
+            var typeMask = 0
             when (mode) {
                 Settings.FullscreenMode.IMMERSIVE -> {
                     typeMask = 0 // Standard Immersive: Overlay everything (Notch included)
                 }
                 Settings.FullscreenMode.IMMERSIVE_WITH_NOTCH -> {
-                    // Avoid Notch mode (ID 3)
                     if (Build.VERSION.SDK_INT >= 28) {
                         typeMask = WindowInsetsCompat.Type.displayCutout()
                     }

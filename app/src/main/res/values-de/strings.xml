@@ -259,6 +259,8 @@
     <string name="media_volume_offset">Medien-Lautstärke</string>
     <string name="assistant_volume_offset">Assistenten-Lautstärke</string>
     <string name="navigation_volume_offset">Navigations-Lautstärke</string>
+    <string name="microphone_settings">Mikrofon-Einstellungen</string>
+    <string name="microphone_settings_description">Eingangsquelle und Audio-Verarbeitung konfigurieren.</string>
     <string name="mic_input_source">Mikrofon-Eingangsquelle</string>
     <string name="mic_input_source_description">Wählen Sie die Audioquelle für das Mikrofon.</string>
     <string-array name="mic_input_sources">
@@ -268,6 +270,12 @@
         <item>Sprachkommunikation (Echo- und Rauschunterdrückung)</item>
         <item>Bluetooth-Headset (SCO)</item>
     </string-array>
+    <string name="mic_echo_canceler">Echounterdrückung (AEC)</string>
+    <string name="mic_echo_canceler_description">Versucht, Echo aus dem Mikrofon zu entfernen. Deaktivieren bei Stille oder Verzerrung.</string>
+    <string name="mic_noise_suppressor">Rauschunterdrückung (NS)</string>
+    <string name="mic_noise_suppressor_description">Versucht, Hintergrundgeräusche zu reduzieren. Deaktivieren, wenn die Stimme dumpf klingt.</string>
+    <string name="mic_auto_gain_control">Automatische Pegelanpassung (AGC)</string>
+    <string name="mic_auto_gain_control_description">Passt die Mikrofonlautstärke automatisch an. Deaktivieren bei instabiler Lautstärke.</string>
 
     <!-- Info Settings -->
     <string name="category_info">Info</string>
@@ -407,7 +415,7 @@
     <string name="kill_on_disconnect">App beim Trennen schließen</string>
     <string name="kill_on_disconnect_description">Die App automatisch schließen, wenn Android Auto getrennt wird</string>
     <string name="kill_on_disconnect_warning_title">Warnung</string>
-    <string name="kill_on_disconnect_warning">Die folgenden Wiederverbindungseinstellungen stehen im Konflikt mit dem Schließen der App bei Trennung:\n\n%1$s\n\nIhre anfänglichen Verbindungseinstellungen (automatische Verbindung, automatischer Start) funktionieren weiterhin beim Einschalten der Headunit. Nach der ersten Trennung wird die App jedoch sofort geschlossen, anstatt eine erneute Verbindung zu versuchen.\n\nHinweis: Einige Aftermarket-Headunits schalten sich nie vollständig aus — sie gehen stattdessen in den Ruhezustand, ähnlich wie ein Telefon, das den Bildschirm sperrt, aber nie wirklich ausschaltet. Mit dieser Option wird die App nach der ersten Trennung geschlossen und öffnet sich möglicherweise beim nächsten Zündungszyklus nicht automatisch wieder.\n\nMöchten Sie die oben aufgeführten Wiederverbindungseinstellungen deaktivieren?</string>
+    <string name="kill_on_disconnect_warning">Die folgenden Wiederverbindungseinstellungen stehen im Konflikt mit dem Schließen der App bei Trennung:\n\n%1$s\n\nIhre anfänglichen Verbindungseinstellungen (automatische Verbindung, automatischer Start) funktionieren weiterhin beim Einschalten der Headunit. Nach der ersten Trennung wird die App jedoch sofort geschlossen, anstatt eine erneute Verbindung zu versuchen.\n\nHinweis: Einige Aftermarket-Headunits schalten sich nie vollständig aus — sie gehen istattdessen in den Ruhezustand, ähnlich wie ein Telefon, das den Bildschirm sperrt, aber nie wirklich ausschaltet. Mit dieser Option wird die App nach der ersten Trennung geschlossen und öffnet sich möglicherweise beim nächsten Zündungszyklus nicht automatisch wieder.\n\nMöchten Sie die oben aufgeführten Wiederverbindungseinstellungen deaktivieren?</string>
     <string name="kill_on_disconnect_disable_and_enable">Deaktivieren und aktivieren</string>
     <string name="kill_on_disconnect_enable_anyway">Trotzdem aktivieren</string>
     <string name="kill_on_disconnect_conflicts_disabled">Konfliktierende Einstellungen wurden deaktiviert</string>

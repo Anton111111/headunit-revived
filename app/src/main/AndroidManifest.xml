@@ -57,8 +57,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <application
@@ -169,7 +167,7 @@
 
         <service
             android:name=".aap.AapService"
-            android:foregroundServiceType="connectedDevice|mediaPlayback|location|microphone"
+            android:foregroundServiceType="connectedDevice|mediaPlayback"
             android:stopWithTask="false"
             android:exported="false">
             <!-- MediaButtonReceiver looks for a Service with this intent-filter -->

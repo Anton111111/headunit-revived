@@ -260,6 +260,8 @@
     <string name="media_volume_offset">Media Volume Offset</string>
     <string name="assistant_volume_offset">Assistant Volume Offset</string>
     <string name="navigation_volume_offset">Navigation Volume Offset</string>
+    <string name="microphone_settings">Microphone Settings</string>
+    <string name="microphone_settings_description">Configure microphone input and audio processing.</string>
     <string name="mic_input_source">Microphone Input Source</string>
     <string name="mic_input_source_description">Choose the audio source for the microphone.</string>
     <string-array name="mic_input_sources">
@@ -269,6 +271,12 @@
         <item>Voice Communication (Echo + noise cancelled)</item>
         <item>Bluetooth Headset (SCO)</item>
     </string-array>
+    <string name="mic_echo_canceler">Echo cancellation (AEC)</string>
+    <string name="mic_echo_canceler_description">Attempts to remove echo from the microphone. Disable if you experience silence or distortion.</string>
+    <string name="mic_noise_suppressor">Noise suppression (NS)</string>
+    <string name="mic_noise_suppressor_description">Attempts to reduce background noise. Disable if your voice sounds muffled.</string>
+    <string name="mic_auto_gain_control">Automatic gain control (AGC)</string>
+    <string name="mic_auto_gain_control_description">Automatically adjusts microphone volume. Disable if the volume is unstable.</string>
 
     <!-- Info Settings -->
     <string name="category_info">Info</string>

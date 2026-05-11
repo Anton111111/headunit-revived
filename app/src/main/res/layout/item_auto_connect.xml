@@ -14,7 +14,7 @@
         android:id="@+id/drag_handle"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_drag_handle"
+        app:srcCompat="@drawable/ic_drag_handle"
         android:alpha="0.5"
         android:contentDescription="@string/drag_to_reorder"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
             android:id="@+id/btn_move_up"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_arrow_up"
+            app:srcCompat="@drawable/ic_arrow_up"
             android:background="@drawable/selectable_borderless"
             android:contentDescription="@string/move_up" />
 
@@ -90,7 +90,7 @@
             android:id="@+id/btn_move_down"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_arrow_down"
+            app:srcCompat="@drawable/ic_arrow_down"
             android:background="@drawable/selectable_borderless"
             android:contentDescription="@string/move_down" />
 
