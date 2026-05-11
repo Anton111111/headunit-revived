@@ -143,7 +143,7 @@ class AapService : Service(), UsbReceiver.Listener {
             }
 
             if (key == Settings.KEY_LOG_SOURCE || key == Settings.KEY_LOG_LEVEL || key == Settings.KEY_LOG_CAPTURE_ENABLED) {
-                serviceScope.launch(Dispatchers.Main) {
+                serviceScope.launch(Dispatchers.IO) {
                     try {
                         syncLogBackendState()
                     } catch (e: Exception) {
