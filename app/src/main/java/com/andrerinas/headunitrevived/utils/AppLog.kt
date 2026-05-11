@@ -72,9 +72,9 @@ object AppLog {
     }
 
     private var settings: Settings? = null
-    private var appLogFileLogger: Logger.File? = null
-    private var lastAppLogFile: IoFile? = null
-    private var currentLogSource: Settings.LogSource = Settings.LogSource.LOGCAT
+    @Volatile private var appLogFileLogger: Logger.File? = null
+    @Volatile private var lastAppLogFile: IoFile? = null
+    @Volatile private var currentLogSource: Settings.LogSource = Settings.LogSource.LOGCAT
 
     fun init(settings: Settings?, context: Context? = null) {
         this.settings = settings
