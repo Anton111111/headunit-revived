@@ -70,6 +70,14 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                     val networkInfo = intent.getParcelableExtra<NetworkInfo>(WifiP2pManager.EXTRA_NETWORK_INFO)
                     if (networkInfo?.isConnected == true) {
                         AppLog.i("WifiDirectManager: Connected. Requesting info...")
+                        // [FIX] Pre-fetch localDeviceAddress here so it's ready before
+                        // onGroupInfoAvailable fires — reduces race condition window.
+                        WifiDirectCompat.requestDeviceInfo(manager, channel) { address ->
+                            if (localDeviceAddress == null || localDeviceAddress == "00:00:00:00:00:00" || localDeviceAddress == "02:00:00:00:00:00") {
+                                AppLog.d("WifiDirectManager: Pre-fetched localDeviceAddress on connect: $address")
+                                localDeviceAddress = address
+                            }
+                        }
                         manager?.requestConnectionInfo(channel, this@WifiDirectManager)
                     } else {
                         isConnected = false
@@ -126,17 +134,22 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             isConnected = true
             isGroupOwner = info.isGroupOwner
             
-            WifiDirectCompat.requestDeviceInfo(manager, channel) { address ->
-                AppLog.d("WifiDirectManager: Updated localDeviceAddress: $address")
-                localDeviceAddress = address
-            }
-
             val goIp = info.groupOwnerAddress?.hostAddress ?: "unknown"
             AppLog.i("WifiDirectManager: Group formed. Owner: $isGroupOwner, GO IP: $goIp")
 
             if (isGroupOwner) {
-                // Request group info to get SSID and Passphrase, and check for connected clients
-                manager?.requestGroupInfo(channel, this)
+                // [FIX] requestDeviceInfo is async — call requestGroupInfo only AFTER the callback
+                // fires so that localDeviceAddress is guaranteed to be set before onGroupInfoAvailable
+                // runs. This eliminates the race condition that caused empty BSSIDs on Android 12+.
+                WifiDirectCompat.requestDeviceInfo(manager, channel) { address ->
+                    AppLog.d("WifiDirectManager: Updated localDeviceAddress: $address")
+                    localDeviceAddress = address
+                    manager?.requestGroupInfo(channel, this@WifiDirectManager)
+                }
+                // Fallback: if requestDeviceInfo is not supported (< API 29), call directly
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                    manager?.requestGroupInfo(channel, this)
+                }
             } else if (info.groupOwnerAddress != null) {
                 Thread {
                     var socket: Socket? = null

@@ -320,8 +320,11 @@ class NativeAaHandshakeManager(
 
             // [FIX] Ensure BSSID is uppercase and not zeroed if possible
             bssid = bssid.uppercase()
-            if (bssid == "00:00:00:00:00:00" || bssid == "02:00:00:00:00:00") {
-                AppLog.w("NativeAA: BSSID is still masked ($bssid) at Type 3 time!")
+            if (bssid.isEmpty() || bssid == "00:00:00:00:00:00" || bssid == "02:00:00:00:00:00") {
+                AppLog.e("NativeAA: BSSID is still masked/empty ($bssid) at Type 3 time — phone WILL reject these credentials. Aborting handshake.")
+                // Triggering a P2P refresh so the next attempt has a valid BSSID
+                context.triggerWifiDirectRefresh()
+                return@withContext
             }
 
             AppLog.i("NativeAA: Starting Handshake Exchange:")
