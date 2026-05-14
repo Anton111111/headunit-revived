@@ -76,8 +76,8 @@ message NextTurnDetail
 
 message NextTurnDistanceEvent
 {
-    required int32 distance_meters = 1;
-    required int32 time_to_turn_seconds = 2;
+optional int32 distance_meters = 1;
+optional int32 time_to_turn_seconds = 2;
     optional int32 display_distance_e3 = 3;
     optional DistanceUnits display_distance_unit = 4;
 
