@@ -73,7 +73,6 @@
             android:configChanges="uiMode|orientation|screenSize|screenLayout|smallestScreenSize"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
-            android:screenOrientation="sensor"
             android:supportsPictureInPicture="true"
             android:resizeableActivity="true"
             android:exported="true"
@@ -100,7 +99,6 @@
             android:name=".main.MainActivity"
             android:configChanges="keyboardHidden|uiMode"
             android:launchMode="singleTask"
-            android:screenOrientation="sensor"
             android:theme="@style/SplashTheme"
             android:exported="true">
 

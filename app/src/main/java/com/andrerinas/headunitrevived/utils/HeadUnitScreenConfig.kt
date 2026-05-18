@@ -81,9 +81,37 @@ object HeadUnitScreenConfig {
             usableH = size.y
         }
 
+        val finalRealW: Int
+        val finalRealH: Int
+        val finalUsableW: Int
+        val finalUsableH: Int
+
+        val screenOrientation = settings.screenOrientation
+        if (screenOrientation == Settings.ScreenOrientation.LANDSCAPE || 
+            screenOrientation == Settings.ScreenOrientation.LANDSCAPE_REVERSE) {
+            finalRealW = Math.max(realW, realH)
+            finalRealH = Math.min(realW, realH)
+            finalUsableW = Math.max(usableW, usableH)
+            finalUsableH = Math.min(usableW, usableH)
+        } else if (screenOrientation == Settings.ScreenOrientation.PORTRAIT || 
+                   screenOrientation == Settings.ScreenOrientation.PORTRAIT_REVERSE) {
+            finalRealW = Math.min(realW, realH)
+            finalRealH = Math.max(realW, realH)
+            finalUsableW = Math.min(usableW, usableH)
+            finalUsableH = Math.max(usableW, usableH)
+        } else {
+            finalRealW = realW
+            finalRealH = realH
+            finalUsableW = usableW
+            finalUsableH = usableH
+        }
+
+        AppLog.i("[UI_DEBUG] HeadUnitScreenConfig: Raw size: ${realW}x${realH}, usable: ${usableW}x${usableH}, orientation setting: $screenOrientation")
+        AppLog.i("[UI_DEBUG] HeadUnitScreenConfig: Final normalized size: ${finalRealW}x${finalRealH}, usable: ${finalUsableW}x${finalUsableH}")
+
         // Only update if dimensions or settings changed
         val currentHash = computeSettingsHash(settings)
-        if (isInitialized && realScreenWidthPx == realW && realScreenHeightPx == realH && lastSettingsHash == currentHash) {
+        if (isInitialized && realScreenWidthPx == finalRealW && realScreenHeightPx == finalRealH && lastSettingsHash == currentHash) {
             return
         }
 
@@ -104,8 +132,8 @@ object HeadUnitScreenConfig {
         // THE ANCHOR: 
         // If we are immersive, our "World" is the physical screen. 
         // If we are NOT, our "World" is limited to the usable window area (no lying to AA).
-        val defaultAnchorW = if (immersive) realW else usableW
-        val defaultAnchorH = if (immersive) realH else usableH
+        val defaultAnchorW = if (immersive) finalRealW else finalUsableW
+        val defaultAnchorH = if (immersive) finalRealH else finalUsableH
         
         density = displayMetrics.density
         densityDpi = displayMetrics.densityDpi
@@ -348,24 +376,41 @@ object HeadUnitScreenConfig {
      * @return true if the dimensions changed and margins need to be re-sent to AA.
      */
     fun updateSurfaceDimensions(surfaceW: Int, surfaceH: Int): Boolean {
-        val diffW = kotlin.math.abs(surfaceW - screenWidthPx)
-        val diffH = kotlin.math.abs(surfaceH - screenHeightPx)
+        val finalSurfaceW: Int
+        val finalSurfaceH: Int
+
+        val screenOrientation = if (this::currentSettings.isInitialized) currentSettings.screenOrientation else Settings.ScreenOrientation.SYSTEM
+        if (screenOrientation == Settings.ScreenOrientation.LANDSCAPE || 
+            screenOrientation == Settings.ScreenOrientation.LANDSCAPE_REVERSE) {
+            finalSurfaceW = Math.max(surfaceW, surfaceH)
+            finalSurfaceH = Math.min(surfaceW, surfaceH)
+        } else if (screenOrientation == Settings.ScreenOrientation.PORTRAIT || 
+                   screenOrientation == Settings.ScreenOrientation.PORTRAIT_REVERSE) {
+            finalSurfaceW = Math.min(surfaceW, surfaceH)
+            finalSurfaceH = Math.max(surfaceW, surfaceH)
+        } else {
+            finalSurfaceW = surfaceW
+            finalSurfaceH = surfaceH
+        }
+
+        val diffW = kotlin.math.abs(finalSurfaceW - screenWidthPx)
+        val diffH = kotlin.math.abs(finalSurfaceH - screenHeightPx)
 
         if (diffW <= SURFACE_MISMATCH_TOLERANCE && diffH <= SURFACE_MISMATCH_TOLERANCE) {
             return false
         }
 
-        if( (diffW > 0 && getNegotiatedWidth() == surfaceW) || (diffH > 0 && getNegotiatedHeight() == surfaceH)) {
-            AppLog.i("[UI_DEBUG_FIX] Surface mismatch detected but matches negotiated resolution. Usable: ${screenWidthPx}x${screenHeightPx}, Actual surface: ${surfaceW}x${surfaceH}. Ignoring.")
+        if( (diffW > 0 && getNegotiatedWidth() == finalSurfaceW) || (diffH > 0 && getNegotiatedHeight() == finalSurfaceH)) {
+            AppLog.i("[UI_DEBUG_FIX] Surface mismatch detected but matches negotiated resolution. Usable: ${screenWidthPx}x${screenHeightPx}, Actual surface: ${finalSurfaceW}x${finalSurfaceH}. Ignoring.")
             return false
         }
 
-        AppLog.i("[UI_DEBUG_FIX] Surface mismatch detected! Usable: ${screenWidthPx}x${screenHeightPx}, Actual surface: ${surfaceW}x${surfaceH} (diff: ${diffW}x${diffH})")
+        AppLog.i("[UI_DEBUG_FIX] Surface mismatch detected! Usable: ${screenWidthPx}x${screenHeightPx}, Actual surface: ${finalSurfaceW}x${finalSurfaceH} (diff: ${diffW}x${diffH})")
 
         // Update anchor: the surface dimensions ARE the real usable area,
         // so the anchor is the usable area plus insets.
-        realScreenWidthPx = surfaceW + systemInsetLeft + systemInsetRight
-        realScreenHeightPx = surfaceH + systemInsetTop + systemInsetBottom
+        realScreenWidthPx = finalSurfaceW + systemInsetLeft + systemInsetRight
+        realScreenHeightPx = finalSurfaceH + systemInsetTop + systemInsetBottom
 
         recalculate()
 

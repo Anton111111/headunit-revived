@@ -29,6 +29,7 @@ class SettingsActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestedOrientation = Settings(this).screenOrientation.androidOrientation
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 

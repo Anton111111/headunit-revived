@@ -194,9 +194,8 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         applyOrientationSettings()
+        super.onCreate(savedInstanceState)
 
 
         setContentView(R.layout.activity_headunit)
