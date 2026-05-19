@@ -16,7 +16,16 @@ import com.andrerinas.headunitrevived.utils.Settings
 internal class AapAudio(
         private val audioDecoder: AudioDecoder,
         private val audioManager: AudioManager,
-        private val settings: Settings) {
+        settings: Settings) {
+
+    private val staticAudioFocus = settings.staticAudioFocus
+    private val separateAudioStreams = settings.separateAudioStreams
+    private val mediaVolumeOffset = settings.mediaVolumeOffset
+    private val assistantVolumeOffset = settings.assistantVolumeOffset
+    private val navigationVolumeOffset = settings.navigationVolumeOffset
+    private val audioLatencyMultiplier = settings.audioLatencyMultiplier
+    private val useAacAudio = settings.useAacAudio
+    private val audioQueueCapacity = settings.audioQueueCapacity
 
     private var audioFocusRequest: AudioFocusRequest? = null
     private var legacyFocusListener: AudioManager.OnAudioFocusChangeListener? = null
@@ -32,7 +41,7 @@ internal class AapAudio(
         if (!isDucked) {
             val mediaTrack = audioDecoder.getTrack(Channel.ID_AUD)
             if (mediaTrack != null) {
-                val duckedVolume = getMediaGain() * 0.4f
+                val duckedVolume = getMediaGain() * DUCK_VOLUME_FACTOR
                 AppLog.i("Static Audio Focus: Ducking media volume to $duckedVolume")
                 mediaTrack.setVolume(duckedVolume)
                 isDucked = true
@@ -53,8 +62,7 @@ internal class AapAudio(
     }
 
     private fun getMediaGain(): Float {
-        val offset = settings.mediaVolumeOffset
-        return (1.0f + (offset / 100.0f)).coerceIn(0.0f, 2.0f)
+        return (1.0f + (mediaVolumeOffset / 100.0f)).coerceIn(0.0f, 2.0f)
     }
 
     fun requestFocusChange(stream: Int, focusRequest: Int, callback: AudioManager.OnAudioFocusChangeListener): Int {
@@ -154,40 +162,40 @@ internal class AapAudio(
 
         if (audioDecoder.getTrack(channel) == null) {
             val config = AudioConfigs.get(channel)
-            val stream = AudioConfigs.stream(channel, settings.separateAudioStreams)
+            val stream = AudioConfigs.stream(channel, separateAudioStreams)
 
             val offset = when (channel) {
-                Channel.ID_AUD -> settings.mediaVolumeOffset
-                Channel.ID_AU1 -> settings.assistantVolumeOffset
-                Channel.ID_AU2 -> settings.navigationVolumeOffset
+                Channel.ID_AUD -> mediaVolumeOffset
+                Channel.ID_AU1 -> assistantVolumeOffset
+                Channel.ID_AU2 -> navigationVolumeOffset
                 else -> 0
             }
             val gain = (1.0f + (offset / 100.0f)).coerceIn(0.0f, 2.0f)
 
             // Voice and Navigation benefit from lower latency. Cap the multiplier for those channels.
             val effectiveMultiplier = if (channel == Channel.ID_AUD) {
-                settings.audioLatencyMultiplier
+                audioLatencyMultiplier
             } else {
-                settings.audioLatencyMultiplier.coerceAtMost(4)
+                audioLatencyMultiplier.coerceAtMost(4)
             }
 
-            AppLog.i("AudioDecoder.start: channel=$channel, stream=$stream, gain=$gain, sampleRate=${config.sampleRate}, numberOfBits=${config.numberOfBits}, numberOfChannels=${config.numberOfChannels}, isAac=${settings.useAacAudio}, latencyMultiplier=$effectiveMultiplier, queueCapacity=${settings.audioQueueCapacity}")
-            audioDecoder.start(channel, stream, config.sampleRate, config.numberOfBits, config.numberOfChannels, settings.useAacAudio, gain, effectiveMultiplier, settings.audioQueueCapacity)
+            AppLog.i("AudioDecoder.start: channel=$channel, stream=$stream, gain=$gain, sampleRate=${config.sampleRate}, numberOfBits=${config.numberOfBits}, numberOfChannels=${config.numberOfChannels}, isAac=$useAacAudio, latencyMultiplier=$effectiveMultiplier, queueCapacity=$audioQueueCapacity")
+            audioDecoder.start(channel, stream, config.sampleRate, config.numberOfBits, config.numberOfChannels, useAacAudio, gain, effectiveMultiplier, audioQueueCapacity)
         }
 
         audioDecoder.decode(channel, buf, start, length)
 
-        if (channel == Channel.ID_AU2 && settings.staticAudioFocus) {
+        if (channel == Channel.ID_AU2 && staticAudioFocus) {
             duckMedia()
             handler.removeCallbacks(unduckRunnable)
-            handler.postDelayed(unduckRunnable, 1500)
+            handler.postDelayed(unduckRunnable, UNDUCK_DELAY_MS)
         }
     }
 
     fun stopAudio(channel: Int) {
         AppLog.i("Audio Stop: " + Channel.name(channel))
         audioDecoder.stop(channel)
-        if (channel == Channel.ID_AU2 && settings.staticAudioFocus) {
+        if (channel == Channel.ID_AU2 && staticAudioFocus) {
             handler.removeCallbacks(unduckRunnable)
             unduckMedia()
         }
@@ -195,5 +203,7 @@ internal class AapAudio(
 
     companion object {
         private const val AUDIO_BUFS_SIZE = 65536 * 4  // Up to 256 Kbytes
+        private const val DUCK_VOLUME_FACTOR = 0.4f
+        private const val UNDUCK_DELAY_MS = 1500L
     }
 }
