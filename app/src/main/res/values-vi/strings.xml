@@ -130,8 +130,8 @@
     <string name="not_set">Chưa đặt</string>
     <string name="keymap_description">Đổi gán phím cho Headunit</string>
 
-    <string name="key_soft_left">Soft Trái</string>
-    <string name="key_soft_right">Soft Phải</string>
+    <string name="key_soft_left">Phím mềm Trái</string>
+    <string name="key_soft_right">Phím mềm Phải</string>
     <string name="key_dpad_up">D-Pad Lên</string>
     <string name="key_dpad_down">D-Pad Xuống</string>
     <string name="key_dpad_left">D-Pad Trái</string>
