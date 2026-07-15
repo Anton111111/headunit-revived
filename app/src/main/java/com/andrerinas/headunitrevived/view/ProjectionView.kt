@@ -87,4 +87,9 @@ class ProjectionView @JvmOverloads constructor(
         this.scaleX = scaleX
         this.scaleY = scaleY
     }
+
+    // A plain SurfaceView is composited directly by SurfaceFlinger, so there is no
+    // per-frame draw callback we can observe. Report "unsupported" so the projection
+    // watchdog skips display-stall recovery for this backend (issue #650).
+    override fun lastFrameDrawnMs(): Long = -1L
 }

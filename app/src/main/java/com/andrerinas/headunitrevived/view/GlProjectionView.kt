@@ -8,6 +8,7 @@ import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.view.Surface
 import com.andrerinas.headunitrevived.decoder.SoftwareYuvFrameSink
 import com.andrerinas.headunitrevived.utils.AppLog
@@ -49,6 +50,8 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
 
     fun getSurface(): Surface? = renderer.getSurface()
     fun isSurfaceValid(): Boolean = renderer.getSurface()?.isValid == true
+
+    override fun lastFrameDrawnMs(): Long = renderer.lastFrameDrawnMs
 
     override fun setVideoSize(width: Int, height: Int) {
         AppLog.i("GlProjectionView setVideoSize: ${width}x$height")
@@ -200,6 +203,11 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
 
         @Volatile
         private var desaturation = 0.0f
+
+        // elapsedRealtime() of the last frame the GL thread actually consumed and drew.
+        // Read by the projection watchdog to detect a stalled GL consumer (issue #650).
+        @Volatile
+        var lastFrameDrawnMs: Long = 0L
 
         fun setDesaturation(value: Float) {
             desaturation = value.coerceIn(0f, 1f)
@@ -521,6 +529,7 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
                     surfaceTexture?.updateTexImage()
                     surfaceTexture?.getTransformMatrix(sSTMatrix)
                     updateSurface = false
+                    lastFrameDrawnMs = SystemClock.elapsedRealtime()
                 }
             }
             
@@ -570,6 +579,7 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
                     uTextureScaleX = 1f
                     vTextureScaleX = 1f
                     pendingYuvFrame = false
+                    lastFrameDrawnMs = SystemClock.elapsedRealtime()
                     if (!loggedFirstYuvUpload) {
                         loggedFirstYuvUpload = true
                         AppLog.i("GlProjectionView: first YUV420 frame uploaded ${width}x$height")

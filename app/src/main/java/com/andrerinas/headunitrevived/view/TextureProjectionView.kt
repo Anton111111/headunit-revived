@@ -2,6 +2,7 @@ package com.andrerinas.headunitrevived.view
 
 import android.content.Context
 import android.graphics.SurfaceTexture
+import android.os.SystemClock
 import android.util.AttributeSet
 import android.view.Surface
 import android.view.TextureView
@@ -16,6 +17,11 @@ class TextureProjectionView @JvmOverloads constructor(
 
     private var videoWidth = 0
     private var videoHeight = 0
+
+    // elapsedRealtime() of the last frame the TextureView actually displayed. Read by the
+    // projection watchdog to detect a stalled display consumer (issue #650).
+    @Volatile
+    private var lastFrameDrawnMsValue: Long = 0L
 
     init {
         surfaceTextureListener = this
@@ -72,8 +78,12 @@ class TextureProjectionView @JvmOverloads constructor(
     }
 
     override fun onSurfaceTextureUpdated(surfaceTexture: SurfaceTexture) {
-        // Not used
+        // Fired each time a new frame is displayed. Used as the display-consumer
+        // liveness signal for stall detection (issue #650).
+        lastFrameDrawnMsValue = SystemClock.elapsedRealtime()
     }
+
+    override fun lastFrameDrawnMs(): Long = lastFrameDrawnMsValue
 
     // ----------------------------------------------------------------
     // Callbacks

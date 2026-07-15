@@ -145,6 +145,9 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
                 showReconnectingOverlay()
             } else if (overlayState == OverlayState.RECONNECTING && gap < 2000) {
                 hideReconnectingOverlay()
+            } else {
+                // Decoder producing but display possibly frozen (issue #650).
+                maybeRecoverFromDisplayStall()
             }
             watchdogHandler.postDelayed(this, 2000)
         }
@@ -237,6 +240,46 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             isSurfaceSet = false
             setupProjectionView()
         }
+    }
+
+    // Issue #650: on some head units the display consumer (the GL thread on GLES, or the
+    // TextureView) stops drawing shortly after the first frame while the decoder keeps
+    // producing frames. The picture freezes (often on Android Auto's boot logo) even though
+    // audio keeps playing. The known manual workaround is to press Home and reopen the app,
+    // which rebuilds the surface. This detects that exact state (decoder still producing,
+    // display frozen) and rebuilds the projection view automatically, so the user does not
+    // have to. It is deliberately narrow to avoid firing on a phone-side pause: that case
+    // stalls the decoder too, so it is left to the reconnecting overlay.
+    private val displayStallThresholdMs = 4000L
+    private val displayStallRecoveryCooldownMs = 12000L
+    private val maxDisplayStallRecoveries = 3
+    private var displayStallRecoveries = 0
+    private var lastDisplayStallRecoveryMs = 0L
+
+    private fun maybeRecoverFromDisplayStall() {
+        if (!::projectionView.isInitialized) return
+        // Only relevant once the video is supposed to be on screen.
+        if (overlayState != OverlayState.HIDDEN) return
+        val drawn = projectionView.lastFrameDrawnMs()
+        // <= 0 means the backend cannot report draws (SurfaceView) or nothing drawn yet.
+        if (drawn <= 0L) return
+        val produced = videoDecoder.lastFrameRenderedMs
+        if (produced <= 0L) return
+        val now = SystemClock.elapsedRealtime()
+        // The decoder must still be actively releasing frames. If it stopped too, this is a
+        // decoder or phone-side stall, handled by the reconnecting overlay rather than here.
+        if (now - produced > 2000L) return
+        if (now - drawn < displayStallThresholdMs) return
+        if (now - lastDisplayStallRecoveryMs < displayStallRecoveryCooldownMs) return
+        if (displayStallRecoveries >= maxDisplayStallRecoveries) return
+        displayStallRecoveries++
+        lastDisplayStallRecoveryMs = now
+        AppLog.w(
+            "Display stall detected (decoder produced ${now - produced}ms ago, no frame " +
+                "drawn for ${now - drawn}ms). Rebuilding projection view " +
+                "(attempt $displayStallRecoveries/$maxDisplayStallRecoveries). See issue #650."
+        )
+        recreateProjectionView()
     }
 
     private val nightModeReceiver = object : BroadcastReceiver() {
