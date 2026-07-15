@@ -242,43 +242,67 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         }
     }
 
-    // Issue #650: on some head units the display consumer (the GL thread on GLES, or the
-    // TextureView) stops drawing shortly after the first frame while the decoder keeps
-    // producing frames. The picture freezes (often on Android Auto's boot logo) even though
-    // audio keeps playing. The known manual workaround is to press Home and reopen the app,
-    // which rebuilds the surface. This detects that exact state (decoder still producing,
-    // display frozen) and rebuilds the projection view automatically, so the user does not
-    // have to. It is deliberately narrow to avoid firing on a phone-side pause: that case
-    // stalls the decoder too, so it is left to the reconnecting overlay.
+    // Issue #650: on some head units (notably MediaTek in GLES mode) the display consumer
+    // stops putting frames on screen while the phone keeps streaming video, so the picture
+    // freezes (often on Android Auto's boot logo) even though audio keeps playing. The known
+    // manual workaround is Home + reopen, which rebuilds the surface. This reproduces that
+    // automatically, and if a device keeps stalling it escalates to SurfaceView (the most
+    // direct path, which avoids the external-texture route that is the demonstrated bottleneck)
+    // for the rest of the session.
+    //
+    // Detection uses two signals so it never fights a genuine phone-side pause: the phone must
+    // still be sending video bytes (videoDecoder.lastInputBytesReceivedMs) while the display
+    // consumer has not drawn a new frame for a while (projectionView.lastFrameDrawnMs). A
+    // phone-side pause stops the input too and is left to the reconnecting overlay.
     private val displayStallThresholdMs = 4000L
-    private val displayStallRecoveryCooldownMs = 12000L
-    private val maxDisplayStallRecoveries = 3
+    private val phoneAliveThresholdMs = 1500L
+    private val displayStallRecoveryCooldownMs = 10000L
+    private val maxDisplayStallRecoveries = 4
     private var displayStallRecoveries = 0
     private var lastDisplayStallRecoveryMs = 0L
+    // Session-scoped backend override applied after repeated stalls. Never persisted, so the
+    // user's chosen viewMode is restored on the next launch.
+    private var forcedViewModeOverride: Settings.ViewMode? = null
 
     private fun maybeRecoverFromDisplayStall() {
         if (!::projectionView.isInitialized) return
-        // Only relevant once the video is supposed to be on screen.
         if (overlayState != OverlayState.HIDDEN) return
+        // Consumer-draw signal: -1 on SurfaceView (no per-frame callback, already the robust
+        // path), 0 before the first draw. Either way there is nothing to recover here.
         val drawn = projectionView.lastFrameDrawnMs()
-        // <= 0 means the backend cannot report draws (SurfaceView) or nothing drawn yet.
         if (drawn <= 0L) return
-        val produced = videoDecoder.lastFrameRenderedMs
-        if (produced <= 0L) return
+        val input = videoDecoder.lastInputBytesReceivedMs
+        if (input <= 0L) return
         val now = SystemClock.elapsedRealtime()
-        // The decoder must still be actively releasing frames. If it stopped too, this is a
-        // decoder or phone-side stall, handled by the reconnecting overlay rather than here.
-        if (now - produced > 2000L) return
+        // Phone must still be streaming; otherwise it is a phone-side pause (reconnecting overlay).
+        if (now - input > phoneAliveThresholdMs) return
+        // Display must have been frozen for a while (not just a brief dip).
         if (now - drawn < displayStallThresholdMs) return
         if (now - lastDisplayStallRecoveryMs < displayStallRecoveryCooldownMs) return
         if (displayStallRecoveries >= maxDisplayStallRecoveries) return
         displayStallRecoveries++
         lastDisplayStallRecoveryMs = now
-        AppLog.w(
-            "Display stall detected (decoder produced ${now - produced}ms ago, no frame " +
-                "drawn for ${now - drawn}ms). Rebuilding projection view " +
-                "(attempt $displayStallRecoveries/$maxDisplayStallRecoveries). See issue #650."
-        )
+
+        val effectiveMode = forcedViewModeOverride ?: settings.viewMode
+        // Escalate only after a plain rebuild already failed to stick, only away from a
+        // non-SurfaceView backend, and never when the bundled software HEVC decoder is active
+        // (it renders through the GLES YUV sink, which SurfaceView cannot provide).
+        val shouldFallBack = displayStallRecoveries >= 2 &&
+            effectiveMode != Settings.ViewMode.SURFACE &&
+            !videoDecoder.usingBundledSoftwareHevc
+        if (shouldFallBack) {
+            AppLog.w(
+                "Display stalled again on $effectiveMode (phone still sending, no draw for " +
+                    "${now - drawn}ms). Falling back to SurfaceView for this session. See issue #650."
+            )
+            forcedViewModeOverride = Settings.ViewMode.SURFACE
+            Toast.makeText(this, R.string.renderer_fallback_surface, Toast.LENGTH_LONG).show()
+        } else {
+            AppLog.w(
+                "Display stall detected (phone still sending, no draw for ${now - drawn}ms). " +
+                    "Rebuilding projection view (attempt $displayStallRecoveries). See issue #650."
+            )
+        }
         recreateProjectionView()
     }
 
@@ -1287,7 +1311,11 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         val container = findViewById<FrameLayout>(R.id.container)
         val displayMetrics = resources.displayMetrics
 
-        if (settings.viewMode == Settings.ViewMode.TEXTURE) {
+        // forcedViewModeOverride is set by the display-stall recovery to pin SurfaceView for the
+        // rest of the session (issue #650); otherwise honor the user's chosen viewMode.
+        val mode = forcedViewModeOverride ?: settings.viewMode
+
+        if (mode == Settings.ViewMode.TEXTURE) {
             AppLog.i("Using TextureView")
             val textureView = TextureProjectionView(this)
             textureView.layoutParams = FrameLayout.LayoutParams(
@@ -1296,7 +1324,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             )
             projectionView = textureView
             container.setBackgroundColor(Color.BLACK)
-        } else if (settings.viewMode == Settings.ViewMode.GLES) {
+        } else if (mode == Settings.ViewMode.GLES) {
             AppLog.i("Using GlProjectionView")
             val glView = GlProjectionView(this)
             glView.layoutParams = FrameLayout.LayoutParams(
