@@ -22,4 +22,13 @@ interface IProjectionView {
      * decoder still releasing frames but consumer not drawing means the picture is stuck.
      */
     fun lastFrameDrawnMs(): Long
+
+    /**
+     * Monotonic count of abnormally long gaps between consecutive drawn frames since this view
+     * was created. On MediaTek/GLES the consumer does not fully stop but collapses to a few fps
+     * with single frames taking up to ~2s, so a plain "no frame for N seconds" check misses it;
+     * this counter lets the watchdog catch that throughput collapse (issue #650). Returns 0 for
+     * backends that cannot observe per-frame draws (SurfaceView).
+     */
+    fun longFrameEvents(): Long
 }

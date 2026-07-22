@@ -53,6 +53,8 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
 
     override fun lastFrameDrawnMs(): Long = renderer.lastFrameDrawnMs
 
+    override fun longFrameEvents(): Long = renderer.longFrameEvents
+
     override fun setVideoSize(width: Int, height: Int) {
         AppLog.i("GlProjectionView setVideoSize: ${width}x$height")
         renderer.updateBufferSize(width, height)
@@ -208,6 +210,24 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
         // Read by the projection watchdog to detect a stalled GL consumer (issue #650).
         @Volatile
         var lastFrameDrawnMs: Long = 0L
+
+        // Count of abnormally long gaps between consecutive draws (issue #650). On MediaTek the
+        // GL thread collapses to a few fps with single frames taking up to ~2s rather than fully
+        // freezing, which a time-gap check misses; this counts those slow frames instead.
+        @Volatile
+        var longFrameEvents: Long = 0L
+        private var prevDrawMs: Long = 0L
+        private val longFrameThresholdMs = 1200L
+
+        private fun markFrameDrawn() {
+            val now = SystemClock.elapsedRealtime()
+            val prev = prevDrawMs
+            if (prev != 0L && now - prev > longFrameThresholdMs) {
+                longFrameEvents++
+            }
+            prevDrawMs = now
+            lastFrameDrawnMs = now
+        }
 
         fun setDesaturation(value: Float) {
             desaturation = value.coerceIn(0f, 1f)
@@ -529,7 +549,7 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
                     surfaceTexture?.updateTexImage()
                     surfaceTexture?.getTransformMatrix(sSTMatrix)
                     updateSurface = false
-                    lastFrameDrawnMs = SystemClock.elapsedRealtime()
+                    markFrameDrawn()
                 }
             }
             
@@ -579,7 +599,7 @@ class GlProjectionView(context: Context) : GLSurfaceView(context), IProjectionVi
                     uTextureScaleX = 1f
                     vTextureScaleX = 1f
                     pendingYuvFrame = false
-                    lastFrameDrawnMs = SystemClock.elapsedRealtime()
+                    markFrameDrawn()
                     if (!loggedFirstYuvUpload) {
                         loggedFirstYuvUpload = true
                         AppLog.i("GlProjectionView: first YUV420 frame uploaded ${width}x$height")
