@@ -595,4 +595,5 @@
     <string name="software_video_decoder_device">デバイスのMediaCodec</string>
 
     <string name="btn_show_qr">QRコードを表示</string>
+    <string name="renderer_fallback_surface">映像がフリーズし続けたため、このセッションでは表示を SurfaceView に切り替えました。安定している場合は、設定でビューモードを SurfaceView に設定してください。</string>
 </resources>

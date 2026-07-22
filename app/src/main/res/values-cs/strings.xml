@@ -587,4 +587,5 @@
     <string name="software_video_decoder_device">MediaCodec zařízení</string>
 
     <string name="btn_show_qr">Zobrazit QR kód</string>
+    <string name="renderer_fallback_surface">Video se pořád zasekávalo, proto bylo zobrazení pro tuto relaci přepnuto na SurfaceView. Pokud je to stabilní, nastavte Režim zobrazení na SurfaceView v Nastavení.</string>
 </resources>

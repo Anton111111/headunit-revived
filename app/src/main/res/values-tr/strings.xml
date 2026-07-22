@@ -583,4 +583,5 @@
     <string name="software_video_decoder_device">Cihaz MediaCodec</string>
 
     <string name="btn_show_qr">QR Kodunu Göster</string>
+    <string name="renderer_fallback_surface">Video sürekli donduğu için görüntü bu oturum boyunca SurfaceView\'e geçirildi. Kararlıysa, Ayarlar\'da Görünüm modunu SurfaceView olarak ayarla.</string>
 </resources>

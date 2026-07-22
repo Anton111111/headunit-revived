@@ -587,4 +587,5 @@
     <string name="software_video_decoder_device">MediaCodec للجهاز</string>
 
     <string name="btn_show_qr">عرض رمز QR</string>
+    <string name="renderer_fallback_surface">ظل الفيديو يتجمد، لذا تم تبديل العرض إلى SurfaceView لهذه الجلسة. إذا كان مستقرًا، فاضبط وضع العرض على SurfaceView في الإعدادات.</string>
 </resources>

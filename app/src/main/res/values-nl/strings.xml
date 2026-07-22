@@ -587,4 +587,5 @@
     <string name="software_video_decoder_device">Apparaat MediaCodec</string>
 
     <string name="btn_show_qr">QR-code tonen</string>
+    <string name="renderer_fallback_surface">De video bleef bevriezen, daarom is de weergave voor deze sessie overgeschakeld naar SurfaceView. Als het stabiel is, stel View modes in op SurfaceView in Instellingen.</string>
 </resources>

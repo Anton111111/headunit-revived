@@ -595,4 +595,5 @@
     <string name="software_video_decoder_device">MediaCodec del dispositivo</string>
 
     <string name="btn_show_qr">Mostrar código QR</string>
+    <string name="renderer_fallback_surface">El vídeo se seguía congelando, así que la pantalla se cambió a SurfaceView durante esta sesión. Si va estable, pon el Modo de vista en SurfaceView en Ajustes.</string>
 </resources>

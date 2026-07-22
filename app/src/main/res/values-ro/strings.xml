@@ -588,4 +588,5 @@
     <string name="software_video_decoder_device">MediaCodec dispozitiv</string>
 
     <string name="btn_show_qr">Afișează codul QR</string>
+    <string name="renderer_fallback_surface">Videoclipul continua să se blocheze, așa că afișarea a fost comutată pe SurfaceView pentru această sesiune. Dacă este stabil, setează Mod de vizualizare pe SurfaceView în Setări.</string>
 </resources>

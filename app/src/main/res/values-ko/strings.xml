@@ -594,4 +594,5 @@
     <string name="software_video_decoder_device">기기 MediaCodec</string>
 
     <string name="btn_show_qr">QR 코드 표시</string>
+    <string name="renderer_fallback_surface">영상이 계속 멈춰서 이번 세션 동안 화면을 SurfaceView로 전환했습니다. 안정적이면 설정에서 뷰 모드를 SurfaceView로 지정하세요.</string>
 </resources>

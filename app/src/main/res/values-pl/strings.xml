@@ -588,4 +588,5 @@
     <string name="software_video_decoder_device">MediaCodec urządzenia</string>
 
     <string name="btn_show_qr">Pokaż kod QR</string>
+    <string name="renderer_fallback_surface">Obraz ciągle się zawieszał, więc wyświetlanie zostało przełączone na SurfaceView na czas tej sesji. Jeśli działa stabilnie, ustaw Tryb widoku na SurfaceView w Ustawieniach.</string>
 </resources>
