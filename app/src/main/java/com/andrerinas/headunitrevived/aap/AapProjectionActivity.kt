@@ -1348,6 +1348,11 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         // forcedViewModeOverride is set by the display-stall recovery to pin SurfaceView for the
         // rest of the session (issue #650); otherwise honor the user's chosen viewMode.
         val mode = forcedViewModeOverride ?: settings.viewMode
+        AppLog.i(
+            "Projection backend: viewMode=$mode override=${forcedViewModeOverride != null} " +
+                "SoC=${Build.HARDWARE} board=${Build.BOARD} mfr=${Build.MANUFACTURER} " +
+                "model=${Build.MODEL} API=${Build.VERSION.SDK_INT}"
+        )
 
         if (mode == Settings.ViewMode.TEXTURE) {
             AppLog.i("Using TextureView")
