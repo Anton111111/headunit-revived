@@ -13,6 +13,7 @@ import android.net.wifi.p2p.WifiP2pManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.App
@@ -57,6 +58,8 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     fun setCredentialsListener(callback: (String, String, String, String) -> Unit) {
         this.onCredentialsReady = callback
     }
+
+
 
     private val receiver = object : BroadcastReceiver() {
         @SuppressLint("MissingPermission")
@@ -235,6 +238,8 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             val ssid = group.networkName
             val psk = group.passphrase ?: ""
             val isOwner = group.isGroupOwner
+
+
 
             // [FIX] Robust interface detection. group.interface is often null on Android 11+ (hidden API)
             var iface = group.`interface`
@@ -495,23 +500,25 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
 
         // 1. Stop any ongoing discovery and remove group to start fresh
         mgr.stopPeerDiscovery(ch, object : WifiP2pManager.ActionListener {
-            override fun onSuccess() { removeGroupAndCreate() }
-            override fun onFailure(reason: Int) { removeGroupAndCreate() }
+            override fun onSuccess() { checkGroupAndCreate() }
+            override fun onFailure(reason: Int) { checkGroupAndCreate() }
         })
     }
 
     @SuppressLint("MissingPermission")
-    private fun removeGroupAndCreate() {
+    private fun checkGroupAndCreate() {
         isGroupOwner = false
         isConnected = false
-        manager?.removeGroup(channel, object : WifiP2pManager.ActionListener {
-            override fun onSuccess() { delayedCreateGroup(0) }
-            override fun onFailure(reason: Int) { delayedCreateGroup(0) }
-        })
-    }
 
-    private fun delayedCreateGroup(retryCount: Int) {
-        handler.postDelayed({ createNewGroup(retryCount) }, 500L)
+        manager?.requestGroupInfo(channel) { group ->
+            if (group == null) {
+                AppLog.i("No existing P2P group, creating new one")
+                createNewGroup(0)
+                return@requestGroupInfo
+            } else {
+                AppLog.i("Existing P2P group found, skip createGroup")
+            }
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -528,6 +535,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             override fun onSuccess() {
                 AppLog.i("WifiDirectManager: P2P Group created.")
                 isGroupOwner = true
+
             }
             override fun onFailure(reason: Int) {
                 if (reason == 2 && retryCount < 3) { // 2 = BUSY
@@ -841,13 +849,17 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         lastNativeGroupStatusMessage = null
         AapService.scanningState.value = false
         try { context.unregisterReceiver(receiver) } catch (e: Exception) {}
+
         if (isGroupOwner) {
             manager?.removeGroup(channel, object : WifiP2pManager.ActionListener {
                 override fun onSuccess() { AppLog.d("WifiDirectManager: Final group removal success") }
                 override fun onFailure(reason: Int) { AppLog.d("WifiDirectManager: Final group removal failed: $reason") }
             })
         }
+
         isGroupOwner = false
         isConnected = false
     }
 }
+
+
