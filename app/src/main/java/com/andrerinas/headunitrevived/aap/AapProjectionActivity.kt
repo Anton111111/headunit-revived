@@ -416,6 +416,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
 
         findViewById<Button>(R.id.disconnect_button)?.setOnClickListener {
             commManager.disconnect()
+            finish()
         }
 
         videoDecoder.onFirstFrameListener = {
