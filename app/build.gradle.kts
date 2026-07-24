@@ -52,6 +52,11 @@ dependencies {
 
     // ZXing for QR Code generation
     implementation("com.google.zxing:core:3.5.3")
+
+    // Shizuku for root / shell access
+    implementation("dev.rikka.shizuku:api:13.1.5")
+    implementation("dev.rikka.shizuku:provider:13.1.5")
+    implementation("com.github.topjohnwu.libsu:core:6.0.0")
 }
 
 android {
@@ -61,6 +66,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        aidl = true // needed for shizuku
     }
 
     externalNativeBuild {
@@ -114,8 +120,8 @@ android {
         applicationId = "com.andrerinas.headunitrevived"
         minSdk = 16
         targetSdk = 36
-        versionCode = 84
-        versionName = "3.1.1"
+        versionCode = 86
+        versionName = "3.2.0-beta1"
         setProperty("archivesBaseName", "${applicationId}_${versionName}")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true

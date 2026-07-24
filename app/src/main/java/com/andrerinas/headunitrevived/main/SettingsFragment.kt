@@ -62,6 +62,7 @@ class SettingsFragment : Fragment() {
     private var pendingSyncMediaSessionAaMetadata: Boolean? = null
     private var pendingResolution: Int? = null
     private var pendingDpi: Int? = null
+    private var pendingPixelAspectRatioE4: Int? = null
     private var pendingStaticBSSID: String? = null
     private var pendingFullscreenMode: Settings.FullscreenMode? = null
     private var pendingViewMode: Settings.ViewMode? = null
@@ -80,6 +81,7 @@ class SettingsFragment : Fragment() {
     private var pendingUseLibusb: Boolean? = null
     private var pendingAudioQueueCapacity: Int? = null
     private var pendingShowFpsCounter: Boolean? = null
+    private var pendingShowToastMessages: Boolean? = null
     private var pendingScreenOrientation: Settings.ScreenOrientation? = null
     private var pendingAppLanguage: String? = null
     private var pendingFakeSpeed: Boolean? = null
@@ -94,6 +96,7 @@ class SettingsFragment : Fragment() {
     // Flag to determine if the projection should stretch to fill the screen
     private var pendingStretchToFill: Boolean? = null
     private var pendingForcedScale: Boolean? = null
+    private var pendingHudMirroring: Boolean? = null
 
     private var pendingKillOnDisconnect: Boolean? = null
 
@@ -163,6 +166,7 @@ class SettingsFragment : Fragment() {
         pendingSyncMediaSessionAaMetadata = settings.syncMediaSessionWithAaMetadata
         pendingResolution = settings.resolutionId
         pendingDpi = settings.dpiPixelDensity
+        pendingPixelAspectRatioE4 = settings.pixelAspectRatioE4
         pendingStaticBSSID = settings.staticBSSID
         pendingFullscreenMode = settings.fullscreenMode
         pendingViewMode = settings.viewMode
@@ -180,12 +184,14 @@ class SettingsFragment : Fragment() {
         pendingAudioLatencyMultiplier = settings.audioLatencyMultiplier
         pendingAudioQueueCapacity = settings.audioQueueCapacity
         pendingShowFpsCounter = settings.showFpsCounter
+        pendingShowToastMessages = settings.showToastMessages
         pendingScreenOrientation = settings.screenOrientation
         pendingAppLanguage = settings.appLanguage
 
         // Initialize local state for stretch to fill
         pendingStretchToFill = settings.stretchToFill
         pendingForcedScale = settings.forcedScale
+        pendingHudMirroring = settings.hudMirroring
 
         pendingKillOnDisconnect = settings.killOnDisconnect
         pendingAutoEnableHotspot = settings.autoEnableHotspot
@@ -248,6 +254,7 @@ class SettingsFragment : Fragment() {
         pendingSyncMediaSessionAaMetadata = settings.syncMediaSessionWithAaMetadata
         pendingResolution = settings.resolutionId
         pendingDpi = settings.dpiPixelDensity
+        pendingPixelAspectRatioE4 = settings.pixelAspectRatioE4
         pendingFullscreenMode = settings.fullscreenMode
         pendingViewMode = settings.viewMode
         pendingForceSoftware = settings.forceSoftwareDecoding
@@ -263,10 +270,12 @@ class SettingsFragment : Fragment() {
         pendingAudioLatencyMultiplier = settings.audioLatencyMultiplier
         pendingAudioQueueCapacity = settings.audioQueueCapacity
         pendingShowFpsCounter = settings.showFpsCounter
+        pendingShowToastMessages = settings.showToastMessages
         pendingScreenOrientation = settings.screenOrientation
         pendingAppLanguage = settings.appLanguage
         pendingStretchToFill = settings.stretchToFill
         pendingForcedScale = settings.forcedScale
+        pendingHudMirroring = settings.hudMirroring
         pendingKillOnDisconnect = settings.killOnDisconnect
         pendingAutoEnableHotspot = settings.autoEnableHotspot
         pendingFakeSpeed = settings.fakeSpeed
@@ -355,6 +364,7 @@ class SettingsFragment : Fragment() {
         pendingSyncMediaSessionAaMetadata?.let { settings.syncMediaSessionWithAaMetadata = it }
         pendingResolution?.let { settings.resolutionId = it }
         pendingDpi?.let { settings.dpiPixelDensity = it }
+        pendingPixelAspectRatioE4?.let { settings.pixelAspectRatioE4 = it }
         pendingStaticBSSID?.let { settings.staticBSSID = it }
         pendingFullscreenMode?.let { settings.fullscreenMode = it }
         pendingViewMode?.let { settings.viewMode = it }
@@ -372,6 +382,7 @@ class SettingsFragment : Fragment() {
         pendingAudioLatencyMultiplier?.let { settings.audioLatencyMultiplier = it }
         pendingAudioQueueCapacity?.let { settings.audioQueueCapacity = it }
         pendingShowFpsCounter?.let { settings.showFpsCounter = it }
+        pendingShowToastMessages?.let { settings.showToastMessages = it }
         pendingScreenOrientation?.let { settings.screenOrientation = it }
 
         pendingMediaVolumeOffset?.let { settings.mediaVolumeOffset = it }
@@ -384,6 +395,7 @@ class SettingsFragment : Fragment() {
         // Save the stretch to fill preference
         pendingStretchToFill?.let { settings.stretchToFill = it }
         pendingForcedScale?.let { settings.forcedScale = it }
+        pendingHudMirroring?.let { settings.hudMirroring = it }
 
         pendingKillOnDisconnect?.let { settings.killOnDisconnect = it }
         pendingAutoEnableHotspot?.let { settings.autoEnableHotspot = it }
@@ -448,6 +460,7 @@ class SettingsFragment : Fragment() {
                         pendingSyncMediaSessionAaMetadata != settings.syncMediaSessionWithAaMetadata ||
                         pendingResolution != settings.resolutionId ||
                         pendingDpi != settings.dpiPixelDensity ||
+                        pendingPixelAspectRatioE4 != settings.pixelAspectRatioE4 ||
                         pendingStaticBSSID != settings.staticBSSID ||
                         pendingFullscreenMode != settings.fullscreenMode ||
                         pendingViewMode != settings.viewMode ||
@@ -465,10 +478,12 @@ class SettingsFragment : Fragment() {
                         pendingAudioLatencyMultiplier != settings.audioLatencyMultiplier ||
                         pendingAudioQueueCapacity != settings.audioQueueCapacity ||
                         pendingShowFpsCounter != settings.showFpsCounter ||
+                        pendingShowToastMessages != settings.showToastMessages ||
                         pendingScreenOrientation != settings.screenOrientation ||
                         pendingAppLanguage != settings.appLanguage ||
                         pendingStretchToFill != settings.stretchToFill ||
                         pendingForcedScale != settings.forcedScale ||
+                        pendingHudMirroring != settings.hudMirroring ||
                         pendingInsetLeft != settings.insetLeft ||
                         pendingInsetTop != settings.insetTop ||
                         pendingInsetRight != settings.insetRight ||
@@ -492,7 +507,8 @@ class SettingsFragment : Fragment() {
         requiresRestart = pendingResolution != settings.resolutionId ||
                           pendingVideoCodec != settings.videoCodec ||
                           pendingFpsLimit != settings.fpsLimit ||
-                            pendingDpi != settings.dpiPixelDensity ||
+                          pendingDpi != settings.dpiPixelDensity ||
+                          pendingPixelAspectRatioE4 != settings.pixelAspectRatioE4 ||
             pendingStaticBSSID != settings.staticBSSID ||
                           pendingForceSoftware != settings.forceSoftwareDecoding ||
                           pendingSoftwareVideoDecoder != settings.softwareVideoDecoder ||
@@ -514,6 +530,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun updateSettingsList() {
+        val app = App.provide(requireContext())
         val scrollState = settingsRecyclerView.layoutManager?.onSaveInstanceState()
         val items = mutableListOf<SettingItem>()
 
@@ -589,6 +606,18 @@ class SettingsFragment : Fragment() {
             value = "${getString(R.string.ui_scale_home)}: ${pendingUiScaleHomePercent ?: 100}% · ${getString(R.string.ui_scale_settings)}: ${pendingUiScaleSettingsPercent ?: 100}%",
             onClick = { _ ->
                 showUiScaleDialog()
+            }
+        ))
+
+        items.add(SettingItem.ToggleSettingEntry(
+            stableId = "showToastMessages",
+            nameResId = R.string.show_toast_messages,
+            descriptionResId = R.string.show_toast_messages_description,
+            isChecked = pendingShowToastMessages ?: true,
+            onCheckedChanged = { isChecked ->
+                pendingShowToastMessages = isChecked
+                checkChanges()
+                updateSettingsList()
             }
         ))
 
@@ -931,6 +960,24 @@ class SettingsFragment : Fragment() {
 
 
         items.add(SettingItem.SettingEntry(
+            stableId = "pixelAspectRatioE4",
+            nameResId = R.string.pixel_aspect_ratio,
+            value = if ((pendingPixelAspectRatioE4 ?: 10000) <= 0) "10000" else pendingPixelAspectRatioE4.toString(),
+            onClick = { _ ->
+                showNumericInputDialog(
+                    title = getString(R.string.enter_pixel_aspect_ratio_value),
+                    message = null,
+                    initialValue = if ((pendingPixelAspectRatioE4 ?: 10000) <= 0) 10000 else pendingPixelAspectRatioE4!!,
+                    onConfirm = { newVal ->
+                        pendingPixelAspectRatioE4 = if (newVal <= 0) 10000 else newVal
+                        checkChanges()
+                        updateSettingsList()
+                    }
+                )
+            }
+        ))
+
+        items.add(SettingItem.SettingEntry(
             stableId = "customInsets",
             nameResId = R.string.custom_insets,
             value = "${pendingInsetLeft ?: 0}, ${pendingInsetTop ?: 0}, ${pendingInsetRight ?: 0}, ${pendingInsetBottom ?: 0}",
@@ -1041,6 +1088,18 @@ class SettingsFragment : Fragment() {
             onCheckedChanged = { isChecked ->
                 pendingStretchToFill = isChecked
                 requiresRestart = true // Requires a reconnect to apply the new rendering bounds
+                checkChanges()
+                updateSettingsList()
+            }
+        ))
+
+        items.add(SettingItem.ToggleSettingEntry(
+            stableId = "hudMirroring",
+            nameResId = R.string.hud_mirroring,
+            descriptionResId = R.string.hud_mirroring_description,
+            isChecked = pendingHudMirroring ?: false,
+            onCheckedChanged = { isChecked ->
+                pendingHudMirroring = isChecked
                 checkChanges()
                 updateSettingsList()
             }

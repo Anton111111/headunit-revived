@@ -76,6 +76,11 @@ class Settings(private val context: Context) {
         get() = prefs.getBoolean("forced_scale", false)
         set(value) { prefs.edit().putBoolean("forced_scale", value).apply() }
 
+    // HUD Mode (Horizontal flip for windshield reflection)
+    var hudMirroring: Boolean
+        get() = prefs.getBoolean("hud_mirroring", false)
+        set(value) { prefs.edit().putBoolean("hud_mirroring", value).apply() }
+
     // UI Scale percentage for Home
     var uiScaleHomePercent: Int
         get() = prefs.getInt("ui-scale-home-percent", 100)
@@ -189,6 +194,12 @@ class Settings(private val context: Context) {
         get() = prefs.getInt("dpi-pixel-density", 0) // Default 0 for Auto
         set(value) {
             prefs.edit().putInt("dpi-pixel-density", value).apply()
+        }
+
+    var pixelAspectRatioE4: Int
+        get() = prefs.getInt("pixel-aspect-ratio-e4", 10000) // Default 10000 = 1.0 (square pixels)
+        set(value) {
+            prefs.edit().putInt("pixel-aspect-ratio-e4", value).apply()
         }
 
     var staticBSSID: String?
@@ -457,6 +468,10 @@ class Settings(private val context: Context) {
     var listenForUsbDevices: Boolean
         get() = prefs.getBoolean("listen-for-usb-devices", true)
         set(value) { prefs.edit().putBoolean("listen-for-usb-devices", value).apply() }
+
+    var showToastMessages: Boolean
+        get() = prefs.getBoolean("show-toast-messages", true)
+        set(value) { prefs.edit().putBoolean("show-toast-messages", value).apply() }
 
     var reopenOnReconnection: Boolean
         get() = prefs.getBoolean("reopen-on-reconnection", true)

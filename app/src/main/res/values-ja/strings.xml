@@ -182,6 +182,8 @@
 
     <string name="listen_for_usb_devices_label">USBデバイスへの反応</string>
     <string name="listen_for_usb_devices_description">USBデバイスが接続されたときにAndroidのシステムプロンプトを表示します。</string>
+    <string name="show_toast_messages">トースト通知を表示</string>
+    <string name="show_toast_messages_description">接続・切断・モード切替時にステータスのトースト通知を表示します。</string>
     <string name="auto_start_usb_label">USBから自動起動</string>
     <string name="auto_start_usb_description">USBデバイスが接続されたら、アプリを自動的に起動して接続を試みます</string>
     <string name="auto_start_settings">自動起動設定</string>
@@ -247,6 +249,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">強制スケール (レガシー修正)</string>
     <string name="forced_scale_description">SurfaceViewを使用する一部の古いデバイスでのスケーリングの問題を修正します。画像が歪んだりずれたりして見える場合にのみ使用してください。</string>
+    <string name="hud_mirroring">HUDモード（左右反転）</string>
+    <string name="hud_mirroring_description">フロントガラス投影用に画面を左右反転します（ヘッドアップディスプレイ）。TextureViewまたはGLES20表示モードが必要です（SurfaceViewでは動作しません）。</string>
 
     <string name="category_audio">オーディオ</string>
     <string name="enable_audio_sink">オーディオシンク</string>
@@ -595,4 +599,6 @@
     <string name="software_video_decoder_device">デバイスのMediaCodec</string>
 
     <string name="btn_show_qr">QRコードを表示</string>
+
+    <string name="self_mode_overlay_permission_description">単独モードをバックグラウンドから安定して起動できるようにするため、次の画面で「他のアプリの上に重ねて表示」の権限を有効にしてください。</string>
 </resources>

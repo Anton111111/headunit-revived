@@ -22,6 +22,9 @@ import com.andrerinas.headunitrevived.aap.protocol.messages.SensorEvent
 import com.andrerinas.headunitrevived.aap.protocol.proto.MediaPlayback
 import java.net.Socket
 import android.view.KeyEvent
+import com.andrerinas.headunitrevived.aap.protocol.messages.TouchEvent
+import com.andrerinas.headunitrevived.aap.protocol.proto.Input
+import com.andrerinas.headunitrevived.aap.protocol.proto.Input.TouchEvent.PointerAction
 
 /**
  * Central connection and transport lifecycle manager.
@@ -352,7 +355,7 @@ class CommManager(
      * This ordering guarantees no video frame is ever decoded before a render target exists.
      *
      * On success:
-     * 1. Claims audio focus for `STREAM_MUSIC`.
+     * 1. In Static Audio Focus mode, claims permanent audio focus for `STREAM_MUSIC`.
      * 2. Starts the [AapTransport] read loop.
      * 3. Emits [ConnectionState.TransportStarted].
      */
@@ -360,12 +363,23 @@ class CommManager(
         if (_connectionState.value !is ConnectionState.HandshakeComplete) return@withContext
 
         try {
-            _transport?.aapAudio?.requestFocusChange(
-                AudioManager.STREAM_MUSIC,
-                AudioManager.AUDIOFOCUS_GAIN,
-                AudioManager.OnAudioFocusChangeListener { }
-            )
-            _transport?.startReading()
+            // Capture the @Volatile _transport once: it can be cleared concurrently by a
+            // disconnect, so a stable local reference avoids racing reads and lets us bail out
+            // early instead of emitting TransportStarted when no reading actually started.
+            val transport = _transport ?: return@withContext
+            // Only grab permanent AUDIOFOCUS_GAIN in Static Audio Focus mode, matching the
+            // gating in AapService.requestPermanentAudioFocus and AapControl.audioFocusRequest.
+            // In the default (dynamic) mode focus is acquired on demand via the AA protocol, so
+            // an unconditional grab here would evict other media (e.g. the car radio) the moment
+            // the phone connects, before AA plays anything.
+            if (settings.enableAudioSink && settings.staticAudioFocus) {
+                transport.aapAudio?.requestFocusChange(
+                    AudioManager.STREAM_MUSIC,
+                    AudioManager.AUDIOFOCUS_GAIN,
+                    AudioManager.OnAudioFocusChangeListener { }
+                )
+            }
+            transport.startReading()
             _connectionState.emit(ConnectionState.TransportStarted)
         } catch (e: Exception) {
             _connectionState.emit(ConnectionState.Error("Start reading failed: ${e.message}"))
@@ -502,6 +516,36 @@ class CommManager(
         if (_connectionState.value is ConnectionState.TransportStarted) {
             _transport?.send(message)
         }
+    }
+
+    fun sendToggleVoiceAssistant() {
+        if (_connectionState.value != ConnectionState.TransportStarted)
+            return
+
+        val transport = _transport ?: return
+
+        // close
+        if (transport.isAssistantActive) {
+            sendKey(KeyEvent.KEYCODE_BACK, true)
+            sendKey(KeyEvent.KEYCODE_BACK, false)
+            loseFocus() // otherwise button stays marked
+
+        // open
+        } else {
+            sendKey(KeyEvent.KEYCODE_SEARCH, false) // up/down must be reversed
+            sendKey(KeyEvent.KEYCODE_SEARCH, true)
+        }
+    }
+
+    fun loseFocus() {
+        val transport = _transport ?: return
+        val ts = SystemClock.elapsedRealtime()
+
+        transport.send(TouchEvent(
+            ts,
+            PointerAction.TOUCH_ACTION_DOWN,
+            0,
+            mutableListOf(Triple(0, 0, 0))))
     }
 
     fun sendUpdateUiConfigRequest(left: Int, top: Int, right: Int, bottom: Int) {

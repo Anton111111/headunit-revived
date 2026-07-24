@@ -161,7 +161,9 @@
     <string name="wifi_ssid_not_set">Nie ustawiono</string>
 
     <string name="listen_for_usb_devices_label">Reaguj na urządzenia USB</string>
-    <string name="listen_for_usb_devices_description">Pokaż monit systemowy Android po podłączeniu urządzenia USB.</string>
+    <string name="listen_for_usb_devices_description">Pokaż monit systemu Android po podłączeniu urządzenia USB.</string>
+    <string name="show_toast_messages">Pokaż komunikaty Toast</string>
+    <string name="show_toast_messages_description">Wyświetlaj wyskakujące komunikaty stanu przy łączeniu, rozłączaniu i zmianie trybu.</string>
     <string name="auto_start_usb_label">Automatyczne uruchamianie przez USB</string>
     <string name="auto_start_usb_description">Automatycznie otwórz aplikację i spróbuj połączyć po podłączeniu urządzenia USB</string>
     <string name="auto_start_settings">Ustawienia automatycznego uruchamiania</string>
@@ -227,6 +229,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">Wymuszone skalowanie (Poprawka legacy)</string>
     <string name="forced_scale_description">Naprawia problemy ze skalowaniem na niektórych starszych urządzeniach korzystających z SurfaceView. Używaj tylko wtedy, gdy obraz jest zniekształcony lub przesunięty.</string>
+    <string name="hud_mirroring">Tryb HUD (Odbicie lustrzane)</string>
+    <string name="hud_mirroring_description">Odbija ekran w poziomie do projekcji na przedniej szybie (Head-Up Display). Wymaga trybu widoku TextureView lub GLES20 (nie działa z SurfaceView).</string>
 
     <string name="category_audio">Dźwięk</string>
     <string name="enable_audio_sink">Włącz wyjście dźwięku</string>
@@ -588,4 +592,6 @@
     <string name="software_video_decoder_device">MediaCodec urządzenia</string>
 
     <string name="btn_show_qr">Pokaż kod QR</string>
+
+    <string name="self_mode_overlay_permission_description">Aby umożliwić niezawodne uruchamianie trybu własnego w tle, włącz uprawnienie \"Wyświetlaj nad innymi aplikacjami\" na następnym ekranie.</string>
 </resources>

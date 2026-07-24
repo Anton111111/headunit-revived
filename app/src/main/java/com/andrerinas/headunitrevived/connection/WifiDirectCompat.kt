@@ -24,6 +24,14 @@ object WifiDirectCompat {
         }
     }
 
+    fun getGroupFrequency(group: android.net.wifi.p2p.WifiP2pGroup?): Int {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && group != null) {
+            return Api29Impl.getGroupFrequency(group)
+        }
+        return 0
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.Q)
     private object Api29Impl {
         fun requestDeviceInfo(
@@ -40,6 +48,10 @@ object WifiDirectCompat {
             } catch (e: Exception) {
                 AppLog.w("WifiDirectCompat: requestDeviceInfo failed: ${e.message}")
             }
+        }
+
+        fun getGroupFrequency(group: android.net.wifi.p2p.WifiP2pGroup): Int {
+            return group.frequency
         }
     }
 }

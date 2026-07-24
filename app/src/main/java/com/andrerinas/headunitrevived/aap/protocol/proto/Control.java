@@ -2639,6 +2639,25 @@ public final class Control {
         int getDecoderAdditionalDepth();
 
         /**
+         * <pre>
+         * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+         * </pre>
+         *
+         * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+         * @return Whether the pixelAspectRatioE4 field is set.
+         */
+        boolean hasPixelAspectRatioE4();
+        /**
+         * <pre>
+         * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+         * </pre>
+         *
+         * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+         * @return The pixelAspectRatioE4.
+         */
+        int getPixelAspectRatioE4();
+
+        /**
          * <code>optional .com.andrerinas.headunitrevived.aap.protocol.proto.MediaCodecType video_codec_type = 10;</code>
          * @return Whether the videoCodecType field is set.
          */
@@ -3055,6 +3074,33 @@ public final class Control {
           return decoderAdditionalDepth_;
         }
 
+        public static final int PIXEL_ASPECT_RATIO_E4_FIELD_NUMBER = 8;
+        private int pixelAspectRatioE4_ = 0;
+        /**
+         * <pre>
+         * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+         * </pre>
+         *
+         * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+         * @return Whether the pixelAspectRatioE4 field is set.
+         */
+        @java.lang.Override
+        public boolean hasPixelAspectRatioE4() {
+          return ((bitField0_ & 0x00000040) != 0);
+        }
+        /**
+         * <pre>
+         * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+         * </pre>
+         *
+         * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+         * @return The pixelAspectRatioE4.
+         */
+        @java.lang.Override
+        public int getPixelAspectRatioE4() {
+          return pixelAspectRatioE4_;
+        }
+
         public static final int VIDEO_CODEC_TYPE_FIELD_NUMBER = 10;
         private int videoCodecType_ = 1;
         /**
@@ -3062,7 +3108,7 @@ public final class Control {
          * @return Whether the videoCodecType field is set.
          */
         @java.lang.Override public boolean hasVideoCodecType() {
-          return ((bitField0_ & 0x00000040) != 0);
+          return ((bitField0_ & 0x00000080) != 0);
         }
         /**
          * <code>optional .com.andrerinas.headunitrevived.aap.protocol.proto.MediaCodecType video_codec_type = 10;</code>
@@ -3126,6 +3172,9 @@ public final class Control {
             output.writeUInt32(6, decoderAdditionalDepth_);
           }
           if (((bitField0_ & 0x00000040) != 0)) {
+            output.writeUInt32(8, pixelAspectRatioE4_);
+          }
+          if (((bitField0_ & 0x00000080) != 0)) {
             output.writeEnum(10, videoCodecType_);
           }
           getUnknownFields().writeTo(output);
@@ -3162,6 +3211,10 @@ public final class Control {
               .computeUInt32Size(6, decoderAdditionalDepth_);
           }
           if (((bitField0_ & 0x00000040) != 0)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeUInt32Size(8, pixelAspectRatioE4_);
+          }
+          if (((bitField0_ & 0x00000080) != 0)) {
             size += com.google.protobuf.CodedOutputStream
               .computeEnumSize(10, videoCodecType_);
           }
@@ -3208,6 +3261,11 @@ public final class Control {
             if (getDecoderAdditionalDepth()
                 != other.getDecoderAdditionalDepth()) return false;
           }
+          if (hasPixelAspectRatioE4() != other.hasPixelAspectRatioE4()) return false;
+          if (hasPixelAspectRatioE4()) {
+            if (getPixelAspectRatioE4()
+                != other.getPixelAspectRatioE4()) return false;
+          }
           if (hasVideoCodecType() != other.hasVideoCodecType()) return false;
           if (hasVideoCodecType()) {
             if (videoCodecType_ != other.videoCodecType_) return false;
@@ -3246,6 +3304,10 @@ public final class Control {
           if (hasDecoderAdditionalDepth()) {
             hash = (37 * hash) + DECODER_ADDITIONAL_DEPTH_FIELD_NUMBER;
             hash = (53 * hash) + getDecoderAdditionalDepth();
+          }
+          if (hasPixelAspectRatioE4()) {
+            hash = (37 * hash) + PIXEL_ASPECT_RATIO_E4_FIELD_NUMBER;
+            hash = (53 * hash) + getPixelAspectRatioE4();
           }
           if (hasVideoCodecType()) {
             hash = (37 * hash) + VIDEO_CODEC_TYPE_FIELD_NUMBER;
@@ -3388,6 +3450,7 @@ public final class Control {
             marginHeight_ = 0;
             density_ = 0;
             decoderAdditionalDepth_ = 0;
+            pixelAspectRatioE4_ = 0;
             videoCodecType_ = 1;
             return this;
           }
@@ -3448,8 +3511,12 @@ public final class Control {
               to_bitField0_ |= 0x00000020;
             }
             if (((from_bitField0_ & 0x00000040) != 0)) {
-              result.videoCodecType_ = videoCodecType_;
+              result.pixelAspectRatioE4_ = pixelAspectRatioE4_;
               to_bitField0_ |= 0x00000040;
+            }
+            if (((from_bitField0_ & 0x00000080) != 0)) {
+              result.videoCodecType_ = videoCodecType_;
+              to_bitField0_ |= 0x00000080;
             }
             result.bitField0_ |= to_bitField0_;
           }
@@ -3515,6 +3582,9 @@ public final class Control {
             }
             if (other.hasDecoderAdditionalDepth()) {
               setDecoderAdditionalDepth(other.getDecoderAdditionalDepth());
+            }
+            if (other.hasPixelAspectRatioE4()) {
+              setPixelAspectRatioE4(other.getPixelAspectRatioE4());
             }
             if (other.hasVideoCodecType()) {
               setVideoCodecType(other.getVideoCodecType());
@@ -3604,6 +3674,11 @@ public final class Control {
                     bitField0_ |= 0x00000020;
                     break;
                   } // case 48
+                  case 64: {
+                    pixelAspectRatioE4_ = input.readUInt32();
+                    bitField0_ |= 0x00000040;
+                    break;
+                  } // case 64
                   case 80: {
                     int tmpRaw = input.readEnum();
                     com.andrerinas.headunitrevived.aap.protocol.proto.Media.MediaCodecType tmpValue =
@@ -3612,7 +3687,7 @@ public final class Control {
                       mergeUnknownVarintField(10, tmpRaw);
                     } else {
                       videoCodecType_ = tmpRaw;
-                      bitField0_ |= 0x00000040;
+                      bitField0_ |= 0x00000080;
                     }
                     break;
                   } // case 80
@@ -3877,13 +3952,69 @@ public final class Control {
             return this;
           }
 
+          private int pixelAspectRatioE4_ ;
+          /**
+           * <pre>
+           * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+           * </pre>
+           *
+           * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+           * @return Whether the pixelAspectRatioE4 field is set.
+           */
+          @java.lang.Override
+          public boolean hasPixelAspectRatioE4() {
+            return ((bitField0_ & 0x00000040) != 0);
+          }
+          /**
+           * <pre>
+           * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+           * </pre>
+           *
+           * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+           * @return The pixelAspectRatioE4.
+           */
+          @java.lang.Override
+          public int getPixelAspectRatioE4() {
+            return pixelAspectRatioE4_;
+          }
+          /**
+           * <pre>
+           * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+           * </pre>
+           *
+           * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+           * @param value The pixelAspectRatioE4 to set.
+           * @return This builder for chaining.
+           */
+          public Builder setPixelAspectRatioE4(int value) {
+
+            pixelAspectRatioE4_ = value;
+            bitField0_ |= 0x00000040;
+            onChanged();
+            return this;
+          }
+          /**
+           * <pre>
+           * Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+           * </pre>
+           *
+           * <code>optional uint32 pixel_aspect_ratio_e4 = 8;</code>
+           * @return This builder for chaining.
+           */
+          public Builder clearPixelAspectRatioE4() {
+            bitField0_ = (bitField0_ & ~0x00000040);
+            pixelAspectRatioE4_ = 0;
+            onChanged();
+            return this;
+          }
+
           private int videoCodecType_ = 1;
           /**
            * <code>optional .com.andrerinas.headunitrevived.aap.protocol.proto.MediaCodecType video_codec_type = 10;</code>
            * @return Whether the videoCodecType field is set.
            */
           @java.lang.Override public boolean hasVideoCodecType() {
-            return ((bitField0_ & 0x00000040) != 0);
+            return ((bitField0_ & 0x00000080) != 0);
           }
           /**
            * <code>optional .com.andrerinas.headunitrevived.aap.protocol.proto.MediaCodecType video_codec_type = 10;</code>
@@ -3903,7 +4034,7 @@ public final class Control {
             if (value == null) {
               throw new NullPointerException();
             }
-            bitField0_ |= 0x00000040;
+            bitField0_ |= 0x00000080;
             videoCodecType_ = value.getNumber();
             onChanged();
             return this;
@@ -3913,7 +4044,7 @@ public final class Control {
            * @return This builder for chaining.
            */
           public Builder clearVideoCodecType() {
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000080);
             videoCodecType_ = 1;
             onChanged();
             return this;
@@ -32131,7 +32262,7 @@ public final class Control {
     java.lang.String[] descriptorData = {
       "\n\rcontrol.proto\0221com.andrerinas.headunit" +
       "revived.aap.protocol.proto\032\014common.proto" +
-      "\032\013media.proto\032\rsensors.proto\"\200#\n\007Service" +
+      "\032\013media.proto\032\rsensors.proto\"\237#\n\007Service" +
       "\022k\n\024phone_status_service\030\n \001(\0132M.com.and" +
       "rerinas.headunitrevived.aap.protocol.pro" +
       "to.Service.PhoneStatusService\022\n\n\002id\030\001 \002(" +
@@ -32168,7 +32299,7 @@ public final class Control {
       "trevived.aap.protocol.proto.Service.Sens" +
       "orSourceService.Sensor\032U\n\006Sensor\022K\n\004type" +
       "\030\001 \002(\0162=.com.andrerinas.headunitrevived." +
-      "aap.protocol.proto.SensorType\032\374\010\n\020MediaS" +
+      "aap.protocol.proto.SensorType\032\233\t\n\020MediaS" +
       "inkService\022Y\n\016available_type\030\001 \002(\0162A.com" +
       ".andrerinas.headunitrevived.aap.protocol" +
       ".proto.MediaCodecType\022V\n\naudio_type\030\002 \001(" +
@@ -32179,7 +32310,7 @@ public final class Control {
       "ion\022u\n\rvideo_configs\030\004 \003(\0132^.com.andreri" +
       "nas.headunitrevived.aap.protocol.proto.S" +
       "ervice.MediaSinkService.VideoConfigurati" +
-      "on\022\037\n\027available_while_in_call\030\005 \001(\010\032\276\005\n\022" +
+      "on\022\037\n\027available_while_in_call\030\005 \001(\010\032\335\005\n\022" +
       "VideoConfiguration\022\221\001\n\020codec_resolution\030" +
       "\001 \002(\0162w.com.andrerinas.headunitrevived.a" +
       "ap.protocol.proto.Service.MediaSinkServi" +
@@ -32189,164 +32320,164 @@ public final class Control {
       "Service.MediaSinkService.VideoConfigurat" +
       "ion.VideoFrameRateType\022\024\n\014margin_width\030\003" +
       " \002(\r\022\025\n\rmargin_height\030\004 \002(\r\022\017\n\007density\030\005" +
-      " \002(\r\022 \n\030decoder_additional_depth\030\006 \001(\r\022[" +
-      "\n\020video_codec_type\030\n \001(\0162A.com.andrerina" +
-      "s.headunitrevived.aap.protocol.proto.Med" +
-      "iaCodecType\"\246\001\n\030VideoCodecResolutionType" +
-      "\022\014\n\010_800x480\020\001\022\r\n\t_1280x720\020\002\022\016\n\n_1920x1" +
-      "080\020\003\022\016\n\n_2560x1440\020\004\022\016\n\n_3840x2160\020\005\022\r\n" +
-      "\t_720x1280\020\006\022\016\n\n_1080x1920\020\007\022\016\n\n_1440x25" +
-      "60\020\010\022\016\n\n_2160x3840\020\t\"&\n\022VideoFrameRateTy" +
-      "pe\022\007\n\003_60\020\001\022\007\n\003_30\020\002\032\273\002\n\022InputSourceServ" +
-      "ice\022\032\n\022keycodes_supported\030\001 \003(\r\022n\n\013touch" +
-      "screen\030\002 \001(\0132Y.com.andrerinas.headunitre" +
-      "vived.aap.protocol.proto.Service.InputSo" +
-      "urceService.TouchConfig\022k\n\010touchpad\030\003 \001(" +
-      "\0132Y.com.andrerinas.headunitrevived.aap.p" +
-      "rotocol.proto.Service.InputSourceService" +
-      ".TouchConfig\032,\n\013TouchConfig\022\r\n\005width\030\001 \002" +
-      "(\r\022\016\n\006height\030\002 \002(\r\032\343\001\n\022MediaSourceServic" +
-      "e\022O\n\004type\030\001 \002(\0162A.com.andrerinas.headuni" +
+      " \002(\r\022 \n\030decoder_additional_depth\030\006 \001(\r\022\035" +
+      "\n\025pixel_aspect_ratio_e4\030\010 \001(\r\022[\n\020video_c" +
+      "odec_type\030\n \001(\0162A.com.andrerinas.headuni" +
       "trevived.aap.protocol.proto.MediaCodecTy" +
-      "pe\022[\n\014audio_config\030\002 \002(\0132E.com.andrerina" +
-      "s.headunitrevived.aap.protocol.proto.Aud" +
-      "ioConfiguration\022\037\n\027available_while_in_ca" +
-      "ll\030\003 \001(\010\032\225\001\n\020BluetoothService\022\023\n\013car_add" +
-      "ress\030\001 \002(\t\022l\n\031supported_pairing_methods\030" +
-      "\002 \003(\0162I.com.andrerinas.headunitrevived.a" +
-      "ap.protocol.proto.BluetoothPairingMethod" +
-      "\032\242\003\n\027NavigationStatusService\022\033\n\023minimum_" +
-      "interval_ms\030\001 \002(\r\022l\n\004type\030\002 \002(\0162^.com.an" +
-      "drerinas.headunitrevived.aap.protocol.pr" +
-      "oto.Service.NavigationStatusService.Clus" +
-      "terType\022v\n\rimage_options\030\003 \001(\0132_.com.and" +
-      "rerinas.headunitrevived.aap.protocol.pro" +
-      "to.Service.NavigationStatusService.Image" +
-      "Options\032G\n\014ImageOptions\022\r\n\005width\030\001 \002(\005\022\016" +
-      "\n\006height\030\002 \002(\005\022\030\n\020colour_deth_bits\030\003 \002(\005" +
-      "\";\n\013ClusterType\022\030\n\024CustomImageSupported\020" +
-      "\001\022\022\n\016ImageCodesOnly\020\002\032\034\n\032MediaPlaybackSt" +
-      "atusService\032\347\001\n\020PhoneStatus_Call\022[\n\005stat" +
-      "e\030\001 \001(\0162L.com.andrerinas.headunitrevived" +
-      ".aap.protocol.proto.Service.PhoneStatus_" +
-      "State\022\035\n\025call_duration_seconds\030\002 \001(\r\022\025\n\r" +
-      "caller_number\030\003 \001(\t\022\021\n\tcaller_id\030\004 \001(\t\022\032" +
-      "\n\022caller_number_type\030\005 \001(\t\022\021\n\tthumbnail\030" +
-      "\006 \001(\014\032=\n\021PhoneStatus_Input\022\025\n\rcaller_num" +
-      "ber\030\001 \001(\t\022\021\n\tcaller_id\030\002 \001(\t\032\211\001\n\022PhoneSt" +
-      "atusService\022Z\n\005calls\030\001 \003(\0132K.com.andreri" +
-      "nas.headunitrevived.aap.protocol.proto.S" +
-      "ervice.PhoneStatus_Call\022\027\n\017signal_streng" +
-      "th\030\002 \001(\r\032P\n\026VendorExtensionService\022\014\n\004na" +
-      "me\030\001 \001(\t\022\032\n\022package_white_list\030\002 \003(\t\022\014\n\004" +
-      "data\030\003 \001(\014\032\034\n\032GenericNotificationService" +
-      "\032/\n\025WifiProjectionService\022\026\n\016car_wifi_bs" +
-      "sid\030\001 \001(\t\"d\n\021PhoneStatus_State\022\n\n\006InCall" +
-      "\020\001\022\n\n\006OnHold\020\002\022\r\n\tHangingUp\020\003\022\014\n\010Incomin" +
-      "g\020\004\022\t\n\005Muted\020\005\022\017\n\013Conferenced\020\006\"B\n\027Servi" +
-      "ceDiscoveryRequest\022\022\n\nphone_name\030\004 \002(\t\022\023" +
-      "\n\013phone_brand\030\005 \002(\t\"\351\004\n\030ServiceDiscovery" +
-      "Response\022L\n\010services\030\001 \003(\0132:.com.andreri" +
-      "nas.headunitrevived.aap.protocol.proto.S" +
-      "ervice\022\014\n\004make\030\002 \002(\t\022\r\n\005model\030\003 \002(\t\022\014\n\004y" +
-      "ear\030\004 \002(\t\022\022\n\nvehicle_id\030\005 \002(\t\022Z\n\017driver_" +
-      "position\030\006 \002(\0162A.com.andrerinas.headunit" +
-      "revived.aap.protocol.proto.DriverPositio" +
-      "n\022\026\n\016head_unit_make\030\007 \002(\t\022\027\n\017head_unit_m" +
-      "odel\030\010 \002(\t\022 \n\030head_unit_software_build\030\t" +
-      " \002(\t\022\"\n\032head_unit_software_version\030\n \002(\t" +
-      "\022\'\n\037can_play_native_media_during_vr\030\013 \002(" +
-      "\010\022\034\n\024hide_projected_clock\030\014 \001(\010\022\035\n\025sessi" +
-      "on_configuration\030\r \001(\005\022\024\n\014display_name\030\016" +
-      " \001(\t\022\031\n\021probe_for_support\030\017 \001(\010\022V\n\rheadu" +
-      "nit_info\030\021 \001(\0132?.com.andrerinas.headunit" +
-      "revived.aap.protocol.proto.HeadUnitInfo\"" +
-      ":\n\022ChannelOpenRequest\022\020\n\010priority\030\001 \002(\005\022" +
-      "\022\n\nservice_id\030\002 \002(\005\"g\n\023ChannelOpenRespon" +
-      "se\022P\n\006status\030\001 \002(\0162@.com.andrerinas.head" +
-      "unitrevived.aap.protocol.proto.MessageSt" +
-      "atus\"4\n\013PingRequest\022\021\n\ttimestamp\030\001 \002(\003\022\022" +
-      "\n\nbug_report\030\002 \001(\005\"!\n\014PingResponse\022\021\n\tti" +
-      "mestamp\030\001 \002(\003\"`\n\rByeByeRequest\022O\n\006reason" +
+      "pe\"\246\001\n\030VideoCodecResolutionType\022\014\n\010_800x" +
+      "480\020\001\022\r\n\t_1280x720\020\002\022\016\n\n_1920x1080\020\003\022\016\n\n" +
+      "_2560x1440\020\004\022\016\n\n_3840x2160\020\005\022\r\n\t_720x128" +
+      "0\020\006\022\016\n\n_1080x1920\020\007\022\016\n\n_1440x2560\020\010\022\016\n\n_" +
+      "2160x3840\020\t\"&\n\022VideoFrameRateType\022\007\n\003_60" +
+      "\020\001\022\007\n\003_30\020\002\032\273\002\n\022InputSourceService\022\032\n\022ke" +
+      "ycodes_supported\030\001 \003(\r\022n\n\013touchscreen\030\002 " +
+      "\001(\0132Y.com.andrerinas.headunitrevived.aap" +
+      ".protocol.proto.Service.InputSourceServi" +
+      "ce.TouchConfig\022k\n\010touchpad\030\003 \001(\0132Y.com.a" +
+      "ndrerinas.headunitrevived.aap.protocol.p" +
+      "roto.Service.InputSourceService.TouchCon" +
+      "fig\032,\n\013TouchConfig\022\r\n\005width\030\001 \002(\r\022\016\n\006hei" +
+      "ght\030\002 \002(\r\032\343\001\n\022MediaSourceService\022O\n\004type" +
+      "\030\001 \002(\0162A.com.andrerinas.headunitrevived." +
+      "aap.protocol.proto.MediaCodecType\022[\n\014aud" +
+      "io_config\030\002 \002(\0132E.com.andrerinas.headuni" +
+      "trevived.aap.protocol.proto.AudioConfigu" +
+      "ration\022\037\n\027available_while_in_call\030\003 \001(\010\032" +
+      "\225\001\n\020BluetoothService\022\023\n\013car_address\030\001 \002(" +
+      "\t\022l\n\031supported_pairing_methods\030\002 \003(\0162I.c" +
+      "om.andrerinas.headunitrevived.aap.protoc" +
+      "ol.proto.BluetoothPairingMethod\032\242\003\n\027Navi" +
+      "gationStatusService\022\033\n\023minimum_interval_" +
+      "ms\030\001 \002(\r\022l\n\004type\030\002 \002(\0162^.com.andrerinas." +
+      "headunitrevived.aap.protocol.proto.Servi" +
+      "ce.NavigationStatusService.ClusterType\022v" +
+      "\n\rimage_options\030\003 \001(\0132_.com.andrerinas.h" +
+      "eadunitrevived.aap.protocol.proto.Servic" +
+      "e.NavigationStatusService.ImageOptions\032G" +
+      "\n\014ImageOptions\022\r\n\005width\030\001 \002(\005\022\016\n\006height\030" +
+      "\002 \002(\005\022\030\n\020colour_deth_bits\030\003 \002(\005\";\n\013Clust" +
+      "erType\022\030\n\024CustomImageSupported\020\001\022\022\n\016Imag" +
+      "eCodesOnly\020\002\032\034\n\032MediaPlaybackStatusServi" +
+      "ce\032\347\001\n\020PhoneStatus_Call\022[\n\005state\030\001 \001(\0162L" +
+      ".com.andrerinas.headunitrevived.aap.prot" +
+      "ocol.proto.Service.PhoneStatus_State\022\035\n\025" +
+      "call_duration_seconds\030\002 \001(\r\022\025\n\rcaller_nu" +
+      "mber\030\003 \001(\t\022\021\n\tcaller_id\030\004 \001(\t\022\032\n\022caller_" +
+      "number_type\030\005 \001(\t\022\021\n\tthumbnail\030\006 \001(\014\032=\n\021" +
+      "PhoneStatus_Input\022\025\n\rcaller_number\030\001 \001(\t" +
+      "\022\021\n\tcaller_id\030\002 \001(\t\032\211\001\n\022PhoneStatusServi" +
+      "ce\022Z\n\005calls\030\001 \003(\0132K.com.andrerinas.headu" +
+      "nitrevived.aap.protocol.proto.Service.Ph" +
+      "oneStatus_Call\022\027\n\017signal_strength\030\002 \001(\r\032" +
+      "P\n\026VendorExtensionService\022\014\n\004name\030\001 \001(\t\022" +
+      "\032\n\022package_white_list\030\002 \003(\t\022\014\n\004data\030\003 \001(" +
+      "\014\032\034\n\032GenericNotificationService\032/\n\025WifiP" +
+      "rojectionService\022\026\n\016car_wifi_bssid\030\001 \001(\t" +
+      "\"d\n\021PhoneStatus_State\022\n\n\006InCall\020\001\022\n\n\006OnH" +
+      "old\020\002\022\r\n\tHangingUp\020\003\022\014\n\010Incoming\020\004\022\t\n\005Mu" +
+      "ted\020\005\022\017\n\013Conferenced\020\006\"B\n\027ServiceDiscove" +
+      "ryRequest\022\022\n\nphone_name\030\004 \002(\t\022\023\n\013phone_b" +
+      "rand\030\005 \002(\t\"\351\004\n\030ServiceDiscoveryResponse\022" +
+      "L\n\010services\030\001 \003(\0132:.com.andrerinas.headu" +
+      "nitrevived.aap.protocol.proto.Service\022\014\n" +
+      "\004make\030\002 \002(\t\022\r\n\005model\030\003 \002(\t\022\014\n\004year\030\004 \002(\t" +
+      "\022\022\n\nvehicle_id\030\005 \002(\t\022Z\n\017driver_position\030" +
+      "\006 \002(\0162A.com.andrerinas.headunitrevived.a" +
+      "ap.protocol.proto.DriverPosition\022\026\n\016head" +
+      "_unit_make\030\007 \002(\t\022\027\n\017head_unit_model\030\010 \002(" +
+      "\t\022 \n\030head_unit_software_build\030\t \002(\t\022\"\n\032h" +
+      "ead_unit_software_version\030\n \002(\t\022\'\n\037can_p" +
+      "lay_native_media_during_vr\030\013 \002(\010\022\034\n\024hide" +
+      "_projected_clock\030\014 \001(\010\022\035\n\025session_config" +
+      "uration\030\r \001(\005\022\024\n\014display_name\030\016 \001(\t\022\031\n\021p" +
+      "robe_for_support\030\017 \001(\010\022V\n\rheadunit_info\030" +
+      "\021 \001(\0132?.com.andrerinas.headunitrevived.a" +
+      "ap.protocol.proto.HeadUnitInfo\":\n\022Channe" +
+      "lOpenRequest\022\020\n\010priority\030\001 \002(\005\022\022\n\nservic" +
+      "e_id\030\002 \002(\005\"g\n\023ChannelOpenResponse\022P\n\006sta" +
+      "tus\030\001 \002(\0162@.com.andrerinas.headunitreviv" +
+      "ed.aap.protocol.proto.MessageStatus\"4\n\013P" +
+      "ingRequest\022\021\n\ttimestamp\030\001 \002(\003\022\022\n\nbug_rep" +
+      "ort\030\002 \001(\005\"!\n\014PingResponse\022\021\n\ttimestamp\030\001" +
+      " \002(\003\"`\n\rByeByeRequest\022O\n\006reason\030\001 \002(\0162?." +
+      "com.andrerinas.headunitrevived.aap.proto" +
+      "col.proto.ByeByeReason\"\020\n\016ByeByeResponse" +
+      "\"\317\001\n\030VoiceSessionNotification\022n\n\006status\030" +
+      "\001 \002(\0162^.com.andrerinas.headunitrevived.a" +
+      "ap.protocol.proto.VoiceSessionNotificati" +
+      "on.VoiceSessionStatus\"C\n\022VoiceSessionSta" +
+      "tus\022\026\n\022VOICE_STATUS_START\020\001\022\025\n\021VOICE_STA" +
+      "TUS_STOP\020\002\"\203\002\n\035AudioFocusRequestNotifica" +
+      "tion\022w\n\007request\030\001 \001(\0162f.com.andrerinas.h" +
+      "eadunitrevived.aap.protocol.proto.AudioF" +
+      "ocusRequestNotification.AudioFocusReques" +
+      "tType\"i\n\025AudioFocusRequestType\022\010\n\004NONE\020\000" +
+      "\022\010\n\004GAIN\020\001\022\022\n\016GAIN_TRANSIENT\020\002\022\033\n\027GAIN_T" +
+      "RANSIENT_MAY_DUCK\020\003\022\013\n\007RELEASE\020\004\"\363\002\n\026Aud" +
+      "ioFocusNotification\022r\n\013focus_state\030\001 \002(\016" +
+      "2].com.andrerinas.headunitrevived.aap.pr" +
+      "otocol.proto.AudioFocusNotification.Audi" +
+      "oFocusStateType\022\023\n\013unsolicited\030\002 \001(\010\"\317\001\n" +
+      "\023AudioFocusStateType\022\016\n\nSTATE_GAIN\020\001\022\030\n\024" +
+      "STATE_GAIN_TRANSIENT\020\002\022\016\n\nSTATE_LOSS\020\003\022!" +
+      "\n\035STATE_LOSS_TRANSIENT_CAN_DUCK\020\004\022\030\n\024STA" +
+      "TE_LOSS_TRANSIENT\020\005\022\031\n\025STATE_GAIN_MEDIA_" +
+      "ONLY\020\006\022&\n\"STATE_GAIN_TRANSIENT_GUIDANCE_" +
+      "ONLY\020\007\"r\n\033NavFocusRequestNotification\022S\n" +
+      "\nfocus_type\030\001 \001(\0162?.com.andrerinas.headu" +
+      "nitrevived.aap.protocol.proto.NavFocusTy" +
+      "pe\"k\n\024NavFocusNotification\022S\n\nfocus_type" +
       "\030\001 \002(\0162?.com.andrerinas.headunitrevived." +
-      "aap.protocol.proto.ByeByeReason\"\020\n\016ByeBy" +
-      "eResponse\"\317\001\n\030VoiceSessionNotification\022n" +
-      "\n\006status\030\001 \002(\0162^.com.andrerinas.headunit" +
-      "revived.aap.protocol.proto.VoiceSessionN" +
-      "otification.VoiceSessionStatus\"C\n\022VoiceS" +
-      "essionStatus\022\026\n\022VOICE_STATUS_START\020\001\022\025\n\021" +
-      "VOICE_STATUS_STOP\020\002\"\203\002\n\035AudioFocusReques" +
-      "tNotification\022w\n\007request\030\001 \001(\0162f.com.and" +
-      "rerinas.headunitrevived.aap.protocol.pro" +
-      "to.AudioFocusRequestNotification.AudioFo" +
-      "cusRequestType\"i\n\025AudioFocusRequestType\022" +
-      "\010\n\004NONE\020\000\022\010\n\004GAIN\020\001\022\022\n\016GAIN_TRANSIENT\020\002\022" +
-      "\033\n\027GAIN_TRANSIENT_MAY_DUCK\020\003\022\013\n\007RELEASE\020" +
-      "\004\"\363\002\n\026AudioFocusNotification\022r\n\013focus_st" +
-      "ate\030\001 \002(\0162].com.andrerinas.headunitreviv" +
-      "ed.aap.protocol.proto.AudioFocusNotifica" +
-      "tion.AudioFocusStateType\022\023\n\013unsolicited\030" +
-      "\002 \001(\010\"\317\001\n\023AudioFocusStateType\022\016\n\nSTATE_G" +
-      "AIN\020\001\022\030\n\024STATE_GAIN_TRANSIENT\020\002\022\016\n\nSTATE" +
-      "_LOSS\020\003\022!\n\035STATE_LOSS_TRANSIENT_CAN_DUCK" +
-      "\020\004\022\030\n\024STATE_LOSS_TRANSIENT\020\005\022\031\n\025STATE_GA" +
-      "IN_MEDIA_ONLY\020\006\022&\n\"STATE_GAIN_TRANSIENT_" +
-      "GUIDANCE_ONLY\020\007\"r\n\033NavFocusRequestNotifi" +
-      "cation\022S\n\nfocus_type\030\001 \001(\0162?.com.andreri" +
-      "nas.headunitrevived.aap.protocol.proto.N" +
-      "avFocusType\"k\n\024NavFocusNotification\022S\n\nf" +
-      "ocus_type\030\001 \002(\0162?.com.andrerinas.headuni" +
-      "trevived.aap.protocol.proto.NavFocusType" +
-      "\"f\n\031BatteryStatusNotification\022\025\n\rbattery" +
-      "_level\030\001 \002(\r\022\030\n\020time_remaining_s\030\002 \001(\r\022\030" +
-      "\n\020critical_battery\030\003 \001(\010\"9\n\017ConnectedDev" +
-      "ice\022\023\n\013device_name\030\001 \001(\t\022\021\n\tdevice_id\030\002 " +
-      "\001(\005\"\243\001\n\023CarConnectedDevices\022]\n\021connected" +
-      "_devices\030\001 \003(\0132B.com.andrerinas.headunit" +
-      "revived.aap.protocol.proto.ConnectedDevi" +
-      "ce\022\023\n\013unsolicited\030\002 \001(\010\022\030\n\nfinal_list\030\003 " +
-      "\001(\010:\004true\"\374\001\n\022UserSwitchResponse\022f\n\006stat" +
-      "us\030\001 \001(\0162V.com.andrerinas.headunitrevive" +
-      "d.aap.protocol.proto.UserSwitchResponse." +
-      "UserSwitchStatus\022[\n\017selected_device\030\002 \001(" +
-      "\0132B.com.andrerinas.headunitrevived.aap.p" +
-      "rotocol.proto.ConnectedDevice\"!\n\020UserSwi" +
-      "tchStatus\022\r\n\tSTATUS_OK\020\000\"0\n\026CallAvailabi" +
-      "lityStatus\022\026\n\016call_available\030\001 \001(\010*\255\007\n\016C" +
-      "ontrolMsgType\022\033\n\027MESSAGE_VERSION_REQUEST" +
-      "\020\001\022\034\n\030MESSAGE_VERSION_RESPONSE\020\002\022\034\n\030MESS" +
-      "AGE_ENCAPSULATED_SSL\020\003\022\031\n\025MESSAGE_AUTH_C" +
-      "OMPLETE\020\004\022%\n!MESSAGE_SERVICE_DISCOVERY_R" +
-      "EQUEST\020\005\022&\n\"MESSAGE_SERVICE_DISCOVERY_RE" +
-      "SPONSE\020\006\022 \n\034MESSAGE_CHANNEL_OPEN_REQUEST" +
-      "\020\007\022!\n\035MESSAGE_CHANNEL_OPEN_RESPONSE\020\010\022&\n" +
-      "\"MESSAGE_CHANNEL_CLOSE_NOTIFICATION\020\t\022\030\n" +
-      "\024MESSAGE_PING_REQUEST\020\013\022\031\n\025MESSAGE_PING_" +
-      "RESPONSE\020\014\022\035\n\031MESSAGE_NAV_FOCUS_REQUEST\020" +
-      "\r\022\"\n\036MESSAGE_NAV_FOCUS_NOTIFICATION\020\016\022\032\n" +
-      "\026MESSAGE_BYEBYE_REQUEST\020\017\022\033\n\027MESSAGE_BYE" +
-      "BYE_RESPONSE\020\020\022&\n\"MESSAGE_VOICE_SESSION_" +
-      "NOTIFICATION\020\021\022\037\n\033MESSAGE_AUDIO_FOCUS_RE" +
-      "QUEST\020\022\022$\n MESSAGE_AUDIO_FOCUS_NOTIFICAT" +
-      "ION\020\023\022)\n%MESSAGE_CAR_CONNECTED_DEVICES_R" +
-      "EQUEST\020\024\022*\n&MESSAGE_CAR_CONNECTED_DEVICE" +
-      "S_RESPONSE\020\025\022\037\n\033MESSAGE_USER_SWITCH_REQU" +
-      "EST\020\026\022\'\n#MESSAGE_BATTERY_STATUS_NOTIFICA" +
-      "TION\020\027\022$\n MESSAGE_CALL_AVAILABILITY_STAT" +
-      "US\020\030\022 \n\034MESSAGE_USER_SWITCH_RESPONSE\020\031\022$" +
-      "\n MESSAGE_SERVICE_DISCOVERY_UPDATE\020\032\022\037\n\032" +
-      "MESSAGE_UNEXPECTED_MESSAGE\020\377\001\022\033\n\025MESSAGE" +
-      "_FRAMING_ERROR\020\377\377\003*G\n\026BluetoothPairingMe" +
-      "thod\022\014\n\010METHOD_1\020\001\022\010\n\004A2DP\020\002\022\014\n\010METHOD_3" +
-      "\020\003\022\007\n\003HFP\020\004*z\n\014ByeByeReason\022\022\n\016USER_SELE" +
-      "CTION\020\001\022\021\n\rDEVICE_SWITCH\020\002\022\021\n\rNOT_SUPPOR" +
-      "TED\020\003\022\033\n\027NOT_CURRENTLY_SUPPORTED\020\004\022\023\n\017PR" +
-      "OBE_SUPPORTED\020\005*~\n\016DriverPosition\022\030\n\024DRI" +
-      "VER_POSITION_LEFT\020\000\022\031\n\025DRIVER_POSITION_R" +
-      "IGHT\020\001\022\032\n\026DRIVER_POSITION_CENTER\020\002\022\033\n\027DR" +
-      "IVER_POSITION_UNKNOWN\020\003*0\n\014NavFocusType\022" +
-      "\017\n\013NAV_FOCUS_1\020\001\022\017\n\013NAV_FOCUS_2\020\002B\tB\007Con" +
-      "trol"
+      "aap.protocol.proto.NavFocusType\"f\n\031Batte" +
+      "ryStatusNotification\022\025\n\rbattery_level\030\001 " +
+      "\002(\r\022\030\n\020time_remaining_s\030\002 \001(\r\022\030\n\020critica" +
+      "l_battery\030\003 \001(\010\"9\n\017ConnectedDevice\022\023\n\013de" +
+      "vice_name\030\001 \001(\t\022\021\n\tdevice_id\030\002 \001(\005\"\243\001\n\023C" +
+      "arConnectedDevices\022]\n\021connected_devices\030" +
+      "\001 \003(\0132B.com.andrerinas.headunitrevived.a" +
+      "ap.protocol.proto.ConnectedDevice\022\023\n\013uns" +
+      "olicited\030\002 \001(\010\022\030\n\nfinal_list\030\003 \001(\010:\004true" +
+      "\"\374\001\n\022UserSwitchResponse\022f\n\006status\030\001 \001(\0162" +
+      "V.com.andrerinas.headunitrevived.aap.pro" +
+      "tocol.proto.UserSwitchResponse.UserSwitc" +
+      "hStatus\022[\n\017selected_device\030\002 \001(\0132B.com.a" +
+      "ndrerinas.headunitrevived.aap.protocol.p" +
+      "roto.ConnectedDevice\"!\n\020UserSwitchStatus" +
+      "\022\r\n\tSTATUS_OK\020\000\"0\n\026CallAvailabilityStatu" +
+      "s\022\026\n\016call_available\030\001 \001(\010*\255\007\n\016ControlMsg" +
+      "Type\022\033\n\027MESSAGE_VERSION_REQUEST\020\001\022\034\n\030MES" +
+      "SAGE_VERSION_RESPONSE\020\002\022\034\n\030MESSAGE_ENCAP" +
+      "SULATED_SSL\020\003\022\031\n\025MESSAGE_AUTH_COMPLETE\020\004" +
+      "\022%\n!MESSAGE_SERVICE_DISCOVERY_REQUEST\020\005\022" +
+      "&\n\"MESSAGE_SERVICE_DISCOVERY_RESPONSE\020\006\022" +
+      " \n\034MESSAGE_CHANNEL_OPEN_REQUEST\020\007\022!\n\035MES" +
+      "SAGE_CHANNEL_OPEN_RESPONSE\020\010\022&\n\"MESSAGE_" +
+      "CHANNEL_CLOSE_NOTIFICATION\020\t\022\030\n\024MESSAGE_" +
+      "PING_REQUEST\020\013\022\031\n\025MESSAGE_PING_RESPONSE\020" +
+      "\014\022\035\n\031MESSAGE_NAV_FOCUS_REQUEST\020\r\022\"\n\036MESS" +
+      "AGE_NAV_FOCUS_NOTIFICATION\020\016\022\032\n\026MESSAGE_" +
+      "BYEBYE_REQUEST\020\017\022\033\n\027MESSAGE_BYEBYE_RESPO" +
+      "NSE\020\020\022&\n\"MESSAGE_VOICE_SESSION_NOTIFICAT" +
+      "ION\020\021\022\037\n\033MESSAGE_AUDIO_FOCUS_REQUEST\020\022\022$" +
+      "\n MESSAGE_AUDIO_FOCUS_NOTIFICATION\020\023\022)\n%" +
+      "MESSAGE_CAR_CONNECTED_DEVICES_REQUEST\020\024\022" +
+      "*\n&MESSAGE_CAR_CONNECTED_DEVICES_RESPONS" +
+      "E\020\025\022\037\n\033MESSAGE_USER_SWITCH_REQUEST\020\026\022\'\n#" +
+      "MESSAGE_BATTERY_STATUS_NOTIFICATION\020\027\022$\n" +
+      " MESSAGE_CALL_AVAILABILITY_STATUS\020\030\022 \n\034M" +
+      "ESSAGE_USER_SWITCH_RESPONSE\020\031\022$\n MESSAGE" +
+      "_SERVICE_DISCOVERY_UPDATE\020\032\022\037\n\032MESSAGE_U" +
+      "NEXPECTED_MESSAGE\020\377\001\022\033\n\025MESSAGE_FRAMING_" +
+      "ERROR\020\377\377\003*G\n\026BluetoothPairingMethod\022\014\n\010M" +
+      "ETHOD_1\020\001\022\010\n\004A2DP\020\002\022\014\n\010METHOD_3\020\003\022\007\n\003HFP" +
+      "\020\004*z\n\014ByeByeReason\022\022\n\016USER_SELECTION\020\001\022\021" +
+      "\n\rDEVICE_SWITCH\020\002\022\021\n\rNOT_SUPPORTED\020\003\022\033\n\027" +
+      "NOT_CURRENTLY_SUPPORTED\020\004\022\023\n\017PROBE_SUPPO" +
+      "RTED\020\005*~\n\016DriverPosition\022\030\n\024DRIVER_POSIT" +
+      "ION_LEFT\020\000\022\031\n\025DRIVER_POSITION_RIGHT\020\001\022\032\n" +
+      "\026DRIVER_POSITION_CENTER\020\002\022\033\n\027DRIVER_POSI" +
+      "TION_UNKNOWN\020\003*0\n\014NavFocusType\022\017\n\013NAV_FO" +
+      "CUS_1\020\001\022\017\n\013NAV_FOCUS_2\020\002B\tB\007Control"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -32384,7 +32515,7 @@ public final class Control {
     internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor,
-        new java.lang.String[] { "CodecResolution", "FrameRate", "MarginWidth", "MarginHeight", "Density", "DecoderAdditionalDepth", "VideoCodecType", });
+        new java.lang.String[] { "CodecResolution", "FrameRate", "MarginWidth", "MarginHeight", "Density", "DecoderAdditionalDepth", "PixelAspectRatioE4", "VideoCodecType", });
     internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor =
       internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(2);
     internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable = new

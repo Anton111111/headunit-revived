@@ -1,4 +1,17 @@
 # Changelog
+### v.3.2.0-beta1
+- Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
+- Acquire transient audio focus while AA audio plays, thanks to @bnayahu
+- Add GitHub Actions CI (build + unit tests), thanks to @bnayahu
+- Fix picture stuck if used within DUDU's PiP, thanks to @MrEAlderson
+- Fix(wifi): use public API for frequency, thanks to @DerTeufel
+- Added pixel aspect ratio setting, thanks to @axel92b
+- Added more audio features to gain audio focus and work with dsp headunits
+- Added display over other apps permission for better compatibility with some headunits, espacially with self mode
+- Fix transport get stucked on multiple reconnects, thanks to @notathf
+- Add car keys support for FYT headunits, thanks to @MrEAlderson
+- Added Option to flip projection horizontal for Headup-Displays
+
 ### v.3.1.1
 - Reduce pressure on sensor events like night and gps and start/stop these events in onConnected, onDisconnect and onDestroy
 - Merged ffmpeg PR #625 by @mmwtl. This added ffmpeg software decoder for h265, which old devives could benefit a lot. Thank you!

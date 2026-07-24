@@ -1,3 +1,6 @@
+import org.gradle.kotlin.dsl.maven
+import org.gradle.kotlin.dsl.repositories
+
 include(":app", ":contract")
 
 
@@ -16,5 +19,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+        maven {
+            url = uri("https://jitpack.io")
+        }
     }
 }

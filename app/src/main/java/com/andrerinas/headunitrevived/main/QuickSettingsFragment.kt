@@ -117,6 +117,19 @@ class QuickSettingsFragment : DialogFragment() {
             }
         ))
 
+        items.add(SettingItem.ToggleSettingEntry(
+            stableId = "hudMirroring",
+            nameResId = R.string.hud_mirroring,
+            descriptionResId = R.string.hud_mirroring_description,
+            isChecked = settings.hudMirroring,
+            onCheckedChanged = { isChecked ->
+                settings.hudMirroring = isChecked
+                settings.commit()
+                notifyChange(needsViewRecreate = true)
+                updateSettingsList()
+            }
+        ))
+
         items.add(SettingItem.SettingEntry(
             stableId = "viewMode",
             nameResId = R.string.view_mode,

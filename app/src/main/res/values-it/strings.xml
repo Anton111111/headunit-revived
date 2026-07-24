@@ -181,7 +181,9 @@
     <string name="wifi_ssid_not_set">Non impostato</string>
 
     <string name="listen_for_usb_devices_label">Ascolta dispositivi USB</string>
-    <string name="listen_for_usb_devices_description">Mostra la richiesta di sistema Android quando viene collegato un dispositivo USB.</string>
+    <string name="listen_for_usb_devices_description">Mostra il messaggio di sistema Android quando viene collegato un dispositivo USB.</string>
+    <string name="show_toast_messages">Mostra messaggi Toast</string>
+    <string name="show_toast_messages_description">Mostra popup di stato alla connessione, disconnessione e cambio modalità.</string>
     <string name="auto_start_usb_label">Avvio automatico su USB</string>
     <string name="auto_start_usb_description">Apri automaticamente l\'app e tenta la connessione quando viene collegato un dispositivo USB</string>
     <string name="auto_start_settings">Impostazioni avvio automatico</string>
@@ -245,6 +247,8 @@
     <string name="pref_stretch_screen_summary">Ignora le proporzioni per riempire l\'intero display (rimuove le barre nere)</string>
     <string name="forced_scale">Scala forzata (Fix Legacy)</string>
     <string name="forced_scale_description">Corregge i problemi di ridimensionamento su alcuni dispositivi più vecchi che utilizzano SurfaceView. Utilizzare solo se l\'immagine appare distorta o spostata.</string>
+    <string name="hud_mirroring">Modalità HUD (Capovolgimento orizzontale)</string>
+    <string name="hud_mirroring_description">Capovolge lo schermo orizzontalmente per il riflesso sul parabrezza (Head-Up Display). Richiede la modalità di visualizzazione TextureView o GLES20 (non funziona con SurfaceView).</string>
 
 
     <!-- Audio Settings -->
@@ -594,4 +598,6 @@
     <string name="software_video_decoder_device">MediaCodec del dispositivo</string>
 
     <string name="btn_show_qr">Mostra codice QR</string>
+
+    <string name="self_mode_overlay_permission_description">Per consentire l\'avvio affidabile della Modalità Personale in background, abilita l\'autorizzazione \"Mostra sopra altre app\" nella schermata successiva.</string>
 </resources>

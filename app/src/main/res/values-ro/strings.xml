@@ -178,6 +178,8 @@
 
     <string name="listen_for_usb_devices_label">Ascultați dispozitive USB</string>
     <string name="listen_for_usb_devices_description">Afișați solicitarea sistemului Android când este conectat un dispozitiv USB.</string>
+    <string name="show_toast_messages">Afișează mesaje Toast</string>
+    <string name="show_toast_messages_description">Afișează mesaje pop-up de stare la conectare, deconectare și schimbarea modului.</string>
     <string name="auto_start_usb_label">Pornire automată pe USB</string>
     <string name="auto_start_usb_description">Deschide aplicația automat și încearcă conectarea când un dispozitiv USB este conectat</string>
     <string name="auto_start_settings">Setări pornire automată</string>
@@ -243,6 +245,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">Scalare forțată (Fix legacy)</string>
     <string name="forced_scale_description">Corectează problemele de scalare pe unele dispozitive mai vechi care folosesc SurfaceView. Utilizați numai dacă imaginea pare distorsionată sau deplasată.</string>
+    <string name="hud_mirroring">Mod HUD (Oglindire orizontală)</string>
+    <string name="hud_mirroring_description">Răstoarnă afișajul pe orizontală pentru reflexia pe parbriz (Head-Up Display). Necesită modul de vizualizare TextureView sau GLES20 (nu funcționează cu SurfaceView).</string>
 
     <string name="category_audio">Audio</string>
     <string name="enable_audio_sink">Receptor Audio (Sink)</string>
@@ -588,4 +592,6 @@
     <string name="software_video_decoder_device">MediaCodec dispozitiv</string>
 
     <string name="btn_show_qr">Afișează codul QR</string>
+
+    <string name="self_mode_overlay_permission_description">Pentru a permite Modului Personal să pornească fiabil în fundal, activați permisiunea „Afișare peste alte aplicații” în ecranul următor.</string>
 </resources>

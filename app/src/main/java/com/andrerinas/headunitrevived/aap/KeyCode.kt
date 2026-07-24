@@ -72,13 +72,16 @@ object KeyCode {
     internal fun convert(keyCode: Int): Int {
         // If it's in our supported list or a standard media key, pass it through.
         // We no longer force ENTER -> DPAD_CENTER here to allow users to map it specifically.
-        if (supported.contains(keyCode) || 
-            keyCode == KeyEvent.KEYCODE_MEDIA_FAST_FORWARD || 
-            keyCode == KeyEvent.KEYCODE_MEDIA_REWIND || 
-            keyCode == KeyEvent.KEYCODE_MUTE || 
+        if (supported.contains(keyCode) ||
+            keyCode == KeyEvent.KEYCODE_MEDIA_FAST_FORWARD ||
+            keyCode == KeyEvent.KEYCODE_MEDIA_REWIND ||
+            keyCode == KeyEvent.KEYCODE_MUTE ||
             keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
             return keyCode
         }
+
+        if (keyCode == KeyEvent.KEYCODE_VOICE_ASSIST)
+            return KeyEvent.KEYCODE_SEARCH
 
         // Return KEYCODE_UNKNOWN for anything else to avoid sending invalid codes to AA
         AppLog.w("KeyCode: Unknown or unsupported keycode $keyCode - returning KEYCODE_UNKNOWN")

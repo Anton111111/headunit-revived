@@ -2,10 +2,12 @@ package com.andrerinas.headunitrevived.decoder
 
 import android.media.AudioAttributes
 import android.media.AudioFormat
+import android.media.AudioManager
 import android.media.AudioTrack
 import android.media.MediaCodec
 import android.media.MediaCodecInfo
 import android.media.MediaFormat
+import android.media.audiofx.Equalizer
 import android.os.Build
 import android.os.Handler
 import android.os.HandlerThread
@@ -44,6 +46,7 @@ class AudioTrackWrapper(
     private val freeInputBuffers = LinkedBlockingQueue<Int>()
     private val writeExecutor = Executors.newSingleThreadExecutor()
     private val writeSemaphore = java.util.concurrent.Semaphore(3)
+    private var equalizer: Equalizer? = null
 
     // Limit queue capacity to provide backpressure to the network thread if audio playback is slow
     private val dataQueue = if (audioQueueCapacity > 0)
@@ -107,7 +110,10 @@ class AudioTrackWrapper(
             mixer.setChannelGain(channelId, gain)
         } else {
             setVolume(gain)
-            audioTrack?.play()
+            audioTrack?.let { track ->
+                attachHwDspEqualizerQuietly(track.audioSessionId)
+                track.play()
+            }
         }
 
         if (isAac) {
@@ -369,7 +375,24 @@ class AudioTrackWrapper(
         AppLog.i("Audio stream: $stream buffer size: $bufferSize (min: $minBufferSize) sampleRateInHz: $sampleRateInHz channelCount: $channelCount")
 
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val (usage, contentType) = when (stream) {
+                AudioManager.STREAM_NOTIFICATION -> Pair(
+                    AudioAttributes.USAGE_NOTIFICATION,
+                    AudioAttributes.CONTENT_TYPE_SONIFICATION
+                )
+                AudioManager.STREAM_VOICE_CALL -> Pair(
+                    AudioAttributes.USAGE_VOICE_COMMUNICATION,
+                    AudioAttributes.CONTENT_TYPE_SPEECH
+                )
+                else -> Pair(
+                    AudioAttributes.USAGE_MEDIA,
+                    AudioAttributes.CONTENT_TYPE_MUSIC
+                )
+            }
+
             val audioAttributes = AudioAttributes.Builder()
+                .setUsage(usage)
+                .setContentType(contentType)
                 .setLegacyStreamType(stream)
                 .build()
 
@@ -395,6 +418,20 @@ class AudioTrackWrapper(
                 bufferSize,
                 AudioTrack.MODE_STREAM
             )
+        }
+    }
+
+    private fun attachHwDspEqualizerQuietly(sessionId: Int) {
+        if (sessionId != AudioManager.AUDIO_SESSION_ID_GENERATE && sessionId > 0) {
+            try {
+                equalizer?.release()
+                val eq = Equalizer(0, sessionId)
+                eq.enabled = true
+                equalizer = eq
+                AppLog.i("Attached dummy Equalizer to audioSessionId $sessionId to trigger HW DSP")
+            } catch (t: Throwable) {
+                // Ignore if Equalizer or AudioEffect is unsupported on device
+            }
         }
     }
 

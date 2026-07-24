@@ -181,7 +181,9 @@
     <string name="wifi_ssid_not_set">Nicht festgelegt</string>
 
     <string name="listen_for_usb_devices_label">USB System Anbindung</string>
-    <string name="listen_for_usb_devices_description">Zeigt den Systemdialog, wenn ein USB-Gerät angeschlossen wird.</string>
+    <string name="listen_for_usb_devices_description">Zeige die Android-Systemaufforderung an, wenn ein USB-Gerät angeschlossen wird.</string>
+    <string name="show_toast_messages">Toast-Meldungen anzeigen</string>
+    <string name="show_toast_messages_description">Status-Meldungen bei Verbindung, Trennung und Moduswechsel einblenden.</string>
     <string name="auto_start_usb_label">Autostart bei USB</string>
     <string name="auto_start_usb_description">Die App automatisch öffnen und eine Verbindung versuchen, wenn ein USB-Gerät angeschlossen wird</string>
     <string name="auto_start_settings">Einstellungen für automatischen Start</string>
@@ -246,6 +248,8 @@
     <string name="pref_stretch_screen_summary">Ignoriert das Seitenverhältnis, um das gesamte Display auszufüllen (entfernt schwarze Balken)</string>
     <string name="forced_scale">Erzwungene Skalierung (Legacy Fix)</string>
     <string name="forced_scale_description">Korrigiert Skalierungsprobleme auf einigen älteren Geräten mit SurfaceView. Nur verwenden, wenn das Bild verzerrt oder verschoben aussieht.</string>
+    <string name="hud_mirroring">HUD-Modus (Horizontale Spiegelung)</string>
+    <string name="hud_mirroring_description">Spiegelt die Anzeige horizontal für Windschutzscheiben-Reflektion (Head-Up Display). Erfordert View-Modus TextureView oder GLES20 (funktioniert nicht mit SurfaceView).</string>
 
     <!-- Audio Settings -->
     <string name="category_audio">Audio</string>
@@ -592,4 +596,7 @@
     <string name="software_video_decoder_device">Geräte-MediaCodec</string>
 
     <string name="btn_show_qr">QR-Code anzeigen</string>
+    <string name="su_needed_keymaps_warning">Warnung: Dein Headunit muss entweder gerooted sein oder Shizuku installiert haben. Falls das der Fall ist, musst du die SU-Privilegien erlauben, sobald danach gefragt wird. Lenkradtasten werden keine Funktion haben, solange dies nicht behoben ist.</string>
+
+    <string name="self_mode_overlay_permission_description">Damit der Self Mode zuverlässig im Hintergrund starten kann, aktivieren Sie bitte die Berechtigung \"Über anderen Apps einblenden\" im nächsten Bildschirm.</string>
 </resources>

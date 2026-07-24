@@ -160,7 +160,9 @@
     <string name="wifi_ssid_not_set">未設定</string>
 
     <string name="listen_for_usb_devices_label">監聽 USB 裝置</string>
-    <string name="listen_for_usb_devices_description">當插入 USB 裝置時顯示 Android 系統提示。</string>
+    <string name="listen_for_usb_devices_description">在插入 USB 裝置時顯示 Android 系統提示。</string>
+    <string name="show_toast_messages">顯示 Toast 吐司訊息</string>
+    <string name="show_toast_messages_description">在連線、中斷連線及切換模式時顯示狀態吐司快顯訊息。</string>
     <string name="auto_start_usb_label">USB 自動啟動</string>
     <string name="auto_start_usb_description">當連接 USB 裝置時，自動開啟應用程式並嘗試連線</string>
     <string name="auto_start_settings">自動啟動設定</string>
@@ -226,6 +228,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">強制縮放 (舊版修正)</string>
     <string name="forced_scale_description">修正某些使用 SurfaceView 的舊裝置上的縮放問題。僅在影像看起來扭曲 or 位移時使用。</string>
+    <string name="hud_mirroring">HUD 模式（水平翻轉）</string>
+    <string name="hud_mirroring_description">水平翻轉螢幕以供擋風玻璃反射（抬頭顯示器）。需要 TextureView 或 GLES20 檢視模式（不適用於 SurfaceView）。</string>
 
     <string name="category_audio">音訊</string>
     <string name="enable_audio_sink">啟用音訊接收器</string>
@@ -587,4 +591,6 @@
     <string name="software_video_decoder_device">裝置 MediaCodec</string>
 
     <string name="btn_show_qr">顯示 QR 碼</string>
+
+    <string name="self_mode_overlay_permission_description">為使單獨模式能在背景穩定啟動，請在下一個畫面啟用「顯示在其他應用程式上層」的權限。</string>
 </resources>

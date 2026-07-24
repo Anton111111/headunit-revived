@@ -109,6 +109,7 @@ class ServiceDiscoveryResponse(private val context: Context)
                             else -> Control.Service.MediaSinkService.VideoConfiguration.VideoFrameRateType._60
                         }
                         setDensity(HeadUnitScreenConfig.getDensityDpi()) // Use actual densityDpi
+                        setPixelAspectRatioE4(HeadUnitScreenConfig.getPixelAspectRatioE4())
                         setMarginWidth(phoneWidthMargin)
                         setMarginHeight(phoneHeightMargin)
                         setVideoCodecType(effectiveCodec)

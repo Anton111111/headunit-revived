@@ -176,6 +176,8 @@
     <string name="auto_start_bt_description">Headunit Revived-ის ავტომატური გახსნა კონკრეტული Bluetooth მოწყობილობის დაკავშირებისას.</string>
     <string name="listen_for_usb_devices_label">USB მოწყობილობების მონიტორინგი</string>
     <string name="listen_for_usb_devices_description">USB მოწყობილობის შეერთებისას Android სისტემური მოთხოვნის ჩვენება.</string>
+    <string name="show_toast_messages">Toast შეტყობინებების ჩვენება</string>
+    <string name="show_toast_messages_description">სტატუსის შეტყობინებების ჩვენება დაკავშირების, გათიშვის და რეჟიმის შეცვლისას.</string>
     <string name="auto_start_usb_label">ავტო-გაშვება USB-ით</string>
     <string name="auto_start_usb_description">აპლიკაციის ავტომატური გახსნა და დაკავშირების მცდელობა USB მოწყობილობის შეერთებისას</string>
     <string name="auto_start_settings">ავტო-გაშვების პარამეტრები</string>
@@ -248,6 +250,8 @@
     <string name="pref_stretch_screen_summary">უგულებელყოფს გვერდების თანაფარდობას მთელი ეკრანის შესავსებად (აქრობს შავ ზოლებს)</string>
     <string name="forced_scale">იძულებითი მასშტაბირება (Legacy Fix)</string>
     <string name="forced_scale_description">ასწორებს მასშტაბირების პრობლემებს ზოგიერთ ძველ მოწყობილობაზე SurfaceView-ს გამოყენებისას. გამოიყენეთ მხოლოდ იმ შემთხვევაში, თუ გამოსახულება დამახინჯებულია ან გადაადგილებულია.</string>
+    <string name="hud_mirroring">HUD რეჟიმი (ჰორიზონტალური სარკე)</string>
+    <string name="hud_mirroring_description">ჰორიზონტალურად ასახავს ეკრანს საქარე მინის რეკლამისთვის (Head-Up Display). მოითხოვს TextureView ან GLES20 ხედვის რეჟიმს (არ მუშაობს SurfaceView-თან).</string>
 
     <string name="category_audio">აუდიო</string>
     <string name="enable_audio_sink">აუდიო მიმღები (Audio Sink)</string>
@@ -574,4 +578,6 @@
     <string name="software_video_decoder_device">მოწყობილობის MediaCodec</string>
 
     <string name="btn_show_qr">QR კოდის ჩვენება</string>
+
+    <string name="self_mode_overlay_permission_description">ავტონომიური რეჟიმის ფონურ რეჟიმში საიმედოდ გასაშვებად, გთხოვთ, შემდეგ ეკრანზე ჩართოთ ნებართვა „სხვა აპებზე ჩვენება“.</string>
 </resources>

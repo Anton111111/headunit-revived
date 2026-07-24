@@ -161,7 +161,9 @@
     <string name="wifi_ssid_not_set">غير محدد</string>
 
     <string name="listen_for_usb_devices_label">الاستماع لأجهزة USB</string>
-    <string name="listen_for_usb_devices_description">إظهار مطالبة نظام Android عند توصيل جهاز USB.</string>
+    <string name="listen_for_usb_devices_description">إظهار موجه نظام Android عند توصيل جهاز USB.</string>
+    <string name="show_toast_messages">إظهار الرسائل المنبثقة (Toast)</string>
+    <string name="show_toast_messages_description">عرض الرسائل المنبثقة للحالة عند الاتصال والانفصال وتغيير الوضع.</string>
     <string name="auto_start_usb_label">تشغيل تلقائي عند توصيل USB</string>
     <string name="auto_start_usb_description">فتح التطبيق تلقائيًا ومحاولة الاتصال عند توصيل جهاز USB</string>
     <string name="auto_start_settings">إعدادات التشغيل التلقائي</string>
@@ -227,6 +229,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">قياس إجباري (إصلاح قديم)</string>
     <string name="forced_scale_description">يصحح مشاكل القياس على بعض الأجهزة القديمة التي تستخدم SurfaceView. استخدمه فقط إذا كانت الصورة تبدو مشوهة أو مزاحة.</string>
+    <string name="hud_mirroring">وضع HUD (قلب أفقي)</string>
+    <string name="hud_mirroring_description">يعكس الشاشة أفقيًا للانعكاس على الزجاج الأمامي (عرض رأسك). يتطلب وضع العرض TextureView أو GLES20 (لا يعمل مع SurfaceView).</string>
 
     <string name="category_audio">الصوت</string>
     <string name="enable_audio_sink">مخرج الصوت</string>
@@ -587,4 +591,6 @@
     <string name="software_video_decoder_device">MediaCodec للجهاز</string>
 
     <string name="btn_show_qr">عرض رمز QR</string>
+
+    <string name="self_mode_overlay_permission_description">للسماح للوضع الذاتي بالبدء بشكل موثوق في الخلفية، يرجى تفعيل إذن \"الظهور فوق التطبيقات الأخرى\" في الشاشة التالية.</string>
 </resources>

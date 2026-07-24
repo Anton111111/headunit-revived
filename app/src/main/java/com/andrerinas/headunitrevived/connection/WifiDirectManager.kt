@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.App
 import com.andrerinas.headunitrevived.R
 import com.andrerinas.headunitrevived.aap.AapService
+import com.andrerinas.headunitrevived.utils.ToastUtils
 import com.andrerinas.headunitrevived.utils.AppLog
 import com.andrerinas.headunitrevived.utils.Settings
 import java.net.InetSocketAddress
@@ -346,18 +347,25 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
 
             // Try to get frequency via reflection (hidden field in WifiP2pGroup)
             var frequency = 0
-            try {
-                // Try several common field names used by different OEMs
-                val fieldNames = arrayOf("frequency", "mFrequency")
-                for (name in fieldNames) {
-                    try {
-                        val field = group.javaClass.getDeclaredField(name)
-                        field.isAccessible = true
-                        frequency = field.getInt(group)
-                        if (frequency > 0) break
-                    } catch (e: Exception) {}
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // For Android 10 (API 29) and above, use the official public API via WifiDirectCompat
+                frequency = WifiDirectCompat.getGroupFrequency(group)
+            } else {
+                try {
+                    // Try several common field names used by different OEMs
+                    val fieldNames = arrayOf("frequency", "mFrequency")
+                    for (name in fieldNames) {
+                        try {
+                            val field = group.javaClass.getDeclaredField(name)
+                            field.isAccessible = true
+                            frequency = field.getInt(group)
+                            if (frequency > 0) break
+                        } catch (e: Exception) {
+                        }
+                    }
+                } catch (e: Exception) {
                 }
-            } catch (e: Exception) {}
+            }
 
             val band = if (frequency > 4000) "5GHz" else if (frequency > 0) "2.4GHz" else "unknown"
             AppLog.i("WifiDirectManager: onGroupInfoAvailable: SSID: $ssid, BSSID: $bssid, GO: $isOwner, IFACE: ${iface ?: "null"}, Freq: $frequency MHz ($band)")
@@ -505,7 +513,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         val wifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as android.net.wifi.WifiManager
         if (!wifiManager.isWifiEnabled) {
             AppLog.w("WifiDirectManager: WiFi is disabled. Cannot start P2P discovery.")
-            Toast.makeText(context, context.getString(R.string.wifi_disabled_info), Toast.LENGTH_LONG).show()
+            ToastUtils.showToast(context, context.getString(R.string.wifi_disabled_info), Toast.LENGTH_LONG)
             isGroupCreatingOrCreated = false
             return
         }
@@ -832,7 +840,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
 
     private fun showToast(message: String) {
         handler.post {
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            ToastUtils.showToast(context, message, Toast.LENGTH_LONG)
         }
     }
 

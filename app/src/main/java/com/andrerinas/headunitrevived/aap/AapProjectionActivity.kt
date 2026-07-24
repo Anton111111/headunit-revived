@@ -695,6 +695,33 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         }
     }
 
+    override fun onRetainCustomNonConfigurationInstance(): Any? {
+        return true
+    }
+
+    private fun applyVirtualDisplayFix() {
+        // fixes projected picture being frozen within DUDU PiP
+        // does not fix the root cause, where there is a redraw (or something?) of the whole launcher
+        //  right before the first frame is shown
+        // there is also no public API to get the type of the display
+        // if this also causes issues with other virtual displays, try to obtain #getType() via reflection
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R)
+            return
+        if (lastCustomNonConfigurationInstance as? Boolean == true)
+            return
+        if (display?.name?.startsWith("DUDU-launcher-split") != true)
+            return
+
+        AppLog.i("Detected VirtualDisplay: Recreating projection to fix stuck picture shortly")
+
+        lifecycleScope.launch {
+            kotlinx.coroutines.delay(1000)
+            if (!isFinishing && !isDestroyed) {
+                recreate()
+            }
+        }
+    }
+
     private fun hideLoadingOverlay(loadingOverlay: View?) {
         overlayState = OverlayState.HIDDEN
         AppLog.i("Hiding loading overlay after first video frame")
@@ -723,11 +750,13 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
                     loadingOverlay?.alpha = 1f
                     touchOverlayView?.requestFocus()
                 }?.start()
-                ?: run { 
-                    loadingOverlay?.visibility = View.GONE 
+                ?: run {
+                    loadingOverlay?.visibility = View.GONE
                     touchOverlayView?.requestFocus()
                 }
         }
+
+        applyVirtualDisplayFix()
         touchOverlayView?.requestFocus()
     }
 
@@ -1090,7 +1119,8 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         val pointerData = mutableListOf<Triple<Int, Int, Int>>()
         repeat(event.pointerCount) { pointerIndex ->
             val pointerId = event.getPointerId(pointerIndex)
-            val px = event.getX(pointerIndex)
+            val rawPx = event.getX(pointerIndex)
+            val px = if (settings.hudMirroring) (viewW - rawPx) else rawPx
             val py = event.getY(pointerIndex)
 
             var videoX = 0f

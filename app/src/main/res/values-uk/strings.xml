@@ -161,7 +161,9 @@
     <string name="wifi_ssid_not_set">Не задано</string>
 
     <string name="listen_for_usb_devices_label">Реагувати на USB-пристрої</string>
-    <string name="listen_for_usb_devices_description">Показувати системне вікно Android під час підключення USB-пристрою.</string>
+    <string name="listen_for_usb_devices_description">Показувати системний запит Android під час підключення USB-пристрою.</string>
+    <string name="show_toast_messages">Показувати сповіщення (Toast)</string>
+    <string name="show_toast_messages_description">Відображати спливаючі повідомлення про статус під час підключення, відключення та зміни режиму.</string>
     <string name="auto_start_usb_label">Автозапуск через USB</string>
     <string name="auto_start_usb_description">Автоматично відкривати додаток і намагатися підключитися при підключенні USB-пристрою</string>
     <string name="auto_start_settings">Налаштування автозапуску</string>
@@ -227,6 +229,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">Примусове масштабування (Legacy Fix)</string>
     <string name="forced_scale_description">Виправляє проблеми з масштабуванням на деяких старих пристроях, що використовують SurfaceView. Використовуйте лише якщо зображення виглядає спотвореним або зміщеним.</string>
+    <string name="hud_mirroring">Режим HUD (Горизонтальне відображення)</string>
+    <string name="hud_mirroring_description">Відображає екран по горизонталі для проекції на лобове скло (Head-Up Display). Потрібен режим відображення TextureView або GLES20 (не працює з SurfaceView).</string>
 
     <string name="category_audio">Звук</string>
     <string name="enable_audio_sink">Увімкнути аудіоприймач</string>
@@ -588,4 +592,6 @@
     <string name="software_video_decoder_device">MediaCodec пристрою</string>
 
     <string name="btn_show_qr">Показати QR-код</string>
+
+    <string name="self_mode_overlay_permission_description">Щоб дозволити автономному режиму надійно запускатися у фоновому режимі, увімкніть дозвіл \"Відображення поверх інших додатків\" на наступному екрані.</string>
 </resources>

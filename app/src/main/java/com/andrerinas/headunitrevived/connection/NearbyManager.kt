@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.utils.AppLog
 import com.andrerinas.headunitrevived.utils.Settings
+import com.andrerinas.headunitrevived.utils.ToastUtils
 import com.google.android.gms.nearby.Nearby
 import com.google.android.gms.nearby.connection.BandwidthInfo
 import com.google.android.gms.nearby.connection.ConnectionInfo
@@ -210,11 +211,11 @@ class NearbyManager(
                         if (activeNearbySocket == null && activeEndpointId == endpointId) {
                             AppLog.e("NearbyManager: Bandwidth upgrade timed out after 10s. Disconnecting to prevent Bluetooth fallback.")
                             scope.launch(Dispatchers.Main) {
-                                android.widget.Toast.makeText(
+                                ToastUtils.showToast(
                                     context, 
                                     "Google Nearby connection failed: Wi-Fi bandwidth upgrade timed out. Please check Wi-Fi & Bluetooth settings.", 
                                     android.widget.Toast.LENGTH_LONG
-                                ).show()
+                                )
                             }
                             stop()
                         }

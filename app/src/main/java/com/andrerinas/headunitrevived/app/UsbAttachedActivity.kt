@@ -22,7 +22,7 @@ import com.andrerinas.headunitrevived.utils.DeviceIntent
 import com.andrerinas.headunitrevived.utils.LocaleHelper
 import com.andrerinas.headunitrevived.main.MainActivity
 import com.andrerinas.headunitrevived.utils.Settings
-
+import com.andrerinas.headunitrevived.utils.ToastUtils
 
 class UsbAttachedActivity : Activity() {
 
@@ -151,15 +151,15 @@ class UsbAttachedActivity : Activity() {
         val usbManager = getSystemService(Context.USB_SERVICE) as UsbManager
         val usbMode = UsbAccessoryMode(usbManager)
         AppLog.i("Switching USB device to accessory mode " + deviceCompat.uniqueName)
-        Toast.makeText(this, getString(R.string.switching_usb_accessory_mode, deviceCompat.uniqueName), Toast.LENGTH_SHORT).show()
+        ToastUtils.showToast(this, getString(R.string.switching_usb_accessory_mode, deviceCompat.uniqueName), Toast.LENGTH_SHORT)
         val useLibusb = settings?.useLibusb ?: false
         Thread {
             val result = usbMode.connectAndSwitch(device, useLibusb)
             runOnUiThread {
                 if (result) {
-                    Toast.makeText(this, getString(R.string.success), Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(this, getString(R.string.success), Toast.LENGTH_SHORT)
                 } else {
-                    Toast.makeText(this, getString(R.string.failed), Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(this, getString(R.string.failed), Toast.LENGTH_SHORT)
                 }
                 finish()
             }

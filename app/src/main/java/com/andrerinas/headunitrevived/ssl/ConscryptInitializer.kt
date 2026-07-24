@@ -1,6 +1,7 @@
 package com.andrerinas.headunitrevived.ssl
 
 import android.os.Build
+import com.andrerinas.headunitrevived.utils.AppLog
 import java.security.Security
 
 object ConscryptInitializer {
@@ -24,13 +25,13 @@ object ConscryptInitializer {
             conscryptAvailable = result != -1 || Security.getProvider("Conscrypt") != null
 
             if (conscryptAvailable) {
-                android.util.Log.i("ConscryptInit", "Conscrypt installed as security provider (position: $result)")
+                AppLog.i("Conscrypt installed as security provider (position: %d)", result)
             }
         } catch (e: ClassNotFoundException) {
-            android.util.Log.e("ConscryptInit", "Conscrypt library not found - TLS 1.2 may not work on Android < 21", e)
+            AppLog.e("Conscrypt library not found - TLS 1.2 may not work on Android < 21", e)
             conscryptAvailable = false
         } catch (e: Exception) {
-            android.util.Log.e("ConscryptInit", "Failed to initialize Conscrypt", e)
+            AppLog.e("Failed to initialize Conscrypt", e)
             conscryptAvailable = false
         }
 

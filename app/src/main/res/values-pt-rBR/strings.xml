@@ -162,6 +162,8 @@
 
     <string name="listen_for_usb_devices_label">Ouvir dispositivos USB</string>
     <string name="listen_for_usb_devices_description">Mostrar o aviso do sistema Android quando um dispositivo USB for conectado.</string>
+    <string name="show_toast_messages">Mostrar mensagens Toast</string>
+    <string name="show_toast_messages_description">Exibir pop-ups de status na conexão, desconexão e troca de modo.</string>
     <string name="auto_start_usb_label">Início automático por USB</string>
     <string name="auto_start_usb_description">Abrir o app automaticamente e tentar conectar quando um dispositivo USB for conectado</string>
     <string name="auto_start_settings">Configurações de início automático</string>
@@ -227,6 +229,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">Escala forçada (Modo de compatibilidade)</string>
     <string name="forced_scale_description">Corrige problemas de escala em alguns dispositivos antigos que usam SurfaceView. Use apenas se a imagem parecer distorcida ou deslocada.</string>
+    <string name="hud_mirroring">Modo HUD (Espelhamento horizontal)</string>
+    <string name="hud_mirroring_description">Espelha a tela horizontalmente para reflexão no para-brisa (Head-Up Display). Requer o modo de visualização TextureView ou GLES20 (não funciona com SurfaceView).</string>
 
     <string name="category_audio">Áudio</string>
     <string name="enable_audio_sink">Ativar receptor de áudio</string>
@@ -588,4 +592,6 @@
     <string name="software_video_decoder_device">MediaCodec do dispositivo</string>
 
     <string name="btn_show_qr">Mostrar código QR</string>
+
+    <string name="self_mode_overlay_permission_description">Para permitir que o Modo Próprio inicie de forma confiável em segundo plano, ative a permissão \"Sobrepor a outros aplicativos\" na próxima tela.</string>
 </resources>

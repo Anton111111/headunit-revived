@@ -179,6 +179,8 @@
 
     <string name="listen_for_usb_devices_label">USB Cihazlarını Dinle</string>
     <string name="listen_for_usb_devices_description">Bir USB cihazı takıldığında Android sistem istemini göster.</string>
+    <string name="show_toast_messages">Toast Bildirimlerini Göster</string>
+    <string name="show_toast_messages_description">Bağlantı, kopma ve mod değiştirme durumlarında durum bildirimi göster.</string>
     <string name="auto_start_usb_label">USB ile otomatik başlat</string>
     <string name="auto_start_usb_description">Bir USB cihazı takıldığında uygulamayı otomatik olarak aç ve bağlanmayı dene</string>
     <string name="auto_start_settings">Otomatik başlatma ayarları</string>
@@ -241,6 +243,8 @@
     <string name="pref_stretch_screen_summary">Tüm ekranı doldurmak için en boy oranını yok sayar (siyah çubukları kaldırır)</string>
     <string name="forced_scale">Zorunlu Ölçekleme (Eski Düzeltme)</string>
     <string name="forced_scale_description">SurfaceView kullanan bazı eski cihazlardaki ölçekleme sorunlarını düzeltir. Sadece görüntü bozuk veya kaymış görünüyorsa kullanın.</string>
+    <string name="hud_mirroring">HUD Modu (Yatay Çevirme)</string>
+    <string name="hud_mirroring_description">Ön cam yansıması için ekranı yatay olarak çevirir (Head-Up Display). TextureView veya GLES20 görünüm modu gerektirir (SurfaceView ile çalışmaz).</string>
 
 
     <string name="category_audio">Ses</string>
@@ -583,4 +587,6 @@
     <string name="software_video_decoder_device">Cihaz MediaCodec</string>
 
     <string name="btn_show_qr">QR Kodunu Göster</string>
+
+    <string name="self_mode_overlay_permission_description">Kendi Modunun arka planda güvenilir bir şekilde başlatılabilmesi için lütfen bir sonraki ekranda \"Diğer uygulamaların üzerinde göster\" iznini etkinleştirin.</string>
 </resources>

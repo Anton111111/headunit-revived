@@ -167,7 +167,9 @@
     <string name="auto_start_bt_label">Tự khởi động khi có Bluetooth</string>
     <string name="auto_start_bt_description">Tự động mở Headunit Revived khi một thiết bị Bluetooth nhất định kết nối.</string>
     <string name="listen_for_usb_devices_label">Lắng nghe thiết bị USB</string>
-    <string name="listen_for_usb_devices_description">Hiển thị hộp thoại hệ thống Android khi cắm thiết bị USB.</string>
+    <string name="listen_for_usb_devices_description">Hiển thị yêu cầu hệ thống Android khi cắm thiết bị USB.</string>
+    <string name="show_toast_messages">Hiển thị thông báo Toast</string>
+    <string name="show_toast_messages_description">Hiển thị thông báo trạng thái khi kết nối, ngắt kết nối và chuyển chế độ.</string>
     <string name="auto_start_usb_label">Tự khởi động khi có USB</string>
     <string name="auto_start_usb_description">Tự động mở ứng dụng và thử kết nối khi cắm thiết bị USB</string>
     <string name="auto_start_settings">Cài đặt tự khởi động</string>
@@ -239,6 +241,8 @@
     <string name="pref_stretch_screen_summary">Bỏ qua tỉ lệ khung hình để lấp đầy màn hình (loại bỏ viền đen)</string>
     <string name="forced_scale">Tỉ lệ ép buộc (Khắc phục cho máy cũ)</string>
     <string name="forced_scale_description">Khắc phục lỗi tỉ lệ trên một số máy cũ dùng SurfaceView. Chỉ dùng khi hình bị méo hoặc lệch.</string>
+    <string name="hud_mirroring">Chế độ HUD (Lật ngang)</string>
+    <string name="hud_mirroring_description">Lật màn hình theo chiều ngang để phản chiếu lên kính chắn gió (Head-Up Display). Yêu cầu chế độ hiển thị TextureView hoặc GLES20 (không hoạt động với SurfaceView).</string>
 
 
     <!-- Audio Settings -->
@@ -593,4 +597,6 @@
     <string name="software_video_decoder_device">MediaCodec thiết bị</string>
 
     <string name="btn_show_qr">Hiển thị mã QR</string>
+
+    <string name="self_mode_overlay_permission_description">Để cho phép Chế độ Tự chạy khởi động ổn định từ nền, vui lòng bật quyền \"Hiển thị trên các ứng dụng khác\" trong màn hình tiếp theo.</string>
 </resources>

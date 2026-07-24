@@ -4,6 +4,7 @@ import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
+import android.media.audiofx.Equalizer
 import android.os.Build
 import com.andrerinas.headunitrevived.utils.AppLog
 import java.util.concurrent.ConcurrentHashMap
@@ -144,7 +145,19 @@ class AudioMixer(
                 )
             }
 
-            audioTrack?.play()
+            audioTrack?.let { track ->
+                try {
+                    val sessionId = track.audioSessionId
+                    if (sessionId != AudioManager.AUDIO_SESSION_ID_GENERATE && sessionId > 0) {
+                        val equalizer = Equalizer(0, sessionId)
+                        equalizer.enabled = true
+                        AppLog.i("$TAG: Attached dummy Equalizer to audioSessionId $sessionId to trigger HW DSP")
+                    }
+                } catch (t: Throwable) {
+                    // Ignore if Equalizer or AudioEffect is unsupported on device
+                }
+                track.play()
+            }
             running.set(true)
 
             mixThread = Thread({

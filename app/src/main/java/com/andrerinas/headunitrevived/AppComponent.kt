@@ -4,8 +4,10 @@ import android.app.NotificationManager
 import android.content.Context
 import android.net.wifi.WifiManager
 import com.andrerinas.headunitrevived.connection.CommManager
+import com.andrerinas.headunitrevived.connection.carkey.CarKeysManager
 import com.andrerinas.headunitrevived.decoder.AudioDecoder
 import com.andrerinas.headunitrevived.decoder.VideoDecoder
+import com.andrerinas.headunitrevived.utils.SUExecutor
 import com.andrerinas.headunitrevived.utils.Settings
 
 class AppComponent(private val app: App) {
@@ -20,4 +22,8 @@ class AppComponent(private val app: App) {
         get() = app.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
     val commManager = CommManager(app, settings, audioDecoder, videoDecoder)
+
+    val suExecutor = SUExecutor()
+
+    val carKeysManager = CarKeysManager()
 }

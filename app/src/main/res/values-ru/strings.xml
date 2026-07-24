@@ -161,7 +161,9 @@
     <string name="wifi_ssid_not_set">Не задано</string>
 
     <string name="listen_for_usb_devices_label">Реагировать на USB-устройства</string>
-    <string name="listen_for_usb_devices_description">Показывать системное окно Android при подключении USB-устройства.</string>
+    <string name="listen_for_usb_devices_description">Показывать системный запрос Android при подключении USB-устройства.</string>
+    <string name="show_toast_messages">Показывать всплывающие уведомления (Toast)</string>
+    <string name="show_toast_messages_description">Отображать всплывающие сообщения о статусе при подключении, отключении и смене режима.</string>
     <string name="auto_start_usb_label">Автозапуск при USB</string>
     <string name="auto_start_usb_description">Автоматически открывать приложение и пытаться подключиться при подключении USB-устройства</string>
     <string name="auto_start_settings">Настройки автозапуска</string>
@@ -230,6 +232,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">Принудительное масштабирование (Legacy Fix)</string>
     <string name="forced_scale_description">Исправляет проблемы с масштабированием на некоторых старых устройствах, использующих SurfaceView. Используйте только если изображение выглядит искаженным или смещенным.</string>
+    <string name="hud_mirroring">Режим HUD (Горизонтальное отражение)</string>
+    <string name="hud_mirroring_description">Отражает экран по горизонтали для проекции на лобовое стекло (Head-Up Display). Требуется режим отображения TextureView или GLES20 (не работает с SurfaceView).</string>
 
     <string name="category_audio">Аудио</string>
     <string name="enable_audio_sink">Включить вывод звука</string>
@@ -586,4 +590,6 @@
     <string name="use_libusb_description">Использовать libusb для связи. Отключите для использования стандартного USB API Android.</string>
 
     <string name="btn_show_qr">Показать QR-код</string>
+
+    <string name="self_mode_overlay_permission_description">Чтобы автономный режим надежно запускался в фоновом режиме, включите разрешение «Отображение поверх других приложений» на следующем экране.</string>
 </resources>
