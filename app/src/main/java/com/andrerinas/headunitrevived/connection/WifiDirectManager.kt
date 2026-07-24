@@ -13,7 +13,6 @@ import android.net.wifi.p2p.WifiP2pManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.App
