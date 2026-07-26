@@ -325,16 +325,30 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                             bssid = shellMac
                         } else {
                             // Fallback 5: Try Settings.Secure (Samsung/Pixel trick)
+                            var resolved = false
                             try {
                                 val secureMac = android.provider.Settings.Secure.getString(context.contentResolver, "wifi_p2p_device_address")
                                 if (!secureMac.isNullOrEmpty() && secureMac != "00:00:00:00:00:00" && secureMac != "02:00:00:00:00:00") {
                                     AppLog.i("WifiDirectManager: Fallback 5 - Selected MAC from Settings.Secure: $secureMac")
                                     bssid = secureMac
-                                } else {
-                                    AppLog.w("WifiDirectManager: All fallbacks failed! BSSID is still zeroed.")
+                                    resolved = true
                                 }
                             } catch (e: Exception) {
                                 AppLog.w("WifiDirectManager: Fallback 5 failed: ${e.message}")
+                            }
+
+                            // Fallback 6: Reflect over WifiP2pGroup/WifiP2pDevice hidden fields for
+                            // any unmasked MAC the public getters didn't expose (some OEM privacy
+                            // hardening masks NetworkInterface/deviceAddress but leaves other
+                            // internal fields populated).
+                            if (!resolved) {
+                                val reflectedMac = getMacFromReflection(group)
+                                if (reflectedMac != null) {
+                                    AppLog.i("WifiDirectManager: Fallback 6 - Selected MAC via reflection: $reflectedMac")
+                                    bssid = reflectedMac
+                                } else {
+                                    AppLog.w("WifiDirectManager: All fallbacks failed! BSSID is still zeroed.")
+                                }
                             }
                         }
                     }
@@ -854,6 +868,39 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         handler.post {
             ToastUtils.showToast(context, message, Toast.LENGTH_LONG)
         }
+    }
+
+    private val macRegex = Regex("^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$")
+    private val maskedMacs = setOf("00:00:00:00:00:00", "02:00:00:00:00:00")
+
+    /**
+     * Last-resort BSSID lookup: reflect over every declared field (including inherited ones) of
+     * the WifiP2pGroup and its owner WifiP2pDevice, looking for any String that looks like a MAC
+     * and isn't one of the known privacy-masked placeholders. Some OEM builds mask the public
+     * NetworkInterface/deviceAddress getters but leave other internal fields populated with the
+     * real value.
+     */
+    private fun getMacFromReflection(group: android.net.wifi.p2p.WifiP2pGroup): String? {
+        val candidates = listOfNotNull(group, group.owner)
+        for (obj in candidates) {
+            var klass: Class<*>? = obj.javaClass
+            while (klass != null) {
+                for (field in klass.declaredFields) {
+                    try {
+                        field.isAccessible = true
+                        val value = field.get(obj) as? String ?: continue
+                        if (macRegex.matches(value) && value !in maskedMacs) {
+                            AppLog.d("WifiDirectManager: getMacFromReflection found candidate in ${klass.simpleName}.${field.name}: $value")
+                            return value
+                        }
+                    } catch (e: Exception) {
+                        // Ignore inaccessible/incompatible fields and keep scanning.
+                    }
+                }
+                klass = klass.superclass
+            }
+        }
+        return null
     }
 
     private fun getMacFromShell(iface: String?): String? {
