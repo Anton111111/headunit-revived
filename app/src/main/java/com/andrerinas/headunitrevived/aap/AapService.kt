@@ -1424,6 +1424,12 @@ class AapService : Service(), UsbReceiver.Listener {
         if (!usesWifiDirect) {
             AppLog.i("AapService: New mode does not use WiFi Direct. Stopping WifiDirectManager...")
             wifiDirectManager?.stop()
+        } else {
+            // This chipset can't run SoftAP and WiFi Direct concurrently — make sure hotspot is off before P2P starts.
+            Thread {
+                AppLog.i("AapService: Mode requires WiFi Direct — ensuring hotspot is disabled first...")
+                HotspotManager.setHotspotEnabled(this, false)
+            }.start()
         }
 
         // Mode 1: Auto (Headunit Server), Mode 2: Helper (Wireless Launcher), Mode 3: Native AA
