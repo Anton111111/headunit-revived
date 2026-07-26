@@ -2070,8 +2070,11 @@ class AapService : Service(), UsbReceiver.Listener {
         val mode = settings.wifiConnectionMode
         val strategy = settings.helperConnectionStrategy
 
-        // Only register NSD for Headunit Server (Auto) or Helper (Common Wifi NSD)
-        val shouldRegisterNsd = mode == 1 || (mode == 2 && strategy == 0)
+        // Register NSD for Headunit Server (Auto), Helper Common Wifi (NSD), and the Hotspot
+        // strategies (3, 4) — both devices share an IP network there too, and the companion
+        // "Wireless Helper" app's discovery relies on this service record to trigger the
+        // handoff instead of just blindly probing the TCP port.
+        val shouldRegisterNsd = mode == 1 || (mode == 2 && (strategy == 0 || strategy == 3 || strategy == 4))
 
         wirelessServer = WirelessServer().apply { start(registerNsd = shouldRegisterNsd) }
         if (shouldRegisterNsd) {
