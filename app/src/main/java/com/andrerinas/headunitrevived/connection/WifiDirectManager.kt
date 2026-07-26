@@ -540,6 +540,10 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     private fun removeGroupAndCreate() {
         isGroupOwner = false
         isConnected = false
+        // The next createGroup() call generates a brand-new GO interface with a new random
+        // MAC — a cached BSSID from the group we're tearing down is now stale and must never
+        // be delivered for the new one.
+        lastKnownBssid = null
         manager?.removeGroup(channel, object : WifiP2pManager.ActionListener {
             override fun onSuccess() { delayedCreateGroup(0) }
             override fun onFailure(reason: Int) { delayedCreateGroup(0) }
@@ -697,6 +701,10 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         AppLog.i("WifiDirectManager: startNativeAaQuietHost() requested. Removing old group if any...")
         nativeGroupCreationMode = NATIVE_GROUP_MODE_UNKNOWN
         lastNativeGroupStatusMessage = null
+        // The next createGroup() call generates a brand-new GO interface with a new random
+        // MAC — a cached BSSID from the group we're tearing down is now stale and must never
+        // be delivered for the new one.
+        lastKnownBssid = null
         mgr.removeGroup(ch, object : WifiP2pManager.ActionListener {
             override fun onSuccess() {
                 AppLog.d("WifiDirectManager: removeGroup SUCCESS. Creating quiet group...")
@@ -819,6 +827,10 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     private fun removeGroupAndRetryNative5Ghz() {
         val mgr = manager ?: return
         val ch = channel ?: return
+        // The next createGroup() call generates a brand-new GO interface with a new random
+        // MAC — a cached BSSID from the group we're tearing down is now stale and must never
+        // be delivered for the new one.
+        lastKnownBssid = null
         mgr.removeGroup(ch, object : WifiP2pManager.ActionListener {
             override fun onSuccess() { delayedCreateQuietGroup(0) }
             override fun onFailure(reason: Int) {
