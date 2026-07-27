@@ -126,6 +126,16 @@ class VideoDecoder(private val settings: Settings) {
     @Volatile var onFirstFrameListener: (() -> Unit)? = null
     @Volatile var lastFrameRenderedMs: Long = 0L
 
+    // elapsedRealtime() of the last encoded video bytes received from the phone (input side),
+    // as opposed to lastFrameRenderedMs (output side). Lets the projection watchdog tell a
+    // phone-side pause (no input) apart from a local display stall (input flowing, nothing
+    // drawn). See issue #650.
+    @Volatile var lastInputBytesReceivedMs: Long = 0L
+
+    // True while the bundled software HEVC decoder is active. That path renders through the
+    // GLES YUV sink, so the projection watchdog must not fall back to a non-GLES backend.
+    val usingBundledSoftwareHevc: Boolean get() = softwareHevcDecoder != null
+
     @Volatile private var decoderNeedsRestart = false
     @Volatile private var decoderRestartReason: String? = null
     @Volatile private var pendingKeyframeRequest = false
@@ -234,6 +244,9 @@ class VideoDecoder(private val settings: Settings) {
      */
     fun decode(buffer: ByteArray, offset: Int, size: Int, forceSoftware: Boolean, codecName: String) {
         synchronized(this) {
+            // Input-side liveness: bytes are arriving from the phone right now (issue #650).
+            lastInputBytesReceivedMs = SystemClock.elapsedRealtime()
+
             // Check if a restart was requested by output thread
             if (decoderNeedsRestart) {
                 AppLog.w("Decoder restart requested: $decoderRestartReason")

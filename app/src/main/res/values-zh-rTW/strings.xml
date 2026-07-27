@@ -593,6 +593,7 @@
     <string name="software_video_decoder_device">裝置 MediaCodec</string>
 
     <string name="btn_show_qr">顯示 QR 碼</string>
+    <string name="renderer_fallback_surface">影像持續卡住，因此本次連線已切換為 SurfaceView。若運作穩定，請在設定中將檢視模式設為 SurfaceView。</string>
 
     <string name="self_mode_overlay_permission_description">為使單獨模式能在背景穩定啟動，請在下一個畫面啟用「顯示在其他應用程式上層」的權限。</string>
 </resources>

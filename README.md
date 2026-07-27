@@ -75,6 +75,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - Fix transport get stucked on multiple reconnects, thanks to @notathf
 - Add car keys support for FYT headunits, thanks to @MrEAlderson
 - Added Option to flip projection horizontal for Headup-Displays
+- Recover automatically from post-first-frame video display stalls, thanks to @andrecuellar
 
 ### v.3.1.1
 - Reduce pressure on sensor events like night and gps and start/stop these events in onConnected, onDisconnect and onDestroy

@@ -598,8 +598,7 @@
     <string name="share_hotspot_qr_error">현재 Wi-Fi 핫스팟 정보를 가져올 수 없습니다. 핫스팟이 켜져 있고 위치 서비스가 활성화되어 있는지 확인하세요.</string>
     <string name="use_libusb">네이티브 USB 드라이버 사용</string>
     <string name="use_libusb_description">USB 통신에 libusb를 사용합니다. 비활성화 시 Android 표준 USB API를 사용합니다.</string>
-
-    <string name="btn_show_qr">QR 코드 보기</string>
-
+    <string name="btn_show_qr">QR 코드 표시</string>
+    <string name="renderer_fallback_surface">영상이 계속 멈춰서 이번 세션 동안 화면을 SurfaceView로 전환했습니다. 안정적이면 설정에서 뷰 모드를 SurfaceView로 지정하세요.</string>
     <string name="self_mode_overlay_permission_description">단독 모드가 백그라운드에서 안정적으로 시작되도록 하려면 다음 화면에서 \"다른 앱 위에 표시\" 권한을 허용해 주세요.</string>
 </resources>

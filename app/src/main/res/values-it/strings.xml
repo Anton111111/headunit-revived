@@ -600,6 +600,7 @@
     <string name="software_video_decoder_device">MediaCodec del dispositivo</string>
 
     <string name="btn_show_qr">Mostra codice QR</string>
+    <string name="renderer_fallback_surface">Il video continuava a bloccarsi, quindi la visualizzazione è passata a SurfaceView per questa sessione. Se è stabile, imposta la Modalità visualizzazione su SurfaceView nelle Impostazioni.</string>
 
     <string name="self_mode_overlay_permission_description">Per consentire l\'avvio affidabile della Modalità Personale in background, abilita l\'autorizzazione \"Mostra sopra altre app\" nella schermata successiva.</string>
 </resources>

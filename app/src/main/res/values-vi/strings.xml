@@ -599,6 +599,7 @@
     <string name="software_video_decoder_device">MediaCodec thiết bị</string>
 
     <string name="btn_show_qr">Hiển thị mã QR</string>
+    <string name="renderer_fallback_surface">Video liên tục bị đứng, nên màn hình đã chuyển sang SurfaceView cho phiên này. Nếu ổn định, hãy đặt Chế độ hiển thị thành SurfaceView trong Cài đặt.</string>
 
     <string name="self_mode_overlay_permission_description">Để cho phép Chế độ Tự chạy khởi động ổn định từ nền, vui lòng bật quyền \"Hiển thị trên các ứng dụng khác\" trong màn hình tiếp theo.</string>
 </resources>

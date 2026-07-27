@@ -601,6 +601,7 @@
     <string name="software_video_decoder_device">MediaCodec del dispositivo</string>
 
     <string name="btn_show_qr">Mostrar código QR</string>
+    <string name="renderer_fallback_surface">El video se seguía congelando, así que la pantalla se cambió a SurfaceView por esta sesión. Si va estable, pon el Modo de vista en SurfaceView en Ajustes.</string>
 
     <string name="self_mode_overlay_permission_description">Para permitir que el Modo Propio se inicie de manera confiable en segundo plano, active el permiso \"Mostrar sobre outras aplicaciones\" en la siguiente pantalla.</string>
 </resources>

@@ -66,16 +66,23 @@ class SystemOptimizer(private val context: Context) {
 
         // 3. View Mode Recommendation
         val recViewMode = when {
-            // Very old devices (Android 4.x) often have distortion issues with SurfaceView, 
+            // Very old devices (Android 4.x) often have distortion issues with SurfaceView,
             // so we recommend TextureView instead.
             Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP -> Settings.ViewMode.TEXTURE
-            
-            // Middle-aged devices (5.0 - 8.1) often perform best with GLES20
-            Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1 -> Settings.ViewMode.GLES
-            
+
+            // 5.0 - 8.1 used to get GLES here, but sampling the hardware decoder's external
+            // texture in-app via GLES forces a per-frame color conversion on some SoCs (notably
+            // MediaTek's MDP), which collapses playback to a few fps (issue #650). When the
+            // device can decode video in hardware, a direct SurfaceView avoids that path. GLES
+            // is only kept for devices without hardware HEVC, which may fall back to the software
+            // YUV sink that GLES provides.
+            Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1 ->
+                if (hasH265) Settings.ViewMode.SURFACE else Settings.ViewMode.GLES
+
             // Modern devices are usually fine with the default TextureView
             else -> Settings.ViewMode.TEXTURE
         }
+        AppLog.i("SystemOptimizer: SoC=${Build.HARDWARE}/${Build.BOARD} API=${Build.VERSION.SDK_INT} hasHwHevc=$hasH265 -> recommended viewMode=$recViewMode")
 
         // 4. Apply orientation-based caps
         if (isPortraitTarget) {
