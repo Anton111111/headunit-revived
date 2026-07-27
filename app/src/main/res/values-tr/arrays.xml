@@ -7,6 +7,8 @@
         <item>Manuel Saat</item>
         <item>Işık Sensörü</item>
         <item>Ekran Parlaklığı</item>
+        <item>Araç farı sinyali (ILL+)</item>
+        <item>Manuel Koordinatlar</item>
     </string-array>
 
     <string-array name="app_theme">

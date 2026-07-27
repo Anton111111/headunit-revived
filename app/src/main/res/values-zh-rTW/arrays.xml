@@ -7,6 +7,8 @@
         <item>手動時間</item>
         <item>光傳感器</item>
         <item>屏幕亮度</item>
+        <item>車輛大燈訊號 (ILL+)</item>
+        <item>手動座標</item>
     </string-array>
 
     <string-array name="app_theme">

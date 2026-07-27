@@ -41,8 +41,12 @@ class AutoStartReceiver : BroadcastReceiver() {
             AppLog.i("BT Device connected: ${device?.name} (${device?.address})")
 
             if (device != null && targetMacs.contains(device.address)) {
+                if (!Settings.geofenceAllowsAutomation(context)) {
+                    AppLog.i("Geofence gate: outside allowed area, skipping Bluetooth auto-start")
+                    return
+                }
                 AppLog.i("MATCH! Starting AapService via Bluetooth Auto-start...")
-                
+
                 // Start the service to make the app alive
                 val serviceIntent = Intent(context, AapService::class.java)
                 try {

@@ -8,6 +8,7 @@
         <item>Датчик света</item>
         <item>Яркость экрана</item>
         <item>Сигнал фар (ILL+)</item>
+        <item>Ручные координаты</item>
     </string-array>
 
     <string-array name="app_theme">

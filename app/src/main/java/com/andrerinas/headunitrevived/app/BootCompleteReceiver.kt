@@ -26,6 +26,11 @@ class BootCompleteReceiver : BroadcastReceiver() {
             return
         }
 
+        if (!Settings.geofenceAllowsAutomation(context)) {
+            AppLog.i("Geofence gate: outside allowed area, skipping boot auto-start")
+            return
+        }
+
         val bootEnabled = Settings.isAutoStartOnBootEnabled(context)
         val screenOnEnabled = Settings.isAutoStartOnScreenOnEnabled(context)
         val usbEnabled = Settings.isAutoStartOnUsbEnabled(context)

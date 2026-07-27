@@ -597,4 +597,28 @@
     <string name="renderer_fallback_surface">Obraz ciągle się zawieszał, więc wyświetlanie zostało przełączone na SurfaceView na czas tej sesji. Jeśli działa stabilnie, ustaw Tryb widoku na SurfaceView w Ustawieniach.</string>
 
     <string name="self_mode_overlay_permission_description">Aby umożliwić niezawodne uruchamianie trybu własnego w tle, włącz uprawnienie \"Wyświetlaj nad innymi aplikacjami\" na następnym ekranie.</string>
+
+    <string name="delete">Usuń</string>
+    <string name="night_mode_coordinates">Współrzędne</string>
+    <string name="geofence_locations_title">Lokalizacje</string>
+    <string name="geofence_none">Brak</string>
+    <string name="geofence_count_summary">Obszary: %1$d</string>
+    <string name="geofence_empty_hint">Brak lokalizacji. Dodaj jedną, aby wymusić dzień lub noc według obszaru, albo ograniczyć automatyczne uruchamianie do strefy.</string>
+    <string name="geofence_unnamed">Nienazwana lokalizacja</string>
+    <string name="geofence_add">Dodaj lokalizację</string>
+    <string name="geofence_pick_location">Wybierz lokalizację</string>
+    <string name="geofence_name_hint">Nazwa (np. Dom)</string>
+    <string name="geofence_force_dark">Wymuś tryb ciemny w tym obszarze</string>
+    <string name="geofence_allow_automation">Automatyczne uruchamianie / łączenie tylko w tym obszarze</string>
+    <string name="geofence_use_gps">Użyj mojej bieżącej lokalizacji</string>
+    <string name="geofence_no_location">Brak dostępnej lokalizacji</string>
+    <string name="geofence_saved">Lokalizacja zapisana</string>
+    <string name="geofence_delete_title">Usunąć lokalizację?</string>
+    <string name="geofence_delete_message">Ta lokalizacja zostanie usunięta.</string>
+    <string name="geofence_internet_title">Wymagany internet</string>
+    <string name="geofence_internet_message">Mapa wymaga połączenia z internetem, aby się załadować. Kafelki mapy są pobierane tylko podczas ustawiania lokalizacji.</string>
+    <string name="geofence_radius_summary">Promień: %1$d m</string>
+    <string name="geofence_mode_dark">Ciemny</string>
+    <string name="geofence_mode_light">Jasny</string>
+    <string name="geofence_gate_on">Automatyczne uruchamianie ograniczone</string>
 </resources>

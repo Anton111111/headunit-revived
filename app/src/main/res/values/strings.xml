@@ -606,4 +606,29 @@
     <string name="su_needed_keymaps_warning">Warning: Your headunit must be either rooted, or have Shizuku installed. If that\'s the case, you must allow SU rights, once prompted. Steering keys likely are not functional until this is fixed.</string>
 
     <string name="self_mode_overlay_permission_description">To allow Self Mode to start reliably from the background, please enable the \"Display over other apps\" permission in the next screen.</string>
+
+    <!-- Manual coordinates (night mode) and geofenced locations -->
+    <string name="delete">Delete</string>
+    <string name="night_mode_coordinates">Coordinates</string>
+    <string name="geofence_locations_title">Locations</string>
+    <string name="geofence_none">None</string>
+    <string name="geofence_count_summary">%1$d areas</string>
+    <string name="geofence_empty_hint">No locations yet. Add one to force day or night by area, or to restrict auto-start to a zone.</string>
+    <string name="geofence_unnamed">Unnamed location</string>
+    <string name="geofence_add">Add location</string>
+    <string name="geofence_pick_location">Pick location</string>
+    <string name="geofence_name_hint">Name (e.g. Home)</string>
+    <string name="geofence_force_dark">Force dark mode inside this area</string>
+    <string name="geofence_allow_automation">Only auto-start / connect inside this area</string>
+    <string name="geofence_use_gps">Use my current location</string>
+    <string name="geofence_no_location">No location available yet</string>
+    <string name="geofence_saved">Location saved</string>
+    <string name="geofence_delete_title">Delete location?</string>
+    <string name="geofence_delete_message">This location will be removed.</string>
+    <string name="geofence_internet_title">Internet required</string>
+    <string name="geofence_internet_message">The map needs an internet connection to load. Map tiles are only downloaded while you set the location.</string>
+    <string name="geofence_radius_summary">Radius: %1$d m</string>
+    <string name="geofence_mode_dark">Dark</string>
+    <string name="geofence_mode_light">Light</string>
+    <string name="geofence_gate_on">Auto-start gated</string>
 </resources>

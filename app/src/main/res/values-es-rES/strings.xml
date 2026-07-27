@@ -604,4 +604,29 @@
     <string name="renderer_fallback_surface">El vídeo se seguía congelando, así que la pantalla se cambió a SurfaceView durante esta sesión. Si va estable, pon el Modo de vista en SurfaceView en Ajustes.</string>
 
     <string name="self_mode_overlay_permission_description">Para permitir que el Modo Propio se inicie de manera confiable en segundo plano, active el permiso \"Mostrar sobre outras aplicaciones\" en la siguiente pantalla.</string>
+
+    <!-- Geofence / coordinates -->
+    <string name="delete">Eliminar</string>
+    <string name="night_mode_coordinates">Coordenadas</string>
+    <string name="geofence_locations_title">Ubicaciones</string>
+    <string name="geofence_none">Ninguna</string>
+    <string name="geofence_count_summary">%1$d zonas</string>
+    <string name="geofence_empty_hint">Aún no hay ubicaciones. Añade una para forzar el día o la noche por zona, o para restringir el inicio automático a una zona.</string>
+    <string name="geofence_unnamed">Ubicación sin nombre</string>
+    <string name="geofence_add">Añadir ubicación</string>
+    <string name="geofence_pick_location">Elegir ubicación</string>
+    <string name="geofence_name_hint">Nombre (p. ej. Casa)</string>
+    <string name="geofence_force_dark">Forzar el modo oscuro dentro de esta zona</string>
+    <string name="geofence_allow_automation">Iniciar / conectar automáticamente solo dentro de esta zona</string>
+    <string name="geofence_use_gps">Usar mi ubicación actual</string>
+    <string name="geofence_no_location">Aún no hay ninguna ubicación disponible</string>
+    <string name="geofence_saved">Ubicación guardada</string>
+    <string name="geofence_delete_title">¿Eliminar la ubicación?</string>
+    <string name="geofence_delete_message">Esta ubicación se eliminará.</string>
+    <string name="geofence_internet_title">Se requiere conexión a Internet</string>
+    <string name="geofence_internet_message">El mapa necesita conexión a Internet para cargarse. Las teselas del mapa solo se descargan mientras estableces la ubicación.</string>
+    <string name="geofence_radius_summary">Radio: %1$d m</string>
+    <string name="geofence_mode_dark">Oscuro</string>
+    <string name="geofence_mode_light">Claro</string>
+    <string name="geofence_gate_on">Inicio automático restringido</string>
 </resources>

@@ -8,6 +8,7 @@
         <item>Light Sensor</item>
         <item>Screen Brightness</item>
         <item>Car Headlight Signal (ILL+)</item>
+        <item>Manual Coordinates</item>
     </string-array>
 
     <string-array name="app_theme">

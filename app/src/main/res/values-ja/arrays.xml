@@ -8,6 +8,7 @@
         <item>照度センサー</item>
         <item>画面の明るさ</item>
         <item>車のヘッドライト信号 (ILL+)</item>
+        <item>手動座標</item>
     </string-array>
 
     <string-array name="app_theme">

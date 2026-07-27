@@ -628,7 +628,8 @@ class Settings(private val context: Context) {
         MANUAL_TIME(3),
         LIGHT_SENSOR(4),
         SCREEN_BRIGHTNESS(5),
-        CAR_SIGNAL(6);
+        CAR_SIGNAL(6),
+        MANUAL_COORDINATES(7);
 
         companion object {
             private val map = NightMode.values().associateBy(NightMode::value)
@@ -646,6 +647,37 @@ class Settings(private val context: Context) {
         get() = prefs.getInt("night-mode-manual-end", 420) // Default 07:00 (7 * 60)
         set(value) {
             prefs.edit().putInt("night-mode-manual-end", value).apply()
+        }
+
+    // Fixed coordinate used by NightMode.MANUAL_COORDINATES so head units without GPS
+    // can still compute correct sunrise/sunset. Defaults mirror lastKnownLocation.
+    var nightModeManualLatitude: Double
+        get() = java.lang.Double.longBitsToDouble(
+            prefs.getLong("night-mode-manual-latitude", (32.0864169).toRawBits())
+        )
+        set(value) {
+            prefs.edit().putLong("night-mode-manual-latitude", value.toRawBits()).apply()
+        }
+
+    var nightModeManualLongitude: Double
+        get() = java.lang.Double.longBitsToDouble(
+            prefs.getLong("night-mode-manual-longitude", (34.7557871).toRawBits())
+        )
+        set(value) {
+            prefs.edit().putLong("night-mode-manual-longitude", value.toRawBits()).apply()
+        }
+
+    // User-defined geo-fenced areas (Home, Work, ...) serialized as a JSON array.
+    // Setting the list also mirrors it to device-protected storage so the automation
+    // gate can read it before the user unlocks the device (boot / BT auto-start).
+    var geofenceLocations: List<com.andrerinas.headunitrevived.location.GeofenceLocation>
+        get() = com.andrerinas.headunitrevived.location.GeofenceLocation.listFromJson(
+            prefs.getString("geofence-locations", "[]")
+        )
+        set(value) {
+            val json = com.andrerinas.headunitrevived.location.GeofenceLocation.listToJson(value)
+            prefs.edit().putString("geofence-locations", json).apply()
+            syncGeofenceLocationsToDeviceStorage(context, json)
         }
 
     // App Theme independent threshold/time settings (separate from Night Mode)
@@ -918,6 +950,62 @@ class Settings(private val context: Context) {
                     .putStringSet(KEY_AUTO_START_BT_MACS, macs)
                     .apply()
             }
+        }
+
+        private const val KEY_GEOFENCE_LOCATIONS = "geofence-locations"
+
+        /** Mirrors the geofence list JSON to device-protected storage (API 24+). */
+        fun syncGeofenceLocationsToDeviceStorage(context: Context, json: String) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val deviceContext = context.createDeviceProtectedStorageContext()
+                deviceContext.getSharedPreferences(DEVICE_PREFS_NAME, Context.MODE_PRIVATE)
+                    .edit()
+                    .putString(KEY_GEOFENCE_LOCATIONS, json)
+                    .apply()
+            }
+        }
+
+        /**
+         * Reads the geofence list from device-protected storage (API 24+), falling
+         * back to regular prefs. Safe to call during locked boot.
+         */
+        private fun getGeofenceLocationsJson(context: Context): String {
+            val prefs = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val deviceContext = context.createDeviceProtectedStorageContext()
+                deviceContext.getSharedPreferences(DEVICE_PREFS_NAME, Context.MODE_PRIVATE)
+            } else {
+                context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            }
+            return prefs.getString(KEY_GEOFENCE_LOCATIONS, "[]") ?: "[]"
+        }
+
+        /**
+         * Automation gate. Returns true when auto-start / auto-connect is allowed.
+         *
+         * Fail-open by design: if no geofence gates automation, or there is no usable
+         * live location (e.g. a head unit without GPS, or a cold boot before any fix),
+         * automation is ALLOWED so those devices are never permanently blocked. It only
+         * ever suppresses automation when there is positive evidence the device is
+         * outside every gating area.
+         */
+        fun geofenceAllowsAutomation(context: Context): Boolean {
+            val gating = try {
+                com.andrerinas.headunitrevived.location.GeofenceLocation
+                    .listFromJson(getGeofenceLocationsJson(context))
+                    .filter { it.gateAutomation }
+            } catch (e: Exception) {
+                emptyList()
+            }
+            if (gating.isEmpty()) return true
+
+            val fix = com.andrerinas.headunitrevived.location.LocationHolder
+                .currentLocation(context) ?: return true // fail-open: no live location
+
+            val inside = gating.any { it.contains(fix) }
+            if (!inside) {
+                AppLog.i("Geofence gate: live location outside all gating areas, suppressing automation")
+            }
+            return inside
         }
 
         val MicSampleRates = listOf(8000, 16000, 24000, 32000, 44100, 48000) // Changed to List

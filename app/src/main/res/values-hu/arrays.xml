@@ -7,6 +7,8 @@
         <item>Kézi idő</item>
         <item>Fény érzékelő</item>
         <item>Kijelző fényerő</item>
+        <item>Autó fényszóró jelzés (ILL+)</item>
+        <item>Kézi koordináták</item>
     </string-array>
 
     <string-array name="app_theme">

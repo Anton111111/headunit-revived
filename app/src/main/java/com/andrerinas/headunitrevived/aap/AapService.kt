@@ -1900,6 +1900,12 @@ class AapService : Service(), UsbReceiver.Listener {
         val usbAutoStart = settings.autoStartOnUsb
 
         if (!force && !lastSession && !singleUsb && !usbAutoStart) return
+        // Geofence gate: suppress automatic USB auto-connect when outside the allowed
+        // area. Explicit plug-in (force=true) is never gated.
+        if (!force && !Settings.geofenceAllowsAutomation(this)) {
+            AppLog.i("Geofence gate: outside allowed area, skipping USB auto-start")
+            return
+        }
         if (commManager.isConnected ||
             commManager.connectionState.value is CommManager.ConnectionState.Connecting ||
             isSwitchingToAccessory.get()) return

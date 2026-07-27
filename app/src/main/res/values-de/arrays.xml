@@ -7,6 +7,8 @@
         <item>Manuelle Zeit</item>
         <item>Lichtsensor</item>
         <item>Bildschirmhelligkeit</item>
+        <item>Autoscheinwerfer-Signal (ILL+)</item>
+        <item>Manuelle Koordinaten</item>
     </string-array>
 
     <string-array name="app_theme">

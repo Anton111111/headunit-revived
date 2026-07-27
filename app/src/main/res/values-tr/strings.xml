@@ -592,4 +592,29 @@
     <string name="renderer_fallback_surface">Video sürekli donduğu için görüntü bu oturum boyunca SurfaceView\'e geçirildi. Kararlıysa, Ayarlar\'da Görünüm modunu SurfaceView olarak ayarla.</string>
 
     <string name="self_mode_overlay_permission_description">Kendi Modunun arka planda güvenilir bir şekilde başlatılabilmesi için lütfen bir sonraki ekranda \"Diğer uygulamaların üzerinde göster\" iznini etkinleştirin.</string>
+
+    <!-- Geofence / Coordinates -->
+    <string name="delete">Sil</string>
+    <string name="night_mode_coordinates">Koordinatlar</string>
+    <string name="geofence_locations_title">Konumlar</string>
+    <string name="geofence_none">Yok</string>
+    <string name="geofence_count_summary">%1$d bölge</string>
+    <string name="geofence_empty_hint">Henüz konum yok. Bölgeye göre gündüz veya geceyi zorlamak ya da otomatik başlatmayı bir bölgeyle sınırlamak için bir tane ekleyin.</string>
+    <string name="geofence_unnamed">Adsız konum</string>
+    <string name="geofence_add">Konum ekle</string>
+    <string name="geofence_pick_location">Konum seç</string>
+    <string name="geofence_name_hint">Ad (örn. Ev)</string>
+    <string name="geofence_force_dark">Bu bölgede koyu modu zorla</string>
+    <string name="geofence_allow_automation">Yalnızca bu bölgede otomatik başlat / bağlan</string>
+    <string name="geofence_use_gps">Mevcut konumumu kullan</string>
+    <string name="geofence_no_location">Henüz konum mevcut değil</string>
+    <string name="geofence_saved">Konum kaydedildi</string>
+    <string name="geofence_delete_title">Konum silinsin mi?</string>
+    <string name="geofence_delete_message">Bu konum kaldırılacak.</string>
+    <string name="geofence_internet_title">İnternet gerekli</string>
+    <string name="geofence_internet_message">Haritanın yüklenmesi için internet bağlantısı gerekir. Harita döşemeleri yalnızca konumu ayarlarken indirilir.</string>
+    <string name="geofence_radius_summary">Yarıçap: %1$d m</string>
+    <string name="geofence_mode_dark">Koyu</string>
+    <string name="geofence_mode_light">Açık</string>
+    <string name="geofence_gate_on">Otomatik başlatma sınırlı</string>
 </resources>

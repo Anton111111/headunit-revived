@@ -58,6 +58,11 @@ class WifiAutoStartReceiver : BroadcastReceiver() {
             if (currentSsid.equals(targetSsid, ignoreCase = true)) {
                 AppLog.i("WifiAutoStartReceiver: MATCH! Starting AapService via WiFi Auto-start...")
 
+                if (!Settings.geofenceAllowsAutomation(context)) {
+                    AppLog.i("Geofence gate: outside allowed area, skipping WiFi auto-start")
+                    return
+                }
+
                 // Don't trigger if already connected
                 if (App.provide(context).commManager.isConnected) {
                     AppLog.d("WifiAutoStartReceiver: Already connected to Android Auto. Ignoring event.")

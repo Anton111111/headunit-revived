@@ -597,4 +597,28 @@
     <string name="renderer_fallback_surface">Videoclipul continua să se blocheze, așa că afișarea a fost comutată pe SurfaceView pentru această sesiune. Dacă este stabil, setează Mod de vizualizare pe SurfaceView în Setări.</string>
 
     <string name="self_mode_overlay_permission_description">Pentru a permite Modului Personal să pornească fiabil în fundal, activați permisiunea „Afișare peste alte aplicații” în ecranul următor.</string>
+
+    <string name="delete">Șterge</string>
+    <string name="night_mode_coordinates">Coordonate</string>
+    <string name="geofence_locations_title">Locații</string>
+    <string name="geofence_none">Niciuna</string>
+    <string name="geofence_count_summary">%1$d zone</string>
+    <string name="geofence_empty_hint">Nicio locație încă. Adaugă una pentru a forța ziua sau noaptea în funcție de zonă, sau pentru a restricționa pornirea automată la o zonă.</string>
+    <string name="geofence_unnamed">Locație fără nume</string>
+    <string name="geofence_add">Adaugă locație</string>
+    <string name="geofence_pick_location">Alege locația</string>
+    <string name="geofence_name_hint">Nume (ex. Acasă)</string>
+    <string name="geofence_force_dark">Forțează modul întunecat în această zonă</string>
+    <string name="geofence_allow_automation">Pornește automat / conectează doar în această zonă</string>
+    <string name="geofence_use_gps">Folosește locația mea curentă</string>
+    <string name="geofence_no_location">Nicio locație disponibilă încă</string>
+    <string name="geofence_saved">Locație salvată</string>
+    <string name="geofence_delete_title">Ștergeți locația?</string>
+    <string name="geofence_delete_message">Această locație va fi eliminată.</string>
+    <string name="geofence_internet_title">Necesită internet</string>
+    <string name="geofence_internet_message">Harta are nevoie de o conexiune la internet pentru a se încărca. Dalele hărții sunt descărcate doar în timp ce setați locația.</string>
+    <string name="geofence_radius_summary">Rază: %1$d m</string>
+    <string name="geofence_mode_dark">Întunecat</string>
+    <string name="geofence_mode_light">Deschis</string>
+    <string name="geofence_gate_on">Pornire automată restricționată</string>
 </resources>

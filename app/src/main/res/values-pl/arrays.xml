@@ -7,6 +7,8 @@
         <item>Ręczny czas</item>
         <item>Czujnik światła</item>
         <item>Jasność ekranu</item>
+        <item>Sygnał świateł auta (ILL+)</item>
+        <item>Ręczne współrzędne</item>
     </string-array>
 
     <string-array name="app_theme">

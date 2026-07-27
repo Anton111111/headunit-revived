@@ -602,4 +602,28 @@
     <string name="su_needed_keymaps_warning">Warnung: Dein Headunit muss entweder gerooted sein oder Shizuku installiert haben. Falls das der Fall ist, musst du die SU-Privilegien erlauben, sobald danach gefragt wird. Lenkradtasten werden keine Funktion haben, solange dies nicht behoben ist.</string>
 
     <string name="self_mode_overlay_permission_description">Damit der Self Mode zuverlässig im Hintergrund starten kann, aktivieren Sie bitte die Berechtigung \"Über anderen Apps einblenden\" im nächsten Bildschirm.</string>
+
+    <string name="delete">Löschen</string>
+    <string name="night_mode_coordinates">Koordinaten</string>
+    <string name="geofence_locations_title">Orte</string>
+    <string name="geofence_none">Keine</string>
+    <string name="geofence_count_summary">%1$d Bereiche</string>
+    <string name="geofence_empty_hint">Noch keine Orte. Fügen Sie einen hinzu, um Tag oder Nacht je nach Bereich zu erzwingen oder den Auto-Start auf eine Zone zu beschränken.</string>
+    <string name="geofence_unnamed">Unbenannter Ort</string>
+    <string name="geofence_add">Ort hinzufügen</string>
+    <string name="geofence_pick_location">Ort auswählen</string>
+    <string name="geofence_name_hint">Name (z.B. Zuhause)</string>
+    <string name="geofence_force_dark">Dunkelmodus in diesem Bereich erzwingen</string>
+    <string name="geofence_allow_automation">Nur in diesem Bereich automatisch starten / verbinden</string>
+    <string name="geofence_use_gps">Meinen aktuellen Standort verwenden</string>
+    <string name="geofence_no_location">Noch kein Standort verfügbar</string>
+    <string name="geofence_saved">Ort gespeichert</string>
+    <string name="geofence_delete_title">Ort löschen?</string>
+    <string name="geofence_delete_message">Dieser Ort wird entfernt.</string>
+    <string name="geofence_internet_title">Internet erforderlich</string>
+    <string name="geofence_internet_message">Die Karte benötigt eine Internetverbindung zum Laden. Kartenkacheln werden nur heruntergeladen, während Sie den Ort festlegen.</string>
+    <string name="geofence_radius_summary">Radius: %1$d m</string>
+    <string name="geofence_mode_dark">Dunkel</string>
+    <string name="geofence_mode_light">Hell</string>
+    <string name="geofence_gate_on">Auto-Start eingeschränkt</string>
 </resources>

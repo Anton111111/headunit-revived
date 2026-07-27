@@ -602,4 +602,28 @@
     <string name="renderer_fallback_surface">Video liên tục bị đứng, nên màn hình đã chuyển sang SurfaceView cho phiên này. Nếu ổn định, hãy đặt Chế độ hiển thị thành SurfaceView trong Cài đặt.</string>
 
     <string name="self_mode_overlay_permission_description">Để cho phép Chế độ Tự chạy khởi động ổn định từ nền, vui lòng bật quyền \"Hiển thị trên các ứng dụng khác\" trong màn hình tiếp theo.</string>
+
+    <string name="delete">Xóa</string>
+    <string name="night_mode_coordinates">Tọa độ</string>
+    <string name="geofence_locations_title">Vị trí</string>
+    <string name="geofence_none">Không có</string>
+    <string name="geofence_count_summary">%1$d khu vực</string>
+    <string name="geofence_empty_hint">Chưa có vị trí nào. Thêm một vị trí để buộc chế độ ngày hoặc đêm theo khu vực, hoặc để giới hạn tự khởi động trong một vùng.</string>
+    <string name="geofence_unnamed">Vị trí chưa đặt tên</string>
+    <string name="geofence_add">Thêm vị trí</string>
+    <string name="geofence_pick_location">Chọn vị trí</string>
+    <string name="geofence_name_hint">Tên (ví dụ: Nhà)</string>
+    <string name="geofence_force_dark">Buộc chế độ tối trong khu vực này</string>
+    <string name="geofence_allow_automation">Chỉ tự khởi động / kết nối trong khu vực này</string>
+    <string name="geofence_use_gps">Dùng vị trí hiện tại của tôi</string>
+    <string name="geofence_no_location">Chưa có vị trí khả dụng</string>
+    <string name="geofence_saved">Đã lưu vị trí</string>
+    <string name="geofence_delete_title">Xóa vị trí?</string>
+    <string name="geofence_delete_message">Vị trí này sẽ bị xóa.</string>
+    <string name="geofence_internet_title">Cần kết nối Internet</string>
+    <string name="geofence_internet_message">Bản đồ cần kết nối internet để tải. Các ô bản đồ chỉ được tải xuống khi bạn đặt vị trí.</string>
+    <string name="geofence_radius_summary">Bán kính: %1$d m</string>
+    <string name="geofence_mode_dark">Tối</string>
+    <string name="geofence_mode_light">Sáng</string>
+    <string name="geofence_gate_on">Tự khởi động bị giới hạn</string>
 </resources>

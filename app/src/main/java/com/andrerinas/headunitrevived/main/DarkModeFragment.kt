@@ -619,6 +619,37 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             ))
         }
 
+        // Night mode sub-option: fixed coordinate for Manual Coordinates (issue #647).
+        // Works fully offline once picked; useful for head units without GPS.
+        if (pendingNightMode == Settings.NightMode.MANUAL_COORDINATES) {
+            items.add(SettingItem.SettingEntry(
+                stableId = "nightModeCoordinates",
+                nameResId = R.string.night_mode_coordinates,
+                value = "%.4f, %.4f".format(settings.nightModeManualLatitude, settings.nightModeManualLongitude),
+                onClick = { _ ->
+                    findNavController().navigate(
+                        R.id.action_darkModeFragment_to_mapPickerFragment,
+                        androidx.core.os.bundleOf(MapPickerFragment.ARG_MODE to MapPickerFragment.MODE_POINT)
+                    )
+                }
+            ))
+        }
+
+        // Geofenced areas (Home, Work, ...): each can force day/night by area and/or
+        // gate auto-start / auto-connect to that area.
+        items.add(SettingItem.SettingEntry(
+            stableId = "geofenceLocations",
+            nameResId = R.string.geofence_locations_title,
+            value = run {
+                val n = settings.geofenceLocations.size
+                if (n == 0) getString(R.string.geofence_none)
+                else getString(R.string.geofence_count_summary, n)
+            },
+            onClick = { _ ->
+                findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment)
+            }
+        ))
+
         // AA Monochrome toggle — hidden when Night Mode is DAY
         if (pendingNightMode != Settings.NightMode.DAY) {
             items.add(SettingItem.ToggleSettingEntry(

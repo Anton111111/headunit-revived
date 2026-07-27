@@ -7,6 +7,8 @@
         <item>Manuální čas</item>
         <item>Světelný senzor</item>
         <item>Jas obrazovky</item>
+        <item>Signál světlometů auta (ILL+)</item>
+        <item>Manuální souřadnice</item>
     </string-array>
 
     <string-array name="app_theme">

@@ -20,6 +20,7 @@ sealed class SettingItem {
         override val stableId: String, // Unique ID for the setting (e.g., "gpsNavigation")
         @StringRes val nameResId: Int,
         var value: String, // Current display value of the setting
+        val nameOverride: String? = null, // Dynamic title (used instead of nameResId when set)
         val onClick: (settingId: String) -> Unit // Callback when the setting is clicked
     ) : SettingItem()
 
@@ -151,7 +152,8 @@ class SettingsAdapter : ListAdapter<SettingItem, RecyclerView.ViewHolder>(Settin
         private val settingValue: TextView = itemView.findViewById(R.id.settingValue)
         
         fun bind(setting: SettingItem.SettingEntry) {
-            settingName.setText(setting.nameResId)
+            if (setting.nameOverride != null) settingName.text = setting.nameOverride
+            else settingName.setText(setting.nameResId)
             settingValue.text = setting.value
             itemView.setOnClickListener { setting.onClick(setting.stableId) }
         }

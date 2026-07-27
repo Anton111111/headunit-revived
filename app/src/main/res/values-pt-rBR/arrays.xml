@@ -7,6 +7,8 @@
         <item>Hora manual</item>
         <item>Sensor de luz</item>
         <item>Brilho da tela</item>
+        <item>Sinal dos faróis do carro (ILL+)</item>
+        <item>Coordenadas manuais</item>
     </string-array>
 
     <string-array name="app_theme">

@@ -604,4 +604,27 @@
     <string name="renderer_fallback_surface">映像がフリーズし続けたため、このセッションでは表示を SurfaceView に切り替えました。安定している場合は、設定でビューモードを SurfaceView に設定してください。</string>
 
     <string name="self_mode_overlay_permission_description">単独モードをバックグラウンドから安定して起動できるようにするため、次の画面で「他のアプリの上に重ねて表示」の権限を有効にしてください。</string>
+    <string name="delete">削除</string>
+    <string name="night_mode_coordinates">座標</string>
+    <string name="geofence_locations_title">場所</string>
+    <string name="geofence_none">なし</string>
+    <string name="geofence_count_summary">%1$d 件のエリア</string>
+    <string name="geofence_empty_hint">まだ場所がありません。追加すると、エリアごとに昼／夜を強制したり、自動起動を特定のゾーンに制限したりできます。</string>
+    <string name="geofence_unnamed">名称未設定の場所</string>
+    <string name="geofence_add">場所を追加</string>
+    <string name="geofence_pick_location">場所を選択</string>
+    <string name="geofence_name_hint">名前（例：自宅）</string>
+    <string name="geofence_force_dark">このエリア内ではダークモードを強制する</string>
+    <string name="geofence_allow_automation">このエリア内でのみ自動起動／接続する</string>
+    <string name="geofence_use_gps">現在地を使用</string>
+    <string name="geofence_no_location">利用できる位置情報がまだありません</string>
+    <string name="geofence_saved">場所を保存しました</string>
+    <string name="geofence_delete_title">場所を削除しますか？</string>
+    <string name="geofence_delete_message">この場所は削除されます。</string>
+    <string name="geofence_internet_title">インターネットが必要です</string>
+    <string name="geofence_internet_message">地図の読み込みにはインターネット接続が必要です。地図タイルは場所を設定するときにのみダウンロードされます。</string>
+    <string name="geofence_radius_summary">半径：%1$d m</string>
+    <string name="geofence_mode_dark">ダーク</string>
+    <string name="geofence_mode_light">ライト</string>
+    <string name="geofence_gate_on">自動起動を制限中</string>
 </resources>

@@ -595,4 +595,29 @@
     <string name="renderer_fallback_surface">Видео постоянно зависало, поэтому отображение переключено на SurfaceView на эту сессию. Если работает стабильно, установите Режим отображения на SurfaceView в настройках.</string>
 
     <string name="self_mode_overlay_permission_description">Чтобы автономный режим надежно запускался в фоновом режиме, включите разрешение «Отображение поверх других приложений» на следующем экране.</string>
+
+    <!-- Geofence / Coordinates -->
+    <string name="delete">Удалить</string>
+    <string name="night_mode_coordinates">Координаты</string>
+    <string name="geofence_locations_title">Местоположения</string>
+    <string name="geofence_none">Нет</string>
+    <string name="geofence_count_summary">%1$d зон</string>
+    <string name="geofence_empty_hint">Пока нет местоположений. Добавьте одно, чтобы принудительно включать день или ночь по зоне, либо чтобы ограничить автозапуск зоной.</string>
+    <string name="geofence_unnamed">Безымянное местоположение</string>
+    <string name="geofence_add">Добавить местоположение</string>
+    <string name="geofence_pick_location">Выбрать местоположение</string>
+    <string name="geofence_name_hint">Название (напр. Дом)</string>
+    <string name="geofence_force_dark">Принудительно включать тёмный режим в этой зоне</string>
+    <string name="geofence_allow_automation">Автозапуск / подключение только в этой зоне</string>
+    <string name="geofence_use_gps">Использовать моё текущее местоположение</string>
+    <string name="geofence_no_location">Местоположение пока недоступно</string>
+    <string name="geofence_saved">Местоположение сохранено</string>
+    <string name="geofence_delete_title">Удалить местоположение?</string>
+    <string name="geofence_delete_message">Это местоположение будет удалено.</string>
+    <string name="geofence_internet_title">Требуется интернет</string>
+    <string name="geofence_internet_message">Для загрузки карты нужно интернет-соединение. Тайлы карты загружаются только во время задания местоположения.</string>
+    <string name="geofence_radius_summary">Радиус: %1$d м</string>
+    <string name="geofence_mode_dark">Тёмный</string>
+    <string name="geofence_mode_light">Светлый</string>
+    <string name="geofence_gate_on">Автозапуск ограничен</string>
 </resources>

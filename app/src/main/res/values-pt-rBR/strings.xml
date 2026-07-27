@@ -597,4 +597,29 @@
     <string name="renderer_fallback_surface">O vídeo continuava travando, então a exibição foi trocada para SurfaceView nesta sessão. Se ficar estável, defina o Modo de visualização como SurfaceView nas Configurações.</string>
 
     <string name="self_mode_overlay_permission_description">Para permitir que o Modo Próprio inicie de forma confiável em segundo plano, ative a permissão \"Sobrepor a outros aplicativos\" na próxima tela.</string>
+
+    <!-- Geofence / coordinates -->
+    <string name="delete">Excluir</string>
+    <string name="night_mode_coordinates">Coordenadas</string>
+    <string name="geofence_locations_title">Locais</string>
+    <string name="geofence_none">Nenhum</string>
+    <string name="geofence_count_summary">%1$d áreas</string>
+    <string name="geofence_empty_hint">Nenhum local ainda. Adicione um para forçar dia ou noite por área, ou para restringir o início automático a uma zona.</string>
+    <string name="geofence_unnamed">Local sem nome</string>
+    <string name="geofence_add">Adicionar local</string>
+    <string name="geofence_pick_location">Escolher local</string>
+    <string name="geofence_name_hint">Nome (ex. Casa)</string>
+    <string name="geofence_force_dark">Forçar modo escuro dentro desta área</string>
+    <string name="geofence_allow_automation">Iniciar / conectar automaticamente apenas dentro desta área</string>
+    <string name="geofence_use_gps">Usar minha localização atual</string>
+    <string name="geofence_no_location">Nenhuma localização disponível ainda</string>
+    <string name="geofence_saved">Local salvo</string>
+    <string name="geofence_delete_title">Excluir local?</string>
+    <string name="geofence_delete_message">Este local será removido.</string>
+    <string name="geofence_internet_title">Internet necessária</string>
+    <string name="geofence_internet_message">O mapa precisa de uma conexão com a Internet para carregar. Os blocos do mapa só são baixados enquanto você define o local.</string>
+    <string name="geofence_radius_summary">Raio: %1$d m</string>
+    <string name="geofence_mode_dark">Escuro</string>
+    <string name="geofence_mode_light">Claro</string>
+    <string name="geofence_gate_on">Início automático restrito</string>
 </resources>

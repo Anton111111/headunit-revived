@@ -8,6 +8,7 @@
         <item>Sensore di luce</item>
         <item>Luminosità dello schermo</item>
         <item>Segnale fari auto (ILL+)</item>
+        <item>Coordinate manuali</item>
     </string-array>
 
     <string-array name="app_theme">

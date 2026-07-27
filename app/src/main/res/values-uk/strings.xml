@@ -597,4 +597,29 @@
     <string name="renderer_fallback_surface">Відео постійно зависало, тому відображення переключено на SurfaceView на цю сесію. Якщо працює стабільно, встановіть Режим перегляду на SurfaceView у налаштуваннях.</string>
 
     <string name="self_mode_overlay_permission_description">Щоб дозволити автономному режиму надійно запускатися у фоновому режимі, увімкніть дозвіл \"Відображення поверх інших додатків\" на наступному екрані.</string>
+
+    <!-- Geofence / Coordinates -->
+    <string name="delete">Видалити</string>
+    <string name="night_mode_coordinates">Координати</string>
+    <string name="geofence_locations_title">Місцезнаходження</string>
+    <string name="geofence_none">Немає</string>
+    <string name="geofence_count_summary">%1$d зон</string>
+    <string name="geofence_empty_hint">Поки немає місцезнаходжень. Додайте одне, щоб примусово вмикати день або ніч за зоною, або щоб обмежити автозапуск зоною.</string>
+    <string name="geofence_unnamed">Безіменне місцезнаходження</string>
+    <string name="geofence_add">Додати місцезнаходження</string>
+    <string name="geofence_pick_location">Вибрати місцезнаходження</string>
+    <string name="geofence_name_hint">Назва (напр. Дім)</string>
+    <string name="geofence_force_dark">Примусово вмикати темний режим у цій зоні</string>
+    <string name="geofence_allow_automation">Автозапуск / підключення лише в цій зоні</string>
+    <string name="geofence_use_gps">Використати моє поточне місцезнаходження</string>
+    <string name="geofence_no_location">Місцезнаходження поки недоступне</string>
+    <string name="geofence_saved">Місцезнаходження збережено</string>
+    <string name="geofence_delete_title">Видалити місцезнаходження?</string>
+    <string name="geofence_delete_message">Це місцезнаходження буде видалено.</string>
+    <string name="geofence_internet_title">Потрібен інтернет</string>
+    <string name="geofence_internet_message">Для завантаження карти потрібне інтернет-зʼєднання. Тайли карти завантажуються лише під час задання місцезнаходження.</string>
+    <string name="geofence_radius_summary">Радіус: %1$d м</string>
+    <string name="geofence_mode_dark">Темний</string>
+    <string name="geofence_mode_light">Світлий</string>
+    <string name="geofence_gate_on">Автозапуск обмежено</string>
 </resources>

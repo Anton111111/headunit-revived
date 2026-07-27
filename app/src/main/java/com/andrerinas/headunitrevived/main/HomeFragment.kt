@@ -126,13 +126,15 @@ class HomeFragment : Fragment() {
         }
 
         val appSettings = App.provide(requireContext()).settings
+        // Geofence automation gate (fail-open when no live location is available).
+        val automationAllowed = Settings.geofenceAllowsAutomation(requireContext())
 
-        if (appSettings.autoStartOnScreenOn || appSettings.autoStartOnBoot) {
+        if (automationAllowed && (appSettings.autoStartOnScreenOn || appSettings.autoStartOnBoot)) {
             ContextCompat.startForegroundService(requireContext(),
                 Intent(requireContext(), AapService::class.java))
         }
 
-        for (methodId in appSettings.autoConnectPriorityOrder) {
+        if (automationAllowed) for (methodId in appSettings.autoConnectPriorityOrder) {
             if (commManager.isConnected) break
             when (methodId) {
                 Settings.AUTO_CONNECT_LAST_SESSION -> {

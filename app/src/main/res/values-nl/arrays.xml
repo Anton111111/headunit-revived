@@ -7,6 +7,8 @@
         <item>Handmatige tijd</item>
         <item>Lichtsensor</item>
         <item>Schermhelderheid</item>
+        <item>Koplampsignaal auto (ILL+)</item>
+        <item>Handmatige coördinaten</item>
     </string-array>
 
     <string-array name="app_theme">
