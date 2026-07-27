@@ -594,6 +594,7 @@
     <string name="software_video_decoder_device">MediaCodec do dispositivo</string>
 
     <string name="btn_show_qr">Mostrar código QR</string>
+    <string name="renderer_fallback_surface">O vídeo continuava travando, então a exibição foi trocada para SurfaceView nesta sessão. Se ficar estável, defina o Modo de visualização como SurfaceView nas Configurações.</string>
 
     <string name="self_mode_overlay_permission_description">Para permitir que o Modo Próprio inicie de forma confiável em segundo plano, ative a permissão \"Sobrepor a outros aplicativos\" na próxima tela.</string>
 </resources>

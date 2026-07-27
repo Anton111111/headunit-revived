@@ -145,6 +145,9 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
                 showReconnectingOverlay()
             } else if (overlayState == OverlayState.RECONNECTING && gap < 2000) {
                 hideReconnectingOverlay()
+            } else {
+                // Decoder producing but display possibly frozen (issue #650).
+                maybeRecoverFromDisplayStall()
             }
             watchdogHandler.postDelayed(this, 2000)
         }
@@ -237,6 +240,104 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             isSurfaceSet = false
             setupProjectionView()
         }
+    }
+
+    // Issue #650: on some head units (notably MediaTek in GLES mode) the display consumer
+    // stops putting frames on screen while the phone keeps streaming video, so the picture
+    // freezes (often on Android Auto's boot logo) even though audio keeps playing. The known
+    // manual workaround is Home + reopen, which rebuilds the surface. This reproduces that
+    // automatically, and if a device keeps stalling it escalates to SurfaceView (the most
+    // direct path, which avoids the external-texture route that is the demonstrated bottleneck)
+    // for the rest of the session.
+    //
+    // Detection is gated on the phone still sending video bytes (videoDecoder.lastInputBytesReceivedMs)
+    // so it never fights a genuine phone-side pause (which stops the input too and is left to the
+    // reconnecting overlay). It then looks for two failure shapes on the consumer side:
+    //   - a full freeze: nothing drawn for displayFreezeThresholdMs, and
+    //   - a throughput collapse: several abnormally long frames within a sliding window. On MediaTek
+    //     the GL consumer does not fully stop but drops to 2-5fps with single frames taking ~2s, so
+    //     a plain "no frame for N seconds" check misses it (issue #650).
+    private val displayFreezeThresholdMs = 3000L
+    private val phoneAliveThresholdMs = 1500L
+    private val displayStallRecoveryCooldownMs = 10000L
+    private val displayStallRecoveryResetMs = 60000L
+    private val maxDisplayStallRecoveries = 4
+    private val collapseLongFrameFloor = 2L
+    private var displayStallRecoveries = 0
+    private var lastDisplayStallRecoveryMs = 0L
+    private var firstUndrawnMs = 0L
+    // Sliding window (~10s at the 2s watchdog cadence) of long frames per tick.
+    private val longFrameTickWindow = LongArray(5)
+    private var longFrameTickIndex = 0
+    private var prevLongFrameCount = 0L
+    // Session-scoped backend override applied after repeated stalls. Never persisted, so the
+    // user's chosen viewMode is restored on the next launch.
+    private var forcedViewModeOverride: Settings.ViewMode? = null
+
+    private fun maybeRecoverFromDisplayStall() {
+        if (!::projectionView.isInitialized) return
+        if (overlayState != OverlayState.HIDDEN) return
+        // SurfaceView has no per-frame draw callback (-1) and is already the robust fallback path.
+        val drawn = projectionView.lastFrameDrawnMs()
+        if (drawn < 0L) return
+        val input = videoDecoder.lastInputBytesReceivedMs
+        if (input <= 0L) return
+        val now = SystemClock.elapsedRealtime()
+        // Only act while the phone is still streaming video.
+        if (now - input > phoneAliveThresholdMs) return
+
+        // Slide the long-frame window (this runs ~every 2s from the reconnecting watchdog).
+        val longFrames = projectionView.longFrameEvents()
+        longFrameTickWindow[longFrameTickIndex] = (longFrames - prevLongFrameCount).coerceAtLeast(0)
+        longFrameTickIndex = (longFrameTickIndex + 1) % longFrameTickWindow.size
+        prevLongFrameCount = longFrames
+        val longFramesInWindow = longFrameTickWindow.sum()
+
+        // Baseline for the case where the consumer never drew a single frame after the overlay was
+        // dismissed (drawn stays 0): time it from when that state was first seen.
+        if (drawn == 0L) {
+            if (firstUndrawnMs == 0L) firstUndrawnMs = now
+        } else {
+            firstUndrawnMs = 0L
+        }
+        val effectiveDrawn = if (drawn == 0L) firstUndrawnMs else drawn
+
+        val frozen = effectiveDrawn > 0L && now - effectiveDrawn >= displayFreezeThresholdMs
+        val collapsed = longFramesInWindow >= collapseLongFrameFloor
+
+        if (!frozen && !collapsed) {
+            // Healthy: after a sustained good period, re-arm recovery so a later stall on a long
+            // drive is still handled.
+            if (displayStallRecoveries > 0 && now - lastDisplayStallRecoveryMs > displayStallRecoveryResetMs) {
+                displayStallRecoveries = 0
+            }
+            return
+        }
+
+        if (now - lastDisplayStallRecoveryMs < displayStallRecoveryCooldownMs) return
+        if (displayStallRecoveries >= maxDisplayStallRecoveries) return
+        displayStallRecoveries++
+        lastDisplayStallRecoveryMs = now
+        val reason = if (collapsed) "$longFramesInWindow slow frames in window" else "no draw for ${now - effectiveDrawn}ms"
+
+        val effectiveMode = forcedViewModeOverride ?: settings.viewMode
+        // After a plain rebuild fails to stick, escalate away from a non-SurfaceView backend
+        // (unless the bundled software HEVC decoder is active, which needs the GLES YUV sink).
+        val shouldFallBack = displayStallRecoveries >= 2 &&
+            effectiveMode != Settings.ViewMode.SURFACE &&
+            !videoDecoder.usingBundledSoftwareHevc
+        if (shouldFallBack) {
+            AppLog.w("Display stall ($reason) again on $effectiveMode. Falling back to SurfaceView for this session. See issue #650.")
+            forcedViewModeOverride = Settings.ViewMode.SURFACE
+            Toast.makeText(this, R.string.renderer_fallback_surface, Toast.LENGTH_LONG).show()
+        } else {
+            AppLog.w("Display stall ($reason). Rebuilding projection view (attempt $displayStallRecoveries). See issue #650.")
+        }
+        // The rebuilt view starts its counters from zero.
+        firstUndrawnMs = 0L
+        prevLongFrameCount = 0L
+        longFrameTickWindow.fill(0L)
+        recreateProjectionView()
     }
 
     private val nightModeReceiver = object : BroadcastReceiver() {
@@ -1275,7 +1376,16 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         val container = findViewById<FrameLayout>(R.id.container)
         val displayMetrics = resources.displayMetrics
 
-        if (settings.viewMode == Settings.ViewMode.TEXTURE) {
+        // forcedViewModeOverride is set by the display-stall recovery to pin SurfaceView for the
+        // rest of the session (issue #650); otherwise honor the user's chosen viewMode.
+        val mode = forcedViewModeOverride ?: settings.viewMode
+        AppLog.i(
+            "Projection backend: viewMode=$mode override=${forcedViewModeOverride != null} " +
+                "SoC=${Build.HARDWARE} board=${Build.BOARD} mfr=${Build.MANUFACTURER} " +
+                "model=${Build.MODEL} API=${Build.VERSION.SDK_INT}"
+        )
+
+        if (mode == Settings.ViewMode.TEXTURE) {
             AppLog.i("Using TextureView")
             val textureView = TextureProjectionView(this)
             textureView.layoutParams = FrameLayout.LayoutParams(
@@ -1284,7 +1394,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             )
             projectionView = textureView
             container.setBackgroundColor(Color.BLACK)
-        } else if (settings.viewMode == Settings.ViewMode.GLES) {
+        } else if (mode == Settings.ViewMode.GLES) {
             AppLog.i("Using GlProjectionView")
             val glView = GlProjectionView(this)
             glView.layoutParams = FrameLayout.LayoutParams(

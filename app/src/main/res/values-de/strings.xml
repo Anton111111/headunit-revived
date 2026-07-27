@@ -598,6 +598,7 @@
     <string name="software_video_decoder_device">Geräte-MediaCodec</string>
 
     <string name="btn_show_qr">QR-Code anzeigen</string>
+    <string name="renderer_fallback_surface">Das Video ist immer wieder eingefroren, daher wurde die Anzeige für diese Sitzung auf SurfaceView umgestellt. Wenn es stabil läuft, stelle den View-Modus in den Einstellungen auf SurfaceView.</string>
     <string name="su_needed_keymaps_warning">Warnung: Dein Headunit muss entweder gerooted sein oder Shizuku installiert haben. Falls das der Fall ist, musst du die SU-Privilegien erlauben, sobald danach gefragt wird. Lenkradtasten werden keine Funktion haben, solange dies nicht behoben ist.</string>
 
     <string name="self_mode_overlay_permission_description">Damit der Self Mode zuverlässig im Hintergrund starten kann, aktivieren Sie bitte die Berechtigung \"Über anderen Apps einblenden\" im nächsten Bildschirm.</string>

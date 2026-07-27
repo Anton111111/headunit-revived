@@ -589,6 +589,7 @@
     <string name="software_video_decoder_device">Cihaz MediaCodec</string>
 
     <string name="btn_show_qr">QR Kodunu Göster</string>
+    <string name="renderer_fallback_surface">Video sürekli donduğu için görüntü bu oturum boyunca SurfaceView\'e geçirildi. Kararlıysa, Ayarlar\'da Görünüm modunu SurfaceView olarak ayarla.</string>
 
     <string name="self_mode_overlay_permission_description">Kendi Modunun arka planda güvenilir bir şekilde başlatılabilmesi için lütfen bir sonraki ekranda \"Diğer uygulamaların üzerinde göster\" iznini etkinleştirin.</string>
 </resources>

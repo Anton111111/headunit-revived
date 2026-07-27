@@ -594,6 +594,7 @@
     <string name="software_video_decoder_device">MediaCodec пристрою</string>
 
     <string name="btn_show_qr">Показати QR-код</string>
+    <string name="renderer_fallback_surface">Відео постійно зависало, тому відображення переключено на SurfaceView на цю сесію. Якщо працює стабільно, встановіть Режим перегляду на SurfaceView у налаштуваннях.</string>
 
     <string name="self_mode_overlay_permission_description">Щоб дозволити автономному режиму надійно запускатися у фоновому режимі, увімкніть дозвіл \"Відображення поверх інших додатків\" на наступному екрані.</string>
 </resources>
