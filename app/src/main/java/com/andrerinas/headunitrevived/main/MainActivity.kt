@@ -375,9 +375,19 @@ class MainActivity : BaseActivity() {
         // Pill cleanup is cheap and safe to run regardless of mode.
         hideAutoConnectPill()
         if (success) {
-            // On success the projection activity will cover our overlay almost
-            // immediately. Hiding without an animation avoids the fade competing
-            // with the activity transition.
+            // Launch the projection activity directly rather than waiting for the
+            // phone to request video focus (AapControl.gainVideoFocus() -> AapBroadcastReceiver).
+            // That broadcast only fires once the phone gets around to its VIDEO
+            // mediaSinkSetupRequest, which can lag well behind HandshakeComplete -
+            // during that gap this overlay had already hidden itself, leaving the
+            // user stuck on HomeFragment with only a relabeled button to notice.
+            val aapIntent = AapProjectionActivity.intent(this).apply {
+                putExtra(AapProjectionActivity.EXTRA_FOCUS, true)
+                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+            startActivity(aapIntent)
+            // Hiding without an animation avoids the fade competing with the
+            // activity transition.
             findViewById<View>(R.id.auto_connect_loading_overlay)?.visibility = View.GONE
             stopAutoConnectVideo()
             autoConnectKenBurnsAnim?.cancel()
