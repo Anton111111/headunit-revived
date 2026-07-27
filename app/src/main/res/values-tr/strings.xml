@@ -179,6 +179,8 @@
 
     <string name="listen_for_usb_devices_label">USB Cihazlarını Dinle</string>
     <string name="listen_for_usb_devices_description">Bir USB cihazı takıldığında Android sistem istemini göster.</string>
+    <string name="show_toast_messages">Toast Bildirimlerini Göster</string>
+    <string name="show_toast_messages_description">Bağlantı, kopma ve mod değiştirme durumlarında durum bildirimi göster.</string>
     <string name="auto_start_usb_label">USB ile otomatik başlat</string>
     <string name="auto_start_usb_description">Bir USB cihazı takıldığında uygulamayı otomatik olarak aç ve bağlanmayı dene</string>
     <string name="auto_start_settings">Otomatik başlatma ayarları</string>
@@ -241,6 +243,8 @@
     <string name="pref_stretch_screen_summary">Tüm ekranı doldurmak için en boy oranını yok sayar (siyah çubukları kaldırır)</string>
     <string name="forced_scale">Zorunlu Ölçekleme (Eski Düzeltme)</string>
     <string name="forced_scale_description">SurfaceView kullanan bazı eski cihazlardaki ölçekleme sorunlarını düzeltir. Sadece görüntü bozuk veya kaymış görünüyorsa kullanın.</string>
+    <string name="hud_mirroring">HUD Modu (Yatay Çevirme)</string>
+    <string name="hud_mirroring_description">Ön cam yansıması için ekranı yatay olarak çevirir (Head-Up Display). TextureView veya GLES20 görünüm modu gerektirir (SurfaceView ile çalışmaz).</string>
 
 
     <string name="category_audio">Ses</string>
@@ -250,6 +254,8 @@
     <string name="separate_audio_streams_description">Tek bir multimedya akışının yerine müzik, aramalar ve bildirimler için ses kanallarını ayırın (bazı cihazlarda düzgün çalışmayabilir).</string>
     <string name="use_aac_audio">AAC Ses Kullan</string>
     <string name="use_aac_audio_description">Bant genişliğinden tasarruf etmek için ses için AAC kodeğini kullan (Deneysel).</string>
+    <string name="attach_hw_dsp_equalizer">Donanım DSP Ekolayzır Tetikleyici</string>
+    <string name="attach_hw_dsp_equalizer_description">Belirli multimedya cihazlarında donanım DSP yönlendirmesini zorlamak için ses oturumuna sahte bir ekolayzır efekti ekler. ViPER4Android / ViperFX kullanıyorsanız veya eski Android sürümlerinde ses boğuk çıkıyorsa kapalı tutun.</string>
     <string name="audio_volume_offset">Ses Seviyesi Dengesi (Offset)</string>
     <string name="media_volume_offset">Medya Ses Dengesi</string>
     <string name="assistant_volume_offset">Asistan Ses Dengesi</string>
@@ -584,4 +590,6 @@
 
     <string name="btn_show_qr">QR Kodunu Göster</string>
     <string name="renderer_fallback_surface">Video sürekli donduğu için görüntü bu oturum boyunca SurfaceView\'e geçirildi. Kararlıysa, Ayarlar\'da Görünüm modunu SurfaceView olarak ayarla.</string>
+
+    <string name="self_mode_overlay_permission_description">Kendi Modunun arka planda güvenilir bir şekilde başlatılabilmesi için lütfen bir sonraki ekranda \"Diğer uygulamaların üzerinde göster\" iznini etkinleştirin.</string>
 </resources>

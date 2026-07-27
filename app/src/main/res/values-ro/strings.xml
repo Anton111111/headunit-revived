@@ -178,6 +178,8 @@
 
     <string name="listen_for_usb_devices_label">Ascultați dispozitive USB</string>
     <string name="listen_for_usb_devices_description">Afișați solicitarea sistemului Android când este conectat un dispozitiv USB.</string>
+    <string name="show_toast_messages">Afișează mesaje Toast</string>
+    <string name="show_toast_messages_description">Afișează mesaje pop-up de stare la conectare, deconectare și schimbarea modului.</string>
     <string name="auto_start_usb_label">Pornire automată pe USB</string>
     <string name="auto_start_usb_description">Deschide aplicația automat și încearcă conectarea când un dispozitiv USB este conectat</string>
     <string name="auto_start_settings">Setări pornire automată</string>
@@ -243,6 +245,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">Scalare forțată (Fix legacy)</string>
     <string name="forced_scale_description">Corectează problemele de scalare pe unele dispozitive mai vechi care folosesc SurfaceView. Utilizați numai dacă imaginea pare distorsionată sau deplasată.</string>
+    <string name="hud_mirroring">Mod HUD (Oglindire orizontală)</string>
+    <string name="hud_mirroring_description">Răstoarnă afișajul pe orizontală pentru reflexia pe parbriz (Head-Up Display). Necesită modul de vizualizare TextureView sau GLES20 (nu funcționează cu SurfaceView).</string>
 
     <string name="category_audio">Audio</string>
     <string name="enable_audio_sink">Receptor Audio (Sink)</string>
@@ -251,6 +255,8 @@
     <string name="separate_audio_streams_description">Se separă canalele audio pentru muzică, apeluri și notificări în locul unui singur flux multimedia (s-ar putea să nu funcționeze corect pe anumite dispozitive).</string>
     <string name="use_aac_audio">Folosește Audio AAC</string>
     <string name="use_aac_audio_description">Folosește codecul AAC pentru audio pentru a salva lățime de bandă (Experimental).</string>
+    <string name="attach_hw_dsp_equalizer">Declanșator egalizator DSP hardware</string>
+    <string name="attach_hw_dsp_equalizer_description">Așează un efect de egalizator fictiv la sesiunea audio pentru a forța direcționarea prin DSP hardware pe anumite navigații. Lăsați dezactivat dacă folosiți ViPER4Android / ViperFX sau dacă sunetul este înfundat pe versiuni vechi de Android.</string>
     <string name="audio_volume_offset">Ajustare volum audio</string>
     <string name="media_volume_offset">Ajustare volum media</string>
     <string name="assistant_volume_offset">Ajustare volum asistent</string>
@@ -589,4 +595,6 @@
 
     <string name="btn_show_qr">Afișează codul QR</string>
     <string name="renderer_fallback_surface">Videoclipul continua să se blocheze, așa că afișarea a fost comutată pe SurfaceView pentru această sesiune. Dacă este stabil, setează Mod de vizualizare pe SurfaceView în Setări.</string>
+
+    <string name="self_mode_overlay_permission_description">Pentru a permite Modului Personal să pornească fiabil în fundal, activați permisiunea „Afișare peste alte aplicații” în ecranul următor.</string>
 </resources>

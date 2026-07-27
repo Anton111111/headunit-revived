@@ -167,7 +167,9 @@
     <string name="auto_start_bt_label">Tự khởi động khi có Bluetooth</string>
     <string name="auto_start_bt_description">Tự động mở Headunit Revived khi một thiết bị Bluetooth nhất định kết nối.</string>
     <string name="listen_for_usb_devices_label">Lắng nghe thiết bị USB</string>
-    <string name="listen_for_usb_devices_description">Hiển thị hộp thoại hệ thống Android khi cắm thiết bị USB.</string>
+    <string name="listen_for_usb_devices_description">Hiển thị yêu cầu hệ thống Android khi cắm thiết bị USB.</string>
+    <string name="show_toast_messages">Hiển thị thông báo Toast</string>
+    <string name="show_toast_messages_description">Hiển thị thông báo trạng thái khi kết nối, ngắt kết nối và chuyển chế độ.</string>
     <string name="auto_start_usb_label">Tự khởi động khi có USB</string>
     <string name="auto_start_usb_description">Tự động mở ứng dụng và thử kết nối khi cắm thiết bị USB</string>
     <string name="auto_start_settings">Cài đặt tự khởi động</string>
@@ -239,6 +241,8 @@
     <string name="pref_stretch_screen_summary">Bỏ qua tỉ lệ khung hình để lấp đầy màn hình (loại bỏ viền đen)</string>
     <string name="forced_scale">Tỉ lệ ép buộc (Khắc phục cho máy cũ)</string>
     <string name="forced_scale_description">Khắc phục lỗi tỉ lệ trên một số máy cũ dùng SurfaceView. Chỉ dùng khi hình bị méo hoặc lệch.</string>
+    <string name="hud_mirroring">Chế độ HUD (Lật ngang)</string>
+    <string name="hud_mirroring_description">Lật màn hình theo chiều ngang để phản chiếu lên kính chắn gió (Head-Up Display). Yêu cầu chế độ hiển thị TextureView hoặc GLES20 (không hoạt động với SurfaceView).</string>
 
 
     <!-- Audio Settings -->
@@ -251,6 +255,8 @@
     <string name="separate_audio_streams_description">Tách kênh âm thanh cho nhạc, gọi điện và thông báo thay vì một luồng đa phương tiện chung (có thể không chạy đúng trên một số máy).</string>
     <string name="use_aac_audio">Dùng âm thanh AAC</string>
     <string name="use_aac_audio_description">Dùng codec AAC để tiết kiệm băng thông (Thử nghiệm).</string>
+    <string name="attach_hw_dsp_equalizer">Bộ kích hoạt bộ cân bằng DSP phần cứng</string>
+    <string name="attach_hw_dsp_equalizer_description">Gắn hiệu ứng bộ cân bằng giả vào phiên âm thanh để buộc định tuyến DSP phần cứng trên một số màn hình. Giữ tắt nếu sử dụng ViPER4Android / ViperFX hoặc nếu âm thanh bị nghẹt trên các phiên bản Android cũ.</string>
     <string name="audio_volume_offset">Bù âm lượng</string>
     <string name="media_volume_offset">Bù âm lượng nhạc</string>
     <string name="assistant_volume_offset">Bù âm lượng trợ lý</string>
@@ -594,4 +600,6 @@
 
     <string name="btn_show_qr">Hiển thị mã QR</string>
     <string name="renderer_fallback_surface">Video liên tục bị đứng, nên màn hình đã chuyển sang SurfaceView cho phiên này. Nếu ổn định, hãy đặt Chế độ hiển thị thành SurfaceView trong Cài đặt.</string>
+
+    <string name="self_mode_overlay_permission_description">Để cho phép Chế độ Tự chạy khởi động ổn định từ nền, vui lòng bật quyền \"Hiển thị trên các ứng dụng khác\" trong màn hình tiếp theo.</string>
 </resources>

@@ -371,6 +371,14 @@ object HeadUnitScreenConfig {
         }
     }
 
+    fun getPixelAspectRatioE4(): Int {
+        return if (this::currentSettings.isInitialized && currentSettings.pixelAspectRatioE4 > 0) {
+            currentSettings.pixelAspectRatioE4
+        } else {
+            10000 // 1.0 = square pixels
+        }
+    }
+
     fun getUsableWidth(): Int = screenWidthPx
     fun getUsableHeight(): Int = screenHeightPx
 
@@ -436,6 +444,7 @@ object HeadUnitScreenConfig {
         var hash = 17
         hash = 31 * hash + settings.resolutionId
         hash = 31 * hash + settings.dpiPixelDensity
+        hash = 31 * hash + settings.pixelAspectRatioE4
         hash = 31 * hash + settings.insetLeft
         hash = 31 * hash + settings.insetTop
         hash = 31 * hash + settings.insetRight

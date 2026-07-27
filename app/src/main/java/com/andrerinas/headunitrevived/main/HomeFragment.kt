@@ -368,11 +368,26 @@ class HomeFragment : Fragment() {
                 aapIntent.putExtra(AapProjectionActivity.EXTRA_FOCUS, true)
                 startActivity(aapIntent)
             } else {
-                (requireActivity() as? MainActivity)?.beginAutoConnect(
-                    "manual self mode",
-                    MainActivity.ConnectionUiMode.OVERLAY
-                )
-                startSelfMode()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !android.provider.Settings.canDrawOverlays(requireContext())) {
+                    MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+                        .setTitle(R.string.overlay_permission_title)
+                        .setMessage(R.string.self_mode_overlay_permission_description)
+                        .setPositiveButton(R.string.open_settings) { _, _ ->
+                            val intent = Intent(
+                                android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                android.net.Uri.parse("package:${requireContext().packageName}")
+                            )
+                            startActivity(intent)
+                        }
+                        .setNegativeButton(R.string.cancel, null)
+                        .show()
+                } else {
+                    (requireActivity() as? MainActivity)?.beginAutoConnect(
+                        "manual self mode",
+                        MainActivity.ConnectionUiMode.OVERLAY
+                    )
+                    startSelfMode()
+                }
             }
         }
 

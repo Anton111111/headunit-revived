@@ -33,6 +33,8 @@ import com.andrerinas.headunitrevived.app.BootCompleteReceiver
 import com.andrerinas.headunitrevived.app.WifiAutoStartReceiver
 import com.andrerinas.headunitrevived.main.MainActivity
 import com.andrerinas.headunitrevived.R
+import com.andrerinas.headunitrevived.utils.AppLog
+import com.andrerinas.headunitrevived.utils.ToastUtils
 import com.andrerinas.headunitrevived.aap.protocol.messages.NightModeEvent
 import com.andrerinas.headunitrevived.aap.protocol.proto.MediaPlayback
 import com.andrerinas.headunitrevived.connection.CommManager
@@ -46,7 +48,6 @@ import com.andrerinas.headunitrevived.connection.UsbAccessoryMode
 import com.andrerinas.headunitrevived.connection.UsbDeviceCompat
 import com.andrerinas.headunitrevived.connection.UsbReceiver
 import com.andrerinas.headunitrevived.location.GpsLocationService
-import com.andrerinas.headunitrevived.utils.AppLog
 import com.andrerinas.headunitrevived.utils.HeadUnitScreenConfig
 import com.andrerinas.headunitrevived.utils.LocaleHelper
 import com.andrerinas.headunitrevived.utils.LogExporter
@@ -71,7 +72,9 @@ import com.andrerinas.headunitrevived.utils.VpnControl
 import com.andrerinas.headunitrevived.connection.CarKeyReceiver
 import com.andrerinas.headunitrevived.connection.NativeAaHandshakeManager
 import com.andrerinas.headunitrevived.connection.NearbyManager
+import com.andrerinas.headunitrevived.connection.carkey.CarKeysManager
 import com.andrerinas.headunitrevived.main.BackgroundNotification
+import com.andrerinas.headunitrevived.utils.SUExecutor
 import com.andrerinas.headunitrevived.utils.Settings
 import com.andrerinas.headunitrevived.utils.protoUint32ToLong
 import java.net.ServerSocket
@@ -104,7 +107,6 @@ class AapService : Service(), UsbReceiver.Listener {
     private var nativeAaHandshakeManager: NativeAaHandshakeManager? = null
     private var nearbyManager: NearbyManager? = null
     private var wifiAutoStartReceiver: WifiAutoStartReceiver? = null
-    private var carKeyReceiver: CarKeyReceiver? = null
     private var wirelessServer: WirelessServer? = null
     private var networkDiscovery: NetworkDiscovery? = null
     private var mediaSession: MediaSessionCompat? = null
@@ -194,7 +196,6 @@ class AapService : Service(), UsbReceiver.Listener {
     private var accessoryHandshakeFailures = 0
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private var wifiLock: WifiManager.WifiLock? = null
-    private var isCarKeyReceiverRegistered = false
 
     private var wifiReadyCallback: ConnectivityManager.NetworkCallback? = null
 
@@ -734,8 +735,6 @@ class AapService : Service(), UsbReceiver.Listener {
         }
 
 
-        carKeyReceiver = CarKeyReceiver()
-
         checkAlreadyConnectedUsb()
         registerNetworkMonitor()
     }
@@ -801,10 +800,21 @@ class AapService : Service(), UsbReceiver.Listener {
      * This logic was previously executed in onCreate(); it has been moved here so
      * the caller can decide when to acquire focus (for example, immediately before
      * starting the AA handshake) to avoid stealing audio during autostart.
+     *
+     * The permanent AUDIOFOCUS_GAIN is only appropriate for Static Audio Focus mode,
+     * where the phone must believe focus is always held. In the default (dynamic) mode
+     * focus is instead acquired on demand via the AA protocol
+     * (AapControl.audioFocusRequest -> AapAudio.requestFocusChange), so grabbing a
+     * permanent gain here would needlessly evict other media (e.g. the car radio) the
+     * moment the phone connects, before AA plays anything.
      */
     private fun requestPermanentAudioFocus() {
         if (!settings.enableAudioSink) {
             AppLog.d("Audio Sink disabled - skipping permanent audio focus request.")
+            return
+        }
+        if (!settings.staticAudioFocus) {
+            AppLog.d("Static Audio Focus disabled - skipping permanent audio focus request; focus will be acquired on demand.")
             return
         }
 
@@ -892,24 +902,7 @@ class AapService : Service(), UsbReceiver.Listener {
         // Silent audio hack removed to prevent mixing/resampling stuttering issues
 
         // Register the comprehensive steering wheel key receiver
-        if (!isCarKeyReceiverRegistered) {
-            val filter = IntentFilter().apply {
-                priority = 1000
-                CarKeyReceiver.ACTIONS.forEach { addAction(it) }
-            }
-            try {
-                ContextCompat.registerReceiver(
-                    this,
-                    carKeyReceiver,
-                    filter,
-                    ContextCompat.RECEIVER_EXPORTED
-                )
-                isCarKeyReceiverRegistered = true
-                AppLog.d("AapService: CarKeyReceiver registered")
-            } catch (e: Exception) {
-                AppLog.e("AapService: Failed to register CarKeyReceiver", e)
-            }
-        }
+        App.provide(this).carKeysManager.registerReceivers(this)
 
         // Reactivate the existing MediaSession (created in onCreate, kept alive across disconnects)
         safeMediaSessionCall { it.isActive = true }
@@ -1069,15 +1062,7 @@ class AapService : Service(), UsbReceiver.Listener {
 
         // Release any permanent audio focus we may have requested when connected
         releasePermanentAudioFocus()
-        if (isCarKeyReceiverRegistered) {
-            try {
-                carKeyReceiver?.let { unregisterReceiver(it) }
-            } catch (e: Exception) {
-                AppLog.e("AapService: Failed to unregister CarKeyReceiver", e)
-            } finally {
-                isCarKeyReceiverRegistered = false
-            }
-        }
+        App.provide(this).carKeysManager.unregisterReceivers()
 
         if (!isDestroying) updateNotification()
         mediaMetadataDecodeJob?.cancel()
@@ -1604,10 +1589,7 @@ class AapService : Service(), UsbReceiver.Listener {
         try { unregisterReceiver(usbReceiver) } catch (_: Exception) {}
         try { unregisterReceiver(mediaButtonReceiver) } catch (_: Exception) {}
         try { unregisterReceiver(wakeDetectReceiver) } catch (_: Exception) {}
-        if (isCarKeyReceiverRegistered) {
-            try { carKeyReceiver?.let { unregisterReceiver(it) } } catch (_: Exception) {}
-            isCarKeyReceiverRegistered = false
-        }
+        App.provide(this).carKeysManager.unregisterReceivers()
         try { wifiAutoStartReceiver?.let { unregisterReceiver(it) } } catch (_: Exception) {}
         uiModeManager.disableCarMode(0)
         serviceScope.cancel()
@@ -1690,7 +1672,7 @@ class AapService : Service(), UsbReceiver.Listener {
                     if (wifiManager.isWifiEnabled) {
                         wifiDirectManager?.makeVisible()
                     } else {
-                        Toast.makeText(this, getString(R.string.wifi_disabled_info), Toast.LENGTH_SHORT).show()
+                        ToastUtils.showToast(this, getString(R.string.wifi_disabled_info), Toast.LENGTH_SHORT)
                     }
                 } else if (mode != 3) {
                     startDiscovery(oneShot = (mode != 2))
@@ -1841,7 +1823,7 @@ class AapService : Service(), UsbReceiver.Listener {
             }
         } else {
             AppLog.w("USB permission denied for $deviceName")
-            Toast.makeText(this, getString(R.string.usb_permission_denied), Toast.LENGTH_LONG).show()
+            ToastUtils.showToast(this, getString(R.string.usb_permission_denied), Toast.LENGTH_LONG)
         }
     }
 
@@ -1850,11 +1832,11 @@ class AapService : Service(), UsbReceiver.Listener {
         val permissionIntent = UsbReceiver.createPermissionPendingIntent(this)
         AppLog.i("Requesting USB permission for ${UsbDeviceCompat(device).uniqueName}")
         try {
-            Toast.makeText(this, getString(R.string.requesting_usb_permission), Toast.LENGTH_SHORT).show()
+            ToastUtils.showToast(this, getString(R.string.requesting_usb_permission), Toast.LENGTH_SHORT)
             usbManager.requestPermission(device, permissionIntent)
         } catch (e: Exception) {
             AppLog.e("Failed to request USB permission: ${e.message}. This device might not support USB permission dialogs.", e)
-            Toast.makeText(this, getString(R.string.error_usb_permission_failed), Toast.LENGTH_LONG).show()
+            ToastUtils.showToast(this, getString(R.string.error_usb_permission_failed), Toast.LENGTH_LONG)
         }
     }
 
@@ -2409,7 +2391,7 @@ class AapService : Service(), UsbReceiver.Listener {
                     if (Build.VERSION.SDK_INT <= 29) {
                         // On Android 10, if Activity is gone, Broadcast will definitely be blocked by Gearhead's version check.
                         AppLog.e("Self-mode blocked by Google on Android 10 (AA 16.4+). Skipping broadcast fallback.")
-                        Toast.makeText(this@AapService, getString(R.string.failed_self_mode_android10), Toast.LENGTH_LONG).show()
+                        ToastUtils.showToast(this@AapService, getString(R.string.failed_self_mode_android10), Toast.LENGTH_LONG)
                     } else {
                         val receiverIntent = Intent().apply {
                             setClassName(
@@ -2428,7 +2410,7 @@ class AapService : Service(), UsbReceiver.Listener {
                     }
                 } catch (e2: Exception) {
                     AppLog.e("Both Activity and Broadcast triggers failed", e2)
-                    Toast.makeText(this@AapService, getString(R.string.failed_start_android_auto), Toast.LENGTH_SHORT).show()
+                    ToastUtils.showToast(this@AapService, getString(R.string.failed_start_android_auto), Toast.LENGTH_SHORT)
                 }
             }
         }

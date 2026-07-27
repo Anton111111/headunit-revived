@@ -161,7 +161,9 @@
     <string name="wifi_ssid_not_set">Не задано</string>
 
     <string name="listen_for_usb_devices_label">Реагировать на USB-устройства</string>
-    <string name="listen_for_usb_devices_description">Показывать системное окно Android при подключении USB-устройства.</string>
+    <string name="listen_for_usb_devices_description">Показывать системный запрос Android при подключении USB-устройства.</string>
+    <string name="show_toast_messages">Показывать всплывающие уведомления (Toast)</string>
+    <string name="show_toast_messages_description">Отображать всплывающие сообщения о статусе при подключении, отключении и смене режима.</string>
     <string name="auto_start_usb_label">Автозапуск при USB</string>
     <string name="auto_start_usb_description">Автоматически открывать приложение и пытаться подключиться при подключении USB-устройства</string>
     <string name="auto_start_settings">Настройки автозапуска</string>
@@ -230,6 +232,8 @@
     <!-- Audio Settings -->
     <string name="forced_scale">Принудительное масштабирование (Legacy Fix)</string>
     <string name="forced_scale_description">Исправляет проблемы с масштабированием на некоторых старых устройствах, использующих SurfaceView. Используйте только если изображение выглядит искаженным или смещенным.</string>
+    <string name="hud_mirroring">Режим HUD (Горизонтальное отражение)</string>
+    <string name="hud_mirroring_description">Отражает экран по горизонтали для проекции на лобовое стекло (Head-Up Display). Требуется режим отображения TextureView или GLES20 (не работает с SurfaceView).</string>
 
     <string name="category_audio">Аудио</string>
     <string name="enable_audio_sink">Включить вывод звука</string>
@@ -238,6 +242,8 @@
     <string name="separate_audio_streams_description">Разделять каналы звука для музыки, звонков и уведомлений вместо единого мультимедийного потока (может некорректно работать на некоторых устройствах).</string>
     <string name="use_aac_audio">Использовать AAC</string>
     <string name="use_aac_audio_description">Использовать кодек AAC для аудио для экономии трафика (Экспериментально).</string>
+    <string name="attach_hw_dsp_equalizer">Триггер аппаратного DSP эквалайзера</string>
+    <string name="attach_hw_dsp_equalizer_description">Подключает виртуальный эффект эквалайзера к аудиосессии для принудительной маршрутизации через аппаратный DSP на некоторых ГУ. Оставьте выключенным, если используете ViPER4Android / ViperFX или если звук глухой на старых версиях Android.</string>
     <string name="audio_volume_offset">Смещение громкости</string>
     <string name="media_volume_offset">Медиа</string>
     <string name="assistant_volume_offset">Ассистент</string>
@@ -587,4 +593,6 @@
 
     <string name="btn_show_qr">Показать QR-код</string>
     <string name="renderer_fallback_surface">Видео постоянно зависало, поэтому отображение переключено на SurfaceView на эту сессию. Если работает стабильно, установите Режим отображения на SurfaceView в настройках.</string>
+
+    <string name="self_mode_overlay_permission_description">Чтобы автономный режим надежно запускался в фоновом режиме, включите разрешение «Отображение поверх других приложений» на следующем экране.</string>
 </resources>

@@ -34,13 +34,16 @@ class App : Application() {
         instance = this
 
 
-        
+
         // Enable vector drawable support on older Android versions
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         if (ConscryptInitializer.isNeededForTls12()) {
             ConscryptInitializer.initialize()
         }
+
+        // Root support
+        component.suExecutor.register()
 
         if (isUserUnlocked()) {
             val settings = Settings(this) // Create a Settings instance

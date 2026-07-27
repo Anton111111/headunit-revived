@@ -21,6 +21,8 @@ object ProjectionViewScaler {
         val usableW = HeadUnitScreenConfig.getUsableWidth()
         val usableH = HeadUnitScreenConfig.getUsableHeight()
 
+        val mirrorFactor = if (settings.hudMirroring) -1.0f else 1.0f
+
         if (HeadUnitScreenConfig.forcedScale && view is ProjectionView) {
             val lp = view.layoutParams
             var paramsChanged = false
@@ -50,7 +52,7 @@ object ProjectionViewScaler {
                     view.layoutParams = lp
                 }
 
-                view.scaleX = 1.0f
+                view.scaleX = 1.0f * mirrorFactor
                 view.scaleY = 1.0f
                 view.translationX = 0f
                 view.translationY = 0f
@@ -76,7 +78,7 @@ object ProjectionViewScaler {
                     view.layoutParams = lp
                 }
 
-                view.scaleX = 1.0f
+                view.scaleX = 1.0f * mirrorFactor
                 view.scaleY = 1.0f
                 view.translationX = 0f
                 view.translationY = 0f
@@ -85,7 +87,7 @@ object ProjectionViewScaler {
             }
         } else {
             // Modern way / TextureView: Use View scaling properties on a full-screen view
-            val finalScaleX = HeadUnitScreenConfig.getScaleX()
+            val finalScaleX = HeadUnitScreenConfig.getScaleX() * mirrorFactor
             val finalScaleY = HeadUnitScreenConfig.getScaleY()
 
             val lp = view.layoutParams

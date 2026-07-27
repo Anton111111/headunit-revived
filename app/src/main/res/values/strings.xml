@@ -17,6 +17,7 @@
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
     <string name="dpi">Pixel density (DPI)</string>
+    <string name="pixel_aspect_ratio">Pixel aspect ratio</string>
     <string name="mic_sample_rate">Mic sample rate</string>
     <string name="keymap">Keymap</string>
     <string name="night_mode">Dark Mode (Android Auto)</string>
@@ -92,6 +93,7 @@
     <string name="orientation_portrait">Portrait (90°)</string>
     <string name="orientation_portrait_reverse">Portrait Reverse (270°)</string>
     <string name="enter_dpi_value">Enter DPI value (0 for auto)</string>
+    <string name="enter_pixel_aspect_ratio_value">Pixel aspect ratio x10000 (10000 = square pixels)</string>
     <string name="custom_margin">Custom Margin</string>
     <string name="custom_margin_description">Set custom display margins (0 for auto)</string>
     <string name="enter_custom_margins">Enter custom margins (0 for auto)</string>
@@ -177,6 +179,8 @@
     <string name="auto_start_bt_description">Automatically open Headunit Revived when a specific Bluetooth device connects.</string>
     <string name="listen_for_usb_devices_label">Listen for USB Devices</string>
     <string name="listen_for_usb_devices_description">Show the Android system prompt when a USB device is plugged in.</string>
+    <string name="show_toast_messages">Show Toast Messages</string>
+    <string name="show_toast_messages_description">Display status toast popups on connection, disconnect, and mode switching.</string>
     <string name="auto_start_usb_label">Auto-start on USB</string>
     <string name="auto_start_usb_description">Automatically open the app and attempt connection when a USB device is plugged in</string>
     <string name="auto_start_settings">Auto-start settings</string>
@@ -255,6 +259,8 @@
     <string name="pref_stretch_screen_summary">Ignores aspect ratio to fill the entire display (removes black bars)</string>
     <string name="forced_scale">Forced Scale (Legacy Fix)</string>
     <string name="forced_scale_description">Corrects scaling issues on some older devices using SurfaceView. Only use if the image looks distorted or shifted.</string>
+    <string name="hud_mirroring">HUD Mode (Horizontal Flip)</string>
+    <string name="hud_mirroring_description">Flips the display horizontally for windshield reflection (Head-Up Display). Requires TextureView or GLES20 view mode (does not work with SurfaceView).</string>
 
 
     <!-- Audio Settings -->
@@ -267,6 +273,8 @@
     <string name="separate_audio_streams_description">Separate audio channels for music, calls, and notifications instead of a single multimedia stream (may not work correctly on some devices).</string>
     <string name="use_aac_audio">Use AAC Audio</string>
     <string name="use_aac_audio_description">Use AAC codec for audio to save bandwidth (Experimental).</string>
+    <string name="attach_hw_dsp_equalizer">Hardware DSP Equalizer Trigger</string>
+    <string name="attach_hw_dsp_equalizer_description">Attaches a dummy Equalizer effect to the audio session to force hardware DSP routing on specific headunits. Keep disabled if using ViPER4Android / ViperFX or if sound is muffled on older Android versions.</string>
     <string name="audio_volume_offset">Audio Volume Offset</string>
     <string name="media_volume_offset">Media Volume Offset</string>
     <string name="assistant_volume_offset">Assistant Volume Offset</string>
@@ -595,4 +603,7 @@
     <string name="use_libusb_description">Use libusb for communication. Disable to use Android\'s standard USB API.</string>
 
     <string name="btn_show_qr">Show QR Code</string>
+    <string name="su_needed_keymaps_warning">Warning: Your headunit must be either rooted, or have Shizuku installed. If that\'s the case, you must allow SU rights, once prompted. Steering keys likely are not functional until this is fixed.</string>
+
+    <string name="self_mode_overlay_permission_description">To allow Self Mode to start reliably from the background, please enable the \"Display over other apps\" permission in the next screen.</string>
 </resources>

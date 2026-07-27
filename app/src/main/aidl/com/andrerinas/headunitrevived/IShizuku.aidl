@@ -1,0 +1,1 @@
+package com.andrerinas.headunitrevived;interface IShizuku {    int execShell(String command);}

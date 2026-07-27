@@ -181,7 +181,9 @@
     <string name="wifi_ssid_not_set">Non impostato</string>
 
     <string name="listen_for_usb_devices_label">Ascolta dispositivi USB</string>
-    <string name="listen_for_usb_devices_description">Mostra la richiesta di sistema Android quando viene collegato un dispositivo USB.</string>
+    <string name="listen_for_usb_devices_description">Mostra il messaggio di sistema Android quando viene collegato un dispositivo USB.</string>
+    <string name="show_toast_messages">Mostra messaggi Toast</string>
+    <string name="show_toast_messages_description">Mostra popup di stato alla connessione, disconnessione e cambio modalità.</string>
     <string name="auto_start_usb_label">Avvio automatico su USB</string>
     <string name="auto_start_usb_description">Apri automaticamente l\'app e tenta la connessione quando viene collegato un dispositivo USB</string>
     <string name="auto_start_settings">Impostazioni avvio automatico</string>
@@ -245,6 +247,8 @@
     <string name="pref_stretch_screen_summary">Ignora le proporzioni per riempire l\'intero display (rimuove le barre nere)</string>
     <string name="forced_scale">Scala forzata (Fix Legacy)</string>
     <string name="forced_scale_description">Corregge i problemi di ridimensionamento su alcuni dispositivi più vecchi che utilizzano SurfaceView. Utilizzare solo se l\'immagine appare distorta o spostata.</string>
+    <string name="hud_mirroring">Modalità HUD (Capovolgimento orizzontale)</string>
+    <string name="hud_mirroring_description">Capovolge lo schermo orizzontalmente per il riflesso sul parabrezza (Head-Up Display). Richiede la modalità di visualizzazione TextureView o GLES20 (non funziona con SurfaceView).</string>
 
 
     <!-- Audio Settings -->
@@ -255,6 +259,8 @@
     <string name="separate_audio_streams_description">Separa i canali audio per musica, chiamate e notifiche invece di un singolo flusso multimediale (potrebbe non funzionare correttamente su alcuni dispositivi).</string>
     <string name="use_aac_audio">Usa Audio AAC</string>
     <string name="use_aac_audio_description">Usa il codec AAC per l\'audio per risparmiare larghezza di banda (Sperimentale).</string>
+    <string name="attach_hw_dsp_equalizer">Attivatore equalizzatore DSP hardware</string>
+    <string name="attach_hw_dsp_equalizer_description">Collega un effetto equalizzatore fittizio alla sessione audio per forzare il reindirizzamento DSP hardware su specifiche autoradio. Lasciare disattivato se si utilizza ViPER4Android / ViperFX o se l\'audio risulta ovattato su versioni Android più datate.</string>
     <string name="audio_volume_offset">Offset volume audio</string>
     <string name="media_volume_offset">Offset volume media</string>
     <string name="assistant_volume_offset">Offset volume assistente</string>
@@ -595,4 +601,6 @@
 
     <string name="btn_show_qr">Mostra codice QR</string>
     <string name="renderer_fallback_surface">Il video continuava a bloccarsi, quindi la visualizzazione è passata a SurfaceView per questa sessione. Se è stabile, imposta la Modalità visualizzazione su SurfaceView nelle Impostazioni.</string>
+
+    <string name="self_mode_overlay_permission_description">Per consentire l\'avvio affidabile della Modalità Personale in background, abilita l\'autorizzazione \"Mostra sopra altre app\" nella schermata successiva.</string>
 </resources>

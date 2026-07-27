@@ -102,6 +102,8 @@ message Service
             required uint32 margin_height = 4;
             required uint32 density = 5;
             optional uint32 decoder_additional_depth = 6;
+            // Pixel aspect ratio x 10000 (10000 = 1.0 = square pixels)
+            optional uint32 pixel_aspect_ratio_e4 = 8;
             optional MediaCodecType video_codec_type = 10;
         }
 
