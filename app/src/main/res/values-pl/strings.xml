@@ -239,6 +239,8 @@
     <string name="separate_audio_streams_description">Rozdziel kanały audio dla muzyki, połączeń i powiadomień zamiast pojedynczego strumienia multimediów (może nie działać poprawnie na niektórych urządzeniach).</string>
     <string name="use_aac_audio">Użyj dźwięku AAC</string>
     <string name="use_aac_audio_description">Użyj kodeka AAC dla dźwięku, aby oszczędzać przepustowość (Eksperymentalne).</string>
+    <string name="attach_hw_dsp_equalizer">Wyzwalacz korektora DSP hardware</string>
+    <string name="attach_hw_dsp_equalizer_description">Dołącza atrapę korektora graficznego do sesji audio, aby wymusić trasowanie HW DSP w wybranych stacjach multimedialnych. Pozostaw wyłączone, jeśli używasz ViPER4Android / ViperFX lub jeśli dźwięk jest przytłumiony na starszych wersjach systemu Android.</string>
     <string name="audio_volume_offset">Przesunięcie głośności</string>
     <string name="media_volume_offset">Multimedia</string>
     <string name="assistant_volume_offset">Asystent</string>

@@ -239,6 +239,8 @@
     <string name="separate_audio_streams_description">فصل قنوات الصوت للموسيقى والمكالمات والإشعارات بدلاً من تيار وسائط واحد (قد لا يعمل بشكل صحيح على بعض الأجهزة).</string>
     <string name="use_aac_audio">استخدام ترميز AAC للصوت</string>
     <string name="use_aac_audio_description">استخدام ترميز AAC للصوت لتوفير عرض النطاق الترددي (تجريبي).</string>
+    <string name="attach_hw_dsp_equalizer">مشغل معادل الصوت DSP للأجهزة</string>
+    <string name="attach_hw_dsp_equalizer_description">يربط تأثير معادل صوت وهمي بجلسة الصوت لفرض التوجيه عبر DSP للأجهزة في وحدات معينة. اتركه معطلاً إذا كنت تستخدم ViPER4Android / ViperFX أو إذا كان الصوت مكتوماً على إصدارات Android القديمة.</string>
     <string name="audio_volume_offset">تعويض مستوى الصوت</string>
     <string name="media_volume_offset">تعويض مستوى صوت الوسائط</string>
     <string name="assistant_volume_offset">تعويض مستوى صوت المساعد</string>

@@ -239,6 +239,8 @@
     <string name="separate_audio_streams_description">Separar canais de áudio para música, chamadas e notificações em vez de um único fluxo multimídia (pode não funcionar corretamente em alguns dispositivos).</string>
     <string name="use_aac_audio">Usar áudio AAC</string>
     <string name="use_aac_audio_description">Usa o codec AAC para áudio para economizar banda (experimental).</string>
+    <string name="attach_hw_dsp_equalizer">Ativador de equalizador DSP via hardware</string>
+    <string name="attach_hw_dsp_equalizer_description">Anexa um efeito de equalizador fictício à sessão de áudio para forçar o roteamento por DSP via hardware em algumas centrais multimídia. Mantenha desativado se usar ViPER4Android / ViperFX ou se o som ficar abafado em versões antigas do Android.</string>
     <string name="audio_volume_offset">Ajustes de volume</string>
     <string name="media_volume_offset">Multimídia</string>
     <string name="assistant_volume_offset">Assistente</string>

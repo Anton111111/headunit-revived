@@ -238,6 +238,8 @@
     <string name="separate_audio_streams_description">Scheid audiokanalen voor muziek, oproepen en meldingen in plaats van één multimediastroom (werkt mogelijk niet correct op sommige apparaten).</string>
     <string name="use_aac_audio">Gebruik AAC Audio</string>
     <string name="use_aac_audio_description">Gebruik de AAC-codec voor audio om bandbreedte te besparen (experimenteel).</string>
+    <string name="attach_hw_dsp_equalizer">Hardware DSP Equalizer-trigger</string>
+    <string name="attach_hw_dsp_equalizer_description">Koppelt een dummy-equalizereffect aan de audiosessie om hardware DSP-routing te forceren op specifieke headunits. Laat uitgeschakeld als u ViPER4Android / ViperFX gebruikt of als het geluid dof klinkt op oudere Android-versies.</string>
     <string name="audio_volume_offset">Volume-offsets</string>
     <string name="media_volume_offset">Media</string>
     <string name="assistant_volume_offset">Assistent</string>

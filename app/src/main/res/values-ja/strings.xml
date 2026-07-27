@@ -259,6 +259,8 @@
     <string name="separate_audio_streams_description">単一のマルチメディアストリームの代わりに、音楽、通話、通知の音声チャネルを分離します（一部のデバイスでは正しく機能しない場合があります）。</string>
     <string name="use_aac_audio">AAC Audioを利用する</string>
     <string name="use_aac_audio_description">帯域幅を節約するために、音声にAACコーデックを使用します（実験的機能）。</string>
+    <string name="attach_hw_dsp_equalizer">ハードウェアDSPイコライザートリガー</string>
+    <string name="attach_hw_dsp_equalizer_description">オーディオセッションにダミーのイコライザーエフェクトをアタッチし、一部のヘッドユニットでハードウェアDSPルーティングを強制します。ViPER4Android / ViperFXを使用している場合や、古いAndroidで音声がこもる場合は無効にしてください。</string>
     <string name="audio_volume_offset">オーディオボリュームオフセット</string>
     <string name="media_volume_offset">メディアボリュームオフセット</string>
     <string name="assistant_volume_offset">アシスタントボリュームオフセット</string>

@@ -239,6 +239,8 @@
     <string name="separate_audio_streams_description">Odděluje zvukové kanály pro hudbu, hovory a oznámení místo jednoho multimediálního streamu (nemusí na některých zařízeních fungovat správně).</string>
     <string name="use_aac_audio">Použít AAC audio</string>
     <string name="use_aac_audio_description">Použít kodek AAC pro zvuk pro úsporu šířky pásma (experimentální).</string>
+    <string name="attach_hw_dsp_equalizer">Spouštěč HW DSP ekvalizéru</string>
+    <string name="attach_hw_dsp_equalizer_description">Připojí k relaci zvuku virtuální ekvalizér pro vynucení směrování přes HW DSP na specifických autorádiích. Ponechte vypnuté, pokud používáte ViPER4Android / ViperFX nebo pokud je zvuk na starších verzích Androidu tlumený.</string>
     <string name="audio_volume_offset">Posun hlasitosti</string>
     <string name="media_volume_offset">Média</string>
     <string name="assistant_volume_offset">Asistent</string>

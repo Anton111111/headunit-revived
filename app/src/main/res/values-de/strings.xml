@@ -261,6 +261,8 @@
     <string name="separate_audio_streams_description">Trenne Audiokanäle für Musik, Anrufe und Benachrichtigungen statt eines einzelnen Multimedia-Streams (funktioniert auf einigen Geräten möglicherweise nicht richtig).</string>
     <string name="use_aac_audio">AAC-Audio verwenden</string>
     <string name="use_aac_audio_description">Verwendet den AAC-Codec für Audio, um Bandbreite zu sparen (Experimentell).</string>
+    <string name="attach_hw_dsp_equalizer">Hardware DSP Equalizer-Trigger</string>
+    <string name="attach_hw_dsp_equalizer_description">Hängt einen Dummy-Equalizer-Effekt an die Audio-Session an, um auf spezifischen Headunits das HW-DSP-Routing zu erzwingen. Deaktiviert lassen bei Nutzung von ViPER4Android / ViperFX oder wenn der Ton auf älteren Android-Versionen dumpf klingt.</string>
     <string name="audio_volume_offset">Lautstärke-Offsets</string>
     <string name="media_volume_offset">Medien-Lautstärke</string>
     <string name="assistant_volume_offset">Assistenten-Lautstärke</string>

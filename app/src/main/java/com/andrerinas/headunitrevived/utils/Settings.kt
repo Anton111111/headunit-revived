@@ -429,6 +429,11 @@ class Settings(private val context: Context) {
         get() = prefs.getBoolean("mic-echo-canceler", false)
         set(value) { prefs.edit().putBoolean("mic-echo-canceler", value).apply() }
 
+    // Attach dummy Equalizer effect to AudioTrack/AudioMixer session to force HW DSP hardware routing
+    var attachHwDspEqualizer: Boolean
+        get() = prefs.getBoolean("attach_hw_dsp_equalizer", false)
+        set(value) { prefs.edit().putBoolean("attach_hw_dsp_equalizer", value).apply() }
+
     var micNoiseSuppressor: Boolean
         get() = prefs.getBoolean("mic-noise-suppressor", false)
         set(value) { prefs.edit().putBoolean("mic-noise-suppressor", value).apply() }

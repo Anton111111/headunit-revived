@@ -242,6 +242,8 @@
     <string name="separate_audio_streams_description">Разделять каналы звука для музыки, звонков и уведомлений вместо единого мультимедийного потока (может некорректно работать на некоторых устройствах).</string>
     <string name="use_aac_audio">Использовать AAC</string>
     <string name="use_aac_audio_description">Использовать кодек AAC для аудио для экономии трафика (Экспериментально).</string>
+    <string name="attach_hw_dsp_equalizer">Триггер аппаратного DSP эквалайзера</string>
+    <string name="attach_hw_dsp_equalizer_description">Подключает виртуальный эффект эквалайзера к аудиосессии для принудительной маршрутизации через аппаратный DSP на некоторых ГУ. Оставьте выключенным, если используете ViPER4Android / ViperFX или если звук глухой на старых версиях Android.</string>
     <string name="audio_volume_offset">Смещение громкости</string>
     <string name="media_volume_offset">Медиа</string>
     <string name="assistant_volume_offset">Ассистент</string>

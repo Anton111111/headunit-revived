@@ -271,6 +271,8 @@
     <string name="separate_audio_streams_description">하나의 멀티미디어 스트림 대신 음악, 통화, 알림에 별도의 오디오 채널을 사용합니다(일부 기기에서는 정상적으로 작동하지 않을 수 있음).</string>
     <string name="use_aac_audio">AAC 오디오 사용</string>
     <string name="use_aac_audio_description">대역폭 절약을 위해 오디오에 AAC 코덱을 사용합니다(실험적).</string>
+    <string name="attach_hw_dsp_equalizer">하드웨어 DSP 이퀄라이저 트리거</string>
+    <string name="attach_hw_dsp_equalizer_description">오디오 세션에 더미 이퀄라이저 효과를 연결하여 특정 헤드유닛에서 하드웨어 DSP 라우팅을 강제합니다. ViPER4Android / ViperFX를 사용 중이거나 이전 안드로이드 버전에서 소리가 먹먹하게 들리는 경우 비활성화 상태로 유지하세요.</string>
     <string name="audio_volume_offset">오디오 볼륨 보정</string>
     <string name="media_volume_offset">미디어 볼륨 보정</string>
     <string name="assistant_volume_offset">어시스턴트 볼륨 보정</string>
