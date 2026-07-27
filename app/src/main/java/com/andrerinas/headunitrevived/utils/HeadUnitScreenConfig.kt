@@ -185,6 +185,43 @@ object HeadUnitScreenConfig {
         }
     }
 
+    // Native standard resolution for a given panel size, mirroring the AUTO selection so the
+    // resolution cap never advertises more than the panel warrants (issue #650).
+    private fun autoResolutionForPanel(
+        w: Int,
+        h: Int,
+        portrait: Boolean,
+        canHevc: Boolean
+    ): Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType {
+        return if (portrait) {
+            if (w > 720 || h > 1280) {
+                Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1080x1920
+            } else {
+                Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._720x1280
+            }
+        } else {
+            when {
+                w <= 800 && h <= 480 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._800x480
+                (w >= 3840 || h >= 2160) && VideoDecoder.isHevcSupported() && Build.VERSION.SDK_INT >= 24 ->
+                    Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._3840x2160
+                (w >= 2560 || h >= 1440) && canHevc && Build.VERSION.SDK_INT >= 24 ->
+                    Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._2560x1440
+                w > 1280 || h > 720 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1920x1080
+                else -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1280x720
+            }
+        }
+    }
+
+    private fun pixelsOf(type: Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType): Long {
+        val s = type.toString().replace("_", "")
+        return try {
+            val parts = s.split("x")
+            parts[0].toLong() * parts[1].toLong()
+        } catch (e: Exception) {
+            0L
+        }
+    }
+
     private fun recalculate() {
         // Calculate USABLE area
         screenWidthPx = realScreenWidthPx - systemInsetLeft - systemInsetRight
@@ -246,6 +283,23 @@ object HeadUnitScreenConfig {
                 codec
             }
         }
+
+        // Cap the negotiated resolution to what the physical panel warrants, so we never ask the
+        // phone for more pixels than the screen can show. Downscaling e.g. 1080p to a 600p panel
+        // every frame overloads the display scaler (MediaTek MDP) and stalls video (issue #650).
+        // min(current, panelCeiling): only ever lowers, so explicit lower choices and HEVC-gated
+        // 1440p/4K are never raised.
+        val preCapResolution = negotiatedResolutionType
+        val panelCeiling = autoResolutionForPanel(realScreenWidthPx, realScreenHeightPx, isPortraitDisplay, canNegotiateHevc)
+        if (pixelsOf(negotiatedResolutionType) > pixelsOf(panelCeiling)) {
+            negotiatedResolutionType = panelCeiling
+        }
+        AppLog.i(
+            "[RES_CAP] resolutionId=${currentSettings.resolutionId} " +
+                "realScreen=${realScreenWidthPx}x${realScreenHeightPx} usable=${screenWidthPx}x${screenHeightPx} " +
+                "portrait=$isPortraitDisplay locked=$isResolutionLocked chosen=$preCapResolution " +
+                "capped=$negotiatedResolutionType changed=${preCapResolution != negotiatedResolutionType}"
+        )
 
         // 2. Perform scaling calculations (now safe because negotiatedResolutionType is set)
         AppLog.i("[UI_DEBUG] CarScreen: usable area ${screenWidthPx}x${screenHeightPx}, using $negotiatedResolutionType")
