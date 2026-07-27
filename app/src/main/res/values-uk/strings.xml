@@ -239,6 +239,8 @@
     <string name="separate_audio_streams_description">Розділяти канали звуку для музики, дзвінків та сповіщень замість єдиного мультимедійного потоку (може некоректно працювати на деяких пристроях).</string>
     <string name="use_aac_audio">Використовувати аудіокодек AAC</string>
     <string name="use_aac_audio_description">Використовувати кодек AAC для збереження швидкості (експериментально).</string>
+    <string name="attach_hw_dsp_equalizer">Тригер апаратного DSP еквалайзера</string>
+    <string name="attach_hw_dsp_equalizer_description">Додає віртуальний еквалайзер до аудіосесії для примусового маршрутизування через апаратний DSP на деяких ГУ. Залиште вимкненим, якщо використовуєте ViPER4Android / ViperFX або якщо звук глухий на старих версіях Android.</string>
     <string name="audio_volume_offset">Налаштування гучності</string>
     <string name="media_volume_offset">Медіа</string>
     <string name="assistant_volume_offset">Асистент</string>
@@ -592,6 +594,7 @@
     <string name="software_video_decoder_device">MediaCodec пристрою</string>
 
     <string name="btn_show_qr">Показати QR-код</string>
+    <string name="renderer_fallback_surface">Відео постійно зависало, тому відображення переключено на SurfaceView на цю сесію. Якщо працює стабільно, встановіть Режим перегляду на SurfaceView у налаштуваннях.</string>
 
     <string name="self_mode_overlay_permission_description">Щоб дозволити автономному режиму надійно запускатися у фоновому режимі, увімкніть дозвіл \"Відображення поверх інших додатків\" на наступному екрані.</string>
 </resources>

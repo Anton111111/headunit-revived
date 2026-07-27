@@ -45,11 +45,11 @@ class AudioDecoder {
         }
     }
 
-    fun start(channel: Int, stream: Int, sampleRate: Int, numberOfBits: Int, numberOfChannels: Int, isAac: Boolean = false, gain: Float = 1.0f, audioLatencyMultiplier: Int = 8, audioQueueCapacity: Int = 0, staticAudioFocus: Boolean = false) {
+    fun start(channel: Int, stream: Int, sampleRate: Int, numberOfBits: Int, numberOfChannels: Int, isAac: Boolean = false, gain: Float = 1.0f, audioLatencyMultiplier: Int = 8, audioQueueCapacity: Int = 0, staticAudioFocus: Boolean = false, attachHwDspEqualizer: Boolean = false) {
         if (staticAudioFocus) {
             synchronized(this) {
                 if (mixer == null) {
-                    mixer = AudioMixer(stream)
+                    mixer = AudioMixer(stream, attachHwDspEqualizer)
                     mixer!!.start()
                     AppLog.i("AudioDecoder: Created and started shared AudioMixer")
                 }
@@ -65,7 +65,8 @@ class AudioDecoder {
             audioLatencyMultiplier = audioLatencyMultiplier,
             audioQueueCapacity = audioQueueCapacity,
             mixer = if (staticAudioFocus) mixer else null,
-            channelId = channel
+            channelId = channel,
+            attachHwDspEqualizer = attachHwDspEqualizer
         )
         audioTracks.put(channel, thread)
     }

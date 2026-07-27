@@ -255,6 +255,8 @@
     <string name="separate_audio_streams_description">Tách kênh âm thanh cho nhạc, gọi điện và thông báo thay vì một luồng đa phương tiện chung (có thể không chạy đúng trên một số máy).</string>
     <string name="use_aac_audio">Dùng âm thanh AAC</string>
     <string name="use_aac_audio_description">Dùng codec AAC để tiết kiệm băng thông (Thử nghiệm).</string>
+    <string name="attach_hw_dsp_equalizer">Bộ kích hoạt bộ cân bằng DSP phần cứng</string>
+    <string name="attach_hw_dsp_equalizer_description">Gắn hiệu ứng bộ cân bằng giả vào phiên âm thanh để buộc định tuyến DSP phần cứng trên một số màn hình. Giữ tắt nếu sử dụng ViPER4Android / ViperFX hoặc nếu âm thanh bị nghẹt trên các phiên bản Android cũ.</string>
     <string name="audio_volume_offset">Bù âm lượng</string>
     <string name="media_volume_offset">Bù âm lượng nhạc</string>
     <string name="assistant_volume_offset">Bù âm lượng trợ lý</string>
@@ -597,6 +599,7 @@
     <string name="software_video_decoder_device">MediaCodec thiết bị</string>
 
     <string name="btn_show_qr">Hiển thị mã QR</string>
+    <string name="renderer_fallback_surface">Video liên tục bị đứng, nên màn hình đã chuyển sang SurfaceView cho phiên này. Nếu ổn định, hãy đặt Chế độ hiển thị thành SurfaceView trong Cài đặt.</string>
 
     <string name="self_mode_overlay_permission_description">Để cho phép Chế độ Tự chạy khởi động ổn định từ nền, vui lòng bật quyền \"Hiển thị trên các ứng dụng khác\" trong màn hình tiếp theo.</string>
 </resources>

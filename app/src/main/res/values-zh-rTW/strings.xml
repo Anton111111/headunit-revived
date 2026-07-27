@@ -238,6 +238,8 @@
     <string name="separate_audio_streams_description">為音樂、通話和通知分離音訊頻道，而不是單一的多媒體串流（可能在某些設備上無法正常運作）。</string>
     <string name="use_aac_audio">使用 AAC 音訊</string>
     <string name="use_aac_audio_description">使用 AAC 編碼器進行音訊處理以節省頻寬 (實驗性)。</string>
+    <string name="attach_hw_dsp_equalizer">硬體 DSP 等化器觸發器</string>
+    <string name="attach_hw_dsp_equalizer_description">在音訊工作階段附加虛擬等化器效果，以在特定車機上強制進行硬體 DSP 路由。如果使用 ViPER4Android / ViperFX 或舊版 Android 上音訊沉悶，請保持停用。</string>
     <string name="audio_volume_offset">音量偏移</string>
     <string name="media_volume_offset">媒體</string>
     <string name="assistant_volume_offset">語音助理</string>
@@ -591,6 +593,7 @@
     <string name="software_video_decoder_device">裝置 MediaCodec</string>
 
     <string name="btn_show_qr">顯示 QR 碼</string>
+    <string name="renderer_fallback_surface">影像持續卡住，因此本次連線已切換為 SurfaceView。若運作穩定，請在設定中將檢視模式設為 SurfaceView。</string>
 
     <string name="self_mode_overlay_permission_description">為使單獨模式能在背景穩定啟動，請在下一個畫面啟用「顯示在其他應用程式上層」的權限。</string>
 </resources>

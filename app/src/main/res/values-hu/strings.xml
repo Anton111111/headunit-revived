@@ -238,6 +238,8 @@
     <string name="separate_audio_streams_description">Különálló hangcsatornák a zene, a hívások és az értesítések számára az egységes multimédia folyam helyett (előfordulhat, hogy néhány eszközön nem működik megfelelően).</string>
     <string name="use_aac_audio">AAC hang használata</string>
     <string name="use_aac_audio_description">AAC kódek használata a sávszélesség csökkentéséért (Kísérleti).</string>
+    <string name="attach_hw_dsp_equalizer">Hardveres DSP hangszínszabályzó indító</string>
+    <string name="attach_hw_dsp_equalizer_description">Egy virtuális hangszínszabályzó effektet csatlakoztat az audió munkamenethez a hardveres DSP útvonal kényszerítéséhez egyes fejegységeken. Hagyja kikapcsolva, ha ViPER4Android / ViperFX-et használ, vagy ha a hang tompa a régebbi Android verziókon.</string>
     <string name="audio_volume_offset">Hangerő-eltolás</string>
     <string name="media_volume_offset">Média hangerő-eltolás</string>
     <string name="assistant_volume_offset">Asszisztens hangerő-eltolás</string>
@@ -590,6 +592,7 @@
     <string name="software_video_decoder_device">Eszköz MediaCodec</string>
 
     <string name="btn_show_qr">QR-kód megjelenítése</string>
+    <string name="renderer_fallback_surface">A videó folyamatosan lefagyott, ezért a megjelenítés erre a munkamenetre SurfaceView-ra váltott. Ha stabil, állítsd a Megjelenítési módot SurfaceView-ra a Beállításokban.</string>
 
     <string name="self_mode_overlay_permission_description">A Saját mód háttérben történő megbízható indításához engedélyezze a „Megjelenítés más alkalmazások felett” jogosultságot a következő képernyőn.</string>
 </resources>

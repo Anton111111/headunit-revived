@@ -262,6 +262,8 @@
     <string name="separate_audio_streams_description">მუსიკის, ზარებისა და შეტყობინებების აუდიო არხების განცალკევება ერთი მულტიმედიური ნაკადის ნაცვლად (შეიძლება გამართულად არ იმუშაოს ზოგიერთ მოწყობილობაზე).</string>
     <string name="use_aac_audio">AAC აუდიოს გამოყენება</string>
     <string name="use_aac_audio_description">AAC კოდეკის გამოყენება აუდიოსთვის გამტარუნარიანობის დასაზოგად (ექსპერიმენტული).</string>
+    <string name="attach_hw_dsp_equalizer">აპარატურული DSP ეკვალაიზერის ტრიგერი</string>
+    <string name="attach_hw_dsp_equalizer_description">ამატებს ფიქტიურ ეკვალაიზერის ეფექტს აუდიო სესიას აპარატურული DSP მარშრუტიზაციის იძულებით ჩართვისთვის. დატოვეთ გამორთული თუ იყენებთ ViPER4Android / ViperFX-ს ან თუ ხმა დახშულია ძველ Android ვერსიებზე.</string>
     <string name="audio_volume_offset">აუდიო ხმის ოფსეტი (Offset)</string>
     <string name="media_volume_offset">მედიის ხმის ოფსეტი</string>
     <string name="assistant_volume_offset">ასისტენტის ხმის ოფსეტი</string>
@@ -578,6 +580,7 @@
     <string name="software_video_decoder_device">მოწყობილობის MediaCodec</string>
 
     <string name="btn_show_qr">QR კოდის ჩვენება</string>
+    <string name="renderer_fallback_surface">ვიდეო მუდმივად იყინებოდა, ამიტომ ამ სესიისთვის ჩვენება გადაერთო SurfaceView-ზე. თუ სტაბილურია, პარამეტრებში დააყენეთ ხედვის რეჟიმი SurfaceView-ზე.</string>
 
     <string name="self_mode_overlay_permission_description">ავტონომიური რეჟიმის ფონურ რეჟიმში საიმედოდ გასაშვებად, გთხოვთ, შემდეგ ეკრანზე ჩართოთ ნებართვა „სხვა აპებზე ჩვენება“.</string>
 </resources>

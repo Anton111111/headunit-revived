@@ -259,6 +259,8 @@
     <string name="separate_audio_streams_description">Separa i canali audio per musica, chiamate e notifiche invece di un singolo flusso multimediale (potrebbe non funzionare correttamente su alcuni dispositivi).</string>
     <string name="use_aac_audio">Usa Audio AAC</string>
     <string name="use_aac_audio_description">Usa il codec AAC per l\'audio per risparmiare larghezza di banda (Sperimentale).</string>
+    <string name="attach_hw_dsp_equalizer">Attivatore equalizzatore DSP hardware</string>
+    <string name="attach_hw_dsp_equalizer_description">Collega un effetto equalizzatore fittizio alla sessione audio per forzare il reindirizzamento DSP hardware su specifiche autoradio. Lasciare disattivato se si utilizza ViPER4Android / ViperFX o se l\'audio risulta ovattato su versioni Android più datate.</string>
     <string name="audio_volume_offset">Offset volume audio</string>
     <string name="media_volume_offset">Offset volume media</string>
     <string name="assistant_volume_offset">Offset volume assistente</string>
@@ -598,6 +600,7 @@
     <string name="software_video_decoder_device">MediaCodec del dispositivo</string>
 
     <string name="btn_show_qr">Mostra codice QR</string>
+    <string name="renderer_fallback_surface">Il video continuava a bloccarsi, quindi la visualizzazione è passata a SurfaceView per questa sessione. Se è stabile, imposta la Modalità visualizzazione su SurfaceView nelle Impostazioni.</string>
 
     <string name="self_mode_overlay_permission_description">Per consentire l\'avvio affidabile della Modalità Personale in background, abilita l\'autorizzazione \"Mostra sopra altre app\" nella schermata successiva.</string>
 </resources>

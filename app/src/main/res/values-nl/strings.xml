@@ -238,6 +238,8 @@
     <string name="separate_audio_streams_description">Scheid audiokanalen voor muziek, oproepen en meldingen in plaats van één multimediastroom (werkt mogelijk niet correct op sommige apparaten).</string>
     <string name="use_aac_audio">Gebruik AAC Audio</string>
     <string name="use_aac_audio_description">Gebruik de AAC-codec voor audio om bandbreedte te besparen (experimenteel).</string>
+    <string name="attach_hw_dsp_equalizer">Hardware DSP Equalizer-trigger</string>
+    <string name="attach_hw_dsp_equalizer_description">Koppelt een dummy-equalizereffect aan de audiosessie om hardware DSP-routing te forceren op specifieke headunits. Laat uitgeschakeld als u ViPER4Android / ViperFX gebruikt of als het geluid dof klinkt op oudere Android-versies.</string>
     <string name="audio_volume_offset">Volume-offsets</string>
     <string name="media_volume_offset">Media</string>
     <string name="assistant_volume_offset">Assistent</string>
@@ -591,6 +593,7 @@
     <string name="software_video_decoder_device">Apparaat MediaCodec</string>
 
     <string name="btn_show_qr">QR-code tonen</string>
+    <string name="renderer_fallback_surface">De video bleef bevriezen, daarom is de weergave voor deze sessie overgeschakeld naar SurfaceView. Als het stabiel is, stel View modes in op SurfaceView in Instellingen.</string>
 
     <string name="self_mode_overlay_permission_description">Om de Self-modus betrouwbaar op de achtergrond te laten starten, schakelt u de machtiging \"Weergeven over andere apps\" in op het volgende scherm.</string>
 </resources>

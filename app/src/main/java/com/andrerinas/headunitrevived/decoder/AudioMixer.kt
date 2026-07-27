@@ -20,7 +20,8 @@ import java.util.concurrent.atomic.AtomicBoolean
  * of multiple AudioTrack instances, which causes volume routing bugs.
  */
 class AudioMixer(
-    private val stream: Int = AudioManager.STREAM_MUSIC
+    private val stream: Int = AudioManager.STREAM_MUSIC,
+    private val attachHwDspEqualizer: Boolean = false
 ) {
 
     companion object {
@@ -146,15 +147,17 @@ class AudioMixer(
             }
 
             audioTrack?.let { track ->
-                try {
-                    val sessionId = track.audioSessionId
-                    if (sessionId != AudioManager.AUDIO_SESSION_ID_GENERATE && sessionId > 0) {
-                        val equalizer = Equalizer(0, sessionId)
-                        equalizer.enabled = true
-                        AppLog.i("$TAG: Attached dummy Equalizer to audioSessionId $sessionId to trigger HW DSP")
+                if (attachHwDspEqualizer) {
+                    try {
+                        val sessionId = track.audioSessionId
+                        if (sessionId != AudioManager.AUDIO_SESSION_ID_GENERATE && sessionId > 0) {
+                            val equalizer = Equalizer(0, sessionId)
+                            equalizer.enabled = true
+                            AppLog.i("$TAG: Attached dummy Equalizer to audioSessionId $sessionId to trigger HW DSP")
+                        }
+                    } catch (t: Throwable) {
+                        // Ignore if Equalizer or AudioEffect is unsupported on device
                     }
-                } catch (t: Throwable) {
-                    // Ignore if Equalizer or AudioEffect is unsupported on device
                 }
                 track.play()
             }

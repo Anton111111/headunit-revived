@@ -27,7 +27,8 @@ class AudioTrackWrapper(
     private val audioLatencyMultiplier: Int = 8,
     private val audioQueueCapacity: Int = 0,
     private val mixer: AudioMixer? = null,
-    private val channelId: Int = -1
+    private val channelId: Int = -1,
+    private val attachHwDspEqualizer: Boolean = false
 ) : Thread() {
 
     private data class AudioChunk(
@@ -422,6 +423,7 @@ class AudioTrackWrapper(
     }
 
     private fun attachHwDspEqualizerQuietly(sessionId: Int) {
+        if (!attachHwDspEqualizer) return
         if (sessionId != AudioManager.AUDIO_SESSION_ID_GENERATE && sessionId > 0) {
             try {
                 equalizer?.release()
