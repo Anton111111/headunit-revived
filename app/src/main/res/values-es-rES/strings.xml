@@ -699,4 +699,14 @@
     <string name="onb_night_no_light_sensor">No se ha detectado ningún sensor de luz, por lo que el modo Automático sigue el amanecer y el atardecer.</string>
     <string name="onb_ready_title">Todo listo</string>
     <string name="onb_ready_summary">Conexión: %1$s\nResolución: %2$s\nCódec: %3$s\n\nPuedes ajustarlo todo con detalle en Configuración.</string>
+    <string name="onb_language_help">Elige el idioma de la aplicación.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Móvil conectado por USB, ya sea con un cable directo o con un adaptador inalámbrico USB. Las opciones inalámbricas se mantienen ocultas en el modo Básico.</string>
+    <string name="onb_more_appearance">Más ajustes de apariencia</string>
+    <string name="onb_automation_title">Automatización</string>
+    <string name="onb_automation_help">Elige cómo se inicia y se conecta la app por sí sola. Abre los ajustes de autoconexión para arrastrar el orden de prioridad.</string>
+    <string name="onb_gps_title">Ubicación</string>
+    <string name="onb_gps_help">¿Qué GPS debe usar Android Auto para la navegación?</string>
+    <string name="onb_gps_this_device">Este dispositivo</string>
+    <string name="onb_gps_phone">Móvil conectado</string>
 </resources>

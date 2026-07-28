@@ -689,4 +689,14 @@
     <string name="onb_night_no_light_sensor">未偵測到光線感應器，因此自動模式會依日出與日落調整。</string>
     <string name="onb_ready_title">一切就緒</string>
     <string name="onb_ready_summary">連線：%1$s\n解析度：%2$s\n編碼：%3$s\n\n您可以在設定中微調所有項目。</string>
+    <string name="onb_language_help">選擇應用程式語言。</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">手機以 USB 連接，可以是直接使用線材，或是使用 USB 無線轉接器。無線選項在基本模式下不會顯示。</string>
+    <string name="onb_more_appearance">更多外觀設定</string>
+    <string name="onb_automation_title">自動化</string>
+    <string name="onb_automation_help">選擇應用程式自動啟動與連線的方式。開啟自動連線設定即可拖曳調整優先順序。</string>
+    <string name="onb_gps_title">位置</string>
+    <string name="onb_gps_help">Android Auto 應使用哪個 GPS 進行導航？</string>
+    <string name="onb_gps_this_device">此裝置</string>
+    <string name="onb_gps_phone">已連接的手機</string>
 </resources>

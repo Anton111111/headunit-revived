@@ -690,4 +690,14 @@
     <string name="onb_night_no_light_sensor">Nebyl detekován žádný světelný senzor, takže automatický režim se řídí východem a západem slunce.</string>
     <string name="onb_ready_title">Vše je připraveno</string>
     <string name="onb_ready_summary">Připojení: %1$s\nRozlišení: %2$s\nKodek: %3$s\n\nVše můžete doladit v Nastavení.</string>
+    <string name="onb_language_help">Vyberte jazyk aplikace.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Telefon připojený přes USB, buď přímým kabelem, nebo bezdrátovým USB adaptérem. Bezdrátové možnosti zůstanou v režimu Základní skryté.</string>
+    <string name="onb_more_appearance">Další nastavení vzhledu</string>
+    <string name="onb_automation_title">Automatizace</string>
+    <string name="onb_automation_help">Vyberte, jak se aplikace sama spouští a připojuje. Otevřete nastavení automatického připojení a přetažením nastavte pořadí priorit.</string>
+    <string name="onb_gps_title">Poloha</string>
+    <string name="onb_gps_help">Kterou GPS má Android Auto používat pro navigaci?</string>
+    <string name="onb_gps_this_device">Toto zařízení</string>
+    <string name="onb_gps_phone">Připojený telefon</string>
 </resources>

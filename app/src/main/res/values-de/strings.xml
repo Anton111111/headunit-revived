@@ -696,4 +696,14 @@
     <string name="onb_night_no_light_sensor">Kein Lichtsensor erkannt, daher richtet sich der Automatik-Modus nach Sonnenauf- und -untergang.</string>
     <string name="onb_ready_title">Alles bereit</string>
     <string name="onb_ready_summary">Verbindung: %1$s\nAuflösung: %2$s\nCodec: %3$s\n\nSie können alles in den Einstellungen feinabstimmen.</string>
+    <string name="onb_language_help">Wählen Sie die App-Sprache.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Handy per USB verbunden, entweder mit einem direkten Kabel oder einem kabellosen USB-Adapter. Kabellose Optionen bleiben in den Grundlagen ausgeblendet.</string>
+    <string name="onb_more_appearance">Weitere Aussehen-Einstellungen</string>
+    <string name="onb_automation_title">Automatisierung</string>
+    <string name="onb_automation_help">Wählen Sie, wie die App von selbst startet und sich verbindet. Öffnen Sie die Auto-Connect-Einstellungen, um die Priorität-Reihenfolge zu ziehen.</string>
+    <string name="onb_gps_title">Standort</string>
+    <string name="onb_gps_help">Welches GPS soll Android Auto für die Navigation verwenden?</string>
+    <string name="onb_gps_this_device">Dieses Gerät</string>
+    <string name="onb_gps_phone">Verbundenes Handy</string>
 </resources>

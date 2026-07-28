@@ -687,4 +687,14 @@
     <string name="onb_night_no_light_sensor">Işık sensörü algılanmadı, bu nedenle Otomatik gün doğumu ve gün batımını takip eder.</string>
     <string name="onb_ready_title">Her şey hazır</string>
     <string name="onb_ready_summary">Bağlantı: %1$s\nÇözünürlük: %2$s\nKodek: %3$s\n\nHer şeyi Ayarlar\'dan ince ayar yapabilirsiniz.</string>
+    <string name="onb_language_help">Uygulama dilini seçin.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Telefon USB ile bağlı, doğrudan bir kablo veya bir USB kablosuz adaptör aracılığıyla. Kablosuz seçenekler Temel modda gizli kalır.</string>
+    <string name="onb_more_appearance">Daha fazla görünüm ayarı</string>
+    <string name="onb_automation_title">Otomasyon</string>
+    <string name="onb_automation_help">Uygulamanın kendi kendine nasıl başlayacağını ve bağlanacağını seçin. Öncelik sırasını sürüklemek için Otomatik Bağlantı Ayarları\'nı açın.</string>
+    <string name="onb_gps_title">Konum</string>
+    <string name="onb_gps_help">Android Auto navigasyon için hangi GPS\'i kullanmalı?</string>
+    <string name="onb_gps_this_device">Bu cihaz</string>
+    <string name="onb_gps_phone">Bağlı telefon</string>
 </resources>

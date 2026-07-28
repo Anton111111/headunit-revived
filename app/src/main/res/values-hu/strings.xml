@@ -689,4 +689,14 @@
     <string name="onb_night_no_light_sensor">Nem észlelhető fényérzékelő, így az Automatikus mód a napkeltét és napnyugtát követi.</string>
     <string name="onb_ready_title">Minden készen áll</string>
     <string name="onb_ready_summary">Csatlakozás: %1$s\nFelbontás: %2$s\nKódek: %3$s\n\nMindent finomhangolhatsz a Beállításokban.</string>
+    <string name="onb_language_help">Válaszd ki az alkalmazás nyelvét.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">A telefon USB-n keresztül csatlakozik, akár közvetlen kábellel, akár USB vezeték nélküli adapterrel. A vezeték nélküli lehetőségek rejtve maradnak Alapvető módban.</string>
+    <string name="onb_more_appearance">További megjelenítési beállítások</string>
+    <string name="onb_automation_title">Automatizálás</string>
+    <string name="onb_automation_help">Válaszd ki, hogyan induljon el és csatlakozzon az alkalmazás magától. Nyisd meg az Automatikus csatlakozás beállításait a prioritási sorrend átrendezéséhez.</string>
+    <string name="onb_gps_title">Hely</string>
+    <string name="onb_gps_help">Melyik GPS-t használja az Android Auto a navigációhoz?</string>
+    <string name="onb_gps_this_device">Ez az eszköz</string>
+    <string name="onb_gps_phone">Csatlakoztatott telefon</string>
 </resources>

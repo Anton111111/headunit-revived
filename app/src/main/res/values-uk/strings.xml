@@ -692,4 +692,14 @@
     <string name="onb_night_no_light_sensor">Датчик світла не виявлено, тому режим «Автоматично» орієнтується на схід і захід сонця.</string>
     <string name="onb_ready_title">Усе готово</string>
     <string name="onb_ready_summary">Підключення: %1$s\nРоздільна здатність: %2$s\nКодек: %3$s\n\nВи можете точно налаштувати все в Налаштуваннях.</string>
+    <string name="onb_language_help">Виберіть мову застосунку.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Телефон підключено через USB, безпосередньо кабелем або через USB бездротовий адаптер. Бездротові параметри залишаються прихованими в режимі «Основні».</string>
+    <string name="onb_more_appearance">Більше налаштувань зовнішнього вигляду</string>
+    <string name="onb_automation_title">Автоматизація</string>
+    <string name="onb_automation_help">Виберіть, як застосунок запускається та підключається самостійно. Відкрийте налаштування автопідключення, щоб перетягнути порядок пріоритету.</string>
+    <string name="onb_gps_title">Місцезнаходження</string>
+    <string name="onb_gps_help">Який GPS має використовувати Android Auto для навігації?</string>
+    <string name="onb_gps_this_device">Цей пристрій</string>
+    <string name="onb_gps_phone">Підключений телефон</string>
 </resources>

@@ -691,4 +691,14 @@
     <string name="onb_night_no_light_sensor">Nu a fost detectat niciun senzor de lumină, deci modul Automat urmărește răsăritul și apusul.</string>
     <string name="onb_ready_title">Ești gata</string>
     <string name="onb_ready_summary">Conexiune: %1$s\nRezoluție: %2$s\nCodec: %3$s\n\nPoți ajusta fin totul în Setări.</string>
+    <string name="onb_language_help">Alege limba aplicației.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Telefon conectat prin USB, fie printr-un cablu direct, fie printr-un adaptor wireless USB. Opțiunile wireless rămân ascunse în modul De bază.</string>
+    <string name="onb_more_appearance">Mai multe setări de aspect</string>
+    <string name="onb_automation_title">Automatizare</string>
+    <string name="onb_automation_help">Alege cum pornește și se conectează aplicația de una singură. Deschide setările de conectare automată pentru a trage de ordinea de prioritate.</string>
+    <string name="onb_gps_title">Locație</string>
+    <string name="onb_gps_help">Ce GPS ar trebui să folosească Android Auto pentru navigație?</string>
+    <string name="onb_gps_this_device">Acest dispozitiv</string>
+    <string name="onb_gps_phone">Telefon conectat</string>
 </resources>

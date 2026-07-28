@@ -623,4 +623,14 @@
     <string name="onb_night_no_light_sensor">სინათლის სენსორი ვერ მოიძებნა, ამიტომ ავტომატური რეჟიმი მიჰყვება მზის ამოსვლასა და ჩასვლას.</string>
     <string name="onb_ready_title">ყველაფერი მზადაა</string>
     <string name="onb_ready_summary">კავშირი: %1$s\nგაფართოება: %2$s\nკოდეკი: %3$s\n\nყველაფრის ზუსტად მორგება პარამეტრებში შეგიძლიათ.</string>
+    <string name="onb_language_help">აირჩიეთ აპლიკაციის ენა.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">ტელეფონი დაკავშირებულია USB-ით, პირდაპირი კაბელით ან USB უსადენო ადაპტერით. უსადენო ვარიანტები ძირითად რეჟიმში დამალული რჩება.</string>
+    <string name="onb_more_appearance">იერსახის დამატებითი პარამეტრები</string>
+    <string name="onb_automation_title">ავტომატიზაცია</string>
+    <string name="onb_automation_help">აირჩიეთ, როგორ გაეშვას და დაუკავშირდეს აპლიკაცია დამოუკიდებლად. ავტო-კავშირის პარამეტრები გახსენით პრიორიტეტული რიგის გადასათრევად.</string>
+    <string name="onb_gps_title">მდებარეობა</string>
+    <string name="onb_gps_help">რომელი GPS გამოიყენოს Android Auto-მ ნავიგაციისთვის?</string>
+    <string name="onb_gps_this_device">ეს მოწყობილობა</string>
+    <string name="onb_gps_phone">დაკავშირებული ტელეფონი</string>
 </resources>

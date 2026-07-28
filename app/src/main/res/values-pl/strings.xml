@@ -691,4 +691,14 @@
     <string name="onb_night_no_light_sensor">Nie wykryto czujnika światła, więc tryb Automatyczny kieruje się wschodem i zachodem słońca.</string>
     <string name="onb_ready_title">Wszystko gotowe</string>
     <string name="onb_ready_summary">Połączenie: %1$s\nRozdzielczość: %2$s\nKodek: %3$s\n\nWszystko możesz dostroić w Ustawieniach.</string>
+    <string name="onb_language_help">Wybierz język aplikacji.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Telefon podłączony przez USB, bezpośrednim kablem lub bezprzewodowym adapterem USB. Opcje bezprzewodowe pozostają ukryte w trybie Podstawowym.</string>
+    <string name="onb_more_appearance">Więcej ustawień wyglądu</string>
+    <string name="onb_automation_title">Automatyzacja</string>
+    <string name="onb_automation_help">Wybierz, jak aplikacja uruchamia się i łączy samodzielnie. Otwórz ustawienia automatycznego łączenia, aby przeciągnąć kolejność priorytetów.</string>
+    <string name="onb_gps_title">Lokalizacja</string>
+    <string name="onb_gps_help">Którego GPS powinno używać Android Auto do nawigacji?</string>
+    <string name="onb_gps_this_device">To urządzenie</string>
+    <string name="onb_gps_phone">Połączony telefon</string>
 </resources>

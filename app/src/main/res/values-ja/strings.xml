@@ -697,4 +697,14 @@
     <string name="onb_night_no_light_sensor">光センサーが検出されなかったため、自動モードは日の出と日の入りに追従します。</string>
     <string name="onb_ready_title">準備が完了しました</string>
     <string name="onb_ready_summary">接続: %1$s\n解像度: %2$s\nコーデック: %3$s\n\nすべては設定で細かく調整できます。</string>
+    <string name="onb_language_help">アプリの言語を選択します。</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">スマートフォンをUSBで接続します（直接ケーブルまたはUSBワイヤレスアダプター）。ワイヤレスのオプションは基本では表示されません。</string>
+    <string name="onb_more_appearance">その他の外観設定</string>
+    <string name="onb_automation_title">オートメーション</string>
+    <string name="onb_automation_help">アプリが自動的に起動・接続する方法を選択します。自動接続設定を開くと、優先順位をドラッグして並べ替えられます。</string>
+    <string name="onb_gps_title">位置情報</string>
+    <string name="onb_gps_help">Android AutoのナビゲーションにはどのGPSを使用しますか？</string>
+    <string name="onb_gps_this_device">このデバイス</string>
+    <string name="onb_gps_phone">接続したスマートフォン</string>
 </resources>

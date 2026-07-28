@@ -694,4 +694,14 @@
     <string name="onb_night_no_light_sensor">조도 센서가 감지되지 않아 자동 모드가 일출과 일몰 시간을 따릅니다.</string>
     <string name="onb_ready_title">모든 준비가 끝났습니다</string>
     <string name="onb_ready_summary">연결: %1$s\n해상도: %2$s\n코덱: %3$s\n\n모든 항목은 설정에서 세부 조정할 수 있습니다.</string>
+    <string name="onb_language_help">앱 언어를 선택하세요.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">휴대폰을 USB로 연결합니다. 직접 케이블 또는 USB 무선 어댑터 모두 해당합니다. 무선 관련 옵션은 기본 화면에서는 숨겨집니다.</string>
+    <string name="onb_more_appearance">모양 설정 더 보기</string>
+    <string name="onb_automation_title">자동화</string>
+    <string name="onb_automation_help">앱이 스스로 시작하고 연결하는 방식을 선택하세요. 자동 연결 설정을 열어 우선순위 순서를 드래그할 수 있습니다.</string>
+    <string name="onb_gps_title">위치</string>
+    <string name="onb_gps_help">Android Auto 내비게이션에 어떤 GPS를 사용할까요?</string>
+    <string name="onb_gps_this_device">이 기기</string>
+    <string name="onb_gps_phone">연결된 휴대폰</string>
 </resources>

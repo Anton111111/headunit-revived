@@ -690,4 +690,14 @@
     <string name="onb_night_no_light_sensor">Geen lichtsensor gedetecteerd, dus Automatisch volgt zonsopgang en zonsondergang.</string>
     <string name="onb_ready_title">Alles is klaar</string>
     <string name="onb_ready_summary">Verbinding: %1$s\nResolutie: %2$s\nCodec: %3$s\n\nJe kunt alles verfijnen in Instellingen.</string>
+    <string name="onb_language_help">Kies de taal van de app.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Telefoon aangesloten via USB, hetzij een directe kabel of een draadloze USB-adapter. Draadloze opties blijven verborgen in Basis.</string>
+    <string name="onb_more_appearance">Meer uiterlijk-instellingen</string>
+    <string name="onb_automation_title">Automatisering</string>
+    <string name="onb_automation_help">Kies hoe de app zelf start en verbinding maakt. Open de Auto-Connect instellingen om de prioriteitsvolgorde te slepen.</string>
+    <string name="onb_gps_title">Locatie</string>
+    <string name="onb_gps_help">Welke GPS moet Android Auto gebruiken voor navigatie?</string>
+    <string name="onb_gps_this_device">Dit apparaat</string>
+    <string name="onb_gps_phone">Verbonden telefoon</string>
 </resources>

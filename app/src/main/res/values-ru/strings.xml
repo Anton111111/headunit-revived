@@ -690,4 +690,14 @@
     <string name="onb_night_no_light_sensor">Датчик освещённости не обнаружен, поэтому автоматический режим следует за восходом и закатом.</string>
     <string name="onb_ready_title">Всё готово</string>
     <string name="onb_ready_summary">Подключение: %1$s\nРазрешение экрана: %2$s\nКодек: %3$s\n\nВы можете точно настроить всё в настройках.</string>
+    <string name="onb_language_help">Выберите язык приложения.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Телефон подключён по USB, либо напрямую кабелем, либо через беспроводной USB-адаптер. В режиме «Основные» беспроводные параметры остаются скрытыми.</string>
+    <string name="onb_more_appearance">Больше настроек внешнего вида</string>
+    <string name="onb_automation_title">Автоматизация</string>
+    <string name="onb_automation_help">Выберите, как приложение запускается и подключается самостоятельно. Откройте настройки автоподключения, чтобы перетащить порядок приоритета.</string>
+    <string name="onb_gps_title">Местоположение</string>
+    <string name="onb_gps_help">Какой GPS должен использовать Android Auto для навигации?</string>
+    <string name="onb_gps_this_device">Это устройство</string>
+    <string name="onb_gps_phone">Подключённый телефон</string>
 </resources>

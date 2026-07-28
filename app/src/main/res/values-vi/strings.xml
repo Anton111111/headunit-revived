@@ -696,4 +696,14 @@
     <string name="onb_night_no_light_sensor">Không phát hiện cảm biến ánh sáng, nên chế độ Tự động theo giờ bình minh và hoàng hôn.</string>
     <string name="onb_ready_title">Bạn đã sẵn sàng</string>
     <string name="onb_ready_summary">Kết nối: %1$s\nĐộ phân giải: %2$s\nCodec: %3$s\n\nBạn có thể tinh chỉnh mọi thứ trong Cài đặt.</string>
+    <string name="onb_language_help">Chọn ngôn ngữ ứng dụng.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Điện thoại kết nối bằng USB, qua cáp trực tiếp hoặc bộ chuyển không dây USB. Các tuỳ chọn không dây vẫn được ẩn ở chế độ Cơ bản.</string>
+    <string name="onb_more_appearance">Thêm cài đặt giao diện</string>
+    <string name="onb_automation_title">Tự động hoá</string>
+    <string name="onb_automation_help">Chọn cách ứng dụng tự khởi động và kết nối. Mở cài đặt Tự kết nối để kéo sắp thứ tự ưu tiên.</string>
+    <string name="onb_gps_title">Vị trí</string>
+    <string name="onb_gps_help">Android Auto nên dùng GPS nào cho điều hướng?</string>
+    <string name="onb_gps_this_device">Máy này</string>
+    <string name="onb_gps_phone">Điện thoại đã kết nối</string>
 </resources>
