@@ -655,4 +655,45 @@
     <string name="coordinate_longitude">Kinh độ</string>
     <string name="coordinates_invalid">Tọa độ không hợp lệ</string>
     <string name="coordinates_format_help">Độ thập phân, dấu chấm hoặc dấu phẩy. Ví dụ: 40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search, connection mode, onboarding -->
+    <string name="settings_tab_basic">Cơ bản</string>
+    <string name="settings_tab_advanced">Nâng cao</string>
+    <string name="settings_search_hint">Tìm cài đặt</string>
+    <string name="connection_mode">Chế độ kết nối</string>
+    <string name="connection_kind_usb_cable">Cáp USB (trực tiếp)</string>
+    <string name="connection_kind_usb_wireless_adapter">Bộ chuyển không dây USB</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Chưa đặt</string>
+    <string name="onb_next">Tiếp theo</string>
+    <string name="onb_skip">Bỏ qua</string>
+    <string name="onb_ready_finish">Hoàn tất</string>
+    <string name="onb_welcome_title">Chào mừng đến với Headunit Revived</string>
+    <string name="onb_welcome_body">Thiết lập nhanh này quét thiết bị của bạn và chọn cài đặt video, hiển thị và chế độ tối tốt nhất cho bạn. Bạn có thể đổi mọi thứ sau trong Cài đặt.</string>
+    <string name="onb_safety_title">An toàn là trên hết</string>
+    <string name="onb_safety_accept">Tôi đã đọc và đồng ý với các điều khoản</string>
+    <string name="onb_connection_title">Bạn kết nối bằng cách nào?</string>
+    <string name="onb_connection_help">Chọn cách điện thoại của bạn kết nối. Việc này giúp màn hình cài đặt tập trung vào những gì phù hợp với bạn.</string>
+    <string name="onb_connection_cable_detail">Điện thoại cắm thẳng vào head unit bằng cáp USB. Các tuỳ chọn không dây sẽ được ẩn đi.</string>
+    <string name="onb_connection_adapter_detail">Bộ chuyển USB nối cáp với kết nối không dây. Các tuỳ chọn không dây sẽ được hiển thị.</string>
+    <string name="onb_connection_wifi_detail">Điện thoại kết nối qua WiFi. Các tuỳ chọn không dây sẽ được hiển thị.</string>
+    <string name="onb_display_title">Hiển thị</string>
+    <string name="onb_display_detected">Màn hình phát hiện: %1$d x %2$d px, %3$d dpi, phần cứng %4$s.</string>
+    <string name="onb_display_size_label">Kích thước màn hình</string>
+    <string name="onb_display_orientation_label">Hướng màn hình</string>
+    <string name="onb_display_apply">Áp dụng cài đặt đề xuất</string>
+    <string name="onb_display_result">Đã áp dụng: %1$s, %2$d dpi, %3$s, chế độ hiển thị %4$s.</string>
+    <string name="onb_appearance_title">Giao diện</string>
+    <string name="onb_appearance_theme_label">Giao diện ứng dụng</string>
+    <string name="onb_theme_auto">Tự động</string>
+    <string name="onb_theme_light">Sáng</string>
+    <string name="onb_theme_dark">Tối</string>
+    <string name="onb_appearance_night_label">Chế độ tối Android Auto</string>
+    <string name="onb_night_auto">Tự động</string>
+    <string name="onb_night_day">Ban ngày</string>
+    <string name="onb_night_night">Ban đêm</string>
+    <string name="onb_night_light_sensor_available">Đã phát hiện cảm biến ánh sáng, nên chế độ Tự động có thể theo ánh sáng môi trường.</string>
+    <string name="onb_night_no_light_sensor">Không phát hiện cảm biến ánh sáng, nên chế độ Tự động theo giờ bình minh và hoàng hôn.</string>
+    <string name="onb_ready_title">Bạn đã sẵn sàng</string>
+    <string name="onb_ready_summary">Kết nối: %1$s\nĐộ phân giải: %2$s\nCodec: %3$s\n\nBạn có thể tinh chỉnh mọi thứ trong Cài đặt.</string>
 </resources>

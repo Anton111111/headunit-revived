@@ -648,4 +648,45 @@
     <string name="coordinate_longitude">經度</string>
     <string name="coordinates_invalid">座標無效</string>
     <string name="coordinates_format_help">十進位度數，使用點或逗號。範例：40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search, connection mode, onboarding -->
+    <string name="settings_tab_basic">基本</string>
+    <string name="settings_tab_advanced">進階</string>
+    <string name="settings_search_hint">搜尋設定</string>
+    <string name="connection_mode">連線方式</string>
+    <string name="connection_kind_usb_cable">USB 線 (直連)</string>
+    <string name="connection_kind_usb_wireless_adapter">USB 無線轉接器</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">尚未設定</string>
+    <string name="onb_next">下一步</string>
+    <string name="onb_skip">略過</string>
+    <string name="onb_ready_finish">完成</string>
+    <string name="onb_welcome_title">歡迎使用 Headunit Revived</string>
+    <string name="onb_welcome_body">此快速設定會掃描您的裝置，並為您挑選最佳的視訊、顯示及夜間模式設定。您稍後隨時可以在設定中變更所有項目。</string>
+    <string name="onb_safety_title">安全第一</string>
+    <string name="onb_safety_accept">我已閱讀並接受條款</string>
+    <string name="onb_connection_title">您如何連線？</string>
+    <string name="onb_connection_help">請選擇您手機的連線方式。這能讓設定畫面專注於與您相關的項目。</string>
+    <string name="onb_connection_cable_detail">手機以 USB 線直接插入車機。無線選項不會顯示。</string>
+    <string name="onb_connection_adapter_detail">USB 轉接器將線材橋接為無線連線。會顯示無線選項。</string>
+    <string name="onb_connection_wifi_detail">手機透過 WiFi 連線。會顯示無線選項。</string>
+    <string name="onb_display_title">顯示</string>
+    <string name="onb_display_detected">偵測到的面板：%1$d x %2$d px，%3$d dpi，硬體 %4$s。</string>
+    <string name="onb_display_size_label">螢幕尺寸</string>
+    <string name="onb_display_orientation_label">螢幕方向</string>
+    <string name="onb_display_apply">套用建議設定</string>
+    <string name="onb_display_result">已套用：%1$s、%2$d dpi、%3$s、%4$s 檢視。</string>
+    <string name="onb_appearance_title">外觀</string>
+    <string name="onb_appearance_theme_label">應用程式主題</string>
+    <string name="onb_theme_auto">自動</string>
+    <string name="onb_theme_light">淺色</string>
+    <string name="onb_theme_dark">深色</string>
+    <string name="onb_appearance_night_label">深色模式（Android Auto）</string>
+    <string name="onb_night_auto">自動</string>
+    <string name="onb_night_day">日間</string>
+    <string name="onb_night_night">夜間</string>
+    <string name="onb_night_light_sensor_available">已偵測到光線感應器，因此自動模式可依環境光線調整。</string>
+    <string name="onb_night_no_light_sensor">未偵測到光線感應器，因此自動模式會依日出與日落調整。</string>
+    <string name="onb_ready_title">一切就緒</string>
+    <string name="onb_ready_summary">連線：%1$s\n解析度：%2$s\n編碼：%3$s\n\n您可以在設定中微調所有項目。</string>
 </resources>

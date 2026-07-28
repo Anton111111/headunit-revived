@@ -650,4 +650,45 @@
     <string name="coordinate_longitude">Longitudine</string>
     <string name="coordinates_invalid">Coordonate nevalide</string>
     <string name="coordinates_format_help">Grade zecimale, punct sau virgulă. Exemplu: 40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search, connection mode, onboarding -->
+    <string name="settings_tab_basic">De bază</string>
+    <string name="settings_tab_advanced">Avansate</string>
+    <string name="settings_search_hint">Caută în setări</string>
+    <string name="connection_mode">Mod de conectare</string>
+    <string name="connection_kind_usb_cable">Cablu USB (direct)</string>
+    <string name="connection_kind_usb_wireless_adapter">Adaptor wireless USB</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Nesetat</string>
+    <string name="onb_next">Următorul</string>
+    <string name="onb_skip">Omite</string>
+    <string name="onb_ready_finish">Finalizează</string>
+    <string name="onb_welcome_title">Bine ai venit în Headunit Revived</string>
+    <string name="onb_welcome_body">Această configurare rapidă scanează dispozitivul și alege cele mai bune setări video, de afișare și mod de noapte pentru tine. Poți schimba oricând totul mai târziu în Setări.</string>
+    <string name="onb_safety_title">Siguranța pe primul loc</string>
+    <string name="onb_safety_accept">Am citit și accept termenii</string>
+    <string name="onb_connection_title">Cum te conectezi?</string>
+    <string name="onb_connection_help">Alege cum se conectează telefonul tău. Astfel ecranul de setări rămâne concentrat pe ceea ce ți se aplică.</string>
+    <string name="onb_connection_cable_detail">Telefonul este conectat direct la unitatea principală printr-un cablu USB. Opțiunile wireless rămân ascunse.</string>
+    <string name="onb_connection_adapter_detail">Un dongle USB face legătura dintre cablu și o conexiune wireless. Opțiunile wireless sunt afișate.</string>
+    <string name="onb_connection_wifi_detail">Telefonul se conectează prin WiFi. Opțiunile wireless sunt afișate.</string>
+    <string name="onb_display_title">Afișare</string>
+    <string name="onb_display_detected">Ecran detectat: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Mărime ecran</string>
+    <string name="onb_display_orientation_label">Orientare</string>
+    <string name="onb_display_apply">Aplică setările recomandate</string>
+    <string name="onb_display_result">Aplicat: %1$s, %2$d dpi, %3$s, vizualizare %4$s.</string>
+    <string name="onb_appearance_title">Aspect</string>
+    <string name="onb_appearance_theme_label">Tema aplicației</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Deschis</string>
+    <string name="onb_theme_dark">Întunecat</string>
+    <string name="onb_appearance_night_label">Mod întunecat Android Auto</string>
+    <string name="onb_night_auto">Automat</string>
+    <string name="onb_night_day">Zi</string>
+    <string name="onb_night_night">Noapte</string>
+    <string name="onb_night_light_sensor_available">A fost detectat un senzor de lumină, deci modul Automat poate urmări lumina ambientală.</string>
+    <string name="onb_night_no_light_sensor">Nu a fost detectat niciun senzor de lumină, deci modul Automat urmărește răsăritul și apusul.</string>
+    <string name="onb_ready_title">Ești gata</string>
+    <string name="onb_ready_summary">Conexiune: %1$s\nRezoluție: %2$s\nCodec: %3$s\n\nPoți ajusta fin totul în Setări.</string>
 </resources>

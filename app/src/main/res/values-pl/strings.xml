@@ -650,4 +650,45 @@
     <string name="coordinate_longitude">Długość geograficzna</string>
     <string name="coordinates_invalid">Nieprawidłowe współrzędne</string>
     <string name="coordinates_format_help">Stopnie dziesiętne, kropka lub przecinek. Przykład: 40.4168, -3.7038</string>
+
+    <!-- Settings redesign & onboarding -->
+    <string name="settings_tab_basic">Podstawowe</string>
+    <string name="settings_tab_advanced">Zaawansowane</string>
+    <string name="settings_search_hint">Szukaj w ustawieniach</string>
+    <string name="connection_mode">Tryb połączenia</string>
+    <string name="connection_kind_usb_cable">Kabel USB (bezpośrednio)</string>
+    <string name="connection_kind_usb_wireless_adapter">Bezprzewodowy adapter USB</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Nie ustawiono</string>
+    <string name="onb_next">Dalej</string>
+    <string name="onb_skip">Pomiń</string>
+    <string name="onb_ready_finish">Zakończ</string>
+    <string name="onb_welcome_title">Witamy w Headunit Revived</string>
+    <string name="onb_welcome_body">Ta szybka konfiguracja sprawdza Twoje urządzenie i dobiera najlepsze ustawienia wideo, wyświetlacza i trybu nocnego. Wszystko możesz później zmienić w Ustawieniach.</string>
+    <string name="onb_safety_title">Najpierw bezpieczeństwo</string>
+    <string name="onb_safety_accept">Przeczytałem/-am i akceptuję warunki</string>
+    <string name="onb_connection_title">Jak się łączysz?</string>
+    <string name="onb_connection_help">Wybierz sposób połączenia telefonu. Dzięki temu ekran ustawień pokazuje tylko to, co Cię dotyczy.</string>
+    <string name="onb_connection_cable_detail">Telefon podłączony bezpośrednio do radia kablem USB. Opcje bezprzewodowe pozostają ukryte.</string>
+    <string name="onb_connection_adapter_detail">Adapter USB łączy kabel z połączeniem bezprzewodowym. Opcje bezprzewodowe są widoczne.</string>
+    <string name="onb_connection_wifi_detail">Telefon łączy się przez WiFi. Opcje bezprzewodowe są widoczne.</string>
+    <string name="onb_display_title">Wyświetlacz</string>
+    <string name="onb_display_detected">Wykryty panel: %1$d x %2$d px, %3$d dpi, sprzęt %4$s.</string>
+    <string name="onb_display_size_label">Rozmiar wyświetlacza</string>
+    <string name="onb_display_orientation_label">Orientacja</string>
+    <string name="onb_display_apply">Zastosuj zalecane ustawienia</string>
+    <string name="onb_display_result">Zastosowano: %1$s, %2$d dpi, %3$s, widok %4$s.</string>
+    <string name="onb_appearance_title">Wygląd</string>
+    <string name="onb_appearance_theme_label">Motyw aplikacji</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Jasny</string>
+    <string name="onb_theme_dark">Ciemny</string>
+    <string name="onb_appearance_night_label">Tryb ciemny (Android Auto)</string>
+    <string name="onb_night_auto">Automatyczny</string>
+    <string name="onb_night_day">Dzień</string>
+    <string name="onb_night_night">Noc</string>
+    <string name="onb_night_light_sensor_available">Wykryto czujnik światła, więc tryb Automatyczny może dostosowywać się do światła otoczenia.</string>
+    <string name="onb_night_no_light_sensor">Nie wykryto czujnika światła, więc tryb Automatyczny kieruje się wschodem i zachodem słońca.</string>
+    <string name="onb_ready_title">Wszystko gotowe</string>
+    <string name="onb_ready_summary">Połączenie: %1$s\nRozdzielczość: %2$s\nKodek: %3$s\n\nWszystko możesz dostroić w Ustawieniach.</string>
 </resources>

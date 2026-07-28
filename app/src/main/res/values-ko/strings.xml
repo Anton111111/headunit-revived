@@ -653,4 +653,45 @@
     <string name="coordinate_longitude">경도</string>
     <string name="coordinates_invalid">잘못된 좌표</string>
     <string name="coordinates_format_help">십진수 도, 점 또는 쉼표. 예: 40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search, connection mode, onboarding -->
+    <string name="settings_tab_basic">기본</string>
+    <string name="settings_tab_advanced">고급</string>
+    <string name="settings_search_hint">설정 검색</string>
+    <string name="connection_mode">연결 방식</string>
+    <string name="connection_kind_usb_cable">USB 케이블(직접 연결)</string>
+    <string name="connection_kind_usb_wireless_adapter">USB 무선 어댑터</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">설정 안 됨</string>
+    <string name="onb_next">다음</string>
+    <string name="onb_skip">건너뛰기</string>
+    <string name="onb_ready_finish">완료</string>
+    <string name="onb_welcome_title">Headunit Revived에 오신 것을 환영합니다</string>
+    <string name="onb_welcome_body">이 빠른 설정은 기기를 검사하여 가장 적합한 비디오, 디스플레이, 다크 모드 설정을 자동으로 선택합니다. 모든 항목은 나중에 설정에서 변경할 수 있습니다.</string>
+    <string name="onb_safety_title">안전이 우선입니다</string>
+    <string name="onb_safety_accept">약관을 읽고 동의합니다</string>
+    <string name="onb_connection_title">어떻게 연결하시나요?</string>
+    <string name="onb_connection_help">휴대폰 연결 방식을 선택하세요. 이렇게 하면 설정 화면에 본인에게 해당하는 항목만 표시됩니다.</string>
+    <string name="onb_connection_cable_detail">휴대폰을 USB 케이블로 헤드유닛에 직접 연결합니다. 무선 관련 옵션은 표시되지 않습니다.</string>
+    <string name="onb_connection_adapter_detail">USB 동글이 케이블을 무선 연결로 연결해 줍니다. 무선 관련 옵션이 표시됩니다.</string>
+    <string name="onb_connection_wifi_detail">휴대폰을 WiFi로 연결합니다. 무선 관련 옵션이 표시됩니다.</string>
+    <string name="onb_display_title">디스플레이</string>
+    <string name="onb_display_detected">감지된 화면: %1$d x %2$d px, %3$d dpi, 하드웨어 %4$s.</string>
+    <string name="onb_display_size_label">화면 크기</string>
+    <string name="onb_display_orientation_label">화면 방향</string>
+    <string name="onb_display_apply">권장 설정 적용</string>
+    <string name="onb_display_result">적용됨: %1$s, %2$d dpi, %3$s, %4$s 뷰.</string>
+    <string name="onb_appearance_title">모양</string>
+    <string name="onb_appearance_theme_label">앱 테마</string>
+    <string name="onb_theme_auto">자동</string>
+    <string name="onb_theme_light">라이트</string>
+    <string name="onb_theme_dark">다크</string>
+    <string name="onb_appearance_night_label">다크 모드(Android Auto)</string>
+    <string name="onb_night_auto">자동</string>
+    <string name="onb_night_day">주간</string>
+    <string name="onb_night_night">야간</string>
+    <string name="onb_night_light_sensor_available">조도 센서가 감지되어 자동 모드가 주변 밝기에 따라 동작할 수 있습니다.</string>
+    <string name="onb_night_no_light_sensor">조도 센서가 감지되지 않아 자동 모드가 일출과 일몰 시간을 따릅니다.</string>
+    <string name="onb_ready_title">모든 준비가 끝났습니다</string>
+    <string name="onb_ready_summary">연결: %1$s\n해상도: %2$s\n코덱: %3$s\n\n모든 항목은 설정에서 세부 조정할 수 있습니다.</string>
 </resources>

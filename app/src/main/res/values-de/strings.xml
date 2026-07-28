@@ -655,4 +655,45 @@
     <string name="coordinate_longitude">Längengrad</string>
     <string name="coordinates_invalid">Ungültige Koordinaten</string>
     <string name="coordinates_format_help">Dezimalgrad, Punkt oder Komma. Beispiel: 40.4168, -3.7038</string>
+
+    <!-- Settings redesign / onboarding -->
+    <string name="settings_tab_basic">Grundlagen</string>
+    <string name="settings_tab_advanced">Erweitert</string>
+    <string name="settings_search_hint">Einstellungen suchen</string>
+    <string name="connection_mode">Verbindungsart</string>
+    <string name="connection_kind_usb_cable">USB-Kabel (direkt)</string>
+    <string name="connection_kind_usb_wireless_adapter">Kabelloser USB-Adapter</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Nicht gesetzt</string>
+    <string name="onb_next">Weiter</string>
+    <string name="onb_skip">Überspringen</string>
+    <string name="onb_ready_finish">Fertig</string>
+    <string name="onb_welcome_title">Willkommen bei Headunit Revived</string>
+    <string name="onb_welcome_body">Diese Schnell-Einrichtung prüft Ihr Gerät und wählt die besten Einstellungen für Video, Anzeige und Dunkelmodus für Sie aus. Sie können später alles in den Einstellungen ändern.</string>
+    <string name="onb_safety_title">Sicherheit zuerst</string>
+    <string name="onb_safety_accept">Ich habe die Bedingungen gelesen und akzeptiere sie</string>
+    <string name="onb_connection_title">Wie verbinden Sie sich?</string>
+    <string name="onb_connection_help">Wählen Sie, wie sich Ihr Handy verbindet. So bleibt der Einstellungsbildschirm auf das beschränkt, was für Sie relevant ist.</string>
+    <string name="onb_connection_cable_detail">Handy direkt mit einem USB-Kabel an das Autoradio angeschlossen. Kabellose Optionen bleiben ausgeblendet.</string>
+    <string name="onb_connection_adapter_detail">Ein USB-Dongle verbindet das Kabel mit einer kabellosen Verbindung. Kabellose Optionen werden angezeigt.</string>
+    <string name="onb_connection_wifi_detail">Handy verbindet sich über WiFi. Kabellose Optionen werden angezeigt.</string>
+    <string name="onb_display_title">Anzeige</string>
+    <string name="onb_display_detected">Erkanntes Display: %1$d x %2$d px, %3$d dpi, Hardware %4$s.</string>
+    <string name="onb_display_size_label">Bildschirmgröße</string>
+    <string name="onb_display_orientation_label">Ausrichtung</string>
+    <string name="onb_display_apply">Empfohlene Einstellungen übernehmen</string>
+    <string name="onb_display_result">Übernommen: %1$s, %2$d dpi, %3$s, %4$s-Ansicht.</string>
+    <string name="onb_appearance_title">Aussehen</string>
+    <string name="onb_appearance_theme_label">App-Design</string>
+    <string name="onb_theme_auto">Automatisch</string>
+    <string name="onb_theme_light">Hell</string>
+    <string name="onb_theme_dark">Dunkel</string>
+    <string name="onb_appearance_night_label">Dunkelmodus (Android Auto)</string>
+    <string name="onb_night_auto">Automatisch</string>
+    <string name="onb_night_day">Tag</string>
+    <string name="onb_night_night">Nacht</string>
+    <string name="onb_night_light_sensor_available">Ein Lichtsensor wurde erkannt, daher kann der Automatik-Modus dem Umgebungslicht folgen.</string>
+    <string name="onb_night_no_light_sensor">Kein Lichtsensor erkannt, daher richtet sich der Automatik-Modus nach Sonnenauf- und -untergang.</string>
+    <string name="onb_ready_title">Alles bereit</string>
+    <string name="onb_ready_summary">Verbindung: %1$s\nAuflösung: %2$s\nCodec: %3$s\n\nSie können alles in den Einstellungen feinabstimmen.</string>
 </resources>

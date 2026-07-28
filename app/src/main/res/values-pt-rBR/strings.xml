@@ -651,4 +651,45 @@
     <string name="coordinate_longitude">Longitude</string>
     <string name="coordinates_invalid">Coordenadas inválidas</string>
     <string name="coordinates_format_help">Graus decimais, ponto ou vírgula. Exemplo: 40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search, connection mode and onboarding -->
+    <string name="settings_tab_basic">Básico</string>
+    <string name="settings_tab_advanced">Avançado</string>
+    <string name="settings_search_hint">Buscar configurações</string>
+    <string name="connection_mode">Modo de conexão</string>
+    <string name="connection_kind_usb_cable">Cabo USB (direto)</string>
+    <string name="connection_kind_usb_wireless_adapter">Adaptador USB sem fio</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Não definido</string>
+    <string name="onb_next">Próximo</string>
+    <string name="onb_skip">Pular</string>
+    <string name="onb_ready_finish">Concluir</string>
+    <string name="onb_welcome_title">Bem-vindo ao Headunit Revived</string>
+    <string name="onb_welcome_body">Esta configuração rápida analisa seu dispositivo e escolhe as melhores configurações de vídeo, tela e modo escuro para você. Você pode alterar tudo mais tarde nas Configurações.</string>
+    <string name="onb_safety_title">Segurança em primeiro lugar</string>
+    <string name="onb_safety_accept">Li e aceito os termos</string>
+    <string name="onb_connection_title">Como você se conecta?</string>
+    <string name="onb_connection_help">Escolha como seu celular se conecta. Isso mantém a tela de configurações focada no que se aplica a você.</string>
+    <string name="onb_connection_cable_detail">Celular ligado diretamente à central multimídia com um cabo USB. As opções sem fio ficam fora do caminho.</string>
+    <string name="onb_connection_adapter_detail">Um dongle USB faz a ponte entre o cabo e uma conexão sem fio. As opções sem fio são exibidas.</string>
+    <string name="onb_connection_wifi_detail">O celular se conecta via WiFi. As opções sem fio são exibidas.</string>
+    <string name="onb_display_title">Tela</string>
+    <string name="onb_display_detected">Painel detectado: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Tamanho da tela</string>
+    <string name="onb_display_orientation_label">Orientação</string>
+    <string name="onb_display_apply">Aplicar configurações recomendadas</string>
+    <string name="onb_display_result">Aplicado: %1$s, %2$d dpi, %3$s, visualização %4$s.</string>
+    <string name="onb_appearance_title">Aparência</string>
+    <string name="onb_appearance_theme_label">Tema do app</string>
+    <string name="onb_theme_auto">Automático</string>
+    <string name="onb_theme_light">Claro</string>
+    <string name="onb_theme_dark">Escuro</string>
+    <string name="onb_appearance_night_label">Modo escuro (Android Auto)</string>
+    <string name="onb_night_auto">Automático</string>
+    <string name="onb_night_day">Dia</string>
+    <string name="onb_night_night">Noite</string>
+    <string name="onb_night_light_sensor_available">Um sensor de luz foi detectado, então o modo Automático pode seguir a luz ambiente.</string>
+    <string name="onb_night_no_light_sensor">Nenhum sensor de luz detectado, então o modo Automático segue o nascer e o pôr do sol.</string>
+    <string name="onb_ready_title">Tudo pronto</string>
+    <string name="onb_ready_summary">Conexão: %1$s\nResolução: %2$s\nCodec: %3$s\n\nVocê pode ajustar tudo em detalhes nas Configurações.</string>
 </resources>

@@ -649,4 +649,45 @@
     <string name="coordinate_longitude">Долгота</string>
     <string name="coordinates_invalid">Неверные координаты</string>
     <string name="coordinates_format_help">Десятичные градусы, точка или запятая. Пример: 40.4168, -3.7038</string>
+
+    <!-- Onboarding & settings tabs -->
+    <string name="settings_tab_basic">Основные</string>
+    <string name="settings_tab_advanced">Расширенные</string>
+    <string name="settings_search_hint">Поиск настроек</string>
+    <string name="connection_mode">Режим подключения</string>
+    <string name="connection_kind_usb_cable">USB-кабель (напрямую)</string>
+    <string name="connection_kind_usb_wireless_adapter">Беспроводной USB-адаптер</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Не задано</string>
+    <string name="onb_next">Далее</string>
+    <string name="onb_skip">Пропустить</string>
+    <string name="onb_ready_finish">Готово</string>
+    <string name="onb_welcome_title">Добро пожаловать в Headunit Revived</string>
+    <string name="onb_welcome_body">Эта быстрая настройка проверит ваше устройство и подберёт оптимальные параметры видео, экрана и ночного режима. Вы можете изменить всё это позже в настройках.</string>
+    <string name="onb_safety_title">Безопасность прежде всего</string>
+    <string name="onb_safety_accept">Я прочитал(а) и принимаю условия</string>
+    <string name="onb_connection_title">Как вы подключаетесь?</string>
+    <string name="onb_connection_help">Выберите способ подключения телефона. Это поможет оставить на экране настроек только то, что относится к вам.</string>
+    <string name="onb_connection_cable_detail">Телефон подключён к головному устройству напрямую USB-кабелем. Беспроводные параметры скрыты.</string>
+    <string name="onb_connection_adapter_detail">USB-адаптер соединяет кабель с беспроводным каналом. Беспроводные параметры отображаются.</string>
+    <string name="onb_connection_wifi_detail">Телефон подключается по WiFi. Беспроводные параметры отображаются.</string>
+    <string name="onb_display_title">Экран</string>
+    <string name="onb_display_detected">Обнаружена панель: %1$d x %2$d px, %3$d dpi, оборудование %4$s.</string>
+    <string name="onb_display_size_label">Размер экрана</string>
+    <string name="onb_display_orientation_label">Ориентация экрана</string>
+    <string name="onb_display_apply">Применить рекомендуемые настройки</string>
+    <string name="onb_display_result">Применено: %1$s, %2$d dpi, %3$s, режим отображения %4$s.</string>
+    <string name="onb_appearance_title">Внешний вид</string>
+    <string name="onb_appearance_theme_label">Тема приложения</string>
+    <string name="onb_theme_auto">Автоматически</string>
+    <string name="onb_theme_light">Светлая</string>
+    <string name="onb_theme_dark">Тёмная</string>
+    <string name="onb_appearance_night_label">Тёмный режим (Android Auto)</string>
+    <string name="onb_night_auto">Автоматически</string>
+    <string name="onb_night_day">День</string>
+    <string name="onb_night_night">Ночь</string>
+    <string name="onb_night_light_sensor_available">Обнаружен датчик освещённости, поэтому автоматический режим может учитывать окружающий свет.</string>
+    <string name="onb_night_no_light_sensor">Датчик освещённости не обнаружен, поэтому автоматический режим следует за восходом и закатом.</string>
+    <string name="onb_ready_title">Всё готово</string>
+    <string name="onb_ready_summary">Подключение: %1$s\nРазрешение экрана: %2$s\nКодек: %3$s\n\nВы можете точно настроить всё в настройках.</string>
 </resources>

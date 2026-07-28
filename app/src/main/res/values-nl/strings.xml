@@ -649,4 +649,45 @@
     <string name="coordinate_longitude">Lengtegraad</string>
     <string name="coordinates_invalid">Ongeldige coördinaten</string>
     <string name="coordinates_format_help">Decimale graden, punt of komma. Voorbeeld: 40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search & onboarding -->
+    <string name="settings_tab_basic">Basis</string>
+    <string name="settings_tab_advanced">Geavanceerd</string>
+    <string name="settings_search_hint">Instellingen zoeken</string>
+    <string name="connection_mode">Verbindingsmodus</string>
+    <string name="connection_kind_usb_cable">USB-kabel (direct)</string>
+    <string name="connection_kind_usb_wireless_adapter">Draadloze USB-adapter</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Niet ingesteld</string>
+    <string name="onb_next">Volgende</string>
+    <string name="onb_skip">Overslaan</string>
+    <string name="onb_ready_finish">Voltooien</string>
+    <string name="onb_welcome_title">Welkom bij Headunit Revived</string>
+    <string name="onb_welcome_body">Deze snelle installatie scant je apparaat en kiest de beste video-, weergave- en nachtmodusinstellingen voor je. Je kunt alles later wijzigen in Instellingen.</string>
+    <string name="onb_safety_title">Veiligheid eerst</string>
+    <string name="onb_safety_accept">Ik heb de voorwaarden gelezen en ga ermee akkoord</string>
+    <string name="onb_connection_title">Hoe maak je verbinding?</string>
+    <string name="onb_connection_help">Kies hoe je telefoon verbinding maakt. Zo blijft het instellingenscherm gericht op wat voor jou van toepassing is.</string>
+    <string name="onb_connection_cable_detail">Telefoon rechtstreeks met een USB-kabel op de headunit aangesloten. Draadloze opties blijven verborgen.</string>
+    <string name="onb_connection_adapter_detail">Een USB-dongle verbindt de kabel met een draadloze verbinding. Draadloze opties worden getoond.</string>
+    <string name="onb_connection_wifi_detail">Telefoon maakt verbinding via WiFi. Draadloze opties worden getoond.</string>
+    <string name="onb_display_title">Weergave</string>
+    <string name="onb_display_detected">Gedetecteerd scherm: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Schermgrootte</string>
+    <string name="onb_display_orientation_label">Oriëntatie</string>
+    <string name="onb_display_apply">Aanbevolen instellingen toepassen</string>
+    <string name="onb_display_result">Toegepast: %1$s, %2$d dpi, %3$s, %4$s-weergave.</string>
+    <string name="onb_appearance_title">Uiterlijk</string>
+    <string name="onb_appearance_theme_label">App-thema</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Licht</string>
+    <string name="onb_theme_dark">Donker</string>
+    <string name="onb_appearance_night_label">Nachtmodus (Android Auto)</string>
+    <string name="onb_night_auto">Automatisch</string>
+    <string name="onb_night_day">Dag</string>
+    <string name="onb_night_night">Nacht</string>
+    <string name="onb_night_light_sensor_available">Er is een lichtsensor gedetecteerd, zodat Automatisch het omgevingslicht kan volgen.</string>
+    <string name="onb_night_no_light_sensor">Geen lichtsensor gedetecteerd, dus Automatisch volgt zonsopgang en zonsondergang.</string>
+    <string name="onb_ready_title">Alles is klaar</string>
+    <string name="onb_ready_summary">Verbinding: %1$s\nResolutie: %2$s\nCodec: %3$s\n\nJe kunt alles verfijnen in Instellingen.</string>
 </resources>

@@ -648,4 +648,45 @@
     <string name="coordinate_longitude">Hosszúság</string>
     <string name="coordinates_invalid">Érvénytelen koordináták</string>
     <string name="coordinates_format_help">Tizedes fok, pont vagy vessző. Példa: 40.4168, -3.7038</string>
+
+    <!-- Settings redesign / onboarding -->
+    <string name="settings_tab_basic">Alapvető</string>
+    <string name="settings_tab_advanced">Speciális</string>
+    <string name="settings_search_hint">Beállítások keresése</string>
+    <string name="connection_mode">Csatlakozási mód</string>
+    <string name="connection_kind_usb_cable">USB-kábel (közvetlen)</string>
+    <string name="connection_kind_usb_wireless_adapter">USB vezeték nélküli adapter</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Nincs beállítva</string>
+    <string name="onb_next">Tovább</string>
+    <string name="onb_skip">Kihagyás</string>
+    <string name="onb_ready_finish">Befejezés</string>
+    <string name="onb_welcome_title">Üdvözöl a Headunit Revived</string>
+    <string name="onb_welcome_body">Ez a gyorsbeállítás megvizsgálja az eszközödet, és kiválasztja számodra a legjobb videó-, kijelző- és éjszakai mód beállításokat. Mindent később is módosíthatsz a Beállításokban.</string>
+    <string name="onb_safety_title">Biztonság mindenekelőtt</string>
+    <string name="onb_safety_accept">Elolvastam és elfogadom a feltételeket</string>
+    <string name="onb_connection_title">Hogyan csatlakozol?</string>
+    <string name="onb_connection_help">Válaszd ki, hogyan csatlakozik a telefonod. Így a beállítások képernyő csak arra összpontosít, ami rád vonatkozik.</string>
+    <string name="onb_connection_cable_detail">A telefon közvetlenül a fejegységhez csatlakozik USB-kábellel. A vezeték nélküli lehetőségek nem jelennek meg.</string>
+    <string name="onb_connection_adapter_detail">Egy USB-dongle vezeték nélküli kapcsolattá alakítja a kábelt. A vezeték nélküli lehetőségek megjelennek.</string>
+    <string name="onb_connection_wifi_detail">A telefon WiFi-n keresztül csatlakozik. A vezeték nélküli lehetőségek megjelennek.</string>
+    <string name="onb_display_title">Kijelző</string>
+    <string name="onb_display_detected">Észlelt panel: %1$d x %2$d px, %3$d dpi, hardver %4$s.</string>
+    <string name="onb_display_size_label">Kijelző mérete</string>
+    <string name="onb_display_orientation_label">Tájolás</string>
+    <string name="onb_display_apply">Ajánlott beállítások alkalmazása</string>
+    <string name="onb_display_result">Alkalmazva: %1$s, %2$d dpi, %3$s, %4$s megjelenítés.</string>
+    <string name="onb_appearance_title">Megjelenés</string>
+    <string name="onb_appearance_theme_label">Alkalmazás témája</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Világos</string>
+    <string name="onb_theme_dark">Sötét</string>
+    <string name="onb_appearance_night_label">Android Auto éjszakai mód</string>
+    <string name="onb_night_auto">Automatikus</string>
+    <string name="onb_night_day">Nappali</string>
+    <string name="onb_night_night">Éjszakai</string>
+    <string name="onb_night_light_sensor_available">Fényérzékelő észlelve, így az Automatikus mód követheti a környezeti fényt.</string>
+    <string name="onb_night_no_light_sensor">Nem észlelhető fényérzékelő, így az Automatikus mód a napkeltét és napnyugtát követi.</string>
+    <string name="onb_ready_title">Minden készen áll</string>
+    <string name="onb_ready_summary">Csatlakozás: %1$s\nFelbontás: %2$s\nKódek: %3$s\n\nMindent finomhangolhatsz a Beállításokban.</string>
 </resources>

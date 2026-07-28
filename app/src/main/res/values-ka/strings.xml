@@ -583,4 +583,44 @@
     <string name="renderer_fallback_surface">ვიდეო მუდმივად იყინებოდა, ამიტომ ამ სესიისთვის ჩვენება გადაერთო SurfaceView-ზე. თუ სტაბილურია, პარამეტრებში დააყენეთ ხედვის რეჟიმი SurfaceView-ზე.</string>
 
     <string name="self_mode_overlay_permission_description">ავტონომიური რეჟიმის ფონურ რეჟიმში საიმედოდ გასაშვებად, გთხოვთ, შემდეგ ეკრანზე ჩართოთ ნებართვა „სხვა აპებზე ჩვენება“.</string>
+
+    <string name="settings_tab_basic">ძირითადი</string>
+    <string name="settings_tab_advanced">დამატებითი</string>
+    <string name="settings_search_hint">პარამეტრების ძებნა</string>
+    <string name="connection_mode">კავშირის რეჟიმი</string>
+    <string name="connection_kind_usb_cable">USB კაბელი (პირდაპირი)</string>
+    <string name="connection_kind_usb_wireless_adapter">USB უსადენო ადაპტერი</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">არ არის მითითებული</string>
+    <string name="onb_next">შემდეგი</string>
+    <string name="onb_skip">გამოტოვება</string>
+    <string name="onb_ready_finish">დასრულება</string>
+    <string name="onb_welcome_title">კეთილი იყოს თქვენი მობრძანება Headunit Revived-ში</string>
+    <string name="onb_welcome_body">ეს სწრაფი გამართვა ასკანირებს თქვენს მოწყობილობას და ირჩევს ვიდეოს, ეკრანისა და ბნელი რეჟიმის საუკეთესო პარამეტრებს. ყველაფრის შეცვლა მოგვიანებით პარამეტრებში შეგიძლიათ.</string>
+    <string name="onb_safety_title">უპირველესად უსაფრთხოება</string>
+    <string name="onb_safety_accept">წავიკითხე და ვეთანხმები პირობებს</string>
+    <string name="onb_connection_title">როგორ უკავშირდებით?</string>
+    <string name="onb_connection_help">აირჩიეთ, როგორ უკავშირდება თქვენი ტელეფონი. ეს პარამეტრების ეკრანს მხოლოდ თქვენთვის რელევანტურ ვარიანტებზე ამახვილებს.</string>
+    <string name="onb_connection_cable_detail">ტელეფონი პირდაპირ მონიტორშია ჩართული USB კაბელით. უსადენო ვარიანტები დამალული რჩება.</string>
+    <string name="onb_connection_adapter_detail">USB დონგლი აკავშირებს კაბელს უსადენო კავშირთან. უსადენო ვარიანტები ნაჩვენებია.</string>
+    <string name="onb_connection_wifi_detail">ტელეფონი უკავშირდება WiFi-ით. უსადენო ვარიანტები ნაჩვენებია.</string>
+    <string name="onb_display_title">ეკრანი</string>
+    <string name="onb_display_detected">აღმოჩენილი პანელი: %1$d x %2$d px, %3$d dpi, აპარატურა %4$s.</string>
+    <string name="onb_display_size_label">ეკრანის ზომა</string>
+    <string name="onb_display_orientation_label">ორიენტაცია</string>
+    <string name="onb_display_apply">რეკომენდებული პარამეტრების გამოყენება</string>
+    <string name="onb_display_result">გამოყენებულია: %1$s, %2$d dpi, %3$s, %4$s ხედი.</string>
+    <string name="onb_appearance_title">იერსახე</string>
+    <string name="onb_appearance_theme_label">აპლიკაციის თემა</string>
+    <string name="onb_theme_auto">ავტო</string>
+    <string name="onb_theme_light">ღია</string>
+    <string name="onb_theme_dark">ბნელი</string>
+    <string name="onb_appearance_night_label">ბნელი რეჟიმი (Android Auto)</string>
+    <string name="onb_night_auto">ავტომატური</string>
+    <string name="onb_night_day">დღე</string>
+    <string name="onb_night_night">ღამე</string>
+    <string name="onb_night_light_sensor_available">აღმოჩენილია სინათლის სენსორი, ამიტომ ავტომატურ რეჟიმს შეუძლია გარემო განათებას მიჰყვეს.</string>
+    <string name="onb_night_no_light_sensor">სინათლის სენსორი ვერ მოიძებნა, ამიტომ ავტომატური რეჟიმი მიჰყვება მზის ამოსვლასა და ჩასვლას.</string>
+    <string name="onb_ready_title">ყველაფერი მზადაა</string>
+    <string name="onb_ready_summary">კავშირი: %1$s\nგაფართოება: %2$s\nკოდეკი: %3$s\n\nყველაფრის ზუსტად მორგება პარამეტრებში შეგიძლიათ.</string>
 </resources>

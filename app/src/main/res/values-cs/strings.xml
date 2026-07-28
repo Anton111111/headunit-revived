@@ -649,4 +649,45 @@
     <string name="coordinate_longitude">Zeměpisná délka</string>
     <string name="coordinates_invalid">Neplatné souřadnice</string>
     <string name="coordinates_format_help">Desetinné stupně, tečka nebo čárka. Příklad: 40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search, connection mode, onboarding -->
+    <string name="settings_tab_basic">Základní</string>
+    <string name="settings_tab_advanced">Pokročilé</string>
+    <string name="settings_search_hint">Hledat v nastavení</string>
+    <string name="connection_mode">Režim připojení</string>
+    <string name="connection_kind_usb_cable">USB kabel (přímé)</string>
+    <string name="connection_kind_usb_wireless_adapter">Bezdrátový USB adaptér</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Nenastaveno</string>
+    <string name="onb_next">Další</string>
+    <string name="onb_skip">Přeskočit</string>
+    <string name="onb_ready_finish">Dokončit</string>
+    <string name="onb_welcome_title">Vítejte v Headunit Revived</string>
+    <string name="onb_welcome_body">Toto rychlé nastavení prohlédne vaše zařízení a vybere pro vás nejlepší nastavení videa, displeje a nočního režimu. Vše můžete později změnit v Nastavení.</string>
+    <string name="onb_safety_title">Bezpečnost především</string>
+    <string name="onb_safety_accept">Přečetl/a jsem si podmínky a souhlasím s nimi</string>
+    <string name="onb_connection_title">Jak se připojujete?</string>
+    <string name="onb_connection_help">Vyberte, jak se váš telefon připojuje. Obrazovka nastavení tak zůstane zaměřená na to, co se vás týká.</string>
+    <string name="onb_connection_cable_detail">Telefon zapojený přímo do autorádia pomocí USB kabelu. Bezdrátové možnosti se nezobrazují.</string>
+    <string name="onb_connection_adapter_detail">USB adaptér přemosťuje kabel na bezdrátové spojení. Bezdrátové možnosti se zobrazují.</string>
+    <string name="onb_connection_wifi_detail">Telefon se připojuje přes WiFi. Bezdrátové možnosti se zobrazují.</string>
+    <string name="onb_display_title">Displej</string>
+    <string name="onb_display_detected">Detekovaný panel: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Velikost obrazovky</string>
+    <string name="onb_display_orientation_label">Orientace</string>
+    <string name="onb_display_apply">Použít doporučené nastavení</string>
+    <string name="onb_display_result">Použito: %1$s, %2$d dpi, %3$s, zobrazení %4$s.</string>
+    <string name="onb_appearance_title">Vzhled</string>
+    <string name="onb_appearance_theme_label">Téma aplikace</string>
+    <string name="onb_theme_auto">Automaticky</string>
+    <string name="onb_theme_light">Světlé</string>
+    <string name="onb_theme_dark">Tmavé</string>
+    <string name="onb_appearance_night_label">Tmavý režim (Android Auto)</string>
+    <string name="onb_night_auto">Automaticky</string>
+    <string name="onb_night_day">Den</string>
+    <string name="onb_night_night">Noc</string>
+    <string name="onb_night_light_sensor_available">Byl detekován světelný senzor, takže automatický režim může sledovat okolní světlo.</string>
+    <string name="onb_night_no_light_sensor">Nebyl detekován žádný světelný senzor, takže automatický režim se řídí východem a západem slunce.</string>
+    <string name="onb_ready_title">Vše je připraveno</string>
+    <string name="onb_ready_summary">Připojení: %1$s\nRozlišení: %2$s\nKodek: %3$s\n\nVše můžete doladit v Nastavení.</string>
 </resources>

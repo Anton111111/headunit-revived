@@ -656,4 +656,45 @@
     <string name="coordinate_longitude">Longitudine</string>
     <string name="coordinates_invalid">Coordinate non valide</string>
     <string name="coordinates_format_help">Gradi decimali, punto o virgola. Esempio: 40.4168, -3.7038</string>
+
+    <!-- Settings redesign and onboarding -->
+    <string name="settings_tab_basic">Base</string>
+    <string name="settings_tab_advanced">Avanzate</string>
+    <string name="settings_search_hint">Cerca impostazioni</string>
+    <string name="connection_mode">Modalità di connessione</string>
+    <string name="connection_kind_usb_cable">Cavo USB (diretto)</string>
+    <string name="connection_kind_usb_wireless_adapter">Adattatore wireless USB</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Non impostato</string>
+    <string name="onb_next">Avanti</string>
+    <string name="onb_skip">Salta</string>
+    <string name="onb_ready_finish">Fine</string>
+    <string name="onb_welcome_title">Benvenuto in Headunit Revived</string>
+    <string name="onb_welcome_body">Questa configurazione rapida analizza il tuo dispositivo e sceglie per te le migliori impostazioni video, di visualizzazione e di modalità notte. Potrai modificare tutto in seguito nelle Impostazioni.</string>
+    <string name="onb_safety_title">La sicurezza prima di tutto</string>
+    <string name="onb_safety_accept">Ho letto e accetto i termini</string>
+    <string name="onb_connection_title">Come ti connetti?</string>
+    <string name="onb_connection_help">Scegli come si connette il tuo telefono. In questo modo la schermata delle impostazioni resta focalizzata su ciò che ti riguarda.</string>
+    <string name="onb_connection_cable_detail">Telefono collegato direttamente alla head unit con un cavo USB. Le opzioni wireless restano nascoste.</string>
+    <string name="onb_connection_adapter_detail">Un dongle USB collega il cavo a un link wireless. Le opzioni wireless vengono mostrate.</string>
+    <string name="onb_connection_wifi_detail">Il telefono si connette tramite WiFi. Le opzioni wireless vengono mostrate.</string>
+    <string name="onb_display_title">Visualizzazione</string>
+    <string name="onb_display_detected">Pannello rilevato: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Dimensioni schermo</string>
+    <string name="onb_display_orientation_label">Orientamento</string>
+    <string name="onb_display_apply">Applica impostazioni consigliate</string>
+    <string name="onb_display_result">Applicato: %1$s, %2$d dpi, %3$s, vista %4$s.</string>
+    <string name="onb_appearance_title">Aspetto</string>
+    <string name="onb_appearance_theme_label">Tema app</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Chiaro</string>
+    <string name="onb_theme_dark">Scuro</string>
+    <string name="onb_appearance_night_label">Modalità notte di Android Auto</string>
+    <string name="onb_night_auto">Automatica</string>
+    <string name="onb_night_day">Giorno</string>
+    <string name="onb_night_night">Notte</string>
+    <string name="onb_night_light_sensor_available">È stato rilevato un sensore di luce, quindi la modalità Automatica può seguire la luce ambientale.</string>
+    <string name="onb_night_no_light_sensor">Nessun sensore di luce rilevato, quindi la modalità Automatica segue l\'alba e il tramonto.</string>
+    <string name="onb_ready_title">Tutto pronto</string>
+    <string name="onb_ready_summary">Connessione: %1$s\nRisoluzione: %2$s\nCodec: %3$s\n\nPuoi mettere a punto tutto nelle Impostazioni.</string>
 </resources>

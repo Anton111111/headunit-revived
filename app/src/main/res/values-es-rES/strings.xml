@@ -603,7 +603,7 @@
     <string name="btn_show_qr">Mostrar código QR</string>
     <string name="renderer_fallback_surface">El vídeo se seguía congelando, así que la pantalla se cambió a SurfaceView durante esta sesión. Si va estable, pon el Modo de vista en SurfaceView en Ajustes.</string>
 
-    <string name="self_mode_overlay_permission_description">Para permitir que el Modo Propio se inicie de manera confiable en segundo plano, active el permiso \"Mostrar sobre outras aplicaciones\" en la siguiente pantalla.</string>
+    <string name="self_mode_overlay_permission_description">Para permitir que el Modo autónomo se inicie de manera confiable en segundo plano, active el permiso \"Mostrar sobre outras aplicaciones\" en la siguiente pantalla.</string>
 
     <!-- Geofence / coordinates -->
     <string name="delete">Eliminar</string>
@@ -658,4 +658,45 @@
     <string name="coordinate_longitude">Longitud</string>
     <string name="coordinates_invalid">Coordenadas no válidas</string>
     <string name="coordinates_format_help">Grados decimales, punto o coma. Ejemplo: 40.4168, -3.7038</string>
+
+    <!-- Settings redesign / onboarding -->
+    <string name="settings_tab_basic">Básico</string>
+    <string name="settings_tab_advanced">Avanzado</string>
+    <string name="settings_search_hint">Buscar ajustes</string>
+    <string name="connection_mode">Modo de conexión</string>
+    <string name="connection_kind_usb_cable">Cable USB (directo)</string>
+    <string name="connection_kind_usb_wireless_adapter">Adaptador inalámbrico USB</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Sin establecer</string>
+    <string name="onb_next">Siguiente</string>
+    <string name="onb_skip">Omitir</string>
+    <string name="onb_ready_finish">Finalizar</string>
+    <string name="onb_welcome_title">Bienvenido a Headunit Revived</string>
+    <string name="onb_welcome_body">Esta configuración rápida analiza tu dispositivo y elige los mejores ajustes de vídeo, pantalla y modo oscuro para ti. Puedes cambiarlo todo más tarde en Configuración.</string>
+    <string name="onb_safety_title">La seguridad primero</string>
+    <string name="onb_safety_accept">He leído y acepto los términos</string>
+    <string name="onb_connection_title">¿Cómo te conectas?</string>
+    <string name="onb_connection_help">Elige cómo se conecta tu móvil. Así la pantalla de ajustes se centra en lo que se aplica a tu caso.</string>
+    <string name="onb_connection_cable_detail">El móvil se conecta directamente a la radio con un cable USB. Las opciones inalámbricas se mantienen ocultas.</string>
+    <string name="onb_connection_adapter_detail">Un adaptador USB conecta el cable con un enlace inalámbrico. Se muestran las opciones inalámbricas.</string>
+    <string name="onb_connection_wifi_detail">El móvil se conecta por WiFi. Se muestran las opciones inalámbricas.</string>
+    <string name="onb_display_title">Pantalla</string>
+    <string name="onb_display_detected">Panel detectado: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Tamaño de pantalla</string>
+    <string name="onb_display_orientation_label">Orientación</string>
+    <string name="onb_display_apply">Aplicar ajustes recomendados</string>
+    <string name="onb_display_result">Aplicado: %1$s, %2$d dpi, %3$s, vista %4$s.</string>
+    <string name="onb_appearance_title">Apariencia</string>
+    <string name="onb_appearance_theme_label">Tema de la aplicación</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Claro</string>
+    <string name="onb_theme_dark">Oscuro</string>
+    <string name="onb_appearance_night_label">Modo oscuro de Android Auto</string>
+    <string name="onb_night_auto">Automático</string>
+    <string name="onb_night_day">Día</string>
+    <string name="onb_night_night">Noche</string>
+    <string name="onb_night_light_sensor_available">Se ha detectado un sensor de luz, por lo que el modo Automático puede seguir la luz ambiental.</string>
+    <string name="onb_night_no_light_sensor">No se ha detectado ningún sensor de luz, por lo que el modo Automático sigue el amanecer y el atardecer.</string>
+    <string name="onb_ready_title">Todo listo</string>
+    <string name="onb_ready_summary">Conexión: %1$s\nResolución: %2$s\nCódec: %3$s\n\nPuedes ajustarlo todo con detalle en Configuración.</string>
 </resources>

@@ -656,4 +656,45 @@
     <string name="coordinate_longitude">経度</string>
     <string name="coordinates_invalid">無効な座標</string>
     <string name="coordinates_format_help">十進法の度、ドットまたはカンマ。例: 40.4168, -3.7038</string>
+
+    <!-- Settings tabs, search, connection kinds, onboarding -->
+    <string name="settings_tab_basic">基本</string>
+    <string name="settings_tab_advanced">詳細</string>
+    <string name="settings_search_hint">設定を検索</string>
+    <string name="connection_mode">接続モード</string>
+    <string name="connection_kind_usb_cable">USBケーブル (直接)</string>
+    <string name="connection_kind_usb_wireless_adapter">USBワイヤレスアダプター</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">未設定</string>
+    <string name="onb_next">次へ</string>
+    <string name="onb_skip">スキップ</string>
+    <string name="onb_ready_finish">完了</string>
+    <string name="onb_welcome_title">Headunit Revivedへようこそ</string>
+    <string name="onb_welcome_body">このクイックセットアップでは、お使いのデバイスをスキャンし、最適なビデオ、ディスプレイ、ナイトモードの設定を選択します。すべては後から設定で変更できます。</string>
+    <string name="onb_safety_title">安全が最優先</string>
+    <string name="onb_safety_accept">利用規約を読み、同意しました</string>
+    <string name="onb_connection_title">どのように接続しますか？</string>
+    <string name="onb_connection_help">スマートフォンの接続方法を選択してください。これにより、設定画面をお使いの環境に関連する項目に絞り込みます。</string>
+    <string name="onb_connection_cable_detail">スマートフォンをUSBケーブルで車載機に直接接続します。ワイヤレスのオプションは表示されません。</string>
+    <string name="onb_connection_adapter_detail">USBドングルがケーブルとワイヤレスリンクを橋渡しします。ワイヤレスのオプションが表示されます。</string>
+    <string name="onb_connection_wifi_detail">スマートフォンをWiFiで接続します。ワイヤレスのオプションが表示されます。</string>
+    <string name="onb_display_title">ディスプレイ</string>
+    <string name="onb_display_detected">検出したパネル: %1$d x %2$d px、%3$d dpi、ハードウェア %4$s。</string>
+    <string name="onb_display_size_label">画面のサイズ</string>
+    <string name="onb_display_orientation_label">画面の向き</string>
+    <string name="onb_display_apply">推奨設定を適用する</string>
+    <string name="onb_display_result">適用済み: %1$s、%2$d dpi、%3$s、%4$s ビュー。</string>
+    <string name="onb_appearance_title">外観</string>
+    <string name="onb_appearance_theme_label">アプリテーマ</string>
+    <string name="onb_theme_auto">自動</string>
+    <string name="onb_theme_light">ライト</string>
+    <string name="onb_theme_dark">ダーク</string>
+    <string name="onb_appearance_night_label">Android Auto ナイトモード</string>
+    <string name="onb_night_auto">自動</string>
+    <string name="onb_night_day">日中</string>
+    <string name="onb_night_night">夜間</string>
+    <string name="onb_night_light_sensor_available">光センサーが検出されたため、自動モードは周囲の明るさに追従できます。</string>
+    <string name="onb_night_no_light_sensor">光センサーが検出されなかったため、自動モードは日の出と日の入りに追従します。</string>
+    <string name="onb_ready_title">準備が完了しました</string>
+    <string name="onb_ready_summary">接続: %1$s\n解像度: %2$s\nコーデック: %3$s\n\nすべては設定で細かく調整できます。</string>
 </resources>
