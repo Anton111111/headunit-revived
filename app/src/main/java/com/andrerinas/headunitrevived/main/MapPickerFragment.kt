@@ -235,9 +235,14 @@ class MapPickerFragment : Fragment() {
         callJs("moveTo($currentLat, $currentLon)")
     }
 
-    /** Re-applies both theme engines so a change takes effect right away. */
+    /**
+     * Applies a place/coordinate change right away: re-evaluates the running app theme
+     * manager (recreates only if the appearance actually changed) and asks the service to
+     * re-send the Android Auto night mode. Does NOT rebuild the manager, to avoid a
+     * recreate loop.
+     */
     private fun applyThemeConfigChange() {
-        AppThemeManager.reapply(requireContext(), settings)
+        App.appThemeManager?.forceRefresh()
         requireContext().sendBroadcast(
             Intent(AapService.ACTION_REQUEST_NIGHT_MODE_UPDATE).setPackage(requireContext().packageName)
         )

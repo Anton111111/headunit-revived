@@ -159,6 +159,13 @@ class AppThemeManager(
         }
     }
 
+    /**
+     * Re-evaluates the theme on the EXISTING manager. Unlike [reapply] it does not build
+     * a new manager, so it only recreates activities when the day/night value actually
+     * changes (avoiding a recreate loop when called repeatedly).
+     */
+    fun forceRefresh() = update(debounce = false)
+
     private fun update(debounce: Boolean = true) {
         var isNight = false
         val threshold = settings.appThemeThresholdLux

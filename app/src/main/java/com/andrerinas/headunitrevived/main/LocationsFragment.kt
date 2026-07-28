@@ -51,11 +51,6 @@ class LocationsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // A place may have been added/edited/deleted; re-apply so it takes effect now.
-        AppThemeManager.reapply(requireContext(), settings)
-        requireContext().sendBroadcast(
-            Intent(AapService.ACTION_REQUEST_NIGHT_MODE_UPDATE).setPackage(requireContext().packageName)
-        )
         updateList()
     }
 
