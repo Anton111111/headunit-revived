@@ -56,6 +56,10 @@ class DarkModeFragment : Fragment(), SensorEventListener {
     private var pendingUseFixedSunriseLocation: Boolean? = null
     private var pendingLocationOutsideNight: Boolean? = null
 
+    // Last non-Location mode of each selector, restored when the Location scope removes it.
+    private var restoreAppTheme: Settings.AppTheme = Settings.AppTheme.AUTOMATIC
+    private var restoreNightMode: Settings.NightMode = Settings.NightMode.AUTO
+
     // Pending night mode settings (Android Auto)
     private var pendingNightMode: Settings.NightMode? = null
     private var pendingThresholdLux: Int? = null
@@ -120,6 +124,10 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         pendingNightMode = settings.nightMode
         pendingUseFixedSunriseLocation = settings.useFixedSunriseLocation
         pendingLocationOutsideNight = settings.locationOutsideNight
+        restoreAppTheme = if (settings.appTheme == Settings.AppTheme.LOCATION)
+            Settings.AppTheme.AUTOMATIC else settings.appTheme
+        restoreNightMode = if (settings.nightMode == Settings.NightMode.LOCATION)
+            Settings.NightMode.AUTO else settings.nightMode
         pendingThresholdLux = settings.nightModeThresholdLux
         pendingThresholdBrightness = settings.nightModeThresholdBrightness
         pendingManualStart = settings.nightModeManualStart
@@ -361,9 +369,35 @@ class DarkModeFragment : Fragment(), SensorEventListener {
     }
 
     /** Sub-options for "Location (by area)" mode: outside-places appearance + manage places. */
-    private fun addLocationModeOptions(items: MutableList<SettingItem>, idSuffix: String) {
+    /**
+     * Dedicated "Location" group, shown whenever either selector is set to Location. Its
+     * scope segmented reflects and drives which selector(s) use Location, so choosing here
+     * updates the selectors above immediately. Also holds the outside-places appearance
+     * and the saved places.
+     */
+    private fun addLocationGroup(items: MutableList<SettingItem>) {
+        items.add(SettingItem.CategoryHeader("locationGroup", R.string.location_section))
+
+        val scopeIndex = when {
+            pendingAppTheme == Settings.AppTheme.LOCATION &&
+                pendingNightMode == Settings.NightMode.LOCATION -> 2
+            pendingAppTheme == Settings.AppTheme.LOCATION -> 0
+            else -> 1
+        }
+        items.add(SettingItem.SegmentedButtonSettingEntry(
+            stableId = "locationScope",
+            nameResId = R.string.geofence_scope_label,
+            options = listOf(
+                getString(R.string.geofence_scope_app),
+                getString(R.string.geofence_scope_aa),
+                getString(R.string.geofence_scope_both)
+            ),
+            selectedIndex = scopeIndex,
+            onOptionSelected = { idx -> setLocationScope(idx) }
+        ))
+
         items.add(SettingItem.SettingEntry(
-            stableId = "outsidePlaces_$idSuffix",
+            stableId = "outsidePlaces",
             nameResId = R.string.location_outside_label,
             value = getString(
                 if (pendingLocationOutsideNight == true) R.string.geofence_mode_dark
@@ -385,8 +419,9 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                     .show()
             }
         ))
+
         items.add(SettingItem.SettingEntry(
-            stableId = "managePlaces_$idSuffix",
+            stableId = "managePlaces",
             nameResId = R.string.location_manage_places,
             value = run {
                 val n = settings.geofenceLocations.size
@@ -394,6 +429,29 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             },
             onClick = { _ -> findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment) }
         ))
+    }
+
+    /**
+     * Applies the scope chosen in the Location group to the two selectors, restoring each
+     * selector's previous (non-Location) mode when Location is removed from it.
+     */
+    private fun setLocationScope(index: Int) {
+        when (index) {
+            0 -> { // App only
+                pendingAppTheme = Settings.AppTheme.LOCATION
+                if (pendingNightMode == Settings.NightMode.LOCATION) pendingNightMode = restoreNightMode
+            }
+            1 -> { // Android Auto only
+                pendingNightMode = Settings.NightMode.LOCATION
+                if (pendingAppTheme == Settings.AppTheme.LOCATION) pendingAppTheme = restoreAppTheme
+            }
+            else -> { // Both
+                pendingAppTheme = Settings.AppTheme.LOCATION
+                pendingNightMode = Settings.NightMode.LOCATION
+            }
+        }
+        checkChanges()
+        updateSettingsList()
     }
 
     /** Dialog to type a fixed latitude/longitude, with a shortcut to pick it on the map. */
@@ -461,6 +519,7 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                     .setTitle(R.string.change_app_theme)
                     .setSingleChoiceItems(appThemeTitles, pendingAppTheme!!.value) { dialog, which ->
                         pendingAppTheme = Settings.AppTheme.fromInt(which)
+                        if (pendingAppTheme != Settings.AppTheme.LOCATION) restoreAppTheme = pendingAppTheme!!
                         if (pendingAppTheme == Settings.AppTheme.EXTREME_DARK) {
                             pendingMonochromeIcons = true
                         } else if (pendingAppTheme == Settings.AppTheme.CLEAR) {
@@ -634,9 +693,8 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             ))
         }
 
-        // App theme contextual sub-options
+        // App theme contextual sub-options (Location has its own group below)
         if (pendingAppTheme == Settings.AppTheme.AUTO_SUNRISE) addSunriseReference(items, "app")
-        if (pendingAppTheme == Settings.AppTheme.LOCATION) addLocationModeOptions(items, "app")
 
         // --- Android Auto Night Mode ---
         items.add(SettingItem.CategoryHeader("aaNightMode", R.string.night_mode))
@@ -661,6 +719,7 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                     .setTitle(R.string.night_mode)
                     .setSingleChoiceItems(nightModeTitles, pendingNightMode!!.value) { dialog, which ->
                         pendingNightMode = Settings.NightMode.fromInt(which)!!
+                        if (pendingNightMode != Settings.NightMode.LOCATION) restoreNightMode = pendingNightMode!!
                         checkChanges()
                         dialog.dismiss()
                         updateSettingsList()
@@ -758,13 +817,9 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             ))
         }
 
-        // Android Auto contextual sub-options (avoid duplicating the shared entries when
-        // the app theme section already shows them).
+        // Android Auto sunrise reference (avoid duplicating when app theme already shows it).
         if (pendingNightMode == Settings.NightMode.AUTO && pendingAppTheme != Settings.AppTheme.AUTO_SUNRISE) {
             addSunriseReference(items, "aa")
-        }
-        if (pendingNightMode == Settings.NightMode.LOCATION && pendingAppTheme != Settings.AppTheme.LOCATION) {
-            addLocationModeOptions(items, "aa")
         }
 
         // AA Monochrome toggle — hidden when Night Mode is DAY
@@ -828,6 +883,11 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             }
         }
 
+
+        // --- Location group (shown when either selector uses Location) ---
+        if (pendingAppTheme == Settings.AppTheme.LOCATION || pendingNightMode == Settings.NightMode.LOCATION) {
+            addLocationGroup(items)
+        }
 
         settingsAdapter.submitList(items) {
             scrollState?.let { recyclerView.layoutManager?.onRestoreInstanceState(it) }
