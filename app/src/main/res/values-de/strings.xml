@@ -647,4 +647,11 @@
     <string name="location_places_hint">Erzwingt ein helles oder dunkles Aussehen in einem Bereich und optional nur dort den Auto-Start. Nutzt GPS.</string>
     <string name="appearance_label">Aussehen festlegen, wenn drinnen</string>
     <string name="appearance_off">Aus</string>
+    <string name="location_manage_places">Gespeicherte Orte</string>
+    <string name="location_outside_label">Außerhalb gespeicherter Orte</string>
+    <string name="location_places_desc">Legt in einem Bereich ein helles oder dunkles Aussehen fest, während Sie sich darin befinden. Nutzt GPS.</string>
+    <string name="coordinates_enter">Koordinaten eingeben</string>
+    <string name="coordinate_latitude">Breitengrad</string>
+    <string name="coordinate_longitude">Längengrad</string>
+    <string name="coordinates_invalid">Ungültige Koordinaten</string>
 </resources>

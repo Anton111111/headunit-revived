@@ -81,101 +81,13 @@
                     android:value="150" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/appearance_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:text="@string/appearance_label" />
-
-            <RadioGroup
-                android:id="@+id/appearance_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/appearance_off"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:text="@string/appearance_off" />
-
-                <RadioButton
-                    android:id="@+id/appearance_light"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:text="@string/geofence_mode_light" />
-
-                <RadioButton
-                    android:id="@+id/appearance_dark"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:text="@string/geofence_mode_dark" />
-            </RadioGroup>
-
-            <!-- Scope shown only when appearance is not Off (conflict #3). -->
-            <LinearLayout
-                android:id="@+id/theme_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:text="@string/geofence_scope_label" />
-
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/scope_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:singleSelection="true"
-                    app:selectionRequired="true">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/scope_app"
-                        style="?attr/materialButtonOutlinedStyle"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/geofence_scope_app" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/scope_aa"
-                        style="?attr/materialButtonOutlinedStyle"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/geofence_scope_aa" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/scope_both"
-                        style="?attr/materialButtonOutlinedStyle"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/geofence_scope_both" />
-                </com.google.android.material.button.MaterialButtonToggleGroup>
-            </LinearLayout>
-
             <Switch
-                android:id="@+id/automation_switch"
+                android:id="@+id/dark_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="@string/geofence_gate_here" />
+                android:text="@string/geofence_dark_inside" />
 
             <Button
                 android:id="@+id/use_gps_button"

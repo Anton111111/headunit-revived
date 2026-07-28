@@ -7,10 +7,10 @@
         <item>Senzor de lumină</item>
         <item>Luminozitate ecran</item>
         <item>Semnal faruri auto (ILL+)</item>
+        <item>Locație (după zonă)</item>
 </string-array>
 
-    <string-array name="app_theme">
-        <item>Automat (Sistem)</item>
+    <string-array name="app_theme">        <item>Automat (Sistem)</item>
         <item>Deschis</item>
         <item>Întunecat</item>
         <item>Întunecat extrem</item>
@@ -18,7 +18,9 @@
         <item>Ora manuală</item>
         <item>Senzor de lumină</item>
         <item>Luminozitatea ecranului</item>
-    </string-array>
+        <item>Semnal faruri auto (ILL+)</item>
+        <item>Locație (după zonă)</item>
+</string-array>
 
     <string-array name="screen_orientation">
         <item>@string/orientation_system_default</item>

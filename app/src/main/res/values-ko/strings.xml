@@ -645,4 +645,11 @@
     <string name="location_places_hint">특정 지역에서 밝은 또는 어두운 모드를 강제하고, 선택적으로 해당 지역에서만 자동 시작합니다. GPS를 사용합니다.</string>
     <string name="appearance_label">안에 있을 때 모드 설정</string>
     <string name="appearance_off">끄기</string>
+    <string name="location_manage_places">저장된 장소</string>
+    <string name="location_outside_label">저장된 장소 외부</string>
+    <string name="location_places_desc">영역 안에 있는 동안 밝은 또는 어두운 모양을 설정합니다. GPS를 사용합니다.</string>
+    <string name="coordinates_enter">좌표 입력</string>
+    <string name="coordinate_latitude">위도</string>
+    <string name="coordinate_longitude">경도</string>
+    <string name="coordinates_invalid">잘못된 좌표</string>
 </resources>

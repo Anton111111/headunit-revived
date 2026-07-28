@@ -638,4 +638,11 @@
     <string name="location_places_hint">Bir alanda açık veya koyu görünümü zorla ve isteğe bağlı olarak yalnızca orada otomatik başlat. GPS kullanır.</string>
     <string name="appearance_label">İçeri girince görünümü ayarla</string>
     <string name="appearance_off">Kapalı</string>
+    <string name="location_manage_places">Kaydedilen yerler</string>
+    <string name="location_outside_label">Kaydedilen yerlerin dışında</string>
+    <string name="location_places_desc">Bir alanın içindeyken açık veya koyu bir görünüm ayarlayın. GPS kullanır.</string>
+    <string name="coordinates_enter">Koordinatları girin</string>
+    <string name="coordinate_latitude">Enlem</string>
+    <string name="coordinate_longitude">Boylam</string>
+    <string name="coordinates_invalid">Geçersiz koordinatlar</string>
 </resources>

@@ -656,4 +656,13 @@
     <string name="location_places_hint">Force a light or dark look in an area, and optionally only auto-start there. Uses GPS.</string>
     <string name="appearance_label">When inside, set appearance</string>
     <string name="appearance_off">Off</string>
+
+    <!-- Round 4: Location as a mode -->
+    <string name="location_manage_places">Saved places</string>
+    <string name="location_outside_label">Outside saved places</string>
+    <string name="location_places_desc">Set a light or dark look in an area while you are inside it. Uses GPS.</string>
+    <string name="coordinates_enter">Enter coordinates</string>
+    <string name="coordinate_latitude">Latitude</string>
+    <string name="coordinate_longitude">Longitude</string>
+    <string name="coordinates_invalid">Invalid coordinates</string>
 </resources>

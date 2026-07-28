@@ -648,4 +648,11 @@
     <string name="location_places_hint">Forza un aspetto chiaro o scuro in un\'area e, facoltativamente, l\'avvio automatico solo lì. Usa il GPS.</string>
     <string name="appearance_label">Quando all\'interno, imposta l\'aspetto</string>
     <string name="appearance_off">Disattivato</string>
+    <string name="location_manage_places">Luoghi salvati</string>
+    <string name="location_outside_label">Fuori dai luoghi salvati</string>
+    <string name="location_places_desc">Imposta un aspetto chiaro o scuro in un\'area mentre ti trovi al suo interno. Usa il GPS.</string>
+    <string name="coordinates_enter">Inserisci coordinate</string>
+    <string name="coordinate_latitude">Latitudine</string>
+    <string name="coordinate_longitude">Longitudine</string>
+    <string name="coordinates_invalid">Coordinate non valide</string>
 </resources>

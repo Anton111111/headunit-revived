@@ -7,6 +7,7 @@
         <item>Датчик света</item>
         <item>Яркость экрана</item>
         <item>Сигнал фар (ILL+)</item>
+        <item>Местоположение (по региону)</item>
 </string-array>
 
     <string-array name="app_theme">
@@ -19,6 +20,7 @@
         <item>Датчик освещённости</item>
         <item>Яркость экрана</item>
         <item>Сигнал фар (ILL+)</item>
+        <item>Местоположение (по региону)</item>
     </string-array>
 
     <string-array name="screen_orientation">

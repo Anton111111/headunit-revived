@@ -641,4 +641,11 @@
     <string name="location_places_hint">فرض مظهر فاتح أو داكن في منطقة معينة، مع خيار التشغيل التلقائي هناك فقط. يستخدم نظام تحديد المواقع GPS.</string>
     <string name="appearance_label">عند التواجد بالداخل، اضبط المظهر</string>
     <string name="appearance_off">إيقاف</string>
+    <string name="location_manage_places">الأماكن المحفوظة</string>
+    <string name="location_outside_label">خارج الأماكن المحفوظة</string>
+    <string name="location_places_desc">اضبط مظهرًا فاتحًا أو داكنًا في منطقة أثناء وجودك داخلها. يستخدم نظام تحديد المواقع GPS.</string>
+    <string name="coordinates_enter">أدخل الإحداثيات</string>
+    <string name="coordinate_latitude">خط العرض</string>
+    <string name="coordinate_longitude">خط الطول</string>
+    <string name="coordinates_invalid">إحداثيات غير صالحة</string>
 </resources>

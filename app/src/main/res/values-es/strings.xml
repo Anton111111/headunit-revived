@@ -650,4 +650,11 @@
     <string name="location_places_hint">Fuerza un aspecto claro u oscuro en una zona y, opcionalmente, inicia automáticamente solo allí. Usa GPS.</string>
     <string name="appearance_label">Al entrar, establecer apariencia</string>
     <string name="appearance_off">Desactivado</string>
+    <string name="location_manage_places">Lugares guardados</string>
+    <string name="location_outside_label">Fuera de los lugares guardados</string>
+    <string name="location_places_desc">Establece un aspecto claro u oscuro en una zona mientras estás dentro de ella. Usa GPS.</string>
+    <string name="coordinates_enter">Introducir coordenadas</string>
+    <string name="coordinate_latitude">Latitud</string>
+    <string name="coordinate_longitude">Longitud</string>
+    <string name="coordinates_invalid">Coordenadas no válidas</string>
 </resources>

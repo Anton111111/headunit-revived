@@ -643,4 +643,11 @@
     <string name="location_places_hint">Force uma aparência clara ou escura em uma área e, opcionalmente, inicie automaticamente apenas lá. Usa GPS.</string>
     <string name="appearance_label">Ao entrar, definir aparência</string>
     <string name="appearance_off">Desligado</string>
+    <string name="location_manage_places">Locais salvos</string>
+    <string name="location_outside_label">Fora dos locais salvos</string>
+    <string name="location_places_desc">Defina uma aparência clara ou escura em uma área enquanto você estiver dentro dela. Usa GPS.</string>
+    <string name="coordinates_enter">Inserir coordenadas</string>
+    <string name="coordinate_latitude">Latitude</string>
+    <string name="coordinate_longitude">Longitude</string>
+    <string name="coordinates_invalid">Coordenadas inválidas</string>
 </resources>

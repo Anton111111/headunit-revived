@@ -7,7 +7,8 @@
         <item>Light Sensor</item>
         <item>Screen Brightness</item>
         <item>Car Headlight Signal (ILL+)</item>
-</string-array>
+        <item>Location (by area)</item>
+    </string-array>
 
     <string-array name="app_theme">
         <item>Automatic (System)</item>
@@ -19,6 +20,8 @@
         <item>Light Sensor</item>
         <item>Screen Brightness</item>
         <item>Car Headlight Signal (ILL+)</item>
+    
+        <item>Location (by area)</item>
     </string-array>
 
     <string-array name="screen_orientation">

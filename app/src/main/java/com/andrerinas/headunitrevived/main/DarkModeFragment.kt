@@ -52,6 +52,10 @@ class DarkModeFragment : Fragment(), SensorEventListener {
     private var pendingUseExtremeDarkMode: Boolean? = null
     private var pendingUseGradientBackground: Boolean? = null
 
+    // Shared "Location" mode + sunrise reference settings
+    private var pendingUseFixedSunriseLocation: Boolean? = null
+    private var pendingLocationOutsideNight: Boolean? = null
+
     // Pending night mode settings (Android Auto)
     private var pendingNightMode: Settings.NightMode? = null
     private var pendingThresholdLux: Int? = null
@@ -114,6 +118,8 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         pendingUseGradientBackground = settings.useGradientBackground
 
         pendingNightMode = settings.nightMode
+        pendingUseFixedSunriseLocation = settings.useFixedSunriseLocation
+        pendingLocationOutsideNight = settings.locationOutsideNight
         pendingThresholdLux = settings.nightModeThresholdLux
         pendingThresholdBrightness = settings.nightModeThresholdBrightness
         pendingManualStart = settings.nightModeManualStart
@@ -207,7 +213,10 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         val appThemeThresholdChanged = pendingAppThemeThresholdLux != settings.appThemeThresholdLux ||
                 pendingAppThemeThresholdBrightness != settings.appThemeThresholdBrightness ||
                 pendingAppThemeManualStart != settings.appThemeManualStart ||
-                pendingAppThemeManualEnd != settings.appThemeManualEnd
+                pendingAppThemeManualEnd != settings.appThemeManualEnd ||
+                // Shared sunrise source / outside-places default affect the dynamic app theme too.
+                pendingUseFixedSunriseLocation != settings.useFixedSunriseLocation ||
+                pendingLocationOutsideNight != settings.locationOutsideNight
         val gradientChanged = pendingUseGradientBackground != settings.useGradientBackground
         val extremeDarkChanged = pendingUseExtremeDarkMode != settings.useExtremeDarkMode
         val monochromeIconsChanged = pendingMonochromeIcons != settings.monochromeIcons
@@ -215,6 +224,8 @@ class DarkModeFragment : Fragment(), SensorEventListener {
 
         // Save night mode settings
         pendingNightMode?.let { settings.nightMode = it }
+        pendingUseFixedSunriseLocation?.let { settings.useFixedSunriseLocation = it }
+        pendingLocationOutsideNight?.let { settings.locationOutsideNight = it }
         pendingThresholdLux?.let { settings.nightModeThresholdLux = it }
         pendingThresholdBrightness?.let { settings.nightModeThresholdBrightness = it }
         pendingManualStart?.let { settings.nightModeManualStart = it }
@@ -286,6 +297,8 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                 pendingUseExtremeDarkMode != settings.useExtremeDarkMode ||
                 pendingUseGradientBackground != settings.useGradientBackground ||
                 pendingNightMode != settings.nightMode ||
+                pendingUseFixedSunriseLocation != settings.useFixedSunriseLocation ||
+                pendingLocationOutsideNight != settings.locationOutsideNight ||
                 pendingThresholdLux != settings.nightModeThresholdLux ||
                 pendingThresholdBrightness != settings.nightModeThresholdBrightness ||
                 pendingManualStart != settings.nightModeManualStart ||
@@ -306,19 +319,129 @@ class DarkModeFragment : Fragment(), SensorEventListener {
      * Single entry that opens the self-contained Location screen (sunrise reference point
      * plus saved places). Keeping it here keeps the theme selectors clean.
      */
-    private fun addLocationSection(items: MutableList<SettingItem>) {
-        items.add(SettingItem.CategoryHeader("location", R.string.location_section))
+    /**
+     * Sunrise/sunset reference source (GPS or a fixed point), shown as a sub-option under
+     * an Auto/sunrise mode. Fixed point can be typed (works with no GPS and no internet)
+     * or picked on the map. This is the simple option from issue #647. [idSuffix] keeps
+     * stable IDs unique if shown under both the app theme and Android Auto sections.
+     */
+    private fun addSunriseReference(items: MutableList<SettingItem>, idSuffix: String) {
+        val useFixed = pendingUseFixedSunriseLocation == true
         items.add(SettingItem.SettingEntry(
-            stableId = "openLocation",
-            nameResId = R.string.location_open_entry,
+            stableId = "sunriseSource_$idSuffix",
+            nameResId = R.string.sunrise_location_title,
+            value = if (useFixed)
+                getString(R.string.sunrise_location_fixed) +
+                    " (%.3f, %.3f)".format(settings.fixedSunriseLatitude, settings.fixedSunriseLongitude)
+            else getString(R.string.sunrise_location_gps),
+            onClick = { _ ->
+                val options = arrayOf(
+                    getString(R.string.sunrise_location_gps),
+                    getString(R.string.sunrise_location_fixed)
+                )
+                MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+                    .setTitle(R.string.sunrise_location_title)
+                    .setSingleChoiceItems(options, if (useFixed) 1 else 0) { dialog, which ->
+                        pendingUseFixedSunriseLocation = which == 1
+                        checkChanges()
+                        dialog.dismiss()
+                        updateSettingsList()
+                    }
+                    .show()
+            }
+        ))
+        if (useFixed) {
+            items.add(SettingItem.SettingEntry(
+                stableId = "sunriseCoords_$idSuffix",
+                nameResId = R.string.coordinates_enter,
+                value = "",
+                onClick = { _ -> showCoordinatesDialog() }
+            ))
+        }
+    }
+
+    /** Sub-options for "Location (by area)" mode: outside-places appearance + manage places. */
+    private fun addLocationModeOptions(items: MutableList<SettingItem>, idSuffix: String) {
+        items.add(SettingItem.SettingEntry(
+            stableId = "outsidePlaces_$idSuffix",
+            nameResId = R.string.location_outside_label,
+            value = getString(
+                if (pendingLocationOutsideNight == true) R.string.geofence_mode_dark
+                else R.string.geofence_mode_light
+            ),
+            onClick = { _ ->
+                val options = arrayOf(
+                    getString(R.string.geofence_mode_light),
+                    getString(R.string.geofence_mode_dark)
+                )
+                MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+                    .setTitle(R.string.location_outside_label)
+                    .setSingleChoiceItems(options, if (pendingLocationOutsideNight == true) 1 else 0) { dialog, which ->
+                        pendingLocationOutsideNight = which == 1
+                        checkChanges()
+                        dialog.dismiss()
+                        updateSettingsList()
+                    }
+                    .show()
+            }
+        ))
+        items.add(SettingItem.SettingEntry(
+            stableId = "managePlaces_$idSuffix",
+            nameResId = R.string.location_manage_places,
             value = run {
                 val n = settings.geofenceLocations.size
                 if (n == 0) getString(R.string.geofence_none) else getString(R.string.geofence_count_summary, n)
             },
-            onClick = { _ ->
-                findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment)
-            }
+            onClick = { _ -> findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment) }
         ))
+    }
+
+    /** Dialog to type a fixed latitude/longitude, with a shortcut to pick it on the map. */
+    private fun showCoordinatesDialog() {
+        val ctx = requireContext()
+        val density = resources.displayMetrics.density
+        val pad = (16 * density).toInt()
+        val container = android.widget.LinearLayout(ctx).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(pad, pad, pad, 0)
+        }
+        val latInput = android.widget.EditText(ctx).apply {
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER or
+                android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL or android.text.InputType.TYPE_NUMBER_FLAG_SIGNED
+            hint = getString(R.string.coordinate_latitude)
+            setText("%.5f".format(settings.fixedSunriseLatitude))
+        }
+        val lonInput = android.widget.EditText(ctx).apply {
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER or
+                android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL or android.text.InputType.TYPE_NUMBER_FLAG_SIGNED
+            hint = getString(R.string.coordinate_longitude)
+            setText("%.5f".format(settings.fixedSunriseLongitude))
+        }
+        container.addView(latInput)
+        container.addView(lonInput)
+
+        MaterialAlertDialogBuilder(ctx, R.style.DarkAlertDialog)
+            .setTitle(R.string.coordinates_enter)
+            .setView(container)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                val lat = latInput.text.toString().toDoubleOrNull()
+                val lon = lonInput.text.toString().toDoubleOrNull()
+                if (lat != null && lon != null && lat in -90.0..90.0 && lon in -180.0..180.0) {
+                    settings.fixedSunriseLatitude = lat
+                    settings.fixedSunriseLongitude = lon
+                    updateSettingsList()
+                } else {
+                    Toast.makeText(ctx, R.string.coordinates_invalid, Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNeutralButton(R.string.geofence_pick_on_map) { _, _ ->
+                findNavController().navigate(
+                    R.id.action_darkModeFragment_to_mapPickerFragment,
+                    androidx.core.os.bundleOf(MapPickerFragment.ARG_MODE to MapPickerFragment.MODE_POINT)
+                )
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private fun updateSettingsList() {
@@ -511,6 +634,10 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             ))
         }
 
+        // App theme contextual sub-options
+        if (pendingAppTheme == Settings.AppTheme.AUTO_SUNRISE) addSunriseReference(items, "app")
+        if (pendingAppTheme == Settings.AppTheme.LOCATION) addLocationModeOptions(items, "app")
+
         // --- Android Auto Night Mode ---
         items.add(SettingItem.CategoryHeader("aaNightMode", R.string.night_mode))
 
@@ -631,6 +758,15 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             ))
         }
 
+        // Android Auto contextual sub-options (avoid duplicating the shared entries when
+        // the app theme section already shows them).
+        if (pendingNightMode == Settings.NightMode.AUTO && pendingAppTheme != Settings.AppTheme.AUTO_SUNRISE) {
+            addSunriseReference(items, "aa")
+        }
+        if (pendingNightMode == Settings.NightMode.LOCATION && pendingAppTheme != Settings.AppTheme.LOCATION) {
+            addLocationModeOptions(items, "aa")
+        }
+
         // AA Monochrome toggle — hidden when Night Mode is DAY
         if (pendingNightMode != Settings.NightMode.DAY) {
             items.add(SettingItem.ToggleSettingEntry(
@@ -692,8 +828,6 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             }
         }
 
-        // --- Location (self-contained screen: sunrise reference + places) ---
-        addLocationSection(items)
 
         settingsAdapter.submitList(items) {
             scrollState?.let { recyclerView.layoutManager?.onRestoreInstanceState(it) }

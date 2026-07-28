@@ -647,4 +647,11 @@
     <string name="location_places_hint">Buộc giao diện sáng hoặc tối trong một khu vực, và tùy chọn chỉ tự khởi động tại đó. Sử dụng GPS.</string>
     <string name="appearance_label">Khi ở bên trong, đặt giao diện</string>
     <string name="appearance_off">Tắt</string>
+    <string name="location_manage_places">Địa điểm đã lưu</string>
+    <string name="location_outside_label">Bên ngoài địa điểm đã lưu</string>
+    <string name="location_places_desc">Đặt giao diện sáng hoặc tối trong một khu vực khi bạn ở bên trong khu vực đó. Sử dụng GPS.</string>
+    <string name="coordinates_enter">Nhập tọa độ</string>
+    <string name="coordinate_latitude">Vĩ độ</string>
+    <string name="coordinate_longitude">Kinh độ</string>
+    <string name="coordinates_invalid">Tọa độ không hợp lệ</string>
 </resources>

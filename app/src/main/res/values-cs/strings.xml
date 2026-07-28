@@ -641,4 +641,11 @@
     <string name="location_places_hint">Vynutí světlý nebo tmavý vzhled v oblasti a volitelně automatické spuštění pouze tam. Používá GPS.</string>
     <string name="appearance_label">Když jste uvnitř, nastavte vzhled</string>
     <string name="appearance_off">Vypnuto</string>
+    <string name="location_manage_places">Uložená místa</string>
+    <string name="location_outside_label">Mimo uložená místa</string>
+    <string name="location_places_desc">Nastavte v oblasti světlý nebo tmavý vzhled, dokud jste uvnitř. Používá GPS.</string>
+    <string name="coordinates_enter">Zadejte souřadnice</string>
+    <string name="coordinate_latitude">Zeměpisná šířka</string>
+    <string name="coordinate_longitude">Zeměpisná délka</string>
+    <string name="coordinates_invalid">Neplatné souřadnice</string>
 </resources>

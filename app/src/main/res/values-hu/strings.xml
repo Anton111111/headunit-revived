@@ -640,4 +640,11 @@
     <string name="location_places_hint">Kényszerítsen világos vagy sötét megjelenést egy területen, és opcionálisan csak ott indítson automatikusan. GPS-t használ.</string>
     <string name="appearance_label">Ha belül van, állítsa be a megjelenést</string>
     <string name="appearance_off">Ki</string>
+    <string name="location_manage_places">Mentett helyek</string>
+    <string name="location_outside_label">Mentett helyeken kívül</string>
+    <string name="location_places_desc">Állítson be világos vagy sötét megjelenést egy területen, amíg azon belül tartózkodik. GPS-t használ.</string>
+    <string name="coordinates_enter">Koordináták megadása</string>
+    <string name="coordinate_latitude">Szélesség</string>
+    <string name="coordinate_longitude">Hosszúság</string>
+    <string name="coordinates_invalid">Érvénytelen koordináták</string>
 </resources>

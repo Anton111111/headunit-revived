@@ -642,4 +642,11 @@
     <string name="location_places_hint">Forțează un aspect luminos sau întunecat într-o zonă și, opțional, pornirea automată doar acolo. Folosește GPS.</string>
     <string name="appearance_label">Când ești în interior, setează aspectul</string>
     <string name="appearance_off">Dezactivat</string>
+    <string name="location_manage_places">Locuri salvate</string>
+    <string name="location_outside_label">În afara locurilor salvate</string>
+    <string name="location_places_desc">Setează un aspect luminos sau întunecat într-o zonă cât timp te afli în interiorul ei. Folosește GPS.</string>
+    <string name="coordinates_enter">Introdu coordonatele</string>
+    <string name="coordinate_latitude">Latitudine</string>
+    <string name="coordinate_longitude">Longitudine</string>
+    <string name="coordinates_invalid">Coordonate nevalide</string>
 </resources>

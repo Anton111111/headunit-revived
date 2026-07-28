@@ -641,4 +641,11 @@
     <string name="location_places_hint">Forceer een licht of donker uiterlijk in een gebied en optioneel alleen daar automatisch starten. Gebruikt GPS.</string>
     <string name="appearance_label">Uiterlijk instellen wanneer binnen</string>
     <string name="appearance_off">Uit</string>
+    <string name="location_manage_places">Opgeslagen locaties</string>
+    <string name="location_outside_label">Buiten opgeslagen locaties</string>
+    <string name="location_places_desc">Stel een licht of donker uiterlijk in een gebied in terwijl u zich erin bevindt. Gebruikt GPS.</string>
+    <string name="coordinates_enter">Coördinaten invoeren</string>
+    <string name="coordinate_latitude">Breedtegraad</string>
+    <string name="coordinate_longitude">Lengtegraad</string>
+    <string name="coordinates_invalid">Ongeldige coördinaten</string>
 </resources>

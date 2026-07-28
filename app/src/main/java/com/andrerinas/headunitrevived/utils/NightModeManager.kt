@@ -181,33 +181,19 @@ class NightModeManager(
         }
     }
 
-    /**
-     * If the device's live location falls inside a saved geofence, returns that area's
-     * forced night value (true = night, false = day). Returns null when there are no
-     * geofences, no usable live location, or the location is outside every area, in
-     * which case the normal night-mode resolution applies.
-     */
-    private fun geofenceForcedNight(): Boolean? {
-        val areas = try {
-            settings.geofenceLocations.filter { it.overrideTheme && it.scope.coversAndroidAuto() }
-        } catch (e: Exception) { emptyList() }
-        if (areas.isEmpty()) return null
-        val loc = LocationHolder.geofenceFix(context) ?: return null
-        return areas.firstOrNull { it.contains(loc) }?.forceNight
-    }
-
     // Made public so Service can force an update
     fun update(debounce: Boolean = true) {
         var isNight = false
         val threshold = settings.nightModeThresholdLux
         val thresholdBrightness = settings.nightModeThresholdBrightness
 
-        // Geofence night-by-area override: while the live location is inside a saved
-        // area, force that area's day/night appearance, ignoring the global night mode.
-        val geofenceForced = geofenceForcedNight()
-        if (geofenceForced != null) {
-            isNight = geofenceForced
-        } else when (settings.nightMode) {
+        when (settings.nightMode) {
+            Settings.NightMode.LOCATION -> {
+                // Dark/light depending on the saved place the device is inside, or the
+                // user's outside-places default when outside all of them.
+                isNight = com.andrerinas.headunitrevived.location.GeofenceLocation
+                    .resolveNight(context, settings)
+            }
             Settings.NightMode.LIGHT_SENSOR -> {
                 if (currentLux >= 0) {
                     // Hysteresis Logic

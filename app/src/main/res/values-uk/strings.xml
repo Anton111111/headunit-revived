@@ -643,4 +643,11 @@
     <string name="location_places_hint">Примусово задати світлий або темний вигляд у певній зоні та, за бажанням, автозапуск лише там. Використовує GPS.</string>
     <string name="appearance_label">При вході задати вигляд</string>
     <string name="appearance_off">Вимкнено</string>
+    <string name="location_manage_places">Збережені місця</string>
+    <string name="location_outside_label">Поза збереженими місцями</string>
+    <string name="location_places_desc">Задати світлий або темний вигляд у певній зоні, поки ви перебуваєте всередині неї. Використовує GPS.</string>
+    <string name="coordinates_enter">Ввести координати</string>
+    <string name="coordinate_latitude">Широта</string>
+    <string name="coordinate_longitude">Довгота</string>
+    <string name="coordinates_invalid">Недійсні координати</string>
 </resources>

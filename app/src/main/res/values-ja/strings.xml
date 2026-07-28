@@ -648,4 +648,11 @@
     <string name="location_places_hint">エリア内で明るい表示または暗い表示を強制し、必要に応じてそこでのみ自動起動します。GPSを使用します。</string>
     <string name="appearance_label">内側にいるとき、外観を設定</string>
     <string name="appearance_off">オフ</string>
+    <string name="location_manage_places">保存した場所</string>
+    <string name="location_outside_label">保存した場所の外</string>
+    <string name="location_places_desc">エリア内にいる間、明るいまたは暗い外観を設定します。GPSを使用します。</string>
+    <string name="coordinates_enter">座標を入力</string>
+    <string name="coordinate_latitude">緯度</string>
+    <string name="coordinate_longitude">経度</string>
+    <string name="coordinates_invalid">無効な座標</string>
 </resources>

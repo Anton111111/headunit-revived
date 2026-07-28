@@ -7,6 +7,7 @@
         <item>Sensore di luce</item>
         <item>Luminosità dello schermo</item>
         <item>Segnale fari auto (ILL+)</item>
+        <item>Posizione (per area)</item>
 </string-array>
 
     <string-array name="app_theme">
@@ -19,6 +20,7 @@
         <item>Sensore di luce</item>
         <item>Luminosità dello schermo</item>
         <item>Segnale fari auto (ILL+)</item>
+        <item>Posizione (per area)</item>
     </string-array>
 
     <string-array name="screen_orientation">

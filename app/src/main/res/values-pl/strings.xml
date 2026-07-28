@@ -642,4 +642,11 @@
     <string name="location_places_hint">Wymuś jasny lub ciemny wygląd w obszarze i opcjonalnie automatyczne uruchamianie tylko tam. Używa GPS.</string>
     <string name="appearance_label">Ustaw wygląd wewnątrz</string>
     <string name="appearance_off">Wyłączone</string>
+    <string name="location_manage_places">Zapisane miejsca</string>
+    <string name="location_outside_label">Poza zapisanymi miejscami</string>
+    <string name="location_places_desc">Ustaw jasny lub ciemny wygląd w obszarze, gdy się w nim znajdujesz. Używa GPS.</string>
+    <string name="coordinates_enter">Wprowadź współrzędne</string>
+    <string name="coordinate_latitude">Szerokość geograficzna</string>
+    <string name="coordinate_longitude">Długość geograficzna</string>
+    <string name="coordinates_invalid">Nieprawidłowe współrzędne</string>
 </resources>
