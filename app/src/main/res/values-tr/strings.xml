@@ -645,4 +645,5 @@
     <string name="coordinate_latitude">Enlem</string>
     <string name="coordinate_longitude">Boylam</string>
     <string name="coordinates_invalid">Geçersiz koordinatlar</string>
+    <string name="coordinates_format_help">Ondalık derece, nokta veya virgül. Örnek: 40.4168, -3.7038</string>
 </resources>

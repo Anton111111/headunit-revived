@@ -647,4 +647,5 @@
     <string name="coordinate_latitude">Szélesség</string>
     <string name="coordinate_longitude">Hosszúság</string>
     <string name="coordinates_invalid">Érvénytelen koordináták</string>
+    <string name="coordinates_format_help">Tizedes fok, pont vagy vessző. Példa: 40.4168, -3.7038</string>
 </resources>

@@ -655,4 +655,5 @@
     <string name="coordinate_latitude">緯度</string>
     <string name="coordinate_longitude">経度</string>
     <string name="coordinates_invalid">無効な座標</string>
+    <string name="coordinates_format_help">十進法の度、ドットまたはカンマ。例: 40.4168, -3.7038</string>
 </resources>

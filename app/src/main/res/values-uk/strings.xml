@@ -650,4 +650,5 @@
     <string name="coordinate_latitude">Широта</string>
     <string name="coordinate_longitude">Довгота</string>
     <string name="coordinates_invalid">Недійсні координати</string>
+    <string name="coordinates_format_help">Десяткові градуси, крапка або кома. Приклад: 40.4168, -3.7038</string>
 </resources>

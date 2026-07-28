@@ -647,4 +647,5 @@
     <string name="coordinate_latitude">緯度</string>
     <string name="coordinate_longitude">經度</string>
     <string name="coordinates_invalid">座標無效</string>
+    <string name="coordinates_format_help">十進位度數，使用點或逗號。範例：40.4168, -3.7038</string>
 </resources>

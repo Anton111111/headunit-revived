@@ -665,4 +665,5 @@
     <string name="coordinate_latitude">Latitude</string>
     <string name="coordinate_longitude">Longitude</string>
     <string name="coordinates_invalid">Invalid coordinates</string>
+    <string name="coordinates_format_help">Decimal degrees, dot or comma. Example: 40.4168, -3.7038</string>
 </resources>

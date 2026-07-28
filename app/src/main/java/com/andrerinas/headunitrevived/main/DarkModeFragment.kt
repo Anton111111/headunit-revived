@@ -459,31 +459,56 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         val ctx = requireContext()
         val density = resources.displayMetrics.density
         val pad = (16 * density).toInt()
+
+        fun label(text: String) = android.widget.TextView(ctx).apply {
+            this.text = text
+            setTextColor(android.graphics.Color.WHITE)
+            val lp = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            lp.topMargin = (8 * density).toInt()
+            layoutParams = lp
+        }
+
         val container = android.widget.LinearLayout(ctx).apply {
             orientation = android.widget.LinearLayout.VERTICAL
             setPadding(pad, pad, pad, 0)
         }
+        val help = android.widget.TextView(ctx).apply {
+            text = getString(R.string.coordinates_format_help)
+            setTextColor(android.graphics.Color.WHITE)
+            alpha = 0.7f
+        }
+        // Prefill with a dot decimal separator regardless of device locale.
         val latInput = android.widget.EditText(ctx).apply {
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or
                 android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL or android.text.InputType.TYPE_NUMBER_FLAG_SIGNED
             hint = getString(R.string.coordinate_latitude)
-            setText("%.5f".format(settings.fixedSunriseLatitude))
+            setText(String.format(java.util.Locale.US, "%.5f", settings.fixedSunriseLatitude))
         }
         val lonInput = android.widget.EditText(ctx).apply {
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or
                 android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL or android.text.InputType.TYPE_NUMBER_FLAG_SIGNED
             hint = getString(R.string.coordinate_longitude)
-            setText("%.5f".format(settings.fixedSunriseLongitude))
+            setText(String.format(java.util.Locale.US, "%.5f", settings.fixedSunriseLongitude))
         }
+        container.addView(help)
+        container.addView(label(getString(R.string.coordinate_latitude)))
         container.addView(latInput)
+        container.addView(label(getString(R.string.coordinate_longitude)))
         container.addView(lonInput)
+
+        // Accept a comma or a dot as the decimal separator (locale-proof).
+        fun parse(field: android.widget.EditText): Double? =
+            field.text.toString().trim().replace(',', '.').toDoubleOrNull()
 
         MaterialAlertDialogBuilder(ctx, R.style.DarkAlertDialog)
             .setTitle(R.string.coordinates_enter)
             .setView(container)
             .setPositiveButton(android.R.string.ok) { _, _ ->
-                val lat = latInput.text.toString().toDoubleOrNull()
-                val lon = lonInput.text.toString().toDoubleOrNull()
+                val lat = parse(latInput)
+                val lon = parse(lonInput)
                 if (lat != null && lon != null && lat in -90.0..90.0 && lon in -180.0..180.0) {
                     settings.fixedSunriseLatitude = lat
                     settings.fixedSunriseLongitude = lon

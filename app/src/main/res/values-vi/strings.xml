@@ -654,4 +654,5 @@
     <string name="coordinate_latitude">Vĩ độ</string>
     <string name="coordinate_longitude">Kinh độ</string>
     <string name="coordinates_invalid">Tọa độ không hợp lệ</string>
+    <string name="coordinates_format_help">Độ thập phân, dấu chấm hoặc dấu phẩy. Ví dụ: 40.4168, -3.7038</string>
 </resources>

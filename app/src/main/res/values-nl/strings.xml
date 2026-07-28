@@ -648,4 +648,5 @@
     <string name="coordinate_latitude">Breedtegraad</string>
     <string name="coordinate_longitude">Lengtegraad</string>
     <string name="coordinates_invalid">Ongeldige coördinaten</string>
+    <string name="coordinates_format_help">Decimale graden, punt of komma. Voorbeeld: 40.4168, -3.7038</string>
 </resources>

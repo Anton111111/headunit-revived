@@ -652,4 +652,5 @@
     <string name="coordinate_latitude">위도</string>
     <string name="coordinate_longitude">경도</string>
     <string name="coordinates_invalid">잘못된 좌표</string>
+    <string name="coordinates_format_help">십진수 도, 점 또는 쉼표. 예: 40.4168, -3.7038</string>
 </resources>

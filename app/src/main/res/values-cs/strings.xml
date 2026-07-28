@@ -648,4 +648,5 @@
     <string name="coordinate_latitude">Zeměpisná šířka</string>
     <string name="coordinate_longitude">Zeměpisná délka</string>
     <string name="coordinates_invalid">Neplatné souřadnice</string>
+    <string name="coordinates_format_help">Desetinné stupně, tečka nebo čárka. Příklad: 40.4168, -3.7038</string>
 </resources>

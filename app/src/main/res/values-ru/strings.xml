@@ -648,4 +648,5 @@
     <string name="coordinate_latitude">Широта</string>
     <string name="coordinate_longitude">Долгота</string>
     <string name="coordinates_invalid">Неверные координаты</string>
+    <string name="coordinates_format_help">Десятичные градусы, точка или запятая. Пример: 40.4168, -3.7038</string>
 </resources>
