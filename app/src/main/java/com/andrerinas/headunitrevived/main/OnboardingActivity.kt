@@ -1,9 +1,8 @@
 package com.andrerinas.headunitrevived.main
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
-import android.hardware.Sensor
-import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -25,6 +24,8 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.switchmaterial.SwitchMaterial
+import kotlin.math.sqrt
 
 /**
  * Intelligent, device-aware first-run wizard. Replaces the old
@@ -34,7 +35,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * is older than CURRENT_ONBOARDING_VERSION, and re-launchable from Settings.
  *
  * Steps: Welcome(+language) / Safety(mandatory) / Connection / Display scan /
- * Appearance / Ready.
+ * Appearance / Automation / Location / Ready.
+ *
+ * Every step reuses the real settings and their strings, and deep-links into the
+ * full settings sub-screens for advanced configuration.
  */
 class OnboardingActivity : BaseActivity() {
 
@@ -64,6 +68,7 @@ class OnboardingActivity : BaseActivity() {
         stepper = findViewById(R.id.onb_stepper)
 
         selectedPortrait = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+        selectedSize = estimateSizePreset()
 
         buildStepperDots()
         bindSteps()
@@ -78,6 +83,13 @@ class OnboardingActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(KEY_STEP, step)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Reflect any changes made in deep-linked settings screens (theme, automation).
+        updateThemeButtonText()
+        updateNightButtonText()
     }
 
     private fun buildStepperDots() {
@@ -109,13 +121,13 @@ class OnboardingActivity : BaseActivity() {
     }
 
     private fun bindSteps() {
-        // Welcome: language picker
+        // --- Welcome: language ---
         findViewById<MaterialButton>(R.id.onb_language_button).apply {
             text = currentLanguageLabel()
             setOnClickListener { showLanguageDialog() }
         }
 
-        // Safety: disclaimer text + accept checkbox
+        // --- Safety ---
         findViewById<TextView>(R.id.onb_safety_text).text =
             Html.fromHtml(getString(R.string.disclaimer_text))
         findViewById<MaterialCheckBox>(R.id.onb_safety_accept).apply {
@@ -125,31 +137,27 @@ class OnboardingActivity : BaseActivity() {
             }
         }
 
-        // Connection: sets primaryConnection, updates the detail hint
+        // --- Connection: USB (cable or USB adapter) vs WiFi ---
         val connGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_conn_group)
         isBinding = true
         when (settings.primaryConnection) {
-            Settings.ConnectionKind.USB_CABLE -> connGroup.check(R.id.onb_conn_cable)
-            Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> connGroup.check(R.id.onb_conn_adapter)
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> connGroup.check(R.id.onb_conn_wifi)
+            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> connGroup.check(R.id.onb_conn_usb)
             else -> {}
         }
         isBinding = false
         updateConnectionDetail()
         connGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (!isChecked || isBinding) return@addOnButtonCheckedListener
-            settings.primaryConnection = when (checkedId) {
-                R.id.onb_conn_cable -> Settings.ConnectionKind.USB_CABLE
-                R.id.onb_conn_adapter -> Settings.ConnectionKind.USB_WIRELESS_ADAPTER
-                else -> Settings.ConnectionKind.WIFI
-            }
+            settings.primaryConnection = if (checkedId == R.id.onb_conn_wifi)
+                Settings.ConnectionKind.WIFI else Settings.ConnectionKind.USB_CABLE
             updateConnectionDetail()
         }
 
-        // Display: show detected panel info, size + orientation pickers, apply button
+        // --- Display: detected panel + size/orientation, pre-selected from detection ---
         findViewById<TextView>(R.id.onb_display_detected).text = detectedDisplayText()
         val sizeGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_size_group)
-        sizeGroup.check(R.id.onb_size_standard)
+        sizeGroup.check(sizeButtonId(selectedSize))
         sizeGroup.addOnButtonCheckedListener { _, id, checked ->
             if (!checked) return@addOnButtonCheckedListener
             selectedSize = when (id) {
@@ -167,48 +175,39 @@ class OnboardingActivity : BaseActivity() {
         }
         findViewById<MaterialButton>(R.id.onb_display_run).setOnClickListener { runOptimization() }
 
-        // Appearance: app theme (live) + Android Auto night mode
-        val themeGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_theme_group)
-        isBinding = true
-        themeGroup.check(
-            when (settings.appTheme) {
-                Settings.AppTheme.CLEAR -> R.id.onb_theme_light
-                Settings.AppTheme.DARK, Settings.AppTheme.EXTREME_DARK -> R.id.onb_theme_dark
-                else -> R.id.onb_theme_auto
-            }
-        )
-        isBinding = false
-        themeGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (!isChecked || isBinding) return@addOnButtonCheckedListener
-            val newTheme = when (checkedId) {
-                R.id.onb_theme_light -> Settings.AppTheme.CLEAR
-                R.id.onb_theme_dark -> Settings.AppTheme.DARK
-                else -> Settings.AppTheme.AUTOMATIC
-            }
-            if (newTheme != settings.appTheme) {
-                settings.appTheme = newTheme
-                AppThemeManager.applyStaticTheme(settings)
-            }
+        // --- Appearance: full theme + night-mode pickers, deep link for advanced ---
+        updateThemeButtonText()
+        findViewById<MaterialButton>(R.id.onb_theme_button).setOnClickListener { showThemeDialog() }
+        updateNightButtonText()
+        findViewById<MaterialButton>(R.id.onb_night_button).setOnClickListener { showNightModeDialog() }
+        findViewById<MaterialButton>(R.id.onb_appearance_more).setOnClickListener {
+            openSettingsAt(R.id.darkModeFragment)
         }
 
-        findViewById<TextView>(R.id.onb_night_recommendation).text = nightRecommendationText()
-        val nightGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_night_group)
+        // --- Automation: simple toggles inline, priority + advanced via the real screens ---
+        findViewById<SwitchMaterial>(R.id.onb_autoconnect_last_switch).apply {
+            isChecked = settings.autoConnectLastSession
+            setOnCheckedChangeListener { _, v -> settings.autoConnectLastSession = v }
+        }
+        findViewById<SwitchMaterial>(R.id.onb_autoconnect_single_switch).apply {
+            isChecked = settings.autoConnectSingleUsbDevice
+            setOnCheckedChangeListener { _, v -> settings.autoConnectSingleUsbDevice = v }
+        }
+        findViewById<MaterialButton>(R.id.onb_autoconnect_more).setOnClickListener {
+            openSettingsAt(R.id.autoConnectFragment)
+        }
+        findViewById<MaterialButton>(R.id.onb_autostart_more).setOnClickListener {
+            openSettingsAt(R.id.autoStartFragment)
+        }
+
+        // --- Location: this device's GPS vs the connected phone's GPS ---
+        val gpsGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_gps_group)
         isBinding = true
-        nightGroup.check(
-            when (settings.nightMode) {
-                Settings.NightMode.DAY -> R.id.onb_night_day
-                Settings.NightMode.NIGHT -> R.id.onb_night_night
-                else -> R.id.onb_night_auto
-            }
-        )
+        gpsGroup.check(if (settings.useGpsForNavigation) R.id.onb_gps_device else R.id.onb_gps_phone)
         isBinding = false
-        nightGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+        gpsGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (!isChecked || isBinding) return@addOnButtonCheckedListener
-            settings.nightMode = when (checkedId) {
-                R.id.onb_night_day -> Settings.NightMode.DAY
-                R.id.onb_night_night -> Settings.NightMode.NIGHT
-                else -> if (hasLightSensor()) Settings.NightMode.LIGHT_SENSOR else Settings.NightMode.AUTO
-            }
+            settings.useGpsForNavigation = checkedId == R.id.onb_gps_device
         }
     }
 
@@ -277,9 +276,8 @@ class OnboardingActivity : BaseActivity() {
     private fun updateConnectionDetail() {
         val detail = findViewById<TextView>(R.id.onb_conn_detail)
         detail.text = when (settings.primaryConnection) {
-            Settings.ConnectionKind.USB_CABLE -> getString(R.string.onb_connection_cable_detail)
-            Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.onb_connection_adapter_detail)
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.onb_connection_wifi_detail)
+            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.onb_connection_usb_detail)
             else -> ""
         }
     }
@@ -295,6 +293,26 @@ class OnboardingActivity : BaseActivity() {
             (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getRealMetrics(metrics)
         }
         return metrics
+    }
+
+    /** Estimate the physical diagonal from real pixels and physical DPI, pick the closest preset. */
+    private fun estimateSizePreset(): SystemOptimizer.DisplaySizePreset {
+        val m = realMetrics()
+        val xdpi = if (m.xdpi > 40f) m.xdpi else m.densityDpi.toFloat()
+        val ydpi = if (m.ydpi > 40f) m.ydpi else m.densityDpi.toFloat()
+        val wIn = m.widthPixels / xdpi
+        val hIn = m.heightPixels / ydpi
+        val diagonal = sqrt(wIn * wIn + hIn * hIn)
+        return SystemOptimizer.DisplaySizePreset.values().minByOrNull {
+            kotlin.math.abs(it.diagonalInch - diagonal)
+        } ?: SystemOptimizer.DisplaySizePreset.STANDARD_9_10
+    }
+
+    private fun sizeButtonId(preset: SystemOptimizer.DisplaySizePreset): Int = when (preset) {
+        SystemOptimizer.DisplaySizePreset.PHONE_4_6 -> R.id.onb_size_phone
+        SystemOptimizer.DisplaySizePreset.SMALL_7_8 -> R.id.onb_size_small
+        SystemOptimizer.DisplaySizePreset.LARGE_11_PLUS -> R.id.onb_size_large
+        else -> R.id.onb_size_standard
     }
 
     private fun detectedDisplayText(): String {
@@ -324,21 +342,64 @@ class OnboardingActivity : BaseActivity() {
         }
     }
 
-    // --- Appearance ---
+    // --- Appearance (reuse the same option arrays as the settings screen) ---
 
-    private fun hasLightSensor(): Boolean {
-        val sm = getSystemService(Context.SENSOR_SERVICE) as? SensorManager
-        return sm?.getDefaultSensor(Sensor.TYPE_LIGHT) != null
+    private fun updateThemeButtonText() {
+        val labels = resources.getStringArray(R.array.app_theme)
+        val idx = settings.appTheme.value.coerceIn(0, labels.size - 1)
+        findViewById<MaterialButton>(R.id.onb_theme_button)?.text = labels[idx]
     }
 
-    private fun nightRecommendationText(): String =
-        getString(if (hasLightSensor()) R.string.onb_night_light_sensor_available else R.string.onb_night_no_light_sensor)
+    private fun updateNightButtonText() {
+        val labels = resources.getStringArray(R.array.night_mode)
+        val idx = settings.nightMode.value.coerceIn(0, labels.size - 1)
+        findViewById<MaterialButton>(R.id.onb_night_button)?.text = labels[idx]
+    }
+
+    private fun showThemeDialog() {
+        val labels = resources.getStringArray(R.array.app_theme)
+        MaterialAlertDialogBuilder(this, R.style.DarkAlertDialog)
+            .setTitle(R.string.onb_appearance_theme_label)
+            .setSingleChoiceItems(labels, settings.appTheme.value) { dialog, which ->
+                val newTheme = Settings.AppTheme.values().firstOrNull { it.value == which }
+                    ?: Settings.AppTheme.AUTOMATIC
+                settings.appTheme = newTheme
+                updateThemeButtonText()
+                dialog.dismiss()
+                AppThemeManager.applyStaticTheme(settings)
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun showNightModeDialog() {
+        val labels = resources.getStringArray(R.array.night_mode)
+        MaterialAlertDialogBuilder(this, R.style.DarkAlertDialog)
+            .setTitle(R.string.onb_appearance_night_label)
+            .setSingleChoiceItems(labels, settings.nightMode.value) { dialog, which ->
+                settings.nightMode = Settings.NightMode.fromInt(which) ?: Settings.NightMode.AUTO
+                updateNightButtonText()
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    // --- Deep link into the real settings sub-screens ---
+
+    private fun openSettingsAt(destinationId: Int) {
+        startActivity(
+            Intent(this, SettingsActivity::class.java)
+                .putExtra(SettingsActivity.EXTRA_DESTINATION, destinationId)
+        )
+    }
+
+    // --- Ready ---
 
     private fun summaryText(): String {
         val conn = when (settings.primaryConnection) {
-            Settings.ConnectionKind.USB_CABLE -> getString(R.string.connection_kind_usb_cable)
-            Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb_wireless_adapter)
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
+            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
             else -> getString(R.string.connection_kind_unset)
         }
         val res = Settings.Resolution.fromId(settings.resolutionId)?.resName ?: getString(R.string.auto)
@@ -354,8 +415,8 @@ class OnboardingActivity : BaseActivity() {
     companion object {
         const val CURRENT_ONBOARDING_VERSION = 2
         private const val KEY_STEP = "onb_step"
-        private const val STEP_COUNT = 6
+        private const val STEP_COUNT = 8
         private const val STEP_SAFETY = 1
-        private const val STEP_READY = 5
+        private const val STEP_READY = 7
     }
 }

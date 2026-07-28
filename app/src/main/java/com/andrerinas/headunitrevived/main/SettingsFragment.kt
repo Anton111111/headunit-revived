@@ -1771,9 +1771,10 @@ class SettingsFragment : Fragment() {
     }
 
     private fun connectionKindLabel(kind: Settings.ConnectionKind): String = when (kind) {
-        Settings.ConnectionKind.USB_CABLE -> getString(R.string.connection_kind_usb_cable)
-        Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb_wireless_adapter)
-        Settings.ConnectionKind.WIFI -> getString(R.string.connection_kind_wifi)
+        // USB (direct cable or USB wireless adapter) is presented as a single "USB" option.
+        Settings.ConnectionKind.USB_CABLE,
+        Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
+        Settings.ConnectionKind.WIFI,
         Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
         Settings.ConnectionKind.UNSET -> getString(R.string.connection_kind_unset)
     }
@@ -1781,11 +1782,15 @@ class SettingsFragment : Fragment() {
     private fun showConnectionModeDialog() {
         val kinds = listOf(
             Settings.ConnectionKind.USB_CABLE,
-            Settings.ConnectionKind.USB_WIRELESS_ADAPTER,
             Settings.ConnectionKind.WIFI
         )
         val labels = kinds.map { connectionKindLabel(it) }.toTypedArray()
-        val current = kinds.indexOf(settings.primaryConnection)
+        // Map any stored USB variant to the single USB option, WiFi/native to WiFi.
+        val current = when (settings.primaryConnection) {
+            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> 0
+            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> 1
+            else -> -1
+        }
         MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
             .setTitle(R.string.connection_mode)
             .setSingleChoiceItems(labels, current) { dialog, which ->

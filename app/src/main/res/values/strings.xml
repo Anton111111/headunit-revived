@@ -51,6 +51,18 @@
     <!-- %1$s connection, %2$s resolution, %3$s codec -->
     <string name="onb_ready_summary">Connection: %1$s\nResolution: %2$s\nCodec: %3$s\n\nYou can fine tune everything in Settings.</string>
 
+    <!-- Onboarding wizard (round 2) -->
+    <string name="onb_language_help">Choose the app language.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Phone connected by USB, either a direct cable or a USB wireless adapter. Wireless options stay hidden in Basic.</string>
+    <string name="onb_more_appearance">More appearance settings</string>
+    <string name="onb_automation_title">Automation</string>
+    <string name="onb_automation_help">Choose how the app starts and connects on its own. Open Auto-connect settings to drag the priority order.</string>
+    <string name="onb_gps_title">Location</string>
+    <string name="onb_gps_help">Which GPS should Android Auto use for navigation?</string>
+    <string name="onb_gps_this_device">This device</string>
+    <string name="onb_gps_phone">Connected phone</string>
+
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
