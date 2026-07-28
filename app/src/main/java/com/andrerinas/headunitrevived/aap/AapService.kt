@@ -34,6 +34,7 @@ import com.andrerinas.headunitrevived.app.WifiAutoStartReceiver
 import com.andrerinas.headunitrevived.main.MainActivity
 import com.andrerinas.headunitrevived.R
 import com.andrerinas.headunitrevived.utils.AppLog
+import com.andrerinas.headunitrevived.utils.BluetoothHelper
 import com.andrerinas.headunitrevived.utils.ToastUtils
 import com.andrerinas.headunitrevived.aap.protocol.messages.NightModeEvent
 import com.andrerinas.headunitrevived.aap.protocol.proto.MediaPlayback
@@ -2415,10 +2416,40 @@ class AapService : Service(), UsbReceiver.Listener {
                             addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
                         }
                         sendBroadcast(receiverIntent)
-                        AppLog.i("Broadcast fallback sent successfully.")
+                        AppLog.i("Broadcast fallback 1 (WirelessStartupReceiver) sent.")
+
+                        // Fallback 2: WifiBluetoothReceiver (START_WIRELESS_PROJECTION) for AA 17.4+
+                        val bondedAddress = try {
+                            val adapter = BluetoothHelper.getBluetoothAdapter(this@AapService)
+                            val bonded = adapter?.bondedDevices
+                            val connectedDevice = bonded?.firstOrNull { dev ->
+                                try {
+                                    val m = dev.javaClass.getMethod("isConnected")
+                                    (m.invoke(dev) as? Boolean) == true
+                                } catch (e: Exception) { false }
+                            }
+                            val targetDev = connectedDevice ?: bonded?.firstOrNull()
+                            val selfAddr: String? = try { adapter?.address } catch (se: SecurityException) { null }
+                            AppLog.i("SelfMode BT Discovery: bondedCount=${bonded?.size ?: 0}, connectedMac=${connectedDevice?.address}, selectedMac=${targetDev?.address}")
+                            targetDev?.address ?: if (!selfAddr.isNullOrBlank() && selfAddr != "02:00:00:00:00:00") selfAddr else null
+                        } catch (e: Throwable) {
+                            AppLog.w("Failed to get bonded BT device address: ${e.message}")
+                            null
+                        } ?: "00:11:22:33:44:55"
+
+                        val btReceiverIntent = Intent("com.google.android.projection.gearhead.START_WIRELESS_PROJECTION").apply {
+                            setClassName(
+                                "com.google.android.projection.gearhead",
+                                "com.google.android.apps.auto.wireless.bluetooth.WifiBluetoothReceiver"
+                            )
+                            putExtra("DEVICE_ADDRESS", bondedAddress)
+                            addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+                        }
+                        sendBroadcast(btReceiverIntent)
+                        AppLog.i("Broadcast fallback 2 (WifiBluetoothReceiver START_WIRELESS_PROJECTION with MAC $bondedAddress) sent.")
                     }
                 } catch (e2: Exception) {
-                    AppLog.e("Both Activity and Broadcast triggers failed", e2)
+                    AppLog.e("All triggers failed", e2)
                     ToastUtils.showToast(this@AapService, getString(R.string.failed_start_android_auto), Toast.LENGTH_SHORT)
                 }
             }

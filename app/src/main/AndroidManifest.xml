@@ -6,6 +6,10 @@
         com.google.android.gms.nearby, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.common,
         rikka.shizuku.provider, rikka.shizuku.api, rikka.shizuku.shared, rikka.shizuku.aidl, com.topjohnwu.superuser" />
 
+    <queries>
+        <package android:name="com.google.android.projection.gearhead" />
+    </queries>
+
     <uses-feature
         android:name="android.hardware.usb.host"
         android:required="false" />
