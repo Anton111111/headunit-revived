@@ -640,4 +640,9 @@
     <string name="geofence_scope_both">둘 다</string>
     <string name="geofence_gate_here">여기에서만 자동 시작/연결</string>
     <string name="dont_show_again">다시 표시하지 않음</string>
+    <string name="location_open_entry">장소 및 일출 지점</string>
+    <string name="sunrise_section">일출 / 일몰</string>
+    <string name="location_places_hint">특정 지역에서 밝은 또는 어두운 모드를 강제하고, 선택적으로 해당 지역에서만 자동 시작합니다. GPS를 사용합니다.</string>
+    <string name="appearance_label">안에 있을 때 모드 설정</string>
+    <string name="appearance_off">끄기</string>
 </resources>

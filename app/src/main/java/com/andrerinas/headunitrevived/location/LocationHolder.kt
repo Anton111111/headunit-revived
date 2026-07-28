@@ -53,6 +53,19 @@ object LocationHolder {
     }
 
     /**
+     * The best available fix for geofence containment tests, IGNORING age. A parked
+     * head unit may not get a fresh fix for a long time, but its last known position
+     * is still exactly where it is, so for "am I inside this area?" the newest known
+     * fix (fed or OS last-known) is the right answer regardless of how old it is.
+     */
+    fun geofenceFix(context: Context): Location? {
+        val candidates = mutableListOf<Location>()
+        lastFix?.let { candidates.add(it) }
+        bestEffortDeviceFix(context)?.let { candidates.add(it) }
+        return candidates.maxByOrNull { it.time }
+    }
+
+    /**
      * A best-effort one-shot fix straight from the OS (getLastKnownLocation), used
      * by the automation gate before any connection exists. Returns null if no
      * permission / provider / cached fix is available.

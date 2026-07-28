@@ -633,4 +633,9 @@
     <string name="geofence_scope_both">Her ikisi</string>
     <string name="geofence_gate_here">Yalnızca burada otomatik başlat / bağlan</string>
     <string name="dont_show_again">Bir daha gösterme</string>
+    <string name="location_open_entry">Yerler ve gün doğumu noktası</string>
+    <string name="sunrise_section">Gün doğumu / gün batımı</string>
+    <string name="location_places_hint">Bir alanda açık veya koyu görünümü zorla ve isteğe bağlı olarak yalnızca orada otomatik başlat. GPS kullanır.</string>
+    <string name="appearance_label">İçeri girince görünümü ayarla</string>
+    <string name="appearance_off">Kapalı</string>
 </resources>

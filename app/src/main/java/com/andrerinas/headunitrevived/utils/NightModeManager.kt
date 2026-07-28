@@ -192,7 +192,7 @@ class NightModeManager(
             settings.geofenceLocations.filter { it.overrideTheme && it.scope.coversAndroidAuto() }
         } catch (e: Exception) { emptyList() }
         if (areas.isEmpty()) return null
-        val loc = LocationHolder.currentLocation(context) ?: return null
+        val loc = LocationHolder.geofenceFix(context) ?: return null
         return areas.firstOrNull { it.contains(loc) }?.forceNight
     }
 

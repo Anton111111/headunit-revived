@@ -81,15 +81,46 @@
                     android:value="150" />
             </LinearLayout>
 
-            <Switch
-                android:id="@+id/override_theme_switch"
+            <TextView
+                android:id="@+id/appearance_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="@string/geofence_override_theme" />
+                android:text="@string/appearance_label" />
 
-            <!-- Shown only when "Override theme here" is on (conflict #3). -->
+            <RadioGroup
+                android:id="@+id/appearance_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/appearance_off"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:text="@string/appearance_off" />
+
+                <RadioButton
+                    android:id="@+id/appearance_light"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:text="@string/geofence_mode_light" />
+
+                <RadioButton
+                    android:id="@+id/appearance_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:text="@string/geofence_mode_dark" />
+            </RadioGroup>
+
+            <!-- Scope shown only when appearance is not Off (conflict #3). -->
             <LinearLayout
                 android:id="@+id/theme_detail"
                 android:layout_width="match_parent"
@@ -97,14 +128,6 @@
                 android:orientation="vertical"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp">
-
-                <Switch
-                    android:id="@+id/dark_switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:text="@string/geofence_dark_inside" />
 
                 <TextView
                     android:layout_width="match_parent"

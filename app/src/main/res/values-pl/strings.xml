@@ -637,4 +637,9 @@
     <string name="geofence_scope_both">Oba</string>
     <string name="geofence_gate_here">Automatyczne uruchamianie / łączenie tylko tutaj</string>
     <string name="dont_show_again">Nie pokazuj ponownie</string>
+    <string name="location_open_entry">Miejsca i punkt wschodu słońca</string>
+    <string name="sunrise_section">Wschód / zachód słońca</string>
+    <string name="location_places_hint">Wymuś jasny lub ciemny wygląd w obszarze i opcjonalnie automatyczne uruchamianie tylko tam. Używa GPS.</string>
+    <string name="appearance_label">Ustaw wygląd wewnątrz</string>
+    <string name="appearance_off">Wyłączone</string>
 </resources>

@@ -638,4 +638,9 @@
     <string name="geofence_scope_both">Ambos</string>
     <string name="geofence_gate_here">Iniciar/conectar automaticamente apenas aqui</string>
     <string name="dont_show_again">Não mostrar novamente</string>
+    <string name="location_open_entry">Locais e ponto do nascer do sol</string>
+    <string name="sunrise_section">Nascer / pôr do sol</string>
+    <string name="location_places_hint">Force uma aparência clara ou escura em uma área e, opcionalmente, inicie automaticamente apenas lá. Usa GPS.</string>
+    <string name="appearance_label">Ao entrar, definir aparência</string>
+    <string name="appearance_off">Desligado</string>
 </resources>

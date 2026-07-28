@@ -643,4 +643,9 @@
     <string name="geofence_scope_both">両方</string>
     <string name="geofence_gate_here">ここでのみ自動起動／接続する</string>
     <string name="dont_show_again">今後表示しない</string>
+    <string name="location_open_entry">場所と日の出地点</string>
+    <string name="sunrise_section">日の出／日の入り</string>
+    <string name="location_places_hint">エリア内で明るい表示または暗い表示を強制し、必要に応じてそこでのみ自動起動します。GPSを使用します。</string>
+    <string name="appearance_label">内側にいるとき、外観を設定</string>
+    <string name="appearance_off">オフ</string>
 </resources>

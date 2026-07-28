@@ -642,4 +642,9 @@
     <string name="geofence_scope_both">Beide</string>
     <string name="geofence_gate_here">Nur hier automatisch starten / verbinden</string>
     <string name="dont_show_again">Nicht mehr anzeigen</string>
+    <string name="location_open_entry">Orte und Sonnenaufgangspunkt</string>
+    <string name="sunrise_section">Sonnenaufgang / Sonnenuntergang</string>
+    <string name="location_places_hint">Erzwingt ein helles oder dunkles Aussehen in einem Bereich und optional nur dort den Auto-Start. Nutzt GPS.</string>
+    <string name="appearance_label">Aussehen festlegen, wenn drinnen</string>
+    <string name="appearance_off">Aus</string>
 </resources>

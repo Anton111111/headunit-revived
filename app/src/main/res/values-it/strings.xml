@@ -643,4 +643,9 @@
     <string name="geofence_scope_both">Entrambi</string>
     <string name="geofence_gate_here">Avvia automaticamente / connetti solo qui</string>
     <string name="dont_show_again">Non mostrare più</string>
+    <string name="location_open_entry">Luoghi e punto dell\'alba</string>
+    <string name="sunrise_section">Alba / tramonto</string>
+    <string name="location_places_hint">Forza un aspetto chiaro o scuro in un\'area e, facoltativamente, l\'avvio automatico solo lì. Usa il GPS.</string>
+    <string name="appearance_label">Quando all\'interno, imposta l\'aspetto</string>
+    <string name="appearance_off">Disattivato</string>
 </resources>

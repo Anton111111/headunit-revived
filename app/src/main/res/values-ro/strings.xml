@@ -637,4 +637,9 @@
     <string name="geofence_scope_both">Ambele</string>
     <string name="geofence_gate_here">Pornire automată / conectare doar aici</string>
     <string name="dont_show_again">Nu mai afișa</string>
+    <string name="location_open_entry">Locuri și punct de răsărit</string>
+    <string name="sunrise_section">Răsărit / apus</string>
+    <string name="location_places_hint">Forțează un aspect luminos sau întunecat într-o zonă și, opțional, pornirea automată doar acolo. Folosește GPS.</string>
+    <string name="appearance_label">Când ești în interior, setează aspectul</string>
+    <string name="appearance_off">Dezactivat</string>
 </resources>

@@ -635,4 +635,9 @@
     <string name="geofence_scope_both">兩者</string>
     <string name="geofence_gate_here">僅在此處自動啟動／連線</string>
     <string name="dont_show_again">不再顯示</string>
+    <string name="location_open_entry">地點與日出位置</string>
+    <string name="sunrise_section">日出／日落</string>
+    <string name="location_places_hint">在某個區域強制使用淺色或深色外觀，並可選擇僅在該處自動啟動。使用 GPS。</string>
+    <string name="appearance_label">在區域內時，設定外觀</string>
+    <string name="appearance_off">關閉</string>
 </resources>

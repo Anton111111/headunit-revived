@@ -636,4 +636,9 @@
     <string name="geofence_scope_both">Оба</string>
     <string name="geofence_gate_here">Автозапуск / подключение только здесь</string>
     <string name="dont_show_again">Больше не показывать</string>
+    <string name="location_open_entry">Места и точка восхода</string>
+    <string name="sunrise_section">Восход / закат</string>
+    <string name="location_places_hint">Принудительно задать светлый или тёмный вид в определённой зоне и, при желании, автозапуск только там. Использует GPS.</string>
+    <string name="appearance_label">При входе задать вид</string>
+    <string name="appearance_off">Выключено</string>
 </resources>

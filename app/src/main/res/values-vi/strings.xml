@@ -642,4 +642,9 @@
     <string name="geofence_scope_both">Cả hai</string>
     <string name="geofence_gate_here">Chỉ tự khởi động / kết nối tại đây</string>
     <string name="dont_show_again">Không hiển thị lại</string>
+    <string name="location_open_entry">Địa điểm và điểm mặt trời mọc</string>
+    <string name="sunrise_section">Mặt trời mọc / lặn</string>
+    <string name="location_places_hint">Buộc giao diện sáng hoặc tối trong một khu vực, và tùy chọn chỉ tự khởi động tại đó. Sử dụng GPS.</string>
+    <string name="appearance_label">Khi ở bên trong, đặt giao diện</string>
+    <string name="appearance_off">Tắt</string>
 </resources>

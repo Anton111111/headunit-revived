@@ -636,4 +636,9 @@
     <string name="geofence_scope_both">Beide</string>
     <string name="geofence_gate_here">Alleen hier automatisch starten / verbinden</string>
     <string name="dont_show_again">Niet meer weergeven</string>
+    <string name="location_open_entry">Locaties en zonsopgangpunt</string>
+    <string name="sunrise_section">Zonsopgang / zonsondergang</string>
+    <string name="location_places_hint">Forceer een licht of donker uiterlijk in een gebied en optioneel alleen daar automatisch starten. Gebruikt GPS.</string>
+    <string name="appearance_label">Uiterlijk instellen wanneer binnen</string>
+    <string name="appearance_off">Uit</string>
 </resources>

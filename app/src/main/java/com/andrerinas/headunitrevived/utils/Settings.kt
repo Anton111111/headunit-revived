@@ -1010,7 +1010,7 @@ class Settings(private val context: Context) {
             if (gating.isEmpty()) return true
 
             val fix = com.andrerinas.headunitrevived.location.LocationHolder
-                .currentLocation(context) ?: return true // fail-open: no live location
+                .geofenceFix(context) ?: return true // fail-open: no live location
 
             val inside = gating.any { it.contains(fix) }
             if (!inside) {

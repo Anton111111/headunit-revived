@@ -649,4 +649,11 @@
     <string name="geofence_scope_both">Both</string>
     <string name="geofence_gate_here">Only auto-start / connect here</string>
     <string name="dont_show_again">Don\'t show again</string>
+
+    <!-- Round 3: single Location screen + tri-state appearance -->
+    <string name="location_open_entry">Places and sunrise point</string>
+    <string name="sunrise_section">Sunrise / sunset</string>
+    <string name="location_places_hint">Force a light or dark look in an area, and optionally only auto-start there. Uses GPS.</string>
+    <string name="appearance_label">When inside, set appearance</string>
+    <string name="appearance_off">Off</string>
 </resources>

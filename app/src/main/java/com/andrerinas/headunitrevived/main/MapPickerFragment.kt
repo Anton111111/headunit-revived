@@ -2,6 +2,7 @@ package com.andrerinas.headunitrevived.main
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
+import android.widget.RadioGroup
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -22,8 +24,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.andrerinas.headunitrevived.App
 import com.andrerinas.headunitrevived.R
+import com.andrerinas.headunitrevived.aap.AapService
 import com.andrerinas.headunitrevived.location.GeofenceLocation
 import com.andrerinas.headunitrevived.location.LocationHolder
+import com.andrerinas.headunitrevived.utils.AppThemeManager
 import com.andrerinas.headunitrevived.utils.Settings
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -121,9 +125,9 @@ class MapPickerFragment : Fragment() {
         val radiusRow = view.findViewById<View>(R.id.radius_row)
         val radiusLabel = view.findViewById<TextView>(R.id.radius_label)
         val radiusSlider = view.findViewById<Slider>(R.id.radius_slider)
-        val overrideThemeSwitch = view.findViewById<Switch>(R.id.override_theme_switch)
+        val appearanceGroup = view.findViewById<RadioGroup>(R.id.appearance_group)
+        val appearanceLabel = view.findViewById<TextView>(R.id.appearance_label)
         val themeDetail = view.findViewById<View>(R.id.theme_detail)
-        val darkSwitch = view.findViewById<Switch>(R.id.dark_switch)
         val scopeGroup = view.findViewById<MaterialButtonToggleGroup>(R.id.scope_group)
         val automationSwitch = view.findViewById<Switch>(R.id.automation_switch)
         val useGpsButton = view.findViewById<Button>(R.id.use_gps_button)
@@ -134,7 +138,8 @@ class MapPickerFragment : Fragment() {
         val geofenceOnly = if (isGeofence) View.VISIBLE else View.GONE
         nameLayout.visibility = geofenceOnly
         radiusRow.visibility = geofenceOnly
-        overrideThemeSwitch.visibility = geofenceOnly
+        appearanceLabel.visibility = geofenceOnly
+        appearanceGroup.visibility = geofenceOnly
         automationSwitch.visibility = geofenceOnly
         themeDetail.visibility = View.GONE
 
@@ -145,9 +150,15 @@ class MapPickerFragment : Fragment() {
             radiusSlider.value = currentRadius.coerceIn(radiusSlider.valueFrom, radiusSlider.valueTo)
             radiusLabel.text = getString(R.string.geofence_radius_summary, currentRadius.toInt())
 
-            overrideThemeSwitch.isChecked = overrideTheme
+            // Tri-state appearance: Off / Light / Dark. Off means "no theme override here".
+            appearanceGroup.check(
+                when {
+                    !overrideTheme -> R.id.appearance_off
+                    forceNight -> R.id.appearance_dark
+                    else -> R.id.appearance_light
+                }
+            )
             themeDetail.visibility = if (overrideTheme) View.VISIBLE else View.GONE
-            darkSwitch.isChecked = forceNight
             checkScopeButton(scopeGroup, scope)
             automationSwitch.isChecked = gateAutomation
 
@@ -156,13 +167,16 @@ class MapPickerFragment : Fragment() {
                 radiusLabel.text = getString(R.string.geofence_radius_summary, value.toInt())
                 callJs("setRadius($value)")
             }
-            // Conflict #3: theme detail (scope + dark/light) only visible while overriding.
-            overrideThemeSwitch.setOnCheckedChangeListener { _, checked ->
-                overrideTheme = checked
-                themeDetail.visibility = if (checked) View.VISIBLE else View.GONE
+            // Conflict #3: scope only visible when an appearance (not Off) is chosen.
+            appearanceGroup.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.appearance_off -> overrideTheme = false
+                    R.id.appearance_light -> { overrideTheme = true; forceNight = false }
+                    R.id.appearance_dark -> { overrideTheme = true; forceNight = true }
+                }
+                themeDetail.visibility = if (overrideTheme) View.VISIBLE else View.GONE
                 updateSaveEnabled()
             }
-            darkSwitch.setOnCheckedChangeListener { _, checked -> forceNight = checked }
             scopeGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
                 if (isChecked) scope = scopeFromButton(checkedId)
             }
@@ -284,10 +298,19 @@ class MapPickerFragment : Fragment() {
         callJs("moveTo($currentLat, $currentLon)")
     }
 
+    /** Re-applies both theme engines so a change takes effect right away. */
+    private fun applyThemeConfigChange() {
+        AppThemeManager.reapply(requireContext(), settings)
+        requireContext().sendBroadcast(
+            Intent(AapService.ACTION_REQUEST_NIGHT_MODE_UPDATE).setPackage(requireContext().packageName)
+        )
+    }
+
     private fun save(name: String) {
         if (mode == MODE_POINT) {
             settings.fixedSunriseLatitude = currentLat
             settings.fixedSunriseLongitude = currentLon
+            applyThemeConfigChange()
             Toast.makeText(requireContext(), R.string.geofence_saved, Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
             return
@@ -310,6 +333,7 @@ class MapPickerFragment : Fragment() {
         val idx = if (id != null) list.indexOfFirst { it.id == id } else -1
         if (idx >= 0) list[idx] = updated else list.add(updated)
         settings.geofenceLocations = list
+        applyThemeConfigChange()
         Toast.makeText(requireContext(), R.string.geofence_saved, Toast.LENGTH_SHORT).show()
         findNavController().navigateUp()
     }
@@ -321,6 +345,7 @@ class MapPickerFragment : Fragment() {
             .setMessage(R.string.geofence_delete_message)
             .setPositiveButton(R.string.delete) { _, _ ->
                 settings.geofenceLocations = settings.geofenceLocations.filterNot { it.id == id }
+                applyThemeConfigChange()
                 findNavController().navigateUp()
             }
             .setNegativeButton(R.string.cancel, null)

@@ -29,6 +29,9 @@ class AppThemeManager(
     private var nightModeCalculator = NightMode(settings, false)
 
     private var lastEmittedNight: Boolean? = null
+    // True while the current theme is being forced by a geofence, so we know to restore
+    // the static base theme once when leaving the area.
+    private var wasOverriding = false
     private var currentLux: Float = -1f
     private var currentBrightness: Int = -1
     private var isFirstSensorReading = true
@@ -170,7 +173,7 @@ class AppThemeManager(
             settings.geofenceLocations.filter { it.overrideTheme && it.scope.coversApp() }
         } catch (e: Exception) { emptyList() }
         if (areas.isEmpty()) return null
-        val loc = com.andrerinas.headunitrevived.location.LocationHolder.currentLocation(context)
+        val loc = com.andrerinas.headunitrevived.location.LocationHolder.geofenceFix(context)
             ?: return null
         return areas.firstOrNull { it.contains(loc) }?.forceNight
     }
@@ -181,11 +184,13 @@ class AppThemeManager(
         val thresholdBrightness = settings.appThemeThresholdBrightness
 
         // Geofence override: while inside a saved area that forces a theme for the app,
-        // use that area's day/night, ignoring the selected dynamic app-theme mode.
+        // use that area's day/night, ignoring the selected app-theme mode.
         val geofenceForced = geofenceForcedNight()
         if (geofenceForced != null) {
             isNight = geofenceForced
-        } else when (settings.appTheme) {
+            wasOverriding = true
+        } else {
+          when (settings.appTheme) {
             Settings.AppTheme.LIGHT_SENSOR -> {
                 if (currentLux >= 0) {
                     val hyst = 10.0f
@@ -242,7 +247,18 @@ class AppThemeManager(
                 }
                 AppLog.d("AppThemeManager: MANUAL_TIME currentMinutes=$currentMinutes start=$start end=$end isNight=$isNight")
             }
-            else -> return
+            else -> {
+                // Static base theme, running only because an app-scope place exists.
+                // When we leave the area, restore the static theme once (no per-tick work).
+                if (wasOverriding) {
+                    wasOverriding = false
+                    lastEmittedNight = null
+                    applyStaticTheme(settings)
+                }
+                return
+            }
+          }
+          wasOverriding = false
         }
 
         if (debounce) {
@@ -340,6 +356,31 @@ class AppThemeManager(
                     theme == Settings.AppTheme.CLEAR ||
                     theme == Settings.AppTheme.DARK ||
                     theme == Settings.AppTheme.EXTREME_DARK
+        }
+
+        /** True if any saved place forces a theme covering the app UI. */
+        fun hasAppThemePlace(settings: Settings): Boolean =
+            try {
+                settings.geofenceLocations.any { it.overrideTheme && it.scope.coversApp() }
+            } catch (e: Exception) { false }
+
+        /**
+         * (Re)applies the app theme engine. Runs the live manager when the theme is
+         * dynamic OR when a saved place can force the app theme (so the geofence
+         * override works even over a static base theme); otherwise applies the static
+         * theme directly. Call after any change to the app theme, the sunrise source,
+         * or the saved places.
+         */
+        fun reapply(context: Context, settings: Settings) {
+            com.andrerinas.headunitrevived.App.appThemeManager?.stop()
+            com.andrerinas.headunitrevived.App.appThemeManager = null
+            if (!isStaticMode(settings.appTheme) || hasAppThemePlace(settings)) {
+                val manager = AppThemeManager(context.applicationContext, settings)
+                com.andrerinas.headunitrevived.App.appThemeManager = manager
+                manager.start()
+            } else {
+                applyStaticTheme(settings)
+            }
         }
     }
 }

@@ -638,4 +638,9 @@
     <string name="geofence_scope_both">Обидва</string>
     <string name="geofence_gate_here">Автозапуск / підключення лише тут</string>
     <string name="dont_show_again">Більше не показувати</string>
+    <string name="location_open_entry">Місця та точка світанку</string>
+    <string name="sunrise_section">Схід / захід сонця</string>
+    <string name="location_places_hint">Примусово задати світлий або темний вигляд у певній зоні та, за бажанням, автозапуск лише там. Використовує GPS.</string>
+    <string name="appearance_label">При вході задати вигляд</string>
+    <string name="appearance_off">Вимкнено</string>
 </resources>

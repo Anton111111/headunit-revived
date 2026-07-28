@@ -635,4 +635,9 @@
     <string name="geofence_scope_both">Mindkettő</string>
     <string name="geofence_gate_here">Csak itt indítson automatikusan / csatlakozzon</string>
     <string name="dont_show_again">Ne jelenjen meg többször</string>
+    <string name="location_open_entry">Helyek és napkelte pont</string>
+    <string name="sunrise_section">Napkelte / napnyugta</string>
+    <string name="location_places_hint">Kényszerítsen világos vagy sötét megjelenést egy területen, és opcionálisan csak ott indítson automatikusan. GPS-t használ.</string>
+    <string name="appearance_label">Ha belül van, állítsa be a megjelenést</string>
+    <string name="appearance_off">Ki</string>
 </resources>

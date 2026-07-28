@@ -636,4 +636,9 @@
     <string name="geofence_scope_both">كلاهما</string>
     <string name="geofence_gate_here">التشغيل التلقائي / الاتصال هنا فقط</string>
     <string name="dont_show_again">عدم العرض مرة أخرى</string>
+    <string name="location_open_entry">الأماكن ونقطة الشروق</string>
+    <string name="sunrise_section">الشروق / الغروب</string>
+    <string name="location_places_hint">فرض مظهر فاتح أو داكن في منطقة معينة، مع خيار التشغيل التلقائي هناك فقط. يستخدم نظام تحديد المواقع GPS.</string>
+    <string name="appearance_label">عند التواجد بالداخل، اضبط المظهر</string>
+    <string name="appearance_off">إيقاف</string>
 </resources>

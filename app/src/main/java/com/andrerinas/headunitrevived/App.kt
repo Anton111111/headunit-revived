@@ -58,13 +58,9 @@ class App : Application() {
             Settings.syncAutoStartWifiSsidToDeviceStorage(this, settings.autoStartWifiSsid)
             Settings.syncAutoStartBtMacsToDeviceStorage(this, settings.autoStartBluetoothDeviceMacs)
 
-            // Apply app theme
-            if (AppThemeManager.isStaticMode(settings.appTheme)) {
-                AppThemeManager.applyStaticTheme(settings)
-            } else {
-                appThemeManager = AppThemeManager(this, settings)
-                appThemeManager?.start()
-            }
+            // Apply app theme (runs the live manager when dynamic, or when a saved place
+            // can force the app theme even over a static base).
+            AppThemeManager.reapply(this, settings)
         } else {
             AppLog.init(null, this) // Initialize with default logging if locked
             AppLog.w("App started in Direct Boot mode (locked). Settings access deferred.")
