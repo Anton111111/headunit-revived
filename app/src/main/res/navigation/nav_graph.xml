@@ -107,7 +107,50 @@
     <fragment
         android:id="@+id/darkModeFragment"
         android:name="com.andrerinas.headunitrevived.main.DarkModeFragment"
-        android:label="@string/dark_mode_settings" />
+        android:label="@string/dark_mode_settings">
+        <action
+            android:id="@+id/action_darkModeFragment_to_locationsFragment"
+            app:destination="@id/locationsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_darkModeFragment_to_mapPickerFragment"
+            app:destination="@id/mapPickerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/locationsFragment"
+        android:name="com.andrerinas.headunitrevived.main.LocationsFragment"
+        android:label="@string/geofence_locations_title">
+        <action
+            android:id="@+id/action_locationsFragment_to_mapPickerFragment"
+            app:destination="@id/mapPickerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapPickerFragment"
+        android:name="com.andrerinas.headunitrevived.main.MapPickerFragment"
+        android:label="@string/geofence_pick_location">
+        <argument
+            android:name="mode"
+            app:argType="string"
+            android:defaultValue="geofence" />
+        <argument
+            android:name="geofenceId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         android:id="@+id/autoStartFragment"

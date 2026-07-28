@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>تلقائي (شروق/غروب)</item>
+    <string-array name="night_mode">        <item>تلقائي (شروق/غروب)</item>
         <item>فاتح</item>
         <item>داكن</item>
         <item>وقت يدوي</item>
         <item>مستشعر الضوء</item>
         <item>سطوع الشاشة</item>
-    </string-array>
+        <item>إشارة مصابيح السيارة (ILL+)</item>
+        <item>الموقع (حسب المنطقة)</item>
+</string-array>
 
-    <string-array name="app_theme">
-        <item>تلقائي (النظام)</item>
+    <string-array name="app_theme">        <item>تلقائي (النظام)</item>
         <item>فاتح</item>
         <item>داكن</item>
         <item>داكن للغاية</item>
@@ -18,7 +18,9 @@
         <item>وقت يدوي</item>
         <item>مستشعر الضوء</item>
         <item>سطوع الشاشة</item>
-    </string-array>
+        <item>إشارة مصابيح السيارة (ILL+)</item>
+        <item>الموقع (حسب المنطقة)</item>
+</string-array>
 
     <string-array name="screen_orientation">
         <item>@string/orientation_system_default</item>

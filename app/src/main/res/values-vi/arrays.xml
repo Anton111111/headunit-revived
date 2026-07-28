@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Tự động (Mặt trời mọc/lặn)</item>
+    <string-array name="night_mode">        <item>Tự động (Mặt trời mọc/lặn)</item>
         <item>Sáng</item>
         <item>Tối</item>
         <item>Theo giờ thủ công</item>
         <item>Cảm biến ánh sáng</item>
         <item>Độ sáng màn hình</item>
         <item>Tín hiệu đèn xe (ILL+)</item>
-    </string-array>
+        <item>Vị trí (theo khu vực)</item>
+</string-array>
 
     <string-array name="app_theme">
         <item>Tự động (Theo hệ thống)</item>
@@ -20,6 +20,7 @@
         <item>Cảm biến ánh sáng</item>
         <item>Độ sáng màn hình</item>
         <item>Tín hiệu đèn xe (ILL+)</item>
+        <item>Vị trí (theo khu vực)</item>
     </string-array>
 
     <string-array name="screen_orientation">

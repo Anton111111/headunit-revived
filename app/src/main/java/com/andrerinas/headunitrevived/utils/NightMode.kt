@@ -47,6 +47,7 @@ class NightMode(private val settings: Settings, val hasGPSLocation: Boolean) {
                     if (currentBrightness >= 0) currentBrightness < settings.nightModeThresholdBrightness else false
                 }
                 Settings.NightMode.CAR_SIGNAL -> false // Handled directly in NightModeManager
+                Settings.NightMode.LOCATION -> false // Handled directly in NightModeManager
             }
         }
 
@@ -65,6 +66,7 @@ class NightMode(private val settings: Settings, val hasGPSLocation: Boolean) {
             Settings.NightMode.LIGHT_SENSOR -> "NightMode: Sensor ($currentLux < ${settings.nightModeThresholdLux})"
             Settings.NightMode.SCREEN_BRIGHTNESS -> "NightMode: Brightness ($currentBrightness < ${settings.nightModeThresholdBrightness})"
             Settings.NightMode.CAR_SIGNAL -> "NightMode: Car ILL+ signal"
+            Settings.NightMode.LOCATION -> "NightMode: Location (by area)"
         }
     }
 
@@ -77,10 +79,20 @@ private class NightModeCalculator(private val settings: Settings) {
     private val twilightCalculator = TwilightCalculator()
     private val format = SimpleDateFormat("HH:mm", Locale.US)
 
+    // When the user has chosen a fixed sunrise/sunset point, use it (works offline, no GPS);
+    // otherwise use the last known location (updated from head unit / phone-forwarded GPS).
+    // Shared by both the app theme and the Android Auto night mode Auto/sunrise calculations.
+    private fun latitude(): Double =
+        if (settings.useFixedSunriseLocation)
+            settings.fixedSunriseLatitude else settings.lastKnownLocation.latitude
+
+    private fun longitude(): Double =
+        if (settings.useFixedSunriseLocation)
+            settings.fixedSunriseLongitude else settings.lastKnownLocation.longitude
+
     fun getCalculationInfo(): String {
         val time = Calendar.getInstance().time
-        val location = settings.lastKnownLocation
-        twilightCalculator.calculateTwilight(time.time, location.latitude, location.longitude)
+        twilightCalculator.calculateTwilight(time.time, latitude(), longitude())
         
         val sunrise = if (twilightCalculator.mSunrise > 0) format.format(Date(twilightCalculator.mSunrise)) else "--:--"
         val sunset = if (twilightCalculator.mSunset > 0) format.format(Date(twilightCalculator.mSunset)) else "--:--"
@@ -90,8 +102,7 @@ private class NightModeCalculator(private val settings: Settings) {
     var current: Boolean = false
         get()  {
             val time = Calendar.getInstance().time
-            val location = settings.lastKnownLocation
-            twilightCalculator.calculateTwilight(time.time, location.latitude, location.longitude)
+            twilightCalculator.calculateTwilight(time.time, latitude(), longitude())
             return twilightCalculator.mState == TwilightCalculator.NIGHT
         }
 

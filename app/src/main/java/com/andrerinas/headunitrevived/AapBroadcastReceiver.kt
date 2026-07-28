@@ -37,7 +37,10 @@ class AapBroadcastReceiver : BroadcastReceiver() {
         val component = App.provide(context)
         if (intent.action == LocationUpdateIntent.action) {
             val location = LocationUpdateIntent.extractLocation(intent)
-            
+
+            // Feed the single source of truth for geofence / night-by-area evaluation.
+            com.andrerinas.headunitrevived.location.LocationHolder.update(location)
+
             // Apply Fake Speed if enabled
             if (component.settings.fakeSpeed) {
                 location.speed = 0.5f // 0.5 m/s corresponds to 500 mm/s in Emil's logic

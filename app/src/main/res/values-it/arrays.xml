@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Auto (Alba/Tramonto)</item>
+    <string-array name="night_mode">        <item>Auto (Alba/Tramonto)</item>
         <item>Chiaro</item>
         <item>Scuro</item>
         <item>Ora manuale</item>
         <item>Sensore di luce</item>
         <item>Luminosità dello schermo</item>
         <item>Segnale fari auto (ILL+)</item>
-    </string-array>
+        <item>Posizione (per area)</item>
+</string-array>
 
     <string-array name="app_theme">
         <item>Automatico (Sistema)</item>
@@ -20,6 +20,7 @@
         <item>Sensore di luce</item>
         <item>Luminosità dello schermo</item>
         <item>Segnale fari auto (ILL+)</item>
+        <item>Posizione (per area)</item>
     </string-array>
 
     <string-array name="screen_orientation">
