@@ -673,6 +673,12 @@ class Settings(private val context: Context) {
             prefs.edit().putLong("fixed-sun-longitude", value.toRawBits()).apply()
         }
 
+    // Configurable radius (meters) shown around the fixed sunrise point on the map.
+    // Cosmetic (the sunrise/sunset calc uses only the point); 0 = not set yet.
+    var fixedSunriseRadius: Int
+        get() = prefs.getInt("fixed-sun-radius", 0)
+        set(value) { prefs.edit().putInt("fixed-sun-radius", value).apply() }
+
     // Suppresses the "internet required" notice before opening the map picker once the
     // user has chosen "don't show again".
     var hideMapInternetNotice: Boolean

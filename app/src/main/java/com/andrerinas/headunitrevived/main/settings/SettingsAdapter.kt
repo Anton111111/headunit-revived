@@ -47,7 +47,11 @@ sealed class SettingItem {
 
     data class CategoryHeader(override val stableId: String, @StringRes val titleResId: Int) : SettingItem()
 
-    data class InfoBanner(override val stableId: String, @StringRes val textResId: Int) : SettingItem()
+    data class InfoBanner(
+        override val stableId: String,
+        @StringRes val textResId: Int,
+        val text: String? = null // Dynamic text (used instead of textResId when set)
+    ) : SettingItem()
 
     data class ActionButton(
         override val stableId: String,
@@ -185,7 +189,8 @@ class SettingsAdapter : ListAdapter<SettingItem, RecyclerView.ViewHolder>(Settin
     class InfoBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val infoText: TextView = itemView.findViewById(R.id.infoText)
         fun bind(item: SettingItem.InfoBanner) {
-            infoText.setText(item.textResId)
+            if (item.text != null) infoText.text = item.text
+            else infoText.setText(item.textResId)
         }
     }
 
@@ -317,7 +322,7 @@ class SettingsAdapter : ListAdapter<SettingItem, RecyclerView.ViewHolder>(Settin
                 oldItem is SettingItem.CategoryHeader && newItem is SettingItem.CategoryHeader ->
                     oldItem.titleResId == newItem.titleResId
                 oldItem is SettingItem.InfoBanner && newItem is SettingItem.InfoBanner ->
-                    oldItem.textResId == newItem.textResId
+                    oldItem.textResId == newItem.textResId && oldItem.text == newItem.text
                 oldItem is SettingItem.ActionButton && newItem is SettingItem.ActionButton ->
                     oldItem.textResId == newItem.textResId && oldItem.isEnabled == newItem.isEnabled
                 oldItem is SettingItem.SegmentedButtonSettingEntry && newItem is SettingItem.SegmentedButtonSettingEntry ->

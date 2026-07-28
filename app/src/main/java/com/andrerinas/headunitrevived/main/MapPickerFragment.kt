@@ -100,6 +100,13 @@ class MapPickerFragment : Fragment() {
                 currentLat = settings.fixedSunriseLatitude
                 currentLon = settings.fixedSunriseLongitude
             }
+            // Configurable radius circle: saved value, else the GPS accuracy, else default.
+            val rawRadius = when {
+                settings.fixedSunriseRadius > 0 -> settings.fixedSunriseRadius.toFloat()
+                pointAccuracy > 0f -> pointAccuracy
+                else -> GeofenceLocation.DEFAULT_RADIUS_METERS
+            }
+            currentRadius = (Math.round(rawRadius / 50f) * 50).toFloat().coerceIn(50f, 5000f)
             return
         }
         val existing = editingId?.let { id -> settings.geofenceLocations.firstOrNull { it.id == id } }
@@ -136,22 +143,24 @@ class MapPickerFragment : Fragment() {
         val isGeofence = mode == MODE_GEOFENCE
         val geofenceOnly = if (isGeofence) View.VISIBLE else View.GONE
         nameLayout.visibility = geofenceOnly
-        radiusRow.visibility = geofenceOnly
         darkSwitch.visibility = geofenceOnly
+
+        // Configurable radius circle in both modes (a real geofence for places; a
+        // configurable area around the fixed sunrise point in point mode).
+        radiusRow.visibility = View.VISIBLE
+        radiusSlider.value = currentRadius.coerceIn(radiusSlider.valueFrom, radiusSlider.valueTo)
+        radiusLabel.text = getString(R.string.geofence_radius_summary, currentRadius.toInt())
+        radiusSlider.addOnChangeListener { _, value, _ ->
+            currentRadius = value
+            radiusLabel.text = getString(R.string.geofence_radius_summary, value.toInt())
+            callJs("setRadius($value)")
+        }
 
         if (isGeofence) {
             editingId?.let { id ->
                 settings.geofenceLocations.firstOrNull { it.id == id }?.let { nameInput.setText(it.name) }
             }
-            radiusSlider.value = currentRadius.coerceIn(radiusSlider.valueFrom, radiusSlider.valueTo)
-            radiusLabel.text = getString(R.string.geofence_radius_summary, currentRadius.toInt())
             darkSwitch.isChecked = forceNight
-
-            radiusSlider.addOnChangeListener { _, value, _ ->
-                currentRadius = value
-                radiusLabel.text = getString(R.string.geofence_radius_summary, value.toInt())
-                callJs("setRadius($value)")
-            }
             darkSwitch.setOnCheckedChangeListener { _, checked -> forceNight = checked }
 
             deleteButton.visibility = if (editingId != null) View.VISIBLE else View.GONE
@@ -208,8 +217,8 @@ class MapPickerFragment : Fragment() {
         webView.settings.domStorageEnabled = true
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
-                val showRadius = if (mode == MODE_GEOFENCE) 1 else 0
-                callJs("initMap($currentLat, $currentLon, $currentRadius, $showRadius, $pointAccuracy)")
+                // Configurable radius circle shown in both modes.
+                callJs("initMap($currentLat, $currentLon, $currentRadius, 1, 0)")
             }
         }
         webView.addJavascriptInterface(JsBridge(), "Android")
@@ -263,6 +272,7 @@ class MapPickerFragment : Fragment() {
         if (mode == MODE_POINT) {
             settings.fixedSunriseLatitude = currentLat
             settings.fixedSunriseLongitude = currentLon
+            settings.fixedSunriseRadius = currentRadius.toInt()
             applyThemeConfigChange()
             Toast.makeText(requireContext(), R.string.geofence_saved, Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()

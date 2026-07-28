@@ -78,11 +78,12 @@ class LocationsFragment : Fragment() {
         GeofenceLocation.currentPlace(requireContext(), settings)?.let { g ->
             val state = getString(if (g.forceNight) R.string.geofence_mode_dark else R.string.geofence_mode_light)
             val place = g.name.ifBlank { getString(R.string.geofence_unnamed) }
-            items.add(SettingItem.SettingEntry(
+            // Live status shown as informational text, not a tappable option.
+            items.add(SettingItem.InfoBanner(
                 stableId = "liveStatus",
-                nameResId = R.string.geofence_current_status_label,
-                value = getString(R.string.geofence_current_status, state, place),
-                onClick = { _ -> }
+                textResId = R.string.geofence_current_status_label,
+                text = getString(R.string.geofence_current_status_label) + ": " +
+                    getString(R.string.geofence_current_status, state, place)
             ))
         }
 
