@@ -62,6 +62,8 @@ class MapPickerFragment : Fragment() {
     private var currentLon: Double = 0.0
     private var currentRadius: Float = GeofenceLocation.DEFAULT_RADIUS_METERS
     private var forceNight: Boolean = true
+    // GPS accuracy (meters) of the device fix used to center the point picker; 0 if none.
+    private var pointAccuracy: Float = 0f
 
     private val requestLocationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -87,8 +89,17 @@ class MapPickerFragment : Fragment() {
 
     private fun resolveInitialState() {
         if (mode == MODE_POINT) {
-            currentLat = settings.fixedSunriseLatitude
-            currentLon = settings.fixedSunriseLongitude
+            // Default to the device's current location with its GPS accuracy circle, so the
+            // user sees where they are; fall back to the stored fixed point if there is no fix.
+            val fix = LocationHolder.geofenceFix(requireContext())
+            if (fix != null) {
+                currentLat = fix.latitude
+                currentLon = fix.longitude
+                pointAccuracy = if (fix.hasAccuracy()) fix.accuracy else 0f
+            } else {
+                currentLat = settings.fixedSunriseLatitude
+                currentLon = settings.fixedSunriseLongitude
+            }
             return
         }
         val existing = editingId?.let { id -> settings.geofenceLocations.firstOrNull { it.id == id } }
@@ -198,7 +209,7 @@ class MapPickerFragment : Fragment() {
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 val showRadius = if (mode == MODE_GEOFENCE) 1 else 0
-                callJs("initMap($currentLat, $currentLon, $currentRadius, $showRadius)")
+                callJs("initMap($currentLat, $currentLon, $currentRadius, $showRadius, $pointAccuracy)")
             }
         }
         webView.addJavascriptInterface(JsBridge(), "Android")

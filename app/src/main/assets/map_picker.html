@@ -13,9 +13,24 @@
 <body>
 <div id="map"></div>
 <script>
-    var map, marker, circle;
+    var map, marker, circle, accuracyCircle;
     var radiusMeters = 150;
     var showRadius = true;
+
+    // A static "accuracy" circle showing where the device is (point-picker mode).
+    function drawAccuracy(lat, lon, meters) {
+        if (!meters || meters <= 0) return;
+        var latlng = [lat, lon];
+        if (!accuracyCircle) {
+            accuracyCircle = L.circle(latlng, {
+                radius: meters, color: '#34A853', weight: 1,
+                fillColor: '#34A853', fillOpacity: 0.12, interactive: false
+            }).addTo(map);
+        } else {
+            accuracyCircle.setLatLng(latlng);
+            accuracyCircle.setRadius(meters);
+        }
+    }
 
     function notify() {
         if (marker && window.Android && Android.onPointChanged) {
@@ -48,13 +63,17 @@
         notify();
     }
 
-    // Called from Kotlin. showRadiusFlag=0 hides the radius circle (point-only mode).
-    function initMap(lat, lon, radius, showRadiusFlag) {
+    // Called from Kotlin. showRadiusFlag=0 hides the geofence radius circle (point mode).
+    // accuracyMeters>0 draws a static accuracy circle at the initial (device) location.
+    function initMap(lat, lon, radius, showRadiusFlag, accuracyMeters) {
         radiusMeters = radius || 150;
         showRadius = (showRadiusFlag !== 0);
+        var zoom = 15;
+        if (accuracyMeters && accuracyMeters > 300) zoom = 14;
+        if (accuracyMeters && accuracyMeters > 1500) zoom = 12;
         if (!map) {
             map = L.map('map', { zoomControl: true, attributionControl: true })
-                .setView([lat, lon], 15);
+                .setView([lat, lon], zoom);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; OpenStreetMap contributors'
@@ -63,8 +82,9 @@
                 placeAt(e.latlng.lat, e.latlng.lng);
             });
         } else {
-            map.setView([lat, lon], map.getZoom());
+            map.setView([lat, lon], zoom);
         }
+        drawAccuracy(lat, lon, accuracyMeters);
         placeAt(lat, lon);
     }
 
