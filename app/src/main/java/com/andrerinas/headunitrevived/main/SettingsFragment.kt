@@ -34,7 +34,6 @@ import com.andrerinas.headunitrevived.BuildConfig
 import com.andrerinas.headunitrevived.utils.LogExporter
 import com.andrerinas.headunitrevived.utils.SettingsBackupManager
 import com.andrerinas.headunitrevived.utils.DialogUtils
-import com.andrerinas.headunitrevived.utils.SetupWizard
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -56,6 +55,40 @@ class SettingsFragment : Fragment() {
     private lateinit var toolbar: MaterialToolbar
     private var saveButton: MaterialButton? = null
     private var resetButton: MaterialButton? = null
+
+    // Basic/Advanced tab + search state (Feature A)
+    private enum class SettingsTier { BASIC, ADVANCED }
+    private var settingsTabGroup: com.google.android.material.button.MaterialButtonToggleGroup? = null
+    private var searchInput: com.google.android.material.textfield.TextInputEditText? = null
+    private var activeTab: SettingsTier = SettingsTier.BASIC
+    private var searchQuery: String = ""
+    // The complete, unfiltered list built by updateSettingsList(); rendering filters this.
+    private var fullSettingsList: List<SettingItem> = emptyList()
+
+    // Curated everyday options shown in the Basic tab. Advanced shows everything.
+    // Wireless items here only appear in Basic when the user connects wirelessly (see filterSettings).
+    private val basicSettingIds = setOf(
+        // General
+        "autoOptimize", "connectionMode", "appLanguage", "uiScale",
+        // Wireless (shown in Basic only when primaryConnection is wireless)
+        "wifiConnectionMode",
+        // Dark mode
+        "darkModeSettings",
+        // Automation
+        "autoStartSettings", "autoConnectSettings",
+        // Navigation
+        "gpsNavigation",
+        // Graphic
+        "resolution", "dpiPixelDensity", "viewMode", "screenOrientation", "startInFullscreenMode",
+        // Video
+        "videoCodec", "fpsLimit",
+        // Input
+        "keymap",
+        // Audio
+        "enableAudioSink", "micSettings", "audioVolumeOffsets",
+        // Info
+        "version", "about"
+    )
 
     // Local state to hold changes before saving
     private var pendingUseGps: Boolean? = null
@@ -153,6 +186,16 @@ class SettingsFragment : Fragment() {
         uri?.let { importSettingsFromUri(it) }
     }
 
+    // Re-running the onboarding wizard can change restart-sensitive display settings;
+    // reload pending state and recreate on return, mirroring the old SetupWizard callback.
+    private val onboardingLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (isAdded) {
+            reloadPendingStateFromSettings()
+            checkChanges()
+            requireActivity().recreate()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
@@ -234,6 +277,7 @@ class SettingsFragment : Fragment() {
         settingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         settingsRecyclerView.adapter = settingsAdapter
 
+        setupTabsAndSearch(view)
         updateSettingsList()
         setupToolbar()
 
@@ -563,13 +607,16 @@ class SettingsFragment : Fragment() {
             nameResId = R.string.auto_optimize,
             value = getString(R.string.auto_optimize_desc),
             onClick = { _ ->
-                SetupWizard(requireContext()) {
-                    reloadPendingStateFromSettings()
-                    checkChanges()
-                    updateSettingsList()
-                    requireActivity().recreate()
-                }.start()
+                onboardingLauncher.launch(Intent(requireContext(), OnboardingActivity::class.java))
             }
+        ))
+
+        // Connection mode (Feature B): drives which options appear in the Basic tab.
+        items.add(SettingItem.SettingEntry(
+            stableId = "connectionMode",
+            nameResId = R.string.connection_mode,
+            value = connectionKindLabel(settings.primaryConnection),
+            onClick = { showConnectionModeDialog() }
         ))
 
         // Language Selector
@@ -1627,9 +1674,127 @@ class SettingsFragment : Fragment() {
             ))
         }
 
-        settingsAdapter.submitList(items) {
+        fullSettingsList = items
+        renderSettings(scrollState)
+    }
+
+    private fun setupTabsAndSearch(view: View) {
+        settingsTabGroup = view.findViewById(R.id.settingsTabGroup)
+        searchInput = view.findViewById(R.id.settingsSearch)
+
+        settingsTabGroup?.check(if (activeTab == SettingsTier.BASIC) R.id.tabBasic else R.id.tabAdvanced)
+        settingsTabGroup?.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+            activeTab = if (checkedId == R.id.tabAdvanced) SettingsTier.ADVANCED else SettingsTier.BASIC
+            renderSettings()
+        }
+
+        searchInput?.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, before: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                searchQuery = s?.toString() ?: ""
+                renderSettings()
+            }
+        })
+    }
+
+    private fun renderSettings(scrollState: android.os.Parcelable? = null) {
+        // While searching, the tab has no effect (search spans both tiers), so hint that.
+        settingsTabGroup?.isEnabled = searchQuery.isBlank()
+        settingsAdapter.submitList(filterSettings(fullSettingsList)) {
             scrollState?.let { settingsRecyclerView.layoutManager?.onRestoreInstanceState(it) }
         }
+    }
+
+    // Filters the full list by active tab / search query, keeping category headers only when
+    // at least one of their children survives (so no empty sections show).
+    private fun filterSettings(full: List<SettingItem>): List<SettingItem> {
+        val query = searchQuery.trim()
+        val result = mutableListOf<SettingItem>()
+        var pendingHeader: SettingItem.CategoryHeader? = null
+        var currentCategoryId: String? = null
+        var headerMatchesQuery = false
+
+        for (item in full) {
+            if (item is SettingItem.CategoryHeader) {
+                pendingHeader = item
+                currentCategoryId = item.stableId
+                headerMatchesQuery = query.isNotEmpty() &&
+                    getString(item.titleResId).contains(query, ignoreCase = true)
+                continue
+            }
+            if (shouldShowItem(item, currentCategoryId, query, headerMatchesQuery)) {
+                pendingHeader?.let { result.add(it); pendingHeader = null }
+                result.add(item)
+            }
+        }
+        return result
+    }
+
+    private fun shouldShowItem(
+        item: SettingItem,
+        categoryId: String?,
+        query: String,
+        headerMatchesQuery: Boolean
+    ): Boolean {
+        // The bottom Save action is always relevant when present.
+        if (item is SettingItem.ActionButton && item.stableId == "bottomSaveButton") return true
+
+        if (query.isNotEmpty()) {
+            return headerMatchesQuery || searchableText(item).contains(query, ignoreCase = true)
+        }
+
+        if (activeTab == SettingsTier.ADVANCED) return true
+
+        // Basic tab: cable users do not see the Wireless Connection group here (Feature B).
+        if (categoryId == "wirelessConnection" &&
+            settings.primaryConnection == Settings.ConnectionKind.USB_CABLE) {
+            return false
+        }
+        return item.stableId in basicSettingIds
+    }
+
+    // Text used for search matching (title + description/value where applicable).
+    private fun searchableText(item: SettingItem): String = when (item) {
+        is SettingItem.SettingEntry ->
+            "${item.nameOverride ?: getString(item.nameResId)} ${item.value}"
+        is SettingItem.ToggleSettingEntry ->
+            "${item.nameOverride ?: getString(item.nameResId)} ${getString(item.descriptionResId)}"
+        is SettingItem.SliderSettingEntry ->
+            "${getString(item.nameResId)} ${item.value}"
+        is SettingItem.SegmentedButtonSettingEntry ->
+            "${getString(item.nameResId)} ${item.options.joinToString(" ")}"
+        is SettingItem.InfoBanner -> item.text ?: getString(item.textResId)
+        is SettingItem.ActionButton -> getString(item.textResId)
+        is SettingItem.CategoryHeader -> getString(item.titleResId)
+    }
+
+    private fun connectionKindLabel(kind: Settings.ConnectionKind): String = when (kind) {
+        Settings.ConnectionKind.USB_CABLE -> getString(R.string.connection_kind_usb_cable)
+        Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb_wireless_adapter)
+        Settings.ConnectionKind.WIFI -> getString(R.string.connection_kind_wifi)
+        Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
+        Settings.ConnectionKind.UNSET -> getString(R.string.connection_kind_unset)
+    }
+
+    private fun showConnectionModeDialog() {
+        val kinds = listOf(
+            Settings.ConnectionKind.USB_CABLE,
+            Settings.ConnectionKind.USB_WIRELESS_ADAPTER,
+            Settings.ConnectionKind.WIFI
+        )
+        val labels = kinds.map { connectionKindLabel(it) }.toTypedArray()
+        val current = kinds.indexOf(settings.primaryConnection)
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.connection_mode)
+            .setSingleChoiceItems(labels, current) { dialog, which ->
+                settings.primaryConnection = kinds[which]
+                dialog.dismiss()
+                updateSettingsList()
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private data class ImportSnapshot(

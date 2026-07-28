@@ -365,6 +365,25 @@ class Settings(private val context: Context) {
         get() = prefs.getBoolean("has-completed-setup-wizard", false)
         set(value) { prefs.edit().putBoolean("has-completed-setup-wizard", value).apply() }
 
+    // Version of the onboarding flow the user has already seen. When this is lower than
+    // CURRENT_ONBOARDING_VERSION the wizard is shown again (so upgraders see new steps once).
+    // Migration: users who finished the old dialog wizard are treated as having seen version 1.
+    var onboardingVersion: Int
+        get() {
+            if (!prefs.contains("onboarding-version") &&
+                prefs.getBoolean("has-completed-setup-wizard", false)) {
+                return 1
+            }
+            return prefs.getInt("onboarding-version", 0)
+        }
+        set(value) { prefs.edit().putInt("onboarding-version", value).apply() }
+
+    // How the user primarily connects. Drives which options are surfaced in the Basic tab
+    // (e.g. cable users do not see the Wireless Connection group there). UNSET shows everything.
+    var primaryConnection: ConnectionKind
+        get() = ConnectionKind.fromInt(prefs.getInt("primary-connection", ConnectionKind.UNSET.value))
+        set(value) { prefs.edit().putInt("primary-connection", value.value).apply() }
+
     var autoConnectLastSession: Boolean
         get() = prefs.getBoolean("auto-connect-last-session", false)
         set(value) { prefs.edit().putBoolean("auto-connect-last-session", value).apply() }
@@ -618,6 +637,22 @@ class Settings(private val context: Context) {
         companion object {
             private val map = values().associateBy(SoftwareVideoDecoder::value)
             fun fromInt(value: Int) = map[value]
+        }
+    }
+
+    enum class ConnectionKind(val value: Int) {
+        UNSET(-1),
+        USB_CABLE(0),
+        USB_WIRELESS_ADAPTER(1),
+        WIFI(2),
+        NATIVE_AA(3);
+
+        val isWireless: Boolean
+            get() = this == USB_WIRELESS_ADAPTER || this == WIFI || this == NATIVE_AA
+
+        companion object {
+            private val map = values().associateBy(ConnectionKind::value)
+            fun fromInt(value: Int) = map[value] ?: UNSET
         }
     }
 

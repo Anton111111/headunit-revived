@@ -3,6 +3,54 @@
     <string name="menu">Menu</string>
     <string name="settings">Settings</string>
 
+    <!-- Settings tabs and search (redesign) -->
+    <string name="settings_tab_basic">Basic</string>
+    <string name="settings_tab_advanced">Advanced</string>
+    <string name="settings_search_hint">Search settings</string>
+
+    <!-- Connection mode selector -->
+    <string name="connection_mode">Connection mode</string>
+    <string name="connection_kind_usb_cable">USB cable (direct)</string>
+    <string name="connection_kind_usb_wireless_adapter">USB wireless adapter</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Not set</string>
+
+    <!-- Onboarding wizard -->
+    <string name="onb_next">Next</string>
+    <string name="onb_skip">Skip</string>
+    <string name="onb_ready_finish">Finish</string>
+    <string name="onb_welcome_title">Welcome to Headunit Revived</string>
+    <string name="onb_welcome_body">This quick setup scans your device and picks the best video, display and night mode settings for you. You can change everything later in Settings.</string>
+    <string name="onb_safety_title">Safety first</string>
+    <string name="onb_safety_accept">I have read and accept the terms</string>
+    <string name="onb_connection_title">How do you connect?</string>
+    <string name="onb_connection_help">Pick how your phone connects. This keeps the settings screen focused on what applies to you.</string>
+    <string name="onb_connection_cable_detail">Phone plugged straight into the head unit with a USB cable. Wireless options stay out of the way.</string>
+    <string name="onb_connection_adapter_detail">A USB dongle bridges the cable to a wireless link. Wireless options are shown.</string>
+    <string name="onb_connection_wifi_detail">Phone connects over WiFi. Wireless options are shown.</string>
+    <string name="onb_display_title">Display</string>
+    <!-- %1$d width, %2$d height, %3$d dpi, %4$s codec -->
+    <string name="onb_display_detected">Detected panel: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Screen size</string>
+    <string name="onb_display_orientation_label">Orientation</string>
+    <string name="onb_display_apply">Apply recommended settings</string>
+    <!-- %1$s resolution, %2$d dpi, %3$s codec, %4$s view mode -->
+    <string name="onb_display_result">Applied: %1$s, %2$d dpi, %3$s, %4$s view.</string>
+    <string name="onb_appearance_title">Appearance</string>
+    <string name="onb_appearance_theme_label">App theme</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Light</string>
+    <string name="onb_theme_dark">Dark</string>
+    <string name="onb_appearance_night_label">Android Auto night mode</string>
+    <string name="onb_night_auto">Automatic</string>
+    <string name="onb_night_day">Day</string>
+    <string name="onb_night_night">Night</string>
+    <string name="onb_night_light_sensor_available">A light sensor was detected, so Automatic can follow ambient light.</string>
+    <string name="onb_night_no_light_sensor">No light sensor detected, so Automatic follows sunrise and sunset.</string>
+    <string name="onb_ready_title">You are all set</string>
+    <!-- %1$s connection, %2$s resolution, %3$s codec -->
+    <string name="onb_ready_summary">Connection: %1$s\nResolution: %2$s\nCodec: %3$s\n\nYou can fine tune everything in Settings.</string>
+
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>

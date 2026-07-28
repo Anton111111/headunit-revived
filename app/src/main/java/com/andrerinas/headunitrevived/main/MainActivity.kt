@@ -34,7 +34,6 @@ import com.andrerinas.headunitrevived.utils.AppLog
 import android.content.res.Configuration
 import com.andrerinas.headunitrevived.utils.Settings
 import android.os.SystemClock
-import com.andrerinas.headunitrevived.utils.SetupWizard
 import com.andrerinas.headunitrevived.utils.SystemUI
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
@@ -881,13 +880,10 @@ class MainActivity : BaseActivity() {
 
     fun checkSetupFlow() {
         val appSettings = Settings(this)
-        if (!appSettings.hasAcceptedDisclaimer) {
-            SafetyDisclaimerDialog.show(supportFragmentManager)
-        } else if (!appSettings.hasCompletedSetupWizard) {
-            SetupWizard(this) {
-                // Refresh activity after setup
-                recreate()
-            }.start()
+        // Show the intelligent onboarding wizard once whenever the stored version is
+        // older than the current one (covers fresh installs and upgraders alike).
+        if (appSettings.onboardingVersion < OnboardingActivity.CURRENT_ONBOARDING_VERSION) {
+            startActivity(Intent(this, OnboardingActivity::class.java))
         }
     }
 
