@@ -2,6 +2,7 @@ package com.andrerinas.headunitrevived.aap
 
 import android.content.Context
 import com.andrerinas.headunitrevived.connection.AccessoryConnection
+import com.andrerinas.headunitrevived.connection.SocketAccessoryConnection
 import com.andrerinas.headunitrevived.decoder.MicRecorder
 import com.andrerinas.headunitrevived.utils.AppLog
 import com.andrerinas.headunitrevived.aap.protocol.proto.MediaPlayback
@@ -50,7 +51,14 @@ internal interface AapRead {
                 onAaPlaybackStatus
             )
 
-            return if (connection.isSingleMessage)
+            // Read framing is a transport-shape question, not a handshake-timing one:
+            // every socket-backed connection (Nearby, WiFi Direct, Hotspot, manual IP) frames
+            // one AA message per blocking read, same as it always has. Only USB/libusb bulk
+            // transfers can batch multiple messages into one read and need the FIFO reassembly
+            // in AapReadMultipleMessages. Do NOT key this off isSingleMessage - that flag only
+            // controls the Nearby-specific handshake settle-delay/drain skip in
+            // AapTransport.handshake() and is unrelated to read framing.
+            return if (connection is SocketAccessoryConnection)
                 AapReadSingleMessage(connection, transport.ssl, handler)
             else
                 AapReadMultipleMessages(connection, transport.ssl, handler)
