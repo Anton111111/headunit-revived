@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -370,6 +371,7 @@ class SettingsFragment : Fragment() {
         pendingPixelAspectRatioE4?.let { settings.pixelAspectRatioE4 = it }
         pendingStaticBSSID?.let { settings.staticBSSID = it }
         pendingFullscreenMode?.let { settings.fullscreenMode = it }
+        val oldViewMode = settings.viewMode
         pendingViewMode?.let { settings.viewMode = it }
         pendingForceSoftware?.let { settings.forceSoftwareDecoding = it }
         pendingSoftwareVideoDecoder?.let { settings.softwareVideoDecoder = it }
@@ -422,6 +424,18 @@ class SettingsFragment : Fragment() {
 
         settings.commit()
         AppLog.init(settings, requireContext().applicationContext)
+
+        // View mode is only the local rendering backend, so apply it to a running projection
+        // live instead of requiring a restart, the same path Quick Settings and the stall
+        // recovery use via recreateProjectionView(). If another setting is already forcing a
+        // restart below, that path covers it; with no active session the new value is simply
+        // used on the next launch.
+        if (oldViewMode != settings.viewMode && !requiresRestart) {
+            LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(
+                Intent(QuickSettingsFragment.ACTION_SETTINGS_CHANGED)
+                    .putExtra(QuickSettingsFragment.EXTRA_NEEDS_VIEW_RECREATE, true)
+            )
+        }
 
         if (oldWifiMode != settings.wifiConnectionMode ||
             oldHelperStrategy != settings.helperConnectionStrategy ||
