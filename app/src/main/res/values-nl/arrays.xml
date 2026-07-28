@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Auto (Zonsopgang/-ondergang)</item>
+    <string-array name="night_mode">        <item>Auto (Zonsopgang/-ondergang)</item>
         <item>Licht</item>
         <item>Donker</item>
         <item>Handmatige tijd</item>
         <item>Lichtsensor</item>
         <item>Schermhelderheid</item>
         <item>Koplampsignaal auto (ILL+)</item>
-        <item>Handmatige coördinaten</item>
-    </string-array>
+</string-array>
 
     <string-array name="app_theme">
         <item>Automatisch (Systeem)</item>

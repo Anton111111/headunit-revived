@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Auto (Nascer/pôr do sol)</item>
+    <string-array name="night_mode">        <item>Auto (Nascer/pôr do sol)</item>
         <item>Claro</item>
         <item>Escuro</item>
         <item>Hora manual</item>
         <item>Sensor de luz</item>
         <item>Brilho da tela</item>
         <item>Sinal dos faróis do carro (ILL+)</item>
-        <item>Coordenadas manuais</item>
-    </string-array>
+</string-array>
 
     <string-array name="app_theme">
         <item>Automático (Sistema)</item>

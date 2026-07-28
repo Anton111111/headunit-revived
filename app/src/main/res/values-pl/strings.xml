@@ -621,4 +621,20 @@
     <string name="geofence_mode_dark">Ciemny</string>
     <string name="geofence_mode_light">Jasny</string>
     <string name="geofence_gate_on">Automatyczne uruchamianie ograniczone</string>
+    <string name="location_section">Lokalizacja</string>
+    <string name="sunrise_location_title">Lokalizacja wschodu/zachodu słońca</string>
+    <string name="sunrise_location_gps">GPS (automatycznie)</string>
+    <string name="sunrise_location_fixed">Stały punkt</string>
+    <string name="geofence_pick_on_map">Wybierz na mapie</string>
+    <string name="geofence_overridden_note">Zapisane miejsce zastępuje to ustawienie, gdy się w nim znajdujesz.</string>
+    <string name="geofence_current_status_label">Obecnie</string>
+    <string name="geofence_current_status">%1$s (wewnątrz %2$s)</string>
+    <string name="geofence_override_theme">Wymuś tutaj motyw</string>
+    <string name="geofence_dark_inside">Ciemny wewnątrz tego obszaru</string>
+    <string name="geofence_scope_label">Dotyczy</string>
+    <string name="geofence_scope_app">Aplikacja</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Oba</string>
+    <string name="geofence_gate_here">Automatyczne uruchamianie / łączenie tylko tutaj</string>
+    <string name="dont_show_again">Nie pokazuj ponownie</string>
 </resources>

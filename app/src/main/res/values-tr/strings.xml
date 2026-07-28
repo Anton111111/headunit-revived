@@ -617,4 +617,20 @@
     <string name="geofence_mode_dark">Koyu</string>
     <string name="geofence_mode_light">Açık</string>
     <string name="geofence_gate_on">Otomatik başlatma sınırlı</string>
+    <string name="location_section">Konum</string>
+    <string name="sunrise_location_title">Gün doğumu/batımı konumu</string>
+    <string name="sunrise_location_gps">GPS (otomatik)</string>
+    <string name="sunrise_location_fixed">Sabit nokta</string>
+    <string name="geofence_pick_on_map">Haritadan seç</string>
+    <string name="geofence_overridden_note">Kaydedilmiş bir yer, içindeyken bunu geçersiz kılar.</string>
+    <string name="geofence_current_status_label">Şu anda</string>
+    <string name="geofence_current_status">%1$s (%2$s içinde)</string>
+    <string name="geofence_override_theme">Burada bir temayı zorla</string>
+    <string name="geofence_dark_inside">Bu alanın içinde koyu</string>
+    <string name="geofence_scope_label">Şuna uygulanır</string>
+    <string name="geofence_scope_app">Uygulama</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Her ikisi</string>
+    <string name="geofence_gate_here">Yalnızca burada otomatik başlat / bağlan</string>
+    <string name="dont_show_again">Bir daha gösterme</string>
 </resources>

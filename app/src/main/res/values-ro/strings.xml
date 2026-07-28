@@ -621,4 +621,20 @@
     <string name="geofence_mode_dark">Întunecat</string>
     <string name="geofence_mode_light">Deschis</string>
     <string name="geofence_gate_on">Pornire automată restricționată</string>
+    <string name="location_section">Locație</string>
+    <string name="sunrise_location_title">Locație răsărit/apus</string>
+    <string name="sunrise_location_gps">GPS (automat)</string>
+    <string name="sunrise_location_fixed">Punct fix</string>
+    <string name="geofence_pick_on_map">Alege pe hartă</string>
+    <string name="geofence_overridden_note">Un loc salvat are prioritate cât timp te afli în interiorul lui.</string>
+    <string name="geofence_current_status_label">În prezent</string>
+    <string name="geofence_current_status">%1$s (în %2$s)</string>
+    <string name="geofence_override_theme">Forțează o temă aici</string>
+    <string name="geofence_dark_inside">Întunecat în această zonă</string>
+    <string name="geofence_scope_label">Se aplică la</string>
+    <string name="geofence_scope_app">Aplicație</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Ambele</string>
+    <string name="geofence_gate_here">Pornire automată / conectare doar aici</string>
+    <string name="dont_show_again">Nu mai afișa</string>
 </resources>

@@ -159,12 +159,33 @@ class AppThemeManager(
         }
     }
 
+    /**
+     * If the device's live location is inside a saved geofence that forces a theme for
+     * the app (scope App or Both), returns that area's forced night value; else null so
+     * the selected app-theme mode applies. Only effective for dynamic app-theme modes,
+     * since the manager does not run for static ones.
+     */
+    private fun geofenceForcedNight(): Boolean? {
+        val areas = try {
+            settings.geofenceLocations.filter { it.overrideTheme && it.scope.coversApp() }
+        } catch (e: Exception) { emptyList() }
+        if (areas.isEmpty()) return null
+        val loc = com.andrerinas.headunitrevived.location.LocationHolder.currentLocation(context)
+            ?: return null
+        return areas.firstOrNull { it.contains(loc) }?.forceNight
+    }
+
     private fun update(debounce: Boolean = true) {
         var isNight = false
         val threshold = settings.appThemeThresholdLux
         val thresholdBrightness = settings.appThemeThresholdBrightness
 
-        when (settings.appTheme) {
+        // Geofence override: while inside a saved area that forces a theme for the app,
+        // use that area's day/night, ignoring the selected dynamic app-theme mode.
+        val geofenceForced = geofenceForcedNight()
+        if (geofenceForced != null) {
+            isNight = geofenceForced
+        } else when (settings.appTheme) {
             Settings.AppTheme.LIGHT_SENSOR -> {
                 if (currentLux >= 0) {
                     val hyst = 10.0f

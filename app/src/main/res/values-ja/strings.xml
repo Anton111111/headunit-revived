@@ -627,4 +627,20 @@
     <string name="geofence_mode_dark">ダーク</string>
     <string name="geofence_mode_light">ライト</string>
     <string name="geofence_gate_on">自動起動を制限中</string>
+    <string name="location_section">位置情報</string>
+    <string name="sunrise_location_title">日の出／日の入りの位置</string>
+    <string name="sunrise_location_gps">GPS（自動）</string>
+    <string name="sunrise_location_fixed">固定地点</string>
+    <string name="geofence_pick_on_map">地図で選択</string>
+    <string name="geofence_overridden_note">保存済みの場所の内側にいる間は、その場所が優先されます。</string>
+    <string name="geofence_current_status_label">現在</string>
+    <string name="geofence_current_status">%1$s（%2$s の内側）</string>
+    <string name="geofence_override_theme">ここでテーマを強制する</string>
+    <string name="geofence_dark_inside">このエリア内ではダーク</string>
+    <string name="geofence_scope_label">適用対象</string>
+    <string name="geofence_scope_app">アプリ</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">両方</string>
+    <string name="geofence_gate_here">ここでのみ自動起動／接続する</string>
+    <string name="dont_show_again">今後表示しない</string>
 </resources>

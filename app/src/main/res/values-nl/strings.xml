@@ -620,4 +620,20 @@
     <string name="geofence_mode_dark">Donker</string>
     <string name="geofence_mode_light">Licht</string>
     <string name="geofence_gate_on">Automatisch starten beperkt</string>
+    <string name="location_section">Locatie</string>
+    <string name="sunrise_location_title">Locatie voor zonsopgang/zonsondergang</string>
+    <string name="sunrise_location_gps">GPS (automatisch)</string>
+    <string name="sunrise_location_fixed">Vast punt</string>
+    <string name="geofence_pick_on_map">Kies op kaart</string>
+    <string name="geofence_overridden_note">Een opgeslagen locatie overschrijft dit terwijl u zich erin bevindt.</string>
+    <string name="geofence_current_status_label">Momenteel</string>
+    <string name="geofence_current_status">%1$s (binnen %2$s)</string>
+    <string name="geofence_override_theme">Forceer hier een thema</string>
+    <string name="geofence_dark_inside">Donker binnen dit gebied</string>
+    <string name="geofence_scope_label">Van toepassing op</string>
+    <string name="geofence_scope_app">App</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Beide</string>
+    <string name="geofence_gate_here">Alleen hier automatisch starten / verbinden</string>
+    <string name="dont_show_again">Niet meer weergeven</string>
 </resources>

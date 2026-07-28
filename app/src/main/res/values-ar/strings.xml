@@ -620,4 +620,20 @@
     <string name="geofence_mode_dark">داكن</string>
     <string name="geofence_mode_light">فاتح</string>
     <string name="geofence_gate_on">التشغيل التلقائي مقيد</string>
+    <string name="location_section">الموقع</string>
+    <string name="sunrise_location_title">موقع الشروق/الغروب</string>
+    <string name="sunrise_location_gps">نظام تحديد المواقع (تلقائي)</string>
+    <string name="sunrise_location_fixed">نقطة ثابتة</string>
+    <string name="geofence_pick_on_map">اختيار على الخريطة</string>
+    <string name="geofence_overridden_note">يتجاوز المكان المحفوظ هذا الإعداد أثناء وجودك داخله.</string>
+    <string name="geofence_current_status_label">حاليًا</string>
+    <string name="geofence_current_status">%1$s (داخل %2$s)</string>
+    <string name="geofence_override_theme">فرض سمة هنا</string>
+    <string name="geofence_dark_inside">داكن داخل هذه المنطقة</string>
+    <string name="geofence_scope_label">يُطبَّق على</string>
+    <string name="geofence_scope_app">التطبيق</string>
+    <string name="geofence_scope_aa">أندرويد أوتو</string>
+    <string name="geofence_scope_both">كلاهما</string>
+    <string name="geofence_gate_here">التشغيل التلقائي / الاتصال هنا فقط</string>
+    <string name="dont_show_again">عدم العرض مرة أخرى</string>
 </resources>

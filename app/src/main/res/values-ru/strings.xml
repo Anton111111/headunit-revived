@@ -620,4 +620,20 @@
     <string name="geofence_mode_dark">Тёмный</string>
     <string name="geofence_mode_light">Светлый</string>
     <string name="geofence_gate_on">Автозапуск ограничен</string>
+    <string name="location_section">Местоположение</string>
+    <string name="sunrise_location_title">Место восхода/заката</string>
+    <string name="sunrise_location_gps">GPS (автоматически)</string>
+    <string name="sunrise_location_fixed">Фиксированная точка</string>
+    <string name="geofence_pick_on_map">Выбрать на карте</string>
+    <string name="geofence_overridden_note">Сохранённое место переопределяет это, пока вы находитесь внутри него.</string>
+    <string name="geofence_current_status_label">Сейчас</string>
+    <string name="geofence_current_status">%1$s (внутри %2$s)</string>
+    <string name="geofence_override_theme">Принудительно применить тему здесь</string>
+    <string name="geofence_dark_inside">Тёмный режим внутри этой зоны</string>
+    <string name="geofence_scope_label">Применяется к</string>
+    <string name="geofence_scope_app">Приложение</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Оба</string>
+    <string name="geofence_gate_here">Автозапуск / подключение только здесь</string>
+    <string name="dont_show_again">Больше не показывать</string>
 </resources>

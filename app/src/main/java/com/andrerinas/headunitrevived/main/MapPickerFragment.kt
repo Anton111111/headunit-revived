@@ -11,6 +11,8 @@ import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +26,7 @@ import com.andrerinas.headunitrevived.location.GeofenceLocation
 import com.andrerinas.headunitrevived.location.LocationHolder
 import com.andrerinas.headunitrevived.utils.Settings
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.slider.Slider
 import com.google.android.material.textfield.TextInputEditText
@@ -32,10 +35,10 @@ import com.google.android.material.textfield.TextInputLayout
 /**
  * Full-screen OpenStreetMap picker (Leaflet in a WebView, tiles fetched over the
  * network). Two modes:
- *  - MODE_GEOFENCE: pick center + radius, name it, choose day/night + automation,
- *    then save/delete a [GeofenceLocation].
- *  - MODE_POINT: pick a single fixed coordinate used by NightMode.MANUAL_COORDINATES
- *    (issue #647). The radius / name / toggles are hidden.
+ *  - MODE_GEOFENCE: pick center + radius, name it, and configure two independent
+ *    capabilities (force a theme with a scope, and/or gate automation), then save/delete.
+ *  - MODE_POINT: pick a single fixed coordinate used as the shared sunrise/sunset
+ *    reference (issue #647). Name / radius / capability toggles are hidden.
  */
 class MapPickerFragment : Fragment() {
 
@@ -48,6 +51,7 @@ class MapPickerFragment : Fragment() {
 
     private lateinit var settings: Settings
     private lateinit var webView: WebView
+    private var saveButton: Button? = null
 
     private var mode: String = MODE_GEOFENCE
     private var editingId: String? = null
@@ -55,10 +59,10 @@ class MapPickerFragment : Fragment() {
     private var currentLat: Double = 0.0
     private var currentLon: Double = 0.0
     private var currentRadius: Float = GeofenceLocation.DEFAULT_RADIUS_METERS
+    private var overrideTheme: Boolean = true
     private var forceNight: Boolean = true
+    private var scope: GeofenceLocation.Scope = GeofenceLocation.Scope.BOTH
     private var gateAutomation: Boolean = false
-
-    private var mapReady = false
 
     private val requestLocationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -79,21 +83,13 @@ class MapPickerFragment : Fragment() {
 
         resolveInitialState()
         bindViews(view)
-
-        // Show the "internet required" notice before loading the map tiles.
-        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
-            .setTitle(R.string.geofence_internet_title)
-            .setMessage(R.string.geofence_internet_message)
-            .setCancelable(false)
-            .setPositiveButton(android.R.string.ok) { _, _ -> loadMap() }
-            .setNegativeButton(R.string.cancel) { _, _ -> findNavController().navigateUp() }
-            .show()
+        maybeShowInternetNotice()
     }
 
     private fun resolveInitialState() {
         if (mode == MODE_POINT) {
-            currentLat = settings.nightModeManualLatitude
-            currentLon = settings.nightModeManualLongitude
+            currentLat = settings.fixedSunriseLatitude
+            currentLon = settings.fixedSunriseLongitude
             return
         }
         val existing = editingId?.let { id -> settings.geofenceLocations.firstOrNull { it.id == id } }
@@ -101,7 +97,9 @@ class MapPickerFragment : Fragment() {
             currentLat = existing.latitude
             currentLon = existing.longitude
             currentRadius = existing.radiusMeters
+            overrideTheme = existing.overrideTheme
             forceNight = existing.forceNight
+            scope = existing.scope
             gateAutomation = existing.gateAutomation
         } else {
             val fix = LocationHolder.bestEffortDeviceFix(requireContext())
@@ -123,17 +121,22 @@ class MapPickerFragment : Fragment() {
         val radiusRow = view.findViewById<View>(R.id.radius_row)
         val radiusLabel = view.findViewById<TextView>(R.id.radius_label)
         val radiusSlider = view.findViewById<Slider>(R.id.radius_slider)
+        val overrideThemeSwitch = view.findViewById<Switch>(R.id.override_theme_switch)
+        val themeDetail = view.findViewById<View>(R.id.theme_detail)
         val darkSwitch = view.findViewById<Switch>(R.id.dark_switch)
+        val scopeGroup = view.findViewById<MaterialButtonToggleGroup>(R.id.scope_group)
         val automationSwitch = view.findViewById<Switch>(R.id.automation_switch)
         val useGpsButton = view.findViewById<Button>(R.id.use_gps_button)
-        val saveButton = view.findViewById<Button>(R.id.save_button)
         val deleteButton = view.findViewById<Button>(R.id.delete_button)
+        saveButton = view.findViewById(R.id.save_button)
 
         val isGeofence = mode == MODE_GEOFENCE
-        nameLayout.visibility = if (isGeofence) View.VISIBLE else View.GONE
-        radiusRow.visibility = if (isGeofence) View.VISIBLE else View.GONE
-        darkSwitch.visibility = if (isGeofence) View.VISIBLE else View.GONE
-        automationSwitch.visibility = if (isGeofence) View.VISIBLE else View.GONE
+        val geofenceOnly = if (isGeofence) View.VISIBLE else View.GONE
+        nameLayout.visibility = geofenceOnly
+        radiusRow.visibility = geofenceOnly
+        overrideThemeSwitch.visibility = geofenceOnly
+        automationSwitch.visibility = geofenceOnly
+        themeDetail.visibility = View.GONE
 
         if (isGeofence) {
             editingId?.let { id ->
@@ -141,7 +144,11 @@ class MapPickerFragment : Fragment() {
             }
             radiusSlider.value = currentRadius.coerceIn(radiusSlider.valueFrom, radiusSlider.valueTo)
             radiusLabel.text = getString(R.string.geofence_radius_summary, currentRadius.toInt())
+
+            overrideThemeSwitch.isChecked = overrideTheme
+            themeDetail.visibility = if (overrideTheme) View.VISIBLE else View.GONE
             darkSwitch.isChecked = forceNight
+            checkScopeButton(scopeGroup, scope)
             automationSwitch.isChecked = gateAutomation
 
             radiusSlider.addOnChangeListener { _, value, _ ->
@@ -149,15 +156,88 @@ class MapPickerFragment : Fragment() {
                 radiusLabel.text = getString(R.string.geofence_radius_summary, value.toInt())
                 callJs("setRadius($value)")
             }
+            // Conflict #3: theme detail (scope + dark/light) only visible while overriding.
+            overrideThemeSwitch.setOnCheckedChangeListener { _, checked ->
+                overrideTheme = checked
+                themeDetail.visibility = if (checked) View.VISIBLE else View.GONE
+                updateSaveEnabled()
+            }
             darkSwitch.setOnCheckedChangeListener { _, checked -> forceNight = checked }
-            automationSwitch.setOnCheckedChangeListener { _, checked -> gateAutomation = checked }
+            scopeGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+                if (isChecked) scope = scopeFromButton(checkedId)
+            }
+            automationSwitch.setOnCheckedChangeListener { _, checked ->
+                gateAutomation = checked
+                updateSaveEnabled()
+            }
 
             deleteButton.visibility = if (editingId != null) View.VISIBLE else View.GONE
             deleteButton.setOnClickListener { deleteGeofence() }
         }
 
         useGpsButton.setOnClickListener { requestOrUseLocation() }
-        saveButton.setOnClickListener { save(nameInput.text?.toString()?.trim().orEmpty()) }
+        saveButton?.setOnClickListener { save(nameInput.text?.toString()?.trim().orEmpty()) }
+        updateSaveEnabled()
+    }
+
+    /** Conflict #3: a place that neither forces a theme nor gates automation does nothing. */
+    private fun updateSaveEnabled() {
+        saveButton?.isEnabled = mode == MODE_POINT || overrideTheme || gateAutomation
+    }
+
+    private fun checkScopeButton(group: MaterialButtonToggleGroup, s: GeofenceLocation.Scope) {
+        val id = when (s) {
+            GeofenceLocation.Scope.APP -> R.id.scope_app
+            GeofenceLocation.Scope.ANDROID_AUTO -> R.id.scope_aa
+            GeofenceLocation.Scope.BOTH -> R.id.scope_both
+        }
+        group.check(id)
+    }
+
+    private fun scopeFromButton(id: Int): GeofenceLocation.Scope = when (id) {
+        R.id.scope_app -> GeofenceLocation.Scope.APP
+        R.id.scope_aa -> GeofenceLocation.Scope.ANDROID_AUTO
+        else -> GeofenceLocation.Scope.BOTH
+    }
+
+    /** Shows the "internet required" notice once (with a don't-show-again option). */
+    private fun maybeShowInternetNotice() {
+        if (settings.hideMapInternetNotice) {
+            loadMap()
+            return
+        }
+        val ctx = requireContext()
+        val density = resources.displayMetrics.density
+        val pad = (16 * density).toInt()
+        val container = LinearLayout(ctx).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(pad, pad, pad, 0)
+        }
+        val message = TextView(ctx).apply {
+            text = getString(R.string.geofence_internet_message)
+            setTextColor(resources.getColor(android.R.color.white))
+        }
+        val checkBox = CheckBox(ctx).apply {
+            text = getString(R.string.dont_show_again)
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            lp.topMargin = (12 * density).toInt()
+            layoutParams = lp
+        }
+        container.addView(message)
+        container.addView(checkBox)
+
+        MaterialAlertDialogBuilder(ctx, R.style.DarkAlertDialog)
+            .setTitle(R.string.geofence_internet_title)
+            .setView(container)
+            .setCancelable(false)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                if (checkBox.isChecked) settings.hideMapInternetNotice = true
+                loadMap()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ -> findNavController().navigateUp() }
+            .show()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -166,7 +246,6 @@ class MapPickerFragment : Fragment() {
         webView.settings.domStorageEnabled = true
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
-                mapReady = true
                 val showRadius = if (mode == MODE_GEOFENCE) 1 else 0
                 callJs("initMap($currentLat, $currentLon, $currentRadius, $showRadius)")
             }
@@ -207,8 +286,8 @@ class MapPickerFragment : Fragment() {
 
     private fun save(name: String) {
         if (mode == MODE_POINT) {
-            settings.nightModeManualLatitude = currentLat
-            settings.nightModeManualLongitude = currentLon
+            settings.fixedSunriseLatitude = currentLat
+            settings.fixedSunriseLongitude = currentLon
             Toast.makeText(requireContext(), R.string.geofence_saved, Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
             return
@@ -223,7 +302,9 @@ class MapPickerFragment : Fragment() {
             latitude = currentLat,
             longitude = currentLon,
             radiusMeters = currentRadius,
+            overrideTheme = overrideTheme,
             forceNight = forceNight,
+            scope = scope,
             gateAutomation = gateAutomation
         )
         val idx = if (id != null) list.indexOfFirst { it.id == id } else -1

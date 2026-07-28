@@ -82,12 +82,69 @@
             </LinearLayout>
 
             <Switch
-                android:id="@+id/dark_switch"
+                android:id="@+id/override_theme_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="@string/geofence_force_dark" />
+                android:text="@string/geofence_override_theme" />
+
+            <!-- Shown only when "Override theme here" is on (conflict #3). -->
+            <LinearLayout
+                android:id="@+id/theme_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp">
+
+                <Switch
+                    android:id="@+id/dark_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:text="@string/geofence_dark_inside" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:text="@string/geofence_scope_label" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/scope_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/scope_app"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/geofence_scope_app" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/scope_aa"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/geofence_scope_aa" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/scope_both"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/geofence_scope_both" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+            </LinearLayout>
 
             <Switch
                 android:id="@+id/automation_switch"
@@ -95,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="@string/geofence_allow_automation" />
+                android:text="@string/geofence_gate_here" />
 
             <Button
                 android:id="@+id/use_gps_button"

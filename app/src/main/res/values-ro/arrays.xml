@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Auto (Răsărit/Apus)</item>
+    <string-array name="night_mode">        <item>Auto (Răsărit/Apus)</item>
         <item>Deschis</item>
         <item>Întunecat</item>
         <item>Ora manuală</item>
         <item>Senzor de lumină</item>
         <item>Luminozitate ecran</item>
         <item>Semnal faruri auto (ILL+)</item>
-        <item>Coordonate manuale</item>
-    </string-array>
+</string-array>
 
     <string-array name="app_theme">
         <item>Automat (Sistem)</item>

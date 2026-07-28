@@ -628,8 +628,7 @@ class Settings(private val context: Context) {
         MANUAL_TIME(3),
         LIGHT_SENSOR(4),
         SCREEN_BRIGHTNESS(5),
-        CAR_SIGNAL(6),
-        MANUAL_COORDINATES(7);
+        CAR_SIGNAL(6);
 
         companion object {
             private val map = NightMode.values().associateBy(NightMode::value)
@@ -649,23 +648,35 @@ class Settings(private val context: Context) {
             prefs.edit().putInt("night-mode-manual-end", value).apply()
         }
 
-    // Fixed coordinate used by NightMode.MANUAL_COORDINATES so head units without GPS
-    // can still compute correct sunrise/sunset. Defaults mirror lastKnownLocation.
-    var nightModeManualLatitude: Double
+    // Shared fixed point used as the sunrise/sunset reference when [useFixedSunriseLocation]
+    // is on. Used by BOTH the app theme (AppTheme.AUTO_SUNRISE) and the Android Auto night
+    // mode (NightMode.AUTO) so head units without GPS still compute correct day/night.
+    // Defaults mirror lastKnownLocation.
+    var useFixedSunriseLocation: Boolean
+        get() = prefs.getBoolean("use-fixed-sun-location", false)
+        set(value) { prefs.edit().putBoolean("use-fixed-sun-location", value).apply() }
+
+    var fixedSunriseLatitude: Double
         get() = java.lang.Double.longBitsToDouble(
-            prefs.getLong("night-mode-manual-latitude", (32.0864169).toRawBits())
+            prefs.getLong("fixed-sun-latitude", (32.0864169).toRawBits())
         )
         set(value) {
-            prefs.edit().putLong("night-mode-manual-latitude", value.toRawBits()).apply()
+            prefs.edit().putLong("fixed-sun-latitude", value.toRawBits()).apply()
         }
 
-    var nightModeManualLongitude: Double
+    var fixedSunriseLongitude: Double
         get() = java.lang.Double.longBitsToDouble(
-            prefs.getLong("night-mode-manual-longitude", (34.7557871).toRawBits())
+            prefs.getLong("fixed-sun-longitude", (34.7557871).toRawBits())
         )
         set(value) {
-            prefs.edit().putLong("night-mode-manual-longitude", value.toRawBits()).apply()
+            prefs.edit().putLong("fixed-sun-longitude", value.toRawBits()).apply()
         }
+
+    // Suppresses the "internet required" notice before opening the map picker once the
+    // user has chosen "don't show again".
+    var hideMapInternetNotice: Boolean
+        get() = prefs.getBoolean("hide-map-internet-notice", false)
+        set(value) { prefs.edit().putBoolean("hide-map-internet-notice", value).apply() }
 
     // User-defined geo-fenced areas (Home, Work, ...) serialized as a JSON array.
     // Setting the list also mirrors it to device-protected storage so the automation

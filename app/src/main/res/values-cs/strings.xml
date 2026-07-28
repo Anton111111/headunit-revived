@@ -620,4 +620,20 @@
     <string name="geofence_mode_dark">Tmavý</string>
     <string name="geofence_mode_light">Světlý</string>
     <string name="geofence_gate_on">Automatické spuštění omezeno</string>
+    <string name="location_section">Poloha</string>
+    <string name="sunrise_location_title">Poloha východu/západu slunce</string>
+    <string name="sunrise_location_gps">GPS (automaticky)</string>
+    <string name="sunrise_location_fixed">Pevný bod</string>
+    <string name="geofence_pick_on_map">Vybrat na mapě</string>
+    <string name="geofence_overridden_note">Uložené místo má přednost, dokud jste uvnitř něj.</string>
+    <string name="geofence_current_status_label">Aktuálně</string>
+    <string name="geofence_current_status">%1$s (uvnitř %2$s)</string>
+    <string name="geofence_override_theme">Vynutit zde motiv</string>
+    <string name="geofence_dark_inside">Tmavý v této oblasti</string>
+    <string name="geofence_scope_label">Platí pro</string>
+    <string name="geofence_scope_app">Aplikace</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Obojí</string>
+    <string name="geofence_gate_here">Automatické spuštění / připojení pouze zde</string>
+    <string name="dont_show_again">Příště nezobrazovat</string>
 </resources>

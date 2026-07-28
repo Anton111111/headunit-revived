@@ -8,11 +8,14 @@ import java.util.UUID
 /**
  * A user-defined geo-fenced area (e.g. "Home", "Work").
  *
- * Each area is a circle (center + radius). It can:
- *  - force a day/night appearance while the device's live location is inside it
- *    ([forceNight]), overriding the global night mode; and/or
- *  - gate automation ([gateAutomation]): when enabled, auto-start / auto-connect
- *    is only allowed while inside this area.
+ * Each area is a circle (center + radius) with two independent capabilities:
+ *  - [overrideTheme]: while inside, force a day/night appearance ([forceNight]) for the
+ *    systems selected by [scope] (the app UI, Android Auto, or both), overriding the
+ *    normal mode; and/or
+ *  - [gateAutomation]: while enabled, auto-start / auto-connect is only allowed inside
+ *    this area.
+ *
+ * An area with neither capability enabled does nothing and is not offered for saving.
  */
 data class GeofenceLocation(
     val id: String = UUID.randomUUID().toString(),
@@ -20,11 +23,27 @@ data class GeofenceLocation(
     val latitude: Double,
     val longitude: Double,
     val radiusMeters: Float,
-    /** true -> force NIGHT inside the area, false -> force DAY inside the area. */
+    /** Whether this area forces a day/night appearance while inside. */
+    val overrideTheme: Boolean = true,
+    /** true -> force NIGHT inside, false -> force DAY inside. Only used if [overrideTheme]. */
     val forceNight: Boolean = true,
+    /** Which theming systems the override applies to. Only used if [overrideTheme]. */
+    val scope: Scope = Scope.BOTH,
     /** true -> only allow auto-start / auto-connect while inside this area. */
     val gateAutomation: Boolean = false
 ) {
+    enum class Scope {
+        APP, ANDROID_AUTO, BOTH;
+
+        fun coversApp() = this == APP || this == BOTH
+        fun coversAndroidAuto() = this == ANDROID_AUTO || this == BOTH
+
+        companion object {
+            fun fromName(name: String?): Scope =
+                values().firstOrNull { it.name == name } ?: BOTH
+        }
+    }
+
     /** Distance in meters from this area's center to [location]. */
     fun distanceTo(location: Location): Float {
         val center = Location("").apply {
@@ -43,7 +62,9 @@ data class GeofenceLocation(
         put("lat", latitude)
         put("lon", longitude)
         put("radius", radiusMeters.toDouble())
+        put("overrideTheme", overrideTheme)
         put("forceNight", forceNight)
+        put("scope", scope.name)
         put("gate", gateAutomation)
     }
 
@@ -56,7 +77,10 @@ data class GeofenceLocation(
             latitude = o.optDouble("lat", 0.0),
             longitude = o.optDouble("lon", 0.0),
             radiusMeters = o.optDouble("radius", DEFAULT_RADIUS_METERS.toDouble()).toFloat(),
+            // Tolerant migration: entries written before this field default to overriding both.
+            overrideTheme = o.optBoolean("overrideTheme", true),
             forceNight = o.optBoolean("forceNight", true),
+            scope = Scope.fromName(o.optString("scope", Scope.BOTH.name)),
             gateAutomation = o.optBoolean("gate", false)
         )
 

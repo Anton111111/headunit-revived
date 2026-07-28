@@ -80,13 +80,20 @@ class LocationsFragment : Fragment() {
     }
 
     private fun summary(loc: com.andrerinas.headunitrevived.location.GeofenceLocation): String {
-        val mode = getString(if (loc.forceNight) R.string.geofence_mode_dark else R.string.geofence_mode_light)
-        val radius = getString(R.string.geofence_radius_summary, loc.radiusMeters.toInt())
-        return if (loc.gateAutomation) {
-            "$radius · $mode · ${getString(R.string.geofence_gate_on)}"
-        } else {
-            "$radius · $mode"
+        val parts = mutableListOf(getString(R.string.geofence_radius_summary, loc.radiusMeters.toInt()))
+        if (loc.overrideTheme) {
+            val mode = getString(if (loc.forceNight) R.string.geofence_mode_dark else R.string.geofence_mode_light)
+            val scopeLabel = getString(
+                when (loc.scope) {
+                    com.andrerinas.headunitrevived.location.GeofenceLocation.Scope.APP -> R.string.geofence_scope_app
+                    com.andrerinas.headunitrevived.location.GeofenceLocation.Scope.ANDROID_AUTO -> R.string.geofence_scope_aa
+                    com.andrerinas.headunitrevived.location.GeofenceLocation.Scope.BOTH -> R.string.geofence_scope_both
+                }
+            )
+            parts.add("$mode ($scopeLabel)")
         }
+        if (loc.gateAutomation) parts.add(getString(R.string.geofence_gate_on))
+        return parts.joinToString(" · ")
     }
 
     private fun openEditor(geofenceId: String?) {

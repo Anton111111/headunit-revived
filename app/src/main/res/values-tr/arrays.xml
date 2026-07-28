@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Otomatik (Gündüz/Gece)</item>
+    <string-array name="night_mode">        <item>Otomatik (Gündüz/Gece)</item>
         <item>Açık</item>
         <item>Koyu</item>
         <item>Manuel Saat</item>
         <item>Işık Sensörü</item>
         <item>Ekran Parlaklığı</item>
         <item>Araç farı sinyali (ILL+)</item>
-        <item>Manuel Koordinatlar</item>
-    </string-array>
+</string-array>
 
     <string-array name="app_theme">
         <item>Otomatik (Sistem)</item>

@@ -188,7 +188,9 @@ class NightModeManager(
      * which case the normal night-mode resolution applies.
      */
     private fun geofenceForcedNight(): Boolean? {
-        val areas = try { settings.geofenceLocations } catch (e: Exception) { emptyList() }
+        val areas = try {
+            settings.geofenceLocations.filter { it.overrideTheme && it.scope.coversAndroidAuto() }
+        } catch (e: Exception) { emptyList() }
         if (areas.isEmpty()) return null
         val loc = LocationHolder.currentLocation(context) ?: return null
         return areas.firstOrNull { it.contains(loc) }?.forceNight

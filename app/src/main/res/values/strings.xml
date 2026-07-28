@@ -631,4 +631,22 @@
     <string name="geofence_mode_dark">Dark</string>
     <string name="geofence_mode_light">Light</string>
     <string name="geofence_gate_on">Auto-start gated</string>
+
+    <!-- Round 2 UX: shared location section, scoped places, don't-show-again -->
+    <string name="location_section">Location</string>
+    <string name="sunrise_location_title">Sunrise/sunset location</string>
+    <string name="sunrise_location_gps">GPS (automatic)</string>
+    <string name="sunrise_location_fixed">Fixed point</string>
+    <string name="geofence_pick_on_map">Pick on map</string>
+    <string name="geofence_overridden_note">A saved place overrides this while you are inside it.</string>
+    <string name="geofence_current_status_label">Currently</string>
+    <string name="geofence_current_status">%1$s (inside %2$s)</string>
+    <string name="geofence_override_theme">Force a theme here</string>
+    <string name="geofence_dark_inside">Dark inside this area</string>
+    <string name="geofence_scope_label">Applies to</string>
+    <string name="geofence_scope_app">App</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Both</string>
+    <string name="geofence_gate_here">Only auto-start / connect here</string>
+    <string name="dont_show_again">Don\'t show again</string>
 </resources>

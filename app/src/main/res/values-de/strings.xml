@@ -626,4 +626,20 @@
     <string name="geofence_mode_dark">Dunkel</string>
     <string name="geofence_mode_light">Hell</string>
     <string name="geofence_gate_on">Auto-Start eingeschränkt</string>
+    <string name="location_section">Standort</string>
+    <string name="sunrise_location_title">Standort für Sonnenauf-/-untergang</string>
+    <string name="sunrise_location_gps">GPS (automatisch)</string>
+    <string name="sunrise_location_fixed">Fester Punkt</string>
+    <string name="geofence_pick_on_map">Auf Karte auswählen</string>
+    <string name="geofence_overridden_note">Ein gespeicherter Ort überschreibt dies, solange Sie sich darin befinden.</string>
+    <string name="geofence_current_status_label">Aktuell</string>
+    <string name="geofence_current_status">%1$s (innerhalb von %2$s)</string>
+    <string name="geofence_override_theme">Design hier erzwingen</string>
+    <string name="geofence_dark_inside">Dunkel innerhalb dieses Bereichs</string>
+    <string name="geofence_scope_label">Gilt für</string>
+    <string name="geofence_scope_app">App</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Beide</string>
+    <string name="geofence_gate_here">Nur hier automatisch starten / verbinden</string>
+    <string name="dont_show_again">Nicht mehr anzeigen</string>
 </resources>

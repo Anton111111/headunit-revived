@@ -619,4 +619,20 @@
     <string name="geofence_mode_dark">Sötét</string>
     <string name="geofence_mode_light">Világos</string>
     <string name="geofence_gate_on">Automatikus indítás korlátozva</string>
+    <string name="location_section">Hely</string>
+    <string name="sunrise_location_title">Napkelte/napnyugta helye</string>
+    <string name="sunrise_location_gps">GPS (automatikus)</string>
+    <string name="sunrise_location_fixed">Rögzített pont</string>
+    <string name="geofence_pick_on_map">Kiválasztás a térképen</string>
+    <string name="geofence_overridden_note">Egy mentett hely felülírja ezt, amíg azon belül tartózkodsz.</string>
+    <string name="geofence_current_status_label">Jelenleg</string>
+    <string name="geofence_current_status">%1$s (%2$s területén belül)</string>
+    <string name="geofence_override_theme">Téma kényszerítése itt</string>
+    <string name="geofence_dark_inside">Sötét ezen a területen belül</string>
+    <string name="geofence_scope_label">Érvényes erre</string>
+    <string name="geofence_scope_app">Alkalmazás</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Mindkettő</string>
+    <string name="geofence_gate_here">Csak itt indítson automatikusan / csatlakozzon</string>
+    <string name="dont_show_again">Ne jelenjen meg többször</string>
 </resources>

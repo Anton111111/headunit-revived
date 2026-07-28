@@ -59,6 +59,9 @@ class DarkModeFragment : Fragment(), SensorEventListener {
     private var pendingManualStart: Int? = null
     private var pendingManualEnd: Int? = null
 
+    // Shared sunrise/sunset location source (used by both app theme and Android Auto Auto modes)
+    private var pendingUseFixedSunriseLocation: Boolean? = null
+
     // Pending AA monochrome settings
     private var pendingAaMonochromeEnabled: Boolean? = null
     private var pendingAaDesaturationLevel: Int? = null
@@ -113,6 +116,7 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         pendingUseGradientBackground = settings.useGradientBackground
 
         pendingNightMode = settings.nightMode
+        pendingUseFixedSunriseLocation = settings.useFixedSunriseLocation
         pendingThresholdLux = settings.nightModeThresholdLux
         pendingThresholdBrightness = settings.nightModeThresholdBrightness
         pendingManualStart = settings.nightModeManualStart
@@ -203,10 +207,13 @@ class DarkModeFragment : Fragment(), SensorEventListener {
     private fun saveSettings() {
         // Detect changes BEFORE saving values to SharedPreferences
         val themeChanged = pendingAppTheme != settings.appTheme
+        val sunriseLocationChanged = pendingUseFixedSunriseLocation != settings.useFixedSunriseLocation
         val appThemeThresholdChanged = pendingAppThemeThresholdLux != settings.appThemeThresholdLux ||
                 pendingAppThemeThresholdBrightness != settings.appThemeThresholdBrightness ||
                 pendingAppThemeManualStart != settings.appThemeManualStart ||
-                pendingAppThemeManualEnd != settings.appThemeManualEnd
+                pendingAppThemeManualEnd != settings.appThemeManualEnd ||
+                // A change to the shared sunrise/sunset location affects AUTO_SUNRISE too.
+                sunriseLocationChanged
         val gradientChanged = pendingUseGradientBackground != settings.useGradientBackground
         val extremeDarkChanged = pendingUseExtremeDarkMode != settings.useExtremeDarkMode
         val monochromeIconsChanged = pendingMonochromeIcons != settings.monochromeIcons
@@ -214,6 +221,7 @@ class DarkModeFragment : Fragment(), SensorEventListener {
 
         // Save night mode settings
         pendingNightMode?.let { settings.nightMode = it }
+        pendingUseFixedSunriseLocation?.let { settings.useFixedSunriseLocation = it }
         pendingThresholdLux?.let { settings.nightModeThresholdLux = it }
         pendingThresholdBrightness?.let { settings.nightModeThresholdBrightness = it }
         pendingManualStart?.let { settings.nightModeManualStart = it }
@@ -293,6 +301,7 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                 pendingUseExtremeDarkMode != settings.useExtremeDarkMode ||
                 pendingUseGradientBackground != settings.useGradientBackground ||
                 pendingNightMode != settings.nightMode ||
+                pendingUseFixedSunriseLocation != settings.useFixedSunriseLocation ||
                 pendingThresholdLux != settings.nightModeThresholdLux ||
                 pendingThresholdBrightness != settings.nightModeThresholdBrightness ||
                 pendingManualStart != settings.nightModeManualStart ||
@@ -309,9 +318,105 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         updateSaveButtonState()
     }
 
+    /** True if any saved place forces a theme covering the given system (app or Android Auto). */
+    private fun hasThemeGeofenceFor(app: Boolean): Boolean =
+        settings.geofenceLocations.any {
+            it.overrideTheme && (if (app) it.scope.coversApp() else it.scope.coversAndroidAuto())
+        }
+
+    /** The theme-forcing place the device is currently inside, or null. */
+    private fun currentThemeGeofence(): com.andrerinas.headunitrevived.location.GeofenceLocation? {
+        val areas = settings.geofenceLocations.filter { it.overrideTheme }
+        if (areas.isEmpty()) return null
+        val loc = com.andrerinas.headunitrevived.location.LocationHolder
+            .currentLocation(requireContext()) ?: return null
+        return areas.firstOrNull { it.contains(loc) }
+    }
+
+    /**
+     * Top "Location" section, shared by both theming systems: the sunrise/sunset location
+     * source (only shown when some system uses Auto/sunrise), the saved places entry, and a
+     * live "currently inside" status.
+     */
+    private fun buildLocationSection(items: MutableList<SettingItem>) {
+        items.add(SettingItem.CategoryHeader("location", R.string.location_section))
+
+        // Conflict #1: the sunrise/sunset location only matters for Auto/sunrise modes.
+        val usesSunrise = pendingAppTheme == Settings.AppTheme.AUTO_SUNRISE ||
+                pendingNightMode == Settings.NightMode.AUTO
+        if (usesSunrise) {
+            val useFixed = pendingUseFixedSunriseLocation == true
+            items.add(SettingItem.SettingEntry(
+                stableId = "sunriseLocation",
+                nameResId = R.string.sunrise_location_title,
+                value = if (useFixed)
+                    getString(R.string.sunrise_location_fixed) +
+                        " (%.3f, %.3f)".format(settings.fixedSunriseLatitude, settings.fixedSunriseLongitude)
+                else getString(R.string.sunrise_location_gps),
+                onClick = { _ ->
+                    val options = arrayOf(
+                        getString(R.string.sunrise_location_gps),
+                        getString(R.string.sunrise_location_fixed)
+                    )
+                    MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+                        .setTitle(R.string.sunrise_location_title)
+                        .setSingleChoiceItems(options, if (useFixed) 1 else 0) { dialog, which ->
+                            pendingUseFixedSunriseLocation = which == 1
+                            checkChanges()
+                            dialog.dismiss()
+                            updateSettingsList()
+                        }
+                        .show()
+                }
+            ))
+            // Conflict #2: "pick on map" only when the fixed point source is selected.
+            if (useFixed) {
+                items.add(SettingItem.SettingEntry(
+                    stableId = "sunrisePickMap",
+                    nameResId = R.string.geofence_pick_on_map,
+                    value = "",
+                    onClick = { _ ->
+                        findNavController().navigate(
+                            R.id.action_darkModeFragment_to_mapPickerFragment,
+                            androidx.core.os.bundleOf(MapPickerFragment.ARG_MODE to MapPickerFragment.MODE_POINT)
+                        )
+                    }
+                ))
+            }
+        }
+
+        // Saved places (each forces a theme and/or gates automation per its own settings).
+        items.add(SettingItem.SettingEntry(
+            stableId = "geofenceLocations",
+            nameResId = R.string.geofence_locations_title,
+            value = run {
+                val n = settings.geofenceLocations.size
+                if (n == 0) getString(R.string.geofence_none) else getString(R.string.geofence_count_summary, n)
+            },
+            onClick = { _ ->
+                findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment)
+            }
+        ))
+
+        // Live status: currently inside a theme-forcing place.
+        currentThemeGeofence()?.let { g ->
+            val state = getString(if (g.forceNight) R.string.geofence_mode_dark else R.string.geofence_mode_light)
+            val place = g.name.ifBlank { getString(R.string.geofence_unnamed) }
+            items.add(SettingItem.SettingEntry(
+                stableId = "geofenceLiveStatus",
+                nameResId = R.string.geofence_current_status_label,
+                value = getString(R.string.geofence_current_status, state, place),
+                onClick = { _ -> }
+            ))
+        }
+    }
+
     private fun updateSettingsList() {
         val scrollState = recyclerView.layoutManager?.onSaveInstanceState()
         val items = mutableListOf<SettingItem>()
+
+        // --- Location (shared by the app theme and Android Auto night mode) ---
+        buildLocationSection(items)
 
         // --- App Theme ---
         items.add(SettingItem.CategoryHeader("appTheme", R.string.app_theme))
@@ -499,6 +604,11 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             ))
         }
 
+        // Precedence note: a saved place that forces a theme for the app overrides the mode above.
+        if (hasThemeGeofenceFor(app = true)) {
+            items.add(SettingItem.InfoBanner("appOverriddenNote", R.string.geofence_overridden_note))
+        }
+
         // --- Android Auto Night Mode ---
         items.add(SettingItem.CategoryHeader("aaNightMode", R.string.night_mode))
 
@@ -619,36 +729,11 @@ class DarkModeFragment : Fragment(), SensorEventListener {
             ))
         }
 
-        // Night mode sub-option: fixed coordinate for Manual Coordinates (issue #647).
-        // Works fully offline once picked; useful for head units without GPS.
-        if (pendingNightMode == Settings.NightMode.MANUAL_COORDINATES) {
-            items.add(SettingItem.SettingEntry(
-                stableId = "nightModeCoordinates",
-                nameResId = R.string.night_mode_coordinates,
-                value = "%.4f, %.4f".format(settings.nightModeManualLatitude, settings.nightModeManualLongitude),
-                onClick = { _ ->
-                    findNavController().navigate(
-                        R.id.action_darkModeFragment_to_mapPickerFragment,
-                        androidx.core.os.bundleOf(MapPickerFragment.ARG_MODE to MapPickerFragment.MODE_POINT)
-                    )
-                }
-            ))
+        // Precedence note: while inside a saved place that forces a theme for Android Auto,
+        // that place wins over the mode selected above.
+        if (hasThemeGeofenceFor(app = false)) {
+            items.add(SettingItem.InfoBanner("aaOverriddenNote", R.string.geofence_overridden_note))
         }
-
-        // Geofenced areas (Home, Work, ...): each can force day/night by area and/or
-        // gate auto-start / auto-connect to that area.
-        items.add(SettingItem.SettingEntry(
-            stableId = "geofenceLocations",
-            nameResId = R.string.geofence_locations_title,
-            value = run {
-                val n = settings.geofenceLocations.size
-                if (n == 0) getString(R.string.geofence_none)
-                else getString(R.string.geofence_count_summary, n)
-            },
-            onClick = { _ ->
-                findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment)
-            }
-        ))
 
         // AA Monochrome toggle — hidden when Night Mode is DAY
         if (pendingNightMode != Settings.NightMode.DAY) {

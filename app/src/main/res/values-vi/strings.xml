@@ -626,4 +626,20 @@
     <string name="geofence_mode_dark">Tối</string>
     <string name="geofence_mode_light">Sáng</string>
     <string name="geofence_gate_on">Tự khởi động bị giới hạn</string>
+    <string name="location_section">Vị trí</string>
+    <string name="sunrise_location_title">Vị trí bình minh/hoàng hôn</string>
+    <string name="sunrise_location_gps">GPS (tự động)</string>
+    <string name="sunrise_location_fixed">Điểm cố định</string>
+    <string name="geofence_pick_on_map">Chọn trên bản đồ</string>
+    <string name="geofence_overridden_note">Một địa điểm đã lưu sẽ ghi đè cài đặt này khi bạn ở bên trong nó.</string>
+    <string name="geofence_current_status_label">Hiện tại</string>
+    <string name="geofence_current_status">%1$s (bên trong %2$s)</string>
+    <string name="geofence_override_theme">Buộc dùng giao diện tại đây</string>
+    <string name="geofence_dark_inside">Tối bên trong khu vực này</string>
+    <string name="geofence_scope_label">Áp dụng cho</string>
+    <string name="geofence_scope_app">Ứng dụng</string>
+    <string name="geofence_scope_aa">Android Auto</string>
+    <string name="geofence_scope_both">Cả hai</string>
+    <string name="geofence_gate_here">Chỉ tự khởi động / kết nối tại đây</string>
+    <string name="dont_show_again">Không hiển thị lại</string>
 </resources>
