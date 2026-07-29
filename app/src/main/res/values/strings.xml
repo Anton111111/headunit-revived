@@ -3,6 +3,135 @@
     <string name="menu">Menu</string>
     <string name="settings">Settings</string>
 
+    <!-- Settings tabs and search (redesign) -->
+    <string name="settings_tab_basic">Basic</string>
+    <string name="settings_tab_advanced">Advanced</string>
+    <string name="settings_search_hint">Search settings</string>
+
+    <!-- Connection mode selector -->
+    <string name="connection_mode">Connection mode</string>
+    <string name="connection_kind_usb_cable">USB cable (direct)</string>
+    <string name="connection_kind_usb_wireless_adapter">USB wireless adapter</string>
+    <string name="connection_kind_wifi">WiFi</string>
+    <string name="connection_kind_unset">Not set</string>
+
+    <!-- Onboarding wizard -->
+    <string name="onb_next">Next</string>
+    <string name="onb_skip">Skip</string>
+    <string name="onb_ready_finish">Finish</string>
+    <string name="onb_welcome_title">Welcome to Headunit Revived</string>
+    <string name="onb_welcome_body">This quick setup scans your device and picks the best video, display and night mode settings for you. You can change everything later in Settings.</string>
+    <string name="onb_safety_title">Safety first</string>
+    <string name="onb_safety_accept">I have read and accept the terms</string>
+    <string name="onb_connection_title">How do you connect?</string>
+    <string name="onb_connection_help">Pick how your phone connects. This keeps the settings screen focused on what applies to you.</string>
+    <string name="onb_connection_cable_detail">Phone plugged straight into the head unit with a USB cable. Wireless options stay out of the way.</string>
+    <string name="onb_connection_adapter_detail">A USB dongle bridges the cable to a wireless link. Wireless options are shown.</string>
+    <string name="onb_connection_wifi_detail">Phone connects over WiFi.</string>
+    <string name="onb_display_title">Display</string>
+    <!-- %1$d width, %2$d height, %3$d dpi, %4$s codec -->
+    <string name="onb_display_detected">Detected panel: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
+    <string name="onb_display_size_label">Screen size</string>
+    <string name="onb_display_orientation_label">Orientation</string>
+    <string name="onb_display_apply">Apply recommended settings</string>
+    <!-- %1$s resolution, %2$d dpi, %3$s codec, %4$s view mode -->
+    <string name="onb_display_result">Applied: %1$s, %2$d dpi, %3$s, %4$s view.</string>
+    <string name="onb_appearance_title">Appearance</string>
+    <string name="onb_appearance_theme_label">App theme</string>
+    <string name="onb_theme_auto">Auto</string>
+    <string name="onb_theme_light">Light</string>
+    <string name="onb_theme_dark">Dark</string>
+    <string name="onb_appearance_night_label">Android Auto night mode</string>
+    <string name="onb_night_auto">Automatic</string>
+    <string name="onb_night_day">Day</string>
+    <string name="onb_night_night">Night</string>
+    <string name="onb_night_light_sensor_available">A light sensor was detected, so Automatic can follow ambient light.</string>
+    <string name="onb_night_no_light_sensor">No light sensor detected, so Automatic follows sunrise and sunset.</string>
+    <string name="onb_ready_title">You are all set</string>
+    <!-- %1$s connection, %2$s resolution, %3$s codec -->
+    <string name="onb_ready_summary">Connection: %1$s\nResolution: %2$s\nCodec: %3$s\n\nYou can fine tune everything in Settings.</string>
+    <string name="onb_summary_vehicle_format">Vehicle: %1$s</string>
+
+    <!-- Onboarding wizard: car brand / vehicle identity -->
+    <string name="onb_vehicle_title">Your car</string>
+    <string name="onb_vehicle_input_hint">Brand or name</string>
+    <string name="onb_vehicle_help_aa">This name is sent to Android Auto. It shows in your phone\'s connection history and on the Android Auto welcome screen.</string>
+    <string name="onb_vehicle_help_advanced">You can fine-tune your vehicle details in the Advanced tab. We do not use this data; it is only sent to Android Auto because it requires it.</string>
+    <string-array name="vehicle_brands">
+        <item>Google</item>
+        <item>Android</item>
+        <item>Audi</item>
+        <item>BMW</item>
+        <item>Chevrolet</item>
+        <item>Chrysler</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>Honda</item>
+        <item>Hyundai</item>
+        <item>Jeep</item>
+        <item>Kia</item>
+        <item>Mazda</item>
+        <item>Mercedes-Benz</item>
+        <item>Nissan</item>
+        <item>Peugeot</item>
+        <item>Renault</item>
+        <item>Subaru</item>
+        <item>Suzuki</item>
+        <item>Tesla</item>
+        <item>Toyota</item>
+        <item>Volkswagen</item>
+        <item>Volvo</item>
+    </string-array>
+
+    <!-- Onboarding wizard (round 2) -->
+    <string name="onb_language_help">Choose the app language.</string>
+    <string name="connection_kind_usb">USB</string>
+    <string name="onb_connection_usb_detail">Phone connected by USB, either a direct cable or a USB wireless adapter.</string>
+    <string name="onb_conn_usb_label">USB (or adapter)</string>
+    <string name="onb_connection_self_detail">Self Mode runs Android Auto on this device without connecting a phone.</string>
+    <string name="connection_kind_all">All</string>
+
+    <!-- Resolution recommendation / bandwidth warnings -->
+    <string name="resolution_recommended_format">%1$s (Recommended)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · high bandwidth</string>
+    <string name="resolution_too_high_title">Resolution higher than the screen</string>
+    <string name="resolution_too_high_message">Your screen is %1$d x %2$d pixels. A higher resolution uses more bandwidth without improving quality, because the panel cannot display it.</string>
+    <string name="resolution_high_bandwidth_title">Higher bandwidth needed</string>
+    <string name="resolution_high_bandwidth_message">This resolution uses much more bandwidth and needs a strong connection: a good 5GHz WiFi, or a stable USB connection. If you notice lag, choose a lower resolution.</string>
+    <string name="resolution_use_anyway">Use anyway</string>
+    <string name="resolution_use_recommended">Use recommended</string>
+    <string name="onb_connection_all_detail">Shows both the USB and WiFi settings.</string>
+    <string name="onb_connection_warning">Choosing a connection type hides the settings that do not apply to it, in both Basic and Advanced. To see them again, pick a different mode in the connection settings later.</string>
+    <string name="onb_more_appearance">More appearance settings</string>
+    <string name="onb_automation_title">Automation</string>
+    <string name="onb_automation_help">Choose how the app starts and connects on its own. Open Auto-connect settings to drag the priority order.</string>
+    <string name="onb_gps_title">Location</string>
+    <string name="onb_gps_help">Which GPS should Android Auto use for navigation?</string>
+    <string name="onb_gps_this_device">This device</string>
+    <string name="onb_gps_phone">Connected phone</string>
+    <string name="onb_do_it_later">Do it later</string>
+    <string name="onb_display_dpi_label">Android Auto size</string>
+    <!-- Full-word DPI size names, used as accessibility labels for the S/M/L/XL buttons -->
+    <string name="onb_dpi_small">Small</string>
+    <string name="onb_dpi_medium">Medium</string>
+    <string name="onb_dpi_large">Large</string>
+    <string name="onb_dpi_huge">Huge</string>
+    <!-- Compact size abbreviations shown on the DPI preset buttons. Kept identical in every
+         locale (globally recognized apparel sizing) so they never truncate. -->
+    <string name="dpi_size_s" translatable="false">S</string>
+    <string name="dpi_size_m" translatable="false">M</string>
+    <string name="dpi_size_l" translatable="false">L</string>
+    <string name="dpi_size_xl" translatable="false">XL</string>
+    <string name="onb_appearance_more_hint">You can find more dark mode options in Settings.</string>
+    <string name="onb_automation_more_hint">You can find more options in Auto-connect and Auto-start settings.</string>
+    <string name="onb_dpi_help">A higher DPI makes Android Auto icons and text larger, so less fits on screen. A lower DPI makes them smaller, so more fits. It applies when you connect Android Auto.</string>
+    <string name="onb_change_later">You can change this later in Settings.</string>
+    <string name="dpi_automatic">Automatic</string>
+    <string name="dpi_automatic_desc">Use the device density</string>
+    <string name="dpi_automatic_desc_format">Uses the device density (%1$d DPI)</string>
+    <string name="dpi_value_format">%1$d DPI</string>
+    <string name="dpi_input_hint">DPI</string>
+
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -666,4 +795,5 @@
     <string name="coordinate_longitude">Longitude</string>
     <string name="coordinates_invalid">Invalid coordinates</string>
     <string name="coordinates_format_help">Decimal degrees, dot or comma. Example: 40.4168, -3.7038</string>
+    <string name="sunrise_reference_help">The reference point used to calculate sunrise and sunset. Pick your location once; it works without GPS.</string>
 </resources>

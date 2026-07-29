@@ -106,4 +106,20 @@ class SystemOptimizer(private val context: Context) {
             h265Support = hasH265
         )
     }
+
+    companion object {
+        /**
+         * The largest standard video resolution that physically fits the panel (no upscaling
+         * waste). Compared in landscape terms (long side x short side). Falls back to 480p.
+         */
+        fun recommendedResolution(realWidthPx: Int, realHeightPx: Int): Settings.Resolution {
+            val longSide = maxOf(realWidthPx, realHeightPx)
+            val shortSide = minOf(realWidthPx, realHeightPx)
+            if (longSide <= 0) return Settings.Resolution._1280x720
+            return Settings.Resolution.allResolutions
+                .filter { it.width in 1..longSide && it.height in 1..shortSide }
+                .maxByOrNull { it.width }
+                ?: Settings.Resolution._800x480
+        }
+    }
 }

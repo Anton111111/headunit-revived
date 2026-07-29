@@ -34,7 +34,6 @@ import com.andrerinas.headunitrevived.BuildConfig
 import com.andrerinas.headunitrevived.utils.LogExporter
 import com.andrerinas.headunitrevived.utils.SettingsBackupManager
 import com.andrerinas.headunitrevived.utils.DialogUtils
-import com.andrerinas.headunitrevived.utils.SetupWizard
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -56,6 +55,40 @@ class SettingsFragment : Fragment() {
     private lateinit var toolbar: MaterialToolbar
     private var saveButton: MaterialButton? = null
     private var resetButton: MaterialButton? = null
+
+    // Basic/Advanced tab + search state (Feature A)
+    private enum class SettingsTier { BASIC, ADVANCED }
+    private var settingsTabGroup: com.google.android.material.button.MaterialButtonToggleGroup? = null
+    private var searchInput: com.google.android.material.textfield.TextInputEditText? = null
+    private var activeTab: SettingsTier = SettingsTier.BASIC
+    private var searchQuery: String = ""
+    // The complete, unfiltered list built by updateSettingsList(); rendering filters this.
+    private var fullSettingsList: List<SettingItem> = emptyList()
+
+    // Curated everyday options shown in the Basic tab. Advanced shows everything.
+    // Wireless items here only appear in Basic when the user connects wirelessly (see filterSettings).
+    private val basicSettingIds = setOf(
+        // General
+        "autoOptimize", "connectionMode", "appLanguage", "uiScale",
+        // Wireless (shown in Basic only when primaryConnection is wireless)
+        "wifiConnectionMode",
+        // Dark mode
+        "darkModeSettings",
+        // Automation
+        "autoStartSettings", "autoConnectSettings",
+        // Navigation
+        "gpsNavigation",
+        // Graphic
+        "resolution", "dpiPixelDensity", "viewMode", "screenOrientation", "startInFullscreenMode",
+        // Video
+        "videoCodec", "fpsLimit",
+        // Input
+        "keymap",
+        // Audio
+        "enableAudioSink", "micSettings", "audioVolumeOffsets",
+        // Info
+        "version", "about"
+    )
 
     // Local state to hold changes before saving
     private var pendingUseGps: Boolean? = null
@@ -153,6 +186,16 @@ class SettingsFragment : Fragment() {
         uri?.let { importSettingsFromUri(it) }
     }
 
+    // Re-running the onboarding wizard can change restart-sensitive display settings;
+    // reload pending state and recreate on return, mirroring the old SetupWizard callback.
+    private val onboardingLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (isAdded) {
+            reloadPendingStateFromSettings()
+            checkChanges()
+            requireActivity().recreate()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
@@ -233,6 +276,21 @@ class SettingsFragment : Fragment() {
         settingsRecyclerView = view.findViewById(R.id.settingsRecyclerView)
         settingsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         settingsRecyclerView.adapter = settingsAdapter
+
+        setupTabsAndSearch(view)
+
+        // Receive the DPI chosen in the DPI sub-screen and feed it into the pending flow,
+        // so the main "Save (Reconnect needed)" applies it.
+        findNavController().currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Int>(DpiSettingsFragment.KEY_DPI_RESULT)
+            ?.observe(viewLifecycleOwner) { newDpi ->
+                if (newDpi != pendingDpi) {
+                    pendingDpi = newDpi
+                    checkChanges()
+                    updateSettingsList()
+                }
+            }
 
         updateSettingsList()
         setupToolbar()
@@ -563,13 +621,16 @@ class SettingsFragment : Fragment() {
             nameResId = R.string.auto_optimize,
             value = getString(R.string.auto_optimize_desc),
             onClick = { _ ->
-                SetupWizard(requireContext()) {
-                    reloadPendingStateFromSettings()
-                    checkChanges()
-                    updateSettingsList()
-                    requireActivity().recreate()
-                }.start()
+                onboardingLauncher.launch(Intent(requireContext(), OnboardingActivity::class.java))
             }
+        ))
+
+        // Connection mode (Feature B): drives which options appear in the Basic tab.
+        items.add(SettingItem.SettingEntry(
+            stableId = "connectionMode",
+            nameResId = R.string.connection_mode,
+            value = connectionKindLabel(settings.primaryConnection),
+            onClick = { showConnectionModeDialog() }
         ))
 
         // Language Selector
@@ -839,6 +900,12 @@ class SettingsFragment : Fragment() {
             stableId = "darkModeSettings",
             nameResId = R.string.dark_mode_settings,
             value = darkModeValue,
+            searchKeywords = kw(
+                R.string.night_mode, R.string.app_theme, R.string.threshold_light_title,
+                R.string.threshold_brightness_title, R.string.monochrome_icons,
+                R.string.use_gradient_background, R.string.use_extreme_dark, R.string.aa_monochrome,
+                R.string.sunrise_location_title, R.string.location_section
+            ),
             onClick = {
                 try {
                     findNavController().navigate(R.id.action_settingsFragment_to_darkModeFragment)
@@ -855,6 +922,10 @@ class SettingsFragment : Fragment() {
             stableId = "autoStartSettings",
             nameResId = R.string.auto_start_settings,
             value = getString(R.string.auto_start_settings_description),
+            searchKeywords = kw(
+                R.string.auto_start_on_boot_label, R.string.auto_start_screen_on_label,
+                R.string.auto_start_usb_label, R.string.auto_start_bt_label, R.string.auto_start_wifi_label
+            ),
             onClick = {
                 try {
                     findNavController().navigate(R.id.action_settingsFragment_to_autoStartFragment)
@@ -866,6 +937,10 @@ class SettingsFragment : Fragment() {
             stableId = "autoConnectSettings",
             nameResId = R.string.auto_connect_settings,
             value = getAutoConnectSummary(),
+            searchKeywords = kw(
+                R.string.auto_connect_last_session, R.string.auto_connect_single_usb,
+                R.string.auto_start_self_mode
+            ),
             onClick = {
                 try {
                     findNavController().navigate(R.id.action_settingsFragment_to_autoConnectFragment)
@@ -946,34 +1021,20 @@ class SettingsFragment : Fragment() {
             stableId = "resolution",
             nameResId = R.string.resolution,
             value = Settings.Resolution.fromId(pendingResolution!!)?.resName ?: "",
-            onClick = { _ ->
-                MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
-                    .setTitle(R.string.change_resolution)
-                    .setSingleChoiceItems(Settings.Resolution.allRes, pendingResolution!!) { dialog, which ->
-                        pendingResolution = which
-                        checkChanges()
-                        dialog.dismiss()
-                        updateSettingsList()
-                    }
-                    .show()
-            }
+            searchKeywords = Settings.Resolution.allRes.joinToString(" "),
+            onClick = { showResolutionDialog() }
         ))
 
         items.add(SettingItem.SettingEntry(
             stableId = "dpiPixelDensity",
             nameResId = R.string.dpi,
             value = if (pendingDpi == 0) getString(R.string.auto) else pendingDpi.toString(),
-            onClick = { _ ->
-                showNumericInputDialog(
-                    title = getString(R.string.enter_dpi_value),
-                    message = null,
-                    initialValue = pendingDpi ?: 0,
-                    onConfirm = { newVal ->
-                        pendingDpi = newVal
-                        checkChanges()
-                        updateSettingsList()
-                    }
-                )
+            onClick = {
+                try {
+                    findNavController().navigate(R.id.action_settingsFragment_to_dpiSettingsFragment)
+                } catch (e: Exception) {
+                    // Failover
+                }
             }
         ))
 
@@ -1048,6 +1109,7 @@ class SettingsFragment : Fragment() {
         items.add(SettingItem.SettingEntry(
             stableId = "viewMode",
             nameResId = R.string.view_mode,
+            searchKeywords = kw(R.string.surface_view, R.string.texture_view, R.string.gles_view),
             value = when (pendingViewMode) {
                 Settings.ViewMode.SURFACE -> getString(R.string.surface_view)
                 Settings.ViewMode.TEXTURE -> getString(R.string.texture_view)
@@ -1073,6 +1135,7 @@ class SettingsFragment : Fragment() {
             stableId = "screenOrientation",
             nameResId = R.string.screen_orientation,
             value = resources.getStringArray(R.array.screen_orientation)[pendingScreenOrientation!!.value],
+            searchKeywords = resources.getStringArray(R.array.screen_orientation).joinToString(" "),
             onClick = { _ ->
                 val orientationOptions = resources.getStringArray(R.array.screen_orientation)
                 val currentIdx = pendingScreenOrientation!!.value
@@ -1202,6 +1265,7 @@ class SettingsFragment : Fragment() {
             stableId = "videoCodec",
             nameResId = R.string.video_codec,
             value = pendingVideoCodec!!,
+            searchKeywords = "Auto H.264 H.265",
             onClick = { _ ->
                 val codecs = arrayOf("Auto", "H.264", "H.265")
                 val currentCodecIndex = codecs.indexOf(pendingVideoCodec)
@@ -1346,6 +1410,7 @@ class SettingsFragment : Fragment() {
             stableId = "micSettings",
             nameResId = R.string.microphone_settings,
             value = getString(R.string.microphone_settings_description),
+            searchKeywords = kw(R.string.mic_sample_rate),
             onClick = { _ ->
                 findNavController().navigate(R.id.action_settingsFragment_to_micSettingsFragment)
             }
@@ -1627,9 +1692,236 @@ class SettingsFragment : Fragment() {
             ))
         }
 
-        settingsAdapter.submitList(items) {
+        fullSettingsList = items
+        renderSettings(scrollState)
+    }
+
+    private fun setupTabsAndSearch(view: View) {
+        settingsTabGroup = view.findViewById(R.id.settingsTabGroup)
+        searchInput = view.findViewById(R.id.settingsSearch)
+
+        settingsTabGroup?.check(if (activeTab == SettingsTier.BASIC) R.id.tabBasic else R.id.tabAdvanced)
+        settingsTabGroup?.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+            activeTab = if (checkedId == R.id.tabAdvanced) SettingsTier.ADVANCED else SettingsTier.BASIC
+            renderSettings()
+        }
+
+        searchInput?.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, before: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                searchQuery = s?.toString() ?: ""
+                renderSettings()
+            }
+        })
+
+        // The clear (X) icon also lowers the keyboard and drops focus. Some Chinese head units
+        // cannot dismiss the keyboard easily once it is open, so give an explicit way out.
+        view.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.settingsSearchLayout)
+            ?.setEndIconOnClickListener {
+                searchInput?.setText("")
+                searchInput?.clearFocus()
+                hideKeyboard(view)
+            }
+    }
+
+    private fun hideKeyboard(view: View) {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)
+                as? android.view.inputmethod.InputMethodManager
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun renderSettings(scrollState: android.os.Parcelable? = null) {
+        // While searching, the tab has no effect (search spans both tiers), so hint that.
+        settingsTabGroup?.isEnabled = searchQuery.isBlank()
+        settingsAdapter.submitList(filterSettings(fullSettingsList)) {
             scrollState?.let { settingsRecyclerView.layoutManager?.onRestoreInstanceState(it) }
         }
+    }
+
+    // Filters the full list by active tab / search query, keeping category headers only when
+    // at least one of their children survives (so no empty sections show).
+    private fun filterSettings(full: List<SettingItem>): List<SettingItem> {
+        val query = searchQuery.trim()
+        val result = mutableListOf<SettingItem>()
+        var pendingHeader: SettingItem.CategoryHeader? = null
+        var currentCategoryId: String? = null
+        var headerMatchesQuery = false
+
+        for (item in full) {
+            if (item is SettingItem.CategoryHeader) {
+                pendingHeader = item
+                currentCategoryId = item.stableId
+                headerMatchesQuery = query.isNotEmpty() &&
+                    getString(item.titleResId).contains(query, ignoreCase = true)
+                continue
+            }
+            if (shouldShowItem(item, currentCategoryId, query, headerMatchesQuery)) {
+                pendingHeader?.let { result.add(it); pendingHeader = null }
+                result.add(item)
+            }
+        }
+        return result
+    }
+
+    private fun shouldShowItem(
+        item: SettingItem,
+        categoryId: String?,
+        query: String,
+        headerMatchesQuery: Boolean
+    ): Boolean {
+        // The bottom Save action is always relevant when present.
+        if (item is SettingItem.ActionButton && item.stableId == "bottomSaveButton") return true
+
+        // Connection-type filter: hide settings that do not apply to the chosen connection,
+        // in BOTH tabs and in search. USB hides WiFi settings, WiFi hides USB settings,
+        // Self Mode hides both, All/unset show everything.
+        if (isHiddenByConnection(item, categoryId)) return false
+
+        if (query.isNotEmpty()) {
+            return headerMatchesQuery || searchableText(item).contains(query, ignoreCase = true)
+        }
+
+        if (activeTab == SettingsTier.ADVANCED) return true
+
+        return item.stableId in basicSettingIds
+    }
+
+    // Items scoped to a USB connection (the Wireless Connection category is the WiFi scope).
+    private val usbScopedIds = setOf("useLibusb")
+
+    // Resolutions this wide or more (1440p, 4K) are flagged as high-bandwidth.
+    private val HIGH_BANDWIDTH_WIDTH = 2560
+
+    private fun isHiddenByConnection(item: SettingItem, categoryId: String?): Boolean {
+        val conn = settings.primaryConnection
+        if (categoryId == "wirelessConnection") return conn.hidesWifi()
+        if (item.stableId in usbScopedIds) return conn.hidesUsb()
+        return false
+    }
+
+    // Text used for search matching (title + description/value where applicable).
+    // Joins localized labels into a keyword blob for the settings search.
+    private fun kw(vararg ids: Int): String = ids.joinToString(" ") { getString(it) }
+
+    private fun searchableText(item: SettingItem): String = when (item) {
+        is SettingItem.SettingEntry ->
+            "${item.nameOverride ?: getString(item.nameResId)} ${item.value} ${item.searchKeywords ?: ""}"
+        is SettingItem.ToggleSettingEntry ->
+            "${item.nameOverride ?: getString(item.nameResId)} ${getString(item.descriptionResId)} ${item.searchKeywords ?: ""}"
+        is SettingItem.SliderSettingEntry ->
+            "${getString(item.nameResId)} ${item.value}"
+        is SettingItem.SegmentedButtonSettingEntry ->
+            "${getString(item.nameResId)} ${item.options.joinToString(" ")}"
+        is SettingItem.InfoBanner -> item.text ?: getString(item.textResId)
+        is SettingItem.ActionButton -> getString(item.textResId)
+        is SettingItem.CategoryHeader -> getString(item.titleResId)
+    }
+
+    private fun connectionKindLabel(kind: Settings.ConnectionKind): String = when (kind) {
+        // USB (direct cable or USB wireless adapter) is presented as a single "USB" option.
+        Settings.ConnectionKind.USB_CABLE,
+        Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
+        Settings.ConnectionKind.WIFI,
+        Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
+        Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
+        Settings.ConnectionKind.ALL -> getString(R.string.connection_kind_all)
+        Settings.ConnectionKind.UNSET -> getString(R.string.connection_kind_unset)
+    }
+
+    private fun showResolutionDialog() {
+        val (pw, ph) = realPanelResolution()
+        val recommended = com.andrerinas.headunitrevived.utils.SystemOptimizer.recommendedResolution(pw, ph)
+        val labels = Settings.Resolution.allResolutions.map { r ->
+            when {
+                r.id == recommended.id -> getString(R.string.resolution_recommended_format, r.resName)
+                r.width >= HIGH_BANDWIDTH_WIDTH -> getString(R.string.resolution_high_bandwidth_format, r.resName)
+                else -> r.resName
+            }
+        }.toTypedArray()
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.change_resolution)
+            .setSingleChoiceItems(labels, pendingResolution ?: 0) { dialog, which ->
+                dialog.dismiss()
+                val picked = Settings.Resolution.fromId(which)
+                val longSide = maxOf(pw, ph)
+                when {
+                    picked == null -> {}
+                    picked.width > 0 && longSide > 0 && picked.width > longSide ->
+                        showResolutionTooHighDialog(which, recommended.id, longSide, minOf(pw, ph))
+                    picked.width >= HIGH_BANDWIDTH_WIDTH ->
+                        showResolutionBandwidthDialog(which, recommended.id)
+                    else -> applyResolution(which)
+                }
+            }
+            .show()
+    }
+
+    private fun showResolutionTooHighDialog(pickedId: Int, recommendedId: Int, panelLong: Int, panelShort: Int) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.resolution_too_high_title)
+            .setMessage(getString(R.string.resolution_too_high_message, panelLong, panelShort))
+            .setPositiveButton(R.string.resolution_use_recommended) { _, _ -> applyResolution(recommendedId) }
+            .setNegativeButton(R.string.resolution_use_anyway) { _, _ -> applyResolution(pickedId) }
+            .show()
+    }
+
+    private fun showResolutionBandwidthDialog(pickedId: Int, recommendedId: Int) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.resolution_high_bandwidth_title)
+            .setMessage(R.string.resolution_high_bandwidth_message)
+            .setPositiveButton(R.string.resolution_use_recommended) { _, _ -> applyResolution(recommendedId) }
+            .setNegativeButton(R.string.resolution_use_anyway) { _, _ -> applyResolution(pickedId) }
+            .show()
+    }
+
+    private fun applyResolution(id: Int) {
+        pendingResolution = id
+        checkChanges()
+        updateSettingsList()
+    }
+
+    private fun realPanelResolution(): Pair<Int, Int> {
+        val m = android.util.DisplayMetrics()
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                requireActivity().display?.getRealMetrics(m)
+            } else {
+                @Suppress("DEPRECATION")
+                (requireContext().getSystemService(Context.WINDOW_SERVICE) as android.view.WindowManager)
+                    .defaultDisplay.getRealMetrics(m)
+            }
+        } catch (_: Exception) {
+        }
+        return m.widthPixels to m.heightPixels
+    }
+
+    private fun showConnectionModeDialog() {
+        val kinds = listOf(
+            Settings.ConnectionKind.USB_CABLE,
+            Settings.ConnectionKind.WIFI,
+            Settings.ConnectionKind.SELF_MODE,
+            Settings.ConnectionKind.ALL
+        )
+        val labels = kinds.map { connectionKindLabel(it) }.toTypedArray()
+        // Map any stored USB variant to the single USB option, WiFi/native to WiFi.
+        val current = when (settings.primaryConnection) {
+            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> 0
+            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> 1
+            Settings.ConnectionKind.SELF_MODE -> 2
+            Settings.ConnectionKind.ALL -> 3
+            else -> -1
+        }
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.connection_mode)
+            .setSingleChoiceItems(labels, current) { dialog, which ->
+                settings.primaryConnection = kinds[which]
+                dialog.dismiss()
+                updateSettingsList()
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private data class ImportSnapshot(

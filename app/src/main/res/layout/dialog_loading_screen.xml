@@ -70,8 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/loading_screen_select_file"
-            android:textColor="@android:color/white" />
+            android:text="@string/loading_screen_select_file" />
 
         <!-- Remove button -->
         <Button

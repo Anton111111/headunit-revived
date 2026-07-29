@@ -43,6 +43,16 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <TextView
+                android:id="@+id/point_help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:alpha="0.7"
+                android:visibility="gone"
+                android:text="@string/sunrise_reference_help" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
