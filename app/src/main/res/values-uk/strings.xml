@@ -709,4 +709,5 @@
     <string name="onb_dpi_large">Великий</string>
     <string name="onb_appearance_more_hint">Більше параметрів темного режиму ви знайдете в налаштуваннях.</string>
     <string name="onb_automation_more_hint">Більше параметрів у налаштуваннях автопідключення та автозапуску.</string>
+    <string name="onb_dpi_help">Вищий DPI збільшує значки й текст Android Auto, тож на екран вміщається менше. Нижчий DPI робить їх меншими, вміщається більше. Застосовується під час підключення Android Auto.</string>
 </resources>

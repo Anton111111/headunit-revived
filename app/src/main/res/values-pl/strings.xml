@@ -708,4 +708,5 @@
     <string name="onb_dpi_large">Duży</string>
     <string name="onb_appearance_more_hint">Więcej opcji trybu ciemnego znajdziesz w Ustawieniach.</string>
     <string name="onb_automation_more_hint">Więcej opcji znajdziesz w ustawieniach automatycznego łączenia i automatycznego startu.</string>
+    <string name="onb_dpi_help">Wyższy DPI powiększa ikony i tekst Android Auto, więc mieści się mniej na ekranie. Niższy DPI je pomniejsza i mieści się więcej. Zmiana działa po połączeniu Android Auto.</string>
 </resources>

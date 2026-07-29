@@ -707,4 +707,5 @@
     <string name="onb_dpi_large">Большой</string>
     <string name="onb_appearance_more_hint">Больше настроек тёмного режима вы найдёте в настройках.</string>
     <string name="onb_automation_more_hint">Больше настроек в разделах автоподключения и автозапуска.</string>
+    <string name="onb_dpi_help">Более высокий DPI увеличивает значки и текст Android Auto, поэтому на экране помещается меньше. Более низкий DPI делает их мельче, помещается больше. Применяется при подключении Android Auto.</string>
 </resources>

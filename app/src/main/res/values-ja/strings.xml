@@ -714,4 +714,5 @@
     <string name="onb_dpi_large">大</string>
     <string name="onb_appearance_more_hint">ダークモードの詳細設定は設定画面で変更できます。</string>
     <string name="onb_automation_more_hint">自動接続と自動起動の設定で、さらに多くのオプションを確認できます。</string>
+    <string name="onb_dpi_help">DPI を高くすると Android Auto のアイコンや文字が大きくなり、画面に表示される情報は少なくなります。低くすると小さくなり、より多く表示されます。Android Auto に接続したときに反映されます。</string>
 </resources>

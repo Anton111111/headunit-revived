@@ -175,7 +175,6 @@ class OnboardingActivity : BaseActivity() {
             if (!checked) return@addOnButtonCheckedListener
             selectedPortrait = id == R.id.onb_orient_port
         }
-        findViewById<MaterialButton>(R.id.onb_display_run).setOnClickListener { runOptimization() }
 
         // Graphical DPI picker: the preview shows smaller/more elements at a lower DPI
         // and larger elements at a higher DPI.
@@ -269,7 +268,7 @@ class OnboardingActivity : BaseActivity() {
         if (step == STEP_SAFETY) settings.hasAcceptedDisclaimer = true
         // Apply the display recommendation + chosen DPI on Next, so the user does not
         // have to press "Apply recommended settings" for it to take effect.
-        if (step == STEP_DISPLAY) runOptimization()
+        if (step == STEP_DISPLAY || step == STEP_DPI) applyDisplaySettings()
         if (step == STEP_COUNT - 1) finishOnboarding() else { step++; render() }
     }
 
@@ -398,25 +397,16 @@ class OnboardingActivity : BaseActivity() {
         else -> base
     }.coerceIn(110, 240)
 
-    private fun runOptimization() {
+    /** Writes the recommended display settings plus the chosen DPI. Called when leaving
+     * the Display and Android Auto size steps, so no separate Apply tap is needed. */
+    private fun applyDisplaySettings() {
         val result = SystemOptimizer(this).calculateOptimalSettings(selectedSize, selectedPortrait)
-        val finalDpi = adjustedDpi(result.recommendedDpi)
         settings.resolutionId = result.recommendedResolutionId
         settings.videoCodec = result.recommendedVideoCodec
         settings.viewMode = result.recommendedViewMode
-        settings.dpiPixelDensity = finalDpi
+        settings.dpiPixelDensity = adjustedDpi(result.recommendedDpi)
         settings.screenOrientation = result.suggestedOrientation
         settings.commit()
-        findViewById<TextView>(R.id.onb_display_result).apply {
-            visibility = View.VISIBLE
-            text = getString(
-                R.string.onb_display_result,
-                Settings.Resolution.fromId(result.recommendedResolutionId)?.resName ?: "-",
-                finalDpi,
-                result.recommendedVideoCodec,
-                result.recommendedViewMode.name
-            )
-        }
     }
 
     // --- Appearance (reuse the same option arrays as the settings screen) ---
@@ -487,10 +477,11 @@ class OnboardingActivity : BaseActivity() {
         @Volatile
         var deferredThisSession = false
         private const val KEY_STEP = "onb_step"
-        private const val STEP_COUNT = 8
-        private const val STEP_DISPLAY = 3
+        private const val STEP_COUNT = 9
         private const val STEP_SAFETY = 1
-        private const val STEP_AUTOMATION = 5
-        private const val STEP_READY = 7
+        private const val STEP_DISPLAY = 3
+        private const val STEP_DPI = 4
+        private const val STEP_AUTOMATION = 6
+        private const val STEP_READY = 8
     }
 }

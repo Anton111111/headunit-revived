@@ -707,4 +707,5 @@
     <string name="onb_dpi_large">Groot</string>
     <string name="onb_appearance_more_hint">Je vindt meer opties voor de donkere modus in Instellingen.</string>
     <string name="onb_automation_more_hint">Je vindt meer opties in de instellingen voor Automatisch verbinden en Automatisch starten.</string>
+    <string name="onb_dpi_help">Een hogere DPI maakt de pictogrammen en tekst van Android Auto groter, waardoor er minder op het scherm past. Een lagere DPI maakt alles kleiner, waardoor er meer past. Dit wordt toegepast wanneer je Android Auto verbindt.</string>
 </resources>

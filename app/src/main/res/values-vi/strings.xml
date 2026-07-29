@@ -713,4 +713,5 @@
     <string name="onb_dpi_large">Lớn</string>
     <string name="onb_appearance_more_hint">Bạn có thể tìm thêm tùy chọn chế độ tối trong Cài đặt.</string>
     <string name="onb_automation_more_hint">Bạn có thể tìm thêm tùy chọn trong cài đặt Tự động kết nối và Tự động khởi động.</string>
+    <string name="onb_dpi_help">DPI cao hơn làm cho biểu tượng và chữ của Android Auto lớn hơn, nên hiển thị được ít hơn. DPI thấp hơn làm chúng nhỏ lại và hiển thị được nhiều hơn. Áp dụng khi bạn kết nối Android Auto.</string>
 </resources>

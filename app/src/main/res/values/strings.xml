@@ -69,6 +69,7 @@
     <string name="onb_dpi_large">Large</string>
     <string name="onb_appearance_more_hint">You can find more dark mode options in Settings.</string>
     <string name="onb_automation_more_hint">You can find more options in Auto-connect and Auto-start settings.</string>
+    <string name="onb_dpi_help">A higher DPI makes Android Auto icons and text larger, so less fits on screen. A lower DPI makes them smaller, so more fits. It applies when you connect Android Auto.</string>
 
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="dummy_button">Dummy Button</string>

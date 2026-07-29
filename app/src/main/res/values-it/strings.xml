@@ -714,4 +714,5 @@
     <string name="onb_dpi_large">Grande</string>
     <string name="onb_appearance_more_hint">Puoi trovare altre opzioni della modalità scura nelle Impostazioni.</string>
     <string name="onb_automation_more_hint">Puoi trovare altre opzioni nelle impostazioni di Connessione automatica e Avvio automatico.</string>
+    <string name="onb_dpi_help">Un DPI più alto ingrandisce le icone e il testo di Android Auto, quindi entra meno nello schermo. Un DPI più basso li rende più piccoli e ne entra di più. Si applica quando colleghi Android Auto.</string>
 </resources>
