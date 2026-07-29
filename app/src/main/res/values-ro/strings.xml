@@ -671,7 +671,7 @@
     <string name="onb_connection_help">Alege cum se conectează telefonul tău. Astfel ecranul de setări rămâne concentrat pe ceea ce ți se aplică.</string>
     <string name="onb_connection_cable_detail">Telefonul este conectat direct la unitatea principală printr-un cablu USB. Opțiunile wireless rămân ascunse.</string>
     <string name="onb_connection_adapter_detail">Un dongle USB face legătura dintre cablu și o conexiune wireless. Opțiunile wireless sunt afișate.</string>
-    <string name="onb_connection_wifi_detail">Telefonul se conectează prin WiFi. Opțiunile wireless sunt afișate.</string>
+    <string name="onb_connection_wifi_detail">Telefonul se conectează prin WiFi.</string>
     <string name="onb_display_title">Afișare</string>
     <string name="onb_display_detected">Ecran detectat: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
     <string name="onb_display_size_label">Mărime ecran</string>
@@ -693,7 +693,7 @@
     <string name="onb_ready_summary">Conexiune: %1$s\nRezoluție: %2$s\nCodec: %3$s\n\nPoți ajusta fin totul în Setări.</string>
     <string name="onb_language_help">Alege limba aplicației.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Telefon conectat prin USB, fie printr-un cablu direct, fie printr-un adaptor wireless USB. Opțiunile wireless rămân ascunse în modul De bază.</string>
+    <string name="onb_connection_usb_detail">Telefon conectat prin USB, cu cablu direct sau adaptor USB wireless.</string>
     <string name="onb_more_appearance">Mai multe setări de aspect</string>
     <string name="onb_automation_title">Automatizare</string>
     <string name="onb_automation_help">Alege cum pornește și se conectează aplicația de una singură. Deschide setările de conectare automată pentru a trage de ordinea de prioritate.</string>
@@ -713,7 +713,7 @@
     <string name="dpi_automatic">Automat</string>
     <string name="dpi_automatic_desc">Folosește densitatea dispozitivului</string>
     <string name="onb_conn_usb_label">USB (sau adaptor)</string>
-    <string name="onb_connection_self_detail">Modul autonom rulează Android Auto pe acest dispozitiv fără a conecta un telefon, așa că opțiunile USB și WiFi sunt ascunse în Bază.</string>
+    <string name="onb_connection_self_detail">Modul autonom rulează Android Auto pe acest dispozitiv fără a conecta un telefon.</string>
     <string name="connection_kind_all">Toate</string>
     <string name="onb_connection_all_detail">Afișează atât setările USB, cât și cele WiFi.</string>
     <string name="onb_connection_warning">Alegerea unui tip de conexiune ascunde setările care nu se aplică, atât în Bază, cât și în Avansat. Pentru a le vedea din nou, alege mai târziu alt mod din setările de conexiune.</string>
@@ -725,4 +725,5 @@
     <string name="resolution_high_bandwidth_message">Această rezoluție folosește mult mai multă lățime de bandă și necesită o conexiune puternică: un WiFi 5GHz bun sau o conexiune USB stabilă. Dacă observi întreruperi, alege o rezoluție mai mică.</string>
     <string name="resolution_use_anyway">Folosește oricum</string>
     <string name="resolution_use_recommended">Folosește recomandarea</string>
+    <string name="dpi_automatic_desc_format">Folosește densitatea dispozitivului (%1$d DPI)</string>
 </resources>

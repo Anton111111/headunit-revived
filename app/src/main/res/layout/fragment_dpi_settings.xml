@@ -50,6 +50,7 @@
                         android:text="@string/dpi_automatic"
                         android:textAppearance="?attr/textAppearanceSubtitle1" />
                     <TextView
+                        android:id="@+id/dpi_auto_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dpi_automatic_desc"

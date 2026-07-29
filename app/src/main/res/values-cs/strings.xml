@@ -670,7 +670,7 @@
     <string name="onb_connection_help">Vyberte, jak se váš telefon připojuje. Obrazovka nastavení tak zůstane zaměřená na to, co se vás týká.</string>
     <string name="onb_connection_cable_detail">Telefon zapojený přímo do autorádia pomocí USB kabelu. Bezdrátové možnosti se nezobrazují.</string>
     <string name="onb_connection_adapter_detail">USB adaptér přemosťuje kabel na bezdrátové spojení. Bezdrátové možnosti se zobrazují.</string>
-    <string name="onb_connection_wifi_detail">Telefon se připojuje přes WiFi. Bezdrátové možnosti se zobrazují.</string>
+    <string name="onb_connection_wifi_detail">Telefon se připojuje přes WiFi.</string>
     <string name="onb_display_title">Displej</string>
     <string name="onb_display_detected">Detekovaný panel: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
     <string name="onb_display_size_label">Velikost obrazovky</string>
@@ -692,7 +692,7 @@
     <string name="onb_ready_summary">Připojení: %1$s\nRozlišení: %2$s\nKodek: %3$s\n\nVše můžete doladit v Nastavení.</string>
     <string name="onb_language_help">Vyberte jazyk aplikace.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Telefon připojený přes USB, buď přímým kabelem, nebo bezdrátovým USB adaptérem. Bezdrátové možnosti zůstanou v režimu Základní skryté.</string>
+    <string name="onb_connection_usb_detail">Telefon připojený přes USB, kabelem nebo bezdrátovým USB adaptérem.</string>
     <string name="onb_more_appearance">Další nastavení vzhledu</string>
     <string name="onb_automation_title">Automatizace</string>
     <string name="onb_automation_help">Vyberte, jak se aplikace sama spouští a připojuje. Otevřete nastavení automatického připojení a přetažením nastavte pořadí priorit.</string>
@@ -712,7 +712,7 @@
     <string name="dpi_automatic">Automaticky</string>
     <string name="dpi_automatic_desc">Použít hustotu zařízení</string>
     <string name="onb_conn_usb_label">USB (nebo adaptér)</string>
-    <string name="onb_connection_self_detail">Samostatný režim spouští Android Auto v tomto zařízení bez telefonu, takže možnosti USB a WiFi jsou v základním režimu skryté.</string>
+    <string name="onb_connection_self_detail">Samostatný režim spouští Android Auto v tomto zařízení bez telefonu.</string>
     <string name="connection_kind_all">Vše</string>
     <string name="onb_connection_all_detail">Zobrazí nastavení USB i WiFi.</string>
     <string name="onb_connection_warning">Výběr typu připojení skryje nepoužitelná nastavení v základním i pokročilém režimu. Chcete-li je znovu zobrazit, zvolte později jiný režim v nastavení připojení.</string>
@@ -724,4 +724,5 @@
     <string name="resolution_high_bandwidth_message">Toto rozlišení spotřebuje mnohem více dat a vyžaduje silné připojení: kvalitní WiFi 5GHz nebo stabilní USB. Pokud zaznamenáte lagy, zvolte nižší rozlišení.</string>
     <string name="resolution_use_anyway">Přesto použít</string>
     <string name="resolution_use_recommended">Použít doporučené</string>
+    <string name="dpi_automatic_desc_format">Použije hustotu zařízení (%1$d DPI)</string>
 </resources>

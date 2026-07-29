@@ -670,7 +670,7 @@
     <string name="onb_connection_help">Kies hoe je telefoon verbinding maakt. Zo blijft het instellingenscherm gericht op wat voor jou van toepassing is.</string>
     <string name="onb_connection_cable_detail">Telefoon rechtstreeks met een USB-kabel op de headunit aangesloten. Draadloze opties blijven verborgen.</string>
     <string name="onb_connection_adapter_detail">Een USB-dongle verbindt de kabel met een draadloze verbinding. Draadloze opties worden getoond.</string>
-    <string name="onb_connection_wifi_detail">Telefoon maakt verbinding via WiFi. Draadloze opties worden getoond.</string>
+    <string name="onb_connection_wifi_detail">Telefoon maakt verbinding via WiFi.</string>
     <string name="onb_display_title">Weergave</string>
     <string name="onb_display_detected">Gedetecteerd scherm: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
     <string name="onb_display_size_label">Schermgrootte</string>
@@ -692,7 +692,7 @@
     <string name="onb_ready_summary">Verbinding: %1$s\nResolutie: %2$s\nCodec: %3$s\n\nJe kunt alles verfijnen in Instellingen.</string>
     <string name="onb_language_help">Kies de taal van de app.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Telefoon aangesloten via USB, hetzij een directe kabel of een draadloze USB-adapter. Draadloze opties blijven verborgen in Basis.</string>
+    <string name="onb_connection_usb_detail">Telefoon via USB verbonden, met kabel of USB-draadloosadapter.</string>
     <string name="onb_more_appearance">Meer uiterlijk-instellingen</string>
     <string name="onb_automation_title">Automatisering</string>
     <string name="onb_automation_help">Kies hoe de app zelf start en verbinding maakt. Open de Auto-Connect instellingen om de prioriteitsvolgorde te slepen.</string>
@@ -712,7 +712,7 @@
     <string name="dpi_automatic">Automatisch</string>
     <string name="dpi_automatic_desc">Gebruik de dichtheid van het apparaat</string>
     <string name="onb_conn_usb_label">USB (of adapter)</string>
-    <string name="onb_connection_self_detail">De zelfstandige modus draait Android Auto op dit apparaat zonder telefoon, dus USB- en WiFi-opties worden verborgen in Basis.</string>
+    <string name="onb_connection_self_detail">De zelfstandige modus draait Android Auto op dit apparaat zonder telefoon.</string>
     <string name="connection_kind_all">Alle</string>
     <string name="onb_connection_all_detail">Toont zowel de USB- als de WiFi-instellingen.</string>
     <string name="onb_connection_warning">Als je een verbindingstype kiest, worden de niet-toepasselijke instellingen verborgen in Basis en Geavanceerd. Kies later een andere modus in de verbindingsinstellingen om ze weer te zien.</string>
@@ -724,4 +724,5 @@
     <string name="resolution_high_bandwidth_message">Deze resolutie gebruikt veel meer bandbreedte en heeft een sterke verbinding nodig: een goede 5GHz-WiFi of een stabiele USB-verbinding. Bij haperingen kies je een lagere resolutie.</string>
     <string name="resolution_use_anyway">Toch gebruiken</string>
     <string name="resolution_use_recommended">Aanbevolen gebruiken</string>
+    <string name="dpi_automatic_desc_format">Gebruikt de dichtheid van het apparaat (%1$d DPI)</string>
 </resources>

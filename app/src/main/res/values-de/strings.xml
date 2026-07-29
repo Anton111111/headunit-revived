@@ -676,7 +676,7 @@
     <string name="onb_connection_help">Wählen Sie, wie sich Ihr Handy verbindet. So bleibt der Einstellungsbildschirm auf das beschränkt, was für Sie relevant ist.</string>
     <string name="onb_connection_cable_detail">Handy direkt mit einem USB-Kabel an das Autoradio angeschlossen. Kabellose Optionen bleiben ausgeblendet.</string>
     <string name="onb_connection_adapter_detail">Ein USB-Dongle verbindet das Kabel mit einer kabellosen Verbindung. Kabellose Optionen werden angezeigt.</string>
-    <string name="onb_connection_wifi_detail">Handy verbindet sich über WiFi. Kabellose Optionen werden angezeigt.</string>
+    <string name="onb_connection_wifi_detail">Telefon verbindet sich über WiFi.</string>
     <string name="onb_display_title">Anzeige</string>
     <string name="onb_display_detected">Erkanntes Display: %1$d x %2$d px, %3$d dpi, Hardware %4$s.</string>
     <string name="onb_display_size_label">Bildschirmgröße</string>
@@ -698,7 +698,7 @@
     <string name="onb_ready_summary">Verbindung: %1$s\nAuflösung: %2$s\nCodec: %3$s\n\nSie können alles in den Einstellungen feinabstimmen.</string>
     <string name="onb_language_help">Wählen Sie die App-Sprache.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Handy per USB verbunden, entweder mit einem direkten Kabel oder einem kabellosen USB-Adapter. Kabellose Optionen bleiben in den Grundlagen ausgeblendet.</string>
+    <string name="onb_connection_usb_detail">Telefon über USB verbunden, per Kabel oder USB-Funkadapter.</string>
     <string name="onb_more_appearance">Weitere Aussehen-Einstellungen</string>
     <string name="onb_automation_title">Automatisierung</string>
     <string name="onb_automation_help">Wählen Sie, wie die App von selbst startet und sich verbindet. Öffnen Sie die Auto-Connect-Einstellungen, um die Priorität-Reihenfolge zu ziehen.</string>
@@ -718,7 +718,7 @@
     <string name="dpi_automatic">Automatisch</string>
     <string name="dpi_automatic_desc">Gerätedichte verwenden</string>
     <string name="onb_conn_usb_label">USB (oder Adapter)</string>
-    <string name="onb_connection_self_detail">Der autonome Modus führt Android Auto auf diesem Gerät ohne verbundenes Telefon aus, daher werden USB- und WiFi-Optionen im Basis-Tab ausgeblendet.</string>
+    <string name="onb_connection_self_detail">Der autonome Modus führt Android Auto auf diesem Gerät ohne verbundenes Telefon aus.</string>
     <string name="connection_kind_all">Alle</string>
     <string name="onb_connection_all_detail">Zeigt sowohl die USB- als auch die WiFi-Einstellungen.</string>
     <string name="onb_connection_warning">Wenn du einen Verbindungstyp wählst, werden die nicht passenden Einstellungen in Basis und Erweitert ausgeblendet. Um sie wieder anzuzeigen, wähle später einen anderen Modus in den Verbindungseinstellungen.</string>
@@ -730,4 +730,5 @@
     <string name="resolution_high_bandwidth_message">Diese Auflösung verbraucht viel mehr Bandbreite und braucht eine starke Verbindung: ein gutes 5GHz-WiFi oder eine stabile USB-Verbindung. Bei Rucklern wähle eine niedrigere Auflösung.</string>
     <string name="resolution_use_anyway">Trotzdem verwenden</string>
     <string name="resolution_use_recommended">Empfohlene verwenden</string>
+    <string name="dpi_automatic_desc_format">Verwendet die Gerätedichte (%1$d DPI)</string>
 </resources>

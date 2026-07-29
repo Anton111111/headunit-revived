@@ -670,7 +670,7 @@
     <string name="onb_connection_help">اختر كيفية اتصال هاتفك. يبقي هذا شاشة الإعدادات مركزة على ما ينطبق عليك.</string>
     <string name="onb_connection_cable_detail">الهاتف موصول مباشرة بوحدة الرأس بكابل USB. تبقى الخيارات اللاسلكية بعيدة عن الطريق.</string>
     <string name="onb_connection_adapter_detail">يربط محول USB الكابل بوصلة لاسلكية. يتم عرض الخيارات اللاسلكية.</string>
-    <string name="onb_connection_wifi_detail">يتصل الهاتف عبر WiFi. يتم عرض الخيارات اللاسلكية.</string>
+    <string name="onb_connection_wifi_detail">يتصل الهاتف عبر WiFi.</string>
     <string name="onb_display_title">العرض</string>
     <string name="onb_display_detected">اللوحة المكتشفة: %1$d x %2$d px، %3$d dpi، الأجهزة %4$s.</string>
     <string name="onb_display_size_label">حجم الشاشة</string>
@@ -694,7 +694,7 @@
     <!-- Onboarding wizard (round 2) -->
     <string name="onb_language_help">اختر لغة التطبيق.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">الهاتف موصول عبر USB، إما بكابل مباشر أو بمحول USB لاسلكي. تبقى الخيارات اللاسلكية مخفية في الوضع الأساسي.</string>
+    <string name="onb_connection_usb_detail">الهاتف متصل عبر USB، بكابل مباشر أو محول USB لاسلكي.</string>
     <string name="onb_more_appearance">المزيد من إعدادات المظهر</string>
     <string name="onb_automation_title">الأتمتة</string>
     <string name="onb_automation_help">اختر كيفية بدء التطبيق واتصاله من تلقاء نفسه. افتح إعدادات الاتصال التلقائي لسحب ترتيب الأولويات.</string>
@@ -714,7 +714,7 @@
     <string name="dpi_automatic">تلقائي</string>
     <string name="dpi_automatic_desc">استخدام كثافة الجهاز</string>
     <string name="onb_conn_usb_label">USB (أو محول)</string>
-    <string name="onb_connection_self_detail">يشغّل الوضع المستقل Android Auto على هذا الجهاز دون توصيل هاتف، لذا تُخفى خيارات USB وWiFi في الوضع الأساسي.</string>
+    <string name="onb_connection_self_detail">يشغّل الوضع المستقل Android Auto على هذا الجهاز دون توصيل هاتف.</string>
     <string name="connection_kind_all">الكل</string>
     <string name="onb_connection_all_detail">يعرض إعدادات USB وWiFi معًا.</string>
     <string name="onb_connection_warning">اختيار نوع الاتصال يخفي الإعدادات غير المنطبقة في الوضعين الأساسي والمتقدم. لرؤيتها مجددًا، اختر لاحقًا وضعًا آخر من إعدادات الاتصال.</string>
@@ -726,4 +726,5 @@
     <string name="resolution_high_bandwidth_message">تستهلك هذه الدقة نطاقًا تردديًا أكبر بكثير وتحتاج اتصالًا قويًا: شبكة WiFi جيدة بتردد 5GHz أو اتصال USB مستقر. إذا لاحظت تقطعًا، فاختر دقة أقل.</string>
     <string name="resolution_use_anyway">استخدام على أي حال</string>
     <string name="resolution_use_recommended">استخدام الموصى به</string>
+    <string name="dpi_automatic_desc_format">يستخدم كثافة الجهاز (%1$d DPI)</string>
 </resources>

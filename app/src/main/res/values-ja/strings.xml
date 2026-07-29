@@ -677,7 +677,7 @@
     <string name="onb_connection_help">スマートフォンの接続方法を選択してください。これにより、設定画面をお使いの環境に関連する項目に絞り込みます。</string>
     <string name="onb_connection_cable_detail">スマートフォンをUSBケーブルで車載機に直接接続します。ワイヤレスのオプションは表示されません。</string>
     <string name="onb_connection_adapter_detail">USBドングルがケーブルとワイヤレスリンクを橋渡しします。ワイヤレスのオプションが表示されます。</string>
-    <string name="onb_connection_wifi_detail">スマートフォンをWiFiで接続します。ワイヤレスのオプションが表示されます。</string>
+    <string name="onb_connection_wifi_detail">スマートフォンを WiFi で接続します。</string>
     <string name="onb_display_title">ディスプレイ</string>
     <string name="onb_display_detected">検出したパネル: %1$d x %2$d px、%3$d dpi、ハードウェア %4$s。</string>
     <string name="onb_display_size_label">画面のサイズ</string>
@@ -699,7 +699,7 @@
     <string name="onb_ready_summary">接続: %1$s\n解像度: %2$s\nコーデック: %3$s\n\nすべては設定で細かく調整できます。</string>
     <string name="onb_language_help">アプリの言語を選択します。</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">スマートフォンをUSBで接続します（直接ケーブルまたはUSBワイヤレスアダプター）。ワイヤレスのオプションは基本では表示されません。</string>
+    <string name="onb_connection_usb_detail">スマートフォンを USB で接続（直結ケーブルまたは USB ワイヤレスアダプター）。</string>
     <string name="onb_more_appearance">その他の外観設定</string>
     <string name="onb_automation_title">オートメーション</string>
     <string name="onb_automation_help">アプリが自動的に起動・接続する方法を選択します。自動接続設定を開くと、優先順位をドラッグして並べ替えられます。</string>
@@ -719,7 +719,7 @@
     <string name="dpi_automatic">自動</string>
     <string name="dpi_automatic_desc">デバイスの密度を使用</string>
     <string name="onb_conn_usb_label">USB（またはアダプター）</string>
-    <string name="onb_connection_self_detail">自律モードはスマートフォンを接続せずにこの端末で Android Auto を実行するため、基本タブでは USB と WiFi のオプションは非表示になります。</string>
+    <string name="onb_connection_self_detail">自律モードはスマートフォンを接続せずにこの端末で Android Auto を実行します。</string>
     <string name="connection_kind_all">すべて</string>
     <string name="onb_connection_all_detail">USB と WiFi の設定を両方表示します。</string>
     <string name="onb_connection_warning">接続タイプを選ぶと、該当しない設定が基本タブと詳細タブの両方で非表示になります。再表示するには、あとで接続設定で別のモードを選んでください。</string>
@@ -731,4 +731,5 @@
     <string name="resolution_high_bandwidth_message">この解像度は帯域を大幅に消費し、安定した接続（良好な 5GHz WiFi または安定した USB 接続）が必要です。遅延が出たら低い解像度を選んでください。</string>
     <string name="resolution_use_anyway">そのまま使用</string>
     <string name="resolution_use_recommended">推奨を使用</string>
+    <string name="dpi_automatic_desc_format">デバイスの密度を使用します（%1$d DPI）</string>
 </resources>

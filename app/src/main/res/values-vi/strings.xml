@@ -676,7 +676,7 @@
     <string name="onb_connection_help">Chọn cách điện thoại của bạn kết nối. Việc này giúp màn hình cài đặt tập trung vào những gì phù hợp với bạn.</string>
     <string name="onb_connection_cable_detail">Điện thoại cắm thẳng vào head unit bằng cáp USB. Các tuỳ chọn không dây sẽ được ẩn đi.</string>
     <string name="onb_connection_adapter_detail">Bộ chuyển USB nối cáp với kết nối không dây. Các tuỳ chọn không dây sẽ được hiển thị.</string>
-    <string name="onb_connection_wifi_detail">Điện thoại kết nối qua WiFi. Các tuỳ chọn không dây sẽ được hiển thị.</string>
+    <string name="onb_connection_wifi_detail">Điện thoại kết nối qua WiFi.</string>
     <string name="onb_display_title">Hiển thị</string>
     <string name="onb_display_detected">Màn hình phát hiện: %1$d x %2$d px, %3$d dpi, phần cứng %4$s.</string>
     <string name="onb_display_size_label">Kích thước màn hình</string>
@@ -698,7 +698,7 @@
     <string name="onb_ready_summary">Kết nối: %1$s\nĐộ phân giải: %2$s\nCodec: %3$s\n\nBạn có thể tinh chỉnh mọi thứ trong Cài đặt.</string>
     <string name="onb_language_help">Chọn ngôn ngữ ứng dụng.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Điện thoại kết nối bằng USB, qua cáp trực tiếp hoặc bộ chuyển không dây USB. Các tuỳ chọn không dây vẫn được ẩn ở chế độ Cơ bản.</string>
+    <string name="onb_connection_usb_detail">Điện thoại kết nối qua USB, bằng cáp trực tiếp hoặc bộ chuyển đổi không dây USB.</string>
     <string name="onb_more_appearance">Thêm cài đặt giao diện</string>
     <string name="onb_automation_title">Tự động hoá</string>
     <string name="onb_automation_help">Chọn cách ứng dụng tự khởi động và kết nối. Mở cài đặt Tự kết nối để kéo sắp thứ tự ưu tiên.</string>
@@ -718,7 +718,7 @@
     <string name="dpi_automatic">Tự động</string>
     <string name="dpi_automatic_desc">Dùng mật độ của thiết bị</string>
     <string name="onb_conn_usb_label">USB (hoặc bộ chuyển đổi)</string>
-    <string name="onb_connection_self_detail">Chế độ độc lập chạy Android Auto trên thiết bị này mà không cần kết nối điện thoại, nên các tùy chọn USB và WiFi bị ẩn trong Cơ bản.</string>
+    <string name="onb_connection_self_detail">Chế độ độc lập chạy Android Auto trên thiết bị này mà không cần kết nối điện thoại.</string>
     <string name="connection_kind_all">Tất cả</string>
     <string name="onb_connection_all_detail">Hiển thị cả cài đặt USB và WiFi.</string>
     <string name="onb_connection_warning">Chọn một loại kết nối sẽ ẩn các cài đặt không áp dụng, ở cả Cơ bản và Nâng cao. Để xem lại, hãy chọn chế độ khác trong cài đặt kết nối sau.</string>
@@ -730,4 +730,5 @@
     <string name="resolution_high_bandwidth_message">Độ phân giải này dùng nhiều băng thông hơn và cần kết nối mạnh: WiFi 5GHz tốt hoặc kết nối USB ổn định. Nếu thấy giật, hãy chọn độ phân giải thấp hơn.</string>
     <string name="resolution_use_anyway">Vẫn dùng</string>
     <string name="resolution_use_recommended">Dùng khuyến nghị</string>
+    <string name="dpi_automatic_desc_format">Dùng mật độ của thiết bị (%1$d DPI)</string>
 </resources>

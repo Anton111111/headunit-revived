@@ -603,7 +603,7 @@
     <string name="onb_connection_help">აირჩიეთ, როგორ უკავშირდება თქვენი ტელეფონი. ეს პარამეტრების ეკრანს მხოლოდ თქვენთვის რელევანტურ ვარიანტებზე ამახვილებს.</string>
     <string name="onb_connection_cable_detail">ტელეფონი პირდაპირ მონიტორშია ჩართული USB კაბელით. უსადენო ვარიანტები დამალული რჩება.</string>
     <string name="onb_connection_adapter_detail">USB დონგლი აკავშირებს კაბელს უსადენო კავშირთან. უსადენო ვარიანტები ნაჩვენებია.</string>
-    <string name="onb_connection_wifi_detail">ტელეფონი უკავშირდება WiFi-ით. უსადენო ვარიანტები ნაჩვენებია.</string>
+    <string name="onb_connection_wifi_detail">ტელეფონი უკავშირდება WiFi-ით.</string>
     <string name="onb_display_title">ეკრანი</string>
     <string name="onb_display_detected">აღმოჩენილი პანელი: %1$d x %2$d px, %3$d dpi, აპარატურა %4$s.</string>
     <string name="onb_display_size_label">ეკრანის ზომა</string>
@@ -625,7 +625,7 @@
     <string name="onb_ready_summary">კავშირი: %1$s\nგაფართოება: %2$s\nკოდეკი: %3$s\n\nყველაფრის ზუსტად მორგება პარამეტრებში შეგიძლიათ.</string>
     <string name="onb_language_help">აირჩიეთ აპლიკაციის ენა.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">ტელეფონი დაკავშირებულია USB-ით, პირდაპირი კაბელით ან USB უსადენო ადაპტერით. უსადენო ვარიანტები ძირითად რეჟიმში დამალული რჩება.</string>
+    <string name="onb_connection_usb_detail">ტელეფონი USB-ით არის დაკავშირებული: პირდაპირი კაბელით ან USB უსადენო ადაპტერით.</string>
     <string name="onb_more_appearance">იერსახის დამატებითი პარამეტრები</string>
     <string name="onb_automation_title">ავტომატიზაცია</string>
     <string name="onb_automation_help">აირჩიეთ, როგორ გაეშვას და დაუკავშირდეს აპლიკაცია დამოუკიდებლად. ავტო-კავშირის პარამეტრები გახსენით პრიორიტეტული რიგის გადასათრევად.</string>
@@ -645,7 +645,7 @@
     <string name="dpi_automatic">ავტომატური</string>
     <string name="dpi_automatic_desc">მოწყობილობის სიმკვრივის გამოყენება</string>
     <string name="onb_conn_usb_label">USB (ან ადაპტერი)</string>
-    <string name="onb_connection_self_detail">ავტონომიური რეჟიმი უშვებს Android Auto-ს ამ მოწყობილობაზე ტელეფონის დაკავშირების გარეშე, ამიტომ USB და WiFi პარამეტრები დამალულია ძირითად ჩანართში.</string>
+    <string name="onb_connection_self_detail">ავტონომიური რეჟიმი უშვებს Android Auto-ს ამ მოწყობილობაზე ტელეფონის დაკავშირების გარეშე.</string>
     <string name="connection_kind_all">ყველა</string>
     <string name="onb_connection_all_detail">აჩვენებს როგორც USB, ისე WiFi პარამეტრებს.</string>
     <string name="onb_connection_warning">კავშირის ტიპის არჩევა მალავს შეუსაბამო პარამეტრებს როგორც ძირითად, ისე გაფართოებულ ჩანართში. ისევ სანახავად, მოგვიანებით აირჩიეთ სხვა რეჟიმი კავშირის პარამეტრებში.</string>
@@ -657,4 +657,5 @@
     <string name="resolution_high_bandwidth_message">ეს გარჩევადობა გაცილებით მეტ გამტარუნარიანობას ხარჯავს და საჭიროებს მდგრад კავშირს: კარგ 5GHz WiFi-ს ან სტაბილურ USB-ს. თუ შეფერხებას შეამჩნევთ, აირჩიეთ დაბალი გარჩევადობა.</string>
     <string name="resolution_use_anyway">მაინც გამოყენება</string>
     <string name="resolution_use_recommended">რეკომენდებულის გამოყენება</string>
+    <string name="dpi_automatic_desc_format">იყენებს მოწყობილობის სიმკვრივეს (%1$d DPI)</string>
 </resources>

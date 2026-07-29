@@ -728,4 +728,5 @@
     <string name="resolution_high_bandwidth_message">이 해상도는 훨씬 많은 대역폭을 사용하며 안정적인 연결(양호한 5GHz WiFi 또는 안정적인 USB)이 필요합니다. 지연이 있으면 더 낮은 해상도를 선택하세요.</string>
     <string name="resolution_use_anyway">그래도 사용</string>
     <string name="resolution_use_recommended">권장값 사용</string>
+    <string name="dpi_automatic_desc_format">기기 밀도를 사용합니다 (%1$d DPI)</string>
 </resources>

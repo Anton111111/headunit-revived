@@ -27,7 +27,7 @@
     <string name="onb_connection_help">Pick how your phone connects. This keeps the settings screen focused on what applies to you.</string>
     <string name="onb_connection_cable_detail">Phone plugged straight into the head unit with a USB cable. Wireless options stay out of the way.</string>
     <string name="onb_connection_adapter_detail">A USB dongle bridges the cable to a wireless link. Wireless options are shown.</string>
-    <string name="onb_connection_wifi_detail">Phone connects over WiFi. Wireless options are shown.</string>
+    <string name="onb_connection_wifi_detail">Phone connects over WiFi.</string>
     <string name="onb_display_title">Display</string>
     <!-- %1$d width, %2$d height, %3$d dpi, %4$s codec -->
     <string name="onb_display_detected">Detected panel: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
@@ -54,9 +54,9 @@
     <!-- Onboarding wizard (round 2) -->
     <string name="onb_language_help">Choose the app language.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Phone connected by USB, either a direct cable or a USB wireless adapter. Wireless options stay hidden in Basic.</string>
+    <string name="onb_connection_usb_detail">Phone connected by USB, either a direct cable or a USB wireless adapter.</string>
     <string name="onb_conn_usb_label">USB (or adapter)</string>
-    <string name="onb_connection_self_detail">Self Mode runs Android Auto on this device without connecting a phone, so USB and WiFi options are hidden in Basic.</string>
+    <string name="onb_connection_self_detail">Self Mode runs Android Auto on this device without connecting a phone.</string>
     <string name="connection_kind_all">All</string>
 
     <!-- Resolution recommendation / bandwidth warnings -->
@@ -88,6 +88,7 @@
     <string name="onb_change_later">You can change this later in Settings.</string>
     <string name="dpi_automatic">Automatic</string>
     <string name="dpi_automatic_desc">Use the device density</string>
+    <string name="dpi_automatic_desc_format">Uses the device density (%1$d DPI)</string>
     <string name="dpi_value_format">%1$d DPI</string>
 
     <string name="title_activity_settings">SettingsActivity</string>

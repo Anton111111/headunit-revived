@@ -669,7 +669,7 @@
     <string name="onb_connection_help">請選擇您手機的連線方式。這能讓設定畫面專注於與您相關的項目。</string>
     <string name="onb_connection_cable_detail">手機以 USB 線直接插入車機。無線選項不會顯示。</string>
     <string name="onb_connection_adapter_detail">USB 轉接器將線材橋接為無線連線。會顯示無線選項。</string>
-    <string name="onb_connection_wifi_detail">手機透過 WiFi 連線。會顯示無線選項。</string>
+    <string name="onb_connection_wifi_detail">手機透過 WiFi 連接。</string>
     <string name="onb_display_title">顯示</string>
     <string name="onb_display_detected">偵測到的面板：%1$d x %2$d px，%3$d dpi，硬體 %4$s。</string>
     <string name="onb_display_size_label">螢幕尺寸</string>
@@ -691,7 +691,7 @@
     <string name="onb_ready_summary">連線：%1$s\n解析度：%2$s\n編碼：%3$s\n\n您可以在設定中微調所有項目。</string>
     <string name="onb_language_help">選擇應用程式語言。</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">手機以 USB 連接，可以是直接使用線材，或是使用 USB 無線轉接器。無線選項在基本模式下不會顯示。</string>
+    <string name="onb_connection_usb_detail">手機透過 USB 連接，使用直接連接線或 USB 無線轉接器。</string>
     <string name="onb_more_appearance">更多外觀設定</string>
     <string name="onb_automation_title">自動化</string>
     <string name="onb_automation_help">選擇應用程式自動啟動與連線的方式。開啟自動連線設定即可拖曳調整優先順序。</string>
@@ -711,7 +711,7 @@
     <string name="dpi_automatic">自動</string>
     <string name="dpi_automatic_desc">使用裝置密度</string>
     <string name="onb_conn_usb_label">USB（或轉接器）</string>
-    <string name="onb_connection_self_detail">自主模式在本裝置上執行 Android Auto，不需連接手機，因此基本模式會隱藏 USB 與 WiFi 選項。</string>
+    <string name="onb_connection_self_detail">自主模式在本裝置上執行 Android Auto，不需連接手機。</string>
     <string name="connection_kind_all">全部</string>
     <string name="onb_connection_all_detail">同時顯示 USB 與 WiFi 設定。</string>
     <string name="onb_connection_warning">選擇連線類型會在基本與進階模式中隱藏不適用的設定。若要再次顯示，稍後在連線設定中選擇其他模式。</string>
@@ -723,4 +723,5 @@
     <string name="resolution_high_bandwidth_message">此解析度會佔用更多頻寬，需要穩定的連線：良好的 5GHz WiFi 或穩定的 USB 連線。若出現延遲，請選擇較低的解析度。</string>
     <string name="resolution_use_anyway">仍要使用</string>
     <string name="resolution_use_recommended">使用建議值</string>
+    <string name="dpi_automatic_desc_format">使用裝置密度（%1$d DPI）</string>
 </resources>

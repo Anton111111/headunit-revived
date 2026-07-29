@@ -672,7 +672,7 @@
     <string name="onb_connection_help">Виберіть спосіб підключення телефону. Це залишить на екрані налаштувань лише те, що стосується вас.</string>
     <string name="onb_connection_cable_detail">Телефон підключено безпосередньо до головного пристрою USB-кабелем. Бездротові параметри приховано.</string>
     <string name="onb_connection_adapter_detail">USB-адаптер зʼєднує кабель із бездротовим каналом. Бездротові параметри показано.</string>
-    <string name="onb_connection_wifi_detail">Телефон підключається через WiFi. Бездротові параметри показано.</string>
+    <string name="onb_connection_wifi_detail">Телефон підключається через WiFi.</string>
     <string name="onb_display_title">Дисплей</string>
     <string name="onb_display_detected">Виявлено панель: %1$d x %2$d px, %3$d dpi, обладнання %4$s.</string>
     <string name="onb_display_size_label">Розмір екрана</string>
@@ -694,7 +694,7 @@
     <string name="onb_ready_summary">Підключення: %1$s\nРоздільна здатність: %2$s\nКодек: %3$s\n\nВи можете точно налаштувати все в Налаштуваннях.</string>
     <string name="onb_language_help">Виберіть мову застосунку.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Телефон підключено через USB, безпосередньо кабелем або через USB бездротовий адаптер. Бездротові параметри залишаються прихованими в режимі «Основні».</string>
+    <string name="onb_connection_usb_detail">Телефон підключено через USB: кабелем або бездротовим USB-адаптером.</string>
     <string name="onb_more_appearance">Більше налаштувань зовнішнього вигляду</string>
     <string name="onb_automation_title">Автоматизація</string>
     <string name="onb_automation_help">Виберіть, як застосунок запускається та підключається самостійно. Відкрийте налаштування автопідключення, щоб перетягнути порядок пріоритету.</string>
@@ -714,7 +714,7 @@
     <string name="dpi_automatic">Автоматично</string>
     <string name="dpi_automatic_desc">Використовувати щільність пристрою</string>
     <string name="onb_conn_usb_label">USB (або адаптер)</string>
-    <string name="onb_connection_self_detail">Автономний режим запускає Android Auto на цьому пристрої без телефона, тож параметри USB та WiFi приховані в базовому режимі.</string>
+    <string name="onb_connection_self_detail">Автономний режим запускає Android Auto на цьому пристрої без телефона.</string>
     <string name="connection_kind_all">Усі</string>
     <string name="onb_connection_all_detail">Показує налаштування USB та WiFi.</string>
     <string name="onb_connection_warning">Вибір типу підключення приховує невідповідні параметри в базовому та розширеному режимах. Щоб знову їх побачити, пізніше виберіть інший режим у налаштуваннях підключення.</string>
@@ -726,4 +726,5 @@
     <string name="resolution_high_bandwidth_message">Ця роздільність споживає набагато більше трафіку й потребує стабільного зʼєднання: хорошого WiFi 5 ГГц або стабільного USB. Якщо помітите лаги, виберіть нижчу роздільність.</string>
     <string name="resolution_use_anyway">Все одно використати</string>
     <string name="resolution_use_recommended">Використати рекомендовану</string>
+    <string name="dpi_automatic_desc_format">Використовує щільність пристрою (%1$d DPI)</string>
 </resources>

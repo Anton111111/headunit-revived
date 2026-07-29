@@ -677,7 +677,7 @@
     <string name="onb_connection_help">Scegli come si connette il tuo telefono. In questo modo la schermata delle impostazioni resta focalizzata su ciò che ti riguarda.</string>
     <string name="onb_connection_cable_detail">Telefono collegato direttamente alla head unit con un cavo USB. Le opzioni wireless restano nascoste.</string>
     <string name="onb_connection_adapter_detail">Un dongle USB collega il cavo a un link wireless. Le opzioni wireless vengono mostrate.</string>
-    <string name="onb_connection_wifi_detail">Il telefono si connette tramite WiFi. Le opzioni wireless vengono mostrate.</string>
+    <string name="onb_connection_wifi_detail">Il telefono si connette via WiFi.</string>
     <string name="onb_display_title">Visualizzazione</string>
     <string name="onb_display_detected">Pannello rilevato: %1$d x %2$d px, %3$d dpi, hardware %4$s.</string>
     <string name="onb_display_size_label">Dimensioni schermo</string>
@@ -699,7 +699,7 @@
     <string name="onb_ready_summary">Connessione: %1$s\nRisoluzione: %2$s\nCodec: %3$s\n\nPuoi mettere a punto tutto nelle Impostazioni.</string>
     <string name="onb_language_help">Scegli la lingua dell\'app.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Telefono collegato tramite USB, con un cavo diretto o un adattatore wireless USB. Le opzioni wireless restano nascoste in modalità Base.</string>
+    <string name="onb_connection_usb_detail">Telefono collegato via USB, con cavo diretto o adattatore USB wireless.</string>
     <string name="onb_more_appearance">Altre impostazioni di aspetto</string>
     <string name="onb_automation_title">Automazione</string>
     <string name="onb_automation_help">Scegli come l\'app si avvia e si connette autonomamente. Apri le impostazioni di connessione automatica per trascinare l\'ordine di priorità.</string>
@@ -719,7 +719,7 @@
     <string name="dpi_automatic">Automatico</string>
     <string name="dpi_automatic_desc">Usa la densità del dispositivo</string>
     <string name="onb_conn_usb_label">USB (o adattatore)</string>
-    <string name="onb_connection_self_detail">La modalità autonoma esegue Android Auto su questo dispositivo senza collegare un telefono, quindi le opzioni USB e WiFi vengono nascoste in Base.</string>
+    <string name="onb_connection_self_detail">La modalità autonoma esegue Android Auto su questo dispositivo senza collegare un telefono.</string>
     <string name="connection_kind_all">Tutti</string>
     <string name="onb_connection_all_detail">Mostra sia le impostazioni USB sia quelle WiFi.</string>
     <string name="onb_connection_warning">Scegliendo un tipo di connessione, le impostazioni non pertinenti vengono nascoste sia in Base sia in Avanzate. Per rivederle, scegli in seguito un altro modo nelle impostazioni di connessione.</string>
@@ -731,4 +731,5 @@
     <string name="resolution_high_bandwidth_message">Questa risoluzione consuma molta più banda e richiede una connessione forte: un buon WiFi a 5GHz o una connessione USB stabile. Se noti lag, scegli una risoluzione più bassa.</string>
     <string name="resolution_use_anyway">Usa comunque</string>
     <string name="resolution_use_recommended">Usa consigliata</string>
+    <string name="dpi_automatic_desc_format">Usa la densità del dispositivo (%1$d DPI)</string>
 </resources>

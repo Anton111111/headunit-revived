@@ -670,7 +670,7 @@
     <string name="onb_connection_help">Выберите способ подключения телефона. Это поможет оставить на экране настроек только то, что относится к вам.</string>
     <string name="onb_connection_cable_detail">Телефон подключён к головному устройству напрямую USB-кабелем. Беспроводные параметры скрыты.</string>
     <string name="onb_connection_adapter_detail">USB-адаптер соединяет кабель с беспроводным каналом. Беспроводные параметры отображаются.</string>
-    <string name="onb_connection_wifi_detail">Телефон подключается по WiFi. Беспроводные параметры отображаются.</string>
+    <string name="onb_connection_wifi_detail">Телефон подключается по WiFi.</string>
     <string name="onb_display_title">Экран</string>
     <string name="onb_display_detected">Обнаружена панель: %1$d x %2$d px, %3$d dpi, оборудование %4$s.</string>
     <string name="onb_display_size_label">Размер экрана</string>
@@ -692,7 +692,7 @@
     <string name="onb_ready_summary">Подключение: %1$s\nРазрешение экрана: %2$s\nКодек: %3$s\n\nВы можете точно настроить всё в настройках.</string>
     <string name="onb_language_help">Выберите язык приложения.</string>
     <string name="connection_kind_usb">USB</string>
-    <string name="onb_connection_usb_detail">Телефон подключён по USB, либо напрямую кабелем, либо через беспроводной USB-адаптер. В режиме «Основные» беспроводные параметры остаются скрытыми.</string>
+    <string name="onb_connection_usb_detail">Телефон подключён по USB: кабелем или беспроводным USB-адаптером.</string>
     <string name="onb_more_appearance">Больше настроек внешнего вида</string>
     <string name="onb_automation_title">Автоматизация</string>
     <string name="onb_automation_help">Выберите, как приложение запускается и подключается самостоятельно. Откройте настройки автоподключения, чтобы перетащить порядок приоритета.</string>
@@ -712,7 +712,7 @@
     <string name="dpi_automatic">Автоматически</string>
     <string name="dpi_automatic_desc">Использовать плотность устройства</string>
     <string name="onb_conn_usb_label">USB (или адаптер)</string>
-    <string name="onb_connection_self_detail">Автономный режим запускает Android Auto на этом устройстве без телефона, поэтому параметры USB и WiFi скрыты в базовом режиме.</string>
+    <string name="onb_connection_self_detail">Автономный режим запускает Android Auto на этом устройстве без телефона.</string>
     <string name="connection_kind_all">Все</string>
     <string name="onb_connection_all_detail">Показывает настройки USB и WiFi.</string>
     <string name="onb_connection_warning">Выбор типа подключения скрывает неприменимые настройки в базовом и расширенном режимах. Чтобы снова их увидеть, позже выберите другой режим в настройках подключения.</string>
@@ -724,4 +724,5 @@
     <string name="resolution_high_bandwidth_message">Это разрешение потребляет намного больше трафика и требует устойчивого соединения: хорошего WiFi 5 ГГц или стабильного USB. При задержках выберите разрешение ниже.</string>
     <string name="resolution_use_anyway">Всё равно использовать</string>
     <string name="resolution_use_recommended">Использовать рекомендуемое</string>
+    <string name="dpi_automatic_desc_format">Использует плотность устройства (%1$d DPI)</string>
 </resources>
