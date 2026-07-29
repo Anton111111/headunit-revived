@@ -704,4 +704,5 @@
     <string name="onb_gps_help">Android Auto 내비게이션에 어떤 GPS를 사용할까요?</string>
     <string name="onb_gps_this_device">이 기기</string>
     <string name="onb_gps_phone">연결된 휴대폰</string>
+    <string name="onb_do_it_later">나중에 하기</string>
 </resources>

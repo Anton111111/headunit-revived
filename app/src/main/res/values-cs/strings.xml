@@ -700,4 +700,5 @@
     <string name="onb_gps_help">Kterou GPS má Android Auto používat pro navigaci?</string>
     <string name="onb_gps_this_device">Toto zařízení</string>
     <string name="onb_gps_phone">Připojený telefon</string>
+    <string name="onb_do_it_later">Udělat později</string>
 </resources>

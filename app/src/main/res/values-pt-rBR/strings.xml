@@ -702,4 +702,5 @@
     <string name="onb_gps_help">Qual GPS o Android Auto deve usar para navegação?</string>
     <string name="onb_gps_this_device">Este dispositivo</string>
     <string name="onb_gps_phone">Celular conectado</string>
+    <string name="onb_do_it_later">Fazer isso depois</string>
 </resources>

@@ -697,4 +697,5 @@
     <string name="onb_gps_help">Android Auto navigasyon için hangi GPS\'i kullanmalı?</string>
     <string name="onb_gps_this_device">Bu cihaz</string>
     <string name="onb_gps_phone">Bağlı telefon</string>
+    <string name="onb_do_it_later">Daha sonra yap</string>
 </resources>

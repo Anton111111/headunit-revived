@@ -702,4 +702,5 @@
     <string name="onb_gps_help">أي GPS ينبغي أن يستخدمه Android Auto للملاحة؟</string>
     <string name="onb_gps_this_device">هذا الجهاز</string>
     <string name="onb_gps_phone">الهاتف المتصل</string>
+    <string name="onb_do_it_later">القيام بذلك لاحقًا</string>
 </resources>

@@ -699,4 +699,5 @@
     <string name="onb_gps_help">Melyik GPS-t használja az Android Auto a navigációhoz?</string>
     <string name="onb_gps_this_device">Ez az eszköz</string>
     <string name="onb_gps_phone">Csatlakoztatott telefon</string>
+    <string name="onb_do_it_later">Később</string>
 </resources>

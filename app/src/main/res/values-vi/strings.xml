@@ -706,4 +706,5 @@
     <string name="onb_gps_help">Android Auto nên dùng GPS nào cho điều hướng?</string>
     <string name="onb_gps_this_device">Máy này</string>
     <string name="onb_gps_phone">Điện thoại đã kết nối</string>
+    <string name="onb_do_it_later">Để sau</string>
 </resources>

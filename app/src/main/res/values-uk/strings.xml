@@ -702,4 +702,5 @@
     <string name="onb_gps_help">Який GPS має використовувати Android Auto для навігації?</string>
     <string name="onb_gps_this_device">Цей пристрій</string>
     <string name="onb_gps_phone">Підключений телефон</string>
+    <string name="onb_do_it_later">Зробити пізніше</string>
 </resources>

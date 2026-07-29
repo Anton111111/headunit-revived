@@ -707,4 +707,5 @@
     <string name="onb_gps_help">Android AutoのナビゲーションにはどのGPSを使用しますか？</string>
     <string name="onb_gps_this_device">このデバイス</string>
     <string name="onb_gps_phone">接続したスマートフォン</string>
+    <string name="onb_do_it_later">後で行う</string>
 </resources>

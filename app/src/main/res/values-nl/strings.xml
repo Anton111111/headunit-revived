@@ -700,4 +700,5 @@
     <string name="onb_gps_help">Welke GPS moet Android Auto gebruiken voor navigatie?</string>
     <string name="onb_gps_this_device">Dit apparaat</string>
     <string name="onb_gps_phone">Verbonden telefoon</string>
+    <string name="onb_do_it_later">Later doen</string>
 </resources>

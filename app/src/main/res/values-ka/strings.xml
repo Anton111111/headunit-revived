@@ -633,4 +633,5 @@
     <string name="onb_gps_help">რომელი GPS გამოიყენოს Android Auto-მ ნავიგაციისთვის?</string>
     <string name="onb_gps_this_device">ეს მოწყობილობა</string>
     <string name="onb_gps_phone">დაკავშირებული ტელეფონი</string>
+    <string name="onb_do_it_later">მოგვიანებით</string>
 </resources>
