@@ -34,13 +34,6 @@
         android:fillColor="#525C65"
         android:pathData="M40,152 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0" />
 
-    <!-- Air vents (right) -->
-    <path
-        android:strokeColor="#525C65"
-        android:strokeWidth="6"
-        android:strokeLineCap="round"
-        android:pathData="M238,78 L272,78 M238,96 L272,96" />
-
     <!-- Head-unit bezel (centered) -->
     <path
         android:fillColor="#454E57"
