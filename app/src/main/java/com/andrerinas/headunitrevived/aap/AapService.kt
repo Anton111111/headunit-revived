@@ -2359,11 +2359,82 @@ class AapService : Service(), UsbReceiver.Listener {
      * AA Wireless activity requires; they are constructed reflectively because the
      * relevant Android classes have no public constructors.
      */
+    private fun isAaVersion174OrHigher(): Boolean {
+        return try {
+            val pInfo = packageManager.getPackageInfo("com.google.android.projection.gearhead", 0)
+            val vName = pInfo.versionName ?: ""
+            val parts = vName.split(".")
+            val major = parts.getOrNull(0)?.toIntOrNull() ?: 0
+            val minor = parts.getOrNull(1)?.toIntOrNull() ?: 0
+            AppLog.i("SelfMode: Installed AA version: $vName (major=$major, minor=$minor)")
+            major > 17 || (major == 17 && minor >= 4)
+        } catch (e: Exception) {
+            AppLog.w("SelfMode: Failed to query AA version: ${e.message}")
+            false
+        }
+    }
+
+    private suspend fun isHeadunitServerRunning(): Boolean = withContext(Dispatchers.IO) {
+        try {
+            java.net.Socket().use { socket ->
+                socket.connect(java.net.InetSocketAddress("127.0.0.1", 5277), 500)
+                AppLog.i("SelfMode: Headunit Server socket probe SUCCESS on port 5277!")
+                true
+            }
+        } catch (e: Throwable) {
+            AppLog.w("SelfMode: Headunit Server socket probe failed on port 5277 (${e.javaClass.simpleName}: ${e.message})")
+            false
+        }
+    }
+
+    private fun openAaSettings() {
+        val intent = Intent().apply {
+            setClassName(
+                "com.google.android.projection.gearhead",
+                "com.google.android.projection.gearhead.companion.settings.DefaultSettingsActivity"
+            )
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            try {
+                val fallbackIntent = Intent("android.settings.APPLICATION_DETAILS_SETTINGS").apply {
+                    data = android.net.Uri.parse("package:com.google.android.projection.gearhead")
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(fallbackIntent)
+            } catch (e2: Exception) {
+                AppLog.e("SelfMode: Failed to open AA settings: ${e2.message}")
+            }
+        }
+    }
+
     private fun startSelfMode() {
         selfMode = true
-        startWirelessServer()
 
         serviceScope.launch(Dispatchers.Main) {
+            if (isAaVersion174OrHigher()) {
+                val isRunning = isHeadunitServerRunning()
+                if (isRunning) {
+                    AppLog.i("SelfMode: AA 17.4+ detected and Headunit Server is RUNNING on 127.0.0.1:5277! Connecting directly...")
+                    serviceScope.launch(Dispatchers.IO) {
+                        commManager.connect("127.0.0.1", 5277)
+                    }
+                    return@launch
+                } else {
+                    AppLog.w("SelfMode: AA 17.4+ detected but Headunit Server (127.0.0.1:5277) is NOT running.")
+                    ToastUtils.showToast(
+                        this@AapService,
+                        "Android Auto 17.4+ detected: Please start 'Headunit Server' in Android Auto Developer Settings!",
+                        Toast.LENGTH_LONG
+                    )
+                    openAaSettings()
+                }
+            }
+
+            startWirelessServer()
+
             val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && connectivityManager.activeNetwork == null) {
                 // Wait up to 1 second for the Dummy VPN to become the active network
