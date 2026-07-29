@@ -216,7 +216,8 @@ class OnboardingActivity : BaseActivity() {
     private fun render() {
         flipper.displayedChild = step
         backBtn.visibility = if (step == 0) View.INVISIBLE else View.VISIBLE
-        skipBtn.visibility = if (step == STEP_COUNT - 1) View.INVISIBLE else View.VISIBLE
+        // GONE (not INVISIBLE) so its dedicated row collapses on the final step.
+        skipBtn.visibility = if (step == STEP_COUNT - 1) View.GONE else View.VISIBLE
         nextBtn.text = getString(if (step == STEP_COUNT - 1) R.string.onb_ready_finish else R.string.onb_next)
         nextBtn.isEnabled = if (step == STEP_SAFETY)
             findViewById<MaterialCheckBox>(R.id.onb_safety_accept).isChecked else true
