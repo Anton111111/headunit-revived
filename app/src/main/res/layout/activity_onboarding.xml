@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:icon="@android:drawable/ic_menu_sort_alphabetically" />
+                    app:icon="@drawable/ic_translate" />
             </LinearLayout>
         </ScrollView>
 
