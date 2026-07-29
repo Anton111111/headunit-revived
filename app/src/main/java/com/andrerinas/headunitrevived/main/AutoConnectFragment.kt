@@ -33,6 +33,10 @@ class AutoConnectFragment : Fragment() {
     private lateinit var initialOrder: List<String>
     private lateinit var initialEnabled: Map<String, Boolean>
 
+    // Methods hidden because they do not apply to the chosen connection (kept in the saved
+    // order so they are not lost when switching connection type later).
+    private var hiddenMethodIds: List<String> = emptyList()
+
     private var hasChanges = false
     private val SAVE_ITEM_ID = 1001
 
@@ -60,7 +64,11 @@ class AutoConnectFragment : Fragment() {
             }
         }.toMutableList()
 
-        adapter = AutoConnectAdapter(methods) { checkChanges() }
+        // Single-USB auto-connect only applies to USB connections; hide it otherwise.
+        hiddenMethodIds = if (settings.primaryConnection.hidesUsb())
+            listOf(Settings.AUTO_CONNECT_SINGLE_USB) else emptyList()
+        val visibleMethods = methods.filterNot { it.id in hiddenMethodIds }.toMutableList()
+        adapter = AutoConnectAdapter(visibleMethods) { checkChanges() }
 
         val touchCallback = AutoConnectTouchCallback(adapter)
         val itemTouchHelper = ItemTouchHelper(touchCallback)
@@ -138,8 +146,9 @@ class AutoConnectFragment : Fragment() {
         val currentOrder = adapter.getOrderedIds()
         val currentEnabled = adapter.getEnabledStates()
 
-        hasChanges = currentOrder != initialOrder ||
-            currentEnabled != initialEnabled
+        // Compare against the initial state minus the hidden (non-applicable) methods.
+        hasChanges = currentOrder != initialOrder.filterNot { it in hiddenMethodIds } ||
+            currentEnabled != initialEnabled.filterKeys { it !in hiddenMethodIds }
         updateSaveButtonState()
     }
 
@@ -152,8 +161,8 @@ class AutoConnectFragment : Fragment() {
         val orderedIds = adapter.getOrderedIds()
         val enabledStates = adapter.getEnabledStates()
 
-        // Persist order
-        settings.autoConnectPriorityOrder = orderedIds
+        // Persist order (append hidden methods so they are not lost from the priority list)
+        settings.autoConnectPriorityOrder = orderedIds + hiddenMethodIds
 
         // Persist individual toggles
         enabledStates[Settings.AUTO_CONNECT_LAST_SESSION]?.let { settings.autoConnectLastSession = it }

@@ -55,8 +55,11 @@ class SystemOptimizer(private val context: Context) {
         
         // 1. Resolution Recommendation
         val recResId = when {
-            width >= 2560 && hasH265 -> 4 
-            width >= 1080 || densityDpi >= 320 || aspectRatio > 2.0f -> 3
+            width >= 2560 && hasH265 -> 4
+            // Only recommend 1080p for genuinely >=1920-wide panels. The old rule also fired on
+            // densityDpi >= 320, which mis-set 1080p on small high-DPI head units and made them
+            // downscale every frame (issue #650). Small panels now default to 720p.
+            width >= 1920 -> 3
             else -> 2
         }
 
@@ -102,5 +105,21 @@ class SystemOptimizer(private val context: Context) {
             suggestedOrientation = if (isPortraitTarget) Settings.ScreenOrientation.PORTRAIT else Settings.ScreenOrientation.LANDSCAPE,
             h265Support = hasH265
         )
+    }
+
+    companion object {
+        /**
+         * The largest standard video resolution that physically fits the panel (no upscaling
+         * waste). Compared in landscape terms (long side x short side). Falls back to 480p.
+         */
+        fun recommendedResolution(realWidthPx: Int, realHeightPx: Int): Settings.Resolution {
+            val longSide = maxOf(realWidthPx, realHeightPx)
+            val shortSide = minOf(realWidthPx, realHeightPx)
+            if (longSide <= 0) return Settings.Resolution._1280x720
+            return Settings.Resolution.allResolutions
+                .filter { it.width in 1..longSide && it.height in 1..shortSide }
+                .maxByOrNull { it.width }
+                ?: Settings.Resolution._800x480
+        }
     }
 }

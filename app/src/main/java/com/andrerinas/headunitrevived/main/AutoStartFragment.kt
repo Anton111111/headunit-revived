@@ -361,7 +361,17 @@ class AutoStartFragment : Fragment() {
             }
         }
 
-        settingsAdapter.submitList(items) {
+        // Hide options that do not apply to the chosen connection type. Bluetooth bridges
+        // WiFi, so it is treated as WiFi scope.
+        val conn = settings.primaryConnection
+        val usbIds = setOf("listenForUsbDevices", "autoStartUsb", "reopenOnReconnection")
+        val wifiIds = setOf("autoStartBt", "autoStartWifiWarning", "autoStartWifi", "autoStartWifiSsid")
+        val filtered = items.filterNot { item ->
+            (item.stableId in usbIds && conn.hidesUsb()) ||
+                (item.stableId in wifiIds && conn.hidesWifi())
+        }
+
+        settingsAdapter.submitList(filtered) {
             scrollState?.let { recyclerView.layoutManager?.onRestoreInstanceState(it) }
         }
     }

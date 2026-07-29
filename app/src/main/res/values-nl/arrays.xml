@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Auto (Zonsopgang/-ondergang)</item>
+    <string-array name="night_mode">        <item>Auto (Zonsopgang/-ondergang)</item>
         <item>Licht</item>
         <item>Donker</item>
         <item>Handmatige tijd</item>
         <item>Lichtsensor</item>
         <item>Schermhelderheid</item>
-    </string-array>
+        <item>Koplampsignaal auto (ILL+)</item>
+        <item>Locatie (op gebied)</item>
+</string-array>
 
-    <string-array name="app_theme">
-        <item>Automatisch (Systeem)</item>
+    <string-array name="app_theme">        <item>Automatisch (Systeem)</item>
         <item>Licht</item>
         <item>Donker</item>
         <item>Extra donker</item>
@@ -18,7 +18,9 @@
         <item>Handmatige tijd</item>
         <item>Lichtsensor</item>
         <item>Schermhelderheid</item>
-    </string-array>
+        <item>Koplampsignaal auto (ILL+)</item>
+        <item>Locatie (op gebied)</item>
+</string-array>
 
     <string-array name="screen_orientation">
         <item>@string/orientation_system_default</item>

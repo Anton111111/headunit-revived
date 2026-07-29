@@ -53,8 +53,11 @@ class SettingsActivity : BaseActivity() {
         navGraph.startDestination = R.id.settingsFragment
         navController.graph = navGraph
 
-        // Restore sub-screen after recreate() (e.g. theme change from DarkModeFragment)
-        val restoredDestination = savedInstanceState?.getInt(KEY_CURRENT_DESTINATION, 0) ?: 0
+        // Open a specific sub-screen when requested (e.g. from the onboarding wizard),
+        // otherwise restore the sub-screen after recreate() (e.g. theme change from DarkModeFragment)
+        val requestedDestination = intent?.getIntExtra(EXTRA_DESTINATION, 0) ?: 0
+        val restoredDestination = if (requestedDestination != 0) requestedDestination
+            else savedInstanceState?.getInt(KEY_CURRENT_DESTINATION, 0) ?: 0
         if (restoredDestination != 0 && restoredDestination != R.id.settingsFragment) {
             try {
                 navController.navigate(restoredDestination)
@@ -74,6 +77,8 @@ class SettingsActivity : BaseActivity() {
 
     companion object {
         private const val KEY_CURRENT_DESTINATION = "current_nav_destination"
+        // Optional destination id to open directly on launch (e.g. R.id.darkModeFragment).
+        const val EXTRA_DESTINATION = "extra_destination"
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

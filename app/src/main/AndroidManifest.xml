@@ -187,6 +187,13 @@
         <activity
             android:name=".main.SettingsActivity"
             android:label="@string/settings"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".main.OnboardingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme" />
 
         <service

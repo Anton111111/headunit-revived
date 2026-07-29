@@ -20,6 +20,10 @@ sealed class SettingItem {
         override val stableId: String, // Unique ID for the setting (e.g., "gpsNavigation")
         @StringRes val nameResId: Int,
         var value: String, // Current display value of the setting
+        val nameOverride: String? = null, // Dynamic title (used instead of nameResId when set)
+        // Extra terms matched by the settings search (e.g. picker options or the
+        // names of the settings inside a sub-screen). Not shown in the UI.
+        val searchKeywords: String? = null,
         val onClick: (settingId: String) -> Unit // Callback when the setting is clicked
     ) : SettingItem()
 
@@ -30,6 +34,7 @@ sealed class SettingItem {
         var isChecked: Boolean,
         val isEnabled: Boolean = true,
         val nameOverride: String? = null,
+        val searchKeywords: String? = null,
         val onCheckedChanged: (Boolean) -> Unit
     ) : SettingItem()
 
@@ -46,7 +51,11 @@ sealed class SettingItem {
 
     data class CategoryHeader(override val stableId: String, @StringRes val titleResId: Int) : SettingItem()
 
-    data class InfoBanner(override val stableId: String, @StringRes val textResId: Int) : SettingItem()
+    data class InfoBanner(
+        override val stableId: String,
+        @StringRes val textResId: Int,
+        val text: String? = null // Dynamic text (used instead of textResId when set)
+    ) : SettingItem()
 
     data class ActionButton(
         override val stableId: String,
@@ -151,7 +160,8 @@ class SettingsAdapter : ListAdapter<SettingItem, RecyclerView.ViewHolder>(Settin
         private val settingValue: TextView = itemView.findViewById(R.id.settingValue)
         
         fun bind(setting: SettingItem.SettingEntry) {
-            settingName.setText(setting.nameResId)
+            if (setting.nameOverride != null) settingName.text = setting.nameOverride
+            else settingName.setText(setting.nameResId)
             settingValue.text = setting.value
             itemView.setOnClickListener { setting.onClick(setting.stableId) }
         }
@@ -183,7 +193,8 @@ class SettingsAdapter : ListAdapter<SettingItem, RecyclerView.ViewHolder>(Settin
     class InfoBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val infoText: TextView = itemView.findViewById(R.id.infoText)
         fun bind(item: SettingItem.InfoBanner) {
-            infoText.setText(item.textResId)
+            if (item.text != null) infoText.text = item.text
+            else infoText.setText(item.textResId)
         }
     }
 
@@ -315,7 +326,7 @@ class SettingsAdapter : ListAdapter<SettingItem, RecyclerView.ViewHolder>(Settin
                 oldItem is SettingItem.CategoryHeader && newItem is SettingItem.CategoryHeader ->
                     oldItem.titleResId == newItem.titleResId
                 oldItem is SettingItem.InfoBanner && newItem is SettingItem.InfoBanner ->
-                    oldItem.textResId == newItem.textResId
+                    oldItem.textResId == newItem.textResId && oldItem.text == newItem.text
                 oldItem is SettingItem.ActionButton && newItem is SettingItem.ActionButton ->
                     oldItem.textResId == newItem.textResId && oldItem.isEnabled == newItem.isEnabled
                 oldItem is SettingItem.SegmentedButtonSettingEntry && newItem is SettingItem.SegmentedButtonSettingEntry ->

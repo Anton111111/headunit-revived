@@ -365,6 +365,25 @@ class Settings(private val context: Context) {
         get() = prefs.getBoolean("has-completed-setup-wizard", false)
         set(value) { prefs.edit().putBoolean("has-completed-setup-wizard", value).apply() }
 
+    // Version of the onboarding flow the user has already seen. When this is lower than
+    // CURRENT_ONBOARDING_VERSION the wizard is shown again (so upgraders see new steps once).
+    // Migration: users who finished the old dialog wizard are treated as having seen version 1.
+    var onboardingVersion: Int
+        get() {
+            if (!prefs.contains("onboarding-version") &&
+                prefs.getBoolean("has-completed-setup-wizard", false)) {
+                return 1
+            }
+            return prefs.getInt("onboarding-version", 0)
+        }
+        set(value) { prefs.edit().putInt("onboarding-version", value).apply() }
+
+    // How the user primarily connects. Drives which options are surfaced in the Basic tab
+    // (e.g. cable users do not see the Wireless Connection group there). UNSET shows everything.
+    var primaryConnection: ConnectionKind
+        get() = ConnectionKind.fromInt(prefs.getInt("primary-connection", ConnectionKind.UNSET.value))
+        set(value) { prefs.edit().putInt("primary-connection", value.value).apply() }
+
     var autoConnectLastSession: Boolean
         get() = prefs.getBoolean("auto-connect-last-session", false)
         set(value) { prefs.edit().putBoolean("auto-connect-last-session", value).apply() }
@@ -621,6 +640,31 @@ class Settings(private val context: Context) {
         }
     }
 
+    enum class ConnectionKind(val value: Int) {
+        UNSET(-1),
+        USB_CABLE(0),
+        USB_WIRELESS_ADAPTER(1),
+        WIFI(2),
+        NATIVE_AA(3),
+        SELF_MODE(4),
+        ALL(5);
+
+        val isWireless: Boolean
+            get() = this == USB_WIRELESS_ADAPTER || this == WIFI || this == NATIVE_AA
+
+        /** Whether USB-only settings should be hidden for this connection choice. */
+        fun hidesUsb(): Boolean = this == WIFI || this == NATIVE_AA || this == SELF_MODE
+
+        /** Whether WiFi/Bluetooth settings should be hidden for this connection choice.
+         * (Bluetooth is used to bridge WiFi, so it counts as WiFi scope.) */
+        fun hidesWifi(): Boolean = this == USB_CABLE || this == USB_WIRELESS_ADAPTER || this == SELF_MODE
+
+        companion object {
+            private val map = values().associateBy(ConnectionKind::value)
+            fun fromInt(value: Int) = map[value] ?: UNSET
+        }
+    }
+
     enum class NightMode(val value: Int) {
         AUTO(0),
         DAY(1),
@@ -628,7 +672,8 @@ class Settings(private val context: Context) {
         MANUAL_TIME(3),
         LIGHT_SENSOR(4),
         SCREEN_BRIGHTNESS(5),
-        CAR_SIGNAL(6);
+        CAR_SIGNAL(6),
+        LOCATION(7);
 
         companion object {
             private val map = NightMode.values().associateBy(NightMode::value)
@@ -647,6 +692,52 @@ class Settings(private val context: Context) {
         set(value) {
             prefs.edit().putInt("night-mode-manual-end", value).apply()
         }
+
+    // Shared fixed point used as the sunrise/sunset reference when [useFixedSunriseLocation]
+    // is on. Used by BOTH the app theme (AppTheme.AUTO_SUNRISE) and the Android Auto night
+    // mode (NightMode.AUTO) so head units without GPS still compute correct day/night.
+    // Defaults mirror lastKnownLocation.
+    var useFixedSunriseLocation: Boolean
+        get() = prefs.getBoolean("use-fixed-sun-location", false)
+        set(value) { prefs.edit().putBoolean("use-fixed-sun-location", value).apply() }
+
+    var fixedSunriseLatitude: Double
+        get() = java.lang.Double.longBitsToDouble(
+            prefs.getLong("fixed-sun-latitude", (32.0864169).toRawBits())
+        )
+        set(value) {
+            prefs.edit().putLong("fixed-sun-latitude", value.toRawBits()).apply()
+        }
+
+    var fixedSunriseLongitude: Double
+        get() = java.lang.Double.longBitsToDouble(
+            prefs.getLong("fixed-sun-longitude", (34.7557871).toRawBits())
+        )
+        set(value) {
+            prefs.edit().putLong("fixed-sun-longitude", value.toRawBits()).apply()
+        }
+
+
+    // Suppresses the "internet required" notice before opening the map picker once the
+    // user has chosen "don't show again".
+    var hideMapInternetNotice: Boolean
+        get() = prefs.getBoolean("hide-map-internet-notice", false)
+        set(value) { prefs.edit().putBoolean("hide-map-internet-notice", value).apply() }
+
+    // User-defined places (Home, Garage, ...) for the "Location (by area)" theme mode.
+    var geofenceLocations: List<com.andrerinas.headunitrevived.location.GeofenceLocation>
+        get() = com.andrerinas.headunitrevived.location.GeofenceLocation.listFromJson(
+            prefs.getString("geofence-locations", "[]")
+        )
+        set(value) {
+            val json = com.andrerinas.headunitrevived.location.GeofenceLocation.listToJson(value)
+            prefs.edit().putString("geofence-locations", json).apply()
+        }
+
+    // Appearance to use in "Location (by area)" mode when outside every saved place.
+    var locationOutsideNight: Boolean
+        get() = prefs.getBoolean("location-outside-night", false)
+        set(value) { prefs.edit().putBoolean("location-outside-night", value).apply() }
 
     // App Theme independent threshold/time settings (separate from Night Mode)
     var appThemeThresholdLux: Int
@@ -980,7 +1071,8 @@ class Settings(private val context: Context) {
         MANUAL_TIME(5),
         LIGHT_SENSOR(6),
         SCREEN_BRIGHTNESS(7),
-        CAR_SIGNAL(8);
+        CAR_SIGNAL(8),
+        LOCATION(9);
 
         companion object {
             private val map = values().associateBy(AppTheme::value)

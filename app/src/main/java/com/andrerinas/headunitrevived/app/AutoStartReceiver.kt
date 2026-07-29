@@ -42,7 +42,7 @@ class AutoStartReceiver : BroadcastReceiver() {
 
             if (device != null && targetMacs.contains(device.address)) {
                 AppLog.i("MATCH! Starting AapService via Bluetooth Auto-start...")
-                
+
                 // Start the service to make the app alive
                 val serviceIntent = Intent(context, AapService::class.java)
                 try {

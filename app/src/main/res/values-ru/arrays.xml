@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Авто (Восход/Закат)</item>
+    <string-array name="night_mode">        <item>Авто (Восход/Закат)</item>
         <item>Светлая</item>
         <item>Тёмная</item>
         <item>Ручное время</item>
         <item>Датчик света</item>
         <item>Яркость экрана</item>
         <item>Сигнал фар (ILL+)</item>
-    </string-array>
+        <item>Местоположение (по региону)</item>
+</string-array>
 
     <string-array name="app_theme">
         <item>Автоматически (Система)</item>
@@ -20,6 +20,7 @@
         <item>Датчик освещённости</item>
         <item>Яркость экрана</item>
         <item>Сигнал фар (ILL+)</item>
+        <item>Местоположение (по региону)</item>
     </string-array>
 
     <string-array name="screen_orientation">
