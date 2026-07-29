@@ -75,7 +75,7 @@ class OnboardingActivity : BaseActivity() {
 
         backBtn.setOnClickListener { if (step > 0) { step--; render() } }
         nextBtn.setOnClickListener { onNext() }
-        skipBtn.setOnClickListener { onSkip() }
+        skipBtn.setOnClickListener { onDoItLater() }
 
         render()
     }
@@ -133,6 +133,8 @@ class OnboardingActivity : BaseActivity() {
         findViewById<MaterialCheckBox>(R.id.onb_safety_accept).apply {
             isChecked = settings.hasAcceptedDisclaimer
             setOnCheckedChangeListener { _, checked ->
+                // Persist immediately so "Do it later" works once the terms are accepted.
+                settings.hasAcceptedDisclaimer = checked
                 if (step == STEP_SAFETY) nextBtn.isEnabled = checked
             }
         }
@@ -227,14 +229,25 @@ class OnboardingActivity : BaseActivity() {
         if (step == STEP_COUNT - 1) finishOnboarding() else { step++; render() }
     }
 
-    private fun onSkip() {
-        // Safety is mandatory: skipping still requires accepting the terms.
+    /**
+     * "Do it later": close the wizard for now WITHOUT marking it complete, so it appears
+     * again on the next app launch. The safety disclaimer is still mandatory, so if it has
+     * not been accepted yet we route to that step first instead of leaving.
+     */
+    private fun onDoItLater() {
         if (!settings.hasAcceptedDisclaimer) {
             step = STEP_SAFETY
             render()
             return
         }
-        finishOnboarding()
+        deferredThisSession = true
+        settings.commit()
+        finish()
+    }
+
+    override fun onBackPressed() {
+        // Back walks the steps; from the first step it behaves like "Do it later".
+        if (step > 0) { step--; render() } else onDoItLater()
     }
 
     private fun finishOnboarding() {
@@ -414,6 +427,10 @@ class OnboardingActivity : BaseActivity() {
 
     companion object {
         const val CURRENT_ONBOARDING_VERSION = 2
+        // Set when the user chooses "Do it later" so MainActivity does not immediately
+        // relaunch the wizard this session. Resets on process restart (next app open).
+        @Volatile
+        var deferredThisSession = false
         private const val KEY_STEP = "onb_step"
         private const val STEP_COUNT = 8
         private const val STEP_SAFETY = 1

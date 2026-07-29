@@ -477,7 +477,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/onb_skip" />
+            android:text="@string/onb_do_it_later" />
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"

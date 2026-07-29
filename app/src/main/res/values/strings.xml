@@ -62,6 +62,7 @@
     <string name="onb_gps_help">Which GPS should Android Auto use for navigation?</string>
     <string name="onb_gps_this_device">This device</string>
     <string name="onb_gps_phone">Connected phone</string>
+    <string name="onb_do_it_later">Do it later</string>
 
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="dummy_button">Dummy Button</string>

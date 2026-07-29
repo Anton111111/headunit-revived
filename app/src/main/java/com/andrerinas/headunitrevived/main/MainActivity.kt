@@ -882,7 +882,8 @@ class MainActivity : BaseActivity() {
         val appSettings = Settings(this)
         // Show the intelligent onboarding wizard once whenever the stored version is
         // older than the current one (covers fresh installs and upgraders alike).
-        if (appSettings.onboardingVersion < OnboardingActivity.CURRENT_ONBOARDING_VERSION) {
+        if (appSettings.onboardingVersion < OnboardingActivity.CURRENT_ONBOARDING_VERSION &&
+            !OnboardingActivity.deferredThisSession) {
             startActivity(Intent(this, OnboardingActivity::class.java))
         }
     }
