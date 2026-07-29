@@ -21,6 +21,9 @@ sealed class SettingItem {
         @StringRes val nameResId: Int,
         var value: String, // Current display value of the setting
         val nameOverride: String? = null, // Dynamic title (used instead of nameResId when set)
+        // Extra terms matched by the settings search (e.g. picker options or the
+        // names of the settings inside a sub-screen). Not shown in the UI.
+        val searchKeywords: String? = null,
         val onClick: (settingId: String) -> Unit // Callback when the setting is clicked
     ) : SettingItem()
 
@@ -31,6 +34,7 @@ sealed class SettingItem {
         var isChecked: Boolean,
         val isEnabled: Boolean = true,
         val nameOverride: String? = null,
+        val searchKeywords: String? = null,
         val onCheckedChanged: (Boolean) -> Unit
     ) : SettingItem()
 

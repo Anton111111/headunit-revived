@@ -886,6 +886,12 @@ class SettingsFragment : Fragment() {
             stableId = "darkModeSettings",
             nameResId = R.string.dark_mode_settings,
             value = darkModeValue,
+            searchKeywords = kw(
+                R.string.night_mode, R.string.app_theme, R.string.threshold_light_title,
+                R.string.threshold_brightness_title, R.string.monochrome_icons,
+                R.string.use_gradient_background, R.string.use_extreme_dark, R.string.aa_monochrome,
+                R.string.sunrise_location_title, R.string.location_section
+            ),
             onClick = {
                 try {
                     findNavController().navigate(R.id.action_settingsFragment_to_darkModeFragment)
@@ -902,6 +908,10 @@ class SettingsFragment : Fragment() {
             stableId = "autoStartSettings",
             nameResId = R.string.auto_start_settings,
             value = getString(R.string.auto_start_settings_description),
+            searchKeywords = kw(
+                R.string.auto_start_on_boot_label, R.string.auto_start_screen_on_label,
+                R.string.auto_start_usb_label, R.string.auto_start_bt_label, R.string.auto_start_wifi_label
+            ),
             onClick = {
                 try {
                     findNavController().navigate(R.id.action_settingsFragment_to_autoStartFragment)
@@ -913,6 +923,10 @@ class SettingsFragment : Fragment() {
             stableId = "autoConnectSettings",
             nameResId = R.string.auto_connect_settings,
             value = getAutoConnectSummary(),
+            searchKeywords = kw(
+                R.string.auto_connect_last_session, R.string.auto_connect_single_usb,
+                R.string.auto_start_self_mode
+            ),
             onClick = {
                 try {
                     findNavController().navigate(R.id.action_settingsFragment_to_autoConnectFragment)
@@ -993,6 +1007,7 @@ class SettingsFragment : Fragment() {
             stableId = "resolution",
             nameResId = R.string.resolution,
             value = Settings.Resolution.fromId(pendingResolution!!)?.resName ?: "",
+            searchKeywords = Settings.Resolution.allRes.joinToString(" "),
             onClick = { _ ->
                 MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
                     .setTitle(R.string.change_resolution)
@@ -1095,6 +1110,7 @@ class SettingsFragment : Fragment() {
         items.add(SettingItem.SettingEntry(
             stableId = "viewMode",
             nameResId = R.string.view_mode,
+            searchKeywords = kw(R.string.surface_view, R.string.texture_view, R.string.gles_view),
             value = when (pendingViewMode) {
                 Settings.ViewMode.SURFACE -> getString(R.string.surface_view)
                 Settings.ViewMode.TEXTURE -> getString(R.string.texture_view)
@@ -1120,6 +1136,7 @@ class SettingsFragment : Fragment() {
             stableId = "screenOrientation",
             nameResId = R.string.screen_orientation,
             value = resources.getStringArray(R.array.screen_orientation)[pendingScreenOrientation!!.value],
+            searchKeywords = resources.getStringArray(R.array.screen_orientation).joinToString(" "),
             onClick = { _ ->
                 val orientationOptions = resources.getStringArray(R.array.screen_orientation)
                 val currentIdx = pendingScreenOrientation!!.value
@@ -1249,6 +1266,7 @@ class SettingsFragment : Fragment() {
             stableId = "videoCodec",
             nameResId = R.string.video_codec,
             value = pendingVideoCodec!!,
+            searchKeywords = "Auto H.264 H.265",
             onClick = { _ ->
                 val codecs = arrayOf("Auto", "H.264", "H.265")
                 val currentCodecIndex = codecs.indexOf(pendingVideoCodec)
@@ -1393,6 +1411,7 @@ class SettingsFragment : Fragment() {
             stableId = "micSettings",
             nameResId = R.string.microphone_settings,
             value = getString(R.string.microphone_settings_description),
+            searchKeywords = kw(R.string.mic_sample_rate),
             onClick = { _ ->
                 findNavController().navigate(R.id.action_settingsFragment_to_micSettingsFragment)
             }
@@ -1756,11 +1775,14 @@ class SettingsFragment : Fragment() {
     }
 
     // Text used for search matching (title + description/value where applicable).
+    // Joins localized labels into a keyword blob for the settings search.
+    private fun kw(vararg ids: Int): String = ids.joinToString(" ") { getString(it) }
+
     private fun searchableText(item: SettingItem): String = when (item) {
         is SettingItem.SettingEntry ->
-            "${item.nameOverride ?: getString(item.nameResId)} ${item.value}"
+            "${item.nameOverride ?: getString(item.nameResId)} ${item.value} ${item.searchKeywords ?: ""}"
         is SettingItem.ToggleSettingEntry ->
-            "${item.nameOverride ?: getString(item.nameResId)} ${getString(item.descriptionResId)}"
+            "${item.nameOverride ?: getString(item.nameResId)} ${getString(item.descriptionResId)} ${item.searchKeywords ?: ""}"
         is SettingItem.SliderSettingEntry ->
             "${getString(item.nameResId)} ${item.value}"
         is SettingItem.SegmentedButtonSettingEntry ->
