@@ -711,4 +711,6 @@
     <string name="onb_change_later">Вы можете изменить это позже в настройках.</string>
     <string name="dpi_automatic">Автоматически</string>
     <string name="dpi_automatic_desc">Использовать плотность устройства</string>
+    <string name="onb_conn_usb_label">USB (или адаптер)</string>
+    <string name="onb_connection_self_detail">Автономный режим запускает Android Auto на этом устройстве без телефона, поэтому параметры USB и WiFi скрыты в базовом режиме.</string>
 </resources>

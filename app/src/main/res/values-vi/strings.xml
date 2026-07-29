@@ -717,4 +717,6 @@
     <string name="onb_change_later">Bạn có thể thay đổi điều này sau trong Cài đặt.</string>
     <string name="dpi_automatic">Tự động</string>
     <string name="dpi_automatic_desc">Dùng mật độ của thiết bị</string>
+    <string name="onb_conn_usb_label">USB (hoặc bộ chuyển đổi)</string>
+    <string name="onb_connection_self_detail">Chế độ độc lập chạy Android Auto trên thiết bị này mà không cần kết nối điện thoại, nên các tùy chọn USB và WiFi bị ẩn trong Cơ bản.</string>
 </resources>

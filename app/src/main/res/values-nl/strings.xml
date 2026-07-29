@@ -711,4 +711,6 @@
     <string name="onb_change_later">Je kunt dit later wijzigen in Instellingen.</string>
     <string name="dpi_automatic">Automatisch</string>
     <string name="dpi_automatic_desc">Gebruik de dichtheid van het apparaat</string>
+    <string name="onb_conn_usb_label">USB (of adapter)</string>
+    <string name="onb_connection_self_detail">De zelfstandige modus draait Android Auto op dit apparaat zonder telefoon, dus USB- en WiFi-opties worden verborgen in Basis.</string>
 </resources>

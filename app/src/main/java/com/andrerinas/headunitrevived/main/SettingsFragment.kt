@@ -1775,9 +1775,10 @@ class SettingsFragment : Fragment() {
 
         if (activeTab == SettingsTier.ADVANCED) return true
 
-        // Basic tab: cable users do not see the Wireless Connection group here (Feature B).
+        // Basic tab: cable and self-mode users do not see the Wireless Connection group here.
+        val conn = settings.primaryConnection
         if (categoryId == "wirelessConnection" &&
-            settings.primaryConnection == Settings.ConnectionKind.USB_CABLE) {
+            (conn == Settings.ConnectionKind.USB_CABLE || conn == Settings.ConnectionKind.SELF_MODE)) {
             return false
         }
         return item.stableId in basicSettingIds
@@ -1807,19 +1808,22 @@ class SettingsFragment : Fragment() {
         Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
         Settings.ConnectionKind.WIFI,
         Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
+        Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
         Settings.ConnectionKind.UNSET -> getString(R.string.connection_kind_unset)
     }
 
     private fun showConnectionModeDialog() {
         val kinds = listOf(
             Settings.ConnectionKind.USB_CABLE,
-            Settings.ConnectionKind.WIFI
+            Settings.ConnectionKind.WIFI,
+            Settings.ConnectionKind.SELF_MODE
         )
         val labels = kinds.map { connectionKindLabel(it) }.toTypedArray()
         // Map any stored USB variant to the single USB option, WiFi/native to WiFi.
         val current = when (settings.primaryConnection) {
             Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> 0
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> 1
+            Settings.ConnectionKind.SELF_MODE -> 2
             else -> -1
         }
         MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)

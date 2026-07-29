@@ -708,4 +708,6 @@
     <string name="onb_change_later">Bunu daha sonra Ayarlar bölümünden değiştirebilirsiniz.</string>
     <string name="dpi_automatic">Otomatik</string>
     <string name="dpi_automatic_desc">Cihaz yoğunluğunu kullan</string>
+    <string name="onb_conn_usb_label">USB (veya adaptör)</string>
+    <string name="onb_connection_self_detail">Bağımsız mod Android Auto uygulamasını telefon bağlamadan bu cihazda çalıştırır; bu nedenle USB ve WiFi seçenekleri Temel sekmesinde gizlenir.</string>
 </resources>

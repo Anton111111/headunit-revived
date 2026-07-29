@@ -712,4 +712,6 @@
     <string name="onb_change_later">Możesz to zmienić później w Ustawieniach.</string>
     <string name="dpi_automatic">Automatycznie</string>
     <string name="dpi_automatic_desc">Użyj gęstości urządzenia</string>
+    <string name="onb_conn_usb_label">USB (lub adapter)</string>
+    <string name="onb_connection_self_detail">Tryb samodzielny uruchamia Android Auto na tym urządzeniu bez telefonu, więc opcje USB i WiFi są ukryte w trybie Podstawowym.</string>
 </resources>

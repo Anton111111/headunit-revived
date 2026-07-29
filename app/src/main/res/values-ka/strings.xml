@@ -644,4 +644,6 @@
     <string name="onb_change_later">ამის შეცვლა მოგვიანებით პარამეტრებში შეგიძლიათ.</string>
     <string name="dpi_automatic">ავტომატური</string>
     <string name="dpi_automatic_desc">მოწყობილობის სიმკვრივის გამოყენება</string>
+    <string name="onb_conn_usb_label">USB (ან ადაპტერი)</string>
+    <string name="onb_connection_self_detail">ავტონომიური რეჟიმი უშვებს Android Auto-ს ამ მოწყობილობაზე ტელეფონის დაკავშირების გარეშე, ამიტომ USB და WiFi პარამეტრები დამალულია ძირითად ჩანართში.</string>
 </resources>

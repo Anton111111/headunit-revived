@@ -710,4 +710,6 @@
     <string name="onb_change_later">Ezt később a Beállításokban módosíthatod.</string>
     <string name="dpi_automatic">Automatikus</string>
     <string name="dpi_automatic_desc">Az eszköz sűrűségének használata</string>
+    <string name="onb_conn_usb_label">USB (vagy adapter)</string>
+    <string name="onb_connection_self_detail">Az önálló mód telefon csatlakoztatása nélkül futtatja az Android Autót ezen az eszközön, ezért az USB- és WiFi-beállítások rejtve vannak az Alap fülön.</string>
 </resources>

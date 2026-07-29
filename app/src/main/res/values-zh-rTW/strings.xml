@@ -710,4 +710,6 @@
     <string name="onb_change_later">你可以稍後在設定中變更。</string>
     <string name="dpi_automatic">自動</string>
     <string name="dpi_automatic_desc">使用裝置密度</string>
+    <string name="onb_conn_usb_label">USB（或轉接器）</string>
+    <string name="onb_connection_self_detail">自主模式在本裝置上執行 Android Auto，不需連接手機，因此基本模式會隱藏 USB 與 WiFi 選項。</string>
 </resources>

@@ -55,6 +55,8 @@
     <string name="onb_language_help">Choose the app language.</string>
     <string name="connection_kind_usb">USB</string>
     <string name="onb_connection_usb_detail">Phone connected by USB, either a direct cable or a USB wireless adapter. Wireless options stay hidden in Basic.</string>
+    <string name="onb_conn_usb_label">USB (or adapter)</string>
+    <string name="onb_connection_self_detail">Self Mode runs Android Auto on this device without connecting a phone, so USB and WiFi options are hidden in Basic.</string>
     <string name="onb_more_appearance">More appearance settings</string>
     <string name="onb_automation_title">Automation</string>
     <string name="onb_automation_help">Choose how the app starts and connects on its own. Open Auto-connect settings to drag the priority order.</string>

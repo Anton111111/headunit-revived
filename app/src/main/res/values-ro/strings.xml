@@ -712,4 +712,6 @@
     <string name="onb_change_later">Poți schimba asta mai târziu în Setări.</string>
     <string name="dpi_automatic">Automat</string>
     <string name="dpi_automatic_desc">Folosește densitatea dispozitivului</string>
+    <string name="onb_conn_usb_label">USB (sau adaptor)</string>
+    <string name="onb_connection_self_detail">Modul autonom rulează Android Auto pe acest dispozitiv fără a conecta un telefon, așa că opțiunile USB și WiFi sunt ascunse în Bază.</string>
 </resources>

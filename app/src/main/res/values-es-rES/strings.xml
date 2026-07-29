@@ -720,4 +720,6 @@
     <string name="onb_change_later">Puedes cambiar esto más tarde en Ajustes.</string>
     <string name="dpi_automatic">Automático</string>
     <string name="dpi_automatic_desc">Usar la densidad del dispositivo</string>
+    <string name="onb_conn_usb_label">USB (o adaptador)</string>
+    <string name="onb_connection_self_detail">El modo autónomo ejecuta Android Auto en este dispositivo sin conectar un teléfono, por eso las opciones de USB y WiFi se ocultan en Básico.</string>
 </resources>

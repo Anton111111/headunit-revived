@@ -120,21 +120,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:orientation="vertical"
                     app:singleSelection="true">
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/onb_conn_usb"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/connection_kind_usb" />
+                        android:text="@string/onb_conn_usb_label" />
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/onb_conn_wifi"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/connection_kind_wifi" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/onb_conn_self"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/self_mode" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
                 <TextView
                     android:id="@+id/onb_conn_detail"

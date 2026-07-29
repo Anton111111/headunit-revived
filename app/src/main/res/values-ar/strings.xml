@@ -713,4 +713,6 @@
     <string name="onb_change_later">يمكنك تغيير هذا لاحقًا من الإعدادات.</string>
     <string name="dpi_automatic">تلقائي</string>
     <string name="dpi_automatic_desc">استخدام كثافة الجهاز</string>
+    <string name="onb_conn_usb_label">USB (أو محول)</string>
+    <string name="onb_connection_self_detail">يشغّل الوضع المستقل Android Auto على هذا الجهاز دون توصيل هاتف، لذا تُخفى خيارات USB وWiFi في الوضع الأساسي.</string>
 </resources>

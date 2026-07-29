@@ -711,4 +711,6 @@
     <string name="onb_change_later">Toto můžete změnit později v Nastavení.</string>
     <string name="dpi_automatic">Automaticky</string>
     <string name="dpi_automatic_desc">Použít hustotu zařízení</string>
+    <string name="onb_conn_usb_label">USB (nebo adaptér)</string>
+    <string name="onb_connection_self_detail">Samostatný režim spouští Android Auto v tomto zařízení bez telefonu, takže možnosti USB a WiFi jsou v základním režimu skryté.</string>
 </resources>
