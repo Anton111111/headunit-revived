@@ -8,6 +8,7 @@ import android.text.Html
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
@@ -264,6 +265,18 @@ class OnboardingActivity : BaseActivity() {
         val input = findViewById<TextInputEditText>(R.id.onb_vehicle_input)
         val screen = findViewById<TextView>(R.id.onb_vehicle_screen_name)
         val chips = findViewById<ChipGroup>(R.id.onb_vehicle_chips)
+
+        // Steering wheel side: reuse the existing right-hand-drive setting and mirror the
+        // dashboard illustration live (wheel moves to the right when right-hand drive is on).
+        val dashboard = findViewById<ImageView>(R.id.onb_vehicle_dashboard)
+        val rhdSwitch = findViewById<SwitchMaterial>(R.id.onb_vehicle_rhd_switch)
+        fun applyWheelSide(rhd: Boolean) { dashboard.scaleX = if (rhd) -1f else 1f }
+        rhdSwitch.isChecked = settings.rightHandDrive
+        applyWheelSide(settings.rightHandDrive)
+        rhdSwitch.setOnCheckedChangeListener { _, checked ->
+            settings.rightHandDrive = checked
+            applyWheelSide(checked)
+        }
 
         val current = settings.vehicleDisplayName.trim()
         // Build the brand list with the current value first ("option 1"), then the presets.

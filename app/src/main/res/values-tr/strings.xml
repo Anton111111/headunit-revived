@@ -724,7 +724,7 @@
     <string name="dpi_automatic_desc_format">Cihaz yoğunluğunu kullanır (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">Devasa</string>
-    <string name="onb_vehicle_title">Araba markası</string>
+    <string name="onb_vehicle_title">Aracınız</string>
     <string name="onb_vehicle_input_hint">Marka veya ad</string>
     <string name="onb_vehicle_help_aa">Bu ad Android Auto uygulamasına gönderilir. Telefonunuzun bağlantı geçmişinde ve Android Auto karşılama ekranında görünür.</string>
     <string name="onb_vehicle_help_advanced">Gelişmiş sekmesinde daha fazla araç ayrıntısını düzenleyebilirsiniz. Bu verileri biz kullanmayız; yalnızca Android Auto gerektirdiği için gönderilir.</string>

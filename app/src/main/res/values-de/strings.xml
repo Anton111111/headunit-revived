@@ -733,7 +733,7 @@
     <string name="dpi_automatic_desc_format">Verwendet die Gerätedichte (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">Riesig</string>
-    <string name="onb_vehicle_title">Automarke</string>
+    <string name="onb_vehicle_title">Dein Auto</string>
     <string name="onb_vehicle_input_hint">Marke oder Name</string>
     <string name="onb_vehicle_help_aa">Dieser Name wird an Android Auto gesendet. Er erscheint im Verbindungsverlauf deines Telefons und auf dem Willkommensbildschirm von Android Auto.</string>
     <string name="onb_vehicle_help_advanced">Weitere Fahrzeugdetails kannst du im Tab Erweitert anpassen. Wir verwenden diese Daten nicht, sie werden nur an Android Auto gesendet, weil es sie benötigt.</string>

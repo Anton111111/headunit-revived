@@ -53,7 +53,7 @@
     <string name="onb_summary_vehicle_format">Vehicle: %1$s</string>
 
     <!-- Onboarding wizard: car brand / vehicle identity -->
-    <string name="onb_vehicle_title">Car brand</string>
+    <string name="onb_vehicle_title">Your car</string>
     <string name="onb_vehicle_input_hint">Brand or name</string>
     <string name="onb_vehicle_help_aa">This name is sent to Android Auto. It shows in your phone\'s connection history and on the Android Auto welcome screen.</string>
     <string name="onb_vehicle_help_advanced">You can fine-tune your vehicle details in the Advanced tab. We do not use this data; it is only sent to Android Auto because it requires it.</string>

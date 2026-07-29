@@ -727,7 +727,7 @@
     <string name="dpi_automatic_desc_format">Gebruikt de dichtheid van het apparaat (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">Enorm</string>
-    <string name="onb_vehicle_title">Automerk</string>
+    <string name="onb_vehicle_title">Je auto</string>
     <string name="onb_vehicle_input_hint">Merk of naam</string>
     <string name="onb_vehicle_help_aa">Deze naam wordt naar Android Auto gestuurd. Hij verschijnt in de verbindingsgeschiedenis van je telefoon en op het welkomstscherm van Android Auto.</string>
     <string name="onb_vehicle_help_advanced">Je kunt meer voertuiggegevens aanpassen op het tabblad Geavanceerd. Wij gebruiken deze gegevens niet; ze worden alleen naar Android Auto gestuurd omdat het ze vereist.</string>

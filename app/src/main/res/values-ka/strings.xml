@@ -660,7 +660,7 @@
     <string name="dpi_automatic_desc_format">იყენებს მოწყობილობის სიმკვრივეს (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">უზარმაზარი</string>
-    <string name="onb_vehicle_title">მანქანის მარკა</string>
+    <string name="onb_vehicle_title">თქვენი მანქანა</string>
     <string name="onb_vehicle_input_hint">მარკა ან სახელი</string>
     <string name="onb_vehicle_help_aa">ეს სახელი იგზავნება Android Auto-ში. ის ჩანს ტელეფონის კავშირების ისტორიაში და Android Auto-ს მისალმების ეკრანზე.</string>
     <string name="onb_vehicle_help_advanced">მანქანის დამატებითი დეტალები შეგიძლიათ დააკონფიგუროთ ჩანართში დამატებითი. ჩვენ არ ვიყენებთ ამ მონაცემებს; ისინი იგზავნება მხოლოდ Android Auto-ში, რადგან ის ამას მოითხოვს.</string>
