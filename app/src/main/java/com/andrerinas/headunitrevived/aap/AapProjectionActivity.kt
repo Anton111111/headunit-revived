@@ -1195,19 +1195,18 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             return
         }
 
-        val view = projectionView as View
-        // Use the container's "Anchor" dimensions (full touch surface) as the reference,
-        // not the potentially resized projectionView's dimensions.
-        val viewW = HeadUnitScreenConfig.getUsableWidth().toFloat()
-        val viewH = HeadUnitScreenConfig.getUsableHeight().toFloat()
+        val overlay = touchOverlayView
+        val viewW = (overlay?.width ?: 0).takeIf { it > 0 }?.toFloat()
+            ?: (projectionView as View).width.takeIf { it > 0 }?.toFloat()
+            ?: HeadUnitScreenConfig.getUsableWidth().toFloat()
+        val viewH = (overlay?.height ?: 0).takeIf { it > 0 }?.toFloat()
+            ?: (projectionView as View).height.takeIf { it > 0 }?.toFloat()
+            ?: HeadUnitScreenConfig.getUsableHeight().toFloat()
 
         if (viewW <= 0 || viewH <= 0) return
 
         val marginW = HeadUnitScreenConfig.getWidthMargin().toFloat()
         val marginH = HeadUnitScreenConfig.getHeightMargin().toFloat()
-
-        val uiW = videoW - marginW
-        val uiH = videoH - marginH
 
         // Logic check: When forcedScale is active, the visual behavior of 'stretchToFill'
         // is inverted (True = Aspect Ratio Centered, False = Stretched to Screen).
@@ -1221,44 +1220,20 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         val pointerData = mutableListOf<Triple<Int, Int, Int>>()
         repeat(event.pointerCount) { pointerIndex ->
             val pointerId = event.getPointerId(pointerIndex)
-            val rawPx = event.getX(pointerIndex)
-            val px = if (settings.hudMirroring) (viewW - rawPx) else rawPx
-            val py = event.getY(pointerIndex)
+            val corrected = TouchCoordinateMapper.map(
+                rawX = event.getX(pointerIndex),
+                rawY = event.getY(pointerIndex),
+                inputSurfaceWidth = viewW,
+                inputSurfaceHeight = viewH,
+                negotiatedWidth = videoW,
+                negotiatedHeight = videoH,
+                marginWidth = marginW,
+                marginHeight = marginH,
+                stretchToFill = isStretch,
+                hudMirroring = settings.hudMirroring
+            )
 
-            var videoX = 0f
-            var videoY = 0f
-
-            if (isStretch) {
-                videoX = (px / viewW) * uiW
-                videoY = (py / viewH) * uiH
-            } else {
-                val uiRatio = uiW / uiH
-                val viewRatio = viewW / viewH
-
-                var displayedUiW = viewW
-                var displayedUiH = viewH
-
-                if (viewRatio > uiRatio) {
-                    displayedUiW = viewH * uiRatio
-                } else {
-                    displayedUiH = viewW / uiRatio
-                }
-
-                val uiLeft = (viewW - displayedUiW) / 2f
-                val uiTop = (viewH - displayedUiH) / 2f
-
-                val localX = px - uiLeft
-                val localY = py - uiTop
-
-                videoX = (localX / displayedUiW) * uiW
-                videoY = (localY / displayedUiH) * uiH
-            }
-
-            // Clamp to negotiated bounds to prevent out-of-bounds touches
-            val correctedX = videoX.toInt().coerceIn(0, videoW)
-            val correctedY = videoY.toInt().coerceIn(0, videoH)
-
-            pointerData.add(Triple(pointerId, correctedX, correctedY))
+            pointerData.add(Triple(pointerId, corrected.x, corrected.y))
         }
 
         commManager.send(TouchEvent(ts, action, event.actionIndex, pointerData))
