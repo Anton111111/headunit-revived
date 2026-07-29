@@ -544,6 +544,8 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             return
         }
 
+        lastKnownBssid = null
+
         mgr.createGroup(ch, object : WifiP2pManager.ActionListener {
             override fun onSuccess() {
                 AppLog.i("WifiDirectManager: P2P Group created.")
