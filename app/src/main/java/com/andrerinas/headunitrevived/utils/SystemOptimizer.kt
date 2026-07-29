@@ -55,8 +55,11 @@ class SystemOptimizer(private val context: Context) {
         
         // 1. Resolution Recommendation
         val recResId = when {
-            width >= 2560 && hasH265 -> 4 
-            width >= 1080 || densityDpi >= 320 || aspectRatio > 2.0f -> 3
+            width >= 2560 && hasH265 -> 4
+            // Only recommend 1080p for genuinely >=1920-wide panels. The old rule also fired on
+            // densityDpi >= 320, which mis-set 1080p on small high-DPI head units and made them
+            // downscale every frame (issue #650). Small panels now default to 720p.
+            width >= 1920 -> 3
             else -> 2
         }
 
