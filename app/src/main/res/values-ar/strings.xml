@@ -710,4 +710,7 @@
     <string name="onb_appearance_more_hint">يمكنك العثور على المزيد من خيارات الوضع الداكن في الإعدادات.</string>
     <string name="onb_automation_more_hint">يمكنك العثور على المزيد من الخيارات في إعدادات الاتصال التلقائي والتشغيل التلقائي.</string>
     <string name="onb_dpi_help">يؤدي رفع الـ DPI إلى تكبير أيقونات ونص Android Auto، فيظهر عدد أقل على الشاشة. وخفضه يصغّرها فيظهر المزيد. يُطبَّق عند توصيل Android Auto.</string>
+    <string name="onb_change_later">يمكنك تغيير هذا لاحقًا من الإعدادات.</string>
+    <string name="dpi_automatic">تلقائي</string>
+    <string name="dpi_automatic_desc">استخدام كثافة الجهاز</string>
 </resources>

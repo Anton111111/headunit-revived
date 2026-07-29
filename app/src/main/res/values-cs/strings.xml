@@ -708,4 +708,7 @@
     <string name="onb_appearance_more_hint">Další možnosti tmavého režimu najdete v Nastavení.</string>
     <string name="onb_automation_more_hint">Další možnosti najdete v nastavení automatického připojení a automatického spuštění.</string>
     <string name="onb_dpi_help">Vyšší DPI zvětší ikony a text Android Auto, takže se na obrazovku vejde méně. Nižší DPI je zmenší a vejde se více. Projeví se po připojení Android Auto.</string>
+    <string name="onb_change_later">Toto můžete změnit později v Nastavení.</string>
+    <string name="dpi_automatic">Automaticky</string>
+    <string name="dpi_automatic_desc">Použít hustotu zařízení</string>
 </resources>

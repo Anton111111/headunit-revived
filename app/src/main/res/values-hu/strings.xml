@@ -707,4 +707,7 @@
     <string name="onb_appearance_more_hint">További sötét mód beállításokat a Beállításokban találsz.</string>
     <string name="onb_automation_more_hint">További beállításokat az Automatikus csatlakozás és Automatikus indítás menüben találsz.</string>
     <string name="onb_dpi_help">A magasabb DPI nagyobbá teszi az Android Auto ikonjait és szövegét, így kevesebb fér a képernyőre. Az alacsonyabb DPI kisebbé teszi, így több fér el. A csatlakozáskor lép érvénybe.</string>
+    <string name="onb_change_later">Ezt később a Beállításokban módosíthatod.</string>
+    <string name="dpi_automatic">Automatikus</string>
+    <string name="dpi_automatic_desc">Az eszköz sűrűségének használata</string>
 </resources>

@@ -710,4 +710,7 @@
     <string name="onb_appearance_more_hint">Você encontra mais opções de modo escuro nas Configurações.</string>
     <string name="onb_automation_more_hint">Você encontra mais opções nas configurações de Conexão automática e Início automático.</string>
     <string name="onb_dpi_help">Um DPI mais alto deixa os ícones e o texto do Android Auto maiores, então cabe menos na tela. Um DPI mais baixo deixa tudo menor e cabe mais. É aplicado ao conectar o Android Auto.</string>
+    <string name="onb_change_later">Você pode alterar isso depois nas Configurações.</string>
+    <string name="dpi_automatic">Automático</string>
+    <string name="dpi_automatic_desc">Usar a densidade do dispositivo</string>
 </resources>

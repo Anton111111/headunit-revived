@@ -641,4 +641,7 @@
     <string name="onb_appearance_more_hint">მუქი რეჟიმის დამატებით პარამეტრებს პარამეტრებში იპოვით.</string>
     <string name="onb_automation_more_hint">დამატებით პარამეტრებს ავტომატური დაკავშირებისა და ავტომატური გაშვების პარამეტრებში იპოვით.</string>
     <string name="onb_dpi_help">მაღალი DPI ზრდის Android Auto-ს ხატულებსა და ტექსტს, ამიტომ ეკრანზე ნაკლები ეტევა. დაბალი DPI ამცირებს მათ და მეტი ეტევა. მოქმედებს Android Auto-ს დაკავშირებისას.</string>
+    <string name="onb_change_later">ამის შეცვლა მოგვიანებით პარამეტრებში შეგიძლიათ.</string>
+    <string name="dpi_automatic">ავტომატური</string>
+    <string name="dpi_automatic_desc">მოწყობილობის სიმკვრივის გამოყენება</string>
 </resources>

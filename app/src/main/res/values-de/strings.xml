@@ -714,4 +714,7 @@
     <string name="onb_appearance_more_hint">Weitere Optionen für den Dunkelmodus findest du in den Einstellungen.</string>
     <string name="onb_automation_more_hint">Weitere Optionen findest du in den Einstellungen für automatische Verbindung und automatischen Start.</string>
     <string name="onb_dpi_help">Ein höherer DPI-Wert macht die Symbole und Texte von Android Auto größer, es passt weniger auf den Bildschirm. Ein niedrigerer Wert macht alles kleiner, es passt mehr. Die Änderung greift beim Verbinden von Android Auto.</string>
+    <string name="onb_change_later">Du kannst das später in den Einstellungen ändern.</string>
+    <string name="dpi_automatic">Automatisch</string>
+    <string name="dpi_automatic_desc">Gerätedichte verwenden</string>
 </resources>

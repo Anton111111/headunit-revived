@@ -707,4 +707,7 @@
     <string name="onb_appearance_more_hint">你可以在設定中找到更多深色模式選項。</string>
     <string name="onb_automation_more_hint">你可以在自動連線與自動啟動設定中找到更多選項。</string>
     <string name="onb_dpi_help">較高的 DPI 會讓 Android Auto 的圖示與文字變大，畫面能顯示的內容較少；較低的 DPI 會讓它們變小，能顯示更多。連線 Android Auto 時生效。</string>
+    <string name="onb_change_later">你可以稍後在設定中變更。</string>
+    <string name="dpi_automatic">自動</string>
+    <string name="dpi_automatic_desc">使用裝置密度</string>
 </resources>
