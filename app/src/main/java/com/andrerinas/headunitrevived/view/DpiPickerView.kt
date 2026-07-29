@@ -9,7 +9,6 @@ import com.andrerinas.headunitrevived.R
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
 import com.google.android.material.textfield.TextInputEditText
-import kotlin.math.abs
 import kotlin.math.roundToInt
 
 /**
@@ -97,8 +96,7 @@ class DpiPickerView @JvmOverloads constructor(
         val v = snap(raw)
         isBinding = true
         if (!fromSlider) slider.value = v.toFloat()
-        val tab = tabFor(v)
-        if (tab != null) tabs.check(tab) else tabs.clearChecked()
+        tabs.check(tabFor(v))
         preview.setDpi(v)
         if (input.text?.toString() != v.toString()) input.setText(v.toString())
         isBinding = false
@@ -110,17 +108,15 @@ class DpiPickerView @JvmOverloads constructor(
         return stepped.coerceIn(MIN, MAX)
     }
 
-    /** The preset tab whose representative value is closest, or null for a custom value. */
-    private fun tabFor(v: Int): Int? {
-        if (v < SMALL_REP - PRESET_BAND || v > LARGE_REP + PRESET_BAND) return null
-        val small = abs(v - SMALL_REP)
-        val medium = abs(v - MEDIUM_REP)
-        val large = abs(v - LARGE_REP)
-        return when (minOf(small, medium, large)) {
-            small -> R.id.dpi_tab_small
-            medium -> R.id.dpi_tab_medium
-            else -> R.id.dpi_tab_large
-        }
+    /**
+     * Classifies any value into a tab. Small and Large extend to the extremes (so a high
+     * custom value like 440 reads as Large and a low one as Small); Medium stays capped to
+     * its narrow central band.
+     */
+    private fun tabFor(v: Int): Int = when {
+        v <= SMALL_MEDIUM_MAX -> R.id.dpi_tab_small
+        v <= MEDIUM_LARGE_MAX -> R.id.dpi_tab_medium
+        else -> R.id.dpi_tab_large
     }
 
     companion object {
@@ -130,6 +126,8 @@ class DpiPickerView @JvmOverloads constructor(
         private const val SMALL_REP = 132
         private const val MEDIUM_REP = 175
         private const val LARGE_REP = 218
-        private const val PRESET_BAND = 30
+        // Medium is the narrow central band; Small covers everything below, Large above.
+        private const val SMALL_MEDIUM_MAX = (SMALL_REP + MEDIUM_REP) / 2   // 153
+        private const val MEDIUM_LARGE_MAX = (MEDIUM_REP + LARGE_REP) / 2   // 196
     }
 }
