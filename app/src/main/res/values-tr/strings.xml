@@ -710,4 +710,7 @@
     <string name="dpi_automatic_desc">Cihaz yoğunluğunu kullan</string>
     <string name="onb_conn_usb_label">USB (veya adaptör)</string>
     <string name="onb_connection_self_detail">Bağımsız mod Android Auto uygulamasını telefon bağlamadan bu cihazda çalıştırır; bu nedenle USB ve WiFi seçenekleri Temel sekmesinde gizlenir.</string>
+    <string name="connection_kind_all">Tümü</string>
+    <string name="onb_connection_all_detail">Hem USB hem de WiFi ayarlarını gösterir.</string>
+    <string name="onb_connection_warning">Bir bağlantı türü seçtiğinizde, uygun olmayan ayarlar hem Temel hem de Gelişmiş sekmesinde gizlenir. Yeniden görmek için daha sonra bağlantı ayarlarından farklı bir mod seçin.</string>
 </resources>

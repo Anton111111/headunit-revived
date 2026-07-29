@@ -720,4 +720,7 @@
     <string name="dpi_automatic_desc">デバイスの密度を使用</string>
     <string name="onb_conn_usb_label">USB（またはアダプター）</string>
     <string name="onb_connection_self_detail">自律モードはスマートフォンを接続せずにこの端末で Android Auto を実行するため、基本タブでは USB と WiFi のオプションは非表示になります。</string>
+    <string name="connection_kind_all">すべて</string>
+    <string name="onb_connection_all_detail">USB と WiFi の設定を両方表示します。</string>
+    <string name="onb_connection_warning">接続タイプを選ぶと、該当しない設定が基本タブと詳細タブの両方で非表示になります。再表示するには、あとで接続設定で別のモードを選んでください。</string>
 </resources>

@@ -714,4 +714,7 @@
     <string name="dpi_automatic_desc">Użyj gęstości urządzenia</string>
     <string name="onb_conn_usb_label">USB (lub adapter)</string>
     <string name="onb_connection_self_detail">Tryb samodzielny uruchamia Android Auto na tym urządzeniu bez telefonu, więc opcje USB i WiFi są ukryte w trybie Podstawowym.</string>
+    <string name="connection_kind_all">Wszystkie</string>
+    <string name="onb_connection_all_detail">Pokazuje ustawienia USB i WiFi.</string>
+    <string name="onb_connection_warning">Wybór typu połączenia ukrywa nieodpowiednie ustawienia w trybie Podstawowym i Zaawansowanym. Aby zobaczyć je ponownie, wybierz później inny tryb w ustawieniach połączenia.</string>
 </resources>

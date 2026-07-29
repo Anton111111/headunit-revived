@@ -713,4 +713,7 @@
     <string name="dpi_automatic_desc">Gebruik de dichtheid van het apparaat</string>
     <string name="onb_conn_usb_label">USB (of adapter)</string>
     <string name="onb_connection_self_detail">De zelfstandige modus draait Android Auto op dit apparaat zonder telefoon, dus USB- en WiFi-opties worden verborgen in Basis.</string>
+    <string name="connection_kind_all">Alle</string>
+    <string name="onb_connection_all_detail">Toont zowel de USB- als de WiFi-instellingen.</string>
+    <string name="onb_connection_warning">Als je een verbindingstype kiest, worden de niet-toepasselijke instellingen verborgen in Basis en Geavanceerd. Kies later een andere modus in de verbindingsinstellingen om ze weer te zien.</string>
 </resources>

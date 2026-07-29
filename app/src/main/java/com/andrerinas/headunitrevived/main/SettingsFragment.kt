@@ -1769,19 +1769,33 @@ class SettingsFragment : Fragment() {
         // The bottom Save action is always relevant when present.
         if (item is SettingItem.ActionButton && item.stableId == "bottomSaveButton") return true
 
+        // Connection-type filter: hide settings that do not apply to the chosen connection,
+        // in BOTH tabs and in search. USB hides WiFi settings, WiFi hides USB settings,
+        // Self Mode hides both, All/unset show everything.
+        if (isHiddenByConnection(item, categoryId)) return false
+
         if (query.isNotEmpty()) {
             return headerMatchesQuery || searchableText(item).contains(query, ignoreCase = true)
         }
 
         if (activeTab == SettingsTier.ADVANCED) return true
 
-        // Basic tab: cable and self-mode users do not see the Wireless Connection group here.
-        val conn = settings.primaryConnection
-        if (categoryId == "wirelessConnection" &&
-            (conn == Settings.ConnectionKind.USB_CABLE || conn == Settings.ConnectionKind.SELF_MODE)) {
-            return false
-        }
         return item.stableId in basicSettingIds
+    }
+
+    // Items scoped to a USB connection (the Wireless Connection category is the WiFi scope).
+    private val usbScopedIds = setOf("useLibusb")
+
+    private fun isHiddenByConnection(item: SettingItem, categoryId: String?): Boolean {
+        val wifiScoped = categoryId == "wirelessConnection"
+        val usbScoped = item.stableId in usbScopedIds
+        if (!wifiScoped && !usbScoped) return false
+        return when (settings.primaryConnection) {
+            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> wifiScoped
+            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> usbScoped
+            Settings.ConnectionKind.SELF_MODE -> wifiScoped || usbScoped
+            else -> false // ALL, UNSET
+        }
     }
 
     // Text used for search matching (title + description/value where applicable).
@@ -1809,6 +1823,7 @@ class SettingsFragment : Fragment() {
         Settings.ConnectionKind.WIFI,
         Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
         Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
+        Settings.ConnectionKind.ALL -> getString(R.string.connection_kind_all)
         Settings.ConnectionKind.UNSET -> getString(R.string.connection_kind_unset)
     }
 
@@ -1816,7 +1831,8 @@ class SettingsFragment : Fragment() {
         val kinds = listOf(
             Settings.ConnectionKind.USB_CABLE,
             Settings.ConnectionKind.WIFI,
-            Settings.ConnectionKind.SELF_MODE
+            Settings.ConnectionKind.SELF_MODE,
+            Settings.ConnectionKind.ALL
         )
         val labels = kinds.map { connectionKindLabel(it) }.toTypedArray()
         // Map any stored USB variant to the single USB option, WiFi/native to WiFi.
@@ -1824,6 +1840,7 @@ class SettingsFragment : Fragment() {
             Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> 0
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> 1
             Settings.ConnectionKind.SELF_MODE -> 2
+            Settings.ConnectionKind.ALL -> 3
             else -> -1
         }
         MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)

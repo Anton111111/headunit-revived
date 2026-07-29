@@ -715,4 +715,7 @@
     <string name="dpi_automatic_desc">استخدام كثافة الجهاز</string>
     <string name="onb_conn_usb_label">USB (أو محول)</string>
     <string name="onb_connection_self_detail">يشغّل الوضع المستقل Android Auto على هذا الجهاز دون توصيل هاتف، لذا تُخفى خيارات USB وWiFi في الوضع الأساسي.</string>
+    <string name="connection_kind_all">الكل</string>
+    <string name="onb_connection_all_detail">يعرض إعدادات USB وWiFi معًا.</string>
+    <string name="onb_connection_warning">اختيار نوع الاتصال يخفي الإعدادات غير المنطبقة في الوضعين الأساسي والمتقدم. لرؤيتها مجددًا، اختر لاحقًا وضعًا آخر من إعدادات الاتصال.</string>
 </resources>

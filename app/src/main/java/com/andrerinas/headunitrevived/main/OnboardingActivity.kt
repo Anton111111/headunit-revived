@@ -145,6 +145,7 @@ class OnboardingActivity : BaseActivity() {
         when (settings.primaryConnection) {
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> connGroup.check(R.id.onb_conn_wifi)
             Settings.ConnectionKind.SELF_MODE -> connGroup.check(R.id.onb_conn_self)
+            Settings.ConnectionKind.ALL -> connGroup.check(R.id.onb_conn_all)
             Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> connGroup.check(R.id.onb_conn_usb)
             else -> {}
         }
@@ -155,6 +156,7 @@ class OnboardingActivity : BaseActivity() {
             settings.primaryConnection = when (checkedId) {
                 R.id.onb_conn_wifi -> Settings.ConnectionKind.WIFI
                 R.id.onb_conn_self -> Settings.ConnectionKind.SELF_MODE
+                R.id.onb_conn_all -> Settings.ConnectionKind.ALL
                 else -> Settings.ConnectionKind.USB_CABLE
             }
             updateConnectionDetail()
@@ -253,13 +255,14 @@ class OnboardingActivity : BaseActivity() {
         val conn = settings.primaryConnection
         val isWifi = conn == Settings.ConnectionKind.WIFI || conn == Settings.ConnectionKind.NATIVE_AA
         val isSelf = conn == Settings.ConnectionKind.SELF_MODE
-        val usbVis = if (!isWifi && !isSelf) View.VISIBLE else View.GONE
+        val isAll = conn == Settings.ConnectionKind.ALL
+        val usbVis = if (isAll || (!isWifi && !isSelf)) View.VISIBLE else View.GONE
         findViewById<View>(R.id.onb_ac_single_row).visibility = usbVis
         findViewById<View>(R.id.onb_as_usb_row).visibility = usbVis
         findViewById<View>(R.id.onb_reopen_row).visibility = usbVis
         // Auto-start on WiFi is a legacy path that only applies up to Android 12L (API 32).
         findViewById<View>(R.id.onb_as_wifi_row).visibility =
-            if (isWifi && Build.VERSION.SDK_INT <= 32) View.VISIBLE else View.GONE
+            if ((isWifi || isAll) && Build.VERSION.SDK_INT <= 32) View.VISIBLE else View.GONE
     }
 
     private fun onNext() {
@@ -332,6 +335,7 @@ class OnboardingActivity : BaseActivity() {
         detail.text = when (settings.primaryConnection) {
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.onb_connection_wifi_detail)
             Settings.ConnectionKind.SELF_MODE -> getString(R.string.onb_connection_self_detail)
+            Settings.ConnectionKind.ALL -> getString(R.string.onb_connection_all_detail)
             Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.onb_connection_usb_detail)
             else -> ""
         }
@@ -441,6 +445,7 @@ class OnboardingActivity : BaseActivity() {
         val conn = when (settings.primaryConnection) {
             Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
             Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
+            Settings.ConnectionKind.ALL -> getString(R.string.connection_kind_all)
             Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
             else -> getString(R.string.connection_kind_unset)
         }

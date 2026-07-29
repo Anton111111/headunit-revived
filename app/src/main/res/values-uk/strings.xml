@@ -715,4 +715,7 @@
     <string name="dpi_automatic_desc">Використовувати щільність пристрою</string>
     <string name="onb_conn_usb_label">USB (або адаптер)</string>
     <string name="onb_connection_self_detail">Автономний режим запускає Android Auto на цьому пристрої без телефона, тож параметри USB та WiFi приховані в базовому режимі.</string>
+    <string name="connection_kind_all">Усі</string>
+    <string name="onb_connection_all_detail">Показує налаштування USB та WiFi.</string>
+    <string name="onb_connection_warning">Вибір типу підключення приховує невідповідні параметри в базовому та розширеному режимах. Щоб знову їх побачити, пізніше виберіть інший режим у налаштуваннях підключення.</string>
 </resources>

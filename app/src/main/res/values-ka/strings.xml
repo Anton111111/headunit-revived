@@ -646,4 +646,7 @@
     <string name="dpi_automatic_desc">მოწყობილობის სიმკვრივის გამოყენება</string>
     <string name="onb_conn_usb_label">USB (ან ადაპტერი)</string>
     <string name="onb_connection_self_detail">ავტონომიური რეჟიმი უშვებს Android Auto-ს ამ მოწყობილობაზე ტელეფონის დაკავშირების გარეშე, ამიტომ USB და WiFi პარამეტრები დამალულია ძირითად ჩანართში.</string>
+    <string name="connection_kind_all">ყველა</string>
+    <string name="onb_connection_all_detail">აჩვენებს როგორც USB, ისე WiFi პარამეტრებს.</string>
+    <string name="onb_connection_warning">კავშირის ტიპის არჩევა მალავს შეუსაბამო პარამეტრებს როგორც ძირითად, ისე გაფართოებულ ჩანართში. ისევ სანახავად, მოგვიანებით აირჩიეთ სხვა რეჟიმი კავშირის პარამეტრებში.</string>
 </resources>

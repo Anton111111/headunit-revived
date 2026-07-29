@@ -140,12 +140,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/self_mode" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/onb_conn_all"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/connection_kind_all" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
                 <TextView
                     android:id="@+id/onb_conn_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:textAppearance="?attr/textAppearanceCaption" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:padding="12dp"
+                    android:background="@drawable/bg_setting_single"
+                    android:text="@string/onb_connection_warning"
+                    android:textColor="?attr/colorError"
                     android:textAppearance="?attr/textAppearanceCaption" />
                 <TextView
                     android:layout_width="match_parent"

@@ -646,7 +646,8 @@ class Settings(private val context: Context) {
         USB_WIRELESS_ADAPTER(1),
         WIFI(2),
         NATIVE_AA(3),
-        SELF_MODE(4);
+        SELF_MODE(4),
+        ALL(5);
 
         val isWireless: Boolean
             get() = this == USB_WIRELESS_ADAPTER || this == WIFI || this == NATIVE_AA

@@ -712,4 +712,7 @@
     <string name="dpi_automatic_desc">Az eszköz sűrűségének használata</string>
     <string name="onb_conn_usb_label">USB (vagy adapter)</string>
     <string name="onb_connection_self_detail">Az önálló mód telefon csatlakoztatása nélkül futtatja az Android Autót ezen az eszközön, ezért az USB- és WiFi-beállítások rejtve vannak az Alap fülön.</string>
+    <string name="connection_kind_all">Összes</string>
+    <string name="onb_connection_all_detail">Megjeleníti az USB- és a WiFi-beállításokat is.</string>
+    <string name="onb_connection_warning">Egy kapcsolattípus kiválasztása elrejti a nem megfelelő beállításokat az Alap és a Speciális fülön is. Ha újra látni szeretnéd őket, később válassz másik módot a kapcsolat beállításainál.</string>
 </resources>

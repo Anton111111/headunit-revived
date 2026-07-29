@@ -719,4 +719,7 @@
     <string name="dpi_automatic_desc">Gerätedichte verwenden</string>
     <string name="onb_conn_usb_label">USB (oder Adapter)</string>
     <string name="onb_connection_self_detail">Der autonome Modus führt Android Auto auf diesem Gerät ohne verbundenes Telefon aus, daher werden USB- und WiFi-Optionen im Basis-Tab ausgeblendet.</string>
+    <string name="connection_kind_all">Alle</string>
+    <string name="onb_connection_all_detail">Zeigt sowohl die USB- als auch die WiFi-Einstellungen.</string>
+    <string name="onb_connection_warning">Wenn du einen Verbindungstyp wählst, werden die nicht passenden Einstellungen in Basis und Erweitert ausgeblendet. Um sie wieder anzuzeigen, wähle später einen anderen Modus in den Verbindungseinstellungen.</string>
 </resources>

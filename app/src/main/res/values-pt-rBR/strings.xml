@@ -715,4 +715,7 @@
     <string name="dpi_automatic_desc">Usar a densidade do dispositivo</string>
     <string name="onb_conn_usb_label">USB (ou adaptador)</string>
     <string name="onb_connection_self_detail">O modo autônomo executa o Android Auto neste dispositivo sem conectar um telefone, então as opções de USB e WiFi ficam ocultas em Básico.</string>
+    <string name="connection_kind_all">Todos</string>
+    <string name="onb_connection_all_detail">Mostra as configurações de USB e de WiFi.</string>
+    <string name="onb_connection_warning">Escolher um tipo de conexão oculta as configurações que não se aplicam, tanto em Básico quanto em Avançado. Para vê-las novamente, escolha outro modo nas configurações de conexão mais tarde.</string>
 </resources>

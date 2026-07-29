@@ -5,7 +5,7 @@
     <com.andrerinas.headunitrevived.view.DpiPreviewView
         android:id="@+id/dpi_preview"
         android:layout_width="match_parent"
-        android:layout_height="160dp" />
+        android:layout_height="190dp" />
 
     <TextView
         android:id="@+id/dpi_value"

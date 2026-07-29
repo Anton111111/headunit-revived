@@ -13,7 +13,7 @@ import android.view.View
 import android.view.WindowManager
 import kotlin.math.floor
 import kotlin.math.max
-import kotlin.math.roundToInt
+import kotlin.math.min
 
 /**
  * A schematic, value-driven preview of the head-unit layout. It is NOT a real Android Auto
@@ -31,9 +31,6 @@ class DpiPreviewView @JvmOverloads constructor(
     private var dpi: Int = 160
     private var panelWidthPx: Int = 0
     private var panelHeightPx: Int = 0
-
-    // Reference size of a mock card, in dp. A real Android Auto card is roughly this wide.
-    private val tileDp = 96f
 
     private val accent = resolveAttrColor(com.google.android.material.R.attr.colorPrimary, Color.parseColor("#009688"))
     private val tilePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = withAlpha(accent, 60) }
@@ -111,22 +108,27 @@ class DpiPreviewView @JvmOverloads constructor(
         val spacing = (cRight - cLeft) / 4f
         for (i in 1..3) canvas.drawCircle(cLeft + spacing * i, cy, dotR, dotPaint)
 
-        // Grid of cards above the bar. Columns derive from the real dp width at this DPI.
+        // Grid of cards above the bar. The card size grows clearly with DPI (and shrinks at
+        // low DPI) so the effect stays visible even on narrow portrait previews; the number
+        // that fit changes accordingly.
         val gridBottom = barRect.top - dp(8f)
         val gridW = cRight - cLeft
         val gridH = gridBottom - cTop
         if (gridW <= 0 || gridH <= 0) return
 
-        val panelWidthDp = if (panelWidthPx > 0) panelWidthPx / (dpi / 160f) else 1280f
-        val cols = max(1, (panelWidthDp / tileDp).roundToInt())
+        val norm = ((dpi - 110f) / 130f).coerceIn(0f, 1f)
+        val cell = (min(gridW, gridH) * (0.16f + norm * 0.34f)).coerceAtLeast(dp(22f))
         val gap = dp(6f)
-        val cell = (gridW - gap * (cols - 1)) / cols
-        if (cell <= 0f) return
+        val cols = max(1, floor((gridW + gap) / (cell + gap)).toInt())
         val rows = max(1, floor((gridH + gap) / (cell + gap)).toInt())
+        val totalW = cols * cell + (cols - 1) * gap
+        val totalH = rows * cell + (rows - 1) * gap
+        val startX = cLeft + (gridW - totalW) / 2f
+        val startY = cTop + (gridH - totalH) / 2f
         val tileRadius = dp(6f)
-        var y = cTop
+        var y = startY
         for (r in 0 until rows) {
-            var x = cLeft
+            var x = startX
             for (c in 0 until cols) {
                 val tile = RectF(x, y, x + cell, y + cell)
                 canvas.drawRoundRect(tile, tileRadius, tileRadius, tilePaint)
@@ -134,7 +136,6 @@ class DpiPreviewView @JvmOverloads constructor(
                 x += cell + gap
             }
             y += cell + gap
-            if (y + cell > gridBottom + 0.5f) break
         }
     }
 

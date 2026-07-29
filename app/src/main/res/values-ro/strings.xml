@@ -714,4 +714,7 @@
     <string name="dpi_automatic_desc">Folosește densitatea dispozitivului</string>
     <string name="onb_conn_usb_label">USB (sau adaptor)</string>
     <string name="onb_connection_self_detail">Modul autonom rulează Android Auto pe acest dispozitiv fără a conecta un telefon, așa că opțiunile USB și WiFi sunt ascunse în Bază.</string>
+    <string name="connection_kind_all">Toate</string>
+    <string name="onb_connection_all_detail">Afișează atât setările USB, cât și cele WiFi.</string>
+    <string name="onb_connection_warning">Alegerea unui tip de conexiune ascunde setările care nu se aplică, atât în Bază, cât și în Avansat. Pentru a le vedea din nou, alege mai târziu alt mod din setările de conexiune.</string>
 </resources>

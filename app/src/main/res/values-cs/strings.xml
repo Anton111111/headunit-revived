@@ -713,4 +713,7 @@
     <string name="dpi_automatic_desc">Použít hustotu zařízení</string>
     <string name="onb_conn_usb_label">USB (nebo adaptér)</string>
     <string name="onb_connection_self_detail">Samostatný režim spouští Android Auto v tomto zařízení bez telefonu, takže možnosti USB a WiFi jsou v základním režimu skryté.</string>
+    <string name="connection_kind_all">Vše</string>
+    <string name="onb_connection_all_detail">Zobrazí nastavení USB i WiFi.</string>
+    <string name="onb_connection_warning">Výběr typu připojení skryje nepoužitelná nastavení v základním i pokročilém režimu. Chcete-li je znovu zobrazit, zvolte později jiný režim v nastavení připojení.</string>
 </resources>

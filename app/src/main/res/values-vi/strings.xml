@@ -719,4 +719,7 @@
     <string name="dpi_automatic_desc">Dùng mật độ của thiết bị</string>
     <string name="onb_conn_usb_label">USB (hoặc bộ chuyển đổi)</string>
     <string name="onb_connection_self_detail">Chế độ độc lập chạy Android Auto trên thiết bị này mà không cần kết nối điện thoại, nên các tùy chọn USB và WiFi bị ẩn trong Cơ bản.</string>
+    <string name="connection_kind_all">Tất cả</string>
+    <string name="onb_connection_all_detail">Hiển thị cả cài đặt USB và WiFi.</string>
+    <string name="onb_connection_warning">Chọn một loại kết nối sẽ ẩn các cài đặt không áp dụng, ở cả Cơ bản và Nâng cao. Để xem lại, hãy chọn chế độ khác trong cài đặt kết nối sau.</string>
 </resources>
