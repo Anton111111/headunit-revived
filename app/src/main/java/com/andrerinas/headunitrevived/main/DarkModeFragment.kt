@@ -462,7 +462,6 @@ class DarkModeFragment : Fragment(), SensorEventListener {
 
         fun label(text: String) = android.widget.TextView(ctx).apply {
             this.text = text
-            setTextColor(android.graphics.Color.WHITE)
             val lp = android.widget.LinearLayout.LayoutParams(
                 android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
                 android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
@@ -477,7 +476,6 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         }
         val help = android.widget.TextView(ctx).apply {
             text = getString(R.string.coordinates_format_help)
-            setTextColor(android.graphics.Color.WHITE)
             alpha = 0.7f
         }
         // Prefill with a dot decimal separator regardless of device locale.
