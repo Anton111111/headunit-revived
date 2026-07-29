@@ -54,6 +54,7 @@ class OnboardingActivity : BaseActivity() {
 
     private var selectedSize = SystemOptimizer.DisplaySizePreset.STANDARD_9_10
     private var selectedPortrait = false
+    private var dpiBucket = 1 // 0 = small UI (low DPI), 1 = medium, 2 = large UI (high DPI)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -177,14 +178,27 @@ class OnboardingActivity : BaseActivity() {
         }
         findViewById<MaterialButton>(R.id.onb_display_run).setOnClickListener { runOptimization() }
 
-        // --- Appearance: full theme + night-mode pickers, deep link for advanced ---
+        // Graphical DPI picker: the preview shows smaller/more elements at a lower DPI
+        // and larger elements at a higher DPI.
+        val dpiPreview = findViewById<com.andrerinas.headunitrevived.view.DpiPreviewView>(R.id.onb_dpi_preview)
+        val dpiGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_dpi_group)
+        dpiGroup.check(dpiButtonId(dpiBucket))
+        dpiPreview.setScale(dpiScale(dpiBucket))
+        dpiGroup.addOnButtonCheckedListener { _, id, checked ->
+            if (!checked) return@addOnButtonCheckedListener
+            dpiBucket = when (id) {
+                R.id.onb_dpi_small -> 0
+                R.id.onb_dpi_large -> 2
+                else -> 1
+            }
+            dpiPreview.setScale(dpiScale(dpiBucket))
+        }
+
+        // --- Appearance: full theme + night-mode pickers; more options live in Settings ---
         updateThemeButtonText()
         findViewById<MaterialButton>(R.id.onb_theme_button).setOnClickListener { showThemeDialog() }
         updateNightButtonText()
         findViewById<MaterialButton>(R.id.onb_night_button).setOnClickListener { showNightModeDialog() }
-        findViewById<MaterialButton>(R.id.onb_appearance_more).setOnClickListener {
-            openSettingsAt(R.id.darkModeFragment)
-        }
 
         // --- Automation: simple toggles inline, priority + advanced via the real screens ---
         findViewById<SwitchMaterial>(R.id.onb_autoconnect_last_switch).apply {
@@ -194,6 +208,26 @@ class OnboardingActivity : BaseActivity() {
         findViewById<SwitchMaterial>(R.id.onb_autoconnect_single_switch).apply {
             isChecked = settings.autoConnectSingleUsbDevice
             setOnCheckedChangeListener { _, v -> settings.autoConnectSingleUsbDevice = v }
+        }
+        // USB-only auto-start toggles (also written to device storage, like AutoStartFragment).
+        findViewById<SwitchMaterial>(R.id.onb_autostart_usb_switch).apply {
+            isChecked = settings.autoStartOnUsb
+            setOnCheckedChangeListener { _, v ->
+                settings.autoStartOnUsb = v
+                Settings.syncAutoStartOnUsbToDeviceStorage(this@OnboardingActivity, v)
+            }
+        }
+        findViewById<SwitchMaterial>(R.id.onb_reopen_switch).apply {
+            isChecked = settings.reopenOnReconnection
+            setOnCheckedChangeListener { _, v -> settings.reopenOnReconnection = v }
+        }
+        // WiFi-only auto-start toggle.
+        findViewById<SwitchMaterial>(R.id.onb_autostart_wifi_switch).apply {
+            isChecked = settings.autoStartOnWifi
+            setOnCheckedChangeListener { _, v ->
+                settings.autoStartOnWifi = v
+                Settings.syncAutoStartOnWifiToDeviceStorage(this@OnboardingActivity, v)
+            }
         }
         findViewById<MaterialButton>(R.id.onb_autoconnect_more).setOnClickListener {
             openSettingsAt(R.id.autoConnectFragment)
@@ -222,7 +256,21 @@ class OnboardingActivity : BaseActivity() {
         nextBtn.isEnabled = if (step == STEP_SAFETY)
             findViewById<MaterialCheckBox>(R.id.onb_safety_accept).isChecked else true
         if (step == STEP_READY) findViewById<TextView>(R.id.onb_ready_summary).text = summaryText()
+        if (step == STEP_AUTOMATION) applyAutomationVisibility()
         updateStepperDots()
+    }
+
+    /** Show only the auto-start toggles that match the chosen connection type. */
+    private fun applyAutomationVisibility() {
+        val isWifi = settings.primaryConnection == Settings.ConnectionKind.WIFI ||
+            settings.primaryConnection == Settings.ConnectionKind.NATIVE_AA
+        val usbVis = if (isWifi) View.GONE else View.VISIBLE
+        findViewById<View>(R.id.onb_ac_single_row).visibility = usbVis
+        findViewById<View>(R.id.onb_as_usb_row).visibility = usbVis
+        findViewById<View>(R.id.onb_reopen_row).visibility = usbVis
+        // Auto-start on WiFi is a legacy path that only applies up to Android 12L (API 32).
+        findViewById<View>(R.id.onb_as_wifi_row).visibility =
+            if (isWifi && Build.VERSION.SDK_INT <= 32) View.VISIBLE else View.GONE
     }
 
     private fun onNext() {
@@ -336,12 +384,32 @@ class OnboardingActivity : BaseActivity() {
         return getString(R.string.onb_display_detected, m.widthPixels, m.heightPixels, m.densityDpi, codec)
     }
 
+    private fun dpiButtonId(bucket: Int): Int = when (bucket) {
+        0 -> R.id.onb_dpi_small
+        2 -> R.id.onb_dpi_large
+        else -> R.id.onb_dpi_medium
+    }
+
+    private fun dpiScale(bucket: Int): Float = when (bucket) {
+        0 -> 0.8f
+        2 -> 1.25f
+        else -> 1.0f
+    }
+
+    /** Adjust the recommended DPI by the chosen size bucket, kept within sane bounds. */
+    private fun adjustedDpi(base: Int): Int = when (dpiBucket) {
+        0 -> (base * 0.85f).toInt()
+        2 -> (base * 1.15f).toInt()
+        else -> base
+    }.coerceIn(110, 240)
+
     private fun runOptimization() {
         val result = SystemOptimizer(this).calculateOptimalSettings(selectedSize, selectedPortrait)
+        val finalDpi = adjustedDpi(result.recommendedDpi)
         settings.resolutionId = result.recommendedResolutionId
         settings.videoCodec = result.recommendedVideoCodec
         settings.viewMode = result.recommendedViewMode
-        settings.dpiPixelDensity = result.recommendedDpi
+        settings.dpiPixelDensity = finalDpi
         settings.screenOrientation = result.suggestedOrientation
         settings.commit()
         findViewById<TextView>(R.id.onb_display_result).apply {
@@ -349,7 +417,7 @@ class OnboardingActivity : BaseActivity() {
             text = getString(
                 R.string.onb_display_result,
                 Settings.Resolution.fromId(result.recommendedResolutionId)?.resName ?: "-",
-                result.recommendedDpi,
+                finalDpi,
                 result.recommendedVideoCodec,
                 result.recommendedViewMode.name
             )
@@ -435,6 +503,7 @@ class OnboardingActivity : BaseActivity() {
         private const val KEY_STEP = "onb_step"
         private const val STEP_COUNT = 8
         private const val STEP_SAFETY = 1
+        private const val STEP_AUTOMATION = 5
         private const val STEP_READY = 7
     }
 }

@@ -230,6 +230,46 @@
                         android:layout_height="wrap_content"
                         android:text="@string/setup_orientation_portrait" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_display_dpi_label"
+                    android:textAppearance="?attr/textAppearanceSubtitle2" />
+                <com.andrerinas.headunitrevived.view.DpiPreviewView
+                    android:id="@+id/onb_dpi_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="8dp" />
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/onb_dpi_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/onb_dpi_small"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/onb_dpi_small" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/onb_dpi_medium"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/onb_dpi_medium" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/onb_dpi_large"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/onb_dpi_large" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/onb_display_run"
                     android:layout_width="wrap_content"
@@ -286,13 +326,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     app:icon="@android:drawable/ic_menu_manage" />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/onb_appearance_more"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/onb_more_appearance" />
+                    android:text="@string/onb_appearance_more_hint"
+                    android:textAppearance="?attr/textAppearanceCaption" />
             </LinearLayout>
         </ScrollView>
 
@@ -336,6 +375,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/onb_ac_single_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -349,6 +389,66 @@
                         android:textAppearance="?attr/textAppearanceBody1" />
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/onb_autoconnect_single_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- USB-only: auto-start on USB -->
+                <LinearLayout
+                    android:id="@+id/onb_as_usb_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/auto_start_usb_label"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/onb_autostart_usb_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- USB-only: reopen on reconnection -->
+                <LinearLayout
+                    android:id="@+id/onb_reopen_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reopen_on_reconnection_label"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/onb_reopen_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!-- WiFi-only: auto-start on WiFi -->
+                <LinearLayout
+                    android:id="@+id/onb_as_wifi_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/auto_start_wifi_label"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/onb_autostart_wifi_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
