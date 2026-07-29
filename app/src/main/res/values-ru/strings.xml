@@ -726,4 +726,5 @@
     <string name="resolution_use_recommended">Использовать рекомендуемое</string>
     <string name="dpi_automatic_desc_format">Использует плотность устройства (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">Огромный</string>
 </resources>

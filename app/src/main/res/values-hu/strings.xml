@@ -725,4 +725,5 @@
     <string name="resolution_use_recommended">Ajánlott használata</string>
     <string name="dpi_automatic_desc_format">Az eszköz sűrűségét használja (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">Hatalmas</string>
 </resources>

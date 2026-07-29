@@ -727,4 +727,5 @@
     <string name="resolution_use_recommended">Użyj zalecanej</string>
     <string name="dpi_automatic_desc_format">Używa gęstości urządzenia (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">Ogromny</string>
 </resources>

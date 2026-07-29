@@ -725,4 +725,5 @@
     <string name="resolution_use_recommended">使用建議值</string>
     <string name="dpi_automatic_desc_format">使用裝置密度（%1$d DPI）</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">巨大</string>
 </resources>

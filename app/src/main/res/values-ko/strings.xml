@@ -730,4 +730,5 @@
     <string name="resolution_use_recommended">권장값 사용</string>
     <string name="dpi_automatic_desc_format">기기 밀도를 사용합니다 (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">매우 크게</string>
 </resources>

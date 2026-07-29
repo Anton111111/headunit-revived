@@ -733,4 +733,5 @@
     <string name="resolution_use_recommended">推奨を使用</string>
     <string name="dpi_automatic_desc_format">デバイスの密度を使用します（%1$d DPI）</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">特大</string>
 </resources>

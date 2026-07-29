@@ -69,6 +69,14 @@
             android:layout_height="wrap_content"
             android:text="@string/onb_dpi_large" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dpi_tab_huge"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/onb_dpi_huge" />
+
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
 </merge>

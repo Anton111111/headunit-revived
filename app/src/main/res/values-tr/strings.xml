@@ -723,4 +723,5 @@
     <string name="resolution_use_recommended">Önerileni kullan</string>
     <string name="dpi_automatic_desc_format">Cihaz yoğunluğunu kullanır (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">Devasa</string>
 </resources>

@@ -735,4 +735,5 @@
     <string name="resolution_use_recommended">Usar la recomendada</string>
     <string name="dpi_automatic_desc_format">Usa la densidad del dispositivo (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
+    <string name="onb_dpi_huge">Enorme</string>
 </resources>

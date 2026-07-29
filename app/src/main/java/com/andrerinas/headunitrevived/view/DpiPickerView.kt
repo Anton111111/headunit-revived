@@ -50,6 +50,7 @@ class DpiPickerView @JvmOverloads constructor(
                 val rep = when (checkedId) {
                     R.id.dpi_tab_small -> SMALL_REP
                     R.id.dpi_tab_large -> LARGE_REP
+                    R.id.dpi_tab_huge -> HUGE_REP
                     else -> MEDIUM_REP
                 }
                 applyDpi(rep, fromSlider = false)
@@ -109,14 +110,15 @@ class DpiPickerView @JvmOverloads constructor(
     }
 
     /**
-     * Classifies any value into a tab. Small and Large extend to the extremes (so a high
-     * custom value like 440 reads as Large and a low one as Small); Medium stays capped to
-     * its narrow central band.
+     * Classifies any value into a tab. Small covers everything below and Huge everything
+     * above (so a high custom value like 440 reads as Huge); Medium and Large stay capped to
+     * their narrow central bands.
      */
     private fun tabFor(v: Int): Int = when {
         v <= SMALL_MEDIUM_MAX -> R.id.dpi_tab_small
         v <= MEDIUM_LARGE_MAX -> R.id.dpi_tab_medium
-        else -> R.id.dpi_tab_large
+        v <= LARGE_HUGE_MAX -> R.id.dpi_tab_large
+        else -> R.id.dpi_tab_huge
     }
 
     companion object {
@@ -126,8 +128,11 @@ class DpiPickerView @JvmOverloads constructor(
         private const val SMALL_REP = 132
         private const val MEDIUM_REP = 175
         private const val LARGE_REP = 218
-        // Medium is the narrow central band; Small covers everything below, Large above.
+        private const val HUGE_REP = 320
+        // Small covers everything below and Huge everything above; Medium and Large are
+        // the narrow central bands. Boundaries are the midpoints between representatives.
         private const val SMALL_MEDIUM_MAX = (SMALL_REP + MEDIUM_REP) / 2   // 153
         private const val MEDIUM_LARGE_MAX = (MEDIUM_REP + LARGE_REP) / 2   // 196
+        private const val LARGE_HUGE_MAX = (LARGE_REP + HUGE_REP) / 2       // 269
     }
 }
