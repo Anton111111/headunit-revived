@@ -142,6 +142,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:textAppearance="?attr/textAppearanceCaption" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_change_later"
+                    android:textAppearance="?attr/textAppearanceCaption" />
             </LinearLayout>
         </ScrollView>
 
@@ -230,6 +236,12 @@
                         android:layout_height="wrap_content"
                         android:text="@string/setup_orientation_portrait" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_change_later"
+                    android:textAppearance="?attr/textAppearanceCaption" />
             </LinearLayout>
         </ScrollView>
 
@@ -253,40 +265,17 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/onb_dpi_help"
                     android:textAppearance="?attr/textAppearanceBody2" />
-                <com.andrerinas.headunitrevived.view.DpiPreviewView
-                    android:id="@+id/onb_dpi_preview"
+                <com.andrerinas.headunitrevived.view.DpiPickerView
+                    android:id="@+id/onb_dpi_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="12dp" />
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/onb_dpi_group"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    app:singleSelection="true"
-                    app:selectionRequired="true">
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/onb_dpi_small"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/onb_dpi_small" />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/onb_dpi_medium"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/onb_dpi_medium" />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/onb_dpi_large"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/onb_dpi_large" />
-                </com.google.android.material.button.MaterialButtonToggleGroup>
+                    android:text="@string/onb_change_later"
+                    android:textAppearance="?attr/textAppearanceCaption" />
             </LinearLayout>
         </ScrollView>
 
@@ -518,6 +507,12 @@
                         android:layout_height="wrap_content"
                         android:text="@string/onb_gps_phone" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onb_change_later"
+                    android:textAppearance="?attr/textAppearanceCaption" />
             </LinearLayout>
         </ScrollView>
 

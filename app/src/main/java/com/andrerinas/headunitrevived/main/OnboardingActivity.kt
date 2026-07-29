@@ -53,7 +53,7 @@ class OnboardingActivity : BaseActivity() {
 
     private var selectedSize = SystemOptimizer.DisplaySizePreset.STANDARD_9_10
     private var selectedPortrait = false
-    private var dpiBucket = 1 // 0 = small UI (low DPI), 1 = medium, 2 = large UI (high DPI)
+    private var dpiPicker: com.andrerinas.headunitrevived.view.DpiPickerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,20 +176,12 @@ class OnboardingActivity : BaseActivity() {
             selectedPortrait = id == R.id.onb_orient_port
         }
 
-        // Graphical DPI picker: the preview shows smaller/more elements at a lower DPI
-        // and larger elements at a higher DPI.
-        val dpiPreview = findViewById<com.andrerinas.headunitrevived.view.DpiPreviewView>(R.id.onb_dpi_preview)
-        val dpiGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_dpi_group)
-        dpiGroup.check(dpiButtonId(dpiBucket))
-        dpiPreview.setScale(dpiScale(dpiBucket))
-        dpiGroup.addOnButtonCheckedListener { _, id, checked ->
-            if (!checked) return@addOnButtonCheckedListener
-            dpiBucket = when (id) {
-                R.id.onb_dpi_small -> 0
-                R.id.onb_dpi_large -> 2
-                else -> 1
-            }
-            dpiPreview.setScale(dpiScale(dpiBucket))
+        // Graphical DPI picker (slider + preview + Small/Medium/Large tabs, all synced),
+        // pre-set to the recommended DPI for the detected panel.
+        dpiPicker = findViewById<com.andrerinas.headunitrevived.view.DpiPickerView>(R.id.onb_dpi_picker).apply {
+            val m = realMetrics()
+            setPanelResolution(m.widthPixels, m.heightPixels)
+            dpi = recommendedDpi()
         }
 
         // --- Appearance: full theme + night-mode pickers; more options live in Settings ---
@@ -378,33 +370,17 @@ class OnboardingActivity : BaseActivity() {
         return getString(R.string.onb_display_detected, m.widthPixels, m.heightPixels, m.densityDpi, codec)
     }
 
-    private fun dpiButtonId(bucket: Int): Int = when (bucket) {
-        0 -> R.id.onb_dpi_small
-        2 -> R.id.onb_dpi_large
-        else -> R.id.onb_dpi_medium
-    }
+    private fun recommendedDpi(): Int =
+        SystemOptimizer(this).calculateOptimalSettings(selectedSize, selectedPortrait).recommendedDpi
 
-    private fun dpiScale(bucket: Int): Float = when (bucket) {
-        0 -> 0.8f
-        2 -> 1.25f
-        else -> 1.0f
-    }
-
-    /** Adjust the recommended DPI by the chosen size bucket, kept within sane bounds. */
-    private fun adjustedDpi(base: Int): Int = when (dpiBucket) {
-        0 -> (base * 0.85f).toInt()
-        2 -> (base * 1.15f).toInt()
-        else -> base
-    }.coerceIn(110, 240)
-
-    /** Writes the recommended display settings plus the chosen DPI. Called when leaving
-     * the Display and Android Auto size steps, so no separate Apply tap is needed. */
+    /** Writes the recommended display settings plus the DPI chosen in the picker. Called when
+     * leaving the Display and Android Auto size steps, so no separate Apply tap is needed. */
     private fun applyDisplaySettings() {
         val result = SystemOptimizer(this).calculateOptimalSettings(selectedSize, selectedPortrait)
         settings.resolutionId = result.recommendedResolutionId
         settings.videoCodec = result.recommendedVideoCodec
         settings.viewMode = result.recommendedViewMode
-        settings.dpiPixelDensity = adjustedDpi(result.recommendedDpi)
+        settings.dpiPixelDensity = dpiPicker?.dpi ?: result.recommendedDpi
         settings.screenOrientation = result.suggestedOrientation
         settings.commit()
     }
