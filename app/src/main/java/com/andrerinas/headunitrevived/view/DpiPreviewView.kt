@@ -77,9 +77,12 @@ class DpiPreviewView @JvmOverloads constructor(
         val availH = height - pad * 2
         if (availW <= 0 || availH <= 0) return
 
-        // Panel aspect ratio (fallback 16:9), fitted (letterboxed) inside the view.
+        // Always draw the frame in landscape (wide) orientation, even on a portrait panel:
+        // a wide grid makes the DPI effect clearly visible, whereas a tall narrow frame barely
+        // changes. Uses the panel's true aspect but forced to its landscape form.
         val aspect = if (panelWidthPx > 0 && panelHeightPx > 0)
-            panelWidthPx.toFloat() / panelHeightPx.toFloat() else 16f / 9f
+            max(panelWidthPx, panelHeightPx).toFloat() / min(panelWidthPx, panelHeightPx).toFloat()
+        else 16f / 9f
         var screenW = availW
         var screenH = screenW / aspect
         if (screenH > availH) {

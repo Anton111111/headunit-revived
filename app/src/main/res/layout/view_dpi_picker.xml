@@ -51,7 +51,12 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/onb_dpi_small" />
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:contentDescription="@string/onb_dpi_small"
+            android:text="@string/dpi_size_s" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/dpi_tab_medium"
@@ -59,7 +64,12 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/onb_dpi_medium" />
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:contentDescription="@string/onb_dpi_medium"
+            android:text="@string/dpi_size_m" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/dpi_tab_large"
@@ -67,7 +77,12 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/onb_dpi_large" />
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:contentDescription="@string/onb_dpi_large"
+            android:text="@string/dpi_size_l" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/dpi_tab_huge"
@@ -75,7 +90,12 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/onb_dpi_huge" />
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:contentDescription="@string/onb_dpi_huge"
+            android:text="@string/dpi_size_xl" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
