@@ -511,7 +511,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             })
         } catch (e: Exception) {}
 
-        // 1. Stop any ongoing discovery and remove group to start fresh
+        // 1. Stop any ongoing discovery
         mgr.stopPeerDiscovery(ch, object : WifiP2pManager.ActionListener {
             override fun onSuccess() { checkGroupAndCreate() }
             override fun onFailure(reason: Int) { checkGroupAndCreate() }
@@ -522,18 +522,6 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     private fun checkGroupAndCreate() {
         isGroupOwner = false
         isConnected = false
-        // The next createGroup() call generates a brand-new GO interface with a new random
-        // MAC — a cached BSSID from the group we're tearing down is now stale and must never
-        // be delivered for the new one.
-        lastKnownBssid = null
-        manager?.removeGroup(channel, object : WifiP2pManager.ActionListener {
-            override fun onSuccess() { delayedCreateGroup(0) }
-            override fun onFailure(reason: Int) { delayedCreateGroup(0) }
-        })
-    }
-
-    private fun delayedCreateGroup(retryCount: Int) {
-        handler.postDelayed({ createNewGroup(retryCount) }, 500L)
 
         manager?.requestGroupInfo(channel) { group ->
             if (group == null) {
@@ -555,6 +543,8 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             AppLog.d("WifiDirectManager: Group already active/created (isConnected=$isConnected, isGroupOwner=$isGroupOwner). Skipping createGroup retry.")
             return
         }
+
+        lastKnownBssid = null
 
         mgr.createGroup(ch, object : WifiP2pManager.ActionListener {
             override fun onSuccess() {
@@ -946,5 +936,3 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         isConnected = false
     }
 }
-
-
