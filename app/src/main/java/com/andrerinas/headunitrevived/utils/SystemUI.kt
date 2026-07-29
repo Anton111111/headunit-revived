@@ -178,6 +178,10 @@ object SystemUI {
                 }
             }
 
+            // Always pad for the soft keyboard so text fields are not covered and the
+            // content shrinks while the IME is up (0 when the keyboard is hidden).
+            typeMask = typeMask or WindowInsetsCompat.Type.ime()
+
             val bars = if (typeMask != 0) {
                 insetsCompat.getInsets(typeMask)
             } else {

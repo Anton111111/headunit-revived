@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Auto (Wschód/zachód słońca)</item>
+    <string-array name="night_mode">        <item>Auto (Wschód/zachód słońca)</item>
         <item>Jasny</item>
         <item>Ciemny</item>
         <item>Ręczny czas</item>
         <item>Czujnik światła</item>
         <item>Jasność ekranu</item>
-    </string-array>
+        <item>Sygnał świateł auta (ILL+)</item>
+        <item>Lokalizacja (według obszaru)</item>
+</string-array>
 
-    <string-array name="app_theme">
-        <item>Automatycznie (System)</item>
+    <string-array name="app_theme">        <item>Automatycznie (System)</item>
         <item>Jasny</item>
         <item>Ciemny</item>
         <item>Ekstremalnie ciemny</item>
@@ -18,7 +18,9 @@
         <item>Ręczny czas</item>
         <item>Czujnik światła</item>
         <item>Jasność ekranu</item>
-    </string-array>
+        <item>Sygnał świateł auta (ILL+)</item>
+        <item>Lokalizacja (według obszaru)</item>
+</string-array>
 
     <string-array name="screen_orientation">
         <item>@string/orientation_system_default</item>

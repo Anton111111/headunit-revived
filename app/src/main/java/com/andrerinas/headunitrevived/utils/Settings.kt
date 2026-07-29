@@ -628,7 +628,8 @@ class Settings(private val context: Context) {
         MANUAL_TIME(3),
         LIGHT_SENSOR(4),
         SCREEN_BRIGHTNESS(5),
-        CAR_SIGNAL(6);
+        CAR_SIGNAL(6),
+        LOCATION(7);
 
         companion object {
             private val map = NightMode.values().associateBy(NightMode::value)
@@ -647,6 +648,57 @@ class Settings(private val context: Context) {
         set(value) {
             prefs.edit().putInt("night-mode-manual-end", value).apply()
         }
+
+    // Shared fixed point used as the sunrise/sunset reference when [useFixedSunriseLocation]
+    // is on. Used by BOTH the app theme (AppTheme.AUTO_SUNRISE) and the Android Auto night
+    // mode (NightMode.AUTO) so head units without GPS still compute correct day/night.
+    // Defaults mirror lastKnownLocation.
+    var useFixedSunriseLocation: Boolean
+        get() = prefs.getBoolean("use-fixed-sun-location", false)
+        set(value) { prefs.edit().putBoolean("use-fixed-sun-location", value).apply() }
+
+    var fixedSunriseLatitude: Double
+        get() = java.lang.Double.longBitsToDouble(
+            prefs.getLong("fixed-sun-latitude", (32.0864169).toRawBits())
+        )
+        set(value) {
+            prefs.edit().putLong("fixed-sun-latitude", value.toRawBits()).apply()
+        }
+
+    var fixedSunriseLongitude: Double
+        get() = java.lang.Double.longBitsToDouble(
+            prefs.getLong("fixed-sun-longitude", (34.7557871).toRawBits())
+        )
+        set(value) {
+            prefs.edit().putLong("fixed-sun-longitude", value.toRawBits()).apply()
+        }
+
+    // Configurable radius (meters) shown around the fixed sunrise point on the map.
+    // Cosmetic (the sunrise/sunset calc uses only the point); 0 = not set yet.
+    var fixedSunriseRadius: Int
+        get() = prefs.getInt("fixed-sun-radius", 0)
+        set(value) { prefs.edit().putInt("fixed-sun-radius", value).apply() }
+
+    // Suppresses the "internet required" notice before opening the map picker once the
+    // user has chosen "don't show again".
+    var hideMapInternetNotice: Boolean
+        get() = prefs.getBoolean("hide-map-internet-notice", false)
+        set(value) { prefs.edit().putBoolean("hide-map-internet-notice", value).apply() }
+
+    // User-defined places (Home, Garage, ...) for the "Location (by area)" theme mode.
+    var geofenceLocations: List<com.andrerinas.headunitrevived.location.GeofenceLocation>
+        get() = com.andrerinas.headunitrevived.location.GeofenceLocation.listFromJson(
+            prefs.getString("geofence-locations", "[]")
+        )
+        set(value) {
+            val json = com.andrerinas.headunitrevived.location.GeofenceLocation.listToJson(value)
+            prefs.edit().putString("geofence-locations", json).apply()
+        }
+
+    // Appearance to use in "Location (by area)" mode when outside every saved place.
+    var locationOutsideNight: Boolean
+        get() = prefs.getBoolean("location-outside-night", false)
+        set(value) { prefs.edit().putBoolean("location-outside-night", value).apply() }
 
     // App Theme independent threshold/time settings (separate from Night Mode)
     var appThemeThresholdLux: Int
@@ -980,7 +1032,8 @@ class Settings(private val context: Context) {
         MANUAL_TIME(5),
         LIGHT_SENSOR(6),
         SCREEN_BRIGHTNESS(7),
-        CAR_SIGNAL(8);
+        CAR_SIGNAL(8),
+        LOCATION(9);
 
         companion object {
             private val map = values().associateBy(AppTheme::value)

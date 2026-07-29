@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="night_mode">
-        <item>Auto (Sunrise/Sunset)</item>
+    <string-array name="night_mode">        <item>Auto (Sunrise/Sunset)</item>
         <item>Clear</item>
         <item>Dark</item>
         <item>Manual Time</item>
         <item>Light Sensor</item>
         <item>Screen Brightness</item>
         <item>Car Headlight Signal (ILL+)</item>
+        <item>Location (by area)</item>
     </string-array>
 
     <string-array name="app_theme">
@@ -20,6 +20,8 @@
         <item>Light Sensor</item>
         <item>Screen Brightness</item>
         <item>Car Headlight Signal (ILL+)</item>
+    
+        <item>Location (by area)</item>
     </string-array>
 
     <string-array name="screen_orientation">

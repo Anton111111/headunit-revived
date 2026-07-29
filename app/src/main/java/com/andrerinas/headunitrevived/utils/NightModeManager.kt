@@ -15,6 +15,7 @@ import android.os.Looper
 import android.provider.Settings as SystemSettings
 import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.contract.LocationUpdateIntent
+import com.andrerinas.headunitrevived.location.LocationHolder
 import java.util.Calendar
 
 class NightModeManager(
@@ -187,6 +188,12 @@ class NightModeManager(
         val thresholdBrightness = settings.nightModeThresholdBrightness
 
         when (settings.nightMode) {
+            Settings.NightMode.LOCATION -> {
+                // Dark/light depending on the saved place the device is inside, or the
+                // user's outside-places default when outside all of them.
+                isNight = com.andrerinas.headunitrevived.location.GeofenceLocation
+                    .resolveNight(context, settings)
+            }
             Settings.NightMode.LIGHT_SENSOR -> {
                 if (currentLux >= 0) {
                     // Hysteresis Logic

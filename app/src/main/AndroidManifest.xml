@@ -187,6 +187,7 @@
         <activity
             android:name=".main.SettingsActivity"
             android:label="@string/settings"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme" />
 
         <service

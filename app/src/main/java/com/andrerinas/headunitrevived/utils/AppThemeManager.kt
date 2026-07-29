@@ -159,12 +159,25 @@ class AppThemeManager(
         }
     }
 
+    /**
+     * Re-evaluates the theme on the EXISTING manager. Unlike [reapply] it does not build
+     * a new manager, so it only recreates activities when the day/night value actually
+     * changes (avoiding a recreate loop when called repeatedly).
+     */
+    fun forceRefresh() = update(debounce = false)
+
     private fun update(debounce: Boolean = true) {
         var isNight = false
         val threshold = settings.appThemeThresholdLux
         val thresholdBrightness = settings.appThemeThresholdBrightness
 
         when (settings.appTheme) {
+            Settings.AppTheme.LOCATION -> {
+                // Dark/light depending on the saved place the device is inside, or the
+                // user's outside-places default when outside all of them.
+                isNight = com.andrerinas.headunitrevived.location.GeofenceLocation
+                    .resolveNight(context, settings)
+            }
             Settings.AppTheme.LIGHT_SENSOR -> {
                 if (currentLux >= 0) {
                     val hyst = 10.0f
@@ -319,6 +332,23 @@ class AppThemeManager(
                     theme == Settings.AppTheme.CLEAR ||
                     theme == Settings.AppTheme.DARK ||
                     theme == Settings.AppTheme.EXTREME_DARK
+        }
+
+        /**
+         * (Re)applies the app theme engine: runs the live manager for dynamic themes
+         * (including Location by area), otherwise applies the static theme directly.
+         * Call after any change to the app theme, the sunrise source, or the places.
+         */
+        fun reapply(context: Context, settings: Settings) {
+            com.andrerinas.headunitrevived.App.appThemeManager?.stop()
+            com.andrerinas.headunitrevived.App.appThemeManager = null
+            if (!isStaticMode(settings.appTheme)) {
+                val manager = AppThemeManager(context.applicationContext, settings)
+                com.andrerinas.headunitrevived.App.appThemeManager = manager
+                manager.start()
+            } else {
+                applyStaticTheme(settings)
+            }
         }
     }
 }
