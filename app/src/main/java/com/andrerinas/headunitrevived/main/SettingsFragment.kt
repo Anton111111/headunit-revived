@@ -278,6 +278,20 @@ class SettingsFragment : Fragment() {
         settingsRecyclerView.adapter = settingsAdapter
 
         setupTabsAndSearch(view)
+
+        // Receive the DPI chosen in the DPI sub-screen and feed it into the pending flow,
+        // so the main "Save (Reconnect needed)" applies it.
+        findNavController().currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Int>(DpiSettingsFragment.KEY_DPI_RESULT)
+            ?.observe(viewLifecycleOwner) { newDpi ->
+                if (newDpi != pendingDpi) {
+                    pendingDpi = newDpi
+                    checkChanges()
+                    updateSettingsList()
+                }
+            }
+
         updateSettingsList()
         setupToolbar()
 
@@ -1025,17 +1039,12 @@ class SettingsFragment : Fragment() {
             stableId = "dpiPixelDensity",
             nameResId = R.string.dpi,
             value = if (pendingDpi == 0) getString(R.string.auto) else pendingDpi.toString(),
-            onClick = { _ ->
-                showNumericInputDialog(
-                    title = getString(R.string.enter_dpi_value),
-                    message = null,
-                    initialValue = pendingDpi ?: 0,
-                    onConfirm = { newVal ->
-                        pendingDpi = newVal
-                        checkChanges()
-                        updateSettingsList()
-                    }
-                )
+            onClick = {
+                try {
+                    findNavController().navigate(R.id.action_settingsFragment_to_dpiSettingsFragment)
+                } catch (e: Exception) {
+                    // Failover
+                }
             }
         ))
 
