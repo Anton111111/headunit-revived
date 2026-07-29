@@ -702,4 +702,9 @@
     <string name="onb_gps_this_device">Acest dispozitiv</string>
     <string name="onb_gps_phone">Telefon conectat</string>
     <string name="onb_do_it_later">Fă mai târziu</string>
+    <string name="onb_display_dpi_label">Dimensiune Android Auto</string>
+    <string name="onb_dpi_small">Mic</string>
+    <string name="onb_dpi_medium">Mediu</string>
+    <string name="onb_dpi_large">Mare</string>
+    <string name="onb_appearance_more_hint">Poți găsi mai multe opțiuni pentru modul întunecat în Setări.</string>
 </resources>

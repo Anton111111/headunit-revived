@@ -701,4 +701,9 @@
     <string name="onb_gps_this_device">Toto zařízení</string>
     <string name="onb_gps_phone">Připojený telefon</string>
     <string name="onb_do_it_later">Udělat později</string>
+    <string name="onb_display_dpi_label">Velikost Android Auto</string>
+    <string name="onb_dpi_small">Malá</string>
+    <string name="onb_dpi_medium">Střední</string>
+    <string name="onb_dpi_large">Velká</string>
+    <string name="onb_appearance_more_hint">Další možnosti tmavého režimu najdete v Nastavení.</string>
 </resources>

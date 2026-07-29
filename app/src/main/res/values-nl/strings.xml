@@ -701,4 +701,9 @@
     <string name="onb_gps_this_device">Dit apparaat</string>
     <string name="onb_gps_phone">Verbonden telefoon</string>
     <string name="onb_do_it_later">Later doen</string>
+    <string name="onb_display_dpi_label">Android Auto-grootte</string>
+    <string name="onb_dpi_small">Klein</string>
+    <string name="onb_dpi_medium">Gemiddeld</string>
+    <string name="onb_dpi_large">Groot</string>
+    <string name="onb_appearance_more_hint">Je vindt meer opties voor de donkere modus in Instellingen.</string>
 </resources>

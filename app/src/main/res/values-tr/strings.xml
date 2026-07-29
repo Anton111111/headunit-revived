@@ -698,4 +698,9 @@
     <string name="onb_gps_this_device">Bu cihaz</string>
     <string name="onb_gps_phone">Bağlı telefon</string>
     <string name="onb_do_it_later">Daha sonra yap</string>
+    <string name="onb_display_dpi_label">Android Auto boyutu</string>
+    <string name="onb_dpi_small">Küçük</string>
+    <string name="onb_dpi_medium">Orta</string>
+    <string name="onb_dpi_large">Büyük</string>
+    <string name="onb_appearance_more_hint">Daha fazla karanlık mod seçeneğini Ayarlar bölümünde bulabilirsiniz.</string>
 </resources>

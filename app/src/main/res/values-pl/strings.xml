@@ -702,4 +702,9 @@
     <string name="onb_gps_this_device">To urządzenie</string>
     <string name="onb_gps_phone">Połączony telefon</string>
     <string name="onb_do_it_later">Zrób to później</string>
+    <string name="onb_display_dpi_label">Rozmiar Android Auto</string>
+    <string name="onb_dpi_small">Mały</string>
+    <string name="onb_dpi_medium">Średni</string>
+    <string name="onb_dpi_large">Duży</string>
+    <string name="onb_appearance_more_hint">Więcej opcji trybu ciemnego znajdziesz w Ustawieniach.</string>
 </resources>

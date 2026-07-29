@@ -700,4 +700,9 @@
     <string name="onb_gps_this_device">此裝置</string>
     <string name="onb_gps_phone">已連接的手機</string>
     <string name="onb_do_it_later">稍後設定</string>
+    <string name="onb_display_dpi_label">Android Auto 大小</string>
+    <string name="onb_dpi_small">小</string>
+    <string name="onb_dpi_medium">中</string>
+    <string name="onb_dpi_large">大</string>
+    <string name="onb_appearance_more_hint">你可以在設定中找到更多深色模式選項。</string>
 </resources>

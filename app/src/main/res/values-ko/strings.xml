@@ -705,4 +705,9 @@
     <string name="onb_gps_this_device">이 기기</string>
     <string name="onb_gps_phone">연결된 휴대폰</string>
     <string name="onb_do_it_later">나중에 하기</string>
+    <string name="onb_display_dpi_label">Android Auto 크기</string>
+    <string name="onb_dpi_small">작게</string>
+    <string name="onb_dpi_medium">중간</string>
+    <string name="onb_dpi_large">크게</string>
+    <string name="onb_appearance_more_hint">설정에서 더 많은 다크 모드 옵션을 찾을 수 있습니다.</string>
 </resources>

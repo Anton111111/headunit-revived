@@ -703,4 +703,9 @@
     <string name="onb_gps_this_device">هذا الجهاز</string>
     <string name="onb_gps_phone">الهاتف المتصل</string>
     <string name="onb_do_it_later">القيام بذلك لاحقًا</string>
+    <string name="onb_display_dpi_label">حجم Android Auto</string>
+    <string name="onb_dpi_small">صغير</string>
+    <string name="onb_dpi_medium">متوسط</string>
+    <string name="onb_dpi_large">كبير</string>
+    <string name="onb_appearance_more_hint">يمكنك العثور على المزيد من خيارات الوضع الداكن في الإعدادات.</string>
 </resources>

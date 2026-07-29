@@ -700,4 +700,9 @@
     <string name="onb_gps_this_device">Ez az eszköz</string>
     <string name="onb_gps_phone">Csatlakoztatott telefon</string>
     <string name="onb_do_it_later">Később</string>
+    <string name="onb_display_dpi_label">Android Auto méret</string>
+    <string name="onb_dpi_small">Kicsi</string>
+    <string name="onb_dpi_medium">Közepes</string>
+    <string name="onb_dpi_large">Nagy</string>
+    <string name="onb_appearance_more_hint">További sötét mód beállításokat a Beállításokban találsz.</string>
 </resources>

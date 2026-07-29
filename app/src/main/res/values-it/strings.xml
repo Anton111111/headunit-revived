@@ -708,4 +708,9 @@
     <string name="onb_gps_this_device">Questo dispositivo</string>
     <string name="onb_gps_phone">Telefono connesso</string>
     <string name="onb_do_it_later">Fallo più tardi</string>
+    <string name="onb_display_dpi_label">Dimensione di Android Auto</string>
+    <string name="onb_dpi_small">Piccolo</string>
+    <string name="onb_dpi_medium">Medio</string>
+    <string name="onb_dpi_large">Grande</string>
+    <string name="onb_appearance_more_hint">Puoi trovare altre opzioni della modalità scura nelle Impostazioni.</string>
 </resources>

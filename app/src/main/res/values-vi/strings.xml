@@ -707,4 +707,9 @@
     <string name="onb_gps_this_device">Máy này</string>
     <string name="onb_gps_phone">Điện thoại đã kết nối</string>
     <string name="onb_do_it_later">Để sau</string>
+    <string name="onb_display_dpi_label">Kích thước Android Auto</string>
+    <string name="onb_dpi_small">Nhỏ</string>
+    <string name="onb_dpi_medium">Vừa</string>
+    <string name="onb_dpi_large">Lớn</string>
+    <string name="onb_appearance_more_hint">Bạn có thể tìm thêm tùy chọn chế độ tối trong Cài đặt.</string>
 </resources>

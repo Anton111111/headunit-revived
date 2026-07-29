@@ -634,4 +634,9 @@
     <string name="onb_gps_this_device">ეს მოწყობილობა</string>
     <string name="onb_gps_phone">დაკავშირებული ტელეფონი</string>
     <string name="onb_do_it_later">მოგვიანებით</string>
+    <string name="onb_display_dpi_label">Android Auto-ს ზომა</string>
+    <string name="onb_dpi_small">პატარა</string>
+    <string name="onb_dpi_medium">საშუალო</string>
+    <string name="onb_dpi_large">დიდი</string>
+    <string name="onb_appearance_more_hint">მუქი რეჟიმის დამატებით პარამეტრებს პარამეტრებში იპოვით.</string>
 </resources>

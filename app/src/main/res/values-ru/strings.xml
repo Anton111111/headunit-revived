@@ -701,4 +701,9 @@
     <string name="onb_gps_this_device">Это устройство</string>
     <string name="onb_gps_phone">Подключённый телефон</string>
     <string name="onb_do_it_later">Сделать позже</string>
+    <string name="onb_display_dpi_label">Размер Android Auto</string>
+    <string name="onb_dpi_small">Маленький</string>
+    <string name="onb_dpi_medium">Средний</string>
+    <string name="onb_dpi_large">Большой</string>
+    <string name="onb_appearance_more_hint">Больше настроек тёмного режима вы найдёте в настройках.</string>
 </resources>

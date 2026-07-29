@@ -708,4 +708,9 @@
     <string name="onb_gps_this_device">このデバイス</string>
     <string name="onb_gps_phone">接続したスマートフォン</string>
     <string name="onb_do_it_later">後で行う</string>
+    <string name="onb_display_dpi_label">Android Auto のサイズ</string>
+    <string name="onb_dpi_small">小</string>
+    <string name="onb_dpi_medium">中</string>
+    <string name="onb_dpi_large">大</string>
+    <string name="onb_appearance_more_hint">ダークモードの詳細設定は設定画面で変更できます。</string>
 </resources>

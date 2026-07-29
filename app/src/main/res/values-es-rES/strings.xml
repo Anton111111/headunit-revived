@@ -710,4 +710,9 @@
     <string name="onb_gps_this_device">Este dispositivo</string>
     <string name="onb_gps_phone">Móvil conectado</string>
     <string name="onb_do_it_later">Hacerlo más tarde</string>
+    <string name="onb_display_dpi_label">Tamaño de Android Auto</string>
+    <string name="onb_dpi_small">Pequeño</string>
+    <string name="onb_dpi_medium">Mediano</string>
+    <string name="onb_dpi_large">Grande</string>
+    <string name="onb_appearance_more_hint">Encontrarás más opciones de modo oscuro en Ajustes.</string>
 </resources>
