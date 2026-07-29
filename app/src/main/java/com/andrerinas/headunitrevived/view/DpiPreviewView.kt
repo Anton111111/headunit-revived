@@ -5,16 +5,22 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
+import android.os.Build
 import android.util.AttributeSet
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowManager
+import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.roundToInt
 
 /**
- * A lightweight, schematic preview of the head-unit layout. It is NOT a real
- * Android Auto render; it draws a mock launcher (a grid of tiles plus a bottom
- * bar) whose element size scales with the chosen DPI so the user can see, at a
- * glance, that a lower DPI fits more/smaller elements and a higher DPI makes
- * everything larger.
+ * A schematic, value-driven preview of the head-unit layout. It is NOT a real Android Auto
+ * render; it draws a mock launcher (a grid of fixed-size cards plus a bottom bar) inside a
+ * frame with the panel's aspect ratio. The number of cards that fit is derived from how many
+ * density-independent pixels the panel has at the chosen DPI, so:
+ *   higher DPI -> fewer, larger cards (less fits);  lower DPI -> more, smaller cards.
  */
 class DpiPreviewView @JvmOverloads constructor(
     context: Context,
@@ -22,7 +28,12 @@ class DpiPreviewView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
-    private var scaleFactor = 1f
+    private var dpi: Int = 160
+    private var panelWidthPx: Int = 0
+    private var panelHeightPx: Int = 0
+
+    // Reference size of a mock card, in dp. A real Android Auto card is roughly this wide.
+    private val tileDp = 96f
 
     private val accent = resolveAttrColor(com.google.android.material.R.attr.colorPrimary, Color.parseColor("#009688"))
     private val tilePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = withAlpha(accent, 60) }
@@ -31,13 +42,33 @@ class DpiPreviewView @JvmOverloads constructor(
         strokeWidth = dp(1.5f)
         color = 0x33808080
     }
+    private val framePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = dp(1.5f)
+        color = 0x55808080
+    }
     private val barPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = withAlpha(accent, 130) }
     private val dotPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE }
 
-    /** 0.8 = small UI (low DPI), 1.0 = medium, 1.25 = large UI (high DPI). */
-    fun setScale(factor: Float) {
-        if (factor != scaleFactor) {
-            scaleFactor = factor
+    init {
+        val m = readRealMetrics()
+        panelWidthPx = m.widthPixels
+        panelHeightPx = m.heightPixels
+    }
+
+    fun setDpi(value: Int) {
+        if (value != dpi) {
+            dpi = value
+            invalidate()
+        }
+    }
+
+    /** Override the panel resolution used to compute how much content fits (e.g. the
+     * resolution detected by the wizard). */
+    fun setPanelResolution(widthPx: Int, heightPx: Int) {
+        if (widthPx > 0 && heightPx > 0) {
+            panelWidthPx = widthPx
+            panelHeightPx = heightPx
             invalidate()
         }
     }
@@ -45,41 +76,58 @@ class DpiPreviewView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val pad = dp(6f)
-        val frame = RectF(pad, pad, width - pad, height - pad)
+        val availW = width - pad * 2
+        val availH = height - pad * 2
+        if (availW <= 0 || availH <= 0) return
+
+        // Panel aspect ratio (fallback 16:9), fitted (letterboxed) inside the view.
+        val aspect = if (panelWidthPx > 0 && panelHeightPx > 0)
+            panelWidthPx.toFloat() / panelHeightPx.toFloat() else 16f / 9f
+        var screenW = availW
+        var screenH = screenW / aspect
+        if (screenH > availH) {
+            screenH = availH
+            screenW = screenH * aspect
+        }
+        val left = pad + (availW - screenW) / 2f
+        val top = pad + (availH - screenH) / 2f
+        val screen = RectF(left, top, left + screenW, top + screenH)
         val radius = dp(10f)
-        canvas.drawRoundRect(frame, radius, radius, strokePaint)
+        canvas.drawRoundRect(screen, radius, radius, framePaint)
 
-        val inset = dp(10f)
-        val left = frame.left + inset
-        val top = frame.top + inset
-        val right = frame.right - inset
-        val bottom = frame.bottom - inset
+        val inset = dp(8f)
+        val cLeft = screen.left + inset
+        val cTop = screen.top + inset
+        val cRight = screen.right - inset
+        val cBottom = screen.bottom - inset
 
-        // Bottom bar (mock navigation) with three buttons.
-        val barHeight = (bottom - top) * 0.18f
-        val barRect = RectF(left, bottom - barHeight, right, bottom)
+        // Bottom mock nav bar with three buttons.
+        val barHeight = (cBottom - cTop) * 0.18f
+        val barRect = RectF(cLeft, cBottom - barHeight, cRight, cBottom)
         val barRadius = barHeight / 2f
         canvas.drawRoundRect(barRect, barRadius, barRadius, barPaint)
         val cy = barRect.centerY()
         val dotR = barHeight * 0.18f
-        val spacing = (right - left) / 4f
-        for (i in 1..3) {
-            canvas.drawCircle(left + spacing * i, cy, dotR, dotPaint)
-        }
+        val spacing = (cRight - cLeft) / 4f
+        for (i in 1..3) canvas.drawCircle(cLeft + spacing * i, cy, dotR, dotPaint)
 
-        // Grid of tiles above the bar. Cell size grows with the DPI scale.
+        // Grid of cards above the bar. Columns derive from the real dp width at this DPI.
         val gridBottom = barRect.top - dp(8f)
+        val gridW = cRight - cLeft
+        val gridH = gridBottom - cTop
+        if (gridW <= 0 || gridH <= 0) return
+
+        val panelWidthDp = if (panelWidthPx > 0) panelWidthPx / (dpi / 160f) else 1280f
+        val cols = max(1, (panelWidthDp / tileDp).roundToInt())
         val gap = dp(6f)
-        val cell = dp(28f) * scaleFactor
+        val cell = (gridW - gap * (cols - 1)) / cols
         if (cell <= 0f) return
-        val cols = maxOf(1, (((right - left) + gap) / (cell + gap)).toInt())
-        val rows = maxOf(1, (((gridBottom - top) + gap) / (cell + gap)).toInt())
+        val rows = max(1, floor((gridH + gap) / (cell + gap)).toInt())
         val tileRadius = dp(6f)
-        var y = top
+        var y = cTop
         for (r in 0 until rows) {
-            var x = left
+            var x = cLeft
             for (c in 0 until cols) {
-                if (x + cell > right + 0.5f) break
                 val tile = RectF(x, y, x + cell, y + cell)
                 canvas.drawRoundRect(tile, tileRadius, tileRadius, tilePaint)
                 canvas.drawRoundRect(tile, tileRadius, tileRadius, strokePaint)
@@ -88,6 +136,20 @@ class DpiPreviewView @JvmOverloads constructor(
             y += cell + gap
             if (y + cell > gridBottom + 0.5f) break
         }
+    }
+
+    private fun readRealMetrics(): DisplayMetrics {
+        val m = DisplayMetrics()
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                display?.getRealMetrics(m)
+            } else {
+                @Suppress("DEPRECATION")
+                (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getRealMetrics(m)
+            }
+        } catch (_: Exception) {
+        }
+        return m
     }
 
     private fun dp(value: Float): Float =
