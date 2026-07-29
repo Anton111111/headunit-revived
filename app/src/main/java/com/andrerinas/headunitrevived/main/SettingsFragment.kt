@@ -1787,15 +1787,10 @@ class SettingsFragment : Fragment() {
     private val usbScopedIds = setOf("useLibusb")
 
     private fun isHiddenByConnection(item: SettingItem, categoryId: String?): Boolean {
-        val wifiScoped = categoryId == "wirelessConnection"
-        val usbScoped = item.stableId in usbScopedIds
-        if (!wifiScoped && !usbScoped) return false
-        return when (settings.primaryConnection) {
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> wifiScoped
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> usbScoped
-            Settings.ConnectionKind.SELF_MODE -> wifiScoped || usbScoped
-            else -> false // ALL, UNSET
-        }
+        val conn = settings.primaryConnection
+        if (categoryId == "wirelessConnection") return conn.hidesWifi()
+        if (item.stableId in usbScopedIds) return conn.hidesUsb()
+        return false
     }
 
     // Text used for search matching (title + description/value where applicable).

@@ -652,6 +652,13 @@ class Settings(private val context: Context) {
         val isWireless: Boolean
             get() = this == USB_WIRELESS_ADAPTER || this == WIFI || this == NATIVE_AA
 
+        /** Whether USB-only settings should be hidden for this connection choice. */
+        fun hidesUsb(): Boolean = this == WIFI || this == NATIVE_AA || this == SELF_MODE
+
+        /** Whether WiFi/Bluetooth settings should be hidden for this connection choice.
+         * (Bluetooth is used to bridge WiFi, so it counts as WiFi scope.) */
+        fun hidesWifi(): Boolean = this == USB_CABLE || this == USB_WIRELESS_ADAPTER || this == SELF_MODE
+
         companion object {
             private val map = values().associateBy(ConnectionKind::value)
             fun fromInt(value: Int) = map[value] ?: UNSET
