@@ -713,4 +713,12 @@
     <string name="connection_kind_all">Tümü</string>
     <string name="onb_connection_all_detail">Hem USB hem de WiFi ayarlarını gösterir.</string>
     <string name="onb_connection_warning">Bir bağlantı türü seçtiğinizde, uygun olmayan ayarlar hem Temel hem de Gelişmiş sekmesinde gizlenir. Yeniden görmek için daha sonra bağlantı ayarlarından farklı bir mod seçin.</string>
+    <string name="resolution_recommended_format">%1$s (Önerilen)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · yüksek bant genişliği</string>
+    <string name="resolution_too_high_title">Çözünürlük ekrandan yüksek</string>
+    <string name="resolution_too_high_message">Ekranınız %1$d x %2$d piksel. Daha yüksek çözünürlük, panel gösteremediği için kaliteyi artırmadan daha fazla bant genişliği kullanır.</string>
+    <string name="resolution_high_bandwidth_title">Daha fazla bant genişliği gerekiyor</string>
+    <string name="resolution_high_bandwidth_message">Bu çözünürlük çok daha fazla bant genişliği kullanır ve güçlü bir bağlantı gerektirir: iyi bir 5GHz WiFi veya kararlı bir USB bağlantısı. Takılma fark ederseniz daha düşük bir çözünürlük seçin.</string>
+    <string name="resolution_use_anyway">Yine de kullan</string>
+    <string name="resolution_use_recommended">Önerileni kullan</string>
 </resources>

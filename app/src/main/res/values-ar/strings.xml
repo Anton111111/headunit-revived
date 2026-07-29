@@ -718,4 +718,12 @@
     <string name="connection_kind_all">الكل</string>
     <string name="onb_connection_all_detail">يعرض إعدادات USB وWiFi معًا.</string>
     <string name="onb_connection_warning">اختيار نوع الاتصال يخفي الإعدادات غير المنطبقة في الوضعين الأساسي والمتقدم. لرؤيتها مجددًا، اختر لاحقًا وضعًا آخر من إعدادات الاتصال.</string>
+    <string name="resolution_recommended_format">%1$s (موصى به)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · نطاق ترددي عالٍ</string>
+    <string name="resolution_too_high_title">الدقة أعلى من الشاشة</string>
+    <string name="resolution_too_high_message">شاشتك %1$d x %2$d بكسل. الدقة الأعلى تستهلك نطاقًا تردديًا أكبر دون تحسين الجودة، لأن الشاشة لا يمكنها عرضها.</string>
+    <string name="resolution_high_bandwidth_title">يلزم نطاق ترددي أعلى</string>
+    <string name="resolution_high_bandwidth_message">تستهلك هذه الدقة نطاقًا تردديًا أكبر بكثير وتحتاج اتصالًا قويًا: شبكة WiFi جيدة بتردد 5GHz أو اتصال USB مستقر. إذا لاحظت تقطعًا، فاختر دقة أقل.</string>
+    <string name="resolution_use_anyway">استخدام على أي حال</string>
+    <string name="resolution_use_recommended">استخدام الموصى به</string>
 </resources>

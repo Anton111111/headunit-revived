@@ -715,4 +715,12 @@
     <string name="connection_kind_all">Összes</string>
     <string name="onb_connection_all_detail">Megjeleníti az USB- és a WiFi-beállításokat is.</string>
     <string name="onb_connection_warning">Egy kapcsolattípus kiválasztása elrejti a nem megfelelő beállításokat az Alap és a Speciális fülön is. Ha újra látni szeretnéd őket, később válassz másik módot a kapcsolat beállításainál.</string>
+    <string name="resolution_recommended_format">%1$s (Ajánlott)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · nagy sávszélesség</string>
+    <string name="resolution_too_high_title">A képernyőnél nagyobb felbontás</string>
+    <string name="resolution_too_high_message">A képernyőd %1$d x %2$d pixel. A nagyobb felbontás több sávszélességet használ minőségjavulás nélkül, mert a panel nem tudja megjeleníteni.</string>
+    <string name="resolution_high_bandwidth_title">Nagyobb sávszélesség szükséges</string>
+    <string name="resolution_high_bandwidth_message">Ez a felbontás sokkal több sávszélességet használ, és erős kapcsolatot igényel: jó 5GHz-es WiFi vagy stabil USB. Ha akadozást tapasztalsz, válassz alacsonyabb felbontást.</string>
+    <string name="resolution_use_anyway">Mégis használ</string>
+    <string name="resolution_use_recommended">Ajánlott használata</string>
 </resources>

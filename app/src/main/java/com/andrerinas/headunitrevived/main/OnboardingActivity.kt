@@ -57,6 +57,18 @@ class OnboardingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Match the app theme overlays used by MainActivity/SettingsActivity so the wizard
+        // honours Extreme Dark (pure black) and the gradient background.
+        val isNightActive = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+            Configuration.UI_MODE_NIGHT_YES
+        if (settings.appTheme == Settings.AppTheme.EXTREME_DARK ||
+            (settings.useExtremeDarkMode && isNightActive)) {
+            theme.applyStyle(R.style.ThemeOverlay_ExtremeDark, true)
+        } else if (settings.useGradientBackground) {
+            theme.applyStyle(R.style.ThemeOverlay_GradientBackground, true)
+        }
+
         setContentView(R.layout.activity_onboarding)
 
         step = savedInstanceState?.getInt(KEY_STEP, 0) ?: 0
@@ -388,7 +400,9 @@ class OnboardingActivity : BaseActivity() {
      * leaving the Display and Android Auto size steps, so no separate Apply tap is needed. */
     private fun applyDisplaySettings() {
         val result = SystemOptimizer(this).calculateOptimalSettings(selectedSize, selectedPortrait)
-        settings.resolutionId = result.recommendedResolutionId
+        // Cap the applied resolution to what the physical panel supports (no upscaling waste).
+        val panel = realMetrics()
+        settings.resolutionId = SystemOptimizer.recommendedResolution(panel.widthPixels, panel.heightPixels).id
         settings.videoCodec = result.recommendedVideoCodec
         settings.viewMode = result.recommendedViewMode
         settings.dpiPixelDensity = dpiPicker?.dpi ?: result.recommendedDpi
@@ -449,7 +463,10 @@ class OnboardingActivity : BaseActivity() {
             Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
             else -> getString(R.string.connection_kind_unset)
         }
-        val res = Settings.Resolution.fromId(settings.resolutionId)?.resName ?: getString(R.string.auto)
+        val res = getString(
+            R.string.resolution_recommended_format,
+            Settings.Resolution.fromId(settings.resolutionId)?.resName ?: getString(R.string.auto)
+        )
         return getString(R.string.onb_ready_summary, conn, res, settings.videoCodec)
     }
 

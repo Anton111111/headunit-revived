@@ -58,6 +58,16 @@
     <string name="onb_conn_usb_label">USB (or adapter)</string>
     <string name="onb_connection_self_detail">Self Mode runs Android Auto on this device without connecting a phone, so USB and WiFi options are hidden in Basic.</string>
     <string name="connection_kind_all">All</string>
+
+    <!-- Resolution recommendation / bandwidth warnings -->
+    <string name="resolution_recommended_format">%1$s (Recommended)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · high bandwidth</string>
+    <string name="resolution_too_high_title">Resolution higher than the screen</string>
+    <string name="resolution_too_high_message">Your screen is %1$d x %2$d pixels. A higher resolution uses more bandwidth without improving quality, because the panel cannot display it.</string>
+    <string name="resolution_high_bandwidth_title">Higher bandwidth needed</string>
+    <string name="resolution_high_bandwidth_message">This resolution uses much more bandwidth and needs a strong connection: a good 5GHz WiFi, or a stable USB connection. If you notice lag, choose a lower resolution.</string>
+    <string name="resolution_use_anyway">Use anyway</string>
+    <string name="resolution_use_recommended">Use recommended</string>
     <string name="onb_connection_all_detail">Shows both the USB and WiFi settings.</string>
     <string name="onb_connection_warning">Choosing a connection type hides the settings that do not apply to it, in both Basic and Advanced. To see them again, pick a different mode in the connection settings later.</string>
     <string name="onb_more_appearance">More appearance settings</string>

@@ -716,4 +716,12 @@
     <string name="connection_kind_all">Alle</string>
     <string name="onb_connection_all_detail">Toont zowel de USB- als de WiFi-instellingen.</string>
     <string name="onb_connection_warning">Als je een verbindingstype kiest, worden de niet-toepasselijke instellingen verborgen in Basis en Geavanceerd. Kies later een andere modus in de verbindingsinstellingen om ze weer te zien.</string>
+    <string name="resolution_recommended_format">%1$s (Aanbevolen)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · veel bandbreedte</string>
+    <string name="resolution_too_high_title">Resolutie hoger dan het scherm</string>
+    <string name="resolution_too_high_message">Je scherm is %1$d x %2$d pixels. Een hogere resolutie gebruikt meer bandbreedte zonder betere kwaliteit, omdat het scherm het niet kan tonen.</string>
+    <string name="resolution_high_bandwidth_title">Meer bandbreedte nodig</string>
+    <string name="resolution_high_bandwidth_message">Deze resolutie gebruikt veel meer bandbreedte en heeft een sterke verbinding nodig: een goede 5GHz-WiFi of een stabiele USB-verbinding. Bij haperingen kies je een lagere resolutie.</string>
+    <string name="resolution_use_anyway">Toch gebruiken</string>
+    <string name="resolution_use_recommended">Aanbevolen gebruiken</string>
 </resources>

@@ -1022,17 +1022,7 @@ class SettingsFragment : Fragment() {
             nameResId = R.string.resolution,
             value = Settings.Resolution.fromId(pendingResolution!!)?.resName ?: "",
             searchKeywords = Settings.Resolution.allRes.joinToString(" "),
-            onClick = { _ ->
-                MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
-                    .setTitle(R.string.change_resolution)
-                    .setSingleChoiceItems(Settings.Resolution.allRes, pendingResolution!!) { dialog, which ->
-                        pendingResolution = which
-                        checkChanges()
-                        dialog.dismiss()
-                        updateSettingsList()
-                    }
-                    .show()
-            }
+            onClick = { showResolutionDialog() }
         ))
 
         items.add(SettingItem.SettingEntry(
@@ -1725,6 +1715,21 @@ class SettingsFragment : Fragment() {
                 renderSettings()
             }
         })
+
+        // The clear (X) icon also lowers the keyboard and drops focus. Some Chinese head units
+        // cannot dismiss the keyboard easily once it is open, so give an explicit way out.
+        view.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.settingsSearchLayout)
+            ?.setEndIconOnClickListener {
+                searchInput?.setText("")
+                searchInput?.clearFocus()
+                hideKeyboard(view)
+            }
+    }
+
+    private fun hideKeyboard(view: View) {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)
+                as? android.view.inputmethod.InputMethodManager
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun renderSettings(scrollState: android.os.Parcelable? = null) {
@@ -1786,6 +1791,9 @@ class SettingsFragment : Fragment() {
     // Items scoped to a USB connection (the Wireless Connection category is the WiFi scope).
     private val usbScopedIds = setOf("useLibusb")
 
+    // Resolutions this wide or more (1440p, 4K) are flagged as high-bandwidth.
+    private val HIGH_BANDWIDTH_WIDTH = 2560
+
     private fun isHiddenByConnection(item: SettingItem, categoryId: String?): Boolean {
         val conn = settings.primaryConnection
         if (categoryId == "wirelessConnection") return conn.hidesWifi()
@@ -1820,6 +1828,73 @@ class SettingsFragment : Fragment() {
         Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
         Settings.ConnectionKind.ALL -> getString(R.string.connection_kind_all)
         Settings.ConnectionKind.UNSET -> getString(R.string.connection_kind_unset)
+    }
+
+    private fun showResolutionDialog() {
+        val (pw, ph) = realPanelResolution()
+        val recommended = com.andrerinas.headunitrevived.utils.SystemOptimizer.recommendedResolution(pw, ph)
+        val labels = Settings.Resolution.allResolutions.map { r ->
+            when {
+                r.id == recommended.id -> getString(R.string.resolution_recommended_format, r.resName)
+                r.width >= HIGH_BANDWIDTH_WIDTH -> getString(R.string.resolution_high_bandwidth_format, r.resName)
+                else -> r.resName
+            }
+        }.toTypedArray()
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.change_resolution)
+            .setSingleChoiceItems(labels, pendingResolution ?: 0) { dialog, which ->
+                dialog.dismiss()
+                val picked = Settings.Resolution.fromId(which)
+                val longSide = maxOf(pw, ph)
+                when {
+                    picked == null -> {}
+                    picked.width > 0 && longSide > 0 && picked.width > longSide ->
+                        showResolutionTooHighDialog(which, recommended.id, longSide, minOf(pw, ph))
+                    picked.width >= HIGH_BANDWIDTH_WIDTH ->
+                        showResolutionBandwidthDialog(which, recommended.id)
+                    else -> applyResolution(which)
+                }
+            }
+            .show()
+    }
+
+    private fun showResolutionTooHighDialog(pickedId: Int, recommendedId: Int, panelLong: Int, panelShort: Int) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.resolution_too_high_title)
+            .setMessage(getString(R.string.resolution_too_high_message, panelLong, panelShort))
+            .setPositiveButton(R.string.resolution_use_recommended) { _, _ -> applyResolution(recommendedId) }
+            .setNegativeButton(R.string.resolution_use_anyway) { _, _ -> applyResolution(pickedId) }
+            .show()
+    }
+
+    private fun showResolutionBandwidthDialog(pickedId: Int, recommendedId: Int) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.resolution_high_bandwidth_title)
+            .setMessage(R.string.resolution_high_bandwidth_message)
+            .setPositiveButton(R.string.resolution_use_recommended) { _, _ -> applyResolution(recommendedId) }
+            .setNegativeButton(R.string.resolution_use_anyway) { _, _ -> applyResolution(pickedId) }
+            .show()
+    }
+
+    private fun applyResolution(id: Int) {
+        pendingResolution = id
+        checkChanges()
+        updateSettingsList()
+    }
+
+    private fun realPanelResolution(): Pair<Int, Int> {
+        val m = android.util.DisplayMetrics()
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                requireActivity().display?.getRealMetrics(m)
+            } else {
+                @Suppress("DEPRECATION")
+                (requireContext().getSystemService(Context.WINDOW_SERVICE) as android.view.WindowManager)
+                    .defaultDisplay.getRealMetrics(m)
+            }
+        } catch (_: Exception) {
+        }
+        return m.widthPixels to m.heightPixels
     }
 
     private fun showConnectionModeDialog() {

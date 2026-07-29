@@ -716,4 +716,12 @@
     <string name="connection_kind_all">Все</string>
     <string name="onb_connection_all_detail">Показывает настройки USB и WiFi.</string>
     <string name="onb_connection_warning">Выбор типа подключения скрывает неприменимые настройки в базовом и расширенном режимах. Чтобы снова их увидеть, позже выберите другой режим в настройках подключения.</string>
+    <string name="resolution_recommended_format">%1$s (Рекомендуется)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · высокий трафик</string>
+    <string name="resolution_too_high_title">Разрешение выше экрана</string>
+    <string name="resolution_too_high_message">Экран %1$d x %2$d пикселей. Более высокое разрешение увеличивает трафик без улучшения качества, так как панель не может его отобразить.</string>
+    <string name="resolution_high_bandwidth_title">Нужен больший трафик</string>
+    <string name="resolution_high_bandwidth_message">Это разрешение потребляет намного больше трафика и требует устойчивого соединения: хорошего WiFi 5 ГГц или стабильного USB. При задержках выберите разрешение ниже.</string>
+    <string name="resolution_use_anyway">Всё равно использовать</string>
+    <string name="resolution_use_recommended">Использовать рекомендуемое</string>
 </resources>

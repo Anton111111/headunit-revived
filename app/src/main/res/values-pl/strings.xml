@@ -717,4 +717,12 @@
     <string name="connection_kind_all">Wszystkie</string>
     <string name="onb_connection_all_detail">Pokazuje ustawienia USB i WiFi.</string>
     <string name="onb_connection_warning">Wybór typu połączenia ukrywa nieodpowiednie ustawienia w trybie Podstawowym i Zaawansowanym. Aby zobaczyć je ponownie, wybierz później inny tryb w ustawieniach połączenia.</string>
+    <string name="resolution_recommended_format">%1$s (Zalecana)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · duże pasmo</string>
+    <string name="resolution_too_high_title">Rozdzielczość wyższa niż ekran</string>
+    <string name="resolution_too_high_message">Twój ekran ma %1$d x %2$d pikseli. Wyższa rozdzielczość zużywa więcej pasma bez poprawy jakości, bo panel nie może jej wyświetlić.</string>
+    <string name="resolution_high_bandwidth_title">Potrzeba większego pasma</string>
+    <string name="resolution_high_bandwidth_message">Ta rozdzielczość zużywa znacznie więcej pasma i wymaga silnego połączenia: dobrego WiFi 5GHz lub stabilnego USB. Jeśli zauważysz lagi, wybierz niższą rozdzielczość.</string>
+    <string name="resolution_use_anyway">Użyj mimo to</string>
+    <string name="resolution_use_recommended">Użyj zalecanej</string>
 </resources>

@@ -722,4 +722,12 @@
     <string name="connection_kind_all">Tất cả</string>
     <string name="onb_connection_all_detail">Hiển thị cả cài đặt USB và WiFi.</string>
     <string name="onb_connection_warning">Chọn một loại kết nối sẽ ẩn các cài đặt không áp dụng, ở cả Cơ bản và Nâng cao. Để xem lại, hãy chọn chế độ khác trong cài đặt kết nối sau.</string>
+    <string name="resolution_recommended_format">%1$s (Khuyến nghị)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · băng thông cao</string>
+    <string name="resolution_too_high_title">Độ phân giải cao hơn màn hình</string>
+    <string name="resolution_too_high_message">Màn hình của bạn là %1$d x %2$d pixel. Độ phân giải cao hơn dùng nhiều băng thông hơn mà không cải thiện chất lượng, vì màn hình không thể hiển thị.</string>
+    <string name="resolution_high_bandwidth_title">Cần băng thông cao hơn</string>
+    <string name="resolution_high_bandwidth_message">Độ phân giải này dùng nhiều băng thông hơn và cần kết nối mạnh: WiFi 5GHz tốt hoặc kết nối USB ổn định. Nếu thấy giật, hãy chọn độ phân giải thấp hơn.</string>
+    <string name="resolution_use_anyway">Vẫn dùng</string>
+    <string name="resolution_use_recommended">Dùng khuyến nghị</string>
 </resources>

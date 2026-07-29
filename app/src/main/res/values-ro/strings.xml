@@ -717,4 +717,12 @@
     <string name="connection_kind_all">Toate</string>
     <string name="onb_connection_all_detail">Afișează atât setările USB, cât și cele WiFi.</string>
     <string name="onb_connection_warning">Alegerea unui tip de conexiune ascunde setările care nu se aplică, atât în Bază, cât și în Avansat. Pentru a le vedea din nou, alege mai târziu alt mod din setările de conexiune.</string>
+    <string name="resolution_recommended_format">%1$s (Recomandat)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · lățime de bandă mare</string>
+    <string name="resolution_too_high_title">Rezoluție mai mare decât ecranul</string>
+    <string name="resolution_too_high_message">Ecranul tău are %1$d x %2$d pixeli. O rezoluție mai mare folosește mai multă lățime de bandă fără a îmbunătăți calitatea, deoarece panoul nu o poate afișa.</string>
+    <string name="resolution_high_bandwidth_title">Este nevoie de mai multă lățime de bandă</string>
+    <string name="resolution_high_bandwidth_message">Această rezoluție folosește mult mai multă lățime de bandă și necesită o conexiune puternică: un WiFi 5GHz bun sau o conexiune USB stabilă. Dacă observi întreruperi, alege o rezoluție mai mică.</string>
+    <string name="resolution_use_anyway">Folosește oricum</string>
+    <string name="resolution_use_recommended">Folosește recomandarea</string>
 </resources>

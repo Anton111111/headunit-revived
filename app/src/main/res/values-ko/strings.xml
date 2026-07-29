@@ -720,4 +720,12 @@
     <string name="connection_kind_all">모두</string>
     <string name="onb_connection_all_detail">USB와 WiFi 설정을 모두 표시합니다.</string>
     <string name="onb_connection_warning">연결 유형을 선택하면 해당하지 않는 설정이 기본 및 고급 탭에서 모두 숨겨집니다. 다시 보려면 나중에 연결 설정에서 다른 모드를 선택하세요.</string>
+    <string name="resolution_recommended_format">%1$s (권장)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · 높은 대역폭</string>
+    <string name="resolution_too_high_title">화면보다 높은 해상도</string>
+    <string name="resolution_too_high_message">화면은 %1$d x %2$d 픽셀입니다. 더 높은 해상도는 대역폭만 더 쓰고 화질은 좋아지지 않습니다. 패널이 표시할 수 없기 때문입니다.</string>
+    <string name="resolution_high_bandwidth_title">더 높은 대역폭 필요</string>
+    <string name="resolution_high_bandwidth_message">이 해상도는 훨씬 많은 대역폭을 사용하며 안정적인 연결(양호한 5GHz WiFi 또는 안정적인 USB)이 필요합니다. 지연이 있으면 더 낮은 해상도를 선택하세요.</string>
+    <string name="resolution_use_anyway">그래도 사용</string>
+    <string name="resolution_use_recommended">권장값 사용</string>
 </resources>

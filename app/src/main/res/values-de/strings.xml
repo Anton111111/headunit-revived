@@ -722,4 +722,12 @@
     <string name="connection_kind_all">Alle</string>
     <string name="onb_connection_all_detail">Zeigt sowohl die USB- als auch die WiFi-Einstellungen.</string>
     <string name="onb_connection_warning">Wenn du einen Verbindungstyp wählst, werden die nicht passenden Einstellungen in Basis und Erweitert ausgeblendet. Um sie wieder anzuzeigen, wähle später einen anderen Modus in den Verbindungseinstellungen.</string>
+    <string name="resolution_recommended_format">%1$s (Empfohlen)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · hohe Bandbreite</string>
+    <string name="resolution_too_high_title">Auflösung höher als der Bildschirm</string>
+    <string name="resolution_too_high_message">Dein Bildschirm hat %1$d x %2$d Pixel. Eine höhere Auflösung verbraucht mehr Bandbreite ohne Qualitätsgewinn, da das Panel sie nicht darstellen kann.</string>
+    <string name="resolution_high_bandwidth_title">Mehr Bandbreite nötig</string>
+    <string name="resolution_high_bandwidth_message">Diese Auflösung verbraucht viel mehr Bandbreite und braucht eine starke Verbindung: ein gutes 5GHz-WiFi oder eine stabile USB-Verbindung. Bei Rucklern wähle eine niedrigere Auflösung.</string>
+    <string name="resolution_use_anyway">Trotzdem verwenden</string>
+    <string name="resolution_use_recommended">Empfohlene verwenden</string>
 </resources>

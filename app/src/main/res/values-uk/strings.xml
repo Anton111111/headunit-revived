@@ -718,4 +718,12 @@
     <string name="connection_kind_all">Усі</string>
     <string name="onb_connection_all_detail">Показує налаштування USB та WiFi.</string>
     <string name="onb_connection_warning">Вибір типу підключення приховує невідповідні параметри в базовому та розширеному режимах. Щоб знову їх побачити, пізніше виберіть інший режим у налаштуваннях підключення.</string>
+    <string name="resolution_recommended_format">%1$s (Рекомендовано)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · високий трафік</string>
+    <string name="resolution_too_high_title">Роздільність вища за екран</string>
+    <string name="resolution_too_high_message">Екран %1$d x %2$d пікселів. Вища роздільність збільшує трафік без покращення якості, бо панель не може її показати.</string>
+    <string name="resolution_high_bandwidth_title">Потрібен більший трафік</string>
+    <string name="resolution_high_bandwidth_message">Ця роздільність споживає набагато більше трафіку й потребує стабільного зʼєднання: хорошого WiFi 5 ГГц або стабільного USB. Якщо помітите лаги, виберіть нижчу роздільність.</string>
+    <string name="resolution_use_anyway">Все одно використати</string>
+    <string name="resolution_use_recommended">Використати рекомендовану</string>
 </resources>

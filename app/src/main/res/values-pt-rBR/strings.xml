@@ -718,4 +718,12 @@
     <string name="connection_kind_all">Todos</string>
     <string name="onb_connection_all_detail">Mostra as configurações de USB e de WiFi.</string>
     <string name="onb_connection_warning">Escolher um tipo de conexão oculta as configurações que não se aplicam, tanto em Básico quanto em Avançado. Para vê-las novamente, escolha outro modo nas configurações de conexão mais tarde.</string>
+    <string name="resolution_recommended_format">%1$s (Recomendada)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · muita banda</string>
+    <string name="resolution_too_high_title">Resolução maior que a tela</string>
+    <string name="resolution_too_high_message">Sua tela é de %1$d x %2$d pixels. Uma resolução maior usa mais banda sem melhorar a qualidade, porque o painel não consegue exibi-la.</string>
+    <string name="resolution_high_bandwidth_title">É necessária mais banda</string>
+    <string name="resolution_high_bandwidth_message">Esta resolução usa muito mais banda e precisa de uma conexão forte: um bom WiFi de 5GHz ou uma conexão USB estável. Se notar travamentos, escolha uma resolução menor.</string>
+    <string name="resolution_use_anyway">Usar mesmo assim</string>
+    <string name="resolution_use_recommended">Usar recomendada</string>
 </resources>

@@ -715,4 +715,12 @@
     <string name="connection_kind_all">全部</string>
     <string name="onb_connection_all_detail">同時顯示 USB 與 WiFi 設定。</string>
     <string name="onb_connection_warning">選擇連線類型會在基本與進階模式中隱藏不適用的設定。若要再次顯示，稍後在連線設定中選擇其他模式。</string>
+    <string name="resolution_recommended_format">%1$s（建議）</string>
+    <string name="resolution_high_bandwidth_format">%1$s · 高頻寬</string>
+    <string name="resolution_too_high_title">解析度高於螢幕</string>
+    <string name="resolution_too_high_message">你的螢幕為 %1$d x %2$d 像素。更高的解析度會佔用更多頻寬卻不會提升畫質，因為面板無法顯示。</string>
+    <string name="resolution_high_bandwidth_title">需要更高頻寬</string>
+    <string name="resolution_high_bandwidth_message">此解析度會佔用更多頻寬，需要穩定的連線：良好的 5GHz WiFi 或穩定的 USB 連線。若出現延遲，請選擇較低的解析度。</string>
+    <string name="resolution_use_anyway">仍要使用</string>
+    <string name="resolution_use_recommended">使用建議值</string>
 </resources>

@@ -649,4 +649,12 @@
     <string name="connection_kind_all">ყველა</string>
     <string name="onb_connection_all_detail">აჩვენებს როგორც USB, ისე WiFi პარამეტრებს.</string>
     <string name="onb_connection_warning">კავშირის ტიპის არჩევა მალავს შეუსაბამო პარამეტრებს როგორც ძირითად, ისე გაფართოებულ ჩანართში. ისევ სანახავად, მოგვიანებით აირჩიეთ სხვა რეჟიმი კავშირის პარამეტრებში.</string>
+    <string name="resolution_recommended_format">%1$s (რეკომენდებული)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · მაღალი გამტარუნარიანობა</string>
+    <string name="resolution_too_high_title">გარჩევადობა ეკრანზე მაღალია</string>
+    <string name="resolution_too_high_message">თქვენი ეკრანი %1$d x %2$d პიქსელია. უფრო მაღალი გარჩევადობა მეტ გამტარუნარიანობას ხარჯავს ხარისხის გაუმჯობესების გარეშე, რადგან პანელი მას ვერ აჩვენებს.</string>
+    <string name="resolution_high_bandwidth_title">საჭიროა მეტი გამტარუნარიანობა</string>
+    <string name="resolution_high_bandwidth_message">ეს გარჩევადობა გაცილებით მეტ გამტარუნარიანობას ხარჯავს და საჭიროებს მდგრад კავშირს: კარგ 5GHz WiFi-ს ან სტაბილურ USB-ს. თუ შეფერხებას შეამჩნევთ, აირჩიეთ დაბალი გარჩევადობა.</string>
+    <string name="resolution_use_anyway">მაინც გამოყენება</string>
+    <string name="resolution_use_recommended">რეკომენდებულის გამოყენება</string>
 </resources>

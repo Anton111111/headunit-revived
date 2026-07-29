@@ -716,4 +716,12 @@
     <string name="connection_kind_all">Vše</string>
     <string name="onb_connection_all_detail">Zobrazí nastavení USB i WiFi.</string>
     <string name="onb_connection_warning">Výběr typu připojení skryje nepoužitelná nastavení v základním i pokročilém režimu. Chcete-li je znovu zobrazit, zvolte později jiný režim v nastavení připojení.</string>
+    <string name="resolution_recommended_format">%1$s (Doporučeno)</string>
+    <string name="resolution_high_bandwidth_format">%1$s · vysoký datový tok</string>
+    <string name="resolution_too_high_title">Rozlišení vyšší než obrazovka</string>
+    <string name="resolution_too_high_message">Obrazovka má %1$d x %2$d pixelů. Vyšší rozlišení spotřebuje více dat bez zlepšení kvality, protože panel je nedokáže zobrazit.</string>
+    <string name="resolution_high_bandwidth_title">Potřeba vyšší datový tok</string>
+    <string name="resolution_high_bandwidth_message">Toto rozlišení spotřebuje mnohem více dat a vyžaduje silné připojení: kvalitní WiFi 5GHz nebo stabilní USB. Pokud zaznamenáte lagy, zvolte nižší rozlišení.</string>
+    <string name="resolution_use_anyway">Přesto použít</string>
+    <string name="resolution_use_recommended">Použít doporučené</string>
 </resources>
