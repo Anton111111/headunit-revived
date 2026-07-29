@@ -116,7 +116,7 @@ class DpiPreviewView @JvmOverloads constructor(
         val gridH = gridBottom - cTop
         if (gridW <= 0 || gridH <= 0) return
 
-        val norm = ((dpi - 110f) / 130f).coerceIn(0f, 1f)
+        val norm = ((dpi - 110f) / 530f).coerceIn(0f, 1f)
         val cell = (min(gridW, gridH) * (0.16f + norm * 0.34f)).coerceAtLeast(dp(22f))
         val gap = dp(6f)
         val cols = max(1, floor((gridW + gap) / (cell + gap)).toInt())

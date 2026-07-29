@@ -3,17 +3,23 @@ package com.andrerinas.headunitrevived.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.andrerinas.headunitrevived.R
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
+import com.google.android.material.textfield.TextInputEditText
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 /**
- * Reusable DPI picker: a live [DpiPreviewView] graphic, a value label, a slider and
- * Small/Medium/Large tabs, all kept in sync both ways. Used by the onboarding wizard and
- * the DPI settings sub-screen.
+ * Reusable DPI picker: a live [DpiPreviewView] graphic, a slider, an editable value field and
+ * Small/Medium/Large tabs, all kept in sync. Used by the onboarding wizard and the DPI
+ * settings sub-screen.
+ *
+ * The slider covers the full range of real device densities (up to [MAX]) so "Automatic"
+ * values like 440 DPI are reachable. The text field lets the user type any exact value; the
+ * tabs are handy presets and only light up when the current value matches one.
  */
 class DpiPickerView @JvmOverloads constructor(
     context: Context,
@@ -22,8 +28,8 @@ class DpiPickerView @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyle) {
 
     private val preview: DpiPreviewView
-    private val valueText: TextView
     private val slider: Slider
+    private val input: TextInputEditText
     private val tabs: MaterialButtonToggleGroup
 
     private var isBinding = false
@@ -33,8 +39,8 @@ class DpiPickerView @JvmOverloads constructor(
         orientation = VERTICAL
         LayoutInflater.from(context).inflate(R.layout.view_dpi_picker, this, true)
         preview = findViewById(R.id.dpi_preview)
-        valueText = findViewById(R.id.dpi_value)
         slider = findViewById(R.id.dpi_slider)
+        input = findViewById(R.id.dpi_input)
         tabs = findViewById(R.id.dpi_tabs)
 
         slider.addOnChangeListener { _, value, _ ->
@@ -50,8 +56,12 @@ class DpiPickerView @JvmOverloads constructor(
                 applyDpi(rep, fromSlider = false)
             }
         }
+        input.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) { commitInput(); true } else false
+        }
+        input.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) commitInput() }
 
-        // Initialise the label/preview/tab from the slider's default value.
+        // Initialise the field/preview/tab from the slider's default value.
         applyDpi(slider.value.toInt(), fromSlider = true, silent = true)
     }
 
@@ -65,17 +75,32 @@ class DpiPickerView @JvmOverloads constructor(
 
     fun setPickerEnabled(enabled: Boolean) {
         slider.isEnabled = enabled
+        input.isEnabled = enabled
         for (i in 0 until tabs.childCount) tabs.getChildAt(i).isEnabled = enabled
         alpha = if (enabled) 1f else 0.5f
+    }
+
+    /** Parse the typed value, clamp it into range and apply; restore on invalid input. */
+    private fun commitInput() {
+        if (isBinding) return
+        val typed = input.text?.toString()?.trim()?.toIntOrNull()
+        if (typed == null) {
+            isBinding = true
+            input.setText(slider.value.toInt().toString())
+            isBinding = false
+            return
+        }
+        applyDpi(typed, fromSlider = false)
     }
 
     private fun applyDpi(raw: Int, fromSlider: Boolean, silent: Boolean = false) {
         val v = snap(raw)
         isBinding = true
         if (!fromSlider) slider.value = v.toFloat()
-        tabs.check(tabFor(v))
+        val tab = tabFor(v)
+        if (tab != null) tabs.check(tab) else tabs.clearChecked()
         preview.setDpi(v)
-        valueText.text = context.getString(R.string.dpi_value_format, v)
+        if (input.text?.toString() != v.toString()) input.setText(v.toString())
         isBinding = false
         if (!silent) onDpiChanged?.invoke(v)
     }
@@ -85,18 +110,26 @@ class DpiPickerView @JvmOverloads constructor(
         return stepped.coerceIn(MIN, MAX)
     }
 
-    private fun tabFor(v: Int): Int = when {
-        v < MIN + (MAX - MIN) / 3 -> R.id.dpi_tab_small
-        v < MIN + 2 * (MAX - MIN) / 3 -> R.id.dpi_tab_medium
-        else -> R.id.dpi_tab_large
+    /** The preset tab whose representative value is closest, or null for a custom value. */
+    private fun tabFor(v: Int): Int? {
+        if (v < SMALL_REP - PRESET_BAND || v > LARGE_REP + PRESET_BAND) return null
+        val small = abs(v - SMALL_REP)
+        val medium = abs(v - MEDIUM_REP)
+        val large = abs(v - LARGE_REP)
+        return when (minOf(small, medium, large)) {
+            small -> R.id.dpi_tab_small
+            medium -> R.id.dpi_tab_medium
+            else -> R.id.dpi_tab_large
+        }
     }
 
     companion object {
         private const val MIN = 110
-        private const val MAX = 240
+        private const val MAX = 640
         private const val STEP = 2
         private const val SMALL_REP = 132
         private const val MEDIUM_REP = 175
         private const val LARGE_REP = 218
+        private const val PRESET_BAND = 30
     }
 }

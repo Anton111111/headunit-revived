@@ -727,4 +727,5 @@
     <string name="resolution_use_anyway">Все одно використати</string>
     <string name="resolution_use_recommended">Використати рекомендовану</string>
     <string name="dpi_automatic_desc_format">Використовує щільність пристрою (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

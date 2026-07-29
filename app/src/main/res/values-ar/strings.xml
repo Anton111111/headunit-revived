@@ -727,4 +727,5 @@
     <string name="resolution_use_anyway">استخدام على أي حال</string>
     <string name="resolution_use_recommended">استخدام الموصى به</string>
     <string name="dpi_automatic_desc_format">يستخدم كثافة الجهاز (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

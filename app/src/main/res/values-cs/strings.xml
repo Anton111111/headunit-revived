@@ -725,4 +725,5 @@
     <string name="resolution_use_anyway">Přesto použít</string>
     <string name="resolution_use_recommended">Použít doporučené</string>
     <string name="dpi_automatic_desc_format">Použije hustotu zařízení (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

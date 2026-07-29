@@ -658,4 +658,5 @@
     <string name="resolution_use_anyway">მაინც გამოყენება</string>
     <string name="resolution_use_recommended">რეკომენდებულის გამოყენება</string>
     <string name="dpi_automatic_desc_format">იყენებს მოწყობილობის სიმკვრივეს (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

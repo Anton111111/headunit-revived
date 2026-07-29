@@ -725,4 +725,5 @@
     <string name="resolution_use_anyway">Toch gebruiken</string>
     <string name="resolution_use_recommended">Aanbevolen gebruiken</string>
     <string name="dpi_automatic_desc_format">Gebruikt de dichtheid van het apparaat (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

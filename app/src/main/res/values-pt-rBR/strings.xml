@@ -727,4 +727,5 @@
     <string name="resolution_use_anyway">Usar mesmo assim</string>
     <string name="resolution_use_recommended">Usar recomendada</string>
     <string name="dpi_automatic_desc_format">Usa a densidade do dispositivo (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

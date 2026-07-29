@@ -731,4 +731,5 @@
     <string name="resolution_use_anyway">Vẫn dùng</string>
     <string name="resolution_use_recommended">Dùng khuyến nghị</string>
     <string name="dpi_automatic_desc_format">Dùng mật độ của thiết bị (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

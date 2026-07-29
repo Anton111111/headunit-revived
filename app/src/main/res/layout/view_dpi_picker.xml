@@ -7,23 +7,35 @@
         android:layout_width="match_parent"
         android:layout_height="190dp" />
 
-    <TextView
-        android:id="@+id/dpi_value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textAppearance="?attr/textAppearanceSubtitle1" />
-
     <com.google.android.material.slider.Slider
         android:id="@+id/dpi_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         android:valueFrom="110"
-        android:valueTo="240"
+        android:valueTo="640"
         android:stepSize="2"
         android:value="160" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dpi_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:hint="@string/dpi_input_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dpi_input"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="3" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/dpi_tabs"
@@ -31,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         app:singleSelection="true"
-        app:selectionRequired="true">
+        app:selectionRequired="false">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/dpi_tab_small"

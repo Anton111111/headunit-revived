@@ -729,4 +729,5 @@
     <string name="resolution_use_anyway">그래도 사용</string>
     <string name="resolution_use_recommended">권장값 사용</string>
     <string name="dpi_automatic_desc_format">기기 밀도를 사용합니다 (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>

@@ -90,6 +90,7 @@
     <string name="dpi_automatic_desc">Use the device density</string>
     <string name="dpi_automatic_desc_format">Uses the device density (%1$d DPI)</string>
     <string name="dpi_value_format">%1$d DPI</string>
+    <string name="dpi_input_hint">DPI</string>
 
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="dummy_button">Dummy Button</string>

@@ -722,4 +722,5 @@
     <string name="resolution_use_anyway">Yine de kullan</string>
     <string name="resolution_use_recommended">Önerileni kullan</string>
     <string name="dpi_automatic_desc_format">Cihaz yoğunluğunu kullanır (%1$d DPI)</string>
+    <string name="dpi_input_hint">DPI</string>
 </resources>
