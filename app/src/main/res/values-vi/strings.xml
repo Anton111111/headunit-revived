@@ -712,4 +712,5 @@
     <string name="onb_dpi_medium">Vừa</string>
     <string name="onb_dpi_large">Lớn</string>
     <string name="onb_appearance_more_hint">Bạn có thể tìm thêm tùy chọn chế độ tối trong Cài đặt.</string>
+    <string name="onb_automation_more_hint">Bạn có thể tìm thêm tùy chọn trong cài đặt Tự động kết nối và Tự động khởi động.</string>
 </resources>

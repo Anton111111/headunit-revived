@@ -1,7 +1,6 @@
 package com.andrerinas.headunitrevived.main
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -229,13 +228,6 @@ class OnboardingActivity : BaseActivity() {
                 Settings.syncAutoStartOnWifiToDeviceStorage(this@OnboardingActivity, v)
             }
         }
-        findViewById<MaterialButton>(R.id.onb_autoconnect_more).setOnClickListener {
-            openSettingsAt(R.id.autoConnectFragment)
-        }
-        findViewById<MaterialButton>(R.id.onb_autostart_more).setOnClickListener {
-            openSettingsAt(R.id.autoStartFragment)
-        }
-
         // --- Location: this device's GPS vs the connected phone's GPS ---
         val gpsGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_gps_group)
         isBinding = true
@@ -275,6 +267,9 @@ class OnboardingActivity : BaseActivity() {
 
     private fun onNext() {
         if (step == STEP_SAFETY) settings.hasAcceptedDisclaimer = true
+        // Apply the display recommendation + chosen DPI on Next, so the user does not
+        // have to press "Apply recommended settings" for it to take effect.
+        if (step == STEP_DISPLAY) runOptimization()
         if (step == STEP_COUNT - 1) finishOnboarding() else { step++; render() }
     }
 
@@ -467,15 +462,6 @@ class OnboardingActivity : BaseActivity() {
             .show()
     }
 
-    // --- Deep link into the real settings sub-screens ---
-
-    private fun openSettingsAt(destinationId: Int) {
-        startActivity(
-            Intent(this, SettingsActivity::class.java)
-                .putExtra(SettingsActivity.EXTRA_DESTINATION, destinationId)
-        )
-    }
-
     // --- Ready ---
 
     private fun summaryText(): String {
@@ -502,6 +488,7 @@ class OnboardingActivity : BaseActivity() {
         var deferredThisSession = false
         private const val KEY_STEP = "onb_step"
         private const val STEP_COUNT = 8
+        private const val STEP_DISPLAY = 3
         private const val STEP_SAFETY = 1
         private const val STEP_AUTOMATION = 5
         private const val STEP_READY = 7

@@ -639,4 +639,5 @@
     <string name="onb_dpi_medium">საშუალო</string>
     <string name="onb_dpi_large">დიდი</string>
     <string name="onb_appearance_more_hint">მუქი რეჟიმის დამატებით პარამეტრებს პარამეტრებში იპოვით.</string>
+    <string name="onb_automation_more_hint">დამატებით პარამეტრებს ავტომატური დაკავშირებისა და ავტომატური გაშვების პარამეტრებში იპოვით.</string>
 </resources>

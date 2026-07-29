@@ -703,4 +703,5 @@
     <string name="onb_dpi_medium">Orta</string>
     <string name="onb_dpi_large">Büyük</string>
     <string name="onb_appearance_more_hint">Daha fazla karanlık mod seçeneğini Ayarlar bölümünde bulabilirsiniz.</string>
+    <string name="onb_automation_more_hint">Daha fazla seçeneği Otomatik bağlanma ve Otomatik başlatma ayarlarında bulabilirsiniz.</string>
 </resources>

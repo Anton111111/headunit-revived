@@ -453,29 +453,12 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="12dp">
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/onb_autoconnect_more"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/auto_connect_settings" />
-                    <Space
-                        android:layout_width="8dp"
-                        android:layout_height="1dp" />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/onb_autostart_more"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/auto_start_settings" />
-                </LinearLayout>
+                    android:layout_marginTop="12dp"
+                    android:text="@string/onb_automation_more_hint"
+                    android:textAppearance="?attr/textAppearanceCaption" />
 
                 <TextView
                     android:id="@+id/onb_automation_oem"

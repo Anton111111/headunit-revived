@@ -706,4 +706,5 @@
     <string name="onb_dpi_medium">Gemiddeld</string>
     <string name="onb_dpi_large">Groot</string>
     <string name="onb_appearance_more_hint">Je vindt meer opties voor de donkere modus in Instellingen.</string>
+    <string name="onb_automation_more_hint">Je vindt meer opties in de instellingen voor Automatisch verbinden en Automatisch starten.</string>
 </resources>

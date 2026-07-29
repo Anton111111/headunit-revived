@@ -713,4 +713,5 @@
     <string name="onb_dpi_medium">Medio</string>
     <string name="onb_dpi_large">Grande</string>
     <string name="onb_appearance_more_hint">Puoi trovare altre opzioni della modalità scura nelle Impostazioni.</string>
+    <string name="onb_automation_more_hint">Puoi trovare altre opzioni nelle impostazioni di Connessione automatica e Avvio automatico.</string>
 </resources>

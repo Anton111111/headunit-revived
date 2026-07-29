@@ -708,4 +708,5 @@
     <string name="onb_dpi_medium">متوسط</string>
     <string name="onb_dpi_large">كبير</string>
     <string name="onb_appearance_more_hint">يمكنك العثور على المزيد من خيارات الوضع الداكن في الإعدادات.</string>
+    <string name="onb_automation_more_hint">يمكنك العثور على المزيد من الخيارات في إعدادات الاتصال التلقائي والتشغيل التلقائي.</string>
 </resources>

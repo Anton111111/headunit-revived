@@ -707,4 +707,5 @@
     <string name="onb_dpi_medium">Mediu</string>
     <string name="onb_dpi_large">Mare</string>
     <string name="onb_appearance_more_hint">Poți găsi mai multe opțiuni pentru modul întunecat în Setări.</string>
+    <string name="onb_automation_more_hint">Poți găsi mai multe opțiuni în setările de Conectare automată și Pornire automată.</string>
 </resources>

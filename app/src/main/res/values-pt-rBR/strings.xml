@@ -708,4 +708,5 @@
     <string name="onb_dpi_medium">Médio</string>
     <string name="onb_dpi_large">Grande</string>
     <string name="onb_appearance_more_hint">Você encontra mais opções de modo escuro nas Configurações.</string>
+    <string name="onb_automation_more_hint">Você encontra mais opções nas configurações de Conexão automática e Início automático.</string>
 </resources>

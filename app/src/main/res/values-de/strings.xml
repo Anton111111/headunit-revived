@@ -712,4 +712,5 @@
     <string name="onb_dpi_medium">Mittel</string>
     <string name="onb_dpi_large">Groß</string>
     <string name="onb_appearance_more_hint">Weitere Optionen für den Dunkelmodus findest du in den Einstellungen.</string>
+    <string name="onb_automation_more_hint">Weitere Optionen findest du in den Einstellungen für automatische Verbindung und automatischen Start.</string>
 </resources>

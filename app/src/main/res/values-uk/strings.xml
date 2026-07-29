@@ -708,4 +708,5 @@
     <string name="onb_dpi_medium">Середній</string>
     <string name="onb_dpi_large">Великий</string>
     <string name="onb_appearance_more_hint">Більше параметрів темного режиму ви знайдете в налаштуваннях.</string>
+    <string name="onb_automation_more_hint">Більше параметрів у налаштуваннях автопідключення та автозапуску.</string>
 </resources>

@@ -707,4 +707,5 @@
     <string name="onb_dpi_medium">Średni</string>
     <string name="onb_dpi_large">Duży</string>
     <string name="onb_appearance_more_hint">Więcej opcji trybu ciemnego znajdziesz w Ustawieniach.</string>
+    <string name="onb_automation_more_hint">Więcej opcji znajdziesz w ustawieniach automatycznego łączenia i automatycznego startu.</string>
 </resources>

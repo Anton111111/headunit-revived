@@ -705,4 +705,5 @@
     <string name="onb_dpi_medium">中</string>
     <string name="onb_dpi_large">大</string>
     <string name="onb_appearance_more_hint">你可以在設定中找到更多深色模式選項。</string>
+    <string name="onb_automation_more_hint">你可以在自動連線與自動啟動設定中找到更多選項。</string>
 </resources>
