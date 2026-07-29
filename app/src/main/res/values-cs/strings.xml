@@ -732,4 +732,5 @@
     <string name="onb_vehicle_help_aa">Tento název se odesílá do Android Auto. Zobrazuje se v historii připojení telefonu a na uvítací obrazovce Android Auto.</string>
     <string name="onb_vehicle_help_advanced">Další podrobnosti o vozidle můžete upravit na kartě Pokročilé. Tato data nepoužíváme; odesílají se pouze do Android Auto, protože je vyžaduje.</string>
     <string name="onb_summary_vehicle_format">Vozidlo: %1$s</string>
+    <string name="sunrise_reference_help">Referenční bod používaný pro výpočet východu a západu slunce. Vyberte svou polohu jednou; funguje to bez GPS.</string>
 </resources>

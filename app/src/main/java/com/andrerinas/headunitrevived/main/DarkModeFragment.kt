@@ -335,6 +335,7 @@ class DarkModeFragment : Fragment(), SensorEventListener {
      */
     private fun addSunriseReference(items: MutableList<SettingItem>, idSuffix: String) {
         val useFixed = pendingUseFixedSunriseLocation == true
+        items.add(SettingItem.InfoBanner("sunriseHelp_$idSuffix", R.string.sunrise_reference_help))
         items.add(SettingItem.SettingEntry(
             stableId = "sunriseSource_$idSuffix",
             nameResId = R.string.sunrise_location_title,
@@ -510,6 +511,11 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                 if (lat != null && lon != null && lat in -90.0..90.0 && lon in -180.0..180.0) {
                     settings.fixedSunriseLatitude = lat
                     settings.fixedSunriseLongitude = lon
+                    // Entering coordinates turns on the fixed point so it is not lost if the
+                    // settings screen is left without saving.
+                    settings.useFixedSunriseLocation = true
+                    pendingUseFixedSunriseLocation = true
+                    checkChanges()
                     updateSettingsList()
                 } else {
                     Toast.makeText(ctx, R.string.coordinates_invalid, Toast.LENGTH_SHORT).show()

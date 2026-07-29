@@ -795,4 +795,5 @@
     <string name="coordinate_longitude">Longitude</string>
     <string name="coordinates_invalid">Invalid coordinates</string>
     <string name="coordinates_format_help">Decimal degrees, dot or comma. Example: 40.4168, -3.7038</string>
+    <string name="sunrise_reference_help">The reference point used to calculate sunrise and sunset. Pick your location once; it works without GPS.</string>
 </resources>

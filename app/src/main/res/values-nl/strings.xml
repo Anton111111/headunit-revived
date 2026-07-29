@@ -732,4 +732,5 @@
     <string name="onb_vehicle_help_aa">Deze naam wordt naar Android Auto gestuurd. Hij verschijnt in de verbindingsgeschiedenis van je telefoon en op het welkomstscherm van Android Auto.</string>
     <string name="onb_vehicle_help_advanced">Je kunt meer voertuiggegevens aanpassen op het tabblad Geavanceerd. Wij gebruiken deze gegevens niet; ze worden alleen naar Android Auto gestuurd omdat het ze vereist.</string>
     <string name="onb_summary_vehicle_format">Voertuig: %1$s</string>
+    <string name="sunrise_reference_help">Het referentiepunt dat wordt gebruikt om zonsopkomst en zonsondergang te berekenen. Kies één keer je locatie; het werkt zonder gps.</string>
 </resources>

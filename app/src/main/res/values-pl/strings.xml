@@ -733,4 +733,5 @@
     <string name="onb_vehicle_help_aa">Ta nazwa jest wysyłana do Android Auto. Pojawia się w historii połączeń telefonu i na ekranie powitalnym Android Auto.</string>
     <string name="onb_vehicle_help_advanced">Więcej szczegółów pojazdu możesz dostosować w karcie Zaawansowane. Nie używamy tych danych; są wysyłane tylko do Android Auto, ponieważ ich wymaga.</string>
     <string name="onb_summary_vehicle_format">Pojazd: %1$s</string>
+    <string name="sunrise_reference_help">Punkt odniesienia używany do obliczania wschodu i zachodu słońca. Wybierz swoją lokalizację raz; działa bez GPS.</string>
 </resources>

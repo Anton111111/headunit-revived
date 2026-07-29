@@ -738,4 +738,5 @@
     <string name="onb_vehicle_help_aa">Tên này được gửi đến Android Auto. Nó hiển thị trong lịch sử kết nối của điện thoại và trên màn hình chào mừng của Android Auto.</string>
     <string name="onb_vehicle_help_advanced">Bạn có thể tinh chỉnh thêm chi tiết xe trong tab Nâng cao. Chúng tôi không dùng dữ liệu này; nó chỉ được gửi đến Android Auto vì Android Auto yêu cầu.</string>
     <string name="onb_summary_vehicle_format">Xe: %1$s</string>
+    <string name="sunrise_reference_help">Điểm tham chiếu được dùng để tính thời gian mặt trời mọc và lặn. Chọn vị trí của bạn một lần; hoạt động mà không cần GPS.</string>
 </resources>

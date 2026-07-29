@@ -739,4 +739,5 @@
     <string name="onb_vehicle_help_aa">この名前は Android Auto に送信されます。スマートフォンの接続履歴と Android Auto のウェルカム画面に表示されます。</string>
     <string name="onb_vehicle_help_advanced">車両の詳細は詳細設定タブで調整できます。このデータは当方では使用せず、Android Auto が必要とするため送信するだけです。</string>
     <string name="onb_summary_vehicle_format">車両: %1$s</string>
+    <string name="sunrise_reference_help">日の出と日の入りを計算するための基準点です。場所を一度選択すれば、GPS なしで機能します。</string>
 </resources>

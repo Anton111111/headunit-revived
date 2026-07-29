@@ -736,4 +736,5 @@
     <string name="onb_vehicle_help_aa">이 이름은 Android Auto로 전송됩니다. 휴대전화의 연결 기록과 Android Auto 시작 화면에 표시됩니다.</string>
     <string name="onb_vehicle_help_advanced">고급 탭에서 차량 세부정보를 더 조정할 수 있습니다. 이 데이터는 저희가 사용하지 않으며, Android Auto가 요구하므로 전송만 합니다.</string>
     <string name="onb_summary_vehicle_format">차량: %1$s</string>
+    <string name="sunrise_reference_help">일출과 일몰을 계산하는 데 사용되는 기준점입니다. 위치를 한 번만 선택하면 GPS 없이도 작동합니다.</string>
 </resources>

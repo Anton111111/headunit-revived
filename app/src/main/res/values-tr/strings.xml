@@ -729,4 +729,5 @@
     <string name="onb_vehicle_help_aa">Bu ad Android Auto uygulamasına gönderilir. Telefonunuzun bağlantı geçmişinde ve Android Auto karşılama ekranında görünür.</string>
     <string name="onb_vehicle_help_advanced">Gelişmiş sekmesinde daha fazla araç ayrıntısını düzenleyebilirsiniz. Bu verileri biz kullanmayız; yalnızca Android Auto gerektirdiği için gönderilir.</string>
     <string name="onb_summary_vehicle_format">Araç: %1$s</string>
+    <string name="sunrise_reference_help">Gün doğumu ve gün batımını hesaplamak için kullanılan referans noktası. Konumunuzu bir kez seçin; GPS olmadan çalışır.</string>
 </resources>

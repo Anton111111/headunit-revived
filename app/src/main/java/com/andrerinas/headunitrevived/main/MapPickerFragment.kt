@@ -62,8 +62,6 @@ class MapPickerFragment : Fragment() {
     private var currentLon: Double = 0.0
     private var currentRadius: Float = GeofenceLocation.DEFAULT_RADIUS_METERS
     private var forceNight: Boolean = true
-    // GPS accuracy (meters) of the device fix used to center the point picker; 0 if none.
-    private var pointAccuracy: Float = 0f
 
     private val requestLocationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -89,24 +87,17 @@ class MapPickerFragment : Fragment() {
 
     private fun resolveInitialState() {
         if (mode == MODE_POINT) {
-            // Default to the device's current location with its GPS accuracy circle, so the
-            // user sees where they are; fall back to the stored fixed point if there is no fix.
+            // Center on the device's current location so the user sees where they are; fall
+            // back to the stored fixed point if there is no fix. The fixed sunrise/sunset
+            // point is just a coordinate for the calculation, so there is no radius here.
             val fix = LocationHolder.geofenceFix(requireContext())
             if (fix != null) {
                 currentLat = fix.latitude
                 currentLon = fix.longitude
-                pointAccuracy = if (fix.hasAccuracy()) fix.accuracy else 0f
             } else {
                 currentLat = settings.fixedSunriseLatitude
                 currentLon = settings.fixedSunriseLongitude
             }
-            // Configurable radius circle: saved value, else the GPS accuracy, else default.
-            val rawRadius = when {
-                settings.fixedSunriseRadius > 0 -> settings.fixedSunriseRadius.toFloat()
-                pointAccuracy > 0f -> pointAccuracy
-                else -> GeofenceLocation.DEFAULT_RADIUS_METERS
-            }
-            currentRadius = (Math.round(rawRadius / 50f) * 50).toFloat().coerceIn(50f, 5000f)
             return
         }
         val existing = editingId?.let { id -> settings.geofenceLocations.firstOrNull { it.id == id } }
@@ -142,23 +133,25 @@ class MapPickerFragment : Fragment() {
 
         val isGeofence = mode == MODE_GEOFENCE
         val geofenceOnly = if (isGeofence) View.VISIBLE else View.GONE
+        // Explain what the point picker is for (the sunrise/sunset reference).
+        view.findViewById<TextView>(R.id.point_help).visibility =
+            if (isGeofence) View.GONE else View.VISIBLE
         nameLayout.visibility = geofenceOnly
+        // The radius is a real geofence, only for saved places. The fixed sunrise point
+        // is just a coordinate, so no radius is shown there.
+        radiusRow.visibility = geofenceOnly
         darkSwitch.visibility = geofenceOnly
-
-        // Configurable radius circle in both modes (a real geofence for places; a
-        // configurable area around the fixed sunrise point in point mode).
-        radiusRow.visibility = View.VISIBLE
-        radiusSlider.value = currentRadius.coerceIn(radiusSlider.valueFrom, radiusSlider.valueTo)
-        radiusLabel.text = getString(R.string.geofence_radius_summary, currentRadius.toInt())
-        radiusSlider.addOnChangeListener { _, value, _ ->
-            currentRadius = value
-            radiusLabel.text = getString(R.string.geofence_radius_summary, value.toInt())
-            callJs("setRadius($value)")
-        }
 
         if (isGeofence) {
             editingId?.let { id ->
                 settings.geofenceLocations.firstOrNull { it.id == id }?.let { nameInput.setText(it.name) }
+            }
+            radiusSlider.value = currentRadius.coerceIn(radiusSlider.valueFrom, radiusSlider.valueTo)
+            radiusLabel.text = getString(R.string.geofence_radius_summary, currentRadius.toInt())
+            radiusSlider.addOnChangeListener { _, value, _ ->
+                currentRadius = value
+                radiusLabel.text = getString(R.string.geofence_radius_summary, value.toInt())
+                callJs("setRadius($value)")
             }
             darkSwitch.isChecked = forceNight
             darkSwitch.setOnCheckedChangeListener { _, checked -> forceNight = checked }
@@ -220,8 +213,9 @@ class MapPickerFragment : Fragment() {
         webView.settings.domStorageEnabled = true
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
-                // Configurable radius circle shown in both modes.
-                callJs("initMap($currentLat, $currentLon, $currentRadius, 1, 0)")
+                // Radius circle only for saved places, not for the single sunrise point.
+                val showRadius = if (mode == MODE_GEOFENCE) 1 else 0
+                callJs("initMap($currentLat, $currentLon, $currentRadius, $showRadius, 0)")
             }
         }
         webView.addJavascriptInterface(JsBridge(), "Android")
@@ -275,7 +269,9 @@ class MapPickerFragment : Fragment() {
         if (mode == MODE_POINT) {
             settings.fixedSunriseLatitude = currentLat
             settings.fixedSunriseLongitude = currentLon
-            settings.fixedSunriseRadius = currentRadius.toInt()
+            // Saving on the map now really turns on the fixed point, so picking coordinates
+            // here no longer reverts to GPS when the settings screen was not saved first.
+            settings.useFixedSunriseLocation = true
             applyThemeConfigChange()
             Toast.makeText(requireContext(), R.string.geofence_saved, Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()

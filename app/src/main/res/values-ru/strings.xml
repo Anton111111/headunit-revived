@@ -732,4 +732,5 @@
     <string name="onb_vehicle_help_aa">Это имя отправляется в Android Auto. Оно отображается в истории подключений телефона и на экране приветствия Android Auto.</string>
     <string name="onb_vehicle_help_advanced">Дополнительные сведения об автомобиле можно настроить на вкладке Дополнительно. Мы не используем эти данные; они отправляются только в Android Auto, потому что он их запрашивает.</string>
     <string name="onb_summary_vehicle_format">Автомобиль: %1$s</string>
+    <string name="sunrise_reference_help">Опорная точка для расчёта восхода и заката. Укажите своё местоположение один раз; работает без GPS.</string>
 </resources>
