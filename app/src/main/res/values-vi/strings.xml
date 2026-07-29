@@ -733,4 +733,9 @@
     <string name="dpi_automatic_desc_format">Dùng mật độ của thiết bị (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">Cực lớn</string>
+    <string name="onb_vehicle_title">Hãng xe</string>
+    <string name="onb_vehicle_input_hint">Hãng hoặc tên</string>
+    <string name="onb_vehicle_help_aa">Tên này được gửi đến Android Auto. Nó hiển thị trong lịch sử kết nối của điện thoại và trên màn hình chào mừng của Android Auto.</string>
+    <string name="onb_vehicle_help_advanced">Bạn có thể tinh chỉnh thêm chi tiết xe trong tab Nâng cao. Chúng tôi không dùng dữ liệu này; nó chỉ được gửi đến Android Auto vì Android Auto yêu cầu.</string>
+    <string name="onb_summary_vehicle_format">Xe: %1$s</string>
 </resources>

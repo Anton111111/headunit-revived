@@ -728,4 +728,9 @@
     <string name="dpi_automatic_desc_format">Folosește densitatea dispozitivului (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">Uriaș</string>
+    <string name="onb_vehicle_title">Marca mașinii</string>
+    <string name="onb_vehicle_input_hint">Marcă sau nume</string>
+    <string name="onb_vehicle_help_aa">Acest nume este trimis către Android Auto. Apare în istoricul conexiunilor telefonului și pe ecranul de întâmpinare Android Auto.</string>
+    <string name="onb_vehicle_help_advanced">Poți ajusta mai multe detalii despre vehicul în fila Avansat. Nu folosim aceste date; sunt trimise doar către Android Auto deoarece le solicită.</string>
+    <string name="onb_summary_vehicle_format">Vehicul: %1$s</string>
 </resources>

@@ -726,4 +726,9 @@
     <string name="dpi_automatic_desc_format">使用裝置密度（%1$d DPI）</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">巨大</string>
+    <string name="onb_vehicle_title">汽車品牌</string>
+    <string name="onb_vehicle_input_hint">品牌或名稱</string>
+    <string name="onb_vehicle_help_aa">這個名稱會傳送到 Android Auto，並顯示在手機的連線紀錄和 Android Auto 的歡迎畫面上。</string>
+    <string name="onb_vehicle_help_advanced">你可以在進階分頁中調整更多車輛細節。我們不會使用這些資料，只會傳送給 Android Auto，因為它需要這些資料。</string>
+    <string name="onb_summary_vehicle_format">車輛：%1$s</string>
 </resources>

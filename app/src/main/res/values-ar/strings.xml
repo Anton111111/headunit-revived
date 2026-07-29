@@ -729,4 +729,9 @@
     <string name="dpi_automatic_desc_format">يستخدم كثافة الجهاز (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">ضخم</string>
+    <string name="onb_vehicle_title">علامة السيارة</string>
+    <string name="onb_vehicle_input_hint">العلامة أو الاسم</string>
+    <string name="onb_vehicle_help_aa">يُرسَل هذا الاسم إلى Android Auto. ويظهر في سجل اتصالات هاتفك وعلى شاشة الترحيب في Android Auto.</string>
+    <string name="onb_vehicle_help_advanced">يمكنك ضبط المزيد من تفاصيل مركبتك في علامة التبويب المتقدمة. نحن لا نستخدم هذه البيانات؛ تُرسَل فقط إلى Android Auto لأنه يطلبها.</string>
+    <string name="onb_summary_vehicle_format">المركبة: %1$s</string>
 </resources>

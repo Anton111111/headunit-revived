@@ -19,11 +19,15 @@ import com.andrerinas.headunitrevived.utils.AppThemeManager
 import com.andrerinas.headunitrevived.utils.LocaleHelper
 import com.andrerinas.headunitrevived.utils.Settings
 import com.andrerinas.headunitrevived.utils.SystemOptimizer
+import androidx.core.view.ViewCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.checkbox.MaterialCheckBox
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.textfield.TextInputEditText
 import kotlin.math.sqrt
 
 /**
@@ -246,6 +250,78 @@ class OnboardingActivity : BaseActivity() {
             if (!isChecked || isBinding) return@addOnButtonCheckedListener
             settings.useGpsForNavigation = checkedId == R.id.onb_gps_device
         }
+
+        // --- Car brand: a friendly identity sent to Android Auto (display name + both makes) ---
+        bindVehicleStep()
+    }
+
+    /**
+     * Binds the car-brand step: a live head-unit screen, an editable field and a horizontal
+     * strip of brand chips. The current stored value is shown first and pre-selected, and the
+     * field is the source of truth (chips are shortcuts).
+     */
+    private fun bindVehicleStep() {
+        val input = findViewById<TextInputEditText>(R.id.onb_vehicle_input)
+        val screen = findViewById<TextView>(R.id.onb_vehicle_screen_name)
+        val chips = findViewById<ChipGroup>(R.id.onb_vehicle_chips)
+
+        val current = settings.vehicleDisplayName.trim()
+        // Build the brand list with the current value first ("option 1"), then the presets.
+        val brands = resources.getStringArray(R.array.vehicle_brands).toMutableList()
+        if (current.isNotEmpty()) {
+            brands.removeAll { it.equals(current, ignoreCase = true) }
+            brands.add(0, current)
+        }
+        chips.removeAllViews()
+        brands.forEach { brand ->
+            val chip = layoutInflater.inflate(R.layout.item_vehicle_chip, chips, false) as Chip
+            chip.text = brand
+            chip.id = ViewCompat.generateViewId()
+            chips.addView(chip)
+        }
+
+        isBinding = true
+        input.setText(current)
+        screen.text = current
+        for (i in 0 until chips.childCount) {
+            val chip = chips.getChildAt(i) as Chip
+            if (chip.text.toString().equals(current, ignoreCase = true)) {
+                chip.isChecked = true
+                break
+            }
+        }
+        isBinding = false
+
+        chips.setOnCheckedStateChangeListener { group, checkedIds ->
+            if (isBinding) return@setOnCheckedStateChangeListener
+            val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+            val chip = group.findViewById<Chip>(id) ?: return@setOnCheckedStateChangeListener
+            isBinding = true
+            input.setText(chip.text)
+            input.setSelection(input.text?.length ?: 0)
+            screen.text = chip.text
+            isBinding = false
+        }
+
+        input.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                val text = s?.toString().orEmpty()
+                screen.text = text
+                if (isBinding) return
+                // Clear a chip selection that no longer matches the typed text.
+                val checkedId = chips.checkedChipId
+                if (checkedId != View.NO_ID) {
+                    val chip = chips.findViewById<Chip>(checkedId)
+                    if (chip != null && !chip.text.toString().equals(text.trim(), ignoreCase = true)) {
+                        isBinding = true
+                        chips.clearCheck()
+                        isBinding = false
+                    }
+                }
+            }
+        })
     }
 
     private fun render() {
@@ -282,6 +358,17 @@ class OnboardingActivity : BaseActivity() {
         // Apply the display recommendation + chosen DPI on Next, so the user does not
         // have to press "Apply recommended settings" for it to take effect.
         if (step == STEP_DISPLAY || step == STEP_DPI) applyDisplaySettings()
+        // The chosen car brand fills the display name and both manufacturer fields, so it
+        // appears whichever identity field Android Auto reads.
+        if (step == STEP_VEHICLE) {
+            val brand = findViewById<TextInputEditText>(R.id.onb_vehicle_input)
+                .text?.toString()?.trim().orEmpty()
+            if (brand.isNotEmpty()) {
+                settings.vehicleDisplayName = brand
+                settings.vehicleMake = brand
+                settings.headUnitMake = brand
+            }
+        }
         if (step == STEP_COUNT - 1) finishOnboarding() else { step++; render() }
     }
 
@@ -467,7 +554,11 @@ class OnboardingActivity : BaseActivity() {
             R.string.resolution_recommended_format,
             Settings.Resolution.fromId(settings.resolutionId)?.resName ?: getString(R.string.auto)
         )
-        return getString(R.string.onb_ready_summary, conn, res, settings.videoCodec)
+        val base = getString(R.string.onb_ready_summary, conn, res, settings.videoCodec)
+        val vehicle = settings.vehicleDisplayName.trim()
+        return if (vehicle.isNotEmpty())
+            getString(R.string.onb_summary_vehicle_format, vehicle) + "\n" + base
+        else base
     }
 
     private fun resolveAttrColor(attr: Int): Int {
@@ -483,11 +574,12 @@ class OnboardingActivity : BaseActivity() {
         @Volatile
         var deferredThisSession = false
         private const val KEY_STEP = "onb_step"
-        private const val STEP_COUNT = 9
+        private const val STEP_COUNT = 10
         private const val STEP_SAFETY = 1
         private const val STEP_DISPLAY = 3
         private const val STEP_DPI = 4
         private const val STEP_AUTOMATION = 6
-        private const val STEP_READY = 8
+        private const val STEP_VEHICLE = 8
+        private const val STEP_READY = 9
     }
 }

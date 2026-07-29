@@ -727,4 +727,9 @@
     <string name="dpi_automatic_desc_format">Použije hustotu zařízení (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">Obrovský</string>
+    <string name="onb_vehicle_title">Značka auta</string>
+    <string name="onb_vehicle_input_hint">Značka nebo název</string>
+    <string name="onb_vehicle_help_aa">Tento název se odesílá do Android Auto. Zobrazuje se v historii připojení telefonu a na uvítací obrazovce Android Auto.</string>
+    <string name="onb_vehicle_help_advanced">Další podrobnosti o vozidle můžete upravit na kartě Pokročilé. Tato data nepoužíváme; odesílají se pouze do Android Auto, protože je vyžaduje.</string>
+    <string name="onb_summary_vehicle_format">Vozidlo: %1$s</string>
 </resources>

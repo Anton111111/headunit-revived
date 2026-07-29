@@ -726,4 +726,9 @@
     <string name="dpi_automatic_desc_format">Az eszköz sűrűségét használja (%1$d DPI)</string>
     <string name="dpi_input_hint">DPI</string>
     <string name="onb_dpi_huge">Hatalmas</string>
+    <string name="onb_vehicle_title">Autómárka</string>
+    <string name="onb_vehicle_input_hint">Márka vagy név</string>
+    <string name="onb_vehicle_help_aa">Ez a név elküldésre kerül az Android Autónak. Megjelenik a telefon csatlakozási előzményeiben és az Android Auto üdvözlőképernyőjén.</string>
+    <string name="onb_vehicle_help_advanced">További járműadatokat a Speciális lapon állíthatsz be. Ezeket az adatokat nem használjuk; csak azért küldjük az Android Autónak, mert megköveteli.</string>
+    <string name="onb_summary_vehicle_format">Jármű: %1$s</string>
 </resources>
