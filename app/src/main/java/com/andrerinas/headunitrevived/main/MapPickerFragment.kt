@@ -178,17 +178,20 @@ class MapPickerFragment : Fragment() {
             return
         }
         val ctx = requireContext()
+        // Build the dialog content with the dialog's own DayNight theme so the text stays
+        // readable in both light and dark mode. It was hardcoded white, which was invisible
+        // on the white background in light mode.
+        val dialogCtx = android.view.ContextThemeWrapper(ctx, R.style.DarkAlertDialog)
         val density = resources.displayMetrics.density
         val pad = (16 * density).toInt()
-        val container = LinearLayout(ctx).apply {
+        val container = LinearLayout(dialogCtx).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(pad, pad, pad, 0)
         }
-        val message = TextView(ctx).apply {
+        val message = TextView(dialogCtx).apply {
             text = getString(R.string.geofence_internet_message)
-            setTextColor(resources.getColor(android.R.color.white))
         }
-        val checkBox = CheckBox(ctx).apply {
+        val checkBox = CheckBox(dialogCtx).apply {
             text = getString(R.string.dont_show_again)
             val lp = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
