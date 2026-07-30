@@ -1,8 +1,12 @@
 package com.andrerinas.headunitrevived.view
 
+import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import com.andrerinas.headunitrevived.R
@@ -20,6 +24,7 @@ import kotlin.math.roundToInt
  * values like 440 DPI are reachable. The text field lets the user type any exact value; the
  * tabs are handy presets and only light up when the current value matches one.
  */
+@SuppressLint("ClickableViewAccessibility")
 class DpiPickerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -34,6 +39,15 @@ class DpiPickerView @JvmOverloads constructor(
     private var isBinding = false
     private var onDpiChanged: ((Int) -> Unit)? = null
 
+    // Self-running demo that sweeps only the preview illustration (not the slider or the number), so
+    // the user sees what DPI does before touching anything. It stops for good the moment the user
+    // interacts with the DPI controls.
+    private var demoAnimator: ValueAnimator? = null
+    private var userInteracted = false
+    // The "real" value (from init or a user action). The demo only animates the illustration and
+    // never touches this, so [dpi] keeps returning the intended value even mid-sweep.
+    private var committedDpi = MIN
+
     init {
         orientation = VERTICAL
         LayoutInflater.from(context).inflate(R.layout.view_dpi_picker, this, true)
@@ -43,10 +57,17 @@ class DpiPickerView @JvmOverloads constructor(
         tabs = findViewById(R.id.dpi_tabs)
 
         slider.addOnChangeListener { _, value, _ ->
-            if (!isBinding) applyDpi(value.toInt(), fromSlider = true)
+            if (!isBinding) { stopDemo(userDriven = true); applyDpi(value.toInt(), fromSlider = true) }
+        }
+        // ACTION_DOWN also covers tapping the thumb on its current value (no value change), so the
+        // demo still stops even when the touch does not move the slider.
+        slider.setOnTouchListener { _, event ->
+            if (event.actionMasked == MotionEvent.ACTION_DOWN) stopDemo(userDriven = true)
+            false
         }
         tabs.addOnButtonCheckedListener { _, checkedId, checked ->
             if (checked && !isBinding) {
+                stopDemo(userDriven = true)
                 val rep = when (checkedId) {
                     R.id.dpi_tab_small -> SMALL_REP
                     R.id.dpi_tab_large -> LARGE_REP
@@ -59,25 +80,69 @@ class DpiPickerView @JvmOverloads constructor(
         input.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) { commitInput(); true } else false
         }
-        input.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) commitInput() }
+        input.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) stopDemo(userDriven = true) else commitInput()
+        }
 
         // Initialise the field/preview/tab from the slider's default value.
         applyDpi(slider.value.toInt(), fromSlider = true, silent = true)
     }
 
     var dpi: Int
-        get() = slider.value.toInt()
+        // While the demo sweeps, report the intended value, not the animated frame.
+        get() = if (demoAnimator != null) committedDpi else slider.value.toInt()
         set(value) = applyDpi(value, fromSlider = false, silent = true)
 
     fun setOnDpiChanged(cb: (Int) -> Unit) { onDpiChanged = cb }
 
     fun setPanelResolution(widthPx: Int, heightPx: Int) = preview.setPanelResolution(widthPx, heightPx)
 
+    /**
+     * Starts a gentle looping demo that sweeps only the preview illustration through the DPI range,
+     * so the graphic shows what DPI does while the slider and number stay put. No-op once the user
+     * has interacted, or if the picker is disabled. Safe to call repeatedly (e.g. each time the
+     * step/screen becomes visible).
+     */
+    fun startDemo() {
+        if (userInteracted || demoAnimator != null || !slider.isEnabled) return
+        demoAnimator = ValueAnimator.ofFloat(DEMO_LOW.toFloat(), DEMO_HIGH.toFloat()).apply {
+            duration = DEMO_SWEEP_MS
+            startDelay = DEMO_START_DELAY_MS
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+            interpolator = AccelerateDecelerateInterpolator()
+            addUpdateListener { anim ->
+                // Only the illustration animates; the slider and the DPI number stay at the real value.
+                preview.setDpi((anim.animatedValue as Float).toInt())
+            }
+            start()
+        }
+    }
+
+    /** Stops the demo (if running) without counting as user interaction, e.g. when the screen is
+     * hidden; the illustration is restored to the intended value. */
+    fun stopDemo() = stopDemo(userDriven = false)
+
+    private fun stopDemo(userDriven: Boolean) {
+        if (userDriven) userInteracted = true
+        val anim = demoAnimator ?: return
+        demoAnimator = null
+        anim.cancel()
+        // Resync the illustration to the real DPI (the slider and number never moved during the demo).
+        preview.setDpi(committedDpi)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        stopDemo(userDriven = false)
+    }
+
     fun setPickerEnabled(enabled: Boolean) {
         slider.isEnabled = enabled
         input.isEnabled = enabled
         for (i in 0 until tabs.childCount) tabs.getChildAt(i).isEnabled = enabled
         alpha = if (enabled) 1f else 0.5f
+        if (!enabled) stopDemo(userDriven = false)
     }
 
     /** Parse the typed value, clamp it into range and apply; restore on invalid input. */
@@ -95,6 +160,7 @@ class DpiPickerView @JvmOverloads constructor(
 
     private fun applyDpi(raw: Int, fromSlider: Boolean, silent: Boolean = false) {
         val v = snap(raw)
+        committedDpi = v
         isBinding = true
         if (!fromSlider) slider.value = v.toFloat()
         tabs.check(tabFor(v))
@@ -134,5 +200,13 @@ class DpiPickerView @JvmOverloads constructor(
         private const val SMALL_MEDIUM_MAX = (SMALL_REP + MEDIUM_REP) / 2   // 153
         private const val MEDIUM_LARGE_MAX = (MEDIUM_REP + LARGE_REP) / 2   // 196
         private const val LARGE_HUGE_MAX = (LARGE_REP + HUGE_REP) / 2       // 269
+
+        // Demo sweep range and timing: the illustration alone sweeps the full 160..640 DPI range so
+        // the effect on how much content fits is clearly visible.
+        private const val DEMO_LOW = 160
+        private const val DEMO_HIGH = 640
+        private const val DEMO_SWEEP_MS = 3200L
+        // No wait: the illustration should start sweeping as soon as the step is shown.
+        private const val DEMO_START_DELAY_MS = 0L
     }
 }

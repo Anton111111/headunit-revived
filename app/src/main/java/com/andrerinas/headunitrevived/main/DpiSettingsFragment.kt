@@ -65,6 +65,7 @@ class DpiSettingsFragment : Fragment() {
 
         autoSwitch.setOnCheckedChangeListener { _, checked ->
             picker.visibility = if (checked) View.GONE else View.VISIBLE
+            if (checked) picker.stopDemo() else picker.startDemo()
             updateSaveButtonState()
         }
         picker.setOnDpiChanged { updateSaveButtonState() }
@@ -74,6 +75,19 @@ class DpiSettingsFragment : Fragment() {
         })
 
         updateSaveButtonState()
+
+        // Show the animated demo right away when the picker is visible (Automatic off).
+        if (!auto) picker.startDemo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (::picker.isInitialized) picker.stopDemo()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::picker.isInitialized && !autoSwitch.isChecked) picker.startDemo()
     }
 
     private fun setupToolbar() {

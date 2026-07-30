@@ -135,6 +135,12 @@ class OnboardingActivity : BaseActivity() {
         updateThemeButtonText()
         updateNightButtonText()
         permissionBinder?.rebind()
+        if (step == STEP_DPI) dpiPicker?.startDemo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dpiPicker?.stopDemo()
     }
 
     private fun buildStepperDots() {
@@ -377,8 +383,13 @@ class OnboardingActivity : BaseActivity() {
         if (step == STEP_READY) findViewById<TextView>(R.id.onb_ready_summary).text = summaryText()
         if (step == STEP_AUTOMATION) applyAutomationVisibility()
         if (step == STEP_PERMISSIONS) permissionBinder?.rebind()
-        if (step == STEP_DPI) findViewById<TextView>(R.id.onb_dpi_recommended).text =
-            getString(R.string.onb_dpi_recommended, recommendedDpi())
+        if (step == STEP_DPI) {
+            findViewById<TextView>(R.id.onb_dpi_recommended).text =
+                getString(R.string.onb_dpi_recommended, recommendedDpi())
+            dpiPicker?.startDemo()
+        } else {
+            dpiPicker?.stopDemo()
+        }
         updateStepperDots()
     }
 
