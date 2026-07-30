@@ -752,7 +752,7 @@
 
     <!-- Support rules -->
     <string name="support_rules_button">Quy tắc báo cáo</string>
-    <string name="support_rules_english_desc">Vui lòng luôn viết sự cố của bạn bằng tiếng Anh. Người duy trì dự án và hầu hết những người hỗ trợ đây đều đọc tiếng Anh, và một chủ đề pha trộn nhiều ngôn ngữ nhanh chóng trở thành tháp Babel nơi không ai hiểu ai. Không tự tin với tiếng Anh? Dùng công cụ dịch như Google Translate hoặc DeepL là hoàn toàn ổn.</string>
+    <string name="support_rules_english_desc">Vui lòng luôn viết sự cố của bạn bằng tiếng Anh. Đây là ngôn ngữ chung của người duy trì dự án và hầu hết những người hỗ trợ ở đây, và một chủ đề pha trộn nhiều ngôn ngữ sẽ nhanh chóng trở thành tháp Babel nơi không ai có thể giúp được ai. Không ai phán xét bạn, trình độ tiếng Anh hay cách bạn viết, vì vậy đừng lo lắng về lỗi. Nếu cần, các công cụ dịch như Google Translate hay DeepL, hoặc AI như ChatGPT hay Claude, có thể giúp bạn viết và chỉnh sửa tin nhắn bằng tiếng Anh.</string>
     <string name="support_rules_device_title">Cho biết máy nào đang chạy ứng dụng</string>
     <string name="support_rules_device_desc">Phiên bản Android của thiết bị đang chiếu Android Auto (màn hình ô tô của bạn), cùng hãng và mẫu máy nếu biết.</string>
     <string name="support_rules_connection_title">Cho biết bạn kết nối như thế nào</string>
@@ -761,12 +761,15 @@
     <string name="support_rules_appversion_desc">Phiên bản Headunit Revived, hiển thị trên màn hình Giới thiệu.</string>
     <string name="support_rules_logs_title">Đính kèm log, ngay sau khi xảy ra</string>
     <string name="support_rules_logs_desc">Vào Cài đặt, chọn tab Nâng cao, bật Chế độ gỡ lỗi trong phần Gỡ lỗi, tái hiện sự cố, rồi nhấn Xuất log ngay sau đó để log ghi lại đúng thời điểm xảy ra chứ không chỉ từ lúc khởi động. Đính kèm tệp đó vào issue.</string>
-    <string name="support_rules_search_title">Tìm kiếm trước</string>
-    <string name="support_rules_search_desc">Sự cố của bạn có thể đã được báo cáo. Hãy tìm trong các issue hiện có và bổ sung vào đó thay vì mở issue trùng lặp.</string>
+    <string name="support_rules_search_title">Không trùng lặp</string>
+    <string name="support_rules_search_desc">Trước tiên hãy tìm kiếm trong các issue hiện có. Nếu đã có issue mô tả đúng sự cố của bạn, hãy thêm thông tin của bạn làm bình luận ở đó thay vì mở issue mới. Chỉ mở issue mới nếu không có issue nào phù hợp.</string>
     <string name="support_rules_phone_title">Điện thoại của bạn cũng quan trọng</string>
     <string name="support_rules_phone_desc">Mẫu điện thoại, phiên bản Android và phiên bản ứng dụng Android Auto trên điện thoại. Một số sự cố xuất phát từ một phiên bản Android Auto cụ thể.</string>
     <string name="support_rules_describe_title">Mô tả rõ ràng</string>
     <string name="support_rules_describe_desc">Bạn đã làm gì, bạn mong đợi điều gì và điều gì thực sự xảy ra. Ảnh chụp màn hình hoặc video ngắn rất hữu ích cho các sự cố về hình ảnh.</string>
     <string name="support_rules_oneissue_title">Một sự cố mỗi issue</string>
     <string name="support_rules_oneissue_desc">Mỗi issue chỉ nên đề cập một sự cố để dễ theo dõi và xử lý. Hãy mở issue riêng cho các sự cố không liên quan.</string>
+    <string name="support_rules_intro">Chỉ cần hai điều bắt buộc. Phần còn lại là tuỳ chọn, nhưng sẽ giúp giải quyết vấn đề của bạn nhanh hơn nhiều.</string>
+    <string name="support_rules_section_required">Bắt buộc</string>
+    <string name="support_rules_section_recommend">Khuyến nghị (tuỳ chọn)</string>
 </resources>

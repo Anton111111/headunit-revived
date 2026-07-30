@@ -780,7 +780,7 @@
 
     <!-- Support / issue reporting rules -->
     <string name="support_rules_button">Melderegeln</string>
-    <string name="support_rules_english_desc">Bitte schreibe dein Problem immer auf Englisch. Der Maintainer und die meisten Helfer hier lesen Englisch, und ein Thread in vielen verschiedenen Sprachen wird schnell zum kleinen Babylonischen Sprachgewirr, bei dem niemand den anderen versteht. Kein gutes Englisch? Ein Übersetzer wie Google Translate oder DeepL ist völlig in Ordnung.</string>
+    <string name="support_rules_english_desc">Bitte schreibe dein Problem immer auf Englisch. Es ist die einzige Sprache, die der Maintainer und die meisten Helfer hier teilen, und ein Thread in vielen Sprachen wird schnell zum kleinen Turm zu Babel, bei dem niemand niemandem helfen kann. Niemand bewertet dich, dein Englisch oder wie du schreibst, also mach dir keine Sorgen wegen Fehlern. Wenn es hilft, kann ein Übersetzer wie Google Translate oder DeepL, oder eine KI wie ChatGPT oder Claude, deine Nachricht auf Englisch formulieren und aufpolieren.</string>
     <string name="support_rules_device_title">Sag, was die App ausführt</string>
     <string name="support_rules_device_desc">Die Android-Version des Geräts, das Android Auto projiziert (dein Autoradio oder Bildschirm), sowie Marke und Modell, falls bekannt.</string>
     <string name="support_rules_connection_title">Sag, wie du dich verbindest</string>
@@ -789,12 +789,15 @@
     <string name="support_rules_appversion_desc">Die Headunit Revived Version, die auf dem Bildschirm „Über Headunit Revived" angezeigt wird.</string>
     <string name="support_rules_logs_title">Logs anhängen, direkt nach dem Problem</string>
     <string name="support_rules_logs_desc">Wechsle in den Einstellungen zum Tab „Erweitert", aktiviere im Abschnitt „Debug" den Debug Modus, reproduziere das Problem und tippe danach sofort auf „Logs exportieren", damit das Log den Moment des Fehlers und nicht nur den Start enthält. Hänge diese Datei an dein Issue an.</string>
-    <string name="support_rules_search_title">Zuerst suchen</string>
-    <string name="support_rules_search_desc">Dein Problem wurde vielleicht schon gemeldet. Durchsuche die vorhandenen Issues und ergänze dort, anstatt ein Duplikat zu öffnen.</string>
+    <string name="support_rules_search_title">Keine Duplikate</string>
+    <string name="support_rules_search_desc">Durchsuche zuerst die vorhandenen Issues. Wenn ein offenes Issue dein Problem bereits beschreibt, füge deine Details dort als Kommentar hinzu, anstatt ein neues zu öffnen. Öffne nur dann ein neues Issue, wenn keines passt.</string>
     <string name="support_rules_phone_title">Dein Handy ist auch wichtig</string>
     <string name="support_rules_phone_desc">Dein Handymodell, seine Android-Version und die Android Auto App-Version auf dem Handy. Manche Probleme kommen von einem bestimmten Android Auto-Release.</string>
     <string name="support_rules_describe_title">Klar beschreiben</string>
     <string name="support_rules_describe_desc">Was du gemacht hast, was du erwartet hast und was tatsächlich passiert ist. Ein Screenshot oder ein kurzes Video hilft bei visuellen Problemen sehr.</string>
     <string name="support_rules_oneissue_title">Ein Problem pro Issue</string>
     <string name="support_rules_oneissue_desc">Halte jedes Issue auf ein einzelnes Problem beschränkt, damit es verfolgt und behoben werden kann. Öffne separate Issues für unzusammenhängende Probleme.</string>
+    <string name="support_rules_intro">Nur zwei Dinge sind erforderlich. Alles andere ist optional, hilft aber dabei, dein Problem viel schneller zu lösen.</string>
+    <string name="support_rules_section_required">Erforderlich</string>
+    <string name="support_rules_section_recommend">Empfehlungen (optional)</string>
 </resources>

@@ -774,7 +774,7 @@
 
     <!-- Support rules -->
     <string name="support_rules_button">Правила отчётов</string>
-    <string name="support_rules_english_desc">Пожалуйста, всегда пишите вопрос на английском языке. Разработчик и большинство помощников читают по-английски, а ветка на нескольких языках быстро превращается в Вавилонскую башню, где никто никого не понимает. Не уверены в английском? Переводчик вроде Google Translate или DeepL подойдёт отлично.</string>
+    <string name="support_rules_english_desc">Пожалуйста, всегда пишите вопрос на английском языке. Это единственный язык, который объединяет разработчика и большинство тех, кто здесь помогает, а тред на нескольких языках быстро превращается в маленькую Вавилонскую башню, где никто никому не может помочь. Никто не осудит вас, ваш уровень английского или то, как вы пишете, — не переживайте из-за ошибок. Если нужна помощь, переводчик вроде Google Translate или DeepL, или ИИ вроде ChatGPT или Claude, напишет и оформит ваше сообщение на английском за вас.</string>
     <string name="support_rules_device_title">Укажите, на чём запущено приложение</string>
     <string name="support_rules_device_desc">Версию Android устройства, которое принимает Android Auto (ваше головное устройство или экран), а также марку и модель, если знаете.</string>
     <string name="support_rules_connection_title">Укажите способ подключения</string>
@@ -783,12 +783,15 @@
     <string name="support_rules_appversion_desc">Версию Headunit Revived, которая отображается на экране «Справка и поддержка».</string>
     <string name="support_rules_logs_title">Прикрепите логи сразу после проблемы</string>
     <string name="support_rules_logs_desc">Перейдите в настройки на вкладку «Расширенные», включите «Режим отладки» в разделе «Отладка», воспроизведите проблему, затем сразу нажмите «Выгрузка логов», чтобы лог охватил момент сбоя, а не только запуск. Прикрепите этот файл к обращению.</string>
-    <string name="support_rules_search_title">Сначала поищите</string>
-    <string name="support_rules_search_desc">Возможно, о вашей проблеме уже сообщали. Поищите в существующих обращениях и добавьте комментарий туда, вместо того чтобы создавать дублирующее.</string>
+    <string name="support_rules_search_title">Без дублей</string>
+    <string name="support_rules_search_desc">Сначала поищите среди существующих обращений. Если открытое обращение уже описывает вашу проблему, добавьте свои подробности туда в виде комментария, а не открывайте новое. Новое обращение стоит создавать только если ни одно не подходит.</string>
     <string name="support_rules_phone_title">Телефон тоже важен</string>
     <string name="support_rules_phone_desc">Укажите модель телефона, версию Android на нём и версию приложения Android Auto. Некоторые проблемы связаны с конкретным выпуском Android Auto.</string>
     <string name="support_rules_describe_title">Опишите проблему чётко</string>
     <string name="support_rules_describe_desc">Что вы сделали, что ожидали и что произошло на самом деле. Скриншот или короткое видео очень помогают при визуальных проблемах.</string>
     <string name="support_rules_oneissue_title">Одна проблема — одно обращение</string>
     <string name="support_rules_oneissue_desc">Держите каждое обращение посвящённым одной проблеме, чтобы её можно было отследить и исправить. Создавайте отдельные обращения для несвязанных проблем.</string>
+    <string name="support_rules_intro">Нужно только два условия. Всё остальное необязательно, но поможет решить проблему гораздо быстрее.</string>
+    <string name="support_rules_section_required">Обязательно</string>
+    <string name="support_rules_section_recommend">Рекомендации (необязательно)</string>
 </resources>

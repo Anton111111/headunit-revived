@@ -773,8 +773,11 @@
     <string name="onb_extra_loading_desc">汽車連線時顯示的自訂圖片</string>
 
     <!-- Support Rules -->
+    <string name="support_rules_intro">只有兩項是必填的，其餘都是選填，但填得越詳細，問題就越容易被解決。</string>
+    <string name="support_rules_section_required">必填</string>
+    <string name="support_rules_section_recommend">建議（選填）</string>
     <string name="support_rules_button">回報須知</string>
-    <string name="support_rules_english_desc">請務必以英文描述您的問題。維護者及大多數協助者使用英文，若討論串混雜多種語言，很快就會變成一座巴別塔，讓所有人都看不懂彼此在說什麼。英文不夠有信心？用 Google Translate 或 DeepL 翻譯完全沒問題。</string>
+    <string name="support_rules_english_desc">請務必以英文描述您的問題。英文是維護者與大多數協助者共同使用的語言，若討論串混雜多種語言，很快就會變成一座巴別塔，讓大家都無法互相幫忙。不必擔心英文程度或拼字，沒有人會在意。如果有需要，可以用 Google Translate 或 DeepL 這類翻譯工具，或是 ChatGPT 或 Claude 這類 AI，幫您把問題寫成英文或潤飾一下。</string>
     <string name="support_rules_device_title">說明執行應用程式的裝置</string>
     <string name="support_rules_device_desc">投射 Android Auto 的裝置（您的車機或螢幕）所使用的 Android 版本，以及品牌和型號（如果知道的話）。</string>
     <string name="support_rules_connection_title">說明連線方式</string>
@@ -783,8 +786,8 @@
     <string name="support_rules_appversion_desc">Headunit Revived 的版本號，可在關於畫面中查看。</string>
     <string name="support_rules_logs_title">在問題發生後立即附上日誌</string>
     <string name="support_rules_logs_desc">請進入設定，切換到進階分頁，在除錯區段開啟除錯模式，重現問題，然後立即點選匯出日誌，確保日誌涵蓋問題發生的當下而非僅有啟動時的紀錄。請將該檔案附至您的 Issue。</string>
-    <string name="support_rules_search_title">先搜尋看看</string>
-    <string name="support_rules_search_desc">您的問題可能已有人回報過。請先搜尋現有的 Issue，如果找到相同問題，請在那個 Issue 補充說明，而不是重新開一個重複的。</string>
+    <string name="support_rules_search_title">不要重複回報</string>
+    <string name="support_rules_search_desc">請先搜尋現有的 Issue。如果已有人回報相同問題，請在那個 Issue 補充您的情況，不要另開新的。只有在找不到相符的 Issue 時，才開一個新的。</string>
     <string name="support_rules_phone_title">手機資訊也很重要</string>
     <string name="support_rules_phone_desc">您的手機型號、Android 版本，以及手機上 Android Auto 應用程式的版本。有些問題只在特定版本的 Android Auto 上出現。</string>
     <string name="support_rules_describe_title">清楚描述問題</string>

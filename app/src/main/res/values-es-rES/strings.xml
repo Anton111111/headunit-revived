@@ -784,7 +784,7 @@
 
     <!-- Support rules -->
     <string name="support_rules_button">Normas para reportar</string>
-    <string name="support_rules_english_desc">Por favor, escribe siempre tu incidencia en inglés. El mantenedor y la mayoría de personas que ayudan aquí leen inglés, y un hilo que mezcla muchos idiomas se convierte rápidamente en una pequeña torre de Babel donde nadie entiende a nadie. ¿No te sientes seguro con el inglés? Un traductor como Google Translate o DeepL va perfectamente.</string>
+    <string name="support_rules_english_desc">Por favor, escribe siempre tu incidencia en inglés. Es el idioma que el mantenedor y la mayoría de las personas que ayudan aquí tienen en común, y un hilo con muchos idiomas se convierte rápidamente en una pequeña torre de Babel donde nadie puede ayudar a nadie. Nadie te juzga por tu nivel de inglés ni por cómo escribes, así que no te preocupes por los errores. Si te ayuda, un traductor como Google Translate o DeepL, o una IA como ChatGPT o Claude, puede escribir y ordenar tu mensaje en inglés por ti.</string>
     <string name="support_rules_device_title">Di qué ejecuta la app</string>
     <string name="support_rules_device_desc">La versión de Android del dispositivo que proyecta Android Auto (tu radio o pantalla), y la marca y el modelo si los conoces.</string>
     <string name="support_rules_connection_title">Di cómo te conectas</string>
@@ -793,12 +793,15 @@
     <string name="support_rules_appversion_desc">La versión de Headunit Revived, que aparece en la pantalla Acerca de.</string>
     <string name="support_rules_logs_title">Adjunta los registros justo cuando ocurra</string>
     <string name="support_rules_logs_desc">Ve a Ajustes, abre la pestaña Avanzado, activa el Modo depuración en la sección Depuración, reproduce el problema y toca Exportar registros enseguida para que el registro cubra el momento del fallo y no solo el arranque. Adjunta ese archivo a tu incidencia.</string>
-    <string name="support_rules_search_title">Busca primero</string>
-    <string name="support_rules_search_desc">Es posible que tu problema ya esté reportado. Busca en las incidencias existentes y añade un comentario en esa en lugar de abrir un duplicado.</string>
+    <string name="support_rules_search_title">Sin duplicados</string>
+    <string name="support_rules_search_desc">Busca primero entre las incidencias existentes. Si ya hay una abierta que describe tu problema, añade tus detalles como comentario en vez de abrir una nueva. Solo abre una incidencia nueva si ninguna coincide.</string>
     <string name="support_rules_phone_title">Tu móvil también importa</string>
     <string name="support_rules_phone_desc">El modelo de tu móvil, su versión de Android y la versión de la app Android Auto instalada en el móvil. Algunos problemas vienen de una versión concreta de Android Auto.</string>
     <string name="support_rules_describe_title">Descríbelo con claridad</string>
     <string name="support_rules_describe_desc">Qué hiciste, qué esperabas que pasara y qué pasó realmente. Una captura de pantalla o un vídeo corto ayuda mucho en problemas visuales.</string>
     <string name="support_rules_oneissue_title">Un problema por incidencia</string>
     <string name="support_rules_oneissue_desc">Limita cada incidencia a un solo problema para poder rastrearlo y resolverlo. Abre incidencias separadas para problemas distintos.</string>
+    <string name="support_rules_intro">Solo se requieren dos cosas. Todo lo demás es opcional, aunque ayuda a resolver tu problema mucho más rápido.</string>
+    <string name="support_rules_section_required">Obligatorio</string>
+    <string name="support_rules_section_recommend">Recomendaciones (opcional)</string>
 </resources>

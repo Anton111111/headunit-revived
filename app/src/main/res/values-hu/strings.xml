@@ -745,7 +745,10 @@
 
     <!-- Support / issue reporting rules -->
     <string name="support_rules_button">Hibajelentési szabályok</string>
-    <string name="support_rules_english_desc">Kérjük, mindig angolul írd le a problémádat. A karbantartó és a legtöbb segítő angolul olvas, egy vegyes nyelvű szál pedig hamar olyan Bábel tornyává válik, ahol senki sem érti a másikat. Nem megy biztosan az angol? Egy fordítóprogram, mint a Google Translate vagy a DeepL, teljesen megfelel.</string>
+    <string name="support_rules_intro">Csak két dolog kötelező. Minden más nem szükséges, de sokat segít a probléma gyorsabb megoldásában.</string>
+    <string name="support_rules_section_required">Kötelező</string>
+    <string name="support_rules_section_recommend">Javaslatok (nem kötelező)</string>
+    <string name="support_rules_english_desc">Kérjük, mindig angolul írd le a problémádat. Ez az egyetlen nyelv, amelyet a karbantartó és a legtöbb segítő közösen ért, és egy sok nyelvű szál hamar olyan Bábel tornyává válik, ahol senki sem tud senkinek segíteni. Senki sem ítél meg az angolod szintje vagy az írásod módja miatt, szóval ne aggódj a hibák miatt. Ha segít, egy fordítóprogram, mint a Google Translate vagy a DeepL, vagy egy mesterséges intelligencia, mint a ChatGPT vagy a Claude, megírja és rendbe teszi az üzeneted angolul.</string>
     <string name="support_rules_device_title">Mondd el, min fut az alkalmazás</string>
     <string name="support_rules_device_desc">Az Android Auto-t megjelenítő eszköz (a fejegységed vagy a képernyőd) Android-verziója, és ha tudod, a gyártója és modellje.</string>
     <string name="support_rules_connection_title">Mondd el, hogyan csatlakozol</string>
@@ -754,8 +757,8 @@
     <string name="support_rules_appversion_desc">A Headunit Revived verziószámát a Rólunk képernyőn találod.</string>
     <string name="support_rules_logs_title">Csatold a naplókat, rögtön a hiba után</string>
     <string name="support_rules_logs_desc">Menj a Beállítások Speciális fülére, kapcsold be a Hibakeresési módot a Hibakeresés részben, idézd elő a problémát, majd közvetlenül utána koppints a Naplók exportálása gombra, hogy a napló tartalmazza a hibás pillanatot, ne csak az indítást. Ezt a fájlt csatold a hibajegyedhez.</string>
-    <string name="support_rules_search_title">Előbb keress</string>
-    <string name="support_rules_search_desc">Lehet, hogy a hibát már valaki bejelentette. Keresd meg a meglévő hibajegyek között, és inkább ahhoz szólj hozzá, ne nyiss másolatot.</string>
+    <string name="support_rules_search_title">Nincs kettőzés</string>
+    <string name="support_rules_search_desc">Először keresd meg a meglévő hibajegyeket. Ha egy nyitott hibajegy már leírja a problémádat, inkább ahhoz fűzz hozzászólást, ne nyiss újat. Csak akkor nyiss új hibajegyet, ha egyik sem egyezik.</string>
     <string name="support_rules_phone_title">A telefonod is számít</string>
     <string name="support_rules_phone_desc">A telefon modellje, Android-verziója és az Android Auto alkalmazás verziója a telefonon. Néhány hiba egy adott Android Auto kiadáshoz köthető.</string>
     <string name="support_rules_describe_title">Írd le érthetően</string>

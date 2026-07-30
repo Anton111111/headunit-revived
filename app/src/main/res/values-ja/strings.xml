@@ -753,7 +753,10 @@
 
     <!-- Support rules -->
     <string name="support_rules_button">報告のルール</string>
-    <string name="support_rules_english_desc">issueは必ず英語で書いてください。メンテナーやサポートしてくれる方々は英語を読んでいます。多言語が混在するスレッドはバベルの塔のようになり、誰も理解できなくなります。英語に自信がなければ、Google TranslateやDeepLなどの翻訳ツールを使っても大丈夫です。</string>
+    <string name="support_rules_intro">必須項目は2つだけです。それ以外は任意ですが、あると問題をより早く解決できます。</string>
+    <string name="support_rules_section_required">必須</string>
+    <string name="support_rules_section_recommend">推奨（任意）</string>
+    <string name="support_rules_english_desc">issueは必ず英語で書いてください。メンテナーとほとんどのサポートメンバーが共有できる言語は英語だけです。多言語が混在するスレッドはバベルの塔のようになり、誰も助けられなくなります。英語のレベルや文章の書き方は誰も気にしません。安心して書いてください。Google TranslateやDeepL、あるいはChatGPTやClaudeのようなAIが、英語で文章を書いたり整えたりするのを手伝ってくれます。</string>
     <string name="support_rules_device_title">アプリを動かしているデバイスを書いてください</string>
     <string name="support_rules_device_desc">Android Autoを投影しているデバイス（車載機または画面）のAndroidバージョンと、分かればブランドおよびモデル名。</string>
     <string name="support_rules_connection_title">接続方法を書いてください</string>
@@ -762,8 +765,8 @@
     <string name="support_rules_appversion_desc">Headunit Revivedのバージョンは、アプリとサポート画面に表示されています。</string>
     <string name="support_rules_logs_title">発生直後にログを添付してください</string>
     <string name="support_rules_logs_desc">設定の「詳細」タブを開き、「デバッグ」セクションで「デバッグモード」をオンにして問題を再現した後、すぐに「ログをエクスポート」をタップしてください。問題が発生した瞬間を含むログが取得できます。そのファイルをissueに添付してください。</string>
-    <string name="support_rules_search_title">先に検索してください</string>
-    <string name="support_rules_search_desc">同じ問題がすでに報告されているかもしれません。既存のissueを検索し、重複を開く代わりにそのissueにコメントを追加してください。</string>
+    <string name="support_rules_search_title">重複なし</string>
+    <string name="support_rules_search_desc">まず既存のissueを検索してください。同じ問題がすでに報告されていれば、新しいissueを作らずにそのissueにコメントを追加してください。一致するものがない場合にのみ、新しいissueを作成してください。</string>
     <string name="support_rules_phone_title">スマートフォンの情報も重要です</string>
     <string name="support_rules_phone_desc">スマートフォンのモデル、Androidバージョン、およびスマートフォン上のAndroid Autoアプリのバージョン。特定のAndroid Autoリリースに起因する問題もあります。</string>
     <string name="support_rules_describe_title">問題を明確に説明してください</string>

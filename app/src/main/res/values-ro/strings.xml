@@ -746,7 +746,7 @@
     <string name="onb_extra_loading_desc">O imagine personalizată afișată cât timp mașina se conectează</string>
 
     <string name="support_rules_button">Reguli de raportare</string>
-    <string name="support_rules_english_desc">Te rugăm să scrii întotdeauna problema ta în engleză. Cel care întreține proiectul și majoritatea celor care ajută aici citesc engleza, iar un fir de discuție care amestecă mai multe limbi se transformă rapid într-un mic turnul Babel în care nimeni nu înțelege pe nimeni. Nu ești sigur pe engleză? Un traducător precum Google Translate sau DeepL merge perfect.</string>
+    <string name="support_rules_english_desc">Te rugăm să scrii întotdeauna problema ta în engleză. Este singura limbă pe care o înțelege cel care întreține proiectul și cei mai mulți dintre cei care ajută aici, iar un fir în mai multe limbi se transformă repede într-un mic turnul Babel în care nimeni nu poate ajuta pe nimeni. Nu te judecă nimeni — nici nivelul de engleză, nici felul în care scrii — deci nu-ți face griji pentru greșeli. Dacă te ajută, un traducător precum Google Translate sau DeepL, ori un AI precum ChatGPT sau Claude, poate să îți scrie și să îți pună în ordine mesajul în engleză.</string>
     <string name="support_rules_device_title">Spune ce rulează aplicația</string>
     <string name="support_rules_device_desc">Versiunea Android a dispozitivului care proiectează Android Auto (unitatea ta principală sau ecranul) și marca și modelul acestuia, dacă le știi.</string>
     <string name="support_rules_connection_title">Spune cum te conectezi</string>
@@ -755,12 +755,15 @@
     <string name="support_rules_appversion_desc">Versiunea Headunit Revived, afișată pe ecranul Despre.</string>
     <string name="support_rules_logs_title">Atașează logurile, imediat după ce se întâmplă</string>
     <string name="support_rules_logs_desc">Mergi în Setări la fila Avansate, activează Mod depanare (Debug) în secțiunea Depanare, reproduci problema, apoi apasă Exportă logurile imediat după, ca logul să acopere momentul în care s-a produs eroarea, nu doar pornirea. Atașează acel fișier la problema ta.</string>
-    <string name="support_rules_search_title">Caută mai întâi</string>
-    <string name="support_rules_search_desc">Problema ta poate fi deja raportată. Caută în problemele existente și adaugă acolo, în loc să deschizi un duplicat.</string>
+    <string name="support_rules_search_title">Fără duplicate</string>
+    <string name="support_rules_search_desc">Caută mai întâi în problemele existente. Dacă o problemă deschisă descrie deja situația ta, adaugă detaliile tale acolo ca un comentariu, în loc să deschizi una nouă. Deschide o problemă nouă doar dacă niciuna nu se potrivește.</string>
     <string name="support_rules_phone_title">Telefonul tău contează și el</string>
     <string name="support_rules_phone_desc">Modelul telefonului tău, versiunea Android a acestuia și versiunea aplicației Android Auto de pe telefon. Unele probleme vin dintr-o anumită versiune Android Auto.</string>
     <string name="support_rules_describe_title">Descrie clar</string>
     <string name="support_rules_describe_desc">Ce ai făcut, ce te-ai așteptat să se întâmple și ce s-a întâmplat de fapt. Un screenshot sau un scurt videoclip ajută mult pentru problemele vizuale.</string>
     <string name="support_rules_oneissue_title">O problemă pe fir</string>
     <string name="support_rules_oneissue_desc">Păstrează fiecare fir de discuție la o singură problemă, ca să poată fi urmărită și rezolvată. Deschide fire separate pentru probleme diferite.</string>
+    <string name="support_rules_intro">Sunt necesare doar două lucruri. Restul este opțional, dar te ajută să-ți rezolvăm problema mult mai repede.</string>
+    <string name="support_rules_section_required">Obligatoriu</string>
+    <string name="support_rules_section_recommend">Recomandări (opțional)</string>
 </resources>

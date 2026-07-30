@@ -59,29 +59,48 @@ class SupportFragment : Fragment() {
         }
     }
 
-    /** Modal with the basic rules for opening a good, actionable issue. */
+    /** Modal with the rules for opening a good, actionable issue, split into required vs optional. */
     private fun showRulesDialog() {
-        val rules = listOf(
-            R.string.support_rules_english_title to R.string.support_rules_english_desc,
+        val dialogView = layoutInflater.inflate(R.layout.dialog_reporting_rules, null)
+        dialogView.findViewById<TextView>(R.id.rules_intro).text = getString(R.string.support_rules_intro)
+        dialogView.findViewById<TextView>(R.id.rules_required_header).text =
+            getString(R.string.support_rules_section_required)
+        dialogView.findViewById<TextView>(R.id.rules_recommend_header).text =
+            getString(R.string.support_rules_section_recommend)
+
+        // Required: English (title shown red + bold on purpose) and no duplicates.
+        val required = listOf(
+            Triple(R.string.support_rules_english_title, R.string.support_rules_english_desc, true),
+            Triple(R.string.support_rules_search_title, R.string.support_rules_search_desc, false)
+        )
+        // Recommendations: optional, but they speed up a fix.
+        val recommend = listOf(
             R.string.support_rules_device_title to R.string.support_rules_device_desc,
             R.string.support_rules_connection_title to R.string.support_rules_connection_desc,
             R.string.support_rules_appversion_title to R.string.support_rules_appversion_desc,
             R.string.support_rules_logs_title to R.string.support_rules_logs_desc,
-            R.string.support_rules_search_title to R.string.support_rules_search_desc,
             R.string.support_rules_phone_title to R.string.support_rules_phone_desc,
             R.string.support_rules_describe_title to R.string.support_rules_describe_desc,
             R.string.support_rules_oneissue_title to R.string.support_rules_oneissue_desc
         )
-        // The first rule (English-only) is highlighted red and bold; the rest are just bold.
+
         // <font color> and <b> are legacy HTML tags that Html.fromHtml renders on every API level.
-        val html = rules.mapIndexed { index, (title, desc) ->
-            val t = getString(title)
-            val titleHtml = if (index == 0) "<b><font color=\"#E53935\">$t</font></b>" else "<b>$t</b>"
-            "$titleHtml<br>${getString(desc)}"
-        }.joinToString("<br><br>")
+        dialogView.findViewById<TextView>(R.id.rules_required).text = fromHtml(
+            required.joinToString("<br><br>") { (title, desc, red) ->
+                val t = getString(title)
+                val titleHtml = if (red) "<b><font color=\"#E53935\">$t</font></b>" else "<b>$t</b>"
+                "$titleHtml<br>${getString(desc)}"
+            }
+        )
+        dialogView.findViewById<TextView>(R.id.rules_recommend).text = fromHtml(
+            recommend.joinToString("<br><br>") { (title, desc) ->
+                "<b>${getString(title)}</b><br>${getString(desc)}"
+            }
+        )
+
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.support_rules_button)
-            .setMessage(fromHtml(html))
+            .setView(dialogView)
             .setPositiveButton(R.string.close, null)
             .show()
     }
