@@ -116,7 +116,7 @@ class OnboardingActivity : BaseActivity() {
             finishOnboardingInto(R.id.micSettingsFragment)
         }
 
-        backBtn.setOnClickListener { if (step > 0) { step--; render() } }
+        backBtn.setOnClickListener { if (step > 0) goBack() }
         nextBtn.setOnClickListener { onNext() }
         skipBtn.setOnClickListener { onDoItLater() }
 
@@ -143,9 +143,37 @@ class OnboardingActivity : BaseActivity() {
         dpiPicker?.stopDemo()
     }
 
+    /**
+     * A wizard step that does not apply to the chosen setup and is skipped entirely. The GPS source
+     * choice (this device vs the connected phone) makes no sense in Self Mode, where there is no
+     * separate phone, so it is hidden there.
+     */
+    private fun isStepHidden(s: Int): Boolean =
+        s == STEP_GPS && settings.primaryConnection == Settings.ConnectionKind.SELF_MODE
+
+    /** The steps actually shown, in order, after removing the ones that do not apply. */
+    private fun visibleSteps(): List<Int> = (0 until STEP_COUNT).filter { !isStepHidden(it) }
+
+    /** Move forward to the next visible step, or finish on the last one. */
+    private fun goForward() {
+        var s = step + 1
+        while (s < STEP_COUNT && isStepHidden(s)) s++
+        if (s >= STEP_COUNT) { finishOnboarding(); return }
+        step = s
+        render()
+    }
+
+    /** Move back to the previous visible step. */
+    private fun goBack() {
+        var s = step - 1
+        while (s > 0 && isStepHidden(s)) s--
+        step = s.coerceAtLeast(0)
+        render()
+    }
+
     private fun buildStepperDots() {
         stepper.removeAllViews()
-        for (i in 0 until STEP_COUNT) {
+        repeat(visibleSteps().size) {
             val dot = View(this)
             val h = (5 * resources.displayMetrics.density).toInt()
             val lp = LinearLayout.LayoutParams(h, h)
@@ -156,17 +184,21 @@ class OnboardingActivity : BaseActivity() {
     }
 
     private fun updateStepperDots() {
+        val steps = visibleSteps()
+        // Rebuild if the visible-step count changed (e.g. Self Mode just hid the GPS step).
+        if (stepper.childCount != steps.size) buildStepperDots()
         val density = resources.displayMetrics.density
         val active = resolveAttrColor(com.google.android.material.R.attr.colorPrimary)
         val inactive = 0x33808080
-        for (i in 0 until STEP_COUNT) {
+        val currentPos = steps.indexOf(step).coerceAtLeast(0)
+        for (i in steps.indices) {
             val dot = stepper.getChildAt(i) ?: continue
             val lp = dot.layoutParams as LinearLayout.LayoutParams
-            lp.width = ((if (i == step) 26 else 8) * density).toInt()
+            lp.width = ((if (i == currentPos) 26 else 8) * density).toInt()
             dot.layoutParams = lp
             val bg = android.graphics.drawable.GradientDrawable()
             bg.cornerRadius = 5 * density
-            bg.setColor(if (i <= step) active else inactive)
+            bg.setColor(if (i <= currentPos) active else inactive)
             dot.background = bg
         }
     }
@@ -436,7 +468,7 @@ class OnboardingActivity : BaseActivity() {
                 settings.headUnitMake = brand
             }
         }
-        if (step == STEP_COUNT - 1) finishOnboarding() else { step++; render() }
+        if (step == STEP_COUNT - 1) finishOnboarding() else goForward()
     }
 
     /**
@@ -457,7 +489,7 @@ class OnboardingActivity : BaseActivity() {
 
     override fun onBackPressed() {
         // Back walks the steps; from the first step it behaves like "Do it later".
-        if (step > 0) { step--; render() } else onDoItLater()
+        if (step > 0) goBack() else onDoItLater()
     }
 
     private fun finishOnboarding() {
@@ -664,6 +696,7 @@ class OnboardingActivity : BaseActivity() {
         private const val STEP_DISPLAY = 3
         private const val STEP_DPI = 4
         private const val STEP_AUTOMATION = 6
+        private const val STEP_GPS = 7
         private const val STEP_VEHICLE = 8
         private const val STEP_PERMISSIONS = 9
         private const val STEP_READY = 10

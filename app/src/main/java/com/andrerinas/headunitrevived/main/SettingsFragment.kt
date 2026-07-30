@@ -992,17 +992,21 @@ class SettingsFragment : Fragment() {
         // --- Navigation Settings ---
         items.add(SettingItem.CategoryHeader("navigation", R.string.category_navigation))
 
-        items.add(SettingItem.ToggleSettingEntry(
-            stableId = "gpsNavigation",
-            nameResId = R.string.gps_for_navigation,
-            descriptionResId = R.string.gps_for_navigation_description,
-            isChecked = pendingUseGps!!,
-            onCheckedChanged = { isChecked ->
-                pendingUseGps = isChecked
-                checkChanges()
-                updateSettingsList()
-            }
-        ))
+        // The GPS source choice (this device vs the connected phone) is meaningless in Self Mode,
+        // where there is no separate phone, so hide it for those users.
+        if (settings.primaryConnection != Settings.ConnectionKind.SELF_MODE) {
+            items.add(SettingItem.ToggleSettingEntry(
+                stableId = "gpsNavigation",
+                nameResId = R.string.gps_for_navigation,
+                descriptionResId = R.string.gps_for_navigation_description,
+                isChecked = pendingUseGps!!,
+                onCheckedChanged = { isChecked ->
+                    pendingUseGps = isChecked
+                    checkChanges()
+                    updateSettingsList()
+                }
+            ))
+        }
 
         items.add(SettingItem.ToggleSettingEntry(
             stableId = "showNavigationNotifications",
