@@ -13,6 +13,7 @@ import android.net.wifi.p2p.WifiP2pManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.andrerinas.headunitrevived.App
@@ -41,12 +42,62 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     @Volatile private var manager: WifiP2pManager? = context.getSystemService(Context.WIFI_P2P_SERVICE) as? WifiP2pManager
     private var channel: WifiP2pManager.Channel? = null
     private var isGroupOwner = false
-    // True once we have created a P2P group in this session. A pre-existing group that we did
-    // NOT create this session is a stale persistent group (survives reboots) and is recreated
-    // fresh instead of reused, to stop the phone re-prompting to accept it (issue #719 / #703).
-    @Volatile private var groupCreatedThisSession = false
     private var isConnected = false
+    // A GO's WPS/PBC registrar only accepts one fresh PBC join per persistent group
+    // instance before expecting a P2P Invitation-based reinvoke instead — which
+    // Wireless Helper's client-side P2P API has no way to perform. checkGroupAndCreate()
+    // therefore tears down and recreates on EVERY reuse, unconditionally, rather than
+    // trying to detect whether *this* reuse is actually broken: a prior attempt at
+    // detecting that via "has a peer successfully connected against this group" turned out
+    // to be unobservable in the broken case specifically — a join that's failing never
+    // fires WIFI_P2P_CONNECTION_CHANGED_ACTION(isConnected=true), so the flag that gated
+    // teardown on that broadcast could never become true for the exact case it needed to
+    // catch. A later attempt gated teardown behind a 3s wall-clock debounce instead
+    // (purely to avoid re-triggering the BUSY-chip regression `ebab63a8` fixed), but a
+    // live-device bisection against `ebab63a8` proved reuse itself — not teardown
+    // frequency — is what makes the P2P registrar spin into a tight PROV-DISC retry storm
+    // (confirmed: `ebab63a8`'s ONLY change is skipping teardown on reuse, no other file
+    // touched, and it alone reproduces the storm). Any window where a reused group is left
+    // standing is long enough to trigger it, so there is no safe debounce interval — tear
+    // down on every single reuse. `checkGroupAndCreateInFlight` below already prevents the
+    // concurrent/overlapping calls that actually caused `ebab63a8`'s original BUSY-chip
+    // reports (two calls racing to removeGroup() within the same instant), so a
+    // reentrancy guard is sufficient without a time-based debounce on top.
+    // Secondary safety net: a stuck P2P provision-discovery retry loop can also present as
+    // WIFI_P2P_CONNECTION_CHANGED_ACTION firing in a tight burst (observed when a peer
+    // does briefly toggle connected/disconnected before getting stuck, unlike the fully
+    // silent case the debounce above handles). Track how tightly consecutive occurrences
+    // repeat and self-heal directly once they're clearly bursting rather than progressing.
+    private var lastConnChangedElapsedMs = 0L
+    private var tightBurstCount = 0
+    private val burstGapMs = 800L
+    private val burstTriggerCount = 5
     @Volatile private var isGroupCreatingOrCreated = false
+    // makeVisible() can be invoked twice back to back for the same UI action (AapService's
+    // manual-scan handler calls initWifiMode(force=true), which itself calls makeVisible(),
+    // then immediately calls makeVisible() again directly). Without a guard, two concurrent
+    // checkGroupAndCreate() runs can race: the first tears an existing group down
+    // asynchronously while the second reads group info mid-teardown and takes the
+    // redeliver-credentials path against a group that's disappearing under it, spinning
+    // onGroupInfoAvailable's null-retry loop out to FATAL with nothing ever delivered.
+    // Reset with a bounded safety timeout so a missed reset path can't wedge this permanently.
+    @Volatile private var checkGroupAndCreateInFlight = false
+    // [FIX] Tracks whether a phone has actually joined the P2P group (not just that a group
+    // exists). Live-device testing showed this periodic re-advertisement (removed by PR #693,
+    // restored here) measurably improves how often a fresh join actually completes — likely by
+    // keeping the P2P radio actively cycling/announcing during the window before a client joins,
+    // rather than sitting idle. discoveryRunnable uses this instead of isConnected so
+    // advertisements keep retrying even after the group forms on boot when the chip may have
+    // been BUSY initially.
+    private var isClientConnected = false
+    private val discoveryRunnable = object : Runnable {
+        override fun run() {
+            if (!isClientConnected) {
+                startDiscovery()
+                handler.postDelayed(this, 10000L) // Repeat every 10s to stay visible
+            }
+        }
+    }
     private val handler = Handler(Looper.getMainLooper())
     private var localDeviceAddress: String? = null
     private var lastKnownBssid: String? = null
@@ -89,8 +140,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                     } else {
                         isGroupCreatingOrCreated = false
                         isConnected = false
-                        // P2P turned off tears down our active group; next time start fresh.
-                        groupCreatedThisSession = false
+                        isClientConnected = false
                     }
                 }
 
@@ -113,6 +163,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                     val networkInfo = intent.getParcelableExtra<NetworkInfo>(WifiP2pManager.EXTRA_NETWORK_INFO)
                     if (networkInfo?.isConnected == true) {
                         AppLog.i("WifiDirectManager: Connected. Requesting info...")
+                        checkStuckRetryBurst()
                         // [FIX] Pre-fetch localDeviceAddress here so it's ready before
                         // onGroupInfoAvailable fires — reduces race condition window.
                         WifiDirectCompat.requestDeviceInfo(manager, channel) { address ->
@@ -125,6 +176,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                         AapService.scanningState.value = false
                     } else {
                         isConnected = false
+                        isClientConnected = false
                         lastNativeGroupStatusMessage = null
                         isGroupCreatingOrCreated = false
                     }
@@ -156,6 +208,48 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             AppLog.w("WifiDirectManager: WiFi Direct unavailable — permission denied: ${e.message}")
         } catch (e: Exception) {
             AppLog.e("WifiDirectManager: Unexpected error in init", e)
+        }
+    }
+
+    /**
+     * checkGroupAndCreate()'s stale-group teardown only runs when makeVisible() is
+     * re-invoked, which requires a P2P radio-enable event, a manual rescan, or an
+     * AAP-level disconnect — none of which fire if the phone never gets past raw
+     * PROV-DISC-REQ against an already-consumed group (no AAP session ever connects to
+     * disconnect from). WIFI_P2P_CONNECTION_CHANGED_ACTION with isConnected=true still
+     * fires reliably in that state (it reflects the local GO group's own formed status,
+     * not a completed peer join), so detect the stuck loop directly from how tightly
+     * these broadcasts repeat: on-device captures showed ~200-300ms gaps during the
+     * stuck loop versus 1.1-1.9s gaps on the sequence that led to a real connection.
+     */
+    @SuppressLint("MissingPermission")
+    private fun checkStuckRetryBurst() {
+        val appSettings = App.provide(context).settings
+        if (appSettings.wifiConnectionMode != 2 || appSettings.helperConnectionStrategy != 1 || !isGroupOwner) {
+            tightBurstCount = 0
+            return
+        }
+
+        val now = SystemClock.elapsedRealtime()
+        val gap = now - lastConnChangedElapsedMs
+        lastConnChangedElapsedMs = now
+
+        tightBurstCount = if (gap in 1 until burstGapMs) tightBurstCount + 1 else 1
+
+        if (tightBurstCount >= burstTriggerCount) {
+            AppLog.w("WifiDirectManager: Detected $tightBurstCount CONNECTION_CHANGED repeats <${burstGapMs}ms apart — stuck retry loop against an already-consumed group. Self-healing.")
+            tightBurstCount = 0
+            val mgr = manager
+            val ch = channel
+            if (mgr != null && ch != null) {
+                mgr.removeGroup(ch, object : WifiP2pManager.ActionListener {
+                    override fun onSuccess() { createNewGroup(0) }
+                    override fun onFailure(reason: Int) {
+                        AppLog.w("WifiDirectManager: removeGroup during stuck-loop self-heal failed: ${getP2pErrorString(reason)}")
+                        createNewGroup(0)
+                    }
+                })
+            }
         }
     }
 
@@ -244,7 +338,21 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             val psk = group.passphrase ?: ""
             val isOwner = group.isGroupOwner
 
-
+            // [FIX] Track whether a phone client has actually joined our group.
+            // If we are the Group Owner and the client list is empty, no phone has connected yet.
+            // If the client list becomes non-empty, a phone joined — stop the discovery loop.
+            // If the client list becomes empty again (phone disconnected), restart the loop.
+            if (isOwner) {
+                val clients = group.clientList
+                val hadClient = isClientConnected
+                isClientConnected = clients != null && clients.isNotEmpty()
+                if (hadClient && !isClientConnected) {
+                    AppLog.i("WifiDirectManager: Client disconnected from P2P group. Restarting discovery loop.")
+                    startDiscoveryLoop()
+                }
+            } else {
+                isClientConnected = true
+            }
 
             // [FIX] Robust interface detection. group.interface is often null on Android 11+ (hidden API)
             var iface = group.`interface`
@@ -408,6 +516,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                 }, 1000L)
             } else {
                 AppLog.e("WifiDirectManager: FATAL: Group info remained null after 20 retries.")
+                groupInfoRetries = 0
             }
         }
     }
@@ -526,54 +635,97 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
 
     @SuppressLint("MissingPermission")
     private fun checkGroupAndCreate() {
+        if (checkGroupAndCreateInFlight) {
+            AppLog.d("WifiDirectManager: checkGroupAndCreate already in flight, skipping duplicate call")
+            return
+        }
+        checkGroupAndCreateInFlight = true
+        handler.postDelayed({ checkGroupAndCreateInFlight = false }, 8000L)
+
         isGroupOwner = false
         isConnected = false
 
         manager?.requestGroupInfo(channel) { group ->
             if (group == null) {
                 AppLog.i("No existing P2P group, creating new one")
+                checkGroupAndCreateInFlight = false
                 createNewGroup(0)
                 return@requestGroupInfo
-            } else if (!groupCreatedThisSession) {
-                // A P2P group exists but we did not create it this session, so it is a stale
-                // persistent group left over from a previous session or a reboot. Reusing it
-                // makes the phone re-prompt to accept a group it no longer trusts (the repeated
-                // accept prompts, and "works once then fails after reboot" on #719 / #703).
-                // Remove it and create a fresh one, the way it behaved before groups were reused.
-                AppLog.w("WifiDirectManager: Existing P2P group is stale (ssid=${group.networkName}, not created this session); removing and recreating a fresh one")
-                lastKnownBssid = null
-                isGroupOwner = false
-                manager?.removeGroup(channel, object : WifiP2pManager.ActionListener {
-                    override fun onSuccess() {
-                        AppLog.i("WifiDirectManager: Stale group removed, creating a fresh one")
-                        createNewGroup(0)
-                    }
-                    override fun onFailure(reason: Int) {
-                        AppLog.w("WifiDirectManager: removeGroup of stale group failed ($reason); creating a fresh one anyway")
-                        createNewGroup(0)
-                    }
-                })
-                return@requestGroupInfo
-            } else {
-                // The group already exists (reused), so no WIFI_P2P_CONNECTION_CHANGED
-                // broadcast fires to trigger onGroupInfoAvailable. Resolve the device info
-                // and request the group info ourselves so the SSID, passphrase, IP and BSSID
-                // are delivered to the phone via onCredentialsReady, exactly like the freshly
-                // created group path does. Without this the phone never receives the
-                // credentials and cannot auto-join the reused group, so it has to be
-                // connected by hand through the Wireless Helper.
-                AppLog.i("Existing P2P group found (created this session), delivering its credentials")
-                isGroupOwner = group.isGroupOwner
-                WifiDirectCompat.requestDeviceInfo(manager, channel) { address ->
-                    AppLog.i("WifiDirectManager: Updated localDeviceAddress via requestDeviceInfo: $address")
-                    localDeviceAddress = address
-                    manager?.requestGroupInfo(channel, this@WifiDirectManager)
-                }
-                // Fallback: if requestDeviceInfo is not supported (< API 29), call directly
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                    manager?.requestGroupInfo(channel, this)
-                }
             }
+
+            // A GO's WPS/PBC registrar only accepts one fresh PBC join per persistent group
+            // instance before expecting a P2P Invitation reinvoke instead — which Wireless
+            // Helper's client-side API can't do. There is no reliable way to detect whether
+            // *this* reuse is the broken kind: a join failing for exactly this reason never
+            // fires WIFI_P2P_CONNECTION_CHANGED_ACTION(isConnected=true) (confirmed via live
+            // dumpsys wifip2p capture — the state machine cycles entirely internally,
+            // GroupCreatedState <-> UserAuthorizingJoinState on P2P_PROV_DISC_PBC_REQ_EVENT,
+            // never reaching AP_STA_CONNECTED_EVENT), so any flag gated on that broadcast can
+            // never become true for the case it needs to catch. Tear down and recreate on
+            // EVERY reuse, unconditionally — confirmed via a live-device bisection against
+            // `ebab63a8` (whose only change is skipping this teardown on reuse, nothing else)
+            // that reuse itself, not teardown frequency, is what makes the registrar spin
+            // into the retry storm. checkGroupAndCreateInFlight already prevents the
+            // concurrent/overlapping calls that caused `ebab63a8`'s original BUSY-chip
+            // reports, so no additional debounce is needed on top.
+            //
+            // removeGroup() alone is not enough: live dumpsys wifip2p capture showed the
+            // recreated group came back with the exact same networkId (0) and even the same
+            // SSID as the one just torn down — removeGroup() deactivates the running group
+            // but leaves its persistent group profile on disk, and plain createGroup() (no
+            // config) re-activates that same profile rather than minting a new one. The stuck
+            // PROV-DISC loop reproduced identically against this "fresh" group, proving the
+            // WPS registrar state survives our teardown. deletePersistentGroup() actually
+            // purges the stored profile first.
+            val netId = try { group.networkId } catch (e: Exception) { -1 }
+            AppLog.i("WifiDirectManager: Existing P2P group found (netId=$netId) — deleting persistent profile and recreating fresh for a clean WPS/PBC registrar")
+            manager?.removeGroup(channel, object : WifiP2pManager.ActionListener {
+                override fun onSuccess() { deletePersistentGroupThenCreate(netId) }
+                override fun onFailure(reason: Int) {
+                    AppLog.w("WifiDirectManager: removeGroup before recreate failed: ${getP2pErrorString(reason)}")
+                    deletePersistentGroupThenCreate(netId)
+                }
+            })
+        }
+    }
+
+    // deletePersistentGroup(Channel, int netId, ActionListener) exists on WifiP2pManager but
+    // isn't part of the public SDK, so it's called the same way this file already reflects
+    // into setDeviceName() — via reflection. Falls through to createNewGroup() regardless of
+    // whether the deletion succeeds/is even available, since removeGroup() already
+    // deactivated the running group either way.
+    @SuppressLint("MissingPermission")
+    private fun deletePersistentGroupThenCreate(netId: Int) {
+        val mgr = manager
+        val ch = channel
+        if (mgr == null || ch == null || netId < 0) {
+            checkGroupAndCreateInFlight = false
+            createNewGroup(0)
+            return
+        }
+        try {
+            val method = mgr.javaClass.getMethod(
+                "deletePersistentGroup",
+                WifiP2pManager.Channel::class.java,
+                Int::class.javaPrimitiveType,
+                WifiP2pManager.ActionListener::class.java
+            )
+            method.invoke(mgr, ch, netId, object : WifiP2pManager.ActionListener {
+                override fun onSuccess() {
+                    AppLog.i("WifiDirectManager: deletePersistentGroup(netId=$netId) succeeded")
+                    checkGroupAndCreateInFlight = false
+                    createNewGroup(0)
+                }
+                override fun onFailure(reason: Int) {
+                    AppLog.w("WifiDirectManager: deletePersistentGroup(netId=$netId) failed: ${getP2pErrorString(reason)}")
+                    checkGroupAndCreateInFlight = false
+                    createNewGroup(0)
+                }
+            })
+        } catch (e: Exception) {
+            AppLog.w("WifiDirectManager: deletePersistentGroup reflection unavailable: ${e.message}")
+            checkGroupAndCreateInFlight = false
+            createNewGroup(0)
         }
     }
 
@@ -593,7 +745,9 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             override fun onSuccess() {
                 AppLog.i("WifiDirectManager: P2P Group created (fresh this session).")
                 isGroupOwner = true
-                groupCreatedThisSession = true
+                tightBurstCount = 0
+                lastConnChangedElapsedMs = 0L
+                startDiscoveryLoop()
             }
             override fun onFailure(reason: Int) {
                 if (reason == 2 && retryCount < 3) { // 2 = BUSY
@@ -605,6 +759,38 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                 }
             }
         })
+    }
+
+    private fun startDiscoveryLoop() {
+        handler.removeCallbacks(discoveryRunnable)
+        handler.post(discoveryRunnable)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun startDiscovery() {
+        val ch = channel
+        if (ch != null) {
+            val appSettings = com.andrerinas.headunitrevived.App.provide(context).settings
+            if (appSettings.wifiConnectionMode == 2 && appSettings.helperConnectionStrategy == 1) {
+                AapService.scanningState.value = true
+            }
+            manager?.discoverPeers(ch, object : WifiP2pManager.ActionListener {
+                override fun onSuccess() {
+                    AppLog.d("WifiDirectManager: Discovery active")
+                    if (appSettings.wifiConnectionMode == 2 && appSettings.helperConnectionStrategy == 1) {
+                        handler.postDelayed({
+                            if (!isClientConnected) {
+                                AapService.scanningState.value = false
+                            }
+                        }, 2500L)
+                    }
+                }
+                override fun onFailure(reason: Int) {
+                    AppLog.w("WifiDirectManager: Discovery failed: $reason")
+                    AapService.scanningState.value = false
+                }
+            })
+        }
     }
 
     /**
@@ -962,6 +1148,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         AppLog.i("WifiDirectManager: Stopping and cleaning up...")
         isGroupCreatingOrCreated = false
         handler.removeCallbacksAndMessages(null)
+        isClientConnected = false
         nativeGroupCreationMode = NATIVE_GROUP_MODE_UNKNOWN
         native5GhzBandMismatchRetries = 0
         lastNativeGroupStatusMessage = null
@@ -977,6 +1164,5 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
 
         isGroupOwner = false
         isConnected = false
-        groupCreatedThisSession = false
     }
 }
