@@ -476,7 +476,12 @@ class NativeAaHandshakeManager(
                 delay(1000) // [FIX] Increased delay to give phone more processing time
                 sendWifiSecurityResponse(output, ssid, psk, bssid)
                 AppLog.i("NativeAA: Handshake completed successfully on Bluetooth side.")
-                
+                // The credential exchange is done; the join watchdog no longer needs to defer
+                // for this handshake. Without this, it stayed true for the entire lifetime of
+                // the "maintain session" loop below (observed on-device stuck for 15+ minutes),
+                // permanently blocking recovery if the phone never actually joins the P2P group.
+                handshakeInFlight = false
+
                 // Keep the socket open to maintain the handshake session
                 AppLog.i("NativeAA: Maintaining Bluetooth session...")
                 while (isRunning && isActive && socket.isConnected) {
