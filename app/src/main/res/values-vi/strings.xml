@@ -741,10 +741,10 @@
     <string name="sunrise_reference_help">Điểm tham chiếu được dùng để tính thời gian mặt trời mọc và lặn. Chọn vị trí của bạn một lần; hoạt động mà không cần GPS.</string>
 
     <string name="support">Báo cáo sự cố</string>
-    <string name="support_description">Tìm kiếm hoặc báo lỗi trên GitHub</string>
+    <string name="support_description">Tìm kiếm hoặc báo cáo lỗi trên GitHub</string>
     <string name="support_title">Báo cáo sự cố</string>
-    <string name="support_help">Nếu bạn gặp lỗi hoặc sự cố, vui lòng tìm kiếm trong danh sách GitHub issues trước. Nếu chưa ai báo cáo, hãy mở issue mới và mô tả những gì xảy ra, thiết bị đầu phát của bạn và các bước tái hiện sự cố.</string>
-    <string name="support_open_issues">Mở trang GitHub issues</string>
+    <string name="support_help">Nếu bạn gặp lỗi hoặc sự cố, vui lòng tìm trước trong danh sách GitHub issues. Nếu chưa có ai báo cáo, hãy mở một issue mới và mô tả hiện tượng xảy ra, màn hình ô tô của bạn, và các bước để tái hiện sự cố.</string>
+    <string name="support_open_issues">Mở trang issues trên GitHub</string>
     <string name="support_scan_qr">Hoặc quét mã QR này để mở danh sách issues trên thiết bị khác.</string>
-    <string name="support_github_account_warning">Lưu ý: bạn cần tài khoản GitHub miễn phí để tạo issue.</string>
+    <string name="support_github_account_warning">Lưu ý: bạn cần có tài khoản GitHub miễn phí để tạo issue.</string>
 </resources>

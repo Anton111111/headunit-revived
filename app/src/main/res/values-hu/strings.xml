@@ -734,10 +734,10 @@
     <string name="sunrise_reference_help">A napkelte és napnyugta kiszámításához használt referenciapont. Válassza ki egyszer a helyét; GPS nélkül is működik.</string>
 
     <string name="support">Probléma bejelentése</string>
-    <string name="support_description">Hibák keresése vagy bejelentése GitHub-on</string>
+    <string name="support_description">Keress vagy jelents hibákat GitHub-on</string>
     <string name="support_title">Probléma bejelentése</string>
-    <string name="support_help">Ha hibát vagy problémát tapasztalsz, kérjük, először keresd meg a GitHub hibalistájában. Ha még senki nem jelentette, nyiss egy új hibajegyet, és írd le, mi történt, milyen fejegységet használsz, és hogyan lehet reprodukálni a problémát.</string>
-    <string name="support_open_issues">GitHub hibák listájának megnyitása</string>
-    <string name="support_scan_qr">Vagy szkenneld be ezt a QR-kódot a hibák listájának egy másik eszközön való megnyitásához.</string>
-    <string name="support_github_account_warning">Megjegyzés: egy ingyenes GitHub fiókra van szükséged hibajegy létrehozásához.</string>
+    <string name="support_help">Ha hibát vagy problémát tapasztalsz, először keresd meg a GitHub-os hibajelentések között. Ha még senki nem jelentette, nyiss egy új hibajegyet, és írd le, mi történt, milyen fejegységet használsz, és hogyan lehet reprodukálni a hibát.</string>
+    <string name="support_open_issues">GitHub hibajelentések megnyitása</string>
+    <string name="support_scan_qr">Vagy olvasd be ezt a QR-kódot, ha egy másik eszközön szeretnéd megnyitni a hibajelentések listáját.</string>
+    <string name="support_github_account_warning">Megjegyzés: hibajegy létrehozásához ingyenes GitHub-fiókra van szükség.</string>
 </resources>

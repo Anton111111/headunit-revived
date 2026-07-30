@@ -766,7 +766,7 @@
     <string name="support">Zgłoś problem</string>
     <string name="support_description">Szukaj lub zgłaszaj błędy na GitHub</string>
     <string name="support_title">Zgłoś problem</string>
-    <string name="support_help">Jeśli napotkasz błąd lub problem, najpierw poszukaj go na liście zgłoszeń GitHub. Jeśli nikt jeszcze go nie zgłosił, otwórz nowe zgłoszenie i opisz, co się dzieje, jakie masz radio samochodowe i jak odtworzyć problem.</string>
+    <string name="support_help">Jeśli napotkasz błąd lub problem, najpierw poszukaj go na liście zgłoszeń GitHub. Jeśli nikt jeszcze go nie zgłosił, otwórz nowe zgłoszenie i opisz, co się dzieje, jakie masz radio samochodowe oraz podaj kroki potrzebne do odtworzenia błędu.</string>
     <string name="support_open_issues">Otwórz stronę zgłoszeń GitHub</string>
     <string name="support_scan_qr">Lub zeskanuj ten kod QR, aby otworzyć listę zgłoszeń na innym urządzeniu.</string>
     <string name="support_github_account_warning">Uwaga: aby utworzyć zgłoszenie, potrzebujesz bezpłatnego konta GitHub.</string>

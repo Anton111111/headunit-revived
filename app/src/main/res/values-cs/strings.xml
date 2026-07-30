@@ -762,11 +762,11 @@
     <string name="onb_ready_loading_intro">Ještě jedna věc: nyní můžete nastavit vlastní načítací obrazovku, která se zobrazí při připojování auta.</string>
     <string name="onb_ready_loading_button">Nastavit načítací obrazovku</string>
 
-    <string name="support">Nahlásit problém</string>
-    <string name="support_description">Hledat nebo nahlašovat chyby na GitHubu</string>
-    <string name="support_title">Nahlásit problém</string>
-    <string name="support_help">Pokud narazíte na chybu nebo problém, nejprve ho vyhledejte v seznamu problémů na GitHubu. Pokud ho ještě nikdo nenahlásil, otevřete nový problém a popište, co se děje, vaši hlavní jednotku a kroky k reprodukci.</string>
-    <string name="support_open_issues">Otevřít stránku problémů na GitHubu</string>
-    <string name="support_scan_qr">Nebo naskenujte tento QR kód pro otevření seznamu problémů na jiném zařízení.</string>
-    <string name="support_github_account_warning">Poznámka: pro vytvoření problému potřebujete bezplatný účet GitHub.</string>
+    <string name="support">Nahlásit chybu</string>
+    <string name="support_description">Hledejte nebo nahlašujte chyby na GitHubu</string>
+    <string name="support_title">Nahlásit chybu</string>
+    <string name="support_help">Pokud narazíte na chybu nebo problém, nejprve ho vyhledejte v seznamu hlášení na GitHubu. Pokud ho ještě nikdo nenahlásil, vytvořte nové hlášení a popište, co se stalo, vaše autorádio a postup, jak chybu zopakovat.</string>
+    <string name="support_open_issues">Otevřít hlášení na GitHubu</string>
+    <string name="support_scan_qr">Nebo naskenujte tento QR kód a otevřete seznam hlášení na jiném zařízení.</string>
+    <string name="support_github_account_warning">Poznámka: k vytvoření hlášení potřebujete bezplatný účet na GitHubu.</string>
 </resources>

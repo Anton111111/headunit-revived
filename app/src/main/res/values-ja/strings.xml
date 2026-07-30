@@ -742,10 +742,10 @@
     <string name="sunrise_reference_help">日の出と日の入りを計算するための基準点です。場所を一度選択すれば、GPS なしで機能します。</string>
 
     <string name="support">問題を報告する</string>
-    <string name="support_description">GitHubでバグを検索または報告する</string>
+    <string name="support_description">GitHubでバグを検索・報告する</string>
     <string name="support_title">問題を報告する</string>
-    <string name="support_help">バグや問題が発生した場合は、まずGitHubのissueリストで検索してください。まだ誰も報告していない場合は、新しいissueを作成し、発生した内容、お使いの車載機、再現手順を記載してください。</string>
+    <string name="support_help">バグや不具合が発生した場合は、まずGitHubのissueリストで同様の報告がないか確認してください。まだ誰も報告していない場合は、新しいissueを作成し、症状・お使いの車載機・再現手順を詳しく記載してください。</string>
     <string name="support_open_issues">GitHubのissueページを開く</string>
-    <string name="support_scan_qr">または、このQRコードをスキャンして別のデバイスでissueリストを開いてください。</string>
-    <string name="support_github_account_warning">注意：issueを作成するには、無料のGitHubアカウントが必要です。</string>
+    <string name="support_scan_qr">このQRコードをスキャンして、別のデバイスでissueリストを開くこともできます。</string>
+    <string name="support_github_account_warning">ご注意：issueを作成するには、無料のGitHubアカウントが必要です。</string>
 </resources>

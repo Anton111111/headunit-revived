@@ -740,8 +740,8 @@
     <string name="support">문제 신고</string>
     <string name="support_description">GitHub에서 버그를 검색하거나 신고하세요</string>
     <string name="support_title">문제 신고</string>
-    <string name="support_help">버그나 문제가 발생하면 먼저 GitHub 이슈 목록에서 해당 문제를 검색하세요. 아직 신고된 내용이 없다면 새 이슈를 열어 발생한 상황, 사용 중인 헤드유닛, 재현 단계를 설명해 주세요.</string>
+    <string name="support_help">버그나 문제가 발생하면 먼저 GitHub 이슈 목록에서 검색해 보세요. 아직 신고된 내용이 없다면 새 이슈를 열어 발생한 상황, 사용 중인 헤드유닛 기종, 재현 방법을 구체적으로 설명해 주세요.</string>
     <string name="support_open_issues">GitHub 이슈 페이지 열기</string>
-    <string name="support_scan_qr">또는 이 QR 코드를 스캔하면 다른 기기에서 이슈 목록을 열 수 있습니다.</string>
-    <string name="support_github_account_warning">참고: 이슈를 등록하려면 무료 GitHub 계정이 필요합니다.</string>
+    <string name="support_scan_qr">또는 이 QR 코드를 스캔하여 다른 기기에서 이슈 목록을 여세요.</string>
+    <string name="support_github_account_warning">참고: 이슈를 작성하려면 무료 GitHub 계정이 필요합니다.</string>
 </resources>

@@ -763,10 +763,10 @@
 
     <!-- Support / Bug Report -->
     <string name="support">回報問題</string>
-    <string name="support_description">在 GitHub 上搜尋或回報錯誤</string>
+    <string name="support_description">在 GitHub 上搜尋或回報 Bug</string>
     <string name="support_title">回報問題</string>
-    <string name="support_help">如果您遇到錯誤或問題，請先在 GitHub 問題列表中查找。如果尚無人回報，請開啟新問題並描述發生的情況、您的車機，以及重現步驟。</string>
-    <string name="support_open_issues">開啟 GitHub 問題頁面</string>
-    <string name="support_scan_qr">或掃描此 QR 碼，在其他裝置上開啟問題列表。</string>
-    <string name="support_github_account_warning">注意：您需要一個免費的 GitHub 帳號才能建立問題。</string>
+    <string name="support_help">若您遇到 Bug 或其他問題，請先在 GitHub 的 Issues 清單中搜尋，確認是否已有人回報過。若尚未有人提出，請開啟新的 Issue，說明發生的狀況、您使用的車機型號，以及重現問題的步驟。</string>
+    <string name="support_open_issues">前往 GitHub Issues 頁面</string>
+    <string name="support_scan_qr">或掃描此 QR 碼，在其他裝置上開啟 Issues 清單。</string>
+    <string name="support_github_account_warning">注意：建立 Issue 需要一個免費的 GitHub 帳號。</string>
 </resources>

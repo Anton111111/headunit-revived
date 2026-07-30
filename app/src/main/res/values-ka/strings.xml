@@ -669,8 +669,8 @@
     <string name="support">პრობლემის შეტყობინება</string>
     <string name="support_description">GitHub-ზე ხარვეზების ძებნა ან შეტყობინება</string>
     <string name="support_title">პრობლემის შეტყობინება</string>
-    <string name="support_help">თუ წააწყდებით ხარვეზს ან პრობლემას, გთხოვთ, ჯერ მოძებნოთ იგი GitHub-ის პრობლემების სიაში. თუ არავის შეუტყობინებია, გახსენით ახალი საკითხი და აღწერეთ რა ხდება, თქვენი მონიტორი და პრობლემის გამეორების ნაბიჯები.</string>
-    <string name="support_open_issues">GitHub-ის პრობლემების გვერდის გახსნა</string>
-    <string name="support_scan_qr">ან დაასკანირეთ ეს QR კოდი სხვა მოწყობილობაზე პრობლემების სიის გასახსნელად.</string>
+    <string name="support_help">თუ წაიქეცით ხარვეზში ან პრობლემაში, გთხოვთ, ჯერ მოძებნოთ იგი GitHub-ის საკითხების სიაში. თუ ჯერ არავის შეუტყობინებია ამის შესახებ, გახსენით ახალი საკითხი და აღწერეთ: რა ხდება, რა მონიტორი გაქვთ და როგორ შეიძლება პრობლემის გამეორება.</string>
+    <string name="support_open_issues">GitHub-ის საკითხების გვერდის გახსნა</string>
+    <string name="support_scan_qr">ან დაასკანირეთ ეს QR კოდი, რათა გახსნათ საკითხების სია სხვა მოწყობილობაზე.</string>
     <string name="support_github_account_warning">შენიშვნა: საკითხის შესაქმნელად საჭიროა უფასო GitHub ანგარიში.</string>
 </resources>
