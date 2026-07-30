@@ -673,4 +673,6 @@
     <string name="support_open_issues">GitHub-ის საკითხების გვერდის გახსნა</string>
     <string name="support_scan_qr">ან დაასკანირეთ ეს QR კოდი, რათა გახსნათ საკითხების სია სხვა მოწყობილობაზე.</string>
     <string name="support_github_account_warning">შენიშვნა: საკითხის შესაქმნელად საჭიროა უფასო GitHub ანგარიში.</string>
+    <string name="onb_ready_extras_title">დასრულებამდე შეგიძლიათ ასევე გამართოთ:</string>
+    <string name="onb_extra_loading_desc">სახეობრივი სურათი, რომელიც ჩანს მანქანის დაკავშირების დროს</string>
 </resources>

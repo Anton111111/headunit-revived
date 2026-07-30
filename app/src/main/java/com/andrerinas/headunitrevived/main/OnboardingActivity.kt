@@ -104,9 +104,16 @@ class OnboardingActivity : BaseActivity() {
         bindSteps()
         bindPermissionsStep()
 
-        // Ready step: offer to jump straight into the loading screen setup (finishes the wizard).
-        findViewById<MaterialButton>(R.id.onb_loading_screen_button).setOnClickListener {
+        // Ready step: optional-extras card. Each row finishes the wizard and jumps straight into
+        // that Settings sub-screen (things the wizard does not already walk you through).
+        findViewById<View>(R.id.onb_extra_loading).setOnClickListener {
             finishOnboardingInto(R.id.loadingScreenFragment)
+        }
+        findViewById<View>(R.id.onb_extra_keymap).setOnClickListener {
+            finishOnboardingInto(R.id.keymapFragment)
+        }
+        findViewById<View>(R.id.onb_extra_mic).setOnClickListener {
+            finishOnboardingInto(R.id.micSettingsFragment)
         }
 
         backBtn.setOnClickListener { if (step > 0) { step--; render() } }

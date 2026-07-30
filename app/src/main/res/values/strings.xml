@@ -55,6 +55,9 @@
     <string name="onb_summary_permissions_format">Permissions: %1$d of %2$d granted</string>
     <string name="onb_ready_loading_intro">One more thing: you can now set a custom loading screen, shown while the car connects.</string>
     <string name="onb_ready_loading_button">Set up a loading screen</string>
+    <!-- Ready step optional-extras card -->
+    <string name="onb_ready_extras_title">Before you finish, you can also set up:</string>
+    <string name="onb_extra_loading_desc">A custom image shown while the car connects</string>
 
     <!-- Onboarding wizard: permissions step + Settings > Permissions -->
     <string name="onb_permissions_title">Enable permissions</string>

@@ -769,4 +769,6 @@
     <string name="support_open_issues">Otevřít hlášení na GitHubu</string>
     <string name="support_scan_qr">Nebo naskenujte tento QR kód a otevřete seznam hlášení na jiném zařízení.</string>
     <string name="support_github_account_warning">Poznámka: k vytvoření hlášení potřebujete bezplatný účet na GitHubu.</string>
+    <string name="onb_ready_extras_title">Než dokončíte, můžete také nastavit:</string>
+    <string name="onb_extra_loading_desc">Vlastní obrázek zobrazený při připojování auta</string>
 </resources>

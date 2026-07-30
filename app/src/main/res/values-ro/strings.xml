@@ -742,4 +742,6 @@
     <string name="support_open_issues">Deschide pagina de probleme GitHub</string>
     <string name="support_scan_qr">Sau scanează acest cod QR pentru a deschide lista de probleme pe un alt dispozitiv.</string>
     <string name="support_github_account_warning">Notă: ai nevoie de un cont GitHub gratuit pentru a crea o problemă.</string>
+    <string name="onb_ready_extras_title">Înainte să termini, poți configura și:</string>
+    <string name="onb_extra_loading_desc">O imagine personalizată afișată cât timp mașina se conectează</string>
 </resources>

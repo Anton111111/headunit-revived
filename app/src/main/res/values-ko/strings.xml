@@ -744,4 +744,6 @@
     <string name="support_open_issues">GitHub 이슈 페이지 열기</string>
     <string name="support_scan_qr">또는 이 QR 코드를 스캔하여 다른 기기에서 이슈 목록을 여세요.</string>
     <string name="support_github_account_warning">참고: 이슈를 작성하려면 무료 GitHub 계정이 필요합니다.</string>
+    <string name="onb_ready_extras_title">마무리하기 전에 추가로 설정할 수 있습니다:</string>
+    <string name="onb_extra_loading_desc">차량 연결 중에 표시되는 사용자 지정 이미지</string>
 </resources>

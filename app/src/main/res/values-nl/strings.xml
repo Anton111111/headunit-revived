@@ -770,4 +770,6 @@
     <string name="support_open_issues">Open de GitHub-issuespagina</string>
     <string name="support_scan_qr">Of scan deze QR-code om de issueslijst op een ander apparaat te openen.</string>
     <string name="support_github_account_warning">Let op: je hebt een gratis GitHub-account nodig om een issue aan te maken.</string>
+    <string name="onb_ready_extras_title">Voordat je klaar bent, kun je ook instellen:</string>
+    <string name="onb_extra_loading_desc">Een aangepaste afbeelding die wordt getoond terwijl de auto verbinding maakt</string>
 </resources>

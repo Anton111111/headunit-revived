@@ -738,4 +738,7 @@
     <string name="support_open_issues">GitHub Issues sayfasını aç</string>
     <string name="support_scan_qr">Veya Issues listesini başka bir cihazda açmak için bu QR kodunu tarayın.</string>
     <string name="support_github_account_warning">Not: Konu oluşturmak için ücretsiz bir GitHub hesabına ihtiyacınız var.</string>
+
+    <string name="onb_ready_extras_title">Bitirmeden önce şunları da ayarlayabilirsiniz:</string>
+    <string name="onb_extra_loading_desc">Araç bağlanırken gösterilen özel bir görsel</string>
 </resources>

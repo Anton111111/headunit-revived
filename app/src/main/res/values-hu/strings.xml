@@ -740,4 +740,6 @@
     <string name="support_open_issues">GitHub hibajelentések megnyitása</string>
     <string name="support_scan_qr">Vagy olvasd be ezt a QR-kódot, ha egy másik eszközön szeretnéd megnyitni a hibajelentések listáját.</string>
     <string name="support_github_account_warning">Megjegyzés: hibajegy létrehozásához ingyenes GitHub-fiókra van szükség.</string>
+    <string name="onb_ready_extras_title">Mielőtt befejeznéd, ezeket is beállíthatod:</string>
+    <string name="onb_extra_loading_desc">Egyéni kép, amely az autó csatlakozása közben jelenik meg</string>
 </resources>

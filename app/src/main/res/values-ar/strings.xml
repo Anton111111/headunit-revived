@@ -743,4 +743,6 @@
     <string name="support_open_issues">فتح صفحة المشكلات على GitHub</string>
     <string name="support_scan_qr">أو امسح رمز QR هذا لفتح قائمة المشكلات على جهاز آخر.</string>
     <string name="support_github_account_warning">ملاحظة: تحتاج إلى حساب GitHub مجاني لفتح مشكلة جديدة.</string>
+    <string name="onb_ready_extras_title">قبل أن تنهي، يمكنك أيضًا إعداد:</string>
+    <string name="onb_extra_loading_desc">صورة مخصصة تظهر أثناء اتصال السيارة</string>
 </resources>

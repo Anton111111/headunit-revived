@@ -769,4 +769,6 @@
     <string name="support_open_issues">前往 GitHub Issues 頁面</string>
     <string name="support_scan_qr">或掃描此 QR 碼，在其他裝置上開啟 Issues 清單。</string>
     <string name="support_github_account_warning">注意：建立 Issue 需要一個免費的 GitHub 帳號。</string>
+    <string name="onb_ready_extras_title">完成前，您還可以設定：</string>
+    <string name="onb_extra_loading_desc">汽車連線時顯示的自訂圖片</string>
 </resources>

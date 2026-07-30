@@ -770,4 +770,6 @@
     <string name="support_open_issues">Otwórz stronę zgłoszeń GitHub</string>
     <string name="support_scan_qr">Lub zeskanuj ten kod QR, aby otworzyć listę zgłoszeń na innym urządzeniu.</string>
     <string name="support_github_account_warning">Uwaga: aby utworzyć zgłoszenie, potrzebujesz bezpłatnego konta GitHub.</string>
+    <string name="onb_ready_extras_title">Zanim skończysz, możesz też skonfigurować:</string>
+    <string name="onb_extra_loading_desc">Niestandardowy obraz wyświetlany podczas łączenia samochodu</string>
 </resources>

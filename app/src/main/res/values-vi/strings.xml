@@ -747,4 +747,6 @@
     <string name="support_open_issues">Mở trang issues trên GitHub</string>
     <string name="support_scan_qr">Hoặc quét mã QR này để mở danh sách issues trên thiết bị khác.</string>
     <string name="support_github_account_warning">Lưu ý: bạn cần có tài khoản GitHub miễn phí để tạo issue.</string>
+    <string name="onb_ready_extras_title">Trước khi hoàn tất, bạn cũng có thể thiết lập:</string>
+    <string name="onb_extra_loading_desc">Hình ảnh tuỳ chỉnh hiển thị khi xe đang kết nối</string>
 </resources>

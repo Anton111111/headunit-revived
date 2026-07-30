@@ -769,4 +769,6 @@
     <string name="support_open_issues">Открыть список обращений на GitHub</string>
     <string name="support_scan_qr">Или отсканируйте этот QR-код, чтобы открыть список обращений на другом устройстве.</string>
     <string name="support_github_account_warning">Примечание: для создания обращения необходима бесплатная учётная запись GitHub.</string>
+    <string name="onb_ready_extras_title">Перед завершением вы также можете настроить:</string>
+    <string name="onb_extra_loading_desc">Пользовательское изображение, отображаемое пока автомобиль подключается</string>
 </resources>

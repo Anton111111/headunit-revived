@@ -748,4 +748,6 @@
     <string name="support_open_issues">GitHubのissueページを開く</string>
     <string name="support_scan_qr">このQRコードをスキャンして、別のデバイスでissueリストを開くこともできます。</string>
     <string name="support_github_account_warning">ご注意：issueを作成するには、無料のGitHubアカウントが必要です。</string>
+    <string name="onb_ready_extras_title">完了する前に、以下もセットアップできます：</string>
+    <string name="onb_extra_loading_desc">車が接続中に表示されるカスタム画像</string>
 </resources>

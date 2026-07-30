@@ -775,4 +775,6 @@
     <string name="support_open_issues">GitHub-Problemseite öffnen</string>
     <string name="support_scan_qr">Oder scannen Sie diesen QR-Code, um die Problemliste auf einem anderen Gerät zu öffnen.</string>
     <string name="support_github_account_warning">Hinweis: Sie benötigen ein kostenloses GitHub-Konto, um ein Issue zu erstellen.</string>
+    <string name="onb_ready_extras_title">Bevor Sie fertig sind, können Sie auch einrichten:</string>
+    <string name="onb_extra_loading_desc">Ein benutzerdefiniertes Bild, das während der Verbindung des Fahrzeugs angezeigt wird</string>
 </resources>

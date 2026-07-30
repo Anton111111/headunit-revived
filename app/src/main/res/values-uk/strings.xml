@@ -771,4 +771,6 @@
     <string name="support_open_issues">Відкрити список issues на GitHub</string>
     <string name="support_scan_qr">Або відскануйте цей QR-код, щоб відкрити список issues на іншому пристрої.</string>
     <string name="support_github_account_warning">Примітка: для створення issue потрібен безкоштовний акаунт GitHub.</string>
+    <string name="onb_ready_extras_title">Перед завершенням ви також можете налаштувати:</string>
+    <string name="onb_extra_loading_desc">Власне зображення, що відображається під час підключення автомобіля</string>
 </resources>

@@ -747,4 +747,6 @@
     <string name="support_open_issues">Apri la pagina delle segnalazioni su GitHub</string>
     <string name="support_scan_qr">Oppure scansiona questo codice QR per aprire la lista delle segnalazioni su un altro dispositivo.</string>
     <string name="support_github_account_warning">Nota: è necessario un account GitHub gratuito per creare una segnalazione.</string>
+    <string name="onb_ready_extras_title">Prima di finire, puoi anche configurare:</string>
+    <string name="onb_extra_loading_desc">Un\'immagine personalizzata mostrata mentre l\'auto si connette</string>
 </resources>
