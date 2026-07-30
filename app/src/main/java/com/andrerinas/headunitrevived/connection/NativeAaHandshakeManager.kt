@@ -68,6 +68,9 @@ class NativeAaHandshakeManager(
     private var currentIp: String? = null
     private var currentBssid: String? = null
     private var pokeJob: Job? = null
+    // True while handleHandshake() runs; lets WifiDirectManager's join watchdog know a real
+    // exchange is in progress. Bounded by handleHandshake()'s own timeouts, so it can't stick true.
+    @Volatile private var handshakeInFlight = false
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -80,7 +83,18 @@ class NativeAaHandshakeManager(
         currentBssid = bssid
     }
 
+    /** Clears cached credentials so an in-progress wait doesn't hand out stale ones for a group
+     *  that's about to be torn down. */
+    fun invalidateCredentials() {
+        currentSsid = null
+        currentPsk = null
+        currentIp = null
+        currentBssid = null
+    }
+
     fun isActive(): Boolean = isRunning
+
+    fun isHandshakeInFlight(): Boolean = handshakeInFlight
 
     @SuppressLint("MissingPermission")
     fun start() {
@@ -375,6 +389,7 @@ class NativeAaHandshakeManager(
     }
 
     private suspend fun handleHandshake(socket: BluetoothSocket) = withContext(Dispatchers.IO) {
+        handshakeInFlight = true
         try {
             val device = socket.remoteDevice
             AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address})")
@@ -475,6 +490,7 @@ class NativeAaHandshakeManager(
         } catch (e: Exception) {
             AppLog.e("NativeAA: Handshake error: ${e.message}", e)
         } finally {
+            handshakeInFlight = false
             try { socket.close() } catch (e: Exception) {}
             AppLog.i("NativeAA: BT Handshake socket closed.")
         }

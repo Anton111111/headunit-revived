@@ -734,6 +734,8 @@ class AapService : Service(), UsbReceiver.Listener {
                 AppLog.d("AapService: WiFi credentials received, but not in Native AA mode. Skipping HandshakeManager update.")
             }
         }
+        wifiDirectManager?.setNativeHandshakeStateProvider { nativeAaHandshakeManager?.isHandshakeInFlight() == true }
+        wifiDirectManager?.setNativeGroupInvalidatedListener { nativeAaHandshakeManager?.invalidateCredentials() }
 
 
         checkAlreadyConnectedUsb()
