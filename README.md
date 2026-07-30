@@ -67,7 +67,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - more customization options for the UI and the app itself
 
 ## Changelog
-### v.3.2.0-beta2
+### v.3.2.0-beta3
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
 - Acquire transient audio focus while AA audio plays, thanks to @bnayahu
 - Add GitHub Actions CI (build + unit tests), thanks to @bnayahu
@@ -80,6 +80,8 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - Add car keys support for FYT headunits, thanks to @MrEAlderson
 - Added Option to flip projection horizontal for Headup-Displays
 - Recover automatically from post-first-frame video display stalls, thanks to @andrecuellar
+- Settings and Onboarding Wizard redesign for better usability, thanks to @andrecuellar
+- Fixing mulitiple WiFi-Direct and Native AA connection issues, thanks to @o-jcardenass, @andrecuellar and @notathf
 
 ### v.3.1.1
 - Reduce pressure on sensor events like night and gps and start/stop these events in onConnected, onDisconnect and onDestroy
