@@ -722,7 +722,6 @@
                     android:textAppearance="?attr/textAppearanceBody2" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/onb_loading_screen_button"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
