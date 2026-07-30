@@ -743,7 +743,7 @@
     <string name="support">Segnala un problema</string>
     <string name="support_description">Cerca o segnala bug su GitHub</string>
     <string name="support_title">Segnala un problema</string>
-    <string name="support_help">Se riscontri un bug o un problema, cerca prima nella lista delle segnalazioni su GitHub. Se nessuno lo ha ancora riportato, apri una nuova segnalazione e descrivi cosa succede, la tua unità di bordo e i passaggi per riprodurlo.</string>
+    <string name="support_help">Se riscontri un bug o un problema, cerca prima nella lista delle segnalazioni su GitHub. Se nessuno lo ha ancora riportato, apri una nuova segnalazione e descrivi cosa succede, la tua autoradio e i passaggi per riprodurlo.</string>
     <string name="support_open_issues">Apri la pagina delle segnalazioni su GitHub</string>
     <string name="support_scan_qr">Oppure scansiona questo codice QR per aprire la lista delle segnalazioni su un altro dispositivo.</string>
     <string name="support_github_account_warning">Nota: è necessario un account GitHub gratuito per creare una segnalazione.</string>
