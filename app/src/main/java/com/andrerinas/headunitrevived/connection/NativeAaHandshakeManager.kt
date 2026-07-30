@@ -118,20 +118,23 @@ class NativeAaHandshakeManager(
         }
 
         isRunning = true
-        AppLog.i("NativeAA: Starting Bluetooth Handshake Servers...")
+        // Local Bluetooth radio address; logged on every accept so a dual-radio head unit's logs
+        // show which radio the phone actually reached (compare with the HU MAC in the phone's log).
+        val localAddr = try { adapter.address } catch (e: Exception) { "?" }
+        AppLog.i("NativeAA: Starting Bluetooth Handshake Servers (primary radio [$localAddr])...")
 
         // Start AA RFCOMM Server
         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-RfcommServer")) {
             try {
                 aaServerSocket = adapter.listenUsingRfcommWithServiceRecord("AA BT Listener", AA_UUID)
-                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID ($AA_UUID)... Waiting for phone to connect back!")
+                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID ($AA_UUID) on radio [$localAddr]... Waiting for phone to connect back!")
                 while (isRunning && isActive) {
                     val socket = aaServerSocket?.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: Connection accepted from ${socket.remoteDevice.name}")
+                        AppLog.i("NativeAA: Connection accepted from ${socket.remoteDevice.name} (${socket.remoteDevice.address}) on local radio [$localAddr]")
                         // [FIX] Launch handshake in a separate coroutine so the server can accept the next connection!
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
-                            handleHandshake(socket)
+                            handleHandshake(socket, localAddr)
                         }
                     }
                 }
@@ -201,9 +204,9 @@ class NativeAaHandshakeManager(
                 while (isRunning && isActive) {
                     val socket = server.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: Connection accepted (secondary radio) from ${socket.remoteDevice.name}")
+                        AppLog.i("NativeAA: Connection accepted (secondary radio [$addr]) from ${socket.remoteDevice.name} (${socket.remoteDevice.address})")
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
-                            handleHandshake(socket)
+                            handleHandshake(socket, addr)
                         }
                     }
                 }
@@ -388,11 +391,11 @@ class NativeAaHandshakeManager(
         }
     }
 
-    private suspend fun handleHandshake(socket: BluetoothSocket) = withContext(Dispatchers.IO) {
+    private suspend fun handleHandshake(socket: BluetoothSocket, localRadio: String? = null) = withContext(Dispatchers.IO) {
         handshakeInFlight = true
         try {
             val device = socket.remoteDevice
-            AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address})")
+            AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address}) on local radio [${localRadio ?: "?"}]")
 
             if (commManager.isConnected ||
                 commManager.connectionState.value is CommManager.ConnectionState.Connecting) {
@@ -460,7 +463,7 @@ class NativeAaHandshakeManager(
             // No BluetoothSocket.setSoTimeout(); force-close via watchdog to unblock readFully() on timeout.
             val watchdog = scope.launch(Dispatchers.IO) {
                 delay(HANDSHAKE_RESPONSE_TIMEOUT_MS)
-                AppLog.e("NativeAA: Handshake failed - No response from phone within ${HANDSHAKE_RESPONSE_TIMEOUT_MS / 1000}s of sending WifiStartRequest. Closing socket.")
+                AppLog.e("NativeAA: Handshake failed - No response from phone ${device.name} (${device.address}) on radio [${localRadio ?: "?"}] within ${HANDSHAKE_RESPONSE_TIMEOUT_MS / 1000}s of sending WifiStartRequest. Closing socket.")
                 try { socket.close() } catch (e: Exception) {}
             }
             val response = try {
