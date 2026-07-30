@@ -749,4 +749,24 @@
     <string name="support_github_account_warning">Nota: è necessario un account GitHub gratuito per creare una segnalazione.</string>
     <string name="onb_ready_extras_title">Prima di finire, puoi anche configurare:</string>
     <string name="onb_extra_loading_desc">Un\'immagine personalizzata mostrata mentre l\'auto si connette</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Regole per le segnalazioni</string>
+    <string name="support_rules_english_desc">Scrivi sempre in inglese. Il maintainer e la maggior parte di chi aiuta legge l\'inglese, e un thread con tante lingue diventa in fretta una piccola torre di Babele in cui nessuno capisce nessuno. Non te la cavi con l\'inglese? Un traduttore come Google Translate o DeepL va benissimo.</string>
+    <string name="support_rules_device_title">Di\' cosa fa girare l\'app</string>
+    <string name="support_rules_device_desc">La versione Android del dispositivo che proietta Android Auto (la tua autoradio o schermo), e la marca e il modello se li conosci.</string>
+    <string name="support_rules_connection_title">Di\' come ti connetti</string>
+    <string name="support_rules_connection_desc">Cavo USB, adattatore wireless USB, WiFi Direct, WiFi (headunit server) o Self Mode. Se è wireless, aggiungi il modello dell\'adattatore o dongle.</string>
+    <string name="support_rules_appversion_title">Includi la versione dell\'app</string>
+    <string name="support_rules_appversion_desc">La versione di Headunit Revived, mostrata nella schermata Informazioni e Supporto.</string>
+    <string name="support_rules_logs_title">Allega i log, subito dopo che accade</string>
+    <string name="support_rules_logs_desc">Vai nella scheda Avanzate delle Impostazioni, attiva la Modalità Debug nella sezione Debug, riproduci il problema, poi tocca Esporta Log subito dopo, in modo che il log copra il momento in cui si è rotto e non solo l\'avvio. Allega quel file alla segnalazione.</string>
+    <string name="support_rules_search_title">Cerca prima</string>
+    <string name="support_rules_search_desc">Il tuo problema potrebbe essere già stato segnalato. Cerca tra le segnalazioni esistenti e aggiungi lì il tuo commento invece di aprire un duplicato.</string>
+    <string name="support_rules_phone_title">Anche il tuo telefono conta</string>
+    <string name="support_rules_phone_desc">Il modello del tuo telefono, la versione Android e la versione dell\'app Android Auto sul telefono. Alcuni problemi vengono da una versione specifica di Android Auto.</string>
+    <string name="support_rules_describe_title">Descrivi chiaramente</string>
+    <string name="support_rules_describe_desc">Cosa hai fatto, cosa ti aspettavi e cosa è successo davvero. Uno screenshot o un breve video aiuta molto per i problemi visivi.</string>
+    <string name="support_rules_oneissue_title">Un problema per segnalazione</string>
+    <string name="support_rules_oneissue_desc">Tieni ogni segnalazione a un singolo problema, così è più facile tracciarlo e risolverlo. Apri segnalazioni separate per problemi non correlati.</string>
 </resources>

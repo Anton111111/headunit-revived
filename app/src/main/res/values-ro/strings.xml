@@ -744,4 +744,23 @@
     <string name="support_github_account_warning">Notă: ai nevoie de un cont GitHub gratuit pentru a crea o problemă.</string>
     <string name="onb_ready_extras_title">Înainte să termini, poți configura și:</string>
     <string name="onb_extra_loading_desc">O imagine personalizată afișată cât timp mașina se conectează</string>
+
+    <string name="support_rules_button">Reguli de raportare</string>
+    <string name="support_rules_english_desc">Te rugăm să scrii întotdeauna problema ta în engleză. Cel care întreține proiectul și majoritatea celor care ajută aici citesc engleza, iar un fir de discuție care amestecă mai multe limbi se transformă rapid într-un mic turnul Babel în care nimeni nu înțelege pe nimeni. Nu ești sigur pe engleză? Un traducător precum Google Translate sau DeepL merge perfect.</string>
+    <string name="support_rules_device_title">Spune ce rulează aplicația</string>
+    <string name="support_rules_device_desc">Versiunea Android a dispozitivului care proiectează Android Auto (unitatea ta principală sau ecranul) și marca și modelul acestuia, dacă le știi.</string>
+    <string name="support_rules_connection_title">Spune cum te conectezi</string>
+    <string name="support_rules_connection_desc">Cablu USB, adaptor wireless USB, WiFi Direct, WiFi (headunit server) sau Self Mode. Dacă este wireless, adaugă modelul adaptorului sau dongle-ului.</string>
+    <string name="support_rules_appversion_title">Include versiunea aplicației</string>
+    <string name="support_rules_appversion_desc">Versiunea Headunit Revived, afișată pe ecranul Despre.</string>
+    <string name="support_rules_logs_title">Atașează logurile, imediat după ce se întâmplă</string>
+    <string name="support_rules_logs_desc">Mergi în Setări la fila Avansate, activează Mod depanare (Debug) în secțiunea Depanare, reproduci problema, apoi apasă Exportă logurile imediat după, ca logul să acopere momentul în care s-a produs eroarea, nu doar pornirea. Atașează acel fișier la problema ta.</string>
+    <string name="support_rules_search_title">Caută mai întâi</string>
+    <string name="support_rules_search_desc">Problema ta poate fi deja raportată. Caută în problemele existente și adaugă acolo, în loc să deschizi un duplicat.</string>
+    <string name="support_rules_phone_title">Telefonul tău contează și el</string>
+    <string name="support_rules_phone_desc">Modelul telefonului tău, versiunea Android a acestuia și versiunea aplicației Android Auto de pe telefon. Unele probleme vin dintr-o anumită versiune Android Auto.</string>
+    <string name="support_rules_describe_title">Descrie clar</string>
+    <string name="support_rules_describe_desc">Ce ai făcut, ce te-ai așteptat să se întâmple și ce s-a întâmplat de fapt. Un screenshot sau un scurt videoclip ajută mult pentru problemele vizuale.</string>
+    <string name="support_rules_oneissue_title">O problemă pe fir</string>
+    <string name="support_rules_oneissue_desc">Păstrează fiecare fir de discuție la o singură problemă, ca să poată fi urmărită și rezolvată. Deschide fire separate pentru probleme diferite.</string>
 </resources>

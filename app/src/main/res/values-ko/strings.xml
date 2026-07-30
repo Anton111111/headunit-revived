@@ -746,4 +746,24 @@
     <string name="support_github_account_warning">참고: 이슈를 작성하려면 무료 GitHub 계정이 필요합니다.</string>
     <string name="onb_ready_extras_title">마무리하기 전에 추가로 설정할 수 있습니다:</string>
     <string name="onb_extra_loading_desc">차량 연결 중에 표시되는 사용자 지정 이미지</string>
+
+    <!-- Support / issue reporting rules -->
+    <string name="support_rules_button">신고 규칙</string>
+    <string name="support_rules_english_desc">이슈는 항상 영어로 작성해 주세요. 메인테이너와 도움을 주는 분들 대부분이 영어를 사용하며, 여러 언어가 섞인 스레드는 누구도 이해하기 어려운 바벨탑이 되어버립니다. 영어가 자신 없으시다면 Google Translate나 DeepL 같은 번역기를 충분히 활용하셔도 됩니다.</string>
+    <string name="support_rules_device_title">앱을 실행하는 기기를 알려주세요</string>
+    <string name="support_rules_device_desc">Android Auto를 투영하는 기기(헤드유닛 또는 화면)의 Android 버전과, 알고 계신다면 브랜드와 모델도 함께 알려주세요.</string>
+    <string name="support_rules_connection_title">연결 방식을 알려주세요</string>
+    <string name="support_rules_connection_desc">USB 케이블, USB 무선 어댑터, WiFi Direct, WiFi(헤드유닛 서버) 또는 Self Mode 중 하나를 알려주세요. 무선 연결이라면 어댑터나 동글 모델도 함께 기재해 주세요.</string>
+    <string name="support_rules_appversion_title">앱 버전을 포함해 주세요</string>
+    <string name="support_rules_appversion_desc">정보 및 지원 화면에 표시된 Headunit Revived 버전을 알려주세요.</string>
+    <string name="support_rules_logs_title">문제 발생 직후에 로그를 첨부해 주세요</string>
+    <string name="support_rules_logs_desc">설정의 고급 탭으로 이동해 디버그 섹션에서 디버그 모드를 켠 다음, 문제를 재현하고 바로 로그 내보내기를 탭하세요. 이렇게 해야 앱 시작 시점이 아닌 문제가 발생한 순간이 로그에 포함됩니다. 해당 파일을 이슈에 첨부해 주세요.</string>
+    <string name="support_rules_search_title">먼저 검색해 보세요</string>
+    <string name="support_rules_search_desc">이미 신고된 문제일 수 있습니다. 기존 이슈를 검색한 뒤, 같은 내용이 있다면 새 이슈를 열지 말고 그 이슈에 댓글을 달아주세요.</string>
+    <string name="support_rules_phone_title">휴대폰 정보도 중요합니다</string>
+    <string name="support_rules_phone_desc">휴대폰 모델, Android 버전, 그리고 휴대폰에 설치된 Android Auto 앱 버전도 알려주세요. 특정 Android Auto 버전에서만 발생하는 문제도 있습니다.</string>
+    <string name="support_rules_describe_title">증상을 명확하게 설명해 주세요</string>
+    <string name="support_rules_describe_desc">어떤 작업을 했는지, 어떤 결과를 예상했는지, 실제로는 어떻게 됐는지를 적어주세요. 화면 관련 문제라면 스크린샷이나 짧은 동영상이 큰 도움이 됩니다.</string>
+    <string name="support_rules_oneissue_title">이슈 하나에 문제 하나만</string>
+    <string name="support_rules_oneissue_desc">추적과 수정이 쉽도록 이슈 하나에는 문제 하나만 담아주세요. 관련 없는 문제는 별도의 이슈로 열어주세요.</string>
 </resources>

@@ -745,4 +745,23 @@
     <string name="support_github_account_warning">ملاحظة: تحتاج إلى حساب GitHub مجاني لفتح مشكلة جديدة.</string>
     <string name="onb_ready_extras_title">قبل أن تنهي، يمكنك أيضًا إعداد:</string>
     <string name="onb_extra_loading_desc">صورة مخصصة تظهر أثناء اتصال السيارة</string>
+
+    <string name="support_rules_button">قواعد الإبلاغ</string>
+    <string name="support_rules_english_desc">يرجى دائمًا كتابة مشكلتك باللغة الإنجليزية. القائم على المشروع ومعظم المساهمين يقرؤون الإنجليزية، والموضوع الذي يخلط لغات كثيرة يتحول سريعًا إلى برج بابل لا يفهم فيه أحد الآخر. لست واثقًا من الإنجليزية؟ مترجم مثل Google Translate أو DeepL مقبول تمامًا.</string>
+    <string name="support_rules_device_title">اذكر الجهاز الذي يشغّل التطبيق</string>
+    <string name="support_rules_device_desc">إصدار Android للجهاز الذي يعرض Android Auto (وحدة الوسائط أو الشاشة)، وماركته وطرازه إن عرفتهما.</string>
+    <string name="support_rules_connection_title">اذكر طريقة الاتصال</string>
+    <string name="support_rules_connection_desc">كابل USB، أو محول USB لاسلكي، أو WiFi Direct، أو WiFi (خادم وحدة الرأس)، أو Self Mode. إن كان الاتصال لاسلكيًا، أضف طراز المحول أو الدونغل.</string>
+    <string name="support_rules_appversion_title">أرفق إصدار التطبيق</string>
+    <string name="support_rules_appversion_desc">إصدار Headunit Revived، المعروض في شاشة حول.</string>
+    <string name="support_rules_logs_title">أرفق السجلات فور حدوث المشكلة</string>
+    <string name="support_rules_logs_desc">انتقل إلى الإعدادات وافتح تبويب متقدم، ثم فعّل وضع التصحيح في قسم تصحيح الأخطاء، وأعد إنتاج المشكلة، ثم اضغط تصدير السجلات مباشرة بعدها حتى يغطي السجل لحظة الخلل لا مجرد بداية التشغيل. أرفق الملف بمشكلتك.</string>
+    <string name="support_rules_search_title">ابحث أولاً</string>
+    <string name="support_rules_search_desc">قد تكون مشكلتك مُبلَّغًا عنها من قبل. ابحث في المشكلات الموجودة وأضف تعليقك هناك بدلًا من فتح نسخة مكررة.</string>
+    <string name="support_rules_phone_title">هاتفك مهم أيضًا</string>
+    <string name="support_rules_phone_desc">طراز هاتفك وإصدار Android عليه وإصدار تطبيق Android Auto المثبَّت فيه. بعض المشكلات تنشأ من إصدار بعينه من Android Auto.</string>
+    <string name="support_rules_describe_title">صف المشكلة بوضوح</string>
+    <string name="support_rules_describe_desc">ما الذي فعلته، وما الذي توقعت حدوثه، وما الذي حدث فعلًا. لقطة شاشة أو مقطع فيديو قصير تساعد كثيرًا في المشكلات المرئية.</string>
+    <string name="support_rules_oneissue_title">مشكلة واحدة لكل تقرير</string>
+    <string name="support_rules_oneissue_desc">خصص كل تقرير لمشكلة واحدة حتى يمكن تتبعها وإصلاحها. افتح تقارير منفصلة للمشكلات غير المرتبطة ببعضها.</string>
 </resources>

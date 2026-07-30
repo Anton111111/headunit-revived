@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.andrerinas.headunitrevived.R
 import com.andrerinas.headunitrevived.utils.QrCodeGenerator
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * Dedicated support screen: a clickable link to the project's GitHub issues, a QR code of that
@@ -41,6 +43,10 @@ class SupportFragment : Fragment() {
         link.text = fromHtml("<a href=\"$url\">${getString(R.string.support_open_issues)}</a>")
         link.movementMethod = LinkMovementMethod.getInstance()
 
+        view.findViewById<MaterialButton>(R.id.support_rules_button).setOnClickListener {
+            showRulesDialog()
+        }
+
         // QR of the same URL. Generated offline, so it works without internet on the head unit.
         val qr = view.findViewById<ImageView>(R.id.support_qr)
         val bitmap = QrCodeGenerator.generateQrCode(url, 500)
@@ -51,6 +57,33 @@ class SupportFragment : Fragment() {
             view.findViewById<View>(R.id.support_qr_container).visibility = View.GONE
             view.findViewById<View>(R.id.support_qr_caption).visibility = View.GONE
         }
+    }
+
+    /** Modal with the basic rules for opening a good, actionable issue. */
+    private fun showRulesDialog() {
+        val rules = listOf(
+            R.string.support_rules_english_title to R.string.support_rules_english_desc,
+            R.string.support_rules_device_title to R.string.support_rules_device_desc,
+            R.string.support_rules_connection_title to R.string.support_rules_connection_desc,
+            R.string.support_rules_appversion_title to R.string.support_rules_appversion_desc,
+            R.string.support_rules_logs_title to R.string.support_rules_logs_desc,
+            R.string.support_rules_search_title to R.string.support_rules_search_desc,
+            R.string.support_rules_phone_title to R.string.support_rules_phone_desc,
+            R.string.support_rules_describe_title to R.string.support_rules_describe_desc,
+            R.string.support_rules_oneissue_title to R.string.support_rules_oneissue_desc
+        )
+        // The first rule (English-only) is highlighted red and bold; the rest are just bold.
+        // <font color> and <b> are legacy HTML tags that Html.fromHtml renders on every API level.
+        val html = rules.mapIndexed { index, (title, desc) ->
+            val t = getString(title)
+            val titleHtml = if (index == 0) "<b><font color=\"#E53935\">$t</font></b>" else "<b>$t</b>"
+            "$titleHtml<br>${getString(desc)}"
+        }.joinToString("<br><br>")
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.support_rules_button)
+            .setMessage(fromHtml(html))
+            .setPositiveButton(R.string.close, null)
+            .show()
     }
 
     private fun fromHtml(html: String): Spanned {

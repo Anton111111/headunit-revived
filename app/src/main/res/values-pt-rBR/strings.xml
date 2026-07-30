@@ -774,4 +774,23 @@
 
     <string name="onb_ready_extras_title">Antes de concluir, você também pode configurar:</string>
     <string name="onb_extra_loading_desc">Uma imagem personalizada exibida enquanto o carro se conecta</string>
+
+    <string name="support_rules_button">Regras para reportar</string>
+    <string name="support_rules_english_desc">Por favor, escreva sempre sua dúvida em inglês. O mantenedor e a maioria das pessoas que ajudam aqui leem inglês, e uma discussão misturando vários idiomas vira rapidinho uma torre de Babel onde ninguém entende ninguém. Não se sente seguro em inglês? Um tradutor como o Google Translate ou o DeepL funciona muito bem.</string>
+    <string name="support_rules_device_title">Diga o que executa o app</string>
+    <string name="support_rules_device_desc">A versão do Android do dispositivo que projeta o Android Auto (sua central multimídia ou tela) e a marca e o modelo, se você souber.</string>
+    <string name="support_rules_connection_title">Diga como você se conecta</string>
+    <string name="support_rules_connection_desc">Cabo USB, adaptador USB sem fio, WiFi Direct, WiFi (headunit server) ou Self Mode. Se for sem fio, informe o modelo do adaptador ou dongle.</string>
+    <string name="support_rules_appversion_title">Inclua a versão do app</string>
+    <string name="support_rules_appversion_desc">A versão do Headunit Revived, exibida na tela Sobre.</string>
+    <string name="support_rules_logs_title">Anexe os logs logo após o problema acontecer</string>
+    <string name="support_rules_logs_desc">Vá em Configurações, aba Avançado, ative o Modo de depuração na seção Depuração, reproduza o problema e toque em Exportar logs imediatamente depois, para que o log cubra o momento da falha e não só o início. Anexe esse arquivo à sua issue.</string>
+    <string name="support_rules_search_title">Pesquise antes</string>
+    <string name="support_rules_search_desc">Seu problema pode já ter sido reportado. Pesquise nas issues existentes e adicione seu comentário lá em vez de abrir uma duplicata.</string>
+    <string name="support_rules_phone_title">Seu celular também importa</string>
+    <string name="support_rules_phone_desc">O modelo do seu celular, a versão do Android nele e a versão do app Android Auto. Alguns problemas vêm de uma versão específica do Android Auto.</string>
+    <string name="support_rules_describe_title">Descreva com clareza</string>
+    <string name="support_rules_describe_desc">O que você fez, o que esperava que acontecesse e o que aconteceu de fato. Uma captura de tela ou um vídeo curto ajuda muito para problemas visuais.</string>
+    <string name="support_rules_oneissue_title">Um problema por issue</string>
+    <string name="support_rules_oneissue_desc">Mantenha cada issue focada em um único problema para que ele possa ser rastreado e corrigido. Abra issues separadas para problemas não relacionados.</string>
 </resources>

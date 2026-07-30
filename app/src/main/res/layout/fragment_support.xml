@@ -102,6 +102,15 @@
                         android:textAppearance="?attr/textAppearanceBodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
 
+                    <!-- Opens a modal with the basic rules for opening a good issue. -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/support_rules_button"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/support_rules_button" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

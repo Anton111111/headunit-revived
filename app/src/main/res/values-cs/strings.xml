@@ -771,4 +771,24 @@
     <string name="support_github_account_warning">Poznámka: k vytvoření hlášení potřebujete bezplatný účet na GitHubu.</string>
     <string name="onb_ready_extras_title">Než dokončíte, můžete také nastavit:</string>
     <string name="onb_extra_loading_desc">Vlastní obrázek zobrazený při připojování auta</string>
+
+    <!-- Support / reporting rules -->
+    <string name="support_rules_button">Pravidla hlášení</string>
+    <string name="support_rules_english_desc">Prosím, pište vždy v angličtině. Správce a většina lidí, kteří zde pomáhají, čtou anglicky, a vlákno, kde se mísí více jazyků, se rychle proměňuje v malou babylonskou věž, kde si nikdo nerozumí. Angličtina vám nejde? Překladač jako Google Translate nebo DeepL je naprosto v pořádku.</string>
+    <string name="support_rules_device_title">Řekněte, na čem aplikaci spouštíte</string>
+    <string name="support_rules_device_desc">Verze Androidu zařízení, které promítá Android Auto (vaše autorádio nebo obrazovka), a jeho značka a model, pokud je znáte.</string>
+    <string name="support_rules_connection_title">Řekněte, jak se připojujete</string>
+    <string name="support_rules_connection_desc">USB kabel, bezdrátový USB adaptér, WiFi Direct, WiFi (headunit server) nebo Self Mode. Pokud jde o bezdrátové připojení, uveďte model adaptéru nebo donglu.</string>
+    <string name="support_rules_appversion_title">Uveďte verzi aplikace</string>
+    <string name="support_rules_appversion_desc">Verzi Headunit Revived najdete na obrazovce O aplikaci a podpora.</string>
+    <string name="support_rules_logs_title">Přiložte protokoly, hned po tom, co se to stane</string>
+    <string name="support_rules_logs_desc">V Nastavení přejděte na záložku Pokročilé, v sekci Ladění zapněte Režim ladění, zopakujte problém a hned poté klepněte na Exportovat protokoly, aby protokol zachytil okamžik selhání, a ne jen start. Přiložte tento soubor k hlášení.</string>
+    <string name="support_rules_search_title">Nejprve hledejte</string>
+    <string name="support_rules_search_desc">Váš problém už možná byl nahlášen. Prohledejte existující hlášení a přispějte do stávajícího místo vytváření duplikátu.</string>
+    <string name="support_rules_phone_title">Záleží i na vašem telefonu</string>
+    <string name="support_rules_phone_desc">Model vašeho telefonu, jeho verze Androidu a verze aplikace Android Auto v telefonu. Některé problémy jsou způsobeny konkrétní verzí Android Auto.</string>
+    <string name="support_rules_describe_title">Popište to jasně</string>
+    <string name="support_rules_describe_desc">Co jste udělali, co jste očekávali a co se skutečně stalo. Screenshot nebo krátké video velmi pomáhá u vizuálních problémů.</string>
+    <string name="support_rules_oneissue_title">Jeden problém na jedno hlášení</string>
+    <string name="support_rules_oneissue_desc">Každé hlášení nechte pro jediný problém, aby bylo možné ho sledovat a opravit. Pro nesouvisející problémy otevřete samostatná hlášení.</string>
 </resources>

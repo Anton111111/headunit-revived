@@ -772,4 +772,23 @@
     <string name="support_github_account_warning">Uwaga: aby utworzyć zgłoszenie, potrzebujesz bezpłatnego konta GitHub.</string>
     <string name="onb_ready_extras_title">Zanim skończysz, możesz też skonfigurować:</string>
     <string name="onb_extra_loading_desc">Niestandardowy obraz wyświetlany podczas łączenia samochodu</string>
+
+    <string name="support_rules_button">Zasady zgłaszania</string>
+    <string name="support_rules_english_desc">Proszę zawsze pisać zgłoszenie po angielsku. Opiekun projektu i większość osób pomagających tutaj czyta po angielsku, a wątek mieszający wiele języków szybko zamienia się w małą wieżę Babel, gdzie nikt nikogo nie rozumie. Nie czujesz się pewnie po angielsku? Tłumacz taki jak Google Translate lub DeepL jest jak najbardziej w porządku.</string>
+    <string name="support_rules_device_title">Napisz, na czym działa aplikacja</string>
+    <string name="support_rules_device_desc">Wersja Androida urządzenia wyświetlającego Android Auto (Twoje radio samochodowe lub ekran) oraz jego marka i model, jeśli je znasz.</string>
+    <string name="support_rules_connection_title">Napisz, jak się łączysz</string>
+    <string name="support_rules_connection_desc">Kabel USB, bezprzewodowy adapter USB, WiFi Direct, WiFi (headunit server) lub Self Mode. Jeśli połączenie jest bezprzewodowe, podaj model adaptera lub klucza.</string>
+    <string name="support_rules_appversion_title">Podaj wersję aplikacji</string>
+    <string name="support_rules_appversion_desc">Wersja Headunit Revived widoczna na ekranie O aplikacji i Wsparcie.</string>
+    <string name="support_rules_logs_title">Dołącz logi, zaraz po wystąpieniu problemu</string>
+    <string name="support_rules_logs_desc">Przejdź do karty Zaawansowane w Ustawieniach, włącz Tryb debugowania w sekcji Debugowanie, odtwórz problem, a potem od razu naciśnij Eksportuj logi, żeby log obejmował moment awarii, a nie tylko start. Dołącz ten plik do zgłoszenia.</string>
+    <string name="support_rules_search_title">Najpierw poszukaj</string>
+    <string name="support_rules_search_desc">Twój problem może być już zgłoszony. Przejrzyj istniejące zgłoszenia i dodaj komentarz do tego samego, zamiast otwierać duplikat.</string>
+    <string name="support_rules_phone_title">Twój telefon też ma znaczenie</string>
+    <string name="support_rules_phone_desc">Model telefonu, jego wersja Androida i wersja aplikacji Android Auto na telefonie. Niektóre problemy wynikają z konkretnego wydania Android Auto.</string>
+    <string name="support_rules_describe_title">Opisz problem wyraźnie</string>
+    <string name="support_rules_describe_desc">Co zrobiłeś, czego oczekiwałeś i co faktycznie się stało. Zrzut ekranu lub krótkie wideo bardzo pomaga w przypadku problemów wizualnych.</string>
+    <string name="support_rules_oneissue_title">Jeden problem na zgłoszenie</string>
+    <string name="support_rules_oneissue_desc">Każde zgłoszenie powinno dotyczyć jednego problemu, żeby można go było śledzić i naprawić. Niezwiązane problemy zgłaszaj osobno.</string>
 </resources>

@@ -780,4 +780,24 @@
     <string name="support_github_account_warning">Nota: necesitas una cuenta gratuita de GitHub para crear un issue.</string>
     <string name="onb_ready_extras_title">Antes de terminar, también puedes configurar:</string>
     <string name="onb_extra_loading_desc">Una imagen personalizada que se muestra mientras el auto se conecta</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Reglas para reportar</string>
+    <string name="support_rules_english_desc">Por favor, escribe siempre tu reporte en inglés. El mantenedor y la mayoría de quienes ayudan aquí leen inglés, y un hilo que mezcla varios idiomas se convierte rápidamente en una torre de Babel donde nadie entiende a nadie. ¿No te sientes seguro con el inglés? Un traductor como Google Translate o DeepL está perfectamente bien.</string>
+    <string name="support_rules_device_title">Di qué ejecuta la app</string>
+    <string name="support_rules_device_desc">La versión de Android del dispositivo que proyecta Android Auto (tu radio o pantalla), y su marca y modelo si los conoces.</string>
+    <string name="support_rules_connection_title">Di cómo te conectas</string>
+    <string name="support_rules_connection_desc">Cable USB, adaptador inalámbrico USB, WiFi Direct, WiFi (headunit server) o Self Mode. Si es inalámbrico, agrega el modelo del adaptador o dongle.</string>
+    <string name="support_rules_appversion_title">Incluye la versión de la app</string>
+    <string name="support_rules_appversion_desc">La versión de Headunit Revived, que se muestra en la pantalla de Acerca de.</string>
+    <string name="support_rules_logs_title">Adjunta registros, justo después de que ocurra</string>
+    <string name="support_rules_logs_desc">Ve a Ajustes, abre la pestaña Avanzado, activa el Modo de depuración en la sección Depuración, reproduce el problema y luego toca Exportar registros de inmediato para que el registro cubra el momento exacto del fallo y no solo el inicio. Adjunta ese archivo a tu reporte.</string>
+    <string name="support_rules_search_title">Busca primero</string>
+    <string name="support_rules_search_desc">Es posible que tu problema ya haya sido reportado. Busca en los issues existentes y añade tu comentario ahí en lugar de abrir un duplicado.</string>
+    <string name="support_rules_phone_title">Tu teléfono también importa</string>
+    <string name="support_rules_phone_desc">El modelo de tu teléfono, su versión de Android y la versión de la app Android Auto en el teléfono. Algunos problemas vienen de una versión específica de Android Auto.</string>
+    <string name="support_rules_describe_title">Descríbelo claramente</string>
+    <string name="support_rules_describe_desc">Qué hiciste, qué esperabas y qué pasó en realidad. Una captura de pantalla o un video corto ayuda mucho para problemas visuales.</string>
+    <string name="support_rules_oneissue_title">Un problema por issue</string>
+    <string name="support_rules_oneissue_desc">Mantén cada issue enfocado en un solo problema para que pueda rastrearse y corregirse. Abre issues separados para problemas distintos.</string>
 </resources>

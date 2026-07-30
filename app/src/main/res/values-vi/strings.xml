@@ -749,4 +749,24 @@
     <string name="support_github_account_warning">Lưu ý: bạn cần có tài khoản GitHub miễn phí để tạo issue.</string>
     <string name="onb_ready_extras_title">Trước khi hoàn tất, bạn cũng có thể thiết lập:</string>
     <string name="onb_extra_loading_desc">Hình ảnh tuỳ chỉnh hiển thị khi xe đang kết nối</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Quy tắc báo cáo</string>
+    <string name="support_rules_english_desc">Vui lòng luôn viết sự cố của bạn bằng tiếng Anh. Người duy trì dự án và hầu hết những người hỗ trợ đây đều đọc tiếng Anh, và một chủ đề pha trộn nhiều ngôn ngữ nhanh chóng trở thành tháp Babel nơi không ai hiểu ai. Không tự tin với tiếng Anh? Dùng công cụ dịch như Google Translate hoặc DeepL là hoàn toàn ổn.</string>
+    <string name="support_rules_device_title">Cho biết máy nào đang chạy ứng dụng</string>
+    <string name="support_rules_device_desc">Phiên bản Android của thiết bị đang chiếu Android Auto (màn hình ô tô của bạn), cùng hãng và mẫu máy nếu biết.</string>
+    <string name="support_rules_connection_title">Cho biết bạn kết nối như thế nào</string>
+    <string name="support_rules_connection_desc">Cáp USB, bộ chuyển không dây USB, WiFi Direct, WiFi (headunit server) hoặc Self Mode. Nếu là kết nối không dây, hãy thêm mẫu bộ chuyển hoặc dongle.</string>
+    <string name="support_rules_appversion_title">Ghi rõ phiên bản ứng dụng</string>
+    <string name="support_rules_appversion_desc">Phiên bản Headunit Revived, hiển thị trên màn hình Giới thiệu.</string>
+    <string name="support_rules_logs_title">Đính kèm log, ngay sau khi xảy ra</string>
+    <string name="support_rules_logs_desc">Vào Cài đặt, chọn tab Nâng cao, bật Chế độ gỡ lỗi trong phần Gỡ lỗi, tái hiện sự cố, rồi nhấn Xuất log ngay sau đó để log ghi lại đúng thời điểm xảy ra chứ không chỉ từ lúc khởi động. Đính kèm tệp đó vào issue.</string>
+    <string name="support_rules_search_title">Tìm kiếm trước</string>
+    <string name="support_rules_search_desc">Sự cố của bạn có thể đã được báo cáo. Hãy tìm trong các issue hiện có và bổ sung vào đó thay vì mở issue trùng lặp.</string>
+    <string name="support_rules_phone_title">Điện thoại của bạn cũng quan trọng</string>
+    <string name="support_rules_phone_desc">Mẫu điện thoại, phiên bản Android và phiên bản ứng dụng Android Auto trên điện thoại. Một số sự cố xuất phát từ một phiên bản Android Auto cụ thể.</string>
+    <string name="support_rules_describe_title">Mô tả rõ ràng</string>
+    <string name="support_rules_describe_desc">Bạn đã làm gì, bạn mong đợi điều gì và điều gì thực sự xảy ra. Ảnh chụp màn hình hoặc video ngắn rất hữu ích cho các sự cố về hình ảnh.</string>
+    <string name="support_rules_oneissue_title">Một sự cố mỗi issue</string>
+    <string name="support_rules_oneissue_desc">Mỗi issue chỉ nên đề cập một sự cố để dễ theo dõi và xử lý. Hãy mở issue riêng cho các sự cố không liên quan.</string>
 </resources>

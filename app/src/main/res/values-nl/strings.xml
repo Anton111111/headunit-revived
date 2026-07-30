@@ -772,4 +772,24 @@
     <string name="support_github_account_warning">Let op: je hebt een gratis GitHub-account nodig om een issue aan te maken.</string>
     <string name="onb_ready_extras_title">Voordat je klaar bent, kun je ook instellen:</string>
     <string name="onb_extra_loading_desc">Een aangepaste afbeelding die wordt getoond terwijl de auto verbinding maakt</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Meldingsregels</string>
+    <string name="support_rules_english_desc">Schrijf je issue altijd in het Engels. De beheerder en de meeste mensen die hier helpen lezen Engels, en een discussie in veel verschillende talen wordt snel een kleine toren van Babel waar niemand de ander begrijpt. Niet zeker van je Engels? Een vertaler zoals Google Translate of DeepL is prima.</string>
+    <string name="support_rules_device_title">Zeg wat de app draait</string>
+    <string name="support_rules_device_desc">De Android-versie van het apparaat dat Android Auto projecteert (je autoradio of scherm), en het merk en model als je die weet.</string>
+    <string name="support_rules_connection_title">Zeg hoe je verbindt</string>
+    <string name="support_rules_connection_desc">USB-kabel, draadloze USB-adapter, WiFi Direct, WiFi (headunit server) of Self Mode. Als het draadloos is, voeg dan het model van de adapter of dongle toe.</string>
+    <string name="support_rules_appversion_title">Vermeld de app-versie</string>
+    <string name="support_rules_appversion_desc">De versie van Headunit Revived, te zien op het scherm Over &amp; Support.</string>
+    <string name="support_rules_logs_title">Voeg logs toe, direct nadat het gebeurt</string>
+    <string name="support_rules_logs_desc">Ga naar het tabblad Geavanceerd in Instellingen, zet Debug Modus aan in het gedeelte Debug, reproduceer het probleem en tik daarna meteen op Logs exporteren zodat het logbestand het moment van de fout bevat en niet alleen de start. Voeg dat bestand toe aan je issue.</string>
+    <string name="support_rules_search_title">Zoek eerst</string>
+    <string name="support_rules_search_desc">Je probleem is mogelijk al gemeld. Zoek in de bestaande issues en voeg aan dat issue toe in plaats van een duplicaat te openen.</string>
+    <string name="support_rules_phone_title">Je telefoon telt ook mee</string>
+    <string name="support_rules_phone_desc">Je telefoonmodel, de Android-versie en de versie van de Android Auto-app op de telefoon. Sommige problemen komen van een specifieke Android Auto-release.</string>
+    <string name="support_rules_describe_title">Beschrijf het duidelijk</string>
+    <string name="support_rules_describe_desc">Wat je hebt gedaan, wat je verwachtte en wat er daadwerkelijk gebeurde. Een screenshot of korte video helpt veel bij visuele problemen.</string>
+    <string name="support_rules_oneissue_title">Één probleem per issue</string>
+    <string name="support_rules_oneissue_desc">Houd elk issue beperkt tot één probleem zodat het gevolgd en opgelost kan worden. Open aparte issues voor niet-gerelateerde problemen.</string>
 </resources>
