@@ -28,6 +28,7 @@ import com.andrerinas.headunitrevived.aap.AapService
 import com.andrerinas.headunitrevived.main.settings.SettingItem
 import com.andrerinas.headunitrevived.main.settings.SettingsAdapter
 import com.andrerinas.headunitrevived.utils.AppLog
+import com.andrerinas.headunitrevived.utils.AppPermissions
 import com.andrerinas.headunitrevived.utils.Settings
 import com.andrerinas.headunitrevived.utils.LocaleHelper
 import com.andrerinas.headunitrevived.BuildConfig
@@ -2817,7 +2818,7 @@ class SettingsFragment : Fragment() {
             isChecked = pendingAutoEnableHotspot ?: false,
             onCheckedChanged = { isChecked ->
                 if (isChecked) {
-                    if (Build.VERSION.SDK_INT >= 23 && !SystemSettings.System.canWrite(requireContext())) {
+                    if (!AppPermissions.isWriteSettingsGranted(requireContext())) {
                         showPermissionDialog()
                     } else {
                         showExperimentalWarning()

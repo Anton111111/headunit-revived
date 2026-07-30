@@ -34,6 +34,7 @@ import com.andrerinas.headunitrevived.app.WifiAutoStartReceiver
 import com.andrerinas.headunitrevived.main.MainActivity
 import com.andrerinas.headunitrevived.R
 import com.andrerinas.headunitrevived.utils.AppLog
+import com.andrerinas.headunitrevived.utils.AppPermissions
 import com.andrerinas.headunitrevived.utils.BluetoothHelper
 import com.andrerinas.headunitrevived.utils.ToastUtils
 import com.andrerinas.headunitrevived.aap.protocol.messages.NightModeEvent
@@ -939,7 +940,7 @@ class AapService : Service(), UsbReceiver.Listener {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         }
 
-        val canOverlay = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && AndroidSettings.canDrawOverlays(this)
+        val canOverlay = AppPermissions.isOverlayGranted(this)
         when (ActivityLaunchPolicy.chooseLaunchStrategy(Build.VERSION.SDK_INT, canOverlay)) {
             ActivityLaunchPolicy.LaunchStrategy.DIRECT -> {
                 try { startActivity(intent) }
@@ -2272,8 +2273,7 @@ class AapService : Service(), UsbReceiver.Listener {
         }
 
         // Android 10+: try overlay trampoline (bypasses all known OEM restrictions)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-            AndroidSettings.canDrawOverlays(this)) {
+        if (AppPermissions.isOverlayGranted(this)) {
             AppLog.i("Boot auto-start: launching via overlay window trampoline")
             if (launchViaOverlayTrampoline()) return
         }

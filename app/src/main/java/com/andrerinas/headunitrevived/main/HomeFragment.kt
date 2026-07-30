@@ -33,6 +33,7 @@ import android.content.res.Configuration
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import com.andrerinas.headunitrevived.utils.AppLog
+import com.andrerinas.headunitrevived.utils.AppPermissions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -368,7 +369,7 @@ class HomeFragment : Fragment() {
                 aapIntent.putExtra(AapProjectionActivity.EXTRA_FOCUS, true)
                 startActivity(aapIntent)
             } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !android.provider.Settings.canDrawOverlays(requireContext())) {
+                if (!AppPermissions.isOverlayGranted(requireContext())) {
                     MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
                         .setTitle(R.string.overlay_permission_title)
                         .setMessage(R.string.self_mode_overlay_permission_description)
