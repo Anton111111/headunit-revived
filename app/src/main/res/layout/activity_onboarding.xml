@@ -575,7 +575,7 @@
                         android:layout_height="match_parent"
                         android:contentDescription="@string/onb_vehicle_title"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/illus_car_dashboard" />
+                        app:srcCompat="@drawable/illus_car_dashboard" />
                     <TextView
                         android:id="@+id/onb_vehicle_screen_name"
                         android:layout_width="wrap_content"
@@ -753,7 +753,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:contentDescription="@string/loading_screen"
-                                android:src="@drawable/ic_image"
+                                app:srcCompat="@drawable/ic_image"
                                 app:tint="?attr/colorOnSurfaceVariant" />
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -780,7 +780,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:importantForAccessibility="no"
-                                android:src="@drawable/ic_chevron_right"
+                                app:srcCompat="@drawable/ic_chevron_right"
                                 app:tint="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
 
@@ -809,7 +809,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:contentDescription="@string/keymap"
-                                android:src="@drawable/ic_keyboard"
+                                app:srcCompat="@drawable/ic_keyboard"
                                 app:tint="?attr/colorOnSurfaceVariant" />
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -836,7 +836,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:importantForAccessibility="no"
-                                android:src="@drawable/ic_chevron_right"
+                                app:srcCompat="@drawable/ic_chevron_right"
                                 app:tint="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
 
@@ -865,7 +865,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:contentDescription="@string/microphone_settings"
-                                android:src="@drawable/ic_mic"
+                                app:srcCompat="@drawable/ic_mic"
                                 app:tint="?attr/colorOnSurfaceVariant" />
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -892,7 +892,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:importantForAccessibility="no"
-                                android:src="@drawable/ic_chevron_right"
+                                app:srcCompat="@drawable/ic_chevron_right"
                                 app:tint="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
 

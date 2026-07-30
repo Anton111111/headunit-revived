@@ -37,12 +37,14 @@ class SystemOptimizer(private val context: Context) {
     ): OptimizationResult {
         val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val metrics = DisplayMetrics()
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            context.display?.getRealMetrics(metrics)
-        } else {
-            @Suppress("DEPRECATION")
-            windowManager.defaultDisplay.getRealMetrics(metrics)
+
+        @Suppress("DEPRECATION")
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> context.display?.getRealMetrics(metrics)
+            // getRealMetrics is API 17; on API 16 it does not exist, so fall back to getMetrics.
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ->
+                windowManager.defaultDisplay.getRealMetrics(metrics)
+            else -> windowManager.defaultDisplay.getMetrics(metrics)
         }
 
         val width = metrics.widthPixels.toFloat()
