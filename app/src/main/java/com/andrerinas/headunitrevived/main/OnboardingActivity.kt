@@ -149,7 +149,7 @@ class OnboardingActivity : BaseActivity() {
      * separate phone, so it is hidden there.
      */
     private fun isStepHidden(s: Int): Boolean =
-        s == STEP_GPS && settings.primaryConnection == Settings.ConnectionKind.SELF_MODE
+        s == STEP_GPS && !settings.showsExternalGps()
 
     /** The steps actually shown, in order, after removing the ones that do not apply. */
     private fun visibleSteps(): List<Int> = (0 until STEP_COUNT).filter { !isStepHidden(it) }
@@ -222,27 +222,27 @@ class OnboardingActivity : BaseActivity() {
             }
         }
 
-        // --- Connection: USB (cable or USB adapter) / WiFi / Self Mode ---
+        // --- Connection: multi-select of USB / WiFi / Self Mode ---
         val connGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_conn_group)
         isBinding = true
-        when (settings.primaryConnection) {
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> connGroup.check(R.id.onb_conn_wifi)
-            Settings.ConnectionKind.SELF_MODE -> connGroup.check(R.id.onb_conn_self)
-            Settings.ConnectionKind.ALL -> connGroup.check(R.id.onb_conn_all)
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> connGroup.check(R.id.onb_conn_usb)
-            else -> {}
-        }
+        val modes = settings.connectionModes
+        if (Settings.ConnectionMode.USB in modes) connGroup.check(R.id.onb_conn_usb)
+        if (Settings.ConnectionMode.WIFI in modes) connGroup.check(R.id.onb_conn_wifi)
+        if (Settings.ConnectionMode.SELF in modes) connGroup.check(R.id.onb_conn_self)
         isBinding = false
         updateConnectionDetail()
-        connGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (!isChecked || isBinding) return@addOnButtonCheckedListener
-            settings.primaryConnection = when (checkedId) {
-                R.id.onb_conn_wifi -> Settings.ConnectionKind.WIFI
-                R.id.onb_conn_self -> Settings.ConnectionKind.SELF_MODE
-                R.id.onb_conn_all -> Settings.ConnectionKind.ALL
-                else -> Settings.ConnectionKind.USB_CABLE
+        connGroup.addOnButtonCheckedListener { group, _, _ ->
+            if (isBinding) return@addOnButtonCheckedListener
+            val checked = group.checkedButtonIds
+            val selected = buildSet {
+                if (R.id.onb_conn_usb in checked) add(Settings.ConnectionMode.USB)
+                if (R.id.onb_conn_wifi in checked) add(Settings.ConnectionMode.WIFI)
+                if (R.id.onb_conn_self in checked) add(Settings.ConnectionMode.SELF)
             }
+            settings.connectionModes = selected
             updateConnectionDetail()
+            // At least one is required; keep Next in sync while on this step.
+            if (step == STEP_CONNECTION) nextBtn.isEnabled = selected.isNotEmpty()
         }
 
         // --- Display: detected panel + size/orientation, pre-selected from detection ---
@@ -410,8 +410,11 @@ class OnboardingActivity : BaseActivity() {
         // GONE (not INVISIBLE) so its dedicated row collapses on the final step.
         skipBtn.visibility = if (step == STEP_COUNT - 1) View.GONE else View.VISIBLE
         nextBtn.text = getString(if (step == STEP_COUNT - 1) R.string.onb_ready_finish else R.string.onb_next)
-        nextBtn.isEnabled = if (step == STEP_SAFETY)
-            findViewById<MaterialCheckBox>(R.id.onb_safety_accept).isChecked else true
+        nextBtn.isEnabled = when (step) {
+            STEP_SAFETY -> findViewById<MaterialCheckBox>(R.id.onb_safety_accept).isChecked
+            STEP_CONNECTION -> settings.connectionModes.isNotEmpty()
+            else -> true
+        }
         if (step == STEP_READY) findViewById<TextView>(R.id.onb_ready_summary).text = summaryText()
         if (step == STEP_AUTOMATION) applyAutomationVisibility()
         if (step == STEP_PERMISSIONS) permissionBinder?.rebind()
@@ -439,17 +442,13 @@ class OnboardingActivity : BaseActivity() {
     /** Show only the auto-start toggles that match the chosen connection type. Self Mode
      * connects without USB or WiFi, so both groups are hidden. */
     private fun applyAutomationVisibility() {
-        val conn = settings.primaryConnection
-        val isWifi = conn == Settings.ConnectionKind.WIFI || conn == Settings.ConnectionKind.NATIVE_AA
-        val isSelf = conn == Settings.ConnectionKind.SELF_MODE
-        val isAll = conn == Settings.ConnectionKind.ALL
-        val usbVis = if (isAll || (!isWifi && !isSelf)) View.VISIBLE else View.GONE
+        val usbVis = if (settings.showsUsb()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.onb_ac_single_row).visibility = usbVis
         findViewById<View>(R.id.onb_as_usb_row).visibility = usbVis
         findViewById<View>(R.id.onb_reopen_row).visibility = usbVis
         // Auto-start on WiFi is a legacy path that only applies up to Android 12L (API 32).
         findViewById<View>(R.id.onb_as_wifi_row).visibility =
-            if ((isWifi || isAll) && Build.VERSION.SDK_INT <= 32) View.VISIBLE else View.GONE
+            if (settings.showsWifi() && Build.VERSION.SDK_INT <= 32) View.VISIBLE else View.GONE
     }
 
     private fun onNext() {
@@ -543,13 +542,18 @@ class OnboardingActivity : BaseActivity() {
 
     private fun updateConnectionDetail() {
         val detail = findViewById<TextView>(R.id.onb_conn_detail)
-        detail.text = when (settings.primaryConnection) {
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.onb_connection_wifi_detail)
-            Settings.ConnectionKind.SELF_MODE -> getString(R.string.onb_connection_self_detail)
-            Settings.ConnectionKind.ALL -> getString(R.string.onb_connection_all_detail)
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.onb_connection_usb_detail)
-            else -> ""
-        }
+        detail.text = if (settings.connectionModes.isEmpty()) "" else connectionModesLabel()
+    }
+
+    /** The chosen connection types as a readable label, e.g. "USB, WiFi". */
+    private fun connectionModesLabel(): String {
+        val modes = settings.connectionModes
+        if (modes.isEmpty()) return getString(R.string.connection_kind_unset)
+        val parts = mutableListOf<String>()
+        if (Settings.ConnectionMode.USB in modes) parts.add(getString(R.string.connection_kind_usb))
+        if (Settings.ConnectionMode.WIFI in modes) parts.add(getString(R.string.connection_kind_wifi))
+        if (Settings.ConnectionMode.SELF in modes) parts.add(getString(R.string.self_mode))
+        return parts.joinToString(", ")
     }
 
     // --- Display scan ---
@@ -658,13 +662,7 @@ class OnboardingActivity : BaseActivity() {
     // --- Ready ---
 
     private fun summaryText(): String {
-        val conn = when (settings.primaryConnection) {
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
-            Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
-            Settings.ConnectionKind.ALL -> getString(R.string.connection_kind_all)
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
-            else -> getString(R.string.connection_kind_unset)
-        }
+        val conn = connectionModesLabel()
         val res = getString(
             R.string.resolution_recommended_format,
             Settings.Resolution.fromId(settings.resolutionId)?.resName ?: getString(R.string.auto)
@@ -696,6 +694,7 @@ class OnboardingActivity : BaseActivity() {
         private const val KEY_STEP = "onb_step"
         private const val STEP_COUNT = 11
         private const val STEP_SAFETY = 1
+        private const val STEP_CONNECTION = 2
         private const val STEP_DISPLAY = 3
         private const val STEP_DPI = 4
         private const val STEP_AUTOMATION = 6

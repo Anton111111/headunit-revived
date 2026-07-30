@@ -65,7 +65,7 @@ class AutoConnectFragment : Fragment() {
         }.toMutableList()
 
         // Single-USB auto-connect only applies to USB connections; hide it otherwise.
-        hiddenMethodIds = if (settings.primaryConnection.hidesUsb())
+        hiddenMethodIds = if (!settings.showsUsb())
             listOf(Settings.AUTO_CONNECT_SINGLE_USB) else emptyList()
         val visibleMethods = methods.filterNot { it.id in hiddenMethodIds }.toMutableList()
         adapter = AutoConnectAdapter(visibleMethods) { checkChanges() }
