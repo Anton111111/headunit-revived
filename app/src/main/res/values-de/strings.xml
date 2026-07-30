@@ -767,4 +767,12 @@
     <string name="onb_dpi_recommended">Empfohlen für Ihren Bildschirm: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Noch eine Sache: Sie können jetzt einen benutzerdefinierten Ladebildschirm festlegen, der angezeigt wird, während das Auto eine Verbindung herstellt.</string>
     <string name="onb_ready_loading_button">Ladebildschirm einrichten</string>
+
+    <string name="support">Problem melden</string>
+    <string name="support_description">Fehler auf GitHub suchen oder melden</string>
+    <string name="support_title">Problem melden</string>
+    <string name="support_help">Wenn Sie auf einen Fehler oder ein Problem stoßen, suchen Sie bitte zuerst in der GitHub-Problemliste danach. Falls es noch niemand gemeldet hat, öffnen Sie ein neues Issue und beschreiben Sie, was passiert, Ihr Autoradio und die Schritte zur Reproduktion.</string>
+    <string name="support_open_issues">GitHub-Problemseite öffnen</string>
+    <string name="support_scan_qr">Oder scannen Sie diesen QR-Code, um die Problemliste auf einem anderen Gerät zu öffnen.</string>
+    <string name="support_github_account_warning">Hinweis: Sie benötigen ein kostenloses GitHub-Konto, um ein Issue zu erstellen.</string>
 </resources>

@@ -462,6 +462,16 @@
     <string name="category_info">Info</string>
     <string name="about">About &amp; Support</string>
     <string name="about_description">Get more information about Headunit Revived</string>
+
+    <!-- Support / report a problem screen -->
+    <string name="support">Report a problem</string>
+    <string name="support_description">Search or report bugs on GitHub</string>
+    <string name="support_title">Report a problem</string>
+    <string name="support_help">If you run into a bug or a problem, please first look for it in the GitHub issues list. If no one has reported it yet, open a new issue and describe what happens, your head unit, and the steps to reproduce it.</string>
+    <string name="support_open_issues">Open the GitHub issues page</string>
+    <string name="support_scan_qr">Or scan this QR code to open the issues list on another device.</string>
+    <string name="support_github_account_warning">Note: you need a free GitHub account to create an issue.</string>
+    <string name="github_issues_url" translatable="false">https://github.com/andreknieriem/headunit-revived/issues</string>
     <string name="version">Version</string>
     <string name="about_title">About Headunit Revived</string>
     <string name="copyright">© 2025-%d André Rinas</string>

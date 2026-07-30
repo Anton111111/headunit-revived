@@ -761,4 +761,12 @@
     <string name="onb_dpi_recommended">Рекомендуется для вашего экрана: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Ещё кое-что: теперь вы можете задать пользовательский экран загрузки, который отображается во время подключения автомобиля.</string>
     <string name="onb_ready_loading_button">Настроить экран загрузки</string>
+
+    <string name="support">Сообщить о проблеме</string>
+    <string name="support_description">Найдите или сообщите об ошибках на GitHub</string>
+    <string name="support_title">Сообщить о проблеме</string>
+    <string name="support_help">Если вы столкнулись с ошибкой или проблемой, сначала найдите её в списке задач GitHub. Если о ней ещё никто не сообщал, создайте новую задачу и опишите, что происходит, ваше головное устройство и шаги для воспроизведения.</string>
+    <string name="support_open_issues">Открыть страницу задач GitHub</string>
+    <string name="support_scan_qr">Или отсканируйте этот QR-код, чтобы открыть список задач на другом устройстве.</string>
+    <string name="support_github_account_warning">Примечание: для создания задачи вам нужна бесплатная учётная запись GitHub.</string>
 </resources>

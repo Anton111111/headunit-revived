@@ -730,4 +730,12 @@
     <string name="onb_vehicle_help_advanced">Gelişmiş sekmesinde daha fazla araç ayrıntısını düzenleyebilirsiniz. Bu verileri biz kullanmayız; yalnızca Android Auto gerektirdiği için gönderilir.</string>
     <string name="onb_summary_vehicle_format">Araç: %1$s</string>
     <string name="sunrise_reference_help">Gün doğumu ve gün batımını hesaplamak için kullanılan referans noktası. Konumunuzu bir kez seçin; GPS olmadan çalışır.</string>
+
+    <string name="support">Sorun bildir</string>
+    <string name="support_description">GitHub\'da hataları arayın veya bildirin</string>
+    <string name="support_title">Sorun bildir</string>
+    <string name="support_help">Bir hata veya sorunla karşılaşırsanız, lütfen önce GitHub sorunlar listesinde arayın. Henüz kimse bildirmediyse yeni bir sorun açın ve ne olduğunu, multimedya sisteminizi ve sorunu yeniden oluşturma adımlarını açıklayın.</string>
+    <string name="support_open_issues">GitHub sorunlar sayfasını aç</string>
+    <string name="support_scan_qr">Veya sorunlar listesini başka bir cihazda açmak için bu QR kodunu tarayın.</string>
+    <string name="support_github_account_warning">Not: Sorun oluşturmak için ücretsiz bir GitHub hesabına ihtiyacınız var.</string>
 </resources>

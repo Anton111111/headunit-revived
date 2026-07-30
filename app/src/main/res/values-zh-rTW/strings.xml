@@ -760,4 +760,13 @@
     <string name="onb_dpi_recommended">您螢幕的建議值：%1$d dpi</string>
     <string name="onb_ready_loading_intro">還有一件事：您現在可以設定自訂載入畫面，在汽車連線時顯示。</string>
     <string name="onb_ready_loading_button">設定載入畫面</string>
+
+    <!-- Support / Bug Report -->
+    <string name="support">回報問題</string>
+    <string name="support_description">在 GitHub 上搜尋或回報錯誤</string>
+    <string name="support_title">回報問題</string>
+    <string name="support_help">如果您遇到錯誤或問題，請先在 GitHub 問題列表中查找。如果尚無人回報，請開啟新問題並描述發生的情況、您的車機，以及重現步驟。</string>
+    <string name="support_open_issues">開啟 GitHub 問題頁面</string>
+    <string name="support_scan_qr">或掃描此 QR 碼，在其他裝置上開啟問題列表。</string>
+    <string name="support_github_account_warning">注意：您需要一個免費的 GitHub 帳號才能建立問題。</string>
 </resources>

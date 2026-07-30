@@ -740,4 +740,12 @@
     <string name="onb_vehicle_help_advanced">車両の詳細は詳細設定タブで調整できます。このデータは当方では使用せず、Android Auto が必要とするため送信するだけです。</string>
     <string name="onb_summary_vehicle_format">車両: %1$s</string>
     <string name="sunrise_reference_help">日の出と日の入りを計算するための基準点です。場所を一度選択すれば、GPS なしで機能します。</string>
+
+    <string name="support">問題を報告する</string>
+    <string name="support_description">GitHubでバグを検索または報告する</string>
+    <string name="support_title">問題を報告する</string>
+    <string name="support_help">バグや問題が発生した場合は、まずGitHubのissueリストで検索してください。まだ誰も報告していない場合は、新しいissueを作成し、発生した内容、お使いの車載機、再現手順を記載してください。</string>
+    <string name="support_open_issues">GitHubのissueページを開く</string>
+    <string name="support_scan_qr">または、このQRコードをスキャンして別のデバイスでissueリストを開いてください。</string>
+    <string name="support_github_account_warning">注意：issueを作成するには、無料のGitHubアカウントが必要です。</string>
 </resources>

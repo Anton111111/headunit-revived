@@ -734,4 +734,12 @@
     <string name="onb_vehicle_help_advanced">Poți ajusta mai multe detalii despre vehicul în fila Avansat. Nu folosim aceste date; sunt trimise doar către Android Auto deoarece le solicită.</string>
     <string name="onb_summary_vehicle_format">Vehicul: %1$s</string>
     <string name="sunrise_reference_help">Punctul de referință folosit pentru a calcula răsăritul și apusul soarelui. Alege-ți locația o singură dată; funcționează fără GPS.</string>
+
+    <string name="support">Raportează o problemă</string>
+    <string name="support_description">Caută sau raportează erori pe GitHub</string>
+    <string name="support_title">Raportează o problemă</string>
+    <string name="support_help">Dacă întâmpini o eroare sau o problemă, caută mai întâi în lista de probleme de pe GitHub. Dacă nimeni nu a raportat-o încă, deschide o problemă nouă și descrie ce se întâmplă, unitatea ta principală și pașii pentru a o reproduce.</string>
+    <string name="support_open_issues">Deschide pagina de probleme GitHub</string>
+    <string name="support_scan_qr">Sau scanează acest cod QR pentru a deschide lista de probleme pe un alt dispozitiv.</string>
+    <string name="support_github_account_warning">Notă: ai nevoie de un cont GitHub gratuit pentru a crea o problemă.</string>
 </resources>

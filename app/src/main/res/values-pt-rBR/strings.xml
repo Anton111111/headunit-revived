@@ -763,4 +763,12 @@
     <string name="onb_dpi_recommended">Recomendado para sua tela: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Mais uma coisa: agora você pode definir uma tela de carregamento personalizada, exibida enquanto o carro se conecta.</string>
     <string name="onb_ready_loading_button">Configurar uma tela de carregamento</string>
+
+    <string name="support">Reportar um problema</string>
+    <string name="support_description">Pesquise ou reporte bugs no GitHub</string>
+    <string name="support_title">Reportar um problema</string>
+    <string name="support_help">Se você encontrar um bug ou problema, primeiro procure-o na lista de issues do GitHub. Se ninguém tiver reportado ainda, abra uma nova issue e descreva o que acontece, sua central multimídia e os passos para reproduzir o problema.</string>
+    <string name="support_open_issues">Abrir a página de issues do GitHub</string>
+    <string name="support_scan_qr">Ou escaneie este código QR para abrir a lista de issues em outro dispositivo.</string>
+    <string name="support_github_account_warning">Nota: você precisa de uma conta gratuita no GitHub para criar uma issue.</string>
 </resources>

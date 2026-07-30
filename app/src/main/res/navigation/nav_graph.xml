@@ -43,6 +43,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
+            android:id="@+id/action_settingsFragment_to_supportFragment"
+            app:destination="@id/supportFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
             android:id="@+id/action_settingsFragment_to_autoConnectFragment"
             app:destination="@id/autoConnectFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -117,6 +124,11 @@
         android:id="@+id/aboutFragment"
         android:name="com.andrerinas.headunitrevived.main.AboutFragment"
         android:label="@string/about" />
+
+    <fragment
+        android:id="@+id/supportFragment"
+        android:name="com.andrerinas.headunitrevived.main.SupportFragment"
+        android:label="@string/support" />
 
     <fragment
         android:id="@+id/autoConnectFragment"

@@ -665,4 +665,12 @@
     <string name="onb_vehicle_help_aa">ეს სახელი იგზავნება Android Auto-ში. ის ჩანს ტელეფონის კავშირების ისტორიაში და Android Auto-ს მისალმების ეკრანზე.</string>
     <string name="onb_vehicle_help_advanced">მანქანის დამატებითი დეტალები შეგიძლიათ დააკონფიგუროთ ჩანართში დამატებითი. ჩვენ არ ვიყენებთ ამ მონაცემებს; ისინი იგზავნება მხოლოდ Android Auto-ში, რადგან ის ამას მოითხოვს.</string>
     <string name="onb_summary_vehicle_format">მანქანა: %1$s</string>
+
+    <string name="support">პრობლემის შეტყობინება</string>
+    <string name="support_description">GitHub-ზე ხარვეზების ძებნა ან შეტყობინება</string>
+    <string name="support_title">პრობლემის შეტყობინება</string>
+    <string name="support_help">თუ წააწყდებით ხარვეზს ან პრობლემას, გთხოვთ, ჯერ მოძებნოთ იგი GitHub-ის პრობლემების სიაში. თუ არავის შეუტყობინებია, გახსენით ახალი საკითხი და აღწერეთ რა ხდება, თქვენი მონიტორი და პრობლემის გამეორების ნაბიჯები.</string>
+    <string name="support_open_issues">GitHub-ის პრობლემების გვერდის გახსნა</string>
+    <string name="support_scan_qr">ან დაასკანირეთ ეს QR კოდი სხვა მოწყობილობაზე პრობლემების სიის გასახსნელად.</string>
+    <string name="support_github_account_warning">შენიშვნა: საკითხის შესაქმნელად საჭიროა უფასო GitHub ანგარიში.</string>
 </resources>

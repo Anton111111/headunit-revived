@@ -762,4 +762,13 @@
     <string name="onb_dpi_recommended">Рекомендовано для вашого екрана: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Ще одне: тепер ви можете встановити власний екран завантаження, який відображатиметься під час підключення автомобіля.</string>
     <string name="onb_ready_loading_button">Налаштувати екран завантаження</string>
+
+    <!-- Support / bug reporting -->
+    <string name="support">Повідомити про проблему</string>
+    <string name="support_description">Шукайте або повідомляйте про помилки на GitHub</string>
+    <string name="support_title">Повідомити про проблему</string>
+    <string name="support_help">Якщо ви зіткнулися з помилкою або проблемою, спочатку знайдіть її у списку issues на GitHub. Якщо її ще ніхто не повідомляв, відкрийте нове issue та опишіть, що сталося, вашу магнітолу і кроки для відтворення.</string>
+    <string name="support_open_issues">Відкрити сторінку issues на GitHub</string>
+    <string name="support_scan_qr">Або відскануйте цей QR-код, щоб відкрити список issues на іншому пристрої.</string>
+    <string name="support_github_account_warning">Примітка: для створення issue потрібен безкоштовний обліковий запис GitHub.</string>
 </resources>

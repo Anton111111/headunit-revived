@@ -737,4 +737,11 @@
     <string name="onb_vehicle_help_advanced">고급 탭에서 차량 세부정보를 더 조정할 수 있습니다. 이 데이터는 저희가 사용하지 않으며, Android Auto가 요구하므로 전송만 합니다.</string>
     <string name="onb_summary_vehicle_format">차량: %1$s</string>
     <string name="sunrise_reference_help">일출과 일몰을 계산하는 데 사용되는 기준점입니다. 위치를 한 번만 선택하면 GPS 없이도 작동합니다.</string>
+    <string name="support">문제 신고</string>
+    <string name="support_description">GitHub에서 버그를 검색하거나 신고하세요</string>
+    <string name="support_title">문제 신고</string>
+    <string name="support_help">버그나 문제가 발생하면 먼저 GitHub 이슈 목록에서 해당 문제를 검색하세요. 아직 신고된 내용이 없다면 새 이슈를 열어 발생한 상황, 사용 중인 헤드유닛, 재현 단계를 설명해 주세요.</string>
+    <string name="support_open_issues">GitHub 이슈 페이지 열기</string>
+    <string name="support_scan_qr">또는 이 QR 코드를 스캔하면 다른 기기에서 이슈 목록을 열 수 있습니다.</string>
+    <string name="support_github_account_warning">참고: 이슈를 등록하려면 무료 GitHub 계정이 필요합니다.</string>
 </resources>

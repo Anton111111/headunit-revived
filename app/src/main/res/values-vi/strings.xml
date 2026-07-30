@@ -739,4 +739,12 @@
     <string name="onb_vehicle_help_advanced">Bạn có thể tinh chỉnh thêm chi tiết xe trong tab Nâng cao. Chúng tôi không dùng dữ liệu này; nó chỉ được gửi đến Android Auto vì Android Auto yêu cầu.</string>
     <string name="onb_summary_vehicle_format">Xe: %1$s</string>
     <string name="sunrise_reference_help">Điểm tham chiếu được dùng để tính thời gian mặt trời mọc và lặn. Chọn vị trí của bạn một lần; hoạt động mà không cần GPS.</string>
+
+    <string name="support">Báo cáo sự cố</string>
+    <string name="support_description">Tìm kiếm hoặc báo lỗi trên GitHub</string>
+    <string name="support_title">Báo cáo sự cố</string>
+    <string name="support_help">Nếu bạn gặp lỗi hoặc sự cố, vui lòng tìm kiếm trong danh sách GitHub issues trước. Nếu chưa ai báo cáo, hãy mở issue mới và mô tả những gì xảy ra, thiết bị đầu phát của bạn và các bước tái hiện sự cố.</string>
+    <string name="support_open_issues">Mở trang GitHub issues</string>
+    <string name="support_scan_qr">Hoặc quét mã QR này để mở danh sách issues trên thiết bị khác.</string>
+    <string name="support_github_account_warning">Lưu ý: bạn cần tài khoản GitHub miễn phí để tạo issue.</string>
 </resources>

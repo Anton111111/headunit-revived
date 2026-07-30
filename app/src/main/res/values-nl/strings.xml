@@ -761,4 +761,13 @@
     <string name="onb_dpi_recommended">Aanbevolen voor je scherm: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Nog één ding: je kunt nu een aangepast laadscherm instellen, dat wordt getoond terwijl de auto verbinding maakt.</string>
     <string name="onb_ready_loading_button">Een laadscherm instellen</string>
+
+    <!-- Support / Bug report -->
+    <string name="support">Probleem melden</string>
+    <string name="support_description">Zoek of meld bugs op GitHub</string>
+    <string name="support_title">Probleem melden</string>
+    <string name="support_help">Als je een bug of probleem tegenkomt, kijk dan eerst in de lijst met GitHub-issues. Als niemand het al heeft gemeld, open dan een nieuw issue en beschrijf wat er gebeurt, je autoradio en de stappen om het te reproduceren.</string>
+    <string name="support_open_issues">Open de GitHub-issuespagina</string>
+    <string name="support_scan_qr">Of scan deze QR-code om de issueslijst op een ander apparaat te openen.</string>
+    <string name="support_github_account_warning">Let op: je hebt een gratis GitHub-account nodig om een issue aan te maken.</string>
 </resources>

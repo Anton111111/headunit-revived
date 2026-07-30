@@ -771,4 +771,11 @@
     <string name="onb_dpi_recommended">Recomendado para tu pantalla: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Una cosa más: ahora puedes establecer una pantalla de carga personalizada, que se muestra mientras el auto se conecta.</string>
     <string name="onb_ready_loading_button">Configurar una pantalla de carga</string>
+    <string name="support">Reportar un problema</string>
+    <string name="support_description">Busca o reporta errores en GitHub</string>
+    <string name="support_title">Reportar un problema</string>
+    <string name="support_help">Si encuentras un error o un problema, por favor búscalo primero en la lista de issues de GitHub. Si nadie lo ha reportado aún, abre un nuevo issue y describe qué ocurre, tu unidad de cabeza, y los pasos para reproducirlo.</string>
+    <string name="support_open_issues">Abrir la página de issues de GitHub</string>
+    <string name="support_scan_qr">O escanea este código QR para abrir la lista de issues en otro dispositivo.</string>
+    <string name="support_github_account_warning">Nota: necesitas una cuenta gratuita de GitHub para crear un issue.</string>
 </resources>

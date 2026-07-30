@@ -735,4 +735,12 @@
     <string name="onb_vehicle_help_advanced">يمكنك ضبط المزيد من تفاصيل مركبتك في علامة التبويب المتقدمة. نحن لا نستخدم هذه البيانات؛ تُرسَل فقط إلى Android Auto لأنه يطلبها.</string>
     <string name="onb_summary_vehicle_format">المركبة: %1$s</string>
     <string name="sunrise_reference_help">النقطة المرجعية المستخدمة لحساب وقت الشروق والغروب. اختر موقعك مرة واحدة؛ يعمل بدون نظام تحديد المواقع.</string>
+
+    <string name="support">الإبلاغ عن مشكلة</string>
+    <string name="support_description">البحث عن الأخطاء أو الإبلاغ عنها على GitHub</string>
+    <string name="support_title">الإبلاغ عن مشكلة</string>
+    <string name="support_help">إذا واجهت خطأً أو مشكلة، يرجى البحث عنها أولاً في قائمة المشكلات على GitHub. إذا لم يُبلِّغ عنها أحد بعد، افتح مشكلة جديدة وصف فيها ما يحدث، ووحدة الرأس الخاصة بك، والخطوات اللازمة لإعادة إنتاج المشكلة.</string>
+    <string name="support_open_issues">فتح صفحة المشكلات على GitHub</string>
+    <string name="support_scan_qr">أو امسح رمز QR هذا لفتح قائمة المشكلات على جهاز آخر.</string>
+    <string name="support_github_account_warning">ملاحظة: تحتاج إلى حساب GitHub مجاني لإنشاء مشكلة.</string>
 </resources>

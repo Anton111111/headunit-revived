@@ -732,4 +732,12 @@
     <string name="onb_vehicle_help_advanced">További járműadatokat a Speciális lapon állíthatsz be. Ezeket az adatokat nem használjuk; csak azért küldjük az Android Autónak, mert megköveteli.</string>
     <string name="onb_summary_vehicle_format">Jármű: %1$s</string>
     <string name="sunrise_reference_help">A napkelte és napnyugta kiszámításához használt referenciapont. Válassza ki egyszer a helyét; GPS nélkül is működik.</string>
+
+    <string name="support">Probléma bejelentése</string>
+    <string name="support_description">Hibák keresése vagy bejelentése GitHub-on</string>
+    <string name="support_title">Probléma bejelentése</string>
+    <string name="support_help">Ha hibát vagy problémát tapasztalsz, kérjük, először keresd meg a GitHub hibalistájában. Ha még senki nem jelentette, nyiss egy új hibajegyet, és írd le, mi történt, milyen fejegységet használsz, és hogyan lehet reprodukálni a problémát.</string>
+    <string name="support_open_issues">GitHub hibák listájának megnyitása</string>
+    <string name="support_scan_qr">Vagy szkenneld be ezt a QR-kódot a hibák listájának egy másik eszközön való megnyitásához.</string>
+    <string name="support_github_account_warning">Megjegyzés: egy ingyenes GitHub fiókra van szükséged hibajegy létrehozásához.</string>
 </resources>

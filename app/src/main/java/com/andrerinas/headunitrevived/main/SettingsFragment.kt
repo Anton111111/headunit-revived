@@ -79,7 +79,7 @@ class SettingsFragment : Fragment() {
         // Navigation
         "gpsNavigation",
         // Graphic
-        "resolution", "dpiPixelDensity", "viewMode", "screenOrientation", "startInFullscreenMode",
+        "resolution", "dpiPixelDensity", "viewMode", "screenOrientation", "startInFullscreenMode", "loadingScreen",
         // Video
         "videoCodec", "fpsLimit",
         // Input
@@ -87,7 +87,7 @@ class SettingsFragment : Fragment() {
         // Audio
         "enableAudioSink", "micSettings", "audioVolumeOffsets",
         // Info
-        "version", "about"
+        "version", "about", "support"
     )
 
     // Local state to hold changes before saving
@@ -1682,6 +1682,19 @@ class SettingsFragment : Fragment() {
             nameResId = R.string.version,
             value = BuildConfig.VERSION_NAME,
             onClick = { /* Read only */ }
+        ))
+
+        items.add(SettingItem.SettingEntry(
+            stableId = "support",
+            nameResId = R.string.support,
+            value = getString(R.string.support_description),
+            onClick = {
+                try {
+                    findNavController().navigate(R.id.action_settingsFragment_to_supportFragment)
+                } catch (e: Exception) {
+                    // Failover
+                }
+            }
         ))
 
         items.add(SettingItem.SettingEntry(
