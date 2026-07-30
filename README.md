@@ -9,6 +9,9 @@
     height="200">
 </p>
 
+$\color{Red}\Huge{\textbf{IMPORTANT! - Rebrand of the App}}$
+Discussion: https://github.com/andreknieriem/headunit-revived/discussions/729
+
 Headunit Revived is an Android app that allows you to turn your Android tablet or phone into an Android Auto receiver. This project is a revived version of the original headunit project by the great Michael Reid. The original project can be found here:
 https://github.com/mikereidis/headunit
 
