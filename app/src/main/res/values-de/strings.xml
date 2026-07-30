@@ -17,6 +17,7 @@
     <string name="usb">USB</string>
     <string name="wifi">WLAN</string>
     <string name="dpi">Pixeldichte (DPI)</string>
+    <string name="pixel_aspect_ratio">Pixelseitenverhältnis</string>
     <string name="mic_sample_rate">Mikrofon-Abtastrate</string>
     <string name="keymap">Tastenbelegung</string>
     <string name="night_mode">Dunkelmodus (Android Auto)</string>
@@ -88,6 +89,7 @@
     <string name="orientation_portrait">Hochformat (90°)</string>
     <string name="orientation_portrait_reverse">Hochformat umgekehrt (270°)</string>
     <string name="enter_dpi_value">DPI eingeben (0 für Auto)</string>
+    <string name="enter_pixel_aspect_ratio_value">Pixelseitenverhältnis x10000 (10000 = quadratische Pixel)</string>
     <string name="custom_margin">Benutzerdefinierte Ränder</string>
     <string name="custom_margin_description">Ränder manuell setzen (0 für Auto)</string>
     <string name="enter_custom_margins">Ränder eingeben (0 für Auto)</string>
@@ -205,6 +207,7 @@
     <string name="wireless_connection_settings">Kabellose Verbindung</string>
     <string name="category_graphic">Grafik</string>
 
+    <string name="static_bssid_desc">Trage das BSSID für das Handshake der kabellosen Verbindung ein, falls die automatisierte Identifizierung aufgrund von fehlenden Systemrechten fehlschlägt.</string>
     <string name="custom_insets">Benutzerdefinierte Ränder</string>
     <string name="inset_top">Oben</string>
     <string name="inset_bottom">Unten</string>
@@ -767,4 +770,6 @@
     <string name="onb_dpi_recommended">Empfohlen für Ihren Bildschirm: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Noch eine Sache: Sie können jetzt einen benutzerdefinierten Ladebildschirm festlegen, der angezeigt wird, während das Auto eine Verbindung herstellt.</string>
     <string name="onb_ready_loading_button">Ladebildschirm einrichten</string>
+    <string name="static_bssid_title">Statische BSSID</string>
+    <string name="static_bssid_enter_value">BSSID-Wert (Format: XX:XX:XX:XX:XX:XX)</string>
 </resources>
