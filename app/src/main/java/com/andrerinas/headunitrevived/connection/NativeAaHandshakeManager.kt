@@ -59,6 +59,8 @@ class NativeAaHandshakeManager(
     private val commManager = com.andrerinas.headunitrevived.App.provide(context).commManager
     private var aaServerSocket: BluetoothServerSocket? = null
     private var hfpServerSocket: BluetoothServerSocket? = null
+    // Extra RFCOMM listeners opened on secondary Bluetooth radios (dual-Bluetooth head units).
+    private val extraServerSockets = java.util.Collections.synchronizedList(mutableListOf<BluetoothServerSocket>())
     private var isRunning = false
 
     private var currentSsid: String? = null
@@ -147,6 +149,71 @@ class NativeAaHandshakeManager(
                 } else {
                     AppLog.d("NativeAA: HFP Server socket closed cleanly.")
                 }
+            }
+        }
+
+        // Experimental: some head units have two Bluetooth radios (e.g. "K706" and "CAR8032").
+        // The phone may be bonded to the one that is not the default, so it never reaches the
+        // listener above. Also open listeners on any other radio with a real, different address.
+        // Strict no-op on the usual single-radio device, and skipped when the address is masked
+        // (API 31+), so it cannot disturb the primary listener.
+        val primaryAddr = try { adapter.address } catch (e: Exception) { null }
+        if (primaryAddr != null && primaryAddr != "02:00:00:00:00:00") {
+            val secondaries = try {
+                BluetoothHelper.getAllBluetoothAdapters(context).filter {
+                    val a = try { it.address } catch (e: Exception) { null }
+                    a != null && a != "02:00:00:00:00:00" && a != primaryAddr
+                }
+            } catch (e: Exception) { emptyList() }
+            if (secondaries.isNotEmpty()) {
+                AppLog.i("NativeAA: Opening AA listeners on ${secondaries.size} secondary Bluetooth radio(s) for dual-radio head units")
+                secondaries.forEach { launchExtraServers(it) }
+            }
+        }
+    }
+
+    /**
+     * Open supplementary AA + HFP RFCOMM listeners on a secondary Bluetooth radio, so a phone
+     * bonded to that radio (dual-Bluetooth head units) can still reach us. Experimental, and
+     * fully guarded so a bad radio cannot affect the primary listener.
+     */
+    private fun launchExtraServers(extra: BluetoothAdapter) {
+        val addr = try { extra.address } catch (e: Exception) { "?" }
+        scope.launch(Dispatchers.IO + CoroutineName("NativeAa-RfcommServer-2")) {
+            try {
+                val server = extra.listenUsingRfcommWithServiceRecord("AA BT Listener", AA_UUID)
+                extraServerSockets.add(server)
+                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID on secondary radio [$addr]")
+                while (isRunning && isActive) {
+                    val socket = server.accept()
+                    if (socket != null) {
+                        AppLog.i("NativeAA: Connection accepted (secondary radio) from ${socket.remoteDevice.name}")
+                        scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
+                            handleHandshake(socket)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (isRunning) AppLog.e("NativeAA: Secondary AA server error [$addr]: ${e.message}", e)
+                else AppLog.d("NativeAA: Secondary AA server closed cleanly [$addr].")
+            }
+        }
+        scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpServer-2")) {
+            try {
+                val server = extra.listenUsingRfcommWithServiceRecord("Hands-Free Unit", HFP_UUID)
+                extraServerSockets.add(server)
+                while (isRunning && isActive) {
+                    val socket = server.accept()
+                    if (socket != null) {
+                        AppLog.i("NativeAA: HFP connection accepted (secondary radio) from ${socket.remoteDevice.name}.")
+                        scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpResponder-${socket.remoteDevice.address}")) {
+                            handleHfp(socket)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (isRunning) AppLog.e("NativeAA: Secondary HFP server error [$addr]: ${e.message}", e)
+                else AppLog.d("NativeAA: Secondary HFP server closed cleanly [$addr].")
             }
         }
     }
@@ -463,6 +530,10 @@ class NativeAaHandshakeManager(
         isRunning = false
         try { aaServerSocket?.close() } catch (e: Exception) {}
         try { hfpServerSocket?.close() } catch (e: Exception) {}
+        synchronized(extraServerSockets) {
+            extraServerSockets.forEach { try { it.close() } catch (e: Exception) {} }
+            extraServerSockets.clear()
+        }
         aaServerSocket = null
         hfpServerSocket = null
         currentSsid = null

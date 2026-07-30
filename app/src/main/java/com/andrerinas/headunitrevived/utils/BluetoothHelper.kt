@@ -47,6 +47,41 @@ object BluetoothHelper {
         }
     }
 
+    /** Instantiate the BluetoothAdapter backed by a specific system bluetooth service (reflection). */
+    private fun adapterForService(context: Context, serviceName: String): BluetoothAdapter? {
+        if (serviceName.isEmpty() || serviceName == "bluetooth_manager") return getDefaultAdapter(context)
+        return try {
+            val serviceManagerClass = Class.forName("android.os.ServiceManager")
+            val getServiceMethod = serviceManagerClass.getMethod("getService", String::class.java)
+            val binder = getServiceMethod.invoke(null, serviceName) as? IBinder ?: return null
+            val iBluetoothManagerStubClass = Class.forName("android.bluetooth.IBluetoothManager\$Stub")
+            val asInterfaceMethod = iBluetoothManagerStubClass.getMethod("asInterface", IBinder::class.java)
+            val managerService = asInterfaceMethod.invoke(null, binder) ?: return null
+            val iBluetoothManagerClass = Class.forName("android.bluetooth.IBluetoothManager")
+            val ctor = BluetoothAdapter::class.java.getDeclaredConstructor(iBluetoothManagerClass)
+            ctor.isAccessible = true
+            ctor.newInstance(managerService) as? BluetoothAdapter
+        } catch (e: Exception) {
+            AppLog.e("BluetoothHelper: adapterForService($serviceName) failed: ${e.message}", e)
+            null
+        }
+    }
+
+    /**
+     * All distinct, enabled Bluetooth adapters exposed by the system. Usually just the default
+     * radio; some head units expose a second Bluetooth chip as an extra service. Best-effort:
+     * bogus/non-adapter services resolve to null and are skipped.
+     */
+    fun getAllBluetoothAdapters(context: Context): List<BluetoothAdapter> {
+        val result = mutableListOf<BluetoothAdapter>()
+        getDefaultAdapter(context)?.let { result.add(it) }
+        for (service in listBluetoothServices()) {
+            if (service == "bluetooth_manager") continue
+            adapterForService(context, service)?.let { result.add(it) }
+        }
+        return result.filter { try { it.isEnabled } catch (e: Exception) { false } }
+    }
+
     fun listBluetoothServices(): List<String> {
         val bluetoothServices = mutableListOf<String>()
         try {
