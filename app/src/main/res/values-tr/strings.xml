@@ -1,6 +1,6 @@
 
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Menü</string>
     <string name="settings">Ayarlar</string>
 
@@ -13,7 +13,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Dahili Mod</string>
     <string name="to_android_auto">Android Auto\'ya Geç</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Kaldır</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -168,9 +168,9 @@
     <string name="usb_auto_connect">USB Otomatik Bağlan</string>
     <string name="usb_auto_connect_description">Uygulama açıldığında bilinen bir USB cihazına otomatik olarak bağlan.</string>
     <string name="auto_start_bt_label">Bluetooth ile otomatik başlat</string>
-    <string name="auto_start_bt_description">Belirli bir Bluetooth cihazı bağlandığında Headunit Revived\'ı otomatik olarak aç.</string>
+    <string name="auto_start_bt_description">Belirli bir Bluetooth cihazı bağlandığında Open Headunit\'ı otomatik olarak aç.</string>
     <string name="auto_start_wifi_label">WiFi ile otomatik başlat</string>
-    <string name="auto_start_wifi_description">Belirli bir WiFi SSID\'sine bağlandığında Headunit Revived\'ı otomatik olarak aç.</string>
+    <string name="auto_start_wifi_description">Belirli bir WiFi SSID\'sine bağlandığında Open Headunit\'ı otomatik olarak aç.</string>
     <string name="auto_start_wifi_ssid_label">WiFi SSID</string>
     <string name="auto_start_wifi_ssid_description">Sadece bu WiFi SSID\'sine bağlandığında bağlan</string>
     <string name="auto_start_wifi_warning">Eski özellik: Arka plan kısıtlamaları nedeniyle Android 8+ sürümlerinde güvenilir şekilde çalışmayabilir. Uygulamanın pil optimizasyonundan muaf tutulduğundan emin olun.</string>
@@ -195,7 +195,7 @@
     <string name="bt_permission_denied_title">Bluetooth İzni Gerekli</string>
     <string name="bt_permission_denied_message">Eşleşmiş cihazları seçmek için Bluetooth izni gereklidir. Lütfen uygulama ayarlarından izin verin.</string>
     <string name="overlay_permission_title">Arka Planda Başlatma İzni</string>
-    <string name="overlay_permission_description">Bluetooth bağlandığında Headunit Revived\'ın otomatik olarak açılmasına izin vermek için lütfen bir sonraki ekranda \"Diğer uygulamaların üzerinde görüntüleme\" iznini etkinleştirin.</string>
+    <string name="overlay_permission_description">Bluetooth bağlandığında Open Headunit\'ın otomatik olarak açılmasına izin vermek için lütfen bir sonraki ekranda \"Diğer uygulamaların üzerinde görüntüleme\" iznini etkinleştirin.</string>
     <string name="open_settings">Ayarlar</string>
     <string name="right_hand_drive">Sağdan direksiyon</string>
     <string name="right_hand_drive_description">Arayüzü sağdan direksiyonlu sürüş için konumlandırın</string>
@@ -272,9 +272,9 @@
 
     <string name="category_info">Bilgi</string>
     <string name="about">Hakkında &amp; Destek</string>
-    <string name="about_description">Headunit Revived hakkında daha fazla bilgi alın</string>
+    <string name="about_description">Open Headunit hakkında daha fazla bilgi alın</string>
     <string name="version">Sürüm</string>
-    <string name="about_title">Headunit Revived Hakkında</string>
+    <string name="about_title">Open Headunit Hakkında</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <string name="disclaimer_title">Güvenlik &amp; Sorumluluk</string>
@@ -284,7 +284,7 @@
         <b>1. Yola Odaklanın</b><br/>
         Bu yazılımı sürüş sırasında kullanmak dikkat dağıtıcı ve tehlikeli olabilir. Daima güvenli sürüşe öncelik verin ve tüm yerel trafik kurallarına uyun. Bu uygulamayı yalnızca güvenli olduğunda kullanın.<br/><br/>
         <b>2. Sorumluluk Sınırı</b><br/>
-        Headunit Revived "olduğu gibi" sunulmaktadır ve herhangi bir garanti vermez. Geliştiriciler, bu yazılımın kullanımından kaynaklanan herhangi bir kaza, aracınıza/cihazınıza gelen hasar veya yasal sonuçlar için sorumluluk kabul etmez.<br/><br/>
+        Open Headunit "olduğu gibi" sunulmaktadır ve herhangi bir garanti vermez. Geliştiriciler, bu yazılımın kullanımından kaynaklanan herhangi bir kaza, aracınıza/cihazınıza gelen hasar veya yasal sonuçlar için sorumluluk kabul etmez.<br/><br/>
         <b>3. Bağlantı yok</b><br/>
         Bu proje bağımsız bir açık kaynak girişimidir ve Google LLC veya Android Auto markasıyla bağlı değildir, onlar tarafından onaylanmamıştır veya onlarla bağlantılı değildir.
     ]]></string>
@@ -331,7 +331,7 @@
     <string name="wifi_disconnect_toast">Android Auto bağlantısı kesildi: Kablosuz AA kullanıyorsanız, telefon WiFi ayarlarında \"Ağlar arası geçiş yap\" veya \"Ağ hızlandırma\" seçeneklerini devre dışı bırakın</string>
     <string name="reset_usb_option">USB Bağlantısını Sıfırla</string>
     <string name="reset_usb_timeout">USB cihazı bulunamadı. Lütfen bağlantıyı kontrol edin.</string>
-    <string name="notification_service_running">Headunit Revived çalışıyor</string>
+    <string name="notification_service_running">Open Headunit çalışıyor</string>
     <string name="notification_projection_active">Android Auto yansıtılıyor</string>
     <string name="shortcut_connect_title">Bağlan</string>
     <string name="shortcut_connect_desc">Son telefona otomatik bağlan</string>
@@ -536,7 +536,7 @@
     <string name="settings_backup_saved_to">Ayar yedeği şuraya kaydedildi:\n%1$s</string>
     <string name="share_settings_backup">Ayar yedeğini paylaş</string>
     <string name="import_settings">Ayarları içe aktar</string>
-    <string name="import_settings_description">Bir Headunit Revived yedeğinden ayarları geri yükle</string>
+    <string name="import_settings_description">Bir Open Headunit yedeğinden ayarları geri yükle</string>
     <string name="import_settings_app_folder">Uygulama yedek klasöründen içe aktar</string>
     <string name="import_settings_downloads">İndirilenlerden içe aktar</string>
     <string name="import_settings_choose_file">Yedek dosyasını seç</string>
@@ -544,8 +544,8 @@
     <string name="settings_imported">Ayarlar içe aktarıldı: %1$d uygulandı, %2$d atlandı</string>
     <string name="settings_import_failed">Ayarlar içe aktarılamadı: %1$s</string>
     <string name="no_settings_backups_title">Yedek bulunamadı</string>
-    <string name="no_settings_backups_message">Uygulama yedek klasöründe Headunit Revived yedeği bulunamadı. Önce bir yedek dışa aktarın, ardından buradan içe aktarın.</string>
-    <string name="no_settings_backups_downloads_message">İndirilenlerde Headunit Revived yedeği bulunamadı. Önce İndirilenlere bir yedek dışa aktarın, ardından buradan içe aktarın.</string>
+    <string name="no_settings_backups_message">Uygulama yedek klasöründe Open Headunit yedeği bulunamadı. Önce bir yedek dışa aktarın, ardından buradan içe aktarın.</string>
+    <string name="no_settings_backups_downloads_message">İndirilenlerde Open Headunit yedeği bulunamadı. Önce İndirilenlere bir yedek dışa aktarın, ardından buradan içe aktarın.</string>
     <string name="no_file_picker_title">Dosya seçici mevcut değil</string>
     <string name="no_file_picker_message">Bu cihazda uyumlu bir dosya seçici yok. Bunun yerine İndirilenleri veya uygulama yedek klasörünü kullanabilirsiniz.</string>
     <string name="storage_permission_denied_backup">Depolama izni reddedildi. İndirilenler kullanılamadı.</string>
@@ -659,7 +659,7 @@
     <string name="onb_next">İleri</string>
     <string name="onb_skip">Atla</string>
     <string name="onb_ready_finish">Bitir</string>
-    <string name="onb_welcome_title">Headunit Revived\'a hoş geldiniz</string>
+    <string name="onb_welcome_title">Open Headunit\'a hoş geldiniz</string>
     <string name="onb_welcome_body">Bu hızlı kurulum cihazınızı tarar ve sizin için en iyi video, ekran ve gece modu ayarlarını seçer. Her şeyi daha sonra Ayarlar\'dan değiştirebilirsiniz.</string>
     <string name="onb_safety_title">Önce güvenlik</string>
     <string name="onb_safety_accept">Şartları okudum ve kabul ediyorum</string>
@@ -753,7 +753,7 @@
     <string name="support_rules_connection_title">Nasıl bağlandığınızı belirtin</string>
     <string name="support_rules_connection_desc">USB kablo, USB kablosuz adaptör, WiFi Direct, WiFi (headunit sunucusu) veya Self Mode. Kablosuz bağlantı kullanıyorsanız adaptör veya dongle modelini de ekleyin.</string>
     <string name="support_rules_appversion_title">Uygulama sürümünü ekleyin</string>
-    <string name="support_rules_appversion_desc">Hakkında ekranında gösterilen Headunit Revived sürümü.</string>
+    <string name="support_rules_appversion_desc">Hakkında ekranında gösterilen Open Headunit sürümü.</string>
     <string name="support_rules_logs_title">Olduğu anda günlükleri ekleyin</string>
     <string name="support_rules_logs_desc">Ayarlar\'da Gelişmiş sekmesini açın, Hata Ayıklama bölümünde Hata Ayıklama Modu\'nu etkinleştirin, sorunu yeniden oluşturun ve hemen ardından Günlükleri Dışa Aktar\'a dokunun; böylece günlük yalnızca başlangıcı değil sorunun yaşandığı anı da kapsar. Bu dosyayı konunuza ekleyin.</string>
     <string name="support_rules_search_title">Mükerrer konu açmayın</string>

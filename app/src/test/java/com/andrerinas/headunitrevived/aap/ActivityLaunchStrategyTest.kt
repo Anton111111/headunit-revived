@@ -1,6 +1,6 @@
-package com.andrerinas.headunitrevived.aap
+package com.andrerinas.openheadunit.aap
 
-import com.andrerinas.headunitrevived.aap.ActivityLaunchPolicy.LaunchStrategy
+import com.andrerinas.openheadunit.aap.ActivityLaunchPolicy.LaunchStrategy
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

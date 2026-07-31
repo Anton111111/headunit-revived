@@ -1,4 +1,4 @@
-package com.andrerinas.headunitrevived.aap
+package com.andrerinas.openheadunit.aap
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

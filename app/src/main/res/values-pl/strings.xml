@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Menu</string>
     <string name="settings">Ustawienia</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Tryb samodzielny</string>
     <string name="to_android_auto">Do Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Usuń</string>
     <string name="usb">USB</string>
     <string name="wifi">Wi-Fi</string>
@@ -151,9 +151,9 @@
     <string name="usb_auto_connect">Automatyczne połączenie USB</string>
     <string name="usb_auto_connect_description">Automatycznie łączy się ze znanym urządzeniem USB po otwarciu aplikacji.</string>
     <string name="auto_start_bt_label">Autostart przy Bluetooth</string>
-    <string name="auto_start_bt_description">Automatycznie otwórz Headunit Revived po połączeniu z określonym urządzeniem Bluetooth.</string>
+    <string name="auto_start_bt_description">Automatycznie otwórz Open Headunit po połączeniu z określonym urządzeniem Bluetooth.</string>
     <string name="auto_start_wifi_label">Autostart przy Wi-Fi</string>
-    <string name="auto_start_wifi_description">Automatycznie otwiera Headunit Revived po połączeniu z określoną siecią Wi-Fi (SSID).</string>
+    <string name="auto_start_wifi_description">Automatycznie otwiera Open Headunit po połączeniu z określoną siecią Wi-Fi (SSID).</string>
     <string name="auto_start_wifi_ssid_label">SSID Wi-Fi</string>
     <string name="auto_start_wifi_ssid_description">Połącz tylko, gdy połączono z tym SSID Wi-Fi</string>
     <string name="auto_start_wifi_warning">Funkcja legacy: Może nie działać niezawodnie na Androidzie 8+ z powodu ograniczeń w tle. Upewnij się, że aplikacja jest wykluczona z optymalizacji baterii.</string>
@@ -178,7 +178,7 @@
     <string name="bt_permission_denied_title">Wymagane uprawnienie Bluetooth</string>
     <string name="bt_permission_denied_message">Uprawnienie Bluetooth jest wymagane do wyboru sparowanych urządzeń. Przyznaj je w ustawieniach aplikacji.</string>
     <string name="overlay_permission_title">Uprawnienie do startu w tle</string>
-    <string name="overlay_permission_description">Aby umożliwić automatyczne otwarcie Headunit Revived po połączeniu Bluetooth, włącz uprawnienie \"Wyświetlanie nad innymi aplikacjami\" na następnym ekranie.</string>
+    <string name="overlay_permission_description">Aby umożliwić automatyczne otwarcie Open Headunit po połączeniu Bluetooth, włącz uprawnienie \"Wyświetlanie nad innymi aplikacjami\" na następnym ekranie.</string>
     <string name="open_settings">Ustawienia</string>
     <string name="wireless_connection_settings">Połączenie bezprzewodowe</string>
     <string name="right_hand_drive">Kierownica po prawej stronie</string>
@@ -258,9 +258,9 @@
     <!-- Info Settings -->
     <string name="category_info">Informacje</string>
     <string name="about">O aplikacji i Wsparcie</string>
-    <string name="about_description">Uzyskaj więcej informacji o Headunit Revived</string>
+    <string name="about_description">Uzyskaj więcej informacji o Open Headunit</string>
     <string name="version">Wersja</string>
-    <string name="about_title">O Headunit Revived</string>
+    <string name="about_title">O Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -271,7 +271,7 @@
         <b>1. Skupienie na drodze</b><br/>
         Korzystanie z tego oprogramowania podczas prowadzenia pojazdu może rozpraszać i być niebezpieczne. Zawsze traktuj bezpieczną jazdę priorytetowo i przestrzegaj lokalnych przepisów ruchu drogowego. Korzystaj z tej aplikacji tylko wtedy, gdy jest to bezpieczne.<br/><br/>
         <b>2. Ograniczenie odpowiedzialności</b><br/>
-        Headunit Revived jest udostępniany w stanie "takim, jaki jest" (as is), bez jakiejkolwiek gwarancji. Deweloperzy nie ponoszą odpowiedzialności za jakiekolwiek wypadki, uszkodzenia pojazdu/urządzenia ani konsekwencje prawne wynikające z używania tego oprogramowania.<br/><br/>
+        Open Headunit jest udostępniany w stanie "takim, jaki jest" (as is), bez jakiejkolwiek gwarancji. Deweloperzy nie ponoszą odpowiedzialności za jakiekolwiek wypadki, uszkodzenia pojazdu/urządzenia ani konsekwencje prawne wynikające z używania tego oprogramowania.<br/><br/>
         <b>3. Brak powiązań</b><br/>
         Ten projekt jest niezależną inicjatywą open-source i ne jest powiązany, wspierany ani połączony z firmą Google LLC ani marką Android Auto.
     ]]></string>
@@ -319,7 +319,7 @@
     <string name="wifi_disconnect_toast">Android Auto rozłączono: Jeśli używasz bezprzewodowego AA, wyłącz \"Przełączanie między sieciami\" lub \"Przyspieszenie sieci\" w ustawieniach WiFi telefonu</string>
     <string name="reset_usb_option">Zresetuj połączenie USB</string>
     <string name="reset_usb_timeout">Nie znaleziono urządzenia USB. Sprawdź połączenie.</string>
-    <string name="notification_service_running">Headunit Revived działa</string>
+    <string name="notification_service_running">Open Headunit działa</string>
     <string name="notification_projection_active">Android Auto jest wyświetlane</string>
     <string name="shortcut_connect_title">Połącz</string>
     <string name="shortcut_connect_desc">Połącz z ostatnim urządzeniem</string>
@@ -563,7 +563,7 @@
     <string name="settings_backup_saved_to">Kopia zapasowa zapisana w:\n%1$s</string>
     <string name="share_settings_backup">Udostępnij kopię zapasową</string>
     <string name="import_settings">Importuj ustawienia</string>
-    <string name="import_settings_description">Przywróć ustawienia z kopii zapasowej Headunit Revived</string>
+    <string name="import_settings_description">Przywróć ustawienia z kopii zapasowej Open Headunit</string>
     <string name="import_settings_app_folder">Importuj z folderu kopii zapasowych aplikacji</string>
     <string name="import_settings_downloads">Importuj z Pobranych</string>
     <string name="import_settings_choose_file">Wybierz plik kopii zapasowej</string>
@@ -571,8 +571,8 @@
     <string name="settings_imported">Ustawienia zaimportowane: %1$d zastosowano, %2$d pominięto</string>
     <string name="settings_import_failed">Import ustawień nie powiódł się: %1$s</string>
     <string name="no_settings_backups_title">Brak kopii zapasowych</string>
-    <string name="no_settings_backups_message">Nie znaleziono kopii zapasowych Headunit Revived w folderze kopii zapasowych aplikacji. Najpierw wyeksportuj kopię, a następnie zaimportuj ją stąd.</string>
-    <string name="no_settings_backups_downloads_message">Nie znaleziono kopii zapasowych Headunit Revived w Pobranych. Najpierw wyeksportuj kopię do Pobranych, a następnie zaimportuj ją stąd.</string>
+    <string name="no_settings_backups_message">Nie znaleziono kopii zapasowych Open Headunit w folderze kopii zapasowych aplikacji. Najpierw wyeksportuj kopię, a następnie zaimportuj ją stąd.</string>
+    <string name="no_settings_backups_downloads_message">Nie znaleziono kopii zapasowych Open Headunit w Pobranych. Najpierw wyeksportuj kopię do Pobranych, a następnie zaimportuj ją stąd.</string>
     <string name="no_file_picker_title">Brak dostępnego selektora plików</string>
     <string name="no_file_picker_message">To urządzenie nie ma kompatybilnego selektora plików. Możesz użyć Pobranych lub folderu kopii zapasowych aplikacji.</string>
     <string name="storage_permission_denied_backup">Odmowa dostępu do pamięci. Nie można użyć folderu Pobrane.</string>
@@ -663,7 +663,7 @@
     <string name="onb_next">Dalej</string>
     <string name="onb_skip">Pomiń</string>
     <string name="onb_ready_finish">Zakończ</string>
-    <string name="onb_welcome_title">Witamy w Headunit Revived</string>
+    <string name="onb_welcome_title">Witamy w Open Headunit</string>
     <string name="onb_welcome_body">Ta szybka konfiguracja sprawdza Twoje urządzenie i dobiera najlepsze ustawienia wideo, wyświetlacza i trybu nocnego. Wszystko możesz później zmienić w Ustawieniach.</string>
     <string name="onb_safety_title">Najpierw bezpieczeństwo</string>
     <string name="onb_safety_accept">Przeczytałem/-am i akceptuję warunki</string>
@@ -780,7 +780,7 @@
     <string name="support_rules_connection_title">Napisz, jak się łączysz</string>
     <string name="support_rules_connection_desc">Kabel USB, bezprzewodowy adapter USB, WiFi Direct, WiFi (headunit server) lub Self Mode. Jeśli połączenie jest bezprzewodowe, podaj model adaptera lub klucza.</string>
     <string name="support_rules_appversion_title">Podaj wersję aplikacji</string>
-    <string name="support_rules_appversion_desc">Wersja Headunit Revived widoczna na ekranie O aplikacji i Wsparcie.</string>
+    <string name="support_rules_appversion_desc">Wersja Open Headunit widoczna na ekranie O aplikacji i Wsparcie.</string>
     <string name="support_rules_logs_title">Dołącz logi, zaraz po wystąpieniu problemu</string>
     <string name="support_rules_logs_desc">Przejdź do karty Zaawansowane w Ustawieniach, włącz Tryb debugowania w sekcji Debugowanie, odtwórz problem, a potem od razu naciśnij Eksportuj logi, żeby log obejmował moment awarii, a nie tylko start. Dołącz ten plik do zgłoszenia.</string>
     <string name="support_rules_search_title">Bez duplikatów</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Menü</string>
     <string name="settings">Einstellungen</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Self Mode</string>
     <string name="to_android_auto">Zu Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Entfernen</string>
     <string name="usb">USB</string>
     <string name="wifi">WLAN</string>
@@ -173,9 +173,9 @@
     <string name="usb_auto_connect">USB Auto-Verbindung</string>
     <string name="usb_auto_connect_description">Verbindet sich automatisch mit einem bekannten USB-Gerät, sobald die App geöffnet wird.</string>
     <string name="auto_start_bt_label">Auto-Start bei Bluetooth</string>
-    <string name="auto_start_bt_description">Startet Headunit Revived automatisch, wenn sich ein bestimmtes Bluetooth-Gerät verbindet.</string>
+    <string name="auto_start_bt_description">Startet Open Headunit automatisch, wenn sich ein bestimmtes Bluetooth-Gerät verbindet.</string>
     <string name="auto_start_wifi_label">Auto-Start bei WLAN</string>
-    <string name="auto_start_wifi_description">Öffnet Headunit Revived automatisch, wenn eine Verbindung zu einer bestimmten WLAN-SSID besteht.</string>
+    <string name="auto_start_wifi_description">Öffnet Open Headunit automatisch, wenn eine Verbindung zu einer bestimmten WLAN-SSID besteht.</string>
     <string name="auto_start_wifi_ssid_label">WLAN-SSID</string>
     <string name="auto_start_wifi_ssid_description">Nur verbinden, wenn mit dieser WLAN-SSID gekoppelt</string>
     <string name="auto_start_wifi_warning">Legacy-Funktion: Dies funktioniert unter Android 8+ aufgrund von Hintergrundbeschränkungen möglicherweise nicht zuverlässig. Stellen Sie sicher, dass die App von der Akku-Optimierung ausgeschlossen ist.</string>
@@ -200,7 +200,7 @@
     <string name="bt_permission_denied_title">Bluetooth-Berechtigung erforderlich</string>
     <string name="bt_permission_denied_message">Die Bluetooth-Berechtigung wird benötigt, um gekoppelte Geräte auszuwählen. Bitte in den App-Einstellungen erteilen.</string>
     <string name="overlay_permission_title">Hintergrund-Start Berechtigung</string>
-    <string name="overlay_permission_description">Damit Headunit Revived automatisch starten kann, wenn Bluetooth verbindet, aktivieren Sie bitte die Berechtigung \"Über anderen Apps einblenden\" im nächsten Bildschirm.</string>
+    <string name="overlay_permission_description">Damit Open Headunit automatisch starten kann, wenn Bluetooth verbindet, aktivieren Sie bitte die Berechtigung \"Über anderen Apps einblenden\" im nächsten Bildschirm.</string>
     <string name="open_settings">Einstellungen</string>
     <string name="right_hand_drive">Rechtslenker</string>
     <string name="right_hand_drive_description">Benutzeroberfläche für Rechtsverkehr ausrichten</string>
@@ -292,9 +292,9 @@
     <!-- Info Settings -->
     <string name="category_info">Info</string>
     <string name="about">Über &amp; Support</string>
-    <string name="about_description">Mehr Informationen über Headunit Revived</string>
+    <string name="about_description">Mehr Informationen über Open Headunit</string>
     <string name="version">Version</string>
-    <string name="about_title">Über Headunit Revived</string>
+    <string name="about_title">Über Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -305,7 +305,7 @@
         <b>1. Auf die Straße achten</b><br/>
         Die Bedienung dieser Software während der Fahrt kann ablenken und gefährlich sein. Priorisieren Sie stets die sichere Fahrt und beachten Sie alle Verkehrsregeln. Nutzen Sie diese Anwendung nur, wenn es sicher ist.<br/><br/>
         <b>2. Haftungsausschluss</b><br/>
-        Headunit Revived wird "wie besehen" ohne jegliche Gewährleistung bereitgestellt. Die Entwickler übernehmen keine Haftung für Unfälle, Schäden am Fahrzeug/Gerät oder rechtliche Konsequenzen, die aus der Nutzung dieser Software entstehen.<br/><br/>
+        Open Headunit wird "wie besehen" ohne jegliche Gewährleistung bereitgestellt. Die Entwickler übernehmen keine Haftung für Unfälle, Schäden am Fahrzeug/Gerät oder rechtliche Konsequenzen, die aus der Nutzung dieser Software entstehen.<br/><br/>
         <b>3. Keine Zugehörigkeit</b><br/>
         Dieses Projekt ist eine unabhängige Open-Source-Initiative und steht in keiner Verbindung zu Google LLC oder der Marke Android Auto.
     ]]></string>
@@ -353,7 +353,7 @@
     <string name="wifi_disconnect_toast">Android Auto getrennt: Bei kabellosem AA \"Zwischen Netzwerken wechseln\" oder \"Netzwerkbeschleunigung\" in den WLAN-Einstellungen deaktivieren</string>
     <string name="reset_usb_option">USB-Verbindung zurücksetzen</string>
     <string name="reset_usb_timeout">USB-Gerät nicht gefunden. Bitte Verbindung prüfen.</string>
-    <string name="notification_service_running">Headunit Revived läuft</string>
+    <string name="notification_service_running">Open Headunit läuft</string>
     <string name="notification_projection_active">Android Auto wird projiziert</string>
     <string name="shortcut_connect_title">Verbinden</string>
     <string name="shortcut_connect_desc">Mit letztem Handy verbinden</string>
@@ -573,7 +573,7 @@
     <string name="settings_backup_saved_to">Sicherung gespeichert unter:\n%1$s</string>
     <string name="share_settings_backup">Sicherung teilen</string>
     <string name="import_settings">Einstellungen importieren</string>
-    <string name="import_settings_description">Einstellungen aus einer Headunit Revived Sicherung wiederherstellen</string>
+    <string name="import_settings_description">Einstellungen aus einer Open Headunit Sicherung wiederherstellen</string>
     <string name="import_settings_app_folder">Aus App-Sicherungsordner importieren</string>
     <string name="import_settings_downloads">Aus Downloads importieren</string>
     <string name="import_settings_choose_file">Sicherungsdatei wählen</string>
@@ -581,8 +581,8 @@
     <string name="settings_imported">Einstellungen importiert: %1$d übernommen, %2$d übersprungen</string>
     <string name="settings_import_failed">Import der Einstellungen fehlgeschlagen: %1$s</string>
     <string name="no_settings_backups_title">Keine Sicherungen gefunden</string>
-    <string name="no_settings_backups_message">Im App-Sicherungsordner wurden keine Headunit Revived Sicherungen gefunden. Exportiere zuerst eine Sicherung und importiere sie dann von hier.</string>
-    <string name="no_settings_backups_downloads_message">In Downloads wurden keine Headunit Revived Sicherungen gefunden. Exportiere zuerst eine Sicherung nach Downloads und importiere sie dann von hier.</string>
+    <string name="no_settings_backups_message">Im App-Sicherungsordner wurden keine Open Headunit Sicherungen gefunden. Exportiere zuerst eine Sicherung und importiere sie dann von hier.</string>
+    <string name="no_settings_backups_downloads_message">In Downloads wurden keine Open Headunit Sicherungen gefunden. Exportiere zuerst eine Sicherung nach Downloads und importiere sie dann von hier.</string>
     <string name="no_file_picker_title">Kein Datei-Picker verfügbar</string>
     <string name="no_file_picker_message">Dieses Gerät hat keinen kompatiblen Datei-Picker. Du kannst stattdessen Downloads oder den App-Sicherungsordner verwenden.</string>
     <string name="storage_permission_denied_backup">Speicherberechtigung verweigert. Downloads konnten nicht verwendet werden.</string>
@@ -671,7 +671,7 @@
     <string name="onb_next">Weiter</string>
     <string name="onb_skip">Überspringen</string>
     <string name="onb_ready_finish">Fertig</string>
-    <string name="onb_welcome_title">Willkommen bei Headunit Revived</string>
+    <string name="onb_welcome_title">Willkommen bei Open Headunit</string>
     <string name="onb_welcome_body">Diese Schnell-Einrichtung prüft Ihr Gerät und wählt die besten Einstellungen für Video, Anzeige und Dunkelmodus für Sie aus. Sie können später alles in den Einstellungen ändern.</string>
     <string name="onb_safety_title">Sicherheit zuerst</string>
     <string name="onb_safety_accept">Ich habe die Bedingungen gelesen und akzeptiere sie</string>

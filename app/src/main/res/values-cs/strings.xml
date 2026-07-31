@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Menu</string>
     <string name="settings">Nastavení</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Self Mode</string>
     <string name="to_android_auto">Do Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Odstranit</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -151,9 +151,9 @@
     <string name="usb_auto_connect">Auto-connect USB</string>
     <string name="usb_auto_connect_description">Automatically connect to a known USB device when the application is opened.</string>
     <string name="auto_start_bt_label">Automaticky spustit při Bluetooth</string>
-    <string name="auto_start_bt_description">Automaticky otevřít Headunit Revived při připojení konkrétního Bluetooth zařízení.</string>
+    <string name="auto_start_bt_description">Automaticky otevřít Open Headunit při připojení konkrétního Bluetooth zařízení.</string>
     <string name="auto_start_wifi_label">Automatické spuštění přes Wi-Fi</string>
-    <string name="auto_start_wifi_description">Automaticky otevřít Headunit Revived při připojení k určité Wi-Fi síti (SSID).</string>
+    <string name="auto_start_wifi_description">Automaticky otevřít Open Headunit při připojení k určité Wi-Fi síti (SSID).</string>
     <string name="auto_start_wifi_ssid_label">SSID Wi-Fi</string>
     <string name="auto_start_wifi_ssid_description">Připojovat se pouze při spojení s touto Wi-Fi sítí (SSID)</string>
     <string name="auto_start_wifi_warning">Zastaralá funkce: na Androidu 8+ může kvůli omezením na pozadí fungovat nespolehlivě. Ujistěte se, že aplikace je vyloučena z optimalizace baterie.</string>
@@ -178,7 +178,7 @@
     <string name="bt_permission_denied_title">Vyžadováno oprávnění Bluetooth</string>
     <string name="bt_permission_denied_message">Pro výběr spárovaných zařízení je vyžadováno oprávnění Bluetooth. Povolte ho prosím v nastavení aplikace.</string>
     <string name="overlay_permission_title">Oprávnění pro spuštění na pozadí</string>
-    <string name="overlay_permission_description">Pro automatické otevření Headunit Revived při připojení Bluetooth povolte prosím oprávnění \"Zobrazit přes ostatní aplikace\" na další obrazovce.</string>
+    <string name="overlay_permission_description">Pro automatické otevření Open Headunit při připojení Bluetooth povolte prosím oprávnění \"Zobrazit přes ostatní aplikace\" na další obrazovce.</string>
     <string name="open_settings">Nastavení</string>
     <string name="wireless_connection_settings">Bezdrátové připojení</string>
     <string name="right_hand_drive">Pravostranné řízení</string>
@@ -258,9 +258,9 @@
     <!-- Info Settings -->
     <string name="category_info">Informace</string>
     <string name="about">O aplikaci a podpora</string>
-    <string name="about_description">Získat více informací o Headunit Revived</string>
+    <string name="about_description">Získat více informací o Open Headunit</string>
     <string name="version">Verze</string>
-    <string name="about_title">O aplikaci Headunit Revived</string>
+    <string name="about_title">O aplikaci Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -271,7 +271,7 @@
         <b>1. Věnujte se řízení</b><br/>
         Ovládání tohoto softwaru během jízdy může být rozptylující a nebezpečné. Vždy upřednostňujte bezpečnou jízdu a dodržujte všechny místní dopravní předpisy. Tuto aplikaci používejte pouze tehdy, když je to bezpečné.<br/><br/>
         <b>2. Omezení odpovědnosti</b><br/>
-        Headunit Revived je poskytován „tak jak je“, bez záruky jakéhokoli druhu. Vývojáři nenesou žádnou odpovědnost za nehody, poškození vašeho vozidla/zařízení ani právní následky vyplývající z používání tohoto softwaru.<br/><br/>
+        Open Headunit je poskytován „tak jak je“, bez záruky jakéhokoli druhu. Vývojáři nenesou žádnou odpovědnost za nehody, poškození vašeho vozidla/zařízení ani právní následky vyplývající z používání tohoto softwaru.<br/><br/>
         <b>3. Žádná spojitost</b><br/>
         Tento projekt je nezávislá open-source iniciativa a není spojen se společností Google LLC ani značkou Android Auto, není jimi podporován ani s nimi nijak nesouvisí.
     ]]></string>
@@ -317,7 +317,7 @@
     <string name="connection_interrupted">Spojení ztraceno</string>
     <string name="connection_interrupted_detail">Opětovné připojování…</string>
     <string name="wifi_disconnect_toast">Android Auto odpojeno: Pokud používáte bezdrátové AA, vypněte \"Přepínání mezi sítěmi\" nebo \"Zrychlení sítě\" v nastavení WiFi telefonu</string>
-    <string name="notification_service_running">Headunit Revived je spuštěna</string>
+    <string name="notification_service_running">Open Headunit je spuštěna</string>
     <string name="notification_projection_active">Android Auto je promítáno</string>
     <string name="shortcut_connect_title">Připojit</string>
     <string name="shortcut_connect_desc">Připojit k poslednímu známému zařízení</string>
@@ -562,7 +562,7 @@
     <string name="settings_backup_saved_to">Záloha nastavení uložena do:\n%1$s</string>
     <string name="share_settings_backup">Sdílet zálohu nastavení</string>
     <string name="import_settings">Importovat nastavení</string>
-    <string name="import_settings_description">Obnovit nastavení ze zálohy Headunit Revived</string>
+    <string name="import_settings_description">Obnovit nastavení ze zálohy Open Headunit</string>
     <string name="import_settings_app_folder">Importovat ze složky záloh aplikace</string>
     <string name="import_settings_downloads">Importovat ze Stažených souborů</string>
     <string name="import_settings_choose_file">Vyberte soubor zálohy</string>
@@ -570,8 +570,8 @@
     <string name="settings_imported">Nastavení importováno: %1$d použito, %2$d přeskočeno</string>
     <string name="settings_import_failed">Import nastavení selhal: %1$s</string>
     <string name="no_settings_backups_title">Žádné zálohy nenalezeny</string>
-    <string name="no_settings_backups_message">Ve složce záloh aplikace nebyly nalezeny žádné zálohy Headunit Revived. Nejprve exportujte zálohu a poté ji odtud importujte.</string>
-    <string name="no_settings_backups_downloads_message">Ve Stažených souborech nebyly nalezeny žádné zálohy Headunit Revived. Nejprve exportujte zálohu do Stažených souborů a poté ji odtud importujte.</string>
+    <string name="no_settings_backups_message">Ve složce záloh aplikace nebyly nalezeny žádné zálohy Open Headunit. Nejprve exportujte zálohu a poté ji odtud importujte.</string>
+    <string name="no_settings_backups_downloads_message">Ve Stažených souborech nebyly nalezeny žádné zálohy Open Headunit. Nejprve exportujte zálohu do Stažených souborů a poté ji odtud importujte.</string>
     <string name="no_file_picker_title">Není k dispozici výběr souborů</string>
     <string name="no_file_picker_message">Toto zařízení nemá kompatibilní výběr souborů. Místo toho můžete použít Stažené soubory nebo složku záloh aplikace.</string>
     <string name="storage_permission_denied_backup">Oprávnění k úložišti zamítnuto. Stažené soubory nebylo možné použít.</string>
@@ -662,7 +662,7 @@
     <string name="onb_next">Další</string>
     <string name="onb_skip">Přeskočit</string>
     <string name="onb_ready_finish">Dokončit</string>
-    <string name="onb_welcome_title">Vítejte v Headunit Revived</string>
+    <string name="onb_welcome_title">Vítejte v Open Headunit</string>
     <string name="onb_welcome_body">Toto rychlé nastavení prohlédne vaše zařízení a vybere pro vás nejlepší nastavení videa, displeje a nočního režimu. Vše můžete později změnit v Nastavení.</string>
     <string name="onb_safety_title">Bezpečnost především</string>
     <string name="onb_safety_accept">Přečetl/a jsem si podmínky a souhlasím s nimi</string>
@@ -780,7 +780,7 @@
     <string name="support_rules_connection_title">Řekněte, jak se připojujete</string>
     <string name="support_rules_connection_desc">USB kabel, bezdrátový USB adaptér, WiFi Direct, WiFi (headunit server) nebo Self Mode. Pokud jde o bezdrátové připojení, uveďte model adaptéru nebo donglu.</string>
     <string name="support_rules_appversion_title">Uveďte verzi aplikace</string>
-    <string name="support_rules_appversion_desc">Verzi Headunit Revived najdete na obrazovce O aplikaci a podpora.</string>
+    <string name="support_rules_appversion_desc">Verzi Open Headunit najdete na obrazovce O aplikaci a podpora.</string>
     <string name="support_rules_logs_title">Přiložte protokoly, hned po tom, co se to stane</string>
     <string name="support_rules_logs_desc">V Nastavení přejděte na záložku Pokročilé, v sekci Ladění zapněte Režim ladění, zopakujte problém a hned poté klepněte na Exportovat protokoly, aby protokol zachytil okamžik selhání, a ne jen start. Přiložte tento soubor k hlášení.</string>
     <string name="support_rules_search_title">Žádné duplicity</string>

@@ -1,6 +1,6 @@
-package com.andrerinas.headunitrevived.app
+package com.andrerinas.openheadunit.app
 
-import com.andrerinas.headunitrevived.app.UsbAttachedActivity.DeviceSource
+import com.andrerinas.openheadunit.app.UsbAttachedActivity.DeviceSource
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Menü</string>
     <string name="settings">Beállítások</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Önálló mód</string>
     <string name="to_android_auto">Android Auto-ba</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Eltávolít</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -150,9 +150,9 @@
     <string name="usb_auto_connect">Automatikus USB-csatlakozás</string>
     <string name="usb_auto_connect_description">Az alkalmazás megnyitásakor automatikus csatlakozás egy ismert USB-eszközhöz.</string>
     <string name="auto_start_bt_label">Bluetooth automatikus indítás</string>
-    <string name="auto_start_bt_description">A Headunit Revived automatikus megnyitása, amikor egy adott Bluetooth-eszköz csatlakozik.</string>
+    <string name="auto_start_bt_description">A Open Headunit automatikus megnyitása, amikor egy adott Bluetooth-eszköz csatlakozik.</string>
     <string name="auto_start_wifi_label">WiFi automatikus indítás</string>
-    <string name="auto_start_wifi_description">A Headunit Revived automatikus megnyitása egy adott WiFi SSID-hez való csatlakozáskor.</string>
+    <string name="auto_start_wifi_description">A Open Headunit automatikus megnyitása egy adott WiFi SSID-hez való csatlakozáskor.</string>
     <string name="auto_start_wifi_ssid_label">WiFi SSID</string>
     <string name="auto_start_wifi_ssid_description">Csak akkor csatlakozzon, ha ehhez a WiFi SSID-hez kapcsolódik</string>
     <string name="auto_start_wifi_warning">Régi funkció: a háttérbeli korlátozások miatt Android 8+ rendszeren nem biztos, hogy megbízhatóan működik. Győződjön meg róla, hogy az alkalmazás ki van véve az akkumulátor-optimalizálás alól.</string>
@@ -177,7 +177,7 @@
     <string name="bt_permission_denied_title">Bluetooth-engedély szükséges</string>
     <string name="bt_permission_denied_message">A párosított eszközök kiválasztásához Bluetooth-engedély szükséges. Kérjük, engedélyezze az alkalmazás beállításaiban.</string>
     <string name="overlay_permission_title">Háttérben indítás engedélye</string>
-    <string name="overlay_permission_description">Ahhoz, hogy a Headunit Revived automatikusan megnyíljon Bluetooth-csatlakozáskor, engedélyezd a következő képernyőn a „Megjelenítés más alkalmazások felett” jogosultságot.</string>
+    <string name="overlay_permission_description">Ahhoz, hogy a Open Headunit automatikusan megnyíljon Bluetooth-csatlakozáskor, engedélyezd a következő képernyőn a „Megjelenítés más alkalmazások felett” jogosultságot.</string>
     <string name="open_settings">Beállítások</string>
     <string name="wireless_connection_settings">Vezeték nélküli kapcsolat</string>
     <string name="right_hand_drive">Jobbkormányos vezetés</string>
@@ -257,9 +257,9 @@
     <!-- Info Settings -->
     <string name="category_info">Információ</string>
     <string name="about">Rólunk &amp; támogatás</string>
-    <string name="about_description">További információk a Headunit Revived-ról.</string>
+    <string name="about_description">További információk a Open Headunit-ról.</string>
     <string name="version">Verzió</string>
-    <string name="about_title">Headunit Revived-ról</string>
+    <string name="about_title">Open Headunit-ról</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -270,7 +270,7 @@
         <b>1. Figyelj az útra</b><br/>
         A szoftver használata vezetés közben elvonhatja a figyelmet és veszélyes lehet. Mindig a biztonságos vezetést helyezd előtérbe, és tartsd be a helyi közlekedési szabályokat. Az alkalmazást csak akkor használd, ha az biztonságos.<br/><br/>
         <b>2. Felelősség korlátozása</b><br/>
-        A Headunit Revived „adott állapotában” kerül szolgáltatásra, bármiféle garancia nélkül. A fejlesztők nem vállalnak felelősséget a szoftver használatából eredő balesetekért, a járműben vagy eszközben keletkezett károkért, illetve az esetleges jogi következményekért.<br/><br/>
+        A Open Headunit „adott állapotában” kerül szolgáltatásra, bármiféle garancia nélkül. A fejlesztők nem vállalnak felelősséget a szoftver használatából eredő balesetekért, a járműben vagy eszközben keletkezett károkért, illetve az esetleges jogi következményekért.<br/><br/>
         <b>3. Nincs kapcsolat</b><br/>
         Ez a projekt egy független, nyílt forráskódú kezdeményezés, mely nem áll kapcsolatban a Google LLC-vel vagy az Android Auto márkával, valamint nem kap tőlük támogatást és nincs jóváhagyva általuk.
     ]]></string>
@@ -316,7 +316,7 @@
     <string name="connection_interrupted">Kapcsolat elveszett</string>
     <string name="connection_interrupted_detail">Újrapróbálkozás…</string>
     <string name="wifi_disconnect_toast">Android Auto leválasztva: Ha vezeték nélküli AA-t használ, tiltsa le a \"Hálózatok közötti váltás\" vagy \"Hálózatgyorsítás\" opciót a telefon WiFi beállításaiban</string>
-    <string name="notification_service_running">Headunit Revived fut</string>
+    <string name="notification_service_running">Open Headunit fut</string>
     <string name="notification_projection_active">Android Auto kivetítve</string>
     <string name="shortcut_connect_title">Kapcsolódás</string>
     <string name="shortcut_connect_desc">Kapcsolódás az utolsó ismert eszközhöz</string>
@@ -555,7 +555,7 @@
     <string name="settings_backup_saved_to">Biztonsági mentés ide mentve:\n%1$s</string>
     <string name="share_settings_backup">Biztonsági mentés megosztása</string>
     <string name="import_settings">Beállítások importálása</string>
-    <string name="import_settings_description">Beállítások visszaállítása egy Headunit Revived mentésből</string>
+    <string name="import_settings_description">Beállítások visszaállítása egy Open Headunit mentésből</string>
     <string name="import_settings_app_folder">Importálás az alkalmazás mentési mappájából</string>
     <string name="import_settings_downloads">Importálás a Letöltésekből</string>
     <string name="import_settings_choose_file">Mentési fájl kiválasztása</string>
@@ -563,8 +563,8 @@
     <string name="settings_imported">Beállítások importálva: %1$d alkalmazva, %2$d kihagyva</string>
     <string name="settings_import_failed">A beállítások importálása sikertelen: %1$s</string>
     <string name="no_settings_backups_title">Nem található mentés</string>
-    <string name="no_settings_backups_message">Az alkalmazás mentési mappájában nem található Headunit Revived mentés. Először exportáljon egy mentést, majd importálja innen.</string>
-    <string name="no_settings_backups_downloads_message">A Letöltések mappában nem található Headunit Revived mentés. Először exportáljon egy mentést a Letöltésekbe, majd importálja innen.</string>
+    <string name="no_settings_backups_message">Az alkalmazás mentési mappájában nem található Open Headunit mentés. Először exportáljon egy mentést, majd importálja innen.</string>
+    <string name="no_settings_backups_downloads_message">A Letöltések mappában nem található Open Headunit mentés. Először exportáljon egy mentést a Letöltésekbe, majd importálja innen.</string>
     <string name="no_file_picker_title">Nem érhető el fájlválasztó</string>
     <string name="no_file_picker_message">Ezen az eszközön nincs kompatibilis fájlválasztó. Helyette használhatja a Letöltések mappát vagy az alkalmazás mentési mappáját.</string>
     <string name="storage_permission_denied_backup">Tárhely engedély megtagadva. A Letöltések nem használható.</string>
@@ -661,7 +661,7 @@
     <string name="onb_next">Tovább</string>
     <string name="onb_skip">Kihagyás</string>
     <string name="onb_ready_finish">Befejezés</string>
-    <string name="onb_welcome_title">Üdvözöl a Headunit Revived</string>
+    <string name="onb_welcome_title">Üdvözöl a Open Headunit</string>
     <string name="onb_welcome_body">Ez a gyorsbeállítás megvizsgálja az eszközödet, és kiválasztja számodra a legjobb videó-, kijelző- és éjszakai mód beállításokat. Mindent később is módosíthatsz a Beállításokban.</string>
     <string name="onb_safety_title">Biztonság mindenekelőtt</string>
     <string name="onb_safety_accept">Elolvastam és elfogadom a feltételeket</string>
@@ -754,7 +754,7 @@
     <string name="support_rules_connection_title">Mondd el, hogyan csatlakozol</string>
     <string name="support_rules_connection_desc">USB-kábellel, USB-s vezeték nélküli adapterrel, WiFi Direct-tel, WiFi-n (fejegység szerver) vagy Self Mode-ban. Ha vezeték nélküli, add meg az adapter vagy dongle modelljét is.</string>
     <string name="support_rules_appversion_title">Add meg az alkalmazás verzióját</string>
-    <string name="support_rules_appversion_desc">A Headunit Revived verziószámát a Rólunk képernyőn találod.</string>
+    <string name="support_rules_appversion_desc">A Open Headunit verziószámát a Rólunk képernyőn találod.</string>
     <string name="support_rules_logs_title">Csatold a naplókat, rögtön a hiba után</string>
     <string name="support_rules_logs_desc">Menj a Beállítások Speciális fülére, kapcsold be a Hibakeresési módot a Hibakeresés részben, idézd elő a problémát, majd közvetlenül utána koppints a Naplók exportálása gombra, hogy a napló tartalmazza a hibás pillanatot, ne csak az indítást. Ezt a fájlt csatold a hibajegyedhez.</string>
     <string name="support_rules_search_title">Nincs kettőzés</string>

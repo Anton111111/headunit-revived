@@ -7,9 +7,9 @@
         android:shortcutShortLabel="@string/shortcut_connect_title"
         android:shortcutLongLabel="@string/shortcut_connect_desc">
         <intent
-            android:action="com.andrerinas.headunitrevived.ACTION_CONNECT"
-            android:targetPackage="com.andrerinas.headunitrevived"
-            android:targetClass="com.andrerinas.headunitrevived.main.AutomationActivity" />
+            android:action="com.andrerinas.openheadunit.ACTION_CONNECT"
+            android:targetPackage="com.andrerinas.openheadunit"
+            android:targetClass="com.andrerinas.openheadunit.main.AutomationActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="self_mode"
@@ -18,9 +18,9 @@
         android:shortcutShortLabel="@string/shortcut_selfmode_title"
         android:shortcutLongLabel="@string/shortcut_selfmode_desc">
         <intent
-            android:action="com.andrerinas.headunitrevived.ACTION_START_SELF_MODE"
-            android:targetPackage="com.andrerinas.headunitrevived"
-            android:targetClass="com.andrerinas.headunitrevived.main.AutomationActivity" />
+            android:action="com.andrerinas.openheadunit.ACTION_START_SELF_MODE"
+            android:targetPackage="com.andrerinas.openheadunit"
+            android:targetClass="com.andrerinas.openheadunit.main.AutomationActivity" />
     </shortcut>
 
     <shortcut
@@ -30,9 +30,9 @@
         android:shortcutShortLabel="@string/shortcut_disconnect_title"
         android:shortcutLongLabel="@string/shortcut_disconnect_desc">
         <intent
-            android:action="com.andrerinas.headunitrevived.ACTION_DISCONNECT"
-            android:targetPackage="com.andrerinas.headunitrevived"
-            android:targetClass="com.andrerinas.headunitrevived.main.AutomationActivity" />
+            android:action="com.andrerinas.openheadunit.ACTION_DISCONNECT"
+            android:targetPackage="com.andrerinas.openheadunit"
+            android:targetClass="com.andrerinas.openheadunit.main.AutomationActivity" />
     </shortcut>
 
     <shortcut
@@ -42,9 +42,9 @@
         android:shortcutShortLabel="@string/shortcut_exit_title"
         android:shortcutLongLabel="@string/shortcut_exit_desc">
         <intent
-            android:action="com.andrerinas.headunitrevived.ACTION_STOP_SERVICE"
-            android:targetPackage="com.andrerinas.headunitrevived"
-            android:targetClass="com.andrerinas.headunitrevived.main.AutomationActivity" />
+            android:action="com.andrerinas.openheadunit.ACTION_STOP_SERVICE"
+            android:targetPackage="com.andrerinas.openheadunit"
+            android:targetClass="com.andrerinas.openheadunit.main.AutomationActivity" />
     </shortcut>
 
     <shortcut
@@ -54,9 +54,9 @@
         android:shortcutShortLabel="@string/shortcut_night_mode_day_title"
         android:shortcutLongLabel="@string/shortcut_night_mode_day_desc">
         <intent
-            android:action="com.andrerinas.headunitrevived.ACTION_SET_NIGHT_MODE"
-            android:targetPackage="com.andrerinas.headunitrevived"
-            android:targetClass="com.andrerinas.headunitrevived.main.AutomationActivity">
+            android:action="com.andrerinas.openheadunit.ACTION_SET_NIGHT_MODE"
+            android:targetPackage="com.andrerinas.openheadunit"
+            android:targetClass="com.andrerinas.openheadunit.main.AutomationActivity">
             <extra android:name="state" android:value="day" />
         </intent>
     </shortcut>
@@ -68,9 +68,9 @@
         android:shortcutShortLabel="@string/shortcut_night_mode_night_title"
         android:shortcutLongLabel="@string/shortcut_night_mode_night_desc">
         <intent
-            android:action="com.andrerinas.headunitrevived.ACTION_SET_NIGHT_MODE"
-            android:targetPackage="com.andrerinas.headunitrevived"
-            android:targetClass="com.andrerinas.headunitrevived.main.AutomationActivity">
+            android:action="com.andrerinas.openheadunit.ACTION_SET_NIGHT_MODE"
+            android:targetPackage="com.andrerinas.openheadunit"
+            android:targetClass="com.andrerinas.openheadunit.main.AutomationActivity">
             <extra android:name="state" android:value="night" />
         </intent>
     </shortcut>
@@ -82,9 +82,9 @@
         android:shortcutShortLabel="@string/shortcut_night_mode_auto_title"
         android:shortcutLongLabel="@string/shortcut_night_mode_auto_desc">
         <intent
-            android:action="com.andrerinas.headunitrevived.ACTION_SET_NIGHT_MODE"
-            android:targetPackage="com.andrerinas.headunitrevived"
-            android:targetClass="com.andrerinas.headunitrevived.main.AutomationActivity">
+            android:action="com.andrerinas.openheadunit.ACTION_SET_NIGHT_MODE"
+            android:targetPackage="com.andrerinas.openheadunit"
+            android:targetClass="com.andrerinas.openheadunit.main.AutomationActivity">
             <extra android:name="state" android:value="auto" />
         </intent>
     </shortcut>

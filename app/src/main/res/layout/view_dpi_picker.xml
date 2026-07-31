@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.andrerinas.headunitrevived.view.DpiPreviewView
+    <com.andrerinas.openheadunit.view.DpiPreviewView
         android:id="@+id/dpi_preview"
         android:layout_width="match_parent"
         android:layout_height="190dp" />

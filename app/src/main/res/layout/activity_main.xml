@@ -20,7 +20,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         android:visibility="gone"
-        tools:text="WiFi Direct: HURev"
+        tools:text="WiFi Direct: OpenHU"
         tools:visibility="visible" />
 
     <androidx.fragment.app.FragmentContainerView

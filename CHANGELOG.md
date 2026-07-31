@@ -1,5 +1,5 @@
 # Changelog
-### v.3.2.0-beta3
+### v.3.2.0-beta4
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
 - Acquire transient audio focus while AA audio plays, thanks to @bnayahu
 - Add GitHub Actions CI (build + unit tests), thanks to @bnayahu
@@ -199,7 +199,7 @@
 
 ### v.1.14.3
 - New Feature: Added **App Shortcuts** for quick Connect/Disconnect. Now compatible with Samsung Modes & Routines.
-- New Feature: Registered HURev as an official system navigation provider (Category: Maps).
+- New Feature: Registered OpenHU as an official system navigation provider (Category: Maps).
 - Improvement: Added `headunit://disconnect` intent for remote session termination.
 - Fixed: Resolved potential app freezes during long-running sessions by optimizing memory hygiene and FIFO handling.
 - Compatibility: Improved support for Amazon Fire Tablets and devices without GPS hardware by marking hardware features as optional.
@@ -216,7 +216,7 @@
 - Major Improvement: Audio focus and routing overhaul. Added `MediaSession` support and immediate focus response to phone. Fixes issues where background apps on the tablet would block Android Auto audio.
 - Improvement: Robust Task Switching. Leaving the app via Home button or clicking the Launcher icon no longer breaks the connection. Music continues in background, and clicking the icon/notification correctly returns to the projection.
 - New Feature: Enhanced Key Debugger ("Key-Sniffer"). Prominent display of all key events, including special characters (ö, ü, ß) and proprietary steering wheel intents (MTC, FYT).
-- New Feature: Official Navigation App Registration. HURev is now recognized as a navigation provider (`geo:`, `google.navigation:`, `android.intent.action.NAVIGATE`). Compatible with hardware "NAV" buttons.
+- New Feature: Official Navigation App Registration. OpenHU is now recognized as a navigation provider (`geo:`, `google.navigation:`, `android.intent.action.NAVIGATE`). Compatible with hardware "NAV" buttons.
 - Bugfix: Removed redundant "Already connected" and "Reconnection required" alerts for a smoother user experience.
 - Localization: All new strings translated into 10 languages.
 

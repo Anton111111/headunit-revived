@@ -1,0 +1,878 @@
+package com.andrerinas.openheadunit.decoder
+
+import android.media.MediaCodec
+import android.media.MediaCodecInfo
+import android.media.MediaCodecList
+import android.media.MediaFormat
+import android.os.Build
+import android.view.Surface
+import com.andrerinas.openheadunit.utils.AppLog
+import com.andrerinas.openheadunit.utils.Settings
+import com.andrerinas.openheadunit.utils.HeadUnitScreenConfig
+import com.andrerinas.openheadunit.utils.LegacyOptimizer
+import android.os.SystemClock
+import java.nio.ByteBuffer
+import java.util.Locale
+
+interface VideoDimensionsListener {
+    fun onVideoDimensionsChanged(width: Int, height: Int)
+}
+
+/**
+ * Main video decoding engine.
+ * Handles H.264/H.265 streams via MediaCodec.
+ */
+class VideoDecoder(private val settings: Settings) {
+    companion object {
+        private const val TIMEOUT_US = 10000L
+
+        /**
+         * Checks if H.265 (HEVC) hardware decoding is supported on the current device.
+         */
+        /**
+         * Checks if H.265 (HEVC) hardware decoding is supported and reliable on the current device.
+         * Used for AUTO codec selection.
+         */
+        fun isHevcReliable(): Boolean {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return false
+
+            // 1. Chipset Reliability Check (from SystemOptimizer)
+            val hw = Build.HARDWARE.lowercase()
+            val soc = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                Build.SOC_MANUFACTURER.lowercase()
+            } else ""
+
+            val isReliable = hw.startsWith("qcom") || hw.startsWith("msm") || // Qualcomm
+                    hw.startsWith("exynos") || // Samsung
+                    hw.startsWith("gs") || hw.contains("google") || // Google Tensor
+                    soc.contains("qualcomm") || soc.contains("samsung") || soc.contains("google") ||
+                    // High-end MediaTek (Dimensity 700/800/900/1000/9000+ series)
+                    hw.startsWith("mt68") || hw.startsWith("mt69")
+
+            if (!isReliable) return false
+
+            return isHevcSupported()
+        }
+
+        /**
+         * Checks if ANY H.265 (HEVC) hardware decoding is present, regardless of reliability.
+         * Used for MANUAL codec selection (User override).
+         */
+        fun isHevcSupported(): Boolean {
+            return isHevcDecoderAvailable(includeSoftware = false)
+        }
+
+        /**
+         * Checks if H.265 (HEVC) decoding is present.
+         *
+         * Hardware-only is still the default because software HEVC has no real-time
+         * performance guarantee. includeSoftware is used only for explicit user
+         * overrides before falling back to bundled/native decoders.
+         */
+        fun isHevcDecoderAvailable(includeSoftware: Boolean): Boolean {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return false
+
+            val codecList = MediaCodecList(MediaCodecList.ALL_CODECS)
+            for (info in codecList.codecInfos) {
+                if (info.isEncoder) continue
+                for (type in info.supportedTypes) {
+                    if (type.equals("video/hevc", ignoreCase = true)) {
+                        val name = info.name.lowercase()
+                        val isSoftware = name.startsWith("omx.google.") ||
+                                name.startsWith("c2.android.") ||
+                                name.startsWith("omx.ffmpeg.") ||
+                                name.contains(".sw.") ||
+                                name.contains("software")
+
+                        if (includeSoftware || !isSoftware) return true
+                    }
+                }
+            }
+            return false
+        }
+
+        fun isBundledHevcDecoderAvailable(): Boolean {
+            return FfmpegHevcDecoder.isAvailable()
+        }
+    }
+
+    private var codec: MediaCodec? = null
+    private var softwareHevcDecoder: FfmpegHevcDecoder? = null
+    private var codecBufferInfo: MediaCodec.BufferInfo? = null
+    private var mSurface: Surface? = null
+    private var outputThread: Thread? = null
+    @Volatile private var running = false
+    private var startTime = 0L
+
+    private var mWidth = 0
+    private var mHeight = 0
+    private var vps: ByteArray? = null
+    private var sps: ByteArray? = null
+    private var pps: ByteArray? = null
+    private var codecConfigured = false
+    private var currentCodecType = CodecType.H264
+    private var currentCodecName: String? = null
+
+    // Reuse buffers for older API levels to minimize GC pressure
+    private var inputBuffers: Array<ByteBuffer>? = null
+    private var legacyFrameBuffer: ByteArray? = null
+
+    var dimensionsListener: VideoDimensionsListener? = null
+    var onFpsChanged: ((Int) -> Unit)? = null
+    var softwareYuvFrameSink: SoftwareYuvFrameSink? = null
+    private var frameCount = 0
+    private var lastFpsLogTime = 0L
+    private var loggedFirstSoftwareFrame = false
+    @Volatile var onFirstFrameListener: (() -> Unit)? = null
+    @Volatile var lastFrameRenderedMs: Long = 0L
+    private var syntheticPtsUs = 0L
+
+    // elapsedRealtime() of the last encoded video bytes received from the phone (input side),
+    // as opposed to lastFrameRenderedMs (output side). Lets the projection watchdog tell a
+    // phone-side pause (no input) apart from a local display stall (input flowing, nothing
+    // drawn). See issue #650.
+    @Volatile var lastInputBytesReceivedMs: Long = 0L
+
+    // True while the bundled software HEVC decoder is active. That path renders through the
+    // GLES YUV sink, so the projection watchdog must not fall back to a non-GLES backend.
+    val usingBundledSoftwareHevc: Boolean get() = softwareHevcDecoder != null
+
+    @Volatile private var decoderNeedsRestart = false
+    @Volatile private var decoderRestartReason: String? = null
+    @Volatile private var pendingKeyframeRequest = false
+
+    // Callback for transport layer integration
+    var onDecoderError: (() -> Unit)? = null
+
+    val videoWidth: Int get() = mWidth
+    val videoHeight: Int get() = mHeight
+
+    enum class CodecType(val mimeType: String, val displayName: String) {
+        H264("video/avc", "H.264/AVC"),
+        H265("video/hevc", "H.265/HEVC")
+    }
+
+    /**
+     * Handles dynamic video dimension changes during the session.
+     */
+    private fun handleOutputFormatChange(format: MediaFormat) {
+        AppLog.i("Output Format Changed: $format")
+        val newWidth = try { format.getInteger(MediaFormat.KEY_WIDTH) } catch (e: Exception) { mWidth }
+        val newHeight = try { format.getInteger(MediaFormat.KEY_HEIGHT) } catch (e: Exception) { mHeight }
+        if (mWidth != newWidth || mHeight != newHeight) {
+            AppLog.i("Video dimensions changed via format: ${newWidth}x$newHeight")
+            mWidth = newWidth
+            mHeight = newHeight
+            dimensionsListener?.onVideoDimensionsChanged(mWidth, mHeight)
+        }
+        try {
+            codec?.setVideoScalingMode(MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT)
+        } catch (e: Exception) {}
+    }
+
+    /**
+     * Sets the rendering surface and restarts the decoder if necessary.
+     */
+    fun setSurface(surface: Surface?) {
+        synchronized(this) {
+            if (mSurface === surface) return
+
+            AppLog.i("New surface set: $surface")
+            if (codec != null || softwareHevcDecoder != null) {
+                stop("New surface")
+            }
+            mSurface = surface
+            lastFrameRenderedMs = 0L
+        }
+    }
+
+    /**
+     * Stops the decoder, terminates the output thread, and releases hardware resources.
+     */
+    fun stop(reason: String = "unknown") {
+        synchronized(this) {
+            running = false
+            try {
+                // If calling from output thread, don't join itself to avoid deadlock
+                if (outputThread != null && outputThread != Thread.currentThread()) {
+                    outputThread?.interrupt()
+                    outputThread?.join(500)
+                }
+            } catch (e: Exception) {}
+            outputThread = null
+
+            try {
+                codec?.stop()
+            } catch (e: Exception) {}
+            try {
+                codec?.release()
+            } catch (e: Exception) {
+                AppLog.e("Error releasing decoder", e)
+            }
+            try {
+                softwareHevcDecoder?.stop()
+            } catch (e: Exception) {
+                AppLog.e("Error releasing software HEVC decoder", e)
+            }
+
+            codec = null
+            softwareHevcDecoder = null
+            inputBuffers = null
+            legacyFrameBuffer = null
+            codecBufferInfo = null
+            codecConfigured = false
+            if (!reason.startsWith("restart")) {
+                vps = null
+                sps = null
+                pps = null
+                mWidth = 0
+                mHeight = 0
+            }
+            // Keep VPS/SPS/PPS cached so we can re-inject them on restart
+            lastFrameRenderedMs = 0L
+            syntheticPtsUs = 0L
+            loggedFirstSoftwareFrame = false
+            AppLog.i("Decoder stopped: $reason")
+        }
+    }
+
+    private fun scheduleRestart(reason: String) {
+        decoderRestartReason = reason
+        decoderNeedsRestart = true
+    }
+
+    /**
+     * Main entry point for decoding a video/control packet.
+     */
+    fun decode(buffer: ByteArray, offset: Int, size: Int, forceSoftware: Boolean, codecName: String) {
+        synchronized(this) {
+            // Input-side liveness: bytes are arriving from the phone right now (issue #650).
+            lastInputBytesReceivedMs = SystemClock.elapsedRealtime()
+
+            // Check if a restart was requested by output thread
+            if (decoderNeedsRestart) {
+                AppLog.w("Decoder restart requested: $decoderRestartReason")
+                stop("restart: $decoderRestartReason")
+                decoderNeedsRestart = false
+                decoderRestartReason = null
+                onDecoderError?.invoke()
+            }
+
+            // Buffer management for backward compatibility
+            // Modern devices (API 21+) use the original buffer with offset/size to avoid GC pressure.
+            val frameData: ByteArray
+            val frameOffset: Int
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                if (legacyFrameBuffer == null || legacyFrameBuffer!!.size < size) {
+                    legacyFrameBuffer = ByteArray(size + 1024)
+                }
+                System.arraycopy(buffer, offset, legacyFrameBuffer!!, 0, size)
+                frameData = legacyFrameBuffer!!
+                frameOffset = 0
+            } else {
+                frameData = buffer
+                frameOffset = offset
+            }
+
+
+            // Initialization phase: detect codec and configuration (SPS/PPS)
+            if (codec == null && softwareHevcDecoder == null) {
+                val detectedType = detectCodecType(frameData, frameOffset, size)
+                val requestedType = if (codecName.contains("265")) CodecType.H265 else CodecType.H264
+                val typeToUse = if (requestedType == CodecType.H265) {
+                    CodecType.H265
+                } else {
+                    detectedType ?: requestedType
+                }
+                currentCodecType = typeToUse
+
+                if (!codecConfigured) {
+                    scanAndApplyConfig(frameData, frameOffset, size, typeToUse)
+
+                    if (mWidth == 0) {
+                         // Fallback dimensions if SPS/PPS parsing fails or is missing
+                         val negotiatedW = HeadUnitScreenConfig.getNegotiatedWidth()
+                         val negotiatedH = HeadUnitScreenConfig.getNegotiatedHeight()
+                         if (negotiatedW > 0 && negotiatedH > 0) {
+                             AppLog.i("Fallback to negotiated dimensions: ${negotiatedW}x${negotiatedH}")
+                             mWidth = negotiatedW
+                             mHeight = negotiatedH
+                             dimensionsListener?.onVideoDimensionsChanged(mWidth, mHeight)
+                         }
+                    }
+                }
+
+                if (mSurface == null || !mSurface!!.isValid) return
+                if (mWidth == 0 || mHeight == 0) return
+
+                if (shouldUseBundledHevc(typeToUse, settings.forceSoftwareDecoding || forceSoftware)) {
+                    startBundledHevc(mWidth, mHeight)
+                } else {
+                    start(typeToUse.mimeType, settings.forceSoftwareDecoding || forceSoftware, mWidth, mHeight)
+                }
+            }
+
+            softwareHevcDecoder?.let { decoder ->
+                val renderedFrames = decoder.decode(frameData, frameOffset, size)
+                if (renderedFrames > 0) {
+                    onSoftwareFramesRendered(renderedFrames)
+                } else if (renderedFrames < 0) {
+                    AppLog.e("Bundled HEVC decoder failed with code $renderedFrames")
+                    scheduleRestart("software_hevc_error_$renderedFrames")
+                }
+                return
+            }
+
+            if (codec == null) return
+
+            if (pendingKeyframeRequest) {
+                pendingKeyframeRequest = false
+                AppLog.i("Decoder restarted and ready. Invoking error callback to request keyframe.")
+                onDecoderError?.invoke()
+            }
+
+            // Feed frame data into MediaCodec input buffers
+            val buf = ByteBuffer.wrap(frameData, frameOffset, size)
+            while (buf.hasRemaining()) {
+                if (!feedInputBuffer(buf)) {
+                    // Buffer is full. Request keyframe to avoid smearing
+                    AppLog.w("Input buffer full/failed. Requesting keyframe to prevent smearing.")
+                    scheduleRestart("input_buffer_overflow")
+                    return
+                }
+            }
+        }
+    }
+
+    private fun shouldUseBundledHevc(type: CodecType, forceSoftware: Boolean): Boolean {
+        return type == CodecType.H265 &&
+                forceSoftware &&
+                settings.softwareVideoDecoder == Settings.SoftwareVideoDecoder.BUNDLED_FFMPEG &&
+                FfmpegHevcDecoder.isAvailable()
+    }
+
+    private fun startBundledHevc(width: Int, height: Int) {
+        try {
+            val surface = mSurface ?: return
+            AppLog.i("Configuring bundled FFmpeg HEVC decoder for ${width}x$height")
+            val yuvFrameSink = if (settings.viewMode == Settings.ViewMode.GLES) {
+                softwareYuvFrameSink
+            } else {
+                null
+            }
+            val decoder = FfmpegHevcDecoder(
+                surface = if (yuvFrameSink == null) surface else null,
+                yuvFrameSink = yuvFrameSink,
+                width = width,
+                height = height
+            )
+            if (!decoder.start()) {
+                AppLog.e("Bundled FFmpeg HEVC decoder is unavailable")
+                return
+            }
+            softwareHevcDecoder = decoder
+            currentCodecName = "ffmpeg-hevc"
+            running = true
+            startTime = System.nanoTime()
+            AppLog.i("Bundled FFmpeg HEVC decoder initialized")
+        } catch (e: Exception) {
+            AppLog.e("Failed to start bundled FFmpeg HEVC decoder", e)
+            softwareHevcDecoder = null
+            running = false
+        }
+    }
+
+    private fun onSoftwareFramesRendered(renderedFrames: Int) {
+        lastFrameRenderedMs = SystemClock.elapsedRealtime()
+        if (!loggedFirstSoftwareFrame) {
+            loggedFirstSoftwareFrame = true
+            AppLog.i("First bundled software HEVC frame rendered")
+        }
+        onFirstFrameListener?.let { it(); onFirstFrameListener = null }
+
+        frameCount += renderedFrames
+        val now = System.currentTimeMillis()
+        val elapsed = now - lastFpsLogTime
+        if (elapsed >= 1000) {
+            if (lastFpsLogTime != 0L) {
+                val fps = (frameCount * 1000 / elapsed).toInt()
+                onFpsChanged?.invoke(fps)
+            }
+            frameCount = 0
+            lastFpsLogTime = now
+        }
+    }
+
+    private fun detectCodecType(buffer: ByteArray, offset: Int, size: Int): CodecType? {
+        if (size < 5) return null
+        val limit = offset + size
+        // Need at least 5 bytes visible from position i: [0, 0, 0/1, 1, NAL_HEADER]
+        for (i in offset until limit - 4) {
+            if (buffer[i].toInt() == 0 && buffer[i+1].toInt() == 0) {
+                val headerPos: Int
+                if (buffer[i+2].toInt() == 0 && buffer[i+3].toInt() == 1) {
+                    headerPos = i + 4
+                } else if (buffer[i+2].toInt() == 1) {
+                    headerPos = i + 3
+                } else continue
+                if (headerPos >= limit) return null
+                val b = buffer[headerPos].toInt()
+                val avcType = b and 0x1F
+                if (avcType == 7 || avcType == 8) return CodecType.H264
+
+                val hevcType = (b and 0x7E) shr 1
+                if (hevcType in 32..34 && isHevcSupported()) return CodecType.H265
+            }
+            // Only scan the first ~100 bytes for performance
+            if (i - offset >= 96) break
+        }
+        return null
+    }
+
+    /**
+     * Splits a combined packet into multiple NAL units and normalizes start codes.
+     */
+    private fun forEachNalUnit(buffer: ByteArray, offset: Int, size: Int, callback: (ByteArray, Int) -> Unit) {
+        var currentPos = offset
+        val limit = offset + size
+
+        while (currentPos < limit - 3) {
+            var nalStart = -1
+            var startCodeLen = 0
+
+            for (i in currentPos until limit - 3) {
+                if (buffer[i].toInt() == 0 && buffer[i+1].toInt() == 0) {
+                    if (buffer[i+2].toInt() == 0 && buffer[i+3].toInt() == 1) {
+                        nalStart = i; startCodeLen = 4; break
+                    } else if (buffer[i+2].toInt() == 1) {
+                        nalStart = i; startCodeLen = 3; break
+                    }
+                }
+            }
+
+            if (nalStart != -1) {
+                var nalEnd = limit
+                for (j in (nalStart + startCodeLen) until limit - 3) {
+                    if (buffer[j].toInt() == 0 && buffer[j+1].toInt() == 0 &&
+                        (buffer[j+2].toInt() == 1 || (buffer[j+2].toInt() == 0 && buffer[j+3].toInt() == 1))) {
+                        nalEnd = j; break
+                    }
+                }
+
+                val rawNal = buffer.copyOfRange(nalStart, nalEnd)
+                val fixedNal = if (startCodeLen == 3) {
+                    // Normalize to 4-byte start codes for better decoder compatibility
+                    ByteArray(rawNal.size + 1).apply {
+                        this[0] = 0; System.arraycopy(rawNal, 0, this, 1, rawNal.size)
+                    }
+                } else rawNal
+
+                callback(fixedNal, if (startCodeLen == 3) 4 else 4)
+                currentPos = nalEnd
+            } else break
+        }
+    }
+
+    /**
+     * Extracts SPS/PPS/VPS data for the decoder configuration (CSD).
+     */
+    private fun scanAndApplyConfig(buffer: ByteArray, offset: Int, size: Int, type: CodecType) {
+        forEachNalUnit(buffer, offset, size) { nalData, headerLen ->
+            val nalFirstByte = nalData[headerLen].toInt()
+            if (type == CodecType.H264) {
+                val nalType = nalFirstByte and 0x1F
+                if (nalType == 7) { // SPS
+                    sps = nalData
+                    try {
+                        val offsetInNal = if (sps!![2].toInt() == 1) 3 else 4
+                        SpsParser.parse(sps!!, offsetInNal, sps!!.size - offsetInNal)?.let {
+                            if (mWidth != it.width || mHeight != it.height) {
+                                AppLog.i("H.264 SPS parsed: ${it.width}x${it.height}")
+                                mWidth = it.width; mHeight = it.height
+                                dimensionsListener?.onVideoDimensionsChanged(mWidth, mHeight)
+                            }
+                        }
+                    } catch (e: Exception) { AppLog.e("Failed to parse SPS data", e) }
+                } else if (nalType == 8) pps = nalData // PPS
+
+                // H.264 requires at least SPS to start
+                if (sps != null) codecConfigured = true
+            } else {
+                val nalType = (nalFirstByte and 0x7E) shr 1
+                if (nalType == 32) vps = nalData
+                else if (nalType == 33) sps = nalData
+                else if (nalType == 34) pps = nalData
+
+                // H.265 requires VPS and SPS to start reliably
+                if (vps != null && sps != null) codecConfigured = true
+            }
+        }
+    }
+
+    /**
+     * Configures and starts the native MediaCodec.
+     */
+    private fun start(mimeType: String, forceSoftware: Boolean, width: Int, height: Int) {
+        try {
+            startTime = System.nanoTime()
+            val bestCodec = findBestCodec(mimeType, !forceSoftware)
+                ?: throw IllegalStateException("No decoder available for $mimeType")
+            this.currentCodecName = bestCodec
+
+            codec = MediaCodec.createByCodecName(bestCodec)
+            codecBufferInfo = MediaCodec.BufferInfo()
+
+            val format = MediaFormat.createVideoFormat(mimeType, width, height)
+
+            // Add hardware prioritization and low-latency hints
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                format.setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = Real-time priority
+                format.setInteger(MediaFormat.KEY_OPERATING_RATE, settings.fpsLimit)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                format.setInteger(MediaFormat.KEY_MAX_B_FRAMES, 0) // Tell codec not to hold frames -> drastically decreases latency
+            }
+
+            // Apply Codec Specific Data (CSD) from parsed SPS/PPS/VPS
+            if (mimeType == CodecType.H265.mimeType) {
+                val combined = (vps ?: byteArrayOf()) + (sps ?: byteArrayOf()) + (pps ?: byteArrayOf())
+                if (combined.isNotEmpty()) {
+                    format.setByteBuffer("csd-0", ByteBuffer.wrap(combined))
+                }
+                // [BUG_FIX] Dynamic buffer size based on resolution.
+                // 8MB is too large for many older 1080p decoders (Allwinner/Rockchip),
+                // but we need it for 4K.
+                val maxInputSize = if (width * height > 1920 * 1080) {
+                    8 * 1024 * 1024
+                } else {
+                    2 * 1024 * 1024
+                }
+                format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, maxInputSize)
+            } else {
+                if (sps != null) format.setByteBuffer("csd-0", ByteBuffer.wrap(sps!!))
+                if (pps != null) format.setByteBuffer("csd-1", ByteBuffer.wrap(pps!!))
+
+                // [BUG_FIX] Lower buffer for legacy devices (Android < 9) to prevent startup stalls
+                val maxInputSize = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+                    1 * 1024 * 1024 // 1MB for legacy
+                } else {
+                    2 * 1024 * 1024 // 2MB for modern
+                }
+                format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, maxInputSize)
+            }
+
+            if (!mSurface!!.isValid) throw IllegalStateException("Surface not valid")
+
+            val isAllwinner = bestCodec.lowercase(Locale.ROOT).contains("allwinner")
+            if (isAllwinner) {
+                // [BUG_FIX] Allwinner decoders often fail on adaptive playback initialization,
+                // leading to a SIGABRT in CodecLooper when the surface reconfigures for padding (e.g. 1080->1088).
+                AppLog.i("Decoder: Applying Allwinner stability patches.")
+                format.setInteger("adaptive-playback", 0)
+
+                if (mimeType == CodecType.H265.mimeType) {
+                    AppLog.w("CAUTION: Allwinner H.265 is known to be unstable. If the app crashes, please switch to H.264 in settings.")
+                    // Force macroblock alignment (multiple of 16) to prevent re-padding crash
+                    val alignedHeight = ((height + 15) / 16) * 16
+                    if (alignedHeight != height) {
+                        AppLog.i("Decoder: Aligning Allwinner H.265 height to $alignedHeight (was $height)")
+                        format.setInteger(MediaFormat.KEY_HEIGHT, alignedHeight)
+                    }
+                }
+
+                // Explicitly set color format to surface to help ACodec
+                format.setInteger(MediaFormat.KEY_COLOR_FORMAT, android.media.MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
+            }
+
+            AppLog.i("Configuring decoder: $bestCodec for ${width}x${height}")
+            codec?.configure(format, mSurface, null, 0)
+            try { codec?.setVideoScalingMode(MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT) } catch (e: Exception) {}
+            codec?.start()
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                @Suppress("DEPRECATION") inputBuffers = codec?.inputBuffers
+            }
+
+            running = true
+            outputThread = Thread {
+                android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_DISPLAY)
+                LegacyOptimizer.setHighPriority()
+                outputThreadLoop()
+            }.apply { name = "VideoDecoder-Output"; start() }
+
+            AppLog.i("Codec initialized: $bestCodec")
+        } catch (e: Exception) {
+            AppLog.e("Failed to start decoder", e)
+            codec = null; running = false
+        }
+    }
+
+    /**
+     * Logic to identify chipsets that require constant flagging
+     */
+    private fun shouldAlwaysFlagConfig(): Boolean {
+        val name = currentCodecName?.lowercase(Locale.ROOT) ?: return false
+        return name.contains(".rk.") ||       // Rockchip
+                name.contains("allwinner") ||
+                name.contains(".tcc.")      // Telechips
+    }
+
+    /**
+     * Checks if the data contains SPS/PPS/VPS configuration data.
+     */
+    private fun isCodecConfigData(data: ByteArray, offset: Int, size: Int): Boolean {
+        if (size < 5) return false
+        for (i in offset until (offset + size - 4).coerceAtMost(offset + 32)) {
+            if (data[i].toInt() == 0 && data[i + 1].toInt() == 0) {
+                val headerPos: Int
+                if (data[i + 2].toInt() == 0 && data[i + 3].toInt() == 1) {
+                    headerPos = i + 4
+                } else if (data[i + 2].toInt() == 1) {
+                    headerPos = i + 3
+                } else continue
+                if (headerPos >= offset + size) return false
+                val b = data[headerPos].toInt()
+                if (currentCodecType == CodecType.H265) {
+                    val nalType = (b and 0x7E) shr 1
+                    return nalType in 32..34
+                } else {
+                    val nalType = b and 0x1F
+                    return nalType == 7 || nalType == 8
+                }
+            }
+        }
+        return false
+    }
+
+    /**
+     * Feeds the raw byte stream into the decoder buffer.
+     */
+    private fun feedInputBuffer(buffer: ByteBuffer): Boolean {
+        val currentCodec = codec ?: return false
+        try {
+            var inputIndex = -1
+            var attempts = 0
+            while (attempts < 3) { // do not set attempts to high, otherwise there is a strong hiccup
+                inputIndex = currentCodec.dequeueInputBuffer(TIMEOUT_US)
+                if (inputIndex >= 0) break
+                attempts++
+            }
+
+            if (inputIndex < 0) {
+                AppLog.e("Input buffer feed failed (full)")
+                return false
+            }
+
+            val inputBuffer = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                currentCodec.getInputBuffer(inputIndex)
+            } else {
+                @Suppress("DEPRECATION") inputBuffers?.get(inputIndex)
+            }
+
+            if (inputBuffer == null) return false
+            inputBuffer.clear()
+
+            val capacity = inputBuffer.capacity()
+
+            // Always set BUFFER_FLAG_CODEC_CONFIG for config data (VPS/SPS/PPS).
+            // Some decoders (Rockchip/Allwinner) require this flag for every config packet
+            // even after the stream has already started.
+            val isConfig = buffer.hasArray() && isCodecConfigData(buffer.array(), buffer.position(), buffer.remaining())
+            val flags = if (isConfig && (shouldAlwaysFlagConfig() || !codecConfigured)) {
+                MediaCodec.BUFFER_FLAG_CODEC_CONFIG
+            } else 0
+
+            if (buffer.remaining() <= capacity) {
+                inputBuffer.put(buffer)
+            } else {
+                AppLog.w("Frame too large: ${buffer.remaining()} > $capacity. Truncating!")
+                val limit = buffer.limit()
+                buffer.limit(buffer.position() + capacity)
+                inputBuffer.put(buffer)
+                buffer.limit(limit)
+            }
+
+            inputBuffer.flip()
+
+            // Force a perfectly smooth timestamp (60 FPS = 16,666 microseconds per frame)
+            // This prevents network jitter from causing "catch-up" fast-forwards
+            if (flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG == 0) {
+                syntheticPtsUs += 1000000L/settings.fpsLimit
+            }
+            val pts = syntheticPtsUs
+
+            currentCodec.queueInputBuffer(inputIndex, 0, inputBuffer.limit(), pts, flags)
+            return true
+        } catch (e: Exception) {
+            AppLog.e("Error feeding input buffer", e)
+            return false
+        }
+    }
+
+    /**
+     * Dedicated thread to pull decoded frames and render them to the surface.
+     */
+    private fun outputThreadLoop() {
+        AppLog.i("Output thread started")
+        var consecutiveErrors = 0
+        var lastOutputMs = SystemClock.elapsedRealtime()
+
+        while (running) {
+            val currentCodec = codec
+            val bufferInfo = codecBufferInfo
+            if (currentCodec == null || bufferInfo == null) {
+                try { Thread.sleep(10) } catch (e: InterruptedException) { break }
+                continue
+            }
+
+            try {
+                val outputIndex = currentCodec.dequeueOutputBuffer(bufferInfo, 10000L)
+                if (outputIndex >= 0) {
+                    currentCodec.releaseOutputBuffer(outputIndex, true)
+                    lastFrameRenderedMs = SystemClock.elapsedRealtime()
+                    lastOutputMs = lastFrameRenderedMs
+                    consecutiveErrors = 0
+                    onFirstFrameListener?.let { it(); onFirstFrameListener = null }
+
+                    frameCount++
+
+                    val now = System.currentTimeMillis()
+                    val elapsed = now - lastFpsLogTime
+                    if (elapsed >= 1000) {
+                        if (lastFpsLogTime != 0L) {
+                            val fps = (frameCount * 1000 / elapsed).toInt()
+                            onFpsChanged?.invoke(fps)
+                        }
+                        frameCount = 0
+                        lastFpsLogTime = now
+                    }
+                } else if (outputIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
+                    handleOutputFormatChange(currentCodec.outputFormat)
+                }
+
+                // Stall detection: if we rendered at least one frame but haven't
+                // produced output in 3 seconds, the decoder is likely dead-but-active.
+                val stallGap = SystemClock.elapsedRealtime() - lastOutputMs
+                if (stallGap > 2000L) {
+                    AppLog.w("Decoder stall detected (no output for ${stallGap}ms). Forcing restart.")
+                    scheduleRestart("sync_stall")
+                    break
+                }
+            } catch (e: Exception) {
+                if (running) {
+                    consecutiveErrors++
+                    AppLog.w("Codec exception in output thread (attempt $consecutiveErrors): ${e.message}")
+                    if (consecutiveErrors >= 3) {
+                        AppLog.e("Too many consecutive exceptions in output thread. Forcing restart.")
+                        scheduleRestart("sync_consecutive_errors")
+                        break
+                    }
+                    try { Thread.sleep(50) } catch (ignore: Exception) {}
+                }
+            }
+        }
+        AppLog.i("Output thread stopped")
+    }
+
+    /**
+     * Resolves the best available hardware or software decoder for the given mime type.
+     */
+    private fun findBestCodec(mimeType: String, preferHardware: Boolean): String? {
+        val codecInfos = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            MediaCodecList(MediaCodecList.ALL_CODECS).codecInfos.toList()
+        } else {
+            @Suppress("DEPRECATION")
+            val count = MediaCodecList.getCodecCount()
+            (0 until count).map { MediaCodecList.getCodecInfoAt(it) }
+        }
+
+        val infos = codecInfos.filter { !it.isEncoder && it.supportedTypes.any { t -> t.equals(mimeType, true) } }
+        val hw = infos.find { isHardwareAccelerated(it) }
+        val sw = infos.find { !isHardwareAccelerated(it) }
+        val selected = if (preferHardware && hw != null) hw.name else sw?.name ?: hw?.name
+        AppLog.i("findBestCodec: hw=${hw?.name}, sw=${sw?.name}, preferHardware=$preferHardware, selected=$selected")
+        return selected
+    }
+
+    private fun isHardwareAccelerated(info: MediaCodecInfo): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            return info.isHardwareAccelerated
+        }
+        val lower = info.name.lowercase(Locale.ROOT)
+        return !(lower.startsWith("omx.google.") || lower.startsWith("c2.android.") ||
+                lower.startsWith("omx.ffmpeg.") || lower.contains(".sw.") || lower.contains("software"))
+    }
+}
+
+/**
+ * Helper to parse Bitstreams for SPS data.
+ */
+private class BitReader(private val buffer: ByteArray, private val offset: Int, private val size: Int) {
+    private var bitPosition = offset * 8
+    private val bitLimit = (offset + size) * 8
+
+    fun readBit(): Int {
+        if (bitPosition >= bitLimit) return 0
+        return (buffer[bitPosition / 8].toInt() shr (7 - (bitPosition++ % 8))) and 1
+    }
+
+    fun readBits(count: Int): Int {
+        var res = 0
+        repeat(count) { res = (res shl 1) or readBit() }
+        return res
+    }
+
+    fun readUE(): Int {
+        var zeros = 0
+        while (readBit() == 0 && bitPosition < bitLimit) zeros++
+        return if (zeros == 0) 0 else (1 shl zeros) - 1 + readBits(zeros)
+    }
+}
+
+data class SpsData(val width: Int, val height: Int)
+
+/**
+ * Parses AVC/H.264 Sequence Parameter Sets to extract video dimensions.
+ */
+private object SpsParser {
+    fun parse(sps: ByteArray, offset: Int, size: Int): SpsData? {
+        try {
+            val reader = BitReader(sps, offset, size)
+            reader.readBits(8)
+            val profileIdc = reader.readBits(8)
+            reader.readBits(16)
+            reader.readUE()
+            if (profileIdc in listOf(100, 110, 122, 244, 44, 83, 86, 118, 128)) {
+                val chroma = reader.readUE()
+                if (chroma == 3) reader.readBit()
+                reader.readUE(); reader.readUE(); reader.readBit()
+                if (reader.readBit() == 1) {
+                    repeat(if (chroma != 3) 8 else 12) {
+                        if (reader.readBit() == 1) {
+                            var last = 8; var next = 8
+                            repeat(if (it < 6) 16 else 64) {
+                                if (next != 0) next = (last + reader.readUE() + 256) % 256
+                                if (next != 0) last = next
+                            }
+                        }
+                    }
+                }
+            }
+            reader.readUE()
+            if (reader.readUE() == 0) reader.readUE()
+            reader.readUE(); reader.readBit()
+            val w = (reader.readUE() + 1) * 16
+            val hMap = reader.readUE()
+            val mbs = reader.readBit()
+            var h = (2 - mbs) * (hMap + 1) * 16
+            if (mbs == 0) reader.readBit()
+            reader.readBit()
+            if (reader.readBit() == 1) {
+                val l = reader.readUE(); val r = reader.readUE()
+                val t = reader.readUE(); val b = reader.readUE()
+                return SpsData(w - (l + r) * 2, h - (t + b) * 2)
+            }
+            return SpsData(w, h)
+        } catch (e: Exception) { return null }
+    }
+}

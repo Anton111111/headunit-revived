@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">メニュー</string>
     <string name="settings">設定</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">セルフモード</string>
     <string name="to_android_auto">To Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">取り除く</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -171,9 +171,9 @@
     <string name="usb_auto_connect">USB自動接続</string>
     <string name="usb_auto_connect_description">アプリケーションが開始された時に既知のUSBデバイスに接続されると自動的に接続します。</string>
     <string name="auto_start_bt_label">Bluetooth自動開始</string>
-    <string name="auto_start_bt_description">特定のBluetoothデバイスが接続されたときに、Headunit Revivedを自動的に起動します。</string>
+    <string name="auto_start_bt_description">特定のBluetoothデバイスが接続されたときに、Open Headunitを自動的に起動します。</string>
     <string name="auto_start_wifi_label">Wi-Fi自動起動</string>
-    <string name="auto_start_wifi_description">特定のWi-Fi SSIDに接続されたときにHeadunit Revivedを自動的に起動します。</string>
+    <string name="auto_start_wifi_description">特定のWi-Fi SSIDに接続されたときにOpen Headunitを自動的に起動します。</string>
     <string name="auto_start_wifi_ssid_label">Wi-Fi SSID</string>
     <string name="auto_start_wifi_ssid_description">このWi-Fi SSIDに接続されている場合のみ接続を試みます</string>
     <string name="auto_start_wifi_warning">レガシー機能：バックグラウンド制限のため、Android 8以降では動作が不安定になる場合があります。アプリをバッテリー最適化から除外してください。</string>
@@ -198,7 +198,7 @@
     <string name="bt_permission_denied_title">Bluetooth 許可が必要です</string>
     <string name="bt_permission_denied_message">ペアリング済みデバイスを選択するには、Bluetoothのアクセス許可が必要です。アプリの設定で許可してください。</string>
     <string name="overlay_permission_title">バックグラウンド起動許可</string>
-    <string name="overlay_permission_description">Bluetooth接続時にHeadunit Revivedが自動的に起動するようにするには、次の画面で「他のアプリの上に表示する」権限を有効にしてください。</string>
+    <string name="overlay_permission_description">Bluetooth接続時にOpen Headunitが自動的に起動するようにするには、次の画面で「他のアプリの上に表示する」権限を有効にしてください。</string>
     <string name="open_settings">設定</string>
     <string name="wireless_connection_settings">ワイヤレス接続</string>
     <string name="right_hand_drive">右ハンドル</string>
@@ -278,9 +278,9 @@
     <!-- Info Settings -->
     <string name="category_info">情報</string>
     <string name="about">アプリとサポート</string>
-    <string name="about_description">Headunit Revivedの多くの情報をゲットする</string>
+    <string name="about_description">Open Headunitの多くの情報をゲットする</string>
     <string name="version">バージョン</string>
-    <string name="about_title">Headunit Revivedについて</string>
+    <string name="about_title">Open Headunitについて</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -291,7 +291,7 @@
         <b>1. 運転に集中する</b><br/>
         運転中にこのソフトウェアを操作することは、脇見運転になり危険です。常に安全運転を最優先し、交通規則を遵守してください。このアプリケーションは、安全な状況でのみ使用してください。<br/><br/>
         <b>2. 責任の制限</b><br/>
-        Headunit Revivedは、いかなる保証もなしに「現状のまま」提供されます。開発者は、本ソフトウェアの使用に起因する事故、車両／機器の損傷、または法的結果について一切の責任を負いません。<br/><br/>
+        Open Headunitは、いかなる保証もなしに「現状のまま」提供されます。開発者は、本ソフトウェアの使用に起因する事故、車両／機器の損傷、または法的結果について一切の責任を負いません。<br/><br/>
         <b>3. 他のサービスとの関連</b><br/>
         このプロジェクトは独立したオープンソースの取り組みであり、Google LLCまたはAndroid Autoブランドとは一切関係がなく、承認も受けておらず、関連性もありません。
     ]]></string>
@@ -339,7 +339,7 @@
     <string name="wifi_disconnect_toast">Android Autoが切断されました：ワイヤレスAAを使用している場合は、スマートフォンのWi-Fi設定で「ネットワークを切り替える」または「ネットワークアクセラレーション」を無効にしてください。</string>
     <string name="reset_usb_option">USB接続をリセットする</string>
     <string name="reset_usb_timeout">USBデバイスが見つかりません。接続を確認してください。</string>
-    <string name="notification_service_running">Headunit Revivedが起動中</string>
+    <string name="notification_service_running">Open Headunitが起動中</string>
     <string name="notification_projection_active">Android Autoを起動中</string>
     <string name="shortcut_connect_title">接続</string>
     <string name="shortcut_connect_desc">最後に認識されたデバイスに接続する</string>
@@ -570,7 +570,7 @@
     <string name="settings_backup_saved_to">設定のバックアップを保存しました:\n%1$s</string>
     <string name="share_settings_backup">設定のバックアップを共有</string>
     <string name="import_settings">設定をインポート</string>
-    <string name="import_settings_description">Headunit Revived のバックアップから設定を復元</string>
+    <string name="import_settings_description">Open Headunit のバックアップから設定を復元</string>
     <string name="import_settings_app_folder">アプリのバックアップフォルダからインポート</string>
     <string name="import_settings_downloads">ダウンロードからインポート</string>
     <string name="import_settings_choose_file">バックアップファイルを選択</string>
@@ -578,8 +578,8 @@
     <string name="settings_imported">設定をインポートしました: %1$d 件適用、%2$d 件スキップ</string>
     <string name="settings_import_failed">設定のインポートに失敗しました: %1$s</string>
     <string name="no_settings_backups_title">バックアップが見つかりません</string>
-    <string name="no_settings_backups_message">アプリのバックアップフォルダに Headunit Revived のバックアップが見つかりません。先にバックアップをエクスポートしてからインポートしてください。</string>
-    <string name="no_settings_backups_downloads_message">ダウンロードに Headunit Revived のバックアップが見つかりません。先にバックアップをダウンロードへエクスポートしてからインポートしてください。</string>
+    <string name="no_settings_backups_message">アプリのバックアップフォルダに Open Headunit のバックアップが見つかりません。先にバックアップをエクスポートしてからインポートしてください。</string>
+    <string name="no_settings_backups_downloads_message">ダウンロードに Open Headunit のバックアップが見つかりません。先にバックアップをダウンロードへエクスポートしてからインポートしてください。</string>
     <string name="no_file_picker_title">利用可能なファイルピッカーがありません</string>
     <string name="no_file_picker_message">このデバイスには対応するファイルピッカーがありません。代わりにダウンロードまたはアプリのバックアップフォルダをご利用ください。</string>
     <string name="storage_permission_denied_backup">ストレージへのアクセスが拒否されました。ダウンロードを使用できませんでした。</string>
@@ -669,7 +669,7 @@
     <string name="onb_next">次へ</string>
     <string name="onb_skip">スキップ</string>
     <string name="onb_ready_finish">完了</string>
-    <string name="onb_welcome_title">Headunit Revivedへようこそ</string>
+    <string name="onb_welcome_title">Open Headunitへようこそ</string>
     <string name="onb_welcome_body">このクイックセットアップでは、お使いのデバイスをスキャンし、最適なビデオ、ディスプレイ、ナイトモードの設定を選択します。すべては後から設定で変更できます。</string>
     <string name="onb_safety_title">安全が最優先</string>
     <string name="onb_safety_accept">利用規約を読み、同意しました</string>
@@ -762,7 +762,7 @@
     <string name="support_rules_connection_title">接続方法を書いてください</string>
     <string name="support_rules_connection_desc">USBケーブル、USBワイヤレスアダプター、WiFi Direct、WiFi（headunit server）、またはSelf Mode。ワイヤレスの場合はアダプターやドングルのモデルも書いてください。</string>
     <string name="support_rules_appversion_title">アプリのバージョンを記載してください</string>
-    <string name="support_rules_appversion_desc">Headunit Revivedのバージョンは、アプリとサポート画面に表示されています。</string>
+    <string name="support_rules_appversion_desc">Open Headunitのバージョンは、アプリとサポート画面に表示されています。</string>
     <string name="support_rules_logs_title">発生直後にログを添付してください</string>
     <string name="support_rules_logs_desc">設定の「詳細」タブを開き、「デバッグ」セクションで「デバッグモード」をオンにして問題を再現した後、すぐに「ログをエクスポート」をタップしてください。問題が発生した瞬間を含むログが取得できます。そのファイルをissueに添付してください。</string>
     <string name="support_rules_search_title">重複なし</string>

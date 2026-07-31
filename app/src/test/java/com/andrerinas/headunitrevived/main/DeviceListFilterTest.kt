@@ -1,4 +1,4 @@
-package com.andrerinas.headunitrevived.main
+package com.andrerinas.openheadunit.main
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

@@ -1,4 +1,4 @@
-package com.andrerinas.headunitrevived.aap
+package com.andrerinas.openheadunit.aap
 
 import android.view.KeyEvent
 import org.junit.Assert.assertFalse

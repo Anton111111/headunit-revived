@@ -36,7 +36,7 @@
         android:required="false" />
 
     <permission
-        android:name="com.andrerinas.headunitrevived.permission.NAVIGATION_UPDATE"
+        android:name="com.andrerinas.openheadunit.permission.NAVIGATION_UPDATE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -311,11 +311,11 @@
             android:taskAffinity=""
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
-                <action android:name="com.andrerinas.headunitrevived.ACTION_SET_NIGHT_MODE" />
-                <action android:name="com.andrerinas.headunitrevived.ACTION_CONNECT" />
-                <action android:name="com.andrerinas.headunitrevived.ACTION_DISCONNECT" />
-                <action android:name="com.andrerinas.headunitrevived.ACTION_START_SELF_MODE" />
-                <action android:name="com.andrerinas.headunitrevived.ACTION_STOP_SERVICE" />
+                <action android:name="com.andrerinas.openheadunit.ACTION_SET_NIGHT_MODE" />
+                <action android:name="com.andrerinas.openheadunit.ACTION_CONNECT" />
+                <action android:name="com.andrerinas.openheadunit.ACTION_DISCONNECT" />
+                <action android:name="com.andrerinas.openheadunit.ACTION_START_SELF_MODE" />
+                <action android:name="com.andrerinas.openheadunit.ACTION_STOP_SERVICE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
