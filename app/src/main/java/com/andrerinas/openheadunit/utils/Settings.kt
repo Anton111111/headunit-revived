@@ -224,6 +224,13 @@ class Settings(private val context: Context) {
             prefs.edit().putBoolean("gesture_hint_shown", value).apply()
         }
 
+    // One-time notice telling users the app was rebranded. Shown once on the home screen.
+    var renameNoticeShown: Boolean
+        get() = prefs.getBoolean("rename_notice_shown", false)
+        set(value) {
+            prefs.edit().putBoolean("rename_notice_shown", value).apply()
+        }
+
     // Custom Insets (Screen Margins)
     var insetLeft: Int
         get() = prefs.getInt("inset-left", 0)

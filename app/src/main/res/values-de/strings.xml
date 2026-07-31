@@ -772,4 +772,7 @@
     <string name="onb_ready_loading_button">Ladebildschirm einrichten</string>
     <string name="static_bssid_title">Statische BSSID</string>
     <string name="static_bssid_enter_value">BSSID-Wert (Format: XX:XX:XX:XX:XX:XX)</string>
+    <string name="rename_notice_title">Neuer Name, gleiche App: %1$s</string>
+    <string name="rename_notice_message">Headunit Revived ist dank euch stark gewachsen. Das Projekt und seine Community haben einen weiten Weg zurückgelegt und bekommen deshalb eine eigene Identität: %1$s.\n\nGleiche App, dieselben Leute dahinter, und all deine Einstellungen bleiben genau so, wie sie sind.</string>
+    <string name="rename_notice_button">Verstanden</string>
 </resources>

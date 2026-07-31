@@ -765,4 +765,7 @@
     <string name="support_rules_describe_desc">Mit csináltál, mit vártál, és mi történt valójában. Vizuális problémáknál egy képernyőfotó vagy rövid videó sokat segít.</string>
     <string name="support_rules_oneissue_title">Egy hibajegy, egy probléma</string>
     <string name="support_rules_oneissue_desc">Minden hibajegy egyetlen problémáról szóljon, hogy könnyen nyomon követhető és javítható legyen. Egymással össze nem függő problémákhoz nyiss külön hibajegyeket.</string>
+    <string name="rename_notice_title">Új név, ugyanaz az alkalmazás: %1$s</string>
+    <string name="rename_notice_message">A Headunit Revived sokat fejlődött, nektek köszönhetően. A projekt és a közössége hosszú utat tett meg, ezért saját arculatot kap: %1$s.\n\nUgyanaz az alkalmazás, ugyanazokkal az emberekkel a háttérben, és minden beállításod pontosan úgy marad, ahogy van.</string>
+    <string name="rename_notice_button">Értem</string>
 </resources>

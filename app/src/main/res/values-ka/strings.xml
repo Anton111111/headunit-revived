@@ -697,4 +697,7 @@
     <string name="support_rules_intro">მხოლოდ ორი რამ არის სავალდებულო. ყველა დანარჩენი სურვილისამებრ, მაგრამ ეს ძალიან აჩქარებს პრობლემის გადაჭრას.</string>
     <string name="support_rules_section_required">სავალდებულო</string>
     <string name="support_rules_section_recommend">რეკომენდაციები (სურვილისამებრ)</string>
+    <string name="rename_notice_title">ახალი სახელი, იგივე აპი: %1$s</string>
+    <string name="rename_notice_message">Headunit Revived ბევრად წინ წავიდა თქვენი წყალობით. პროექტმა და მისმა თემმა დიდი გზა გაიარა, ამიტომ ის საკუთარ იდენტობას იძენს: %1$s.\n\nიგივე აპი, იგივე ხალხი მის უკან, და ყველა თქვენი პარამეტრი ზუსტად ისე რჩება, როგორც არის.</string>
+    <string name="rename_notice_button">გასაგებია</string>
 </resources>

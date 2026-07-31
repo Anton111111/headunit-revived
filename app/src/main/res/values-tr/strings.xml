@@ -764,4 +764,7 @@
     <string name="support_rules_describe_desc">Ne yaptığınızı, ne beklediğinizi ve gerçekte ne olduğunu yazın. Görsel sorunlar için bir ekran görüntüsü veya kısa bir video çok işe yarar.</string>
     <string name="support_rules_oneissue_title">Konu başına bir sorun</string>
     <string name="support_rules_oneissue_desc">Her konuyu tek bir sorunla sınırlı tutun ki takip edilip düzeltilebilsin. İlgisiz sorunlar için ayrı konular açın.</string>
+    <string name="rename_notice_title">Yeni isim, aynı uygulama: %1$s</string>
+    <string name="rename_notice_message">Headunit Revived sizin sayenizde çok büyüdü. Proje ve topluluğu uzun bir yol kat etti, bu yüzden kendine ait bir kimlik kazanıyor: %1$s.\n\nAynı uygulama, arkasındaki aynı ekip ve tüm ayarların tam olduğu gibi kalıyor.</string>
+    <string name="rename_notice_button">Anladım</string>
 </resources>

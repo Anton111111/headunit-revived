@@ -773,4 +773,7 @@
     <string name="support_rules_describe_desc">何をしたか、何を期待していたか、実際に何が起きたかを書いてください。見た目の問題はスクリーンショットや短い動画があると非常に助かります。</string>
     <string name="support_rules_oneissue_title">1件のissueにつき1つの問題</string>
     <string name="support_rules_oneissue_desc">追跡・修正しやすくするために、issueは1件につき1つの問題に絞ってください。関係のない問題は別のissueを作成してください。</string>
+    <string name="rename_notice_title">名前は新しく、アプリはそのまま: %1$s</string>
+    <string name="rename_notice_message">Headunit Revived は皆さんのおかげで大きく成長しました。プロジェクトとそのコミュニティはここまで歩んできて、いよいよ独自の名前を持つことになりました: %1$s。\n\n同じアプリ、同じ開発チーム、そして設定もすべてそのまま残ります。</string>
+    <string name="rename_notice_button">了解</string>
 </resources>

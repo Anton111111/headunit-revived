@@ -796,4 +796,7 @@
     <string name="support_rules_intro">Потрібні лише дві речі. Все інше необов\'язкове, але значно прискорює вирішення проблеми.</string>
     <string name="support_rules_section_required">Обов\'язково</string>
     <string name="support_rules_section_recommend">Рекомендації (необов\'язково)</string>
+    <string name="rename_notice_title">Нова назва, той самий застосунок: %1$s</string>
+    <string name="rename_notice_message">Headunit Revived дуже виріс завдяки вам. Проєкт і його спільнота пройшли довгий шлях, тож він отримує власну назву: %1$s.\n\nТой самий застосунок, ті самі люди за ним, і всі ваші налаштування залишаються точно такими, як є.</string>
+    <string name="rename_notice_button">Зрозуміло</string>
 </resources>

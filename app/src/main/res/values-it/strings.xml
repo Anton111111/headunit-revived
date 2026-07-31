@@ -772,4 +772,7 @@
     <string name="support_rules_intro">Sono richieste solo due cose. Tutto il resto è facoltativo, ma aiuta a risolvere il problema molto più in fretta.</string>
     <string name="support_rules_section_required">Obbligatorio</string>
     <string name="support_rules_section_recommend">Consigli (facoltativi)</string>
+    <string name="rename_notice_title">Nuovo nome, stessa app: %1$s</string>
+    <string name="rename_notice_message">Headunit Revived è cresciuta molto, grazie a voi. Il progetto e la sua community hanno fatto tanta strada, quindi ora l\'app ha un\'identità tutta sua: %1$s.\n\nStessa app, stesse persone dietro, e tutte le tue impostazioni restano esattamente come sono.</string>
+    <string name="rename_notice_button">Ho capito</string>
 </resources>
