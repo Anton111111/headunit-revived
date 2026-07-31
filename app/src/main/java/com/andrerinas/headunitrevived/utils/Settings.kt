@@ -81,6 +81,10 @@ class Settings(private val context: Context) {
         get() = prefs.getBoolean("hud_mirroring", false)
         set(value) { prefs.edit().putBoolean("hud_mirroring", value).apply() }
 
+    var useMeasuredTouchSurface: Boolean
+        get() = prefs.getBoolean("use_measured_touch_surface", false)
+        set(value) { prefs.edit().putBoolean("use_measured_touch_surface", value).apply() }
+
     // UI Scale percentage for Home
     var uiScaleHomePercent: Int
         get() = prefs.getInt("ui-scale-home-percent", 100)
