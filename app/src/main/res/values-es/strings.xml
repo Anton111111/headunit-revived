@@ -803,7 +803,7 @@
     <string name="support_rules_intro">Solo se necesitan dos cosas. Todo lo demás es opcional, pero ayuda a resolver tu problema mucho más rápido.</string>
     <string name="support_rules_section_required">Requerido</string>
     <string name="support_rules_section_recommend">Recomendaciones (opcional)</string>
-    <string name="rename_notice_title">Nuevo nombre, la misma app: %1$s</string>
-    <string name="rename_notice_message">Headunit Revived ha crecido mucho, gracias a ustedes. El proyecto y su comunidad han recorrido un largo camino, así que ahora tiene una identidad propia: %1$s.\n\nLa misma app, la misma gente detrás, y todos tus ajustes se quedan exactamente como están.</string>
+    <string name="rename_notice_title">Nuestro nombre está cambiando a Open Headunit</string>
+    <string name="rename_notice_message">Headunit Revived está creciendo, gracias a ustedes, y se está convirtiendo en algo propio: Open Headunit. Vamos a ir cambiando al nuevo nombre en las próximas actualizaciones, así que es posible que sigas viendo el nombre anterior en algunos lugares por un tiempo.\n\nLa misma app, la misma gente detrás, y todos tus ajustes se quedan exactamente como están.</string>
     <string name="rename_notice_button">Entendido</string>
 </resources>
