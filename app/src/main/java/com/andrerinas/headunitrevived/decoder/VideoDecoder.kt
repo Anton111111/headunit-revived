@@ -125,6 +125,7 @@ class VideoDecoder(private val settings: Settings) {
     private var loggedFirstSoftwareFrame = false
     @Volatile var onFirstFrameListener: (() -> Unit)? = null
     @Volatile var lastFrameRenderedMs: Long = 0L
+    private var syntheticPtsUs = 0L
 
     // elapsedRealtime() of the last encoded video bytes received from the phone (input side),
     // as opposed to lastFrameRenderedMs (output side). Lets the projection watchdog tell a
@@ -229,6 +230,7 @@ class VideoDecoder(private val settings: Settings) {
             }
             // Keep VPS/SPS/PPS cached so we can re-inject them on restart
             lastFrameRenderedMs = 0L
+            syntheticPtsUs = 0L
             loggedFirstSoftwareFrame = false
             AppLog.i("Decoder stopped: $reason")
         }
@@ -333,6 +335,9 @@ class VideoDecoder(private val settings: Settings) {
             val buf = ByteBuffer.wrap(frameData, frameOffset, size)
             while (buf.hasRemaining()) {
                 if (!feedInputBuffer(buf)) {
+                    // Buffer is full. Request keyframe to avoid smearing
+                    AppLog.w("Input buffer full/failed. Requesting keyframe to prevent smearing.")
+                    scheduleRestart("input_buffer_overflow")
                     return
                 }
             }
@@ -519,6 +524,15 @@ class VideoDecoder(private val settings: Settings) {
 
             val format = MediaFormat.createVideoFormat(mimeType, width, height)
 
+            // Add hardware prioritization and low-latency hints
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                format.setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = Real-time priority
+                format.setInteger(MediaFormat.KEY_OPERATING_RATE, settings.fpsLimit)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                format.setInteger(MediaFormat.KEY_MAX_B_FRAMES, 0) // Tell codec not to hold frames -> drastically decreases latency
+            }
+
             // Apply Codec Specific Data (CSD) from parsed SPS/PPS/VPS
             if (mimeType == CodecType.H265.mimeType) {
                 val combined = (vps ?: byteArrayOf()) + (sps ?: byteArrayOf()) + (pps ?: byteArrayOf())
@@ -638,7 +652,7 @@ class VideoDecoder(private val settings: Settings) {
         try {
             var inputIndex = -1
             var attempts = 0
-            while (attempts < 30) {
+            while (attempts < 3) { // do not set attempts to high, otherwise there is a strong hiccup
                 inputIndex = currentCodec.dequeueInputBuffer(TIMEOUT_US)
                 if (inputIndex >= 0) break
                 attempts++
@@ -679,7 +693,14 @@ class VideoDecoder(private val settings: Settings) {
             }
 
             inputBuffer.flip()
-            val pts = (System.nanoTime() - startTime) / 1000
+
+            // Force a perfectly smooth timestamp (60 FPS = 16,666 microseconds per frame)
+            // This prevents network jitter from causing "catch-up" fast-forwards
+            if (flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG == 0) {
+                syntheticPtsUs += 1000000L/settings.fpsLimit
+            }
+            val pts = syntheticPtsUs
+
             currentCodec.queueInputBuffer(inputIndex, 0, inputBuffer.limit(), pts, flags)
             return true
         } catch (e: Exception) {
@@ -694,7 +715,7 @@ class VideoDecoder(private val settings: Settings) {
     private fun outputThreadLoop() {
         AppLog.i("Output thread started")
         var consecutiveErrors = 0
-        var lastOutputMs = 0L
+        var lastOutputMs = SystemClock.elapsedRealtime()
 
         while (running) {
             val currentCodec = codec
@@ -731,13 +752,11 @@ class VideoDecoder(private val settings: Settings) {
 
                 // Stall detection: if we rendered at least one frame but haven't
                 // produced output in 3 seconds, the decoder is likely dead-but-active.
-                if (lastOutputMs > 0) {
-                    val stallGap = SystemClock.elapsedRealtime() - lastOutputMs
-                    if (stallGap > 3000L) {
-                        AppLog.w("Decoder stall detected (no output for ${stallGap}ms). Forcing restart.")
-                        scheduleRestart("sync_stall")
-                        break
-                    }
+                val stallGap = SystemClock.elapsedRealtime() - lastOutputMs
+                if (stallGap > 2000L) {
+                    AppLog.w("Decoder stall detected (no output for ${stallGap}ms). Forcing restart.")
+                    scheduleRestart("sync_stall")
+                    break
                 }
             } catch (e: Exception) {
                 if (running) {

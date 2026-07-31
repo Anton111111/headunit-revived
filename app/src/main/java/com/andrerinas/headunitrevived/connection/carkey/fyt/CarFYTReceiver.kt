@@ -18,9 +18,6 @@ import com.andrerinas.headunitrevived.connection.carkey.CarKeyReceiver
 import com.andrerinas.headunitrevived.utils.AppLog
 import com.andrerinas.headunitrevived.utils.SUExecutor
 import com.andrerinas.headunitrevived.utils.SystemProperties
-import com.andrerinas.headunitrevived.utils.SystemService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 // based of decompilation of "com.syu.steer_HD.apk"
 // this mainly adds support for uis7870 (dudu 7, tested)
@@ -67,7 +64,6 @@ class CarFYTReceiver : CarKeyReceiver {
         private var handler: Handler? = null
         private var toolkit: RemoteToolkit? = null
         private val modules = HashMap<Int, RemoteModule>()
-        private var isBinding = false
 
         fun connect() {
             if (this.handler != null)
@@ -84,17 +80,14 @@ class CarFYTReceiver : CarKeyReceiver {
         }
 
         private fun attemptConnect() {
-            if (this.handler == null || this.toolkit != null || isBinding)
+            if (this.handler == null || this.toolkit != null)
                 return;
 
             val intent = Intent()
             intent.setClassName(PACKAGE_NAME, CLASS_NAME)
 
-            if (context.bindService(intent, this, Context.BIND_AUTO_CREATE)) {
-                isBinding = true
-            } else {
+            if (!context.bindService(intent, this, Context.BIND_AUTO_CREATE))
                 handler!!.postDelayed(this::attemptConnect, 2000)
-            }
         }
 
         fun disconnect() {
@@ -114,7 +107,6 @@ class CarFYTReceiver : CarKeyReceiver {
             } catch (e: IllegalArgumentException) {
                 // Ignore if not registered/bound
             }
-            this.isBinding = false
             this.handler = null
             this.toolkit = null
             this.modules.clear()
@@ -123,7 +115,6 @@ class CarFYTReceiver : CarKeyReceiver {
 
         override fun onServiceConnected(name: ComponentName, binder: IBinder) {
             AppLog.i("CarKeyReceiver: Connected with FYT Service")
-            isBinding = false
 
             this.toolkit = RemoteToolkit.Stub.asInterface(binder)
 
@@ -154,7 +145,6 @@ class CarFYTReceiver : CarKeyReceiver {
 
         override fun onServiceDisconnected(p0: ComponentName) {
             AppLog.i("CarKeyReceiver: Disconnected from FYT Service")
-            isBinding = false
             this.toolkit = null
         }
 

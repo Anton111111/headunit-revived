@@ -1,6 +1,7 @@
 package com.andrerinas.headunitrevived.utils
 
 import android.Manifest
+import android.app.AppOpsManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -52,10 +53,8 @@ object AppPermissions {
             Kind.NORMAL -> requestablePermissions().all {
                 ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
             }
-            Kind.OVERLAY ->
-                Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(context)
-            Kind.WRITE_SETTINGS ->
-                Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.System.canWrite(context)
+            Kind.OVERLAY -> isOverlayGranted(context)
+            Kind.WRITE_SETTINGS -> isWriteSettingsGranted(context)
         }
     }
 
@@ -140,6 +139,39 @@ object AppPermissions {
 
     /** Count of visible entries already granted (for the wizard summary). */
     fun grantedCount(context: Context): Int = visible().count { it.isGranted(context) }
+
+    /** Robust check for "Display over other apps" permission. */
+    fun isOverlayGranted(context: Context): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
+        if (Settings.canDrawOverlays(context)) return true
+
+        return isActuallyGranted(context, AppOpsManager.OPSTR_SYSTEM_ALERT_WINDOW)
+    }
+
+    /** Robust check for "Modify system settings" permission. */
+    fun isWriteSettingsGranted(context: Context): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
+        if (Settings.System.canWrite(context)) return true
+
+        return isActuallyGranted(context, AppOpsManager.OPSTR_WRITE_SETTINGS)
+    }
+
+    /** Fallback for some devices (especially headunits) where Settings#xx is unreliable */
+    private fun isActuallyGranted(context: Context, opStr: String): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return true
+
+        return try {
+            val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as? AppOpsManager
+            val mode = appOps?.checkOpNoThrow(
+                opStr,
+                android.os.Process.myUid(),
+                context.packageName
+            )
+            mode == AppOpsManager.MODE_ALLOWED
+        } catch (_: Exception) {
+            false
+        }
+    }
 
     /** The API level at which a given manifest permission became requestable. */
     private fun permissionMinSdk(permission: String): Int = when (permission) {

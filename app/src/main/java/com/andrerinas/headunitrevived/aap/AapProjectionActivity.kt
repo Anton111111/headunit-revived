@@ -813,10 +813,12 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         // if this also causes issues with other virtual displays, try to obtain #getType() via reflection
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R)
             return
-        if (lastCustomNonConfigurationInstance as? Boolean == true)
+        if (intent.getBooleanExtra("applied_vd_fix", false))
             return
         if (display?.name?.startsWith("DUDU-launcher-split") != true)
             return
+
+        intent.putExtra("applied_vd_fix", true) // avoid infinite-loop
 
         AppLog.i("Detected VirtualDisplay: Recreating projection to fix stuck picture shortly")
 

@@ -24,6 +24,7 @@ import com.andrerinas.headunitrevived.main.settings.SettingItem
 import com.andrerinas.headunitrevived.main.settings.SettingsAdapter
 import com.andrerinas.headunitrevived.aap.AapService
 import com.andrerinas.headunitrevived.utils.AppLog
+import com.andrerinas.headunitrevived.utils.AppPermissions
 import com.andrerinas.headunitrevived.utils.Settings
 import com.andrerinas.headunitrevived.utils.BluetoothHelper
 import com.google.android.material.appbar.MaterialToolbar
@@ -205,10 +206,10 @@ class AutoStartFragment : Fragment() {
         pendingReopenOnReconnection?.let { settings.reopenOnReconnection = it }
 
         // Check for Overlay permission if any auto-start is configured
-        if ((pendingAutoStartBtMacs.isNotEmpty() || pendingAutoStartOnUsb == true || 
-            pendingAutoStartOnBoot == true || pendingAutoStartOnScreenOn == true || 
-            pendingAutoStartOnWifi == true) && Build.VERSION.SDK_INT >= 23) {
-            if (!android.provider.Settings.canDrawOverlays(requireContext())) {
+        if ((pendingAutoStartBtMacs.isNotEmpty() || pendingAutoStartOnUsb == true ||
+            pendingAutoStartOnBoot == true || pendingAutoStartOnScreenOn == true ||
+            pendingAutoStartOnWifi == true)) {
+            if (!AppPermissions.isOverlayGranted(requireContext())) {
                 MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
                     .setTitle(R.string.overlay_permission_title)
                     .setMessage(R.string.overlay_permission_description)
@@ -379,7 +380,7 @@ class AutoStartFragment : Fragment() {
         super.onResume()
         // Re-check overlay permission. If the user returned from system settings
         // without granting it, disable auto-start settings that require it.
-        if (Build.VERSION.SDK_INT >= 23 && !android.provider.Settings.canDrawOverlays(requireContext())) {
+        if (!AppPermissions.isOverlayGranted(requireContext())) {
             var disabled = false
             if (settings.autoStartOnBoot) {
                 settings.autoStartOnBoot = false

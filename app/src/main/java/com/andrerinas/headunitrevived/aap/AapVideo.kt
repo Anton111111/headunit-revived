@@ -18,17 +18,94 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
     private var legacyAssembledBuffer: ByteArray? = null
     private var isFrameCorrupt = false
     private var lastKeyframeRequestMs = 0L
+    private var isAssemblingFrame = false
+    private var waitingForKeyframe = false
 
     private fun markCorruptAndRequestRecovery() {
-        if (!isFrameCorrupt) {
-            val now = android.os.SystemClock.elapsedRealtime()
-            if (now - lastKeyframeRequestMs > 1000) {
-                lastKeyframeRequestMs = now
-                AppLog.w("AapVideo: Frame corrupted, requesting keyframe to recover stream")
-                onFrameCorrupted()
+        isFrameCorrupt = true
+        waitingForKeyframe = true // Lock out P-Frames until an I-Frame arrives
+        val now = android.os.SystemClock.elapsedRealtime()
+        if (now - lastKeyframeRequestMs > 1000) {
+            lastKeyframeRequestMs = now
+            AppLog.w("AapVideo: Frame corrupted, requesting keyframe to recover stream")
+            onFrameCorrupted()
+        }
+    }
+
+    private fun checkKeyframe(message: AapMessage): Boolean {
+        if (!waitingForKeyframe)
+            return false
+
+        val flags = message.flags.toInt()
+
+        // We need to check if this new frame is a Keyframe (SPS/PPS or IDR)
+        // Flag 11 (Single) or Flag 9 (First Fragment) indicate the start of a frame
+        // Drop middle/end fragments if it's not
+        if (flags != 11 && flags != 9)
+            return true
+
+        val buf = message.data
+        val len = message.size
+
+        // Try offset 10 first, fallback to offset 2
+        var scOffset = 10
+        var scLen = findStartCode(buf, scOffset)
+        if (scLen <= 0) {
+            scOffset = 2
+            scLen = findStartCode(buf, scOffset)
+        }
+
+        // No start code = Not a keyframe. Drop it.
+        if (scLen <= 0 || scOffset + scLen >= len)
+            return true
+
+        val nalType = if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+            (buf[scOffset + scLen].toInt() and 0x7E) shr 1 // H.265 NAL
+        } else {
+            buf[scOffset + scLen].toInt() and 0x1F // H.264 NAL
+        }
+
+        // Check if it's an I-Frame or VPS/SPS/PPS (types that can start a clean stream)
+        val isKeyframe = if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+            nalType in 16..21 || nalType in 32..34
+        } else {
+            nalType == 5 || nalType == 7 || nalType == 8
+        }
+
+        if (isKeyframe) {
+            AppLog.i("AapVideo: Keyframe received, resuming stream.")
+            waitingForKeyframe = false
+            isFrameCorrupt = false
+        } else {
+            return true // Drop this P-Frame, we are still waiting for a Keyframe!
+        }
+
+        return false
+    }
+
+    private fun checkFragmentState(message: AapMessage) {
+        when (val flags = message.flags.toInt()) {
+            11, 9 -> {
+                // 11 (Single) and 9 (First) should always start a clean slate.
+                if (isAssemblingFrame) {
+                    AppLog.w("AapVideo: Previous frame was truncated! Resetting assembly state.")
+                }
+                isAssemblingFrame = (flags == 9) // Only 9 means we are assembling
+            }
+            8, 10 -> {
+                // 8 (Middle) and 10 (Last) MUST belong to an active assembly.
+                if (!isAssemblingFrame) {
+                    AppLog.e("AapVideo: Orphaned fragment (Flag $flags) detected! Frame data lost.")
+                    markCorruptAndRequestRecovery()
+                    messageBuffer.clear()
+                    // Still need to pass it to checkKeyframe in case it's magically valid (rare),
+                    // but usually we just drop it.
+                }
+                if (flags == 10) {
+                    isAssemblingFrame = false // Assembly finished
+                }
             }
         }
-        isFrameCorrupt = true
     }
 
     private fun findStartCode(buf: ByteArray, offset: Int): Int {
@@ -41,6 +118,10 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
     }
 
     fun process(message: AapMessage): Boolean {
+        // Fix smearing happening after some while
+        checkFragmentState(message)
+        if (checkKeyframe(message))
+            return true
 
         val flags = message.flags.toInt()
         val buf = message.data

@@ -72,6 +72,7 @@ class SUExecutor {
 
         // nobody granted
         Log.i("SUExecutor", "SU not granted")
+
         active = null
         return false
     }
@@ -118,7 +119,10 @@ class SUExecutor {
         }
 
         override fun checkPermission(): Boolean {
-            return Shell.isAppGrantedRoot() ?: false
+            if (Shell.isAppGrantedRoot() == true)
+                return true
+
+            return Shell.cmd("id").exec().isSuccess // prompt for root permission
         }
 
         override fun runShell(cmd: String): Int {
@@ -148,7 +152,7 @@ class SUExecutor {
                 Shizuku.pingBinder() &&
                     Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED &&
                     !Shizuku.isPreV11()
-            } catch (e: Throwable) {
+            } catch (_: Throwable) {
                 false
             }
         }
