@@ -14,6 +14,7 @@
 - Recover automatically from post-first-frame video display stalls, thanks to @andrecuellar
 - Settings and Onboarding Wizard redesign for better usability, thanks to @andrecuellar
 - Fixing mulitiple WiFi-Direct and Native AA connection issues, thanks to @o-jcardenass, @andrecuellar and @notathf
+- Various fixes PR, thanks to @MrEAlderson
 - Selfmode on AA 17.4 now connects to the headunit dev server or opens the AA settings to start it
 
 ### v.3.1.1

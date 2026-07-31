@@ -67,7 +67,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - more customization options for the UI and the app itself
 
 ## Changelog
-### v.3.2.0-beta3
+### v.3.2.0-beta4
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
 - Acquire transient audio focus while AA audio plays, thanks to @bnayahu
 - Add GitHub Actions CI (build + unit tests), thanks to @bnayahu
@@ -82,6 +82,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - Recover automatically from post-first-frame video display stalls, thanks to @andrecuellar
 - Settings and Onboarding Wizard redesign for better usability, thanks to @andrecuellar
 - Fixing mulitiple WiFi-Direct and Native AA connection issues, thanks to @o-jcardenass, @andrecuellar and @notathf
+- Various fixes PR, thanks to @MrEAlderson
 - Selfmode on AA 17.4 now connects to the headunit dev server or opens the AA settings to start it
 
 ### v.3.1.1
