@@ -9,7 +9,7 @@ import java.nio.ByteBuffer
 internal class AapVideo(private val videoDecoder: VideoDecoder, private val settings: Settings, private val onFrameCorrupted: () -> Unit) {
 
     private val messageBuffer = ByteBuffer.allocate(
-        if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+        if (settings.videoCodec == "H.265") {
             Messages.DEF_BUFFER_LENGTH * 64 // ~8MB for H.265 support
         } else {
             Messages.DEF_BUFFER_LENGTH * 16 // ~2MB for H.264 legacy support
@@ -59,14 +59,14 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
         if (scLen <= 0 || scOffset + scLen >= len)
             return true
 
-        val nalType = if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+        val nalType = if (settings.videoCodec == "H.265") {
             (buf[scOffset + scLen].toInt() and 0x7E) shr 1 // H.265 NAL
         } else {
             buf[scOffset + scLen].toInt() and 0x1F // H.264 NAL
         }
 
         // Check if it's an I-Frame or VPS/SPS/PPS (types that can start a clean stream)
-        val isKeyframe = if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+        val isKeyframe = if (settings.videoCodec == "H.265") {
             nalType in 16..21 || nalType in 32..34
         } else {
             nalType == 5 || nalType == 7 || nalType == 8
