@@ -476,6 +476,11 @@ class NativeAaHandshakeManager(
 
     private suspend fun handleHandshake(socket: BluetoothSocket, localRadio: String? = null) = withContext(Dispatchers.IO) {
         handshakeInFlight = true
+        // A real AA_UUID connection just landed - the wake poke (if one is still running) has
+        // done its job and is now just an extra, unnecessary RFCOMM/profile channel held open
+        // on the same physical radio for the remainder of its hold window, competing with this
+        // handshake for radio time. Release it immediately instead of leaving it running.
+        pokeJob?.cancel()
         try {
             val device = socket.remoteDevice
             AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address}) on local radio [${localRadio ?: "?"}]")
