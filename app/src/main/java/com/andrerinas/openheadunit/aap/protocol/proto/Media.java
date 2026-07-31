@@ -10016,71 +10016,71 @@ public final class Media {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013media.proto\0221com.andrerinas.headunitre" +
-      "vived.aap.protocol.proto\"]\n\022AudioConfigu" +
-      "ration\022\023\n\013sample_rate\030\001 \002(\r\022\026\n\016number_of" +
-      "_bits\030\002 \002(\r\022\032\n\022number_of_channels\030\003 \002(\r\"" +
-      "8\n\005Start\022\022\n\nsession_id\030\001 \002(\005\022\033\n\023configur" +
-      "ation_index\030\002 \002(\r\"&\n\003Ack\022\022\n\nsession_id\030\001" +
-      " \002(\005\022\013\n\003ack\030\002 \002(\r\"_\n\021MicrophoneRequest\022\014" +
-      "\n\004open\030\001 \002(\010\022\023\n\013anc_enabled\030\002 \001(\010\022\022\n\nec_" +
-      "enabled\030\003 \001(\010\022\023\n\013max_unacked\030\004 \001(\005\"8\n\022Mi" +
-      "crophoneResponse\022\016\n\006status\030\001 \002(\005\022\022\n\nsess" +
-      "ion_id\030\002 \002(\r\"\306\002\n\035VideoFocusRequestNotifi" +
-      "cation\022\027\n\017disp_channel_id\030\001 \001(\005\022O\n\004mode\030" +
-      "\002 \002(\0162A.com.andrerinas.openheadunit.a" +
-      "ap.protocol.proto.VideoFocusMode\022q\n\006reas" +
-      "on\030\003 \001(\0162a.com.andrerinas.headunitrevive" +
-      "d.aap.protocol.proto.VideoFocusRequestNo" +
-      "tification.VideoFocusReason\"H\n\020VideoFocu" +
-      "sReason\022\013\n\007UNKNOWN\020\000\022\024\n\020PHONE_SCREEN_OFF" +
-      "\020\001\022\021\n\rLAUNCH_NATIVE\020\002\"~\n\026VideoFocusNotif" +
-      "ication\022O\n\004mode\030\001 \002(\0162A.com.andrerinas.h" +
-      "eadunitrevived.aap.protocol.proto.VideoF" +
-      "ocusMode\022\023\n\013unsolicited\030\002 \002(\010\"!\n\021MediaSe" +
-      "tupRequest\022\014\n\004type\030\001 \002(\r\"\276\001\n\006Config\022V\n\006s" +
-      "tatus\030\001 \002(\0162F.com.andrerinas.headunitrev" +
-      "ived.aap.protocol.proto.Config.ConfigSta" +
-      "tus\022\023\n\013max_unacked\030\002 \002(\r\022\035\n\025configuratio" +
-      "n_indices\030\003 \003(\r\"(\n\014ConfigStatus\022\n\n\006DEVIC" +
-      "E\020\001\022\014\n\010HEADUNIT\020\002\"B\n\006Insets\022\013\n\003top\030\001 \001(\005" +
-      "\022\016\n\006bottom\030\002 \001(\005\022\014\n\004left\030\003 \001(\005\022\r\n\005right\030" +
-      "\004 \001(\005\"\225\002\n\010UiConfig\022J\n\007margins\030\001 \001(\01329.co" +
-      "m.andrerinas.headunitrevived.aap.protoco" +
-      "l.proto.Insets\022Q\n\016content_insets\030\002 \001(\01329" +
-      ".com.andrerinas.openheadunit.aap.prot" +
-      "ocol.proto.Insets\022X\n\025stable_content_inse" +
-      "ts\030\003 \001(\01329.com.andrerinas.headunitrevive" +
-      "d.aap.protocol.proto.Insets\022\020\n\010ui_theme\030" +
-      "\004 \001(\005\"g\n\025UpdateUiConfigRequest\022N\n\tui_con" +
-      "fig\030\001 \002(\0132;.com.andrerinas.headunitreviv" +
-      "ed.aap.protocol.proto.UiConfig\"%\n\023Update" +
-      "UiConfigReply\022\016\n\006status\030\001 \002(\r*\372\003\n\007MsgTyp" +
-      "e\022\026\n\022MEDIA_MESSAGE_DATA\020\000\022\036\n\032MEDIA_MESSA" +
-      "GE_CODEC_CONFIG\020\001\022\031\n\023MEDIA_MESSAGE_SETUP" +
-      "\020\200\200\002\022\031\n\023MEDIA_MESSAGE_START\020\201\200\002\022\030\n\022MEDIA" +
-      "_MESSAGE_STOP\020\202\200\002\022\032\n\024MEDIA_MESSAGE_CONFI" +
-      "G\020\203\200\002\022\027\n\021MEDIA_MESSAGE_ACK\020\204\200\002\022&\n MEDIA_" +
-      "MESSAGE_MICROPHONE_REQUEST\020\205\200\002\022\'\n!MEDIA_" +
-      "MESSAGE_MICROPHONE_RESPONSE\020\206\200\002\022\'\n!MEDIA" +
-      "_MESSAGE_VIDEO_FOCUS_REQUEST\020\207\200\002\022,\n&MEDI" +
-      "A_MESSAGE_VIDEO_FOCUS_NOTIFICATION\020\210\200\002\022," +
-      "\n&MEDIA_MESSAGE_UPDATE_UI_CONFIG_REQUEST" +
-      "\020\211\200\002\022*\n$MEDIA_MESSAGE_UPDATE_UI_CONFIG_R" +
-      "EPLY\020\212\200\002\0220\n*MEDIA_MESSAGE_AUDIO_UNDERFLO" +
-      "W_NOTIFICATION\020\213\200\002*\335\001\n\016MediaCodecType\022\031\n" +
-      "\025MEDIA_CODEC_AUDIO_PCM\020\001\022\034\n\030MEDIA_CODEC_" +
-      "AUDIO_AAC_LC\020\002\022\035\n\031MEDIA_CODEC_VIDEO_H264" +
-      "_BP\020\003\022!\n\035MEDIA_CODEC_AUDIO_AAC_LC_ADTS\020\004" +
-      "\022\031\n\025MEDIA_CODEC_VIDEO_VP9\020\005\022\031\n\025MEDIA_COD" +
-      "EC_VIDEO_AV1\020\006\022\032\n\026MEDIA_CODEC_VIDEO_H265" +
-      "\020\007*s\n\017AudioStreamType\022\010\n\004NONE\020\000\022\n\n\006SPEEC" +
-      "H\020\001\022\n\n\006SYSTEM\020\002\022\t\n\005MEDIA\020\003\022\t\n\005ALARM\020\004\022\014\n" +
-      "\010GUIDANCE\020\005\022\020\n\014ANNOUNCEMENT\020\006\022\010\n\004RING\020\007*" +
-      "\217\001\n\016VideoFocusMode\022\031\n\025VIDEO_FOCUS_PROJEC" +
-      "TED\020\001\022\026\n\022VIDEO_FOCUS_NATIVE\020\002\022 \n\034VIDEO_F" +
-      "OCUS_NATIVE_TRANSIENT\020\003\022(\n$VIDEO_FOCUS_P" +
-      "ROJECTED_NO_INPUT_FOCUS\020\004B\007B\005Media"
+      "\012\013media.proto\022.com.andrerinas.openheadun" +
+      "it.aap.protocol.proto\"]\012\022AudioConfigurat" +
+      "ion\022\023\012\013sample_rate\030\001 \002(\015\022\026\012\016number_of_bi" +
+      "ts\030\002 \002(\015\022\032\012\022number_of_channels\030\003 \002(\015\"8\012\005" +
+      "Start\022\022\012\012session_id\030\001 \002(\005\022\033\012\023configurati" +
+      "on_index\030\002 \002(\015\"&\012\003Ack\022\022\012\012session_id\030\001 \002(" +
+      "\005\022\013\012\003ack\030\002 \002(\015\"_\012\021MicrophoneRequest\022\014\012\004o" +
+      "pen\030\001 \002(\010\022\023\012\013anc_enabled\030\002 \001(\010\022\022\012\012ec_ena" +
+      "bled\030\003 \001(\010\022\023\012\013max_unacked\030\004 \001(\005\"8\012\022Micro" +
+      "phoneResponse\022\016\012\006status\030\001 \002(\005\022\022\012\012session" +
+      "_id\030\002 \002(\015\"\300\002\012\035VideoFocusRequestNotificat" +
+      "ion\022\027\012\017disp_channel_id\030\001 \001(\005\022L\012\004mode\030\002 \002" +
+      "(\0162>.com.andrerinas.openheadunit.aap.pro" +
+      "tocol.proto.VideoFocusMode\022n\012\006reason\030\003 \001" +
+      "(\0162^.com.andrerinas.openheadunit.aap.pro" +
+      "tocol.proto.VideoFocusRequestNotificatio" +
+      "n.VideoFocusReason\"H\012\020VideoFocusReason\022\013" +
+      "\012\007UNKNOWN\020\000\022\024\012\020PHONE_SCREEN_OFF\020\001\022\021\012\015LAU" +
+      "NCH_NATIVE\020\002\"{\012\026VideoFocusNotification\022L" +
+      "\012\004mode\030\001 \002(\0162>.com.andrerinas.openheadun" +
+      "it.aap.protocol.proto.VideoFocusMode\022\023\012\013" +
+      "unsolicited\030\002 \002(\010\"!\012\021MediaSetupRequest\022\014" +
+      "\012\004type\030\001 \002(\015\"\273\001\012\006Config\022S\012\006status\030\001 \002(\0162" +
+      "C.com.andrerinas.openheadunit.aap.protoc" +
+      "ol.proto.Config.ConfigStatus\022\023\012\013max_unac" +
+      "ked\030\002 \002(\015\022\035\012\025configuration_indices\030\003 \003(\015" +
+      "\"(\012\014ConfigStatus\022\012\012\006DEVICE\020\001\022\014\012\010HEADUNIT" +
+      "\020\002\"B\012\006Insets\022\013\012\003top\030\001 \001(\005\022\016\012\006bottom\030\002 \001(" +
+      "\005\022\014\012\004left\030\003 \001(\005\022\015\012\005right\030\004 \001(\005\"\214\002\012\010UiCon" +
+      "fig\022G\012\007margins\030\001 \001(\01326.com.andrerinas.op" +
+      "enheadunit.aap.protocol.proto.Insets\022N\012\016" +
+      "content_insets\030\002 \001(\01326.com.andrerinas.op" +
+      "enheadunit.aap.protocol.proto.Insets\022U\012\025" +
+      "stable_content_insets\030\003 \001(\01326.com.andrer" +
+      "inas.openheadunit.aap.protocol.proto.Ins" +
+      "ets\022\020\012\010ui_theme\030\004 \001(\005\"d\012\025UpdateUiConfigR" +
+      "equest\022K\012\011ui_config\030\001 \002(\01328.com.andrerin" +
+      "as.openheadunit.aap.protocol.proto.UiCon" +
+      "fig\"%\012\023UpdateUiConfigReply\022\016\012\006status\030\001 \002" +
+      "(\015*\372\003\012\007MsgType\022\026\012\022MEDIA_MESSAGE_DATA\020\000\022\036" +
+      "\012\032MEDIA_MESSAGE_CODEC_CONFIG\020\001\022\031\012\023MEDIA_" +
+      "MESSAGE_SETUP\020\200\200\002\022\031\012\023MEDIA_MESSAGE_START" +
+      "\020\201\200\002\022\030\012\022MEDIA_MESSAGE_STOP\020\202\200\002\022\032\012\024MEDIA_" +
+      "MESSAGE_CONFIG\020\203\200\002\022\027\012\021MEDIA_MESSAGE_ACK\020" +
+      "\204\200\002\022&\012 MEDIA_MESSAGE_MICROPHONE_REQUEST\020" +
+      "\205\200\002\022'\012!MEDIA_MESSAGE_MICROPHONE_RESPONSE" +
+      "\020\206\200\002\022'\012!MEDIA_MESSAGE_VIDEO_FOCUS_REQUES" +
+      "T\020\207\200\002\022,\012&MEDIA_MESSAGE_VIDEO_FOCUS_NOTIF" +
+      "ICATION\020\210\200\002\022,\012&MEDIA_MESSAGE_UPDATE_UI_C" +
+      "ONFIG_REQUEST\020\211\200\002\022*\012$MEDIA_MESSAGE_UPDAT" +
+      "E_UI_CONFIG_REPLY\020\212\200\002\0220\012*MEDIA_MESSAGE_A" +
+      "UDIO_UNDERFLOW_NOTIFICATION\020\213\200\002*\335\001\012\016Medi" +
+      "aCodecType\022\031\012\025MEDIA_CODEC_AUDIO_PCM\020\001\022\034\012" +
+      "\030MEDIA_CODEC_AUDIO_AAC_LC\020\002\022\035\012\031MEDIA_COD" +
+      "EC_VIDEO_H264_BP\020\003\022!\012\035MEDIA_CODEC_AUDIO_" +
+      "AAC_LC_ADTS\020\004\022\031\012\025MEDIA_CODEC_VIDEO_VP9\020\005" +
+      "\022\031\012\025MEDIA_CODEC_VIDEO_AV1\020\006\022\032\012\026MEDIA_COD" +
+      "EC_VIDEO_H265\020\007*s\012\017AudioStreamType\022\010\012\004NO" +
+      "NE\020\000\022\012\012\006SPEECH\020\001\022\012\012\006SYSTEM\020\002\022\011\012\005MEDIA\020\003\022" +
+      "\011\012\005ALARM\020\004\022\014\012\010GUIDANCE\020\005\022\020\012\014ANNOUNCEMENT" +
+      "\020\006\022\010\012\004RING\020\007*\217\001\012\016VideoFocusMode\022\031\012\025VIDEO" +
+      "_FOCUS_PROJECTED\020\001\022\026\012\022VIDEO_FOCUS_NATIVE" +
+      "\020\002\022 \012\034VIDEO_FOCUS_NATIVE_TRANSIENT\020\003\022(\012$" +
+      "VIDEO_FOCUS_PROJECTED_NO_INPUT_FOCUS\020\004B\007" +
+      "B\005Media"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
