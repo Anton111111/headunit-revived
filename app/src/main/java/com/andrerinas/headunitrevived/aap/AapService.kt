@@ -1084,11 +1084,12 @@ class AapService : Service(), UsbReceiver.Listener {
             nearbyManager?.stop() // Disconnect Nearby tunnel
 
             val settings = App.provide(this@AapService).settings
-            if (settings.wifiConnectionMode == 3) {
+            val mode = settings.wifiConnectionMode
+            val strategy = settings.helperConnectionStrategy
+
+            if (mode == 3) {
                 if (state.isUserExit) {
-                    // [FIX] User voluntarily exited AA. Stop the BT handshake servers and
-                    // tear down the WiFi Direct group so the phone can't auto-reconnect.
-                    AppLog.i("AapService: Native AA user exit. Stopping handshake manager and WiFi Direct group.")
+                    AppLog.i("AapService: Native AA user exit. Stopping handshake manager.")
                     nativeAaHandshakeManager?.stop()
                 } else {
                     // Unexpected disconnect — reset and re-initialize for auto-reconnect.
@@ -1100,6 +1101,21 @@ class AapService : Service(), UsbReceiver.Listener {
                     }
                 }
             }
+
+            // [FIX] User-initiated disconnect while a WiFi-Direct-hosting mode was active: tear
+            // down the P2P group so the phone's OS-level connection actually drops (previously
+            // only the AA session ended — the WiFi Direct network stayed up, with nothing to
+            // tell Wireless Helper the session had ended). Skipped on unexpected disconnects:
+            // mode==3's re-init above and scheduleReconnectIfNeeded() both want to keep/reuse
+            // the existing group for fast reconnection there. Must await CommManager's async
+            // teardown first so we never remove the P2P interface while the
+            // ByeByeRequest/socket-close is still in flight.
+            if (state.isUserExit && WifiModePolicy.usesWifiDirect(mode, strategy)) {
+                commManager.awaitDisconnectComplete()
+                AppLog.i("AapService: CommManager teardown complete. Stopping WiFi Direct group.")
+                wifiDirectManager?.stop()
+            }
+
             App.provide(this@AapService).audioDecoder.stop()
             App.provide(this@AapService).videoDecoder.stop("AapService::onDisconnect")
         }
