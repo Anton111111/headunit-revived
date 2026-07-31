@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Меню</string>
     <string name="settings">Настройки</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Автономный режим</string>
     <string name="to_android_auto">В Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Удалить</string>
     <string name="usb">USB</string>
     <string name="wifi">Wi‑Fi</string>
@@ -151,9 +151,9 @@
     <string name="usb_auto_connect">Автоподключение USB</string>
     <string name="usb_auto_connect_description">Автоматически подключаться к известному USB-устройству при запуске приложения.</string>
     <string name="auto_start_bt_label">Автозапуск при Bluetooth</string>
-    <string name="auto_start_bt_description">Автоматически открывать Headunit Revived при подключении определенного Bluetooth-устройства.</string>
+    <string name="auto_start_bt_description">Автоматически открывать Open Headunit при подключении определенного Bluetooth-устройства.</string>
     <string name="auto_start_wifi_label">Автозапуск при Wi‑Fi</string>
-    <string name="auto_start_wifi_description">Автоматически открывать Headunit Revived при подключении к определенной Wi‑Fi сети (SSID).</string>
+    <string name="auto_start_wifi_description">Автоматически открывать Open Headunit при подключении к определенной Wi‑Fi сети (SSID).</string>
     <string name="auto_start_wifi_ssid_label">SSID Wi‑Fi</string>
     <string name="auto_start_wifi_ssid_description">Подключаться только при подключении к этой Wi‑Fi сети (SSID)</string>
     <string name="auto_start_wifi_warning">Устаревшая функция: может работать нестабильно на Android 8+ из-за фоновых ограничений. Убедитесь, что приложение исключено из оптимизации батареи.</string>
@@ -178,7 +178,7 @@
     <string name="bt_permission_denied_title">Требуется разрешение Bluetooth</string>
     <string name="bt_permission_denied_message">Разрешение Bluetooth необходимо для выбора сопряжённых устройств. Предоставьте его в настройках приложения.</string>
     <string name="overlay_permission_title">Разрешение на запуск в фоне</string>
-    <string name="overlay_permission_description">Чтобы Headunit Revived мог автоматически открываться при подключении Bluetooth, включите разрешение \"Показывать поверх других приложений\" на следующем экране.</string>
+    <string name="overlay_permission_description">Чтобы Open Headunit мог автоматически открываться при подключении Bluetooth, включите разрешение \"Показывать поверх других приложений\" на следующем экране.</string>
     <string name="open_settings">Настройки</string>
     <string name="wireless_connection_settings">Беспроводное соединение</string>
     <string name="right_hand_drive">Праворульный автомобиль</string>
@@ -261,9 +261,9 @@
     <!-- Info Settings -->
     <string name="category_info">Информация</string>
     <string name="about">Справка и поддержка</string>
-    <string name="about_description">Узнать больше о Headunit Revived</string>
+    <string name="about_description">Узнать больше о Open Headunit</string>
     <string name="version">Версия</string>
-    <string name="about_title">О Headunit Revived</string>
+    <string name="about_title">О Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -274,7 +274,7 @@
         <b>1. Cосредоточьтесь на вождении</b><br/>
         Использование этого ПО за рулем может отвлекать и быть опасным. Всегда отдавайте приоритет безопасному вождению и соблюдайте все правила дорожного движения. Используйте это приложение только тогда, когда это безопасно.<br/><br/>
         <b>2. Отказ от ответственности</b><br/>
-        Headunit Revived предоставляется «как есть» без каких-либо гарантий. Разработчики не несут ответственности за несчастные случаи, повреждения транспортного средства/устройства или юридические последствия, возникающие в результате использования этого ПО.<br/><br/>
+        Open Headunit предоставляется «как есть» без каких-либо гарантий. Разработчики не несут ответственности за несчастные случаи, повреждения транспортного средства/устройства или юридические последствия, возникающие в результате использования этого ПО.<br/><br/>
         <b>3. Отсутствие аффилированности</b><br/>
         Этот проект является независимой инициативой с открытым исходным кодом и никак не связан с Google LLC или брендом Android Auto.
     ]]></string>
@@ -320,7 +320,7 @@
     <string name="connection_interrupted">Соединение потеряно</string>
     <string name="connection_interrupted_detail">Повторное подключение…</string>
     <string name="wifi_disconnect_toast">Android Auto отключён: При беспроводном AA отключите \"Переключение между сетями\" или \"Ускорение сети\" в настройках Wi‑Fi телефона</string>
-    <string name="notification_service_running">Headunit Revived запущен</string>
+    <string name="notification_service_running">Open Headunit запущен</string>
     <string name="notification_projection_active">Трансляция Android Auto активна</string>
     <string name="shortcut_connect_title">Подключить</string>
     <string name="shortcut_connect_desc">Подключиться к последнему устройству</string>
@@ -565,7 +565,7 @@
     <string name="settings_backup_saved_to">Резервная копия настроек сохранена в:\n%1$s</string>
     <string name="share_settings_backup">Поделиться резервной копией</string>
     <string name="import_settings">Импорт настроек</string>
-    <string name="import_settings_description">Восстановить настройки из резервной копии Headunit Revived</string>
+    <string name="import_settings_description">Восстановить настройки из резервной копии Open Headunit</string>
     <string name="import_settings_app_folder">Импорт из папки резервных копий приложения</string>
     <string name="import_settings_downloads">Импорт из Загрузок</string>
     <string name="import_settings_choose_file">Выбрать файл резервной копии</string>
@@ -573,8 +573,8 @@
     <string name="settings_imported">Настройки импортированы: %1$d применено, %2$d пропущено</string>
     <string name="settings_import_failed">Не удалось импортировать настройки: %1$s</string>
     <string name="no_settings_backups_title">Резервные копии не найдены</string>
-    <string name="no_settings_backups_message">В папке резервных копий приложения не найдено резервных копий Headunit Revived. Сначала экспортируйте резервную копию, затем импортируйте её отсюда.</string>
-    <string name="no_settings_backups_downloads_message">В Загрузках не найдено резервных копий Headunit Revived. Сначала экспортируйте копию в Загрузки, затем импортируйте её отсюда.</string>
+    <string name="no_settings_backups_message">В папке резервных копий приложения не найдено резервных копий Open Headunit. Сначала экспортируйте резервную копию, затем импортируйте её отсюда.</string>
+    <string name="no_settings_backups_downloads_message">В Загрузках не найдено резервных копий Open Headunit. Сначала экспортируйте копию в Загрузки, затем импортируйте её отсюда.</string>
     <string name="no_file_picker_title">Выбор файлов недоступен</string>
     <string name="no_file_picker_message">На этом устройстве нет совместимого выбора файлов. Вы можете использовать Загрузки или папку резервных копий приложения.</string>
     <string name="storage_permission_denied_backup">В доступе к хранилищу отказано. Не удалось использовать Загрузки.</string>
@@ -662,7 +662,7 @@
     <string name="onb_next">Далее</string>
     <string name="onb_skip">Пропустить</string>
     <string name="onb_ready_finish">Готово</string>
-    <string name="onb_welcome_title">Добро пожаловать в Headunit Revived</string>
+    <string name="onb_welcome_title">Добро пожаловать в Open Headunit</string>
     <string name="onb_welcome_body">Эта быстрая настройка проверит ваше устройство и подберёт оптимальные параметры видео, экрана и ночного режима. Вы можете изменить всё это позже в настройках.</string>
     <string name="onb_safety_title">Безопасность прежде всего</string>
     <string name="onb_safety_accept">Я прочитал(а) и принимаю условия</string>
@@ -780,7 +780,7 @@
     <string name="support_rules_connection_title">Укажите способ подключения</string>
     <string name="support_rules_connection_desc">USB-кабель, USB-беспроводной адаптер, WiFi Direct, WiFi (headunit server) или Self Mode. Если беспроводное — добавьте модель адаптера или донгла.</string>
     <string name="support_rules_appversion_title">Укажите версию приложения</string>
-    <string name="support_rules_appversion_desc">Версию Headunit Revived, которая отображается на экране «Справка и поддержка».</string>
+    <string name="support_rules_appversion_desc">Версию Open Headunit, которая отображается на экране «Справка и поддержка».</string>
     <string name="support_rules_logs_title">Прикрепите логи сразу после проблемы</string>
     <string name="support_rules_logs_desc">Перейдите в настройки на вкладку «Расширенные», включите «Режим отладки» в разделе «Отладка», воспроизведите проблему, затем сразу нажмите «Выгрузка логов», чтобы лог охватил момент сбоя, а не только запуск. Прикрепите этот файл к обращению.</string>
     <string name="support_rules_search_title">Без дублей</string>

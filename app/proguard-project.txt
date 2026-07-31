@@ -7,9 +7,9 @@
 
 # --- Generated Proto Classes ---
 # Keep all generated protocol buffer classes and their members
--keep class com.andrerinas.headunitrevived.aap.protocol.proto.** { *; }
--keep interface com.andrerinas.headunitrevived.aap.protocol.proto.** { *; }
--keep enum com.andrerinas.headunitrevived.aap.protocol.proto.** { *; }
+-keep class com.andrerinas.openheadunit.aap.protocol.proto.** { *; }
+-keep interface com.andrerinas.openheadunit.aap.protocol.proto.** { *; }
+-keep enum com.andrerinas.openheadunit.aap.protocol.proto.** { *; }
 
 # --- Reflection Targets ---
 # Ensure these system classes are kept and their members are accessible via reflection
@@ -22,17 +22,17 @@
 -keep class androidx.fragment.app.FragmentContainerView { *; }
 
 # Keep all fragments in the main package (referenced in nav_graph.xml)
--keep class com.andrerinas.headunitrevived.main.** { *; }
--keep class com.andrerinas.headunitrevived.main.settings.** { *; }
+-keep class com.andrerinas.openheadunit.main.** { *; }
+-keep class com.andrerinas.openheadunit.main.settings.** { *; }
 
 # --- App Logic ---
 # Keep specific app classes if needed (e.g. accessed via JNI or reflection)
-# -keep class com.andrerinas.headunitrevived.decoder.** { *; }
+# -keep class com.andrerinas.openheadunit.decoder.** { *; }
 
 # --- JNI ---
--keep class com.andrerinas.headunitrevived.aap.AapSslNative { *; }
--keep class com.andrerinas.headunitrevived.decoder.FfmpegHevcDecoder { *; }
--keep class com.andrerinas.headunitrevived.decoder.FfmpegHevcDecoder$Companion { *; }
+-keep class com.andrerinas.openheadunit.aap.AapSslNative { *; }
+-keep class com.andrerinas.openheadunit.decoder.FfmpegHevcDecoder { *; }
+-keep class com.andrerinas.openheadunit.decoder.FfmpegHevcDecoder$Companion { *; }
 
 # --- Conscrypt Rules ---
 -dontwarn org.conscrypt.**

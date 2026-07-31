@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Meniu</string>
     <string name="settings">Setări</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Mod local</string>
     <string name="to_android_auto">Către Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Elimină</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -167,9 +167,9 @@
     <string name="usb_auto_connect">Conectare automată USB</string>
     <string name="usb_auto_connect_description">Conectează automat un dispozitiv USB cunoscut când deschizi aplicația.</string>
     <string name="auto_start_bt_label">Pornire automată pe Bluetooth</string>
-    <string name="auto_start_bt_description">Deschide automat Headunit Revived când se conectează un anumit dispozitiv Bluetooth.</string>
+    <string name="auto_start_bt_description">Deschide automat Open Headunit când se conectează un anumit dispozitiv Bluetooth.</string>
     <string name="auto_start_wifi_label">Pornire automată pe WiFi</string>
-    <string name="auto_start_wifi_description">Deschide automat Headunit Revived când se conectează la un SSID WiFi specific.</string>
+    <string name="auto_start_wifi_description">Deschide automat Open Headunit când se conectează la un SSID WiFi specific.</string>
     <string name="auto_start_wifi_ssid_label">SSID WiFi</string>
     <string name="auto_start_wifi_ssid_description">Conectează doar dacă este asociat cu acest SSID WiFi</string>
     <string name="auto_start_wifi_warning">Funcție legacy: S-ar putea să nu funcționeze fiabil pe Android 8+ din cauza restricțiilor de fundal. Asigură-te că aplicația este exclusă de la optimizarea bateriei.</string>
@@ -194,7 +194,7 @@
     <string name="bt_permission_denied_title">Permisiune Bluetooth necesară</string>
     <string name="bt_permission_denied_message">E nevoie de permisiunea Bluetooth pentru a selecta dispozitivele asociate. Te rog să o acorzi din setările aplicației.</string>
     <string name="overlay_permission_title">Permisiune pornire în fundal</string>
-    <string name="overlay_permission_description">Pentru a lăsa Headunit Revived să se deschidă automat la conectarea Bluetooth-ului, activează permisiunea \"Afișare peste alte aplicații\" în ecranul următor.</string>
+    <string name="overlay_permission_description">Pentru a lăsa Open Headunit să se deschidă automat la conectarea Bluetooth-ului, activează permisiunea \"Afișare peste alte aplicații\" în ecranul următor.</string>
     <string name="open_settings">Setări</string>
     <string name="wireless_connection_settings">Conexiune wireless</string>
     <string name="right_hand_drive">Volan pe dreapta</string>
@@ -274,9 +274,9 @@
     <!-- Info Settings -->
     <string name="category_info">Informații</string>
     <string name="about">Despre &amp; Suport</string>
-    <string name="about_description">Află mai multe despre Headunit Revived</string>
+    <string name="about_description">Află mai multe despre Open Headunit</string>
     <string name="version">Versiune</string>
-    <string name="about_title">Despre Headunit Revived</string>
+    <string name="about_title">Despre Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -287,7 +287,7 @@
         <b>1. Concentrează-te la drum</b><br/>
         Folosirea acestui software la volan îți poate distrage atenția și e periculoasă. Pune mereu pe primul loc condusul preventiv și respectă regulile de circulație. Folosește aplicația doar când poți face asta în siguranță.<br/><br/>
         <b>2. Limitarea răspunderii</b><br/>
-        Headunit Revived este oferit "ca atare", fără nicio garanție. Dezvoltatorii nu își asumă răspunderea pentru accidente, daune ale mașinii/telefonului sau probleme legale apărute din folosirea acestui software.<br/><br/>
+        Open Headunit este oferit "ca atare", fără nicio garanție. Dezvoltatorii nu își asumă răspunderea pentru accidente, daune ale mașinii/telefonului sau probleme legale apărute din folosirea acestui software.<br/><br/>
         <b>3. Fără afiliere</b><br/>
         Acest proiect este independent, open-source și nu este asociat, sponsorizat sau conectat în niciun fel cu Google LLC sau brandul Android Auto.
     ]]></string>
@@ -335,7 +335,7 @@
     <string name="wifi_disconnect_toast">Android Auto deconectat: Dacă folosiți AA wireless, dezactivați \"Comutare între rețele\" sau \"Accelerare rețea\" în setările WiFi ale telefonului</string>
     <string name="reset_usb_option">Resetează conexiunea USB</string>
     <string name="reset_usb_timeout">Dispozitivul USB nu a fost găsit. Verifică conexiunea.</string>
-    <string name="notification_service_running">Headunit Revived rulează</string>
+    <string name="notification_service_running">Open Headunit rulează</string>
     <string name="notification_projection_active">Android Auto este proiectat</string>
     <string name="shortcut_connect_title">Conectare</string>
     <string name="shortcut_connect_desc">Conectează ultimul dispozitiv știut</string>
@@ -563,7 +563,7 @@
     <string name="settings_backup_saved_to">Copia de rezervă a setărilor salvată în:\n%1$s</string>
     <string name="share_settings_backup">Partajează copia de rezervă</string>
     <string name="import_settings">Importă setările</string>
-    <string name="import_settings_description">Restaurează setările dintr-o copie de rezervă Headunit Revived</string>
+    <string name="import_settings_description">Restaurează setările dintr-o copie de rezervă Open Headunit</string>
     <string name="import_settings_app_folder">Importă din folderul de copii al aplicației</string>
     <string name="import_settings_downloads">Importă din Descărcări</string>
     <string name="import_settings_choose_file">Alege fișierul copiei de rezervă</string>
@@ -571,8 +571,8 @@
     <string name="settings_imported">Setări importate: %1$d aplicate, %2$d omise</string>
     <string name="settings_import_failed">Importul setărilor a eșuat: %1$s</string>
     <string name="no_settings_backups_title">Nicio copie de rezervă găsită</string>
-    <string name="no_settings_backups_message">Nu s-au găsit copii de rezervă Headunit Revived în folderul aplicației. Exportați mai întâi o copie, apoi importați-o de aici.</string>
-    <string name="no_settings_backups_downloads_message">Nu s-au găsit copii de rezervă Headunit Revived în Descărcări. Exportați mai întâi o copie în Descărcări, apoi importați-o de aici.</string>
+    <string name="no_settings_backups_message">Nu s-au găsit copii de rezervă Open Headunit în folderul aplicației. Exportați mai întâi o copie, apoi importați-o de aici.</string>
+    <string name="no_settings_backups_downloads_message">Nu s-au găsit copii de rezervă Open Headunit în Descărcări. Exportați mai întâi o copie în Descărcări, apoi importați-o de aici.</string>
     <string name="no_file_picker_title">Niciun selector de fișiere disponibil</string>
     <string name="no_file_picker_message">Acest dispozitiv nu are un selector de fișiere compatibil. Puteți utiliza Descărcări sau folderul copiei de rezervă al aplicației.</string>
     <string name="storage_permission_denied_backup">Permisiunea de stocare a fost refuzată. Descărcările nu au putut fi utilizate.</string>
@@ -663,7 +663,7 @@
     <string name="onb_next">Următorul</string>
     <string name="onb_skip">Omite</string>
     <string name="onb_ready_finish">Finalizează</string>
-    <string name="onb_welcome_title">Bine ai venit în Headunit Revived</string>
+    <string name="onb_welcome_title">Bine ai venit în Open Headunit</string>
     <string name="onb_welcome_body">Această configurare rapidă scanează dispozitivul și alege cele mai bune setări video, de afișare și mod de noapte pentru tine. Poți schimba oricând totul mai târziu în Setări.</string>
     <string name="onb_safety_title">Siguranța pe primul loc</string>
     <string name="onb_safety_accept">Am citit și accept termenii</string>
@@ -752,7 +752,7 @@
     <string name="support_rules_connection_title">Spune cum te conectezi</string>
     <string name="support_rules_connection_desc">Cablu USB, adaptor wireless USB, WiFi Direct, WiFi (headunit server) sau Self Mode. Dacă este wireless, adaugă modelul adaptorului sau dongle-ului.</string>
     <string name="support_rules_appversion_title">Include versiunea aplicației</string>
-    <string name="support_rules_appversion_desc">Versiunea Headunit Revived, afișată pe ecranul Despre.</string>
+    <string name="support_rules_appversion_desc">Versiunea Open Headunit, afișată pe ecranul Despre.</string>
     <string name="support_rules_logs_title">Atașează logurile, imediat după ce se întâmplă</string>
     <string name="support_rules_logs_desc">Mergi în Setări la fila Avansate, activează Mod depanare (Debug) în secțiunea Depanare, reproduci problema, apoi apasă Exportă logurile imediat după, ca logul să acopere momentul în care s-a produs eroarea, nu doar pornirea. Atașează acel fișier la problema ta.</string>
     <string name="support_rules_search_title">Fără duplicate</string>

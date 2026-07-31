@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">القائمة</string>
     <string name="settings">الإعدادات</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">الوضع الذاتي</string>
     <string name="to_android_auto">إلى Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">إزالة</string>
     <string name="usb">USB</string>
     <string name="wifi">واي فاي</string>
@@ -151,9 +151,9 @@
     <string name="usb_auto_connect">الاتصال التلقائي بـ USB</string>
     <string name="usb_auto_connect_description">الاتصال تلقائيا بجهاز USB معروف عند فتح التطبيق.</string>
     <string name="auto_start_bt_label">التشغيل التلقائي عبر البلوتوث</string>
-    <string name="auto_start_bt_description">فتح Headunit Revived تلقائيا عند اتصال جهاز بلوتوث محدد.</string>
+    <string name="auto_start_bt_description">فتح Open Headunit تلقائيا عند اتصال جهاز بلوتوث محدد.</string>
     <string name="auto_start_wifi_label">تشغيل تلقائي عبر الواي فاي</string>
-    <string name="auto_start_wifi_description">فتح Headunit Revived تلقائياً عند الاتصال بشبكة واي فاي محددة (SSID).</string>
+    <string name="auto_start_wifi_description">فتح Open Headunit تلقائياً عند الاتصال بشبكة واي فاي محددة (SSID).</string>
     <string name="auto_start_wifi_ssid_label">اسم شبكة الواي فاي (SSID)</string>
     <string name="auto_start_wifi_ssid_description">الاتصال فقط عند الارتباط بشبكة الواي فاي هذه</string>
     <string name="auto_start_wifi_warning">ميزة قديمة: قد لا تعمل بشكل موثوق على Android 8+ بسبب قيود الخلفية. تأكد من استثناء التطبيق من تحسين البطارية.</string>
@@ -178,7 +178,7 @@
     <string name="bt_permission_denied_title">مطلوب إذن البلوتوث</string>
     <string name="bt_permission_denied_message">إذن البلوتوث مطلوب لاختيار الأجهزة المقترنة. يرجى منحه في إعدادات التطبيق.</string>
     <string name="overlay_permission_title">إذن البدء في الخلفية</string>
-    <string name="overlay_permission_description">للسماح لـ Headunit Revived بالفتح التلقائي عند اتصال البلوتوث، يرجى تفعيل إذن \"العرض فوق التطبيقات الأخرى\" في الشاشة التالية.</string>
+    <string name="overlay_permission_description">للسماح لـ Open Headunit بالفتح التلقائي عند اتصال البلوتوث، يرجى تفعيل إذن \"العرض فوق التطبيقات الأخرى\" في الشاشة التالية.</string>
     <string name="open_settings">الإعدادات</string>
     <string name="wireless_connection_settings">اتصال لاسلكي</string>
     <string name="right_hand_drive">القيادة على اليمين</string>
@@ -258,9 +258,9 @@
     <!-- Info Settings -->
     <string name="category_info">المعلومات</string>
     <string name="about">حول &amp; الدعم</string>
-    <string name="about_description">الحصول على مزيد من المعلومات حول Headunit Revived</string>
+    <string name="about_description">الحصول على مزيد من المعلومات حول Open Headunit</string>
     <string name="version">الإصدار</string>
-    <string name="about_title">حول Headunit Revived</string>
+    <string name="about_title">حول Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -271,7 +271,7 @@
         <b>١. التركيز على الطريق</b><br/>
         استخدام هذا البرنامج أثناء القيادة قد يشتت الانتباه ويكون خطيرا. أول الأولوية دائما للقيادة الآمنة والالتزام بأنظمة المرور المحلية. استخدم هذا التطبيق فقط عند الأمان التام.<br/><br/>
         <b>٢. تحديد المسؤولية</b><br/>
-        يقدم Headunit Revived "كما هو" دون أي ضمان من أي نوع. لا يتحمل المطورون أي مسؤولية عن الحوادث أو الأضرار التي تلحق بسيارتك/جهازك أو أي تبعات قانونية ناجمة عن استخدام هذا البرنامج.<br/><br/>
+        يقدم Open Headunit "كما هو" دون أي ضمان من أي نوع. لا يتحمل المطورون أي مسؤولية عن الحوادث أو الأضرار التي تلحق بسيارتك/جهازك أو أي تبعات قانونية ناجمة عن استخدام هذا البرنامج.<br/><br/>
         <b>٣. عدم الانتساب</b><br/>
         هذا المشروع مبادرة مفتوحة المصدر مستقلة، وليس له أي صلة أو اعتماد أو ارتباط بشركة Google LLC أو علامة Android Auto التجارية.
     ]]></string>
@@ -317,7 +317,7 @@
     <string name="connection_interrupted">فُقد الاتصال</string>
     <string name="connection_interrupted_detail">جارٍ إعادة المحاولة…</string>
     <string name="wifi_disconnect_toast">تم قطع اتصال Android Auto: إذا كنت تستخدم AA لاسلكي، عطّل \"التبديل بين الشبكات\" أو \"تسريع الشبكة\" في إعدادات WiFi الهاتف</string>
-    <string name="notification_service_running">Headunit Revived يعمل</string>
+    <string name="notification_service_running">Open Headunit يعمل</string>
     <string name="notification_projection_active">Android Auto قيد الإسقاط</string>
     <string name="shortcut_connect_title">اتصال</string>
     <string name="shortcut_connect_desc">الاتصال بآخر جهاز معروف</string>
@@ -562,7 +562,7 @@
     <string name="settings_backup_saved_to">تم حفظ النسخة الاحتياطية في:\n%1$s</string>
     <string name="share_settings_backup">مشاركة النسخة الاحتياطية</string>
     <string name="import_settings">استيراد الإعدادات</string>
-    <string name="import_settings_description">استعادة الإعدادات من نسخة احتياطية لـ Headunit Revived</string>
+    <string name="import_settings_description">استعادة الإعدادات من نسخة احتياطية لـ Open Headunit</string>
     <string name="import_settings_app_folder">استيراد من مجلد نسخ التطبيق</string>
     <string name="import_settings_downloads">استيراد من التنزيلات</string>
     <string name="import_settings_choose_file">اختر ملف النسخة الاحتياطية</string>
@@ -570,8 +570,8 @@
     <string name="settings_imported">تم استيراد الإعدادات: %1$d مطبَّقة، %2$d تم تجاوزها</string>
     <string name="settings_import_failed">فشل استيراد الإعدادات: %1$s</string>
     <string name="no_settings_backups_title">لا توجد نسخ احتياطية</string>
-    <string name="no_settings_backups_message">لم يتم العثور على أي نسخ احتياطية لـ Headunit Revived في مجلد نسخ التطبيق. قم بتصدير نسخة احتياطية أولاً ثم استوردها من هنا.</string>
-    <string name="no_settings_backups_downloads_message">لم يتم العثور على أي نسخ احتياطية لـ Headunit Revived في التنزيلات. قم بتصدير نسخة احتياطية إلى التنزيلات أولاً ثم استوردها من هنا.</string>
+    <string name="no_settings_backups_message">لم يتم العثور على أي نسخ احتياطية لـ Open Headunit في مجلد نسخ التطبيق. قم بتصدير نسخة احتياطية أولاً ثم استوردها من هنا.</string>
+    <string name="no_settings_backups_downloads_message">لم يتم العثور على أي نسخ احتياطية لـ Open Headunit في التنزيلات. قم بتصدير نسخة احتياطية إلى التنزيلات أولاً ثم استوردها من هنا.</string>
     <string name="no_file_picker_title">لا يوجد منتقي ملفات</string>
     <string name="no_file_picker_message">هذا الجهاز لا يحتوي على منتقي ملفات متوافق. يمكنك استخدام التنزيلات أو مجلد نسخ التطبيق بدلاً من ذلك.</string>
     <string name="storage_permission_denied_backup">تم رفض إذن التخزين. تعذر استخدام التنزيلات.</string>
@@ -662,7 +662,7 @@
     <string name="onb_next">التالي</string>
     <string name="onb_skip">تخطي</string>
     <string name="onb_ready_finish">إنهاء</string>
-    <string name="onb_welcome_title">مرحبا بك في Headunit Revived</string>
+    <string name="onb_welcome_title">مرحبا بك في Open Headunit</string>
     <string name="onb_welcome_body">يفحص هذا الإعداد السريع جهازك ويختار لك أفضل إعدادات الفيديو والعرض والوضع الداكن. يمكنك تغيير كل شيء لاحقا في الإعدادات.</string>
     <string name="onb_safety_title">السلامة أولا</string>
     <string name="onb_safety_accept">لقد قرأت الشروط وأوافق عليها</string>
@@ -756,7 +756,7 @@
     <string name="support_rules_connection_title">اذكر طريقة الاتصال</string>
     <string name="support_rules_connection_desc">كابل USB، أو محول USB لاسلكي، أو WiFi Direct، أو WiFi (خادم وحدة الرأس)، أو Self Mode. إن كان الاتصال لاسلكيًا، أضف طراز المحول أو الدونغل.</string>
     <string name="support_rules_appversion_title">أرفق إصدار التطبيق</string>
-    <string name="support_rules_appversion_desc">إصدار Headunit Revived، المعروض في شاشة حول.</string>
+    <string name="support_rules_appversion_desc">إصدار Open Headunit، المعروض في شاشة حول.</string>
     <string name="support_rules_logs_title">أرفق السجلات فور حدوث المشكلة</string>
     <string name="support_rules_logs_desc">انتقل إلى الإعدادات وافتح تبويب متقدم، ثم فعّل وضع التصحيح في قسم تصحيح الأخطاء، وأعد إنتاج المشكلة، ثم اضغط تصدير السجلات مباشرة بعدها حتى يغطي السجل لحظة الخلل لا مجرد بداية التشغيل. أرفق الملف بمشكلتك.</string>
     <string name="support_rules_search_title">لا تكرار</string>

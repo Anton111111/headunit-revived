@@ -4,7 +4,7 @@ import org.gradle.kotlin.dsl.repositories
 include(":app", ":contract")
 
 
-rootProject.name = "headunit"
+rootProject.name = "open-headunit"
 
 pluginManagement {
     repositories {

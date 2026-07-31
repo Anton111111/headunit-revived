@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <com.andrerinas.headunitrevived.view.DpiPickerView
+            <com.andrerinas.openheadunit.view.DpiPickerView
                 android:id="@+id/dpi_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

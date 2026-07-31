@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">მენიუ</string>
     <string name="settings">პარამეტრები</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">ავტონომიური რეჟიმი</string>
     <string name="to_android_auto">Android Auto-ზე გადასვლა</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">წაშლა</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -173,7 +173,7 @@
     <string name="usb_auto_connect">USB ავტო-კავშირი</string>
     <string name="usb_auto_connect_description">ცნობილ USB მოწყობილობასთან ავტომატური დაკავშირება აპლიკაციის გახსნისას.</string>
     <string name="auto_start_bt_label">ავტო-გაშვება Bluetooth-ით</string>
-    <string name="auto_start_bt_description">Headunit Revived-ის ავტომატური გახსნა კონკრეტული Bluetooth მოწყობილობის დაკავშირებისას.</string>
+    <string name="auto_start_bt_description">Open Headunit-ის ავტომატური გახსნა კონკრეტული Bluetooth მოწყობილობის დაკავშირებისას.</string>
     <string name="listen_for_usb_devices_label">USB მოწყობილობების მონიტორინგი</string>
     <string name="listen_for_usb_devices_description">USB მოწყობილობის შეერთებისას Android სისტემური მოთხოვნის ჩვენება.</string>
     <string name="show_toast_messages">Toast შეტყობინებების ჩვენება</string>
@@ -190,7 +190,7 @@
     <string name="select_bt_device">აირჩიეთ Bluetooth მოწყობილობა</string>
     <string name="bt_device_not_set">არ არის მითითებული</string>
     <string name="auto_start_wifi_label">ავტო-გაშვება WiFi-ით</string>
-    <string name="auto_start_wifi_description">Headunit Revived-ის ავტომატური გახსნა კონკრეტულ WiFi SSID-თან დაკავშირებისას.</string>
+    <string name="auto_start_wifi_description">Open Headunit-ის ავტომატური გახსნა კონკრეტულ WiFi SSID-თან დაკავშირებისას.</string>
     <string name="auto_start_wifi_ssid_label">WiFi SSID</string>
     <string name="auto_start_wifi_ssid_description">დაკავშირება მხოლოდ ამ WiFi SSID-თან ყოფნისას</string>
     <string name="auto_start_wifi_warning">მოძველებული ფუნქცია: შესაძლოა საიმედოდ არ იმუშაოს Android 8+ ვერსიებზე ფონური შეზღუდვების გამო. დარწმუნდით, რომ აპლიკაცია ამოღებულია ელემენტის ოპტიმიზაციიდან.</string>
@@ -199,7 +199,7 @@
     <string name="bt_permission_denied_title">საჭიროა Bluetooth ნებართვა</string>
     <string name="bt_permission_denied_message">დაწყვილებული მოწყობილობების ასარჩევად საჭიროა Bluetooth ნებართვა. გთხოვთ, მიანიჭოთ იგი აპლიკაციის პარამეტრებიდან.</string>
     <string name="overlay_permission_title">ფონური გაშვების ნებართვა</string>
-    <string name="overlay_permission_description">იმისათვის, რომ Headunit Revived ავტომატურად გაიხსნას Bluetooth-ის დაკავშირებისას, გთხოვთ, შემდეგ ეკრანზე ჩართოთ ნებართვა \"ჩვენება სხვა აპების ზემოთ\" (Display over other apps).</string>
+    <string name="overlay_permission_description">იმისათვის, რომ Open Headunit ავტომატურად გაიხსნას Bluetooth-ის დაკავშირებისას, გთხოვთ, შემდეგ ეკრანზე ჩართოთ ნებართვა \"ჩვენება სხვა აპების ზემოთ\" (Display over other apps).</string>
     <string name="open_settings">პარამეტრები</string>
     <string name="right_hand_drive">მარჯვენასაჭიანი მართვა</string>
     <string name="right_hand_drive_description">ინტერფეისის მორგება მარჯვენა საჭის მქონე ავტომობილებისთვის</string>
@@ -289,9 +289,9 @@
 
     <string name="category_info">ინფორმაცია</string>
     <string name="about">შესახებ &amp; მხარდაჭერა</string>
-    <string name="about_description">მიიღეთ მეტი ინფორმაცია Headunit Revived-ის შესახებ</string>
+    <string name="about_description">მიიღეთ მეტი ინფორმაცია Open Headunit-ის შესახებ</string>
     <string name="version">ვერსია</string>
-    <string name="about_title">Headunit Revived-ის შესახებ</string>
+    <string name="about_title">Open Headunit-ის შესახებ</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <string name="disclaimer_title">უსაფრთხოება &amp; პასუხისმგებლობა</string>
@@ -301,7 +301,7 @@
         <b>1. ყურადღება გზაზე</b><br/>
         მართვის დროს ამ პროგრამის გამოყენებამ შეიძლება გაგიფანტოთ ყურადღება და შექმნას საფრთხე. ყოველთვის მიანიჭეთ უპირატესობა უსაფრთხო მართვას და დაიცავით საგზაო მოძრაობის ყველა ადგილობრივი წესი. გამოიყენეთ ეს აპლიკაცია მხოლოდ მაშინ, როდესაც ეს უსაფრთხოა.<br/><br/>
         <b>2. პასუხისმგებლობის შეზღუდვა</b><br/>
-        Headunit Revived მოწოდებულია "როგორც არის" (as is) ყოველგვარი გარანტიის გარეშე. დეველოპერები არ იღებენ პასუხისმგებლობას რაიმე სახის ავარიაზე, თქვენი ავტომობილის/მოწყობილობის დაზიანებაზე ან სამართლებრივ შედეგებზე, რომლებიც გამოწვეულია ამ პროგრამის გამოყენებით.<br/><br/>
+        Open Headunit მოწოდებულია "როგორც არის" (as is) ყოველგვარი გარანტიის გარეშე. დეველოპერები არ იღებენ პასუხისმგებლობას რაიმე სახის ავარიაზე, თქვენი ავტომობილის/მოწყობილობის დაზიანებაზე ან სამართლებრივ შედეგებზე, რომლებიც გამოწვეულია ამ პროგრამის გამოყენებით.<br/><br/>
         <b>3. დამოუკიდებლობა</b><br/>
         ეს პროექტი არის დამოუკიდებელი ღია კოდის მქონე ინიციატივა და არ არის ასოცირებული, დამტკიცებული ან დაკავშირებული Google LLC-სთან ან Android Auto ბრენდთან.
     ]]></string>
@@ -334,7 +334,7 @@
     <string name="export_settings_downloads">ჩამოტვირთვებში (Downloads) შენახვა</string>
     <string name="export_settings_app_folder">აპის სარეზერვო საქაღალდეში შენახვა</string>
     <string name="import_settings">პარამეტრების იმპორტი</string>
-    <string name="import_settings_description">პარამეტრების აღდგენა Headunit Revived-ის სარეზერვო ასლიდან</string>
+    <string name="import_settings_description">პარამეტრების აღდგენა Open Headunit-ის სარეზერვო ასლიდან</string>
     <string name="import_settings_choose_file">აირჩიეთ სარეზერვო ფაილი</string>
     <string name="import_settings_downloads">იმპორტი ჩამოტვირთვებიდან (Downloads)</string>
     <string name="import_settings_app_folder">იმპორტი აპის სარეზერვო საქაღალდიდან</string>
@@ -352,8 +352,8 @@
     <string name="no_file_picker_title">ფაილების მენეჯერი ვერ მოიძებნა</string>
     <string name="no_file_picker_message">ამ მოწყობილობას არ აქვს თავსებადი ფაილების მენეჯერი. ამის ნაცვლად შეგიძლიათ გამოიყენოთ ჩამოტვირთვები ან აპის სარეზერვო საქაღალდე.</string>
     <string name="no_settings_backups_title">სარეზერვო ასლები ვერ მოიძებნა</string>
-    <string name="no_settings_backups_message">აპის სარეზერვო საქაღალდეში Headunit Revived-ის ასლები ვერ მოიძებნა. ჯერ გააკეთეთ ექსპორტი ამ საქაღალდეში, შემდეგ კი სცადეთ იმპორტი.</string>
-    <string name="no_settings_backups_downloads_message">ჩამოტვირთვებში Headunit Revived-ის სარეზერვო ასლები ვერ მოიძებნა. ჯერ გააკეთეთ ექსპორტი ჩამოტვირთვებში, შემდეგ კი სცადეთ იმპორტი.</string>
+    <string name="no_settings_backups_message">აპის სარეზერვო საქაღალდეში Open Headunit-ის ასლები ვერ მოიძებნა. ჯერ გააკეთეთ ექსპორტი ამ საქაღალდეში, შემდეგ კი სცადეთ იმპორტი.</string>
+    <string name="no_settings_backups_downloads_message">ჩამოტვირთვებში Open Headunit-ის სარეზერვო ასლები ვერ მოიძებნა. ჯერ გააკეთეთ ექსპორტი ჩამოტვირთვებში, შემდეგ კი სცადეთ იმპორტი.</string>
     <string name="share_settings_backup">პარამეტრების სარეზერვო ასლის გაზიარება</string>
     <string name="logs_exported">ლოგების ექსპორტი შესრულებულია</string>
     <string name="log_saved_to">ლოგი შენახულია აქ:\n%s</string>
@@ -376,7 +376,7 @@
     <string name="wifi_disconnect_toast">Android Auto გაითიშა: თუ იყენებთ უ線ო კავშირს, გამორთეთ ფუნქციები \"Switch between networks\" ან \"Network acceleration\" ტელეფონის WiFi პარამეტრებიდან</string>
     <string name="reset_usb_option">USB კავშირის გადატვირთვა</string>
     <string name="reset_usb_timeout">USB მოწყობილობა ვერ მოიძებნა. გთხოვთ, შეამოწმოთ კავშირი.</string>
-    <string name="notification_service_running">Headunit Revived აქტიურია</string>
+    <string name="notification_service_running">Open Headunit აქტიურია</string>
     <string name="notification_projection_active">Android Auto პროეცირებულია</string>
     <string name="shortcut_connect_title">დაკავშირება</string>
     <string name="shortcut_connect_desc">ავტო-კავშირი ბოლო ტელეფონთან</string>
@@ -595,7 +595,7 @@
     <string name="onb_next">შემდეგი</string>
     <string name="onb_skip">გამოტოვება</string>
     <string name="onb_ready_finish">დასრულება</string>
-    <string name="onb_welcome_title">კეთილი იყოს თქვენი მობრძანება Headunit Revived-ში</string>
+    <string name="onb_welcome_title">კეთილი იყოს თქვენი მობრძანება Open Headunit-ში</string>
     <string name="onb_welcome_body">ეს სწრაფი გამართვა ასკანირებს თქვენს მოწყობილობას და ირჩევს ვიდეოს, ეკრანისა და ბნელი რეჟიმის საუკეთესო პარამეტრებს. ყველაფრის შეცვლა მოგვიანებით პარამეტრებში შეგიძლიათ.</string>
     <string name="onb_safety_title">უპირველესად უსაფრთხოება</string>
     <string name="onb_safety_accept">წავიკითხე და ვეთანხმები პირობებს</string>
@@ -683,7 +683,7 @@
     <string name="support_rules_connection_title">მიუთითეთ, როგორ უკავშირდებით</string>
     <string name="support_rules_connection_desc">USB კაბელი, USB უსადენო ადაპტერი, WiFi Direct, WiFi (headunit server) ან Self Mode. თუ კავშირი უსადენოა, დაამატეთ ადაპტერის ან დონგლის მოდელი.</string>
     <string name="support_rules_appversion_title">მიუთითეთ აპის ვერსია</string>
-    <string name="support_rules_appversion_desc">Headunit Revived-ის ვერსია, რომელიც ნაჩვენებია შესახებ ეკრანზე.</string>
+    <string name="support_rules_appversion_desc">Open Headunit-ის ვერსია, რომელიც ნაჩვენებია შესახებ ეკრანზე.</string>
     <string name="support_rules_logs_title">მიამაგრეთ ლოგი — პრობლემის შემდეგ დაუყოვნებლივ</string>
     <string name="support_rules_logs_desc">გახსენით პარამეტრები, გადადით დამატებითი ჩანართზე, ჩართეთ გამართვის რეჟიმი გამართვა განყოფილებაში, გაიმეორეთ პრობლემა, შემდეგ დაუყოვნებლივ შეეხეთ ლოგების ექსპორტი, რათა ლოგი მოიცავდეს შეცდომის მომენტს და არა მხოლოდ გაშვებას. მიამაგრეთ ეს ფაილი საკითხს.</string>
     <string name="support_rules_search_title">დუბლიკატები არ გახსნათ</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Menu</string>
     <string name="settings">Instellingen</string>
     <string name="title_activity_settings">Instellingen</string>
@@ -11,7 +11,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Self Mode</string>
     <string name="to_android_auto">Naar Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Verwijder</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -150,9 +150,9 @@
     <string name="usb_auto_connect">Automatisch verbinden met USB</string>
     <string name="usb_auto_connect_description">Automatisch verbinden met een bekend USB-apparaat wanneer de applicatie wordt geopend.</string>
     <string name="auto_start_bt_label">Automatisch starten bij Bluetooth</string>
-    <string name="auto_start_bt_description">Start Headunit Revived automatisch wanneer een specifiek Bluetooth-apparaat verbinding maakt.</string>
+    <string name="auto_start_bt_description">Start Open Headunit automatisch wanneer een specifiek Bluetooth-apparaat verbinding maakt.</string>
     <string name="auto_start_wifi_label">Automatisch starten bij WiFi</string>
-    <string name="auto_start_wifi_description">Opent Headunit Revived automatisch bij verbinding met een specifieke WiFi-SSID.</string>
+    <string name="auto_start_wifi_description">Opent Open Headunit automatisch bij verbinding met een specifieke WiFi-SSID.</string>
     <string name="auto_start_wifi_ssid_label">WiFi-SSID</string>
     <string name="auto_start_wifi_ssid_description">Alleen verbinden bij verbinding met deze WiFi-SSID</string>
     <string name="auto_start_wifi_warning">Legacy-functie: Dit werkt mogelijk niet betrouwbaar op Android 8+ vanwege achtergrondbeperkingen. Zorg ervoor dat de app is uitgesloten van batterijoptimalisatie.</string>
@@ -177,7 +177,7 @@
     <string name="bt_permission_denied_title">Bluetooth-toestemming vereist</string>
     <string name="bt_permission_denied_message">Bluetooth-toestemming is nodig om gekoppelde apparaten te selecteren. Verleen deze in de app-instellingen.</string>
     <string name="overlay_permission_title">Toestemming voor starten op achtergrond</string>
-    <string name="overlay_permission_description">Om Headunit Revived automatisch te openen wanneer Bluetooth verbinding maakt, dient u de toestemming \"Weergeven over andere apps\" in te schakelen in het volgende scherm.</string>
+    <string name="overlay_permission_description">Om Open Headunit automatisch te openen wanneer Bluetooth verbinding maakt, dient u de toestemming \"Weergeven over andere apps\" in te schakelen in het volgende scherm.</string>
     <string name="open_settings">Instellingen</string>
     <string name="wireless_connection_settings">Draadloze verbinding</string>
     <string name="right_hand_drive">Rechts hand gestuurd</string>
@@ -257,9 +257,9 @@
     <!-- Info Settings -->
     <string name="category_info">Info</string>
     <string name="about">Over &amp; Support</string>
-    <string name="about_description">Meer informatie over Headunit Revived</string>
+    <string name="about_description">Meer informatie over Open Headunit</string>
     <string name="version">Versie</string>
-    <string name="about_title">Over Headunit Revived</string>
+    <string name="about_title">Over Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -270,7 +270,7 @@
         <b>1. Focus on the Road</b><br/>
         Operating this software while driving can be distracting and dangerous. Always prioritize safe driving and adhere to all local traffic regulations. Use this application only when it is safe to do so.<br/><br/>
         <b>2. Limitation of Liability</b><br/>
-        Headunit Revived is provided "as is" without warranty of any kind. The developers assume no liability for any accidents, damage to your vehicle/device, or legal consequences arising from the use of this software.<br/><br/>
+        Open Headunit is provided "as is" without warranty of any kind. The developers assume no liability for any accidents, damage to your vehicle/device, or legal consequences arising from the use of this software.<br/><br/>
         <b>3. No Affiliation</b><br/>
         This project is an independent open-source initiative and is not affiliated with, endorsed by, or connected to Google LLC or the Android Auto brand.
     ]]></string>
@@ -318,7 +318,7 @@
     <string name="wifi_disconnect_toast">Android Auto losgekoppeld: Bij draadloze AA, schakel \"Wisselen tussen netwerken\" of \"Netwerkversnelling\" uit in WiFi-instellingen van telefoon</string>
     <string name="reset_usb_option">USB-verbinding resetten</string>
     <string name="reset_usb_timeout">USB-apparaat niet gevonden. Controleer de verbinding.</string>
-    <string name="notification_service_running">Headunit Revived is actief</string>
+    <string name="notification_service_running">Open Headunit is actief</string>
     <string name="notification_projection_active">Android Auto wordt geprojecteerd</string>
     <string name="shortcut_connect_title">Verbinden</string>
     <string name="shortcut_connect_desc">Verbinden met laatst bekende apparaat</string>
@@ -562,7 +562,7 @@
     <string name="settings_backup_saved_to">Back-up opgeslagen in:\n%1$s</string>
     <string name="share_settings_backup">Back-up delen</string>
     <string name="import_settings">Instellingen importeren</string>
-    <string name="import_settings_description">Herstel instellingen vanuit een Headunit Revived back-up</string>
+    <string name="import_settings_description">Herstel instellingen vanuit een Open Headunit back-up</string>
     <string name="import_settings_app_folder">Importeren uit back-upmap van app</string>
     <string name="import_settings_downloads">Importeren uit Downloads</string>
     <string name="import_settings_choose_file">Back-upbestand kiezen</string>
@@ -570,8 +570,8 @@
     <string name="settings_imported">Instellingen geïmporteerd: %1$d toegepast, %2$d overgeslagen</string>
     <string name="settings_import_failed">Importeren van instellingen mislukt: %1$s</string>
     <string name="no_settings_backups_title">Geen back-ups gevonden</string>
-    <string name="no_settings_backups_message">Er zijn geen Headunit Revived back-ups gevonden in de back-upmap van de app. Exporteer eerst een back-up en importeer deze daarna van hier.</string>
-    <string name="no_settings_backups_downloads_message">Er zijn geen Headunit Revived back-ups gevonden in Downloads. Exporteer eerst een back-up naar Downloads en importeer deze daarna van hier.</string>
+    <string name="no_settings_backups_message">Er zijn geen Open Headunit back-ups gevonden in de back-upmap van de app. Exporteer eerst een back-up en importeer deze daarna van hier.</string>
+    <string name="no_settings_backups_downloads_message">Er zijn geen Open Headunit back-ups gevonden in Downloads. Exporteer eerst een back-up naar Downloads en importeer deze daarna van hier.</string>
     <string name="no_file_picker_title">Geen bestandskiezer beschikbaar</string>
     <string name="no_file_picker_message">Dit apparaat heeft geen compatibele bestandskiezer. Gebruik in plaats daarvan Downloads of de back-upmap van de app.</string>
     <string name="storage_permission_denied_backup">Toegang tot opslag geweigerd. Downloads kon niet worden gebruikt.</string>
@@ -662,7 +662,7 @@
     <string name="onb_next">Volgende</string>
     <string name="onb_skip">Overslaan</string>
     <string name="onb_ready_finish">Voltooien</string>
-    <string name="onb_welcome_title">Welkom bij Headunit Revived</string>
+    <string name="onb_welcome_title">Welkom bij Open Headunit</string>
     <string name="onb_welcome_body">Deze snelle installatie scant je apparaat en kiest de beste video-, weergave- en nachtmodusinstellingen voor je. Je kunt alles later wijzigen in Instellingen.</string>
     <string name="onb_safety_title">Veiligheid eerst</string>
     <string name="onb_safety_accept">Ik heb de voorwaarden gelezen en ga ermee akkoord</string>
@@ -781,7 +781,7 @@
     <string name="support_rules_connection_title">Zeg hoe je verbindt</string>
     <string name="support_rules_connection_desc">USB-kabel, draadloze USB-adapter, WiFi Direct, WiFi (headunit server) of Self Mode. Als het draadloos is, voeg dan het model van de adapter of dongle toe.</string>
     <string name="support_rules_appversion_title">Vermeld de app-versie</string>
-    <string name="support_rules_appversion_desc">De versie van Headunit Revived, te zien op het scherm Over &amp; Support.</string>
+    <string name="support_rules_appversion_desc">De versie van Open Headunit, te zien op het scherm Over &amp; Support.</string>
     <string name="support_rules_logs_title">Voeg logs toe, direct nadat het gebeurt</string>
     <string name="support_rules_logs_desc">Ga naar het tabblad Geavanceerd in Instellingen, zet Debug Modus aan in het gedeelte Debug, reproduceer het probleem en tik daarna meteen op Logs exporteren zodat het logbestand het moment van de fout bevat en niet alleen de start. Voeg dat bestand toe aan je issue.</string>
     <string name="support_rules_search_title">Geen duplicaten</string>

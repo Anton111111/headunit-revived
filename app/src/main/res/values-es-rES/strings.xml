@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Headunit Revived</string>
+    <string name="app_name">Open Headunit</string>
     <string name="menu">Menú</string>
     <string name="settings">Configuración</string>
 
@@ -12,7 +12,7 @@
     <string name="video">Android Auto</string>
     <string name="self_mode">Modo autónomo</string>
     <string name="to_android_auto">A Android Auto</string>
-    <string name="title">Headunit Revived</string>
+    <string name="title">Open Headunit</string>
     <string name="remove">Eliminar</string>
     <string name="usb">USB</string>
     <string name="wifi">WiFi</string>
@@ -151,9 +151,9 @@
     <string name="usb_auto_connect">Conexión automática USB</string>
     <string name="usb_auto_connect_description">Se conecta automáticamente a un dispositivo USB conocido tan pronto como se abre la aplicación.</string>
     <string name="auto_start_bt_label">Autoinicio por Bluetooth</string>
-    <string name="auto_start_bt_description">Abrir Headunit Revived automáticamente al conectar un dispositivo Bluetooth.</string>
+    <string name="auto_start_bt_description">Abrir Open Headunit automáticamente al conectar un dispositivo Bluetooth.</string>
     <string name="auto_start_wifi_label">Inicio automático por WiFi</string>
-    <string name="auto_start_wifi_description">Abrir Headunit Revived automáticamente al conectarse a una red WiFi específica.</string>
+    <string name="auto_start_wifi_description">Abrir Open Headunit automáticamente al conectarse a una red WiFi específica.</string>
     <string name="auto_start_wifi_ssid_label">SSID WiFi</string>
     <string name="auto_start_wifi_ssid_description">Conectar solo cuando se detecte este SSID WiFi</string>
     <string name="auto_start_wifi_warning">Característica heredada: Es posible que esto no funcione correctamente en Android 8+ debido a restricciones de fondo. Asegúrese de excluir la aplicación de la optimización de batería.</string>
@@ -178,7 +178,7 @@
     <string name="bt_permission_denied_title">Permiso de Bluetooth requerido</string>
     <string name="bt_permission_denied_message">Se necesita el permiso de Bluetooth para seleccionar dispositivos emparejados. Concédalo en los ajustes de la app.</string>
     <string name="overlay_permission_title">Permiso de inicio en segundo plano</string>
-    <string name="overlay_permission_description">Para permitir que Headunit Revived se abra automáticamente, active \"Mostrar sobre otras aplicaciones\".</string>
+    <string name="overlay_permission_description">Para permitir que Open Headunit se abra automáticamente, active \"Mostrar sobre otras aplicaciones\".</string>
     <string name="open_settings">Ajustes</string>
     <string name="wireless_connection_settings">Conexión inalámbrica</string>
     <string name="right_hand_drive">Conducción por la derecha</string>
@@ -258,9 +258,9 @@
     <!-- Info Settings -->
     <string name="category_info">Información</string>
     <string name="about">Acerca de</string>
-    <string name="about_description">Más información sobre Headunit Revived</string>
+    <string name="about_description">Más información sobre Open Headunit</string>
     <string name="version">Versión</string>
-    <string name="about_title">Acerca de Headunit Revived</string>
+    <string name="about_title">Acerca de Open Headunit</string>
     <string name="copyright">© 2025-%d André Rinas</string>
 
     <!-- Safety Disclaimer -->
@@ -271,7 +271,7 @@
         <b>1. Céntrese en la carretera</b><br/>
         Usar este software mientras conduce puede ser peligroso. Priorice siempre la seguridad.<br/><br/>
         <b>2. Limitación de responsabilidad</b><br/>
-        Headunit Revived se proporciona "tal cual". Los desarrolladores no asumen responsabilidad por accidentes o daños.<br/><br/>
+        Open Headunit se proporciona "tal cual". Los desarrolladores no asumen responsabilidad por accidentes o daños.<br/><br/>
         <b>3. Sin afiliación</b><br/>
         Este proyecto no está afiliado a Google LLC ni a Android Auto.
     ]]></string>
@@ -317,7 +317,7 @@
     <string name="connection_interrupted">Conexión perdida</string>
     <string name="connection_interrupted_detail">Reintentando…</string>
     <string name="wifi_disconnect_toast">Android Auto desconectado: Si usas AA inalámbrico, desactiva \"Cambiar entre redes\" o \"Aceleración de red\" en ajustes WiFi del móvil</string>
-    <string name="notification_service_running">Headunit Revived ejecutándose</string>
+    <string name="notification_service_running">Open Headunit ejecutándose</string>
     <string name="notification_projection_active">Android Auto proyectado</string>
     <string name="shortcut_connect_title">Conectar</string>
     <string name="shortcut_connect_desc">Conectar al último dispositivo</string>
@@ -561,7 +561,7 @@
     <string name="export_settings_downloads">Guardar en Descargas</string>
     <string name="export_settings_app_folder">Guardar en la carpeta de copias de la app</string>
     <string name="import_settings">Importar ajustes</string>
-    <string name="import_settings_description">Restaurar ajustes desde una copia de seguridad de Headunit Revived</string>
+    <string name="import_settings_description">Restaurar ajustes desde una copia de seguridad de Open Headunit</string>
     <string name="import_settings_choose_file">Elegir archivo de copia</string>
     <string name="import_settings_downloads">Importar desde Descargas</string>
     <string name="import_settings_app_folder">Importar desde la carpeta de copias de la app</string>
@@ -583,8 +583,8 @@
     <string name="no_file_picker_title">No hay selector de archivos disponible</string>
     <string name="no_file_picker_message">Este dispositivo no tiene un selector de archivos compatible. Puedes usar Descargas o la carpeta de copias de la app en su lugar.</string>
     <string name="no_settings_backups_title">No se han encontrado copias de seguridad</string>
-    <string name="no_settings_backups_message">No se han encontrado copias de Headunit Revived en la carpeta de copias de la app. Exporta primero una copia a esa carpeta y luego impórtala desde aquí.</string>
-    <string name="no_settings_backups_downloads_message">No se han encontrado copias de Headunit Revived en Descargas. Exporta primero una copia a Descargas y luego impórtala desde aquí.</string>
+    <string name="no_settings_backups_message">No se han encontrado copias de Open Headunit en la carpeta de copias de la app. Exporta primero una copia a esa carpeta y luego impórtala desde aquí.</string>
+    <string name="no_settings_backups_downloads_message">No se han encontrado copias de Open Headunit en Descargas. Exporta primero una copia a Descargas y luego impórtala desde aquí.</string>
 
     <!-- Keymap: back key label -->
     <string name="key_back">Atrás</string>
@@ -671,7 +671,7 @@
     <string name="onb_next">Siguiente</string>
     <string name="onb_skip">Omitir</string>
     <string name="onb_ready_finish">Finalizar</string>
-    <string name="onb_welcome_title">Bienvenido a Headunit Revived</string>
+    <string name="onb_welcome_title">Bienvenido a Open Headunit</string>
     <string name="onb_welcome_body">Esta configuración rápida analiza tu dispositivo y elige los mejores ajustes de vídeo, pantalla y modo oscuro para ti. Puedes cambiarlo todo más tarde en Configuración.</string>
     <string name="onb_safety_title">La seguridad primero</string>
     <string name="onb_safety_accept">He leído y acepto los términos</string>
@@ -790,7 +790,7 @@
     <string name="support_rules_connection_title">Di cómo te conectas</string>
     <string name="support_rules_connection_desc">Cable USB, adaptador inalámbrico USB, WiFi Direct, WiFi (headunit server) o Self Mode. Si es inalámbrico, añade el modelo del adaptador o dongle.</string>
     <string name="support_rules_appversion_title">Incluye la versión de la app</string>
-    <string name="support_rules_appversion_desc">La versión de Headunit Revived, que aparece en la pantalla Acerca de.</string>
+    <string name="support_rules_appversion_desc">La versión de Open Headunit, que aparece en la pantalla Acerca de.</string>
     <string name="support_rules_logs_title">Adjunta los registros justo cuando ocurra</string>
     <string name="support_rules_logs_desc">Ve a Ajustes, abre la pestaña Avanzado, activa el Modo depuración en la sección Depuración, reproduce el problema y toca Exportar registros enseguida para que el registro cubra el momento del fallo y no solo el arranque. Adjunta ese archivo a tu incidencia.</string>
     <string name="support_rules_search_title">Sin duplicados</string>

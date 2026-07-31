@@ -62,7 +62,7 @@ dependencies {
 android {
     compileSdk = 36
     ndkVersion = "27.0.12077973"
-    namespace = "com.andrerinas.headunitrevived"
+    namespace = "com.andrerinas.openheadunit"
 
     buildFeatures {
         buildConfig = true
@@ -117,7 +117,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.andrerinas.headunitrevived"
+        applicationId = "com.andrerinas.openheadunit"
         minSdk = 16
         targetSdk = 36
         versionCode = 89
