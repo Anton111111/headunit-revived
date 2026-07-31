@@ -1421,7 +1421,7 @@ class AapService : Service(), UsbReceiver.Listener {
         nearbyManager?.stop()
         nativeAaHandshakeManager?.stop()
 
-        val usesWifiDirect = (mode == 3) || (mode == 2 && strategy == 1)
+        val usesWifiDirect = WifiModePolicy.usesWifiDirect(mode, strategy)
         if (!usesWifiDirect) {
             AppLog.i("AapService: New mode does not use WiFi Direct. Stopping WifiDirectManager...")
             wifiDirectManager?.stop()
