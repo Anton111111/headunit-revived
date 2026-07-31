@@ -189,7 +189,7 @@ class HomeFragment : Fragment() {
         } catch (e: PackageManager.NameNotFoundException) {
             0L
         }
-        if (!RenameNoticePolicy.shouldOffer(firstInstallTime, System.currentTimeMillis())) return
+        if (!RenameNoticePolicy.shouldOffer(firstInstallTime)) return
 
         appSettings.renameNoticeShown = true
         activeDialog = MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
