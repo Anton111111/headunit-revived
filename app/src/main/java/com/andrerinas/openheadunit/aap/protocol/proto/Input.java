@@ -192,13 +192,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.Key.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.Key.Builder.class);
     }
@@ -509,13 +509,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.Key.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.Key.Builder.class);
       }
@@ -544,7 +544,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_descriptor;
       }
 
       @java.lang.Override
@@ -992,13 +992,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyEvent.Builder.class);
     }
@@ -1218,13 +1218,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyEvent.Builder.class);
       }
@@ -1256,7 +1256,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_descriptor;
       }
 
       @java.lang.Override
@@ -1808,13 +1808,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.Builder.class);
     }
@@ -2029,13 +2029,13 @@ public final class Input {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.Pointer.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.Pointer.Builder.class);
       }
@@ -2313,13 +2313,13 @@ public final class Input {
           com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.PointerOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.Pointer.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.Pointer.Builder.class);
         }
@@ -2347,7 +2347,7 @@ public final class Input {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_descriptor;
         }
 
         @java.lang.Override
@@ -2981,13 +2981,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.TouchEvent.Builder.class);
       }
@@ -3021,7 +3021,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_descriptor;
       }
 
       @java.lang.Override
@@ -3665,13 +3665,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent_Rel.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent_Rel.Builder.class);
     }
@@ -3910,13 +3910,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent_RelOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent_Rel.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent_Rel.Builder.class);
       }
@@ -3943,7 +3943,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_descriptor;
       }
 
       @java.lang.Override
@@ -4287,13 +4287,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent.Builder.class);
     }
@@ -4513,13 +4513,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.RelativeEvent.Builder.class);
       }
@@ -4551,7 +4551,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_descriptor;
       }
 
       @java.lang.Override
@@ -5077,13 +5077,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent_Abs.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent_Abs.Builder.class);
     }
@@ -5322,13 +5322,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent_AbsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent_Abs.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent_Abs.Builder.class);
       }
@@ -5355,7 +5355,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
       }
 
       @java.lang.Override
@@ -5699,13 +5699,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent.Builder.class);
     }
@@ -5925,13 +5925,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.AbsoluteEvent.Builder.class);
       }
@@ -5963,7 +5963,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_descriptor;
       }
 
       @java.lang.Override
@@ -6564,13 +6564,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.InputReport.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.InputReport.Builder.class);
     }
@@ -7046,13 +7046,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.InputReportOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.InputReport.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.InputReport.Builder.class);
       }
@@ -7114,7 +7114,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_descriptor;
       }
 
       @java.lang.Override
@@ -8158,13 +8158,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyBindingRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyBindingRequest.Builder.class);
     }
@@ -8371,13 +8371,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyBindingRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyBindingRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.KeyBindingRequest.Builder.class);
       }
@@ -8403,7 +8403,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_descriptor;
       }
 
       @java.lang.Override
@@ -8737,13 +8737,13 @@ public final class Input {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Input.BindingResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.BindingResponse.Builder.class);
     }
@@ -8941,13 +8941,13 @@ public final class Input {
         com.andrerinas.openheadunit.aap.protocol.proto.Input.BindingResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Input.BindingResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Input.BindingResponse.Builder.class);
       }
@@ -8973,7 +8973,7 @@ public final class Input {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Input.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_descriptor;
       }
 
       @java.lang.Override
@@ -9219,60 +9219,60 @@ public final class Input {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9282,121 +9282,120 @@ public final class Input {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013input.proto\0221com.andrerinas.headunitre" +
-      "vived.aap.protocol.proto\032\014common.proto\"J" +
-      "\n\003Key\022\017\n\007keycode\030\001 \002(\r\022\014\n\004down\030\002 \002(\010\022\021\n\t" +
-      "metastate\030\003 \001(\r\022\021\n\tlongpress\030\004 \001(\010\"P\n\010Ke" +
-      "yEvent\022D\n\004keys\030\001 \003(\01326.com.andrerinas.he" +
-      "adunitrevived.aap.protocol.proto.Key\"\325\003\n" +
-      "\nTouchEvent\022[\n\014pointer_data\030\001 \003(\0132E.com." +
-      "andrerinas.headunitrevived.aap.protocol." +
-      "proto.TouchEvent.Pointer\022\024\n\014action_index" +
-      "\030\002 \001(\r\022[\n\006action\030\003 \002(\0162K.com.andrerinas." +
-      "headunitrevived.aap.protocol.proto.Touch" +
-      "Event.PointerAction\0323\n\007Pointer\022\t\n\001x\030\001 \002(" +
-      "\r\022\t\n\001y\030\002 \002(\r\022\022\n\npointer_id\030\003 \002(\r\"\301\001\n\rPoi" +
-      "nterAction\022\025\n\021TOUCH_ACTION_DOWN\020\000\022\023\n\017TOU" +
-      "CH_ACTION_UP\020\001\022\025\n\021TOUCH_ACTION_MOVE\020\002\022\027\n" +
-      "\023TOUCH_ACTION_CANCEL\020\003\022\030\n\024TOUCH_ACTION_O" +
-      "UTSIDE\020\004\022\035\n\031TOUCH_ACTION_POINTER_DOWN\020\005\022" +
-      "\033\n\027TOUCH_ACTION_POINTER_UP\020\006\"3\n\021Relative" +
-      "Event_Rel\022\017\n\007keycode\030\001 \002(\r\022\r\n\005delta\030\002 \002(" +
-      "\005\"c\n\rRelativeEvent\022R\n\004data\030\001 \003(\0132D.com.a" +
-      "ndrerinas.headunitrevived.aap.protocol.p" +
-      "roto.RelativeEvent_Rel\"3\n\021AbsoluteEvent_" +
-      "Abs\022\017\n\007keycode\030\001 \002(\r\022\r\n\005value\030\002 \002(\005\"c\n\rA" +
-      "bsoluteEvent\022R\n\004data\030\001 \003(\0132D.com.andreri" +
-      "nas.headunitrevived.aap.protocol.proto.A" +
-      "bsoluteEvent_Abs\"\350\003\n\013InputReport\022\021\n\ttime" +
-      "stamp\030\001 \002(\004\022\027\n\017disp_channel_id\030\002 \001(\005\022R\n\013" +
-      "touch_event\030\003 \001(\0132=.com.andrerinas.headu" +
-      "nitrevived.aap.protocol.proto.TouchEvent" +
-      "\022N\n\tkey_event\030\004 \001(\0132;.com.andrerinas.hea" +
-      "dunitrevived.aap.protocol.proto.KeyEvent" +
-      "\022X\n\016absolute_event\030\005 \001(\0132@.com.andrerina" +
-      "s.headunitrevived.aap.protocol.proto.Abs" +
-      "oluteEvent\022X\n\016relative_event\030\006 \001(\0132@.com" +
-      ".andrerinas.headunitrevived.aap.protocol" +
-      ".proto.RelativeEvent\022U\n\016touchpad_event\030\007" +
-      " \001(\0132=.com.andrerinas.openheadunit.aa" +
-      "p.protocol.proto.TouchEvent\"%\n\021KeyBindin" +
-      "gRequest\022\020\n\010keycodes\030\001 \003(\005\"c\n\017BindingRes" +
-      "ponse\022P\n\006status\030\001 \002(\0162@.com.andrerinas.h" +
-      "eadunitrevived.aap.protocol.proto.Messag" +
-      "eStatus*C\n\007MsgType\022\013\n\005EVENT\020\201\200\002\022\024\n\016BINDI" +
-      "NGREQUEST\020\202\200\002\022\025\n\017BINDINGRESPONSE\020\203\200\002B\007B\005" +
-      "Input"
+      "\012\013input.proto\022.com.andrerinas.openheadun" +
+      "it.aap.protocol.proto\032\014common.proto\"J\012\003K" +
+      "ey\022\017\012\007keycode\030\001 \002(\015\022\014\012\004down\030\002 \002(\010\022\021\012\011met" +
+      "astate\030\003 \001(\015\022\021\012\011longpress\030\004 \001(\010\"M\012\010KeyEv" +
+      "ent\022A\012\004keys\030\001 \003(\01323.com.andrerinas.openh" +
+      "eadunit.aap.protocol.proto.Key\"\317\003\012\012Touch" +
+      "Event\022X\012\014pointer_data\030\001 \003(\0132B.com.andrer" +
+      "inas.openheadunit.aap.protocol.proto.Tou" +
+      "chEvent.Pointer\022\024\012\014action_index\030\002 \001(\015\022X\012" +
+      "\006action\030\003 \002(\0162H.com.andrerinas.openheadu" +
+      "nit.aap.protocol.proto.TouchEvent.Pointe" +
+      "rAction\0323\012\007Pointer\022\011\012\001x\030\001 \002(\015\022\011\012\001y\030\002 \002(\015" +
+      "\022\022\012\012pointer_id\030\003 \002(\015\"\301\001\012\015PointerAction\022\025" +
+      "\012\021TOUCH_ACTION_DOWN\020\000\022\023\012\017TOUCH_ACTION_UP" +
+      "\020\001\022\025\012\021TOUCH_ACTION_MOVE\020\002\022\027\012\023TOUCH_ACTIO" +
+      "N_CANCEL\020\003\022\030\012\024TOUCH_ACTION_OUTSIDE\020\004\022\035\012\031" +
+      "TOUCH_ACTION_POINTER_DOWN\020\005\022\033\012\027TOUCH_ACT" +
+      "ION_POINTER_UP\020\006\"3\012\021RelativeEvent_Rel\022\017\012" +
+      "\007keycode\030\001 \002(\015\022\015\012\005delta\030\002 \002(\005\"`\012\015Relativ" +
+      "eEvent\022O\012\004data\030\001 \003(\0132A.com.andrerinas.op" +
+      "enheadunit.aap.protocol.proto.RelativeEv" +
+      "ent_Rel\"3\012\021AbsoluteEvent_Abs\022\017\012\007keycode\030" +
+      "\001 \002(\015\022\015\012\005value\030\002 \002(\005\"`\012\015AbsoluteEvent\022O\012" +
+      "\004data\030\001 \003(\0132A.com.andrerinas.openheaduni" +
+      "t.aap.protocol.proto.AbsoluteEvent_Abs\"\331" +
+      "\003\012\013InputReport\022\021\012\011timestamp\030\001 \002(\004\022\027\012\017dis" +
+      "p_channel_id\030\002 \001(\005\022O\012\013touch_event\030\003 \001(\0132" +
+      ":.com.andrerinas.openheadunit.aap.protoc" +
+      "ol.proto.TouchEvent\022K\012\011key_event\030\004 \001(\01328" +
+      ".com.andrerinas.openheadunit.aap.protoco" +
+      "l.proto.KeyEvent\022U\012\016absolute_event\030\005 \001(\013" +
+      "2=.com.andrerinas.openheadunit.aap.proto" +
+      "col.proto.AbsoluteEvent\022U\012\016relative_even" +
+      "t\030\006 \001(\0132=.com.andrerinas.openheadunit.aa" +
+      "p.protocol.proto.RelativeEvent\022R\012\016touchp" +
+      "ad_event\030\007 \001(\0132:.com.andrerinas.openhead" +
+      "unit.aap.protocol.proto.TouchEvent\"%\012\021Ke" +
+      "yBindingRequest\022\020\012\010keycodes\030\001 \003(\005\"`\012\017Bin" +
+      "dingResponse\022M\012\006status\030\001 \002(\0162=.com.andre" +
+      "rinas.openheadunit.aap.protocol.proto.Me" +
+      "ssageStatus*C\012\007MsgType\022\013\012\005EVENT\020\201\200\002\022\024\012\016B" +
+      "INDINGREQUEST\020\202\200\002\022\025\012\017BINDINGRESPONSE\020\203\200\002" +
+      "B\007B\005Input"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.andrerinas.openheadunit.aap.protocol.proto.Common.getDescriptor(),
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Key_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Key_descriptor,
         new java.lang.String[] { "Keycode", "Down", "Metastate", "Longpress", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyEvent_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyEvent_descriptor,
         new java.lang.String[] { "Keys", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_descriptor,
         new java.lang.String[] { "PointerData", "ActionIndex", "Action", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_TouchEvent_Pointer_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_TouchEvent_Pointer_descriptor,
         new java.lang.String[] { "X", "Y", "PointerId", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_Rel_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_Rel_descriptor,
         new java.lang.String[] { "Keycode", "Delta", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_RelativeEvent_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_RelativeEvent_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_Abs_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_Abs_descriptor,
         new java.lang.String[] { "Keycode", "Value", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AbsoluteEvent_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AbsoluteEvent_descriptor,
         new java.lang.String[] { "Data", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_descriptor =
       getDescriptor().getMessageTypes().get(7);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_InputReport_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_InputReport_descriptor,
         new java.lang.String[] { "Timestamp", "DispChannelId", "TouchEvent", "KeyEvent", "AbsoluteEvent", "RelativeEvent", "TouchpadEvent", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_KeyBindingRequest_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_KeyBindingRequest_descriptor,
         new java.lang.String[] { "Keycodes", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_descriptor =
       getDescriptor().getMessageTypes().get(9);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BindingResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BindingResponse_descriptor,
         new java.lang.String[] { "Status", });
     com.andrerinas.openheadunit.aap.protocol.proto.Common.getDescriptor();
   }

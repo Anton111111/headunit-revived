@@ -987,13 +987,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.Builder.class);
     }
@@ -1183,13 +1183,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.Builder.class);
       }
@@ -1234,13 +1234,13 @@ public final class Control {
 
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.Sensor.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.Sensor.Builder.class);
         }
@@ -1438,13 +1438,13 @@ public final class Control {
             com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.SensorOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
           }
 
           @java.lang.Override
           protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
               internalGetFieldAccessorTable() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
                     com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.Sensor.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.Sensor.Builder.class);
           }
@@ -1470,7 +1470,7 @@ public final class Control {
           @java.lang.Override
           public com.google.protobuf.Descriptors.Descriptor
               getDescriptorForType() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
           }
 
           @java.lang.Override
@@ -1930,13 +1930,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.SensorSourceService.Builder.class);
         }
@@ -1968,7 +1968,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_descriptor;
         }
 
         @java.lang.Override
@@ -2557,13 +2557,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.Builder.class);
       }
@@ -2695,13 +2695,13 @@ public final class Control {
 
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.VideoConfiguration.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.VideoConfiguration.Builder.class);
         }
@@ -3419,13 +3419,13 @@ public final class Control {
             com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.VideoConfigurationOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
           }
 
           @java.lang.Override
           protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
               internalGetFieldAccessorTable() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
                     com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.VideoConfiguration.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.VideoConfiguration.Builder.class);
           }
@@ -3458,7 +3458,7 @@ public final class Control {
           @java.lang.Override
           public com.google.protobuf.Descriptors.Descriptor
               getDescriptorForType() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
           }
 
           @java.lang.Override
@@ -4495,13 +4495,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSinkService.Builder.class);
         }
@@ -4543,7 +4543,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_descriptor;
         }
 
         @java.lang.Override
@@ -5567,13 +5567,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.Builder.class);
       }
@@ -5628,13 +5628,13 @@ public final class Control {
 
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.TouchConfig.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.TouchConfig.Builder.class);
         }
@@ -5873,13 +5873,13 @@ public final class Control {
             com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.TouchConfigOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
           }
 
           @java.lang.Override
           protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
               internalGetFieldAccessorTable() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
                     com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.TouchConfig.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.TouchConfig.Builder.class);
           }
@@ -5906,7 +5906,7 @@ public final class Control {
           @java.lang.Override
           public com.google.protobuf.Descriptors.Descriptor
               getDescriptorForType() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
           }
 
           @java.lang.Override
@@ -6496,13 +6496,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.InputSourceService.Builder.class);
         }
@@ -6545,7 +6545,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_descriptor;
         }
 
         @java.lang.Override
@@ -7191,13 +7191,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSourceService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSourceService.Builder.class);
       }
@@ -7481,13 +7481,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSourceServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSourceService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaSourceService.Builder.class);
         }
@@ -7525,7 +7525,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_descriptor;
         }
 
         @java.lang.Override
@@ -8029,13 +8029,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.BluetoothService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.BluetoothService.Builder.class);
       }
@@ -8320,13 +8320,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.BluetoothServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.BluetoothService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.BluetoothService.Builder.class);
         }
@@ -8354,7 +8354,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_descriptor;
         }
 
         @java.lang.Override
@@ -8832,13 +8832,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.Builder.class);
       }
@@ -9000,13 +9000,13 @@ public final class Control {
 
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.ImageOptions.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.ImageOptions.Builder.class);
         }
@@ -9284,13 +9284,13 @@ public final class Control {
             com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.ImageOptionsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
           }
 
           @java.lang.Override
           protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
               internalGetFieldAccessorTable() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
                     com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.ImageOptions.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.ImageOptions.Builder.class);
           }
@@ -9318,7 +9318,7 @@ public final class Control {
           @java.lang.Override
           public com.google.protobuf.Descriptors.Descriptor
               getDescriptorForType() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
           }
 
           @java.lang.Override
@@ -9944,13 +9944,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.NavigationStatusService.Builder.class);
         }
@@ -9988,7 +9988,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_descriptor;
         }
 
         @java.lang.Override
@@ -10458,13 +10458,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaPlaybackStatusService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaPlaybackStatusService.Builder.class);
       }
@@ -10624,13 +10624,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaPlaybackStatusServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaPlaybackStatusService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.MediaPlaybackStatusService.Builder.class);
         }
@@ -10654,7 +10654,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
         }
 
         @java.lang.Override
@@ -10952,13 +10952,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Call.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Call.Builder.class);
       }
@@ -11422,13 +11422,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_CallOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Call.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Call.Builder.class);
         }
@@ -11459,7 +11459,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
         }
 
         @java.lang.Override
@@ -12167,13 +12167,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Input.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Input.Builder.class);
       }
@@ -12462,13 +12462,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_InputOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Input.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatus_Input.Builder.class);
         }
@@ -12495,7 +12495,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
         }
 
         @java.lang.Override
@@ -12928,13 +12928,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatusService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatusService.Builder.class);
       }
@@ -13184,13 +13184,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatusServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatusService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.PhoneStatusService.Builder.class);
         }
@@ -13223,7 +13223,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_descriptor;
         }
 
         @java.lang.Override
@@ -13833,13 +13833,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.VendorExtensionService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.VendorExtensionService.Builder.class);
       }
@@ -14153,13 +14153,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.VendorExtensionServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.VendorExtensionService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.VendorExtensionService.Builder.class);
         }
@@ -14188,7 +14188,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_descriptor;
         }
 
         @java.lang.Override
@@ -14673,13 +14673,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.GenericNotificationService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.GenericNotificationService.Builder.class);
       }
@@ -14839,13 +14839,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.GenericNotificationServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.GenericNotificationService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.GenericNotificationService.Builder.class);
         }
@@ -14869,7 +14869,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_descriptor;
         }
 
         @java.lang.Override
@@ -15088,13 +15088,13 @@ public final class Control {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.WifiProjectionService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.WifiProjectionService.Builder.class);
       }
@@ -15319,13 +15319,13 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.WifiProjectionServiceOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.WifiProjectionService.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.WifiProjectionService.Builder.class);
         }
@@ -15351,7 +15351,7 @@ public final class Control {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_descriptor;
         }
 
         @java.lang.Override
@@ -16319,13 +16319,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.Service.Builder.class);
       }
@@ -16422,7 +16422,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor;
       }
 
       @java.lang.Override
@@ -18259,13 +18259,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryRequest.Builder.class);
     }
@@ -18562,13 +18562,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryRequest.Builder.class);
       }
@@ -18595,7 +18595,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
       }
 
       @java.lang.Override
@@ -19256,13 +19256,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryResponse.Builder.class);
     }
@@ -20317,13 +20317,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ServiceDiscoveryResponse.Builder.class);
       }
@@ -20381,7 +20381,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
       }
 
       @java.lang.Override
@@ -22191,13 +22191,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenRequest.Builder.class);
     }
@@ -22436,13 +22436,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenRequest.Builder.class);
       }
@@ -22469,7 +22469,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_descriptor;
       }
 
       @java.lang.Override
@@ -22800,13 +22800,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenResponse.Builder.class);
     }
@@ -23004,13 +23004,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ChannelOpenResponse.Builder.class);
       }
@@ -23036,7 +23036,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_descriptor;
       }
 
       @java.lang.Override
@@ -23331,13 +23331,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.PingRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.PingRequest.Builder.class);
     }
@@ -23573,13 +23573,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.PingRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.PingRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.PingRequest.Builder.class);
       }
@@ -23606,7 +23606,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_descriptor;
       }
 
       @java.lang.Override
@@ -23933,13 +23933,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.PingResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.PingResponse.Builder.class);
     }
@@ -24140,13 +24140,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.PingResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.PingResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.PingResponse.Builder.class);
       }
@@ -24172,7 +24172,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_descriptor;
       }
 
       @java.lang.Override
@@ -24448,13 +24448,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeRequest.Builder.class);
     }
@@ -24652,13 +24652,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeRequest.Builder.class);
       }
@@ -24684,7 +24684,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_descriptor;
       }
 
       @java.lang.Override
@@ -24957,13 +24957,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeResponse.Builder.class);
     }
@@ -25123,13 +25123,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ByeByeResponse.Builder.class);
       }
@@ -25153,7 +25153,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_descriptor;
       }
 
       @java.lang.Override
@@ -25366,13 +25366,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.VoiceSessionNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.VoiceSessionNotification.Builder.class);
     }
@@ -25666,13 +25666,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.VoiceSessionNotificationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.VoiceSessionNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.VoiceSessionNotification.Builder.class);
       }
@@ -25698,7 +25698,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_descriptor;
       }
 
       @java.lang.Override
@@ -25983,13 +25983,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusRequestNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusRequestNotification.Builder.class);
     }
@@ -26306,13 +26306,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusRequestNotificationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusRequestNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusRequestNotification.Builder.class);
       }
@@ -26338,7 +26338,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
       }
 
       @java.lang.Override
@@ -26631,13 +26631,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusNotification.Builder.class);
     }
@@ -27012,13 +27012,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusNotificationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.AudioFocusNotification.Builder.class);
       }
@@ -27045,7 +27045,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_descriptor;
       }
 
       @java.lang.Override
@@ -27382,13 +27382,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusRequestNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusRequestNotification.Builder.class);
     }
@@ -27582,13 +27582,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusRequestNotificationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusRequestNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusRequestNotification.Builder.class);
       }
@@ -27614,7 +27614,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_descriptor;
       }
 
       @java.lang.Override
@@ -27896,13 +27896,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusNotification.Builder.class);
     }
@@ -28100,13 +28100,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusNotificationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.NavFocusNotification.Builder.class);
       }
@@ -28132,7 +28132,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_descriptor;
       }
 
       @java.lang.Override
@@ -28438,13 +28438,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.BatteryStatusNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.BatteryStatusNotification.Builder.class);
     }
@@ -28715,13 +28715,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.BatteryStatusNotificationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.BatteryStatusNotification.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.BatteryStatusNotification.Builder.class);
       }
@@ -28749,7 +28749,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_descriptor;
       }
 
       @java.lang.Override
@@ -29146,13 +29146,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.ConnectedDevice.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ConnectedDevice.Builder.class);
     }
@@ -29412,13 +29412,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.ConnectedDeviceOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.ConnectedDevice.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.ConnectedDevice.Builder.class);
       }
@@ -29445,7 +29445,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_descriptor;
       }
 
       @java.lang.Override
@@ -29848,13 +29848,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.CarConnectedDevices.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.CarConnectedDevices.Builder.class);
     }
@@ -30141,13 +30141,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.CarConnectedDevicesOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.CarConnectedDevices.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.CarConnectedDevices.Builder.class);
       }
@@ -30181,7 +30181,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_descriptor;
       }
 
       @java.lang.Override
@@ -30813,13 +30813,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.UserSwitchResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.UserSwitchResponse.Builder.class);
     }
@@ -31142,13 +31142,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.UserSwitchResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.UserSwitchResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.UserSwitchResponse.Builder.class);
       }
@@ -31185,7 +31185,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_descriptor;
       }
 
       @java.lang.Override
@@ -31603,13 +31603,13 @@ public final class Control {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Control.CallAvailabilityStatus.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.CallAvailabilityStatus.Builder.class);
     }
@@ -31806,13 +31806,13 @@ public final class Control {
         com.andrerinas.openheadunit.aap.protocol.proto.Control.CallAvailabilityStatusOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Control.CallAvailabilityStatus.class, com.andrerinas.openheadunit.aap.protocol.proto.Control.CallAvailabilityStatus.Builder.class);
       }
@@ -31838,7 +31838,7 @@ public final class Control {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Control.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_descriptor;
       }
 
       @java.lang.Override
@@ -32072,185 +32072,185 @@ public final class Control {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -32260,224 +32260,221 @@ public final class Control {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rcontrol.proto\0221com.andrerinas.headunit" +
-      "revived.aap.protocol.proto\032\014common.proto" +
-      "\032\013media.proto\032\rsensors.proto\"\237#\n\007Service" +
-      "\022k\n\024phone_status_service\030\n \001(\0132M.com.and" +
-      "rerinas.headunitrevived.aap.protocol.pro" +
-      "to.Service.PhoneStatusService\022\n\n\002id\030\001 \002(" +
-      "\r\022m\n\025sensor_source_service\030\002 \001(\0132N.com.a" +
-      "ndrerinas.headunitrevived.aap.protocol.p" +
-      "roto.Service.SensorSourceService\022g\n\022medi" +
-      "a_sink_service\030\003 \001(\0132K.com.andrerinas.he" +
-      "adunitrevived.aap.protocol.proto.Service" +
-      ".MediaSinkService\022k\n\024input_source_servic" +
-      "e\030\004 \001(\0132M.com.andrerinas.openheadunit" +
-      ".aap.protocol.proto.Service.InputSourceS" +
-      "ervice\022k\n\024media_source_service\030\005 \001(\0132M.c" +
-      "om.andrerinas.headunitrevived.aap.protoc" +
-      "ol.proto.Service.MediaSourceService\022f\n\021b" +
-      "luetooth_service\030\006 \001(\0132K.com.andrerinas." +
-      "headunitrevived.aap.protocol.proto.Servi" +
-      "ce.BluetoothService\022u\n\031navigation_status" +
-      "_service\030\010 \001(\0132R.com.andrerinas.headunit" +
-      "revived.aap.protocol.proto.Service.Navig" +
-      "ationStatusService\022u\n\026media_playback_ser" +
-      "vice\030\t \001(\0132U.com.andrerinas.headunitrevi" +
-      "ved.aap.protocol.proto.Service.MediaPlay" +
-      "backStatusService\022s\n\030vendor_extension_se" +
-      "rvice\030\014 \001(\0132Q.com.andrerinas.headunitrev" +
-      "ived.aap.protocol.proto.Service.VendorEx" +
-      "tensionService\022{\n\034generic_notification_s" +
-      "ervice\030\r \001(\0132U.com.andrerinas.headunitre" +
-      "vived.aap.protocol.proto.Service.Generic" +
-      "NotificationService\022q\n\027wifi_projection_s" +
-      "ervice\030\016 \001(\0132P.com.andrerinas.headunitre" +
-      "vived.aap.protocol.proto.Service.WifiPro" +
-      "jectionService\032\324\001\n\023SensorSourceService\022f" +
-      "\n\007sensors\030\001 \003(\0132U.com.andrerinas.headuni" +
-      "trevived.aap.protocol.proto.Service.Sens" +
-      "orSourceService.Sensor\032U\n\006Sensor\022K\n\004type" +
-      "\030\001 \002(\0162=.com.andrerinas.openheadunit." +
-      "aap.protocol.proto.SensorType\032\233\t\n\020MediaS" +
-      "inkService\022Y\n\016available_type\030\001 \002(\0162A.com" +
-      ".andrerinas.headunitrevived.aap.protocol" +
-      ".proto.MediaCodecType\022V\n\naudio_type\030\002 \001(" +
-      "\0162B.com.andrerinas.openheadunit.aap.p" +
-      "rotocol.proto.AudioStreamType\022\\\n\raudio_c" +
-      "onfigs\030\003 \003(\0132E.com.andrerinas.headunitre" +
-      "vived.aap.protocol.proto.AudioConfigurat" +
-      "ion\022u\n\rvideo_configs\030\004 \003(\0132^.com.andreri" +
-      "nas.headunitrevived.aap.protocol.proto.S" +
-      "ervice.MediaSinkService.VideoConfigurati" +
-      "on\022\037\n\027available_while_in_call\030\005 \001(\010\032\335\005\n\022" +
-      "VideoConfiguration\022\221\001\n\020codec_resolution\030" +
-      "\001 \002(\0162w.com.andrerinas.openheadunit.a" +
-      "ap.protocol.proto.Service.MediaSinkServi" +
-      "ce.VideoConfiguration.VideoCodecResoluti" +
-      "onType\022\205\001\n\nframe_rate\030\002 \002(\0162q.com.andrer" +
-      "inas.headunitrevived.aap.protocol.proto." +
-      "Service.MediaSinkService.VideoConfigurat" +
-      "ion.VideoFrameRateType\022\024\n\014margin_width\030\003" +
-      " \002(\r\022\025\n\rmargin_height\030\004 \002(\r\022\017\n\007density\030\005" +
-      " \002(\r\022 \n\030decoder_additional_depth\030\006 \001(\r\022\035" +
-      "\n\025pixel_aspect_ratio_e4\030\010 \001(\r\022[\n\020video_c" +
-      "odec_type\030\n \001(\0162A.com.andrerinas.headuni" +
-      "trevived.aap.protocol.proto.MediaCodecTy" +
-      "pe\"\246\001\n\030VideoCodecResolutionType\022\014\n\010_800x" +
-      "480\020\001\022\r\n\t_1280x720\020\002\022\016\n\n_1920x1080\020\003\022\016\n\n" +
-      "_2560x1440\020\004\022\016\n\n_3840x2160\020\005\022\r\n\t_720x128" +
-      "0\020\006\022\016\n\n_1080x1920\020\007\022\016\n\n_1440x2560\020\010\022\016\n\n_" +
-      "2160x3840\020\t\"&\n\022VideoFrameRateType\022\007\n\003_60" +
-      "\020\001\022\007\n\003_30\020\002\032\273\002\n\022InputSourceService\022\032\n\022ke" +
-      "ycodes_supported\030\001 \003(\r\022n\n\013touchscreen\030\002 " +
-      "\001(\0132Y.com.andrerinas.openheadunit.aap" +
+      "\012\015control.proto\022.com.andrerinas.openhead" +
+      "unit.aap.protocol.proto\032\014common.proto\032\013m" +
+      "edia.proto\032\015sensors.proto\"\310\"\012\007Service\022h\012" +
+      "\024phone_status_service\030\012 \001(\0132J.com.andrer" +
+      "inas.openheadunit.aap.protocol.proto.Ser" +
+      "vice.PhoneStatusService\022\012\012\002id\030\001 \002(\015\022j\012\025s" +
+      "ensor_source_service\030\002 \001(\0132K.com.andreri" +
+      "nas.openheadunit.aap.protocol.proto.Serv" +
+      "ice.SensorSourceService\022d\012\022media_sink_se" +
+      "rvice\030\003 \001(\0132H.com.andrerinas.openheaduni" +
+      "t.aap.protocol.proto.Service.MediaSinkSe" +
+      "rvice\022h\012\024input_source_service\030\004 \001(\0132J.co" +
+      "m.andrerinas.openheadunit.aap.protocol.p" +
+      "roto.Service.InputSourceService\022h\012\024media" +
+      "_source_service\030\005 \001(\0132J.com.andrerinas.o" +
+      "penheadunit.aap.protocol.proto.Service.M" +
+      "ediaSourceService\022c\012\021bluetooth_service\030\006" +
+      " \001(\0132H.com.andrerinas.openheadunit.aap.p" +
+      "rotocol.proto.Service.BluetoothService\022r" +
+      "\012\031navigation_status_service\030\010 \001(\0132O.com." +
+      "andrerinas.openheadunit.aap.protocol.pro" +
+      "to.Service.NavigationStatusService\022r\012\026me" +
+      "dia_playback_service\030\011 \001(\0132R.com.andreri" +
+      "nas.openheadunit.aap.protocol.proto.Serv" +
+      "ice.MediaPlaybackStatusService\022p\012\030vendor" +
+      "_extension_service\030\014 \001(\0132N.com.andrerina" +
+      "s.openheadunit.aap.protocol.proto.Servic" +
+      "e.VendorExtensionService\022x\012\034generic_noti" +
+      "fication_service\030\015 \001(\0132R.com.andrerinas." +
+      "openheadunit.aap.protocol.proto.Service." +
+      "GenericNotificationService\022n\012\027wifi_proje" +
+      "ction_service\030\016 \001(\0132M.com.andrerinas.ope" +
+      "nheadunit.aap.protocol.proto.Service.Wif" +
+      "iProjectionService\032\316\001\012\023SensorSourceServi" +
+      "ce\022c\012\007sensors\030\001 \003(\0132R.com.andrerinas.ope" +
+      "nheadunit.aap.protocol.proto.Service.Sen" +
+      "sorSourceService.Sensor\032R\012\006Sensor\022H\012\004typ" +
+      "e\030\001 \002(\0162:.com.andrerinas.openheadunit.aa" +
+      "p.protocol.proto.SensorType\032\206\011\012\020MediaSin" +
+      "kService\022V\012\016available_type\030\001 \002(\0162>.com.a" +
+      "ndrerinas.openheadunit.aap.protocol.prot" +
+      "o.MediaCodecType\022S\012\012audio_type\030\002 \001(\0162?.c" +
+      "om.andrerinas.openheadunit.aap.protocol." +
+      "proto.AudioStreamType\022Y\012\015audio_configs\030\003" +
+      " \003(\0132B.com.andrerinas.openheadunit.aap.p" +
+      "rotocol.proto.AudioConfiguration\022r\012\015vide" +
+      "o_configs\030\004 \003(\0132[.com.andrerinas.openhea" +
+      "dunit.aap.protocol.proto.Service.MediaSi" +
+      "nkService.VideoConfiguration\022\037\012\027availabl" +
+      "e_while_in_call\030\005 \001(\010\032\324\005\012\022VideoConfigura" +
+      "tion\022\216\001\012\020codec_resolution\030\001 \002(\0162t.com.an" +
+      "drerinas.openheadunit.aap.protocol.proto" +
+      ".Service.MediaSinkService.VideoConfigura" +
+      "tion.VideoCodecResolutionType\022\202\001\012\012frame_" +
+      "rate\030\002 \002(\0162n.com.andrerinas.openheadunit" +
+      ".aap.protocol.proto.Service.MediaSinkSer" +
+      "vice.VideoConfiguration.VideoFrameRateTy" +
+      "pe\022\024\012\014margin_width\030\003 \002(\015\022\025\012\015margin_heigh" +
+      "t\030\004 \002(\015\022\017\012\007density\030\005 \002(\015\022 \012\030decoder_addi" +
+      "tional_depth\030\006 \001(\015\022\035\012\025pixel_aspect_ratio" +
+      "_e4\030\010 \001(\015\022X\012\020video_codec_type\030\012 \001(\0162>.co" +
+      "m.andrerinas.openheadunit.aap.protocol.p" +
+      "roto.MediaCodecType\"\246\001\012\030VideoCodecResolu" +
+      "tionType\022\014\012\010_800x480\020\001\022\015\012\011_1280x720\020\002\022\016\012" +
+      "\012_1920x1080\020\003\022\016\012\012_2560x1440\020\004\022\016\012\012_3840x2" +
+      "160\020\005\022\015\012\011_720x1280\020\006\022\016\012\012_1080x1920\020\007\022\016\012\012" +
+      "_1440x2560\020\010\022\016\012\012_2160x3840\020\011\"&\012\022VideoFra" +
+      "meRateType\022\007\012\003_60\020\001\022\007\012\003_30\020\002\032\265\002\012\022InputSo" +
+      "urceService\022\032\012\022keycodes_supported\030\001 \003(\015\022" +
+      "k\012\013touchscreen\030\002 \001(\0132V.com.andrerinas.op" +
+      "enheadunit.aap.protocol.proto.Service.In" +
+      "putSourceService.TouchConfig\022h\012\010touchpad" +
+      "\030\003 \001(\0132V.com.andrerinas.openheadunit.aap" +
       ".protocol.proto.Service.InputSourceServi" +
-      "ce.TouchConfig\022k\n\010touchpad\030\003 \001(\0132Y.com.a" +
-      "ndrerinas.headunitrevived.aap.protocol.p" +
-      "roto.Service.InputSourceService.TouchCon" +
-      "fig\032,\n\013TouchConfig\022\r\n\005width\030\001 \002(\r\022\016\n\006hei" +
-      "ght\030\002 \002(\r\032\343\001\n\022MediaSourceService\022O\n\004type" +
-      "\030\001 \002(\0162A.com.andrerinas.openheadunit." +
-      "aap.protocol.proto.MediaCodecType\022[\n\014aud" +
-      "io_config\030\002 \002(\0132E.com.andrerinas.headuni" +
-      "trevived.aap.protocol.proto.AudioConfigu" +
-      "ration\022\037\n\027available_while_in_call\030\003 \001(\010\032" +
-      "\225\001\n\020BluetoothService\022\023\n\013car_address\030\001 \002(" +
-      "\t\022l\n\031supported_pairing_methods\030\002 \003(\0162I.c" +
-      "om.andrerinas.headunitrevived.aap.protoc" +
-      "ol.proto.BluetoothPairingMethod\032\242\003\n\027Navi" +
-      "gationStatusService\022\033\n\023minimum_interval_" +
-      "ms\030\001 \002(\r\022l\n\004type\030\002 \002(\0162^.com.andrerinas." +
-      "headunitrevived.aap.protocol.proto.Servi" +
-      "ce.NavigationStatusService.ClusterType\022v" +
-      "\n\rimage_options\030\003 \001(\0132_.com.andrerinas.h" +
-      "eadunitrevived.aap.protocol.proto.Servic" +
-      "e.NavigationStatusService.ImageOptions\032G" +
-      "\n\014ImageOptions\022\r\n\005width\030\001 \002(\005\022\016\n\006height\030" +
-      "\002 \002(\005\022\030\n\020colour_deth_bits\030\003 \002(\005\";\n\013Clust" +
-      "erType\022\030\n\024CustomImageSupported\020\001\022\022\n\016Imag" +
-      "eCodesOnly\020\002\032\034\n\032MediaPlaybackStatusServi" +
-      "ce\032\347\001\n\020PhoneStatus_Call\022[\n\005state\030\001 \001(\0162L" +
-      ".com.andrerinas.openheadunit.aap.prot" +
-      "ocol.proto.Service.PhoneStatus_State\022\035\n\025" +
-      "call_duration_seconds\030\002 \001(\r\022\025\n\rcaller_nu" +
-      "mber\030\003 \001(\t\022\021\n\tcaller_id\030\004 \001(\t\022\032\n\022caller_" +
-      "number_type\030\005 \001(\t\022\021\n\tthumbnail\030\006 \001(\014\032=\n\021" +
-      "PhoneStatus_Input\022\025\n\rcaller_number\030\001 \001(\t" +
-      "\022\021\n\tcaller_id\030\002 \001(\t\032\211\001\n\022PhoneStatusServi" +
-      "ce\022Z\n\005calls\030\001 \003(\0132K.com.andrerinas.headu" +
-      "nitrevived.aap.protocol.proto.Service.Ph" +
-      "oneStatus_Call\022\027\n\017signal_strength\030\002 \001(\r\032" +
-      "P\n\026VendorExtensionService\022\014\n\004name\030\001 \001(\t\022" +
-      "\032\n\022package_white_list\030\002 \003(\t\022\014\n\004data\030\003 \001(" +
-      "\014\032\034\n\032GenericNotificationService\032/\n\025WifiP" +
-      "rojectionService\022\026\n\016car_wifi_bssid\030\001 \001(\t" +
-      "\"d\n\021PhoneStatus_State\022\n\n\006InCall\020\001\022\n\n\006OnH" +
-      "old\020\002\022\r\n\tHangingUp\020\003\022\014\n\010Incoming\020\004\022\t\n\005Mu" +
-      "ted\020\005\022\017\n\013Conferenced\020\006\"B\n\027ServiceDiscove" +
-      "ryRequest\022\022\n\nphone_name\030\004 \002(\t\022\023\n\013phone_b" +
-      "rand\030\005 \002(\t\"\351\004\n\030ServiceDiscoveryResponse\022" +
-      "L\n\010services\030\001 \003(\0132:.com.andrerinas.headu" +
-      "nitrevived.aap.protocol.proto.Service\022\014\n" +
-      "\004make\030\002 \002(\t\022\r\n\005model\030\003 \002(\t\022\014\n\004year\030\004 \002(\t" +
-      "\022\022\n\nvehicle_id\030\005 \002(\t\022Z\n\017driver_position\030" +
-      "\006 \002(\0162A.com.andrerinas.openheadunit.a" +
-      "ap.protocol.proto.DriverPosition\022\026\n\016head" +
-      "_unit_make\030\007 \002(\t\022\027\n\017head_unit_model\030\010 \002(" +
-      "\t\022 \n\030head_unit_software_build\030\t \002(\t\022\"\n\032h" +
-      "ead_unit_software_version\030\n \002(\t\022\'\n\037can_p" +
-      "lay_native_media_during_vr\030\013 \002(\010\022\034\n\024hide" +
-      "_projected_clock\030\014 \001(\010\022\035\n\025session_config" +
-      "uration\030\r \001(\005\022\024\n\014display_name\030\016 \001(\t\022\031\n\021p" +
-      "robe_for_support\030\017 \001(\010\022V\n\rheadunit_info\030" +
-      "\021 \001(\0132?.com.andrerinas.openheadunit.a" +
-      "ap.protocol.proto.HeadUnitInfo\":\n\022Channe" +
-      "lOpenRequest\022\020\n\010priority\030\001 \002(\005\022\022\n\nservic" +
-      "e_id\030\002 \002(\005\"g\n\023ChannelOpenResponse\022P\n\006sta" +
-      "tus\030\001 \002(\0162@.com.andrerinas.headunitreviv" +
-      "ed.aap.protocol.proto.MessageStatus\"4\n\013P" +
-      "ingRequest\022\021\n\ttimestamp\030\001 \002(\003\022\022\n\nbug_rep" +
-      "ort\030\002 \001(\005\"!\n\014PingResponse\022\021\n\ttimestamp\030\001" +
-      " \002(\003\"`\n\rByeByeRequest\022O\n\006reason\030\001 \002(\0162?." +
-      "com.andrerinas.openheadunit.aap.proto" +
-      "col.proto.ByeByeReason\"\020\n\016ByeByeResponse" +
-      "\"\317\001\n\030VoiceSessionNotification\022n\n\006status\030" +
-      "\001 \002(\0162^.com.andrerinas.openheadunit.a" +
-      "ap.protocol.proto.VoiceSessionNotificati" +
-      "on.VoiceSessionStatus\"C\n\022VoiceSessionSta" +
-      "tus\022\026\n\022VOICE_STATUS_START\020\001\022\025\n\021VOICE_STA" +
-      "TUS_STOP\020\002\"\203\002\n\035AudioFocusRequestNotifica" +
-      "tion\022w\n\007request\030\001 \001(\0162f.com.andrerinas.h" +
-      "eadunitrevived.aap.protocol.proto.AudioF" +
-      "ocusRequestNotification.AudioFocusReques" +
-      "tType\"i\n\025AudioFocusRequestType\022\010\n\004NONE\020\000" +
-      "\022\010\n\004GAIN\020\001\022\022\n\016GAIN_TRANSIENT\020\002\022\033\n\027GAIN_T" +
-      "RANSIENT_MAY_DUCK\020\003\022\013\n\007RELEASE\020\004\"\363\002\n\026Aud" +
-      "ioFocusNotification\022r\n\013focus_state\030\001 \002(\016" +
-      "2].com.andrerinas.openheadunit.aap.pr" +
-      "otocol.proto.AudioFocusNotification.Audi" +
-      "oFocusStateType\022\023\n\013unsolicited\030\002 \001(\010\"\317\001\n" +
-      "\023AudioFocusStateType\022\016\n\nSTATE_GAIN\020\001\022\030\n\024" +
-      "STATE_GAIN_TRANSIENT\020\002\022\016\n\nSTATE_LOSS\020\003\022!" +
-      "\n\035STATE_LOSS_TRANSIENT_CAN_DUCK\020\004\022\030\n\024STA" +
-      "TE_LOSS_TRANSIENT\020\005\022\031\n\025STATE_GAIN_MEDIA_" +
-      "ONLY\020\006\022&\n\"STATE_GAIN_TRANSIENT_GUIDANCE_" +
-      "ONLY\020\007\"r\n\033NavFocusRequestNotification\022S\n" +
-      "\nfocus_type\030\001 \001(\0162?.com.andrerinas.headu" +
-      "nitrevived.aap.protocol.proto.NavFocusTy" +
-      "pe\"k\n\024NavFocusNotification\022S\n\nfocus_type" +
-      "\030\001 \002(\0162?.com.andrerinas.openheadunit." +
-      "aap.protocol.proto.NavFocusType\"f\n\031Batte" +
-      "ryStatusNotification\022\025\n\rbattery_level\030\001 " +
-      "\002(\r\022\030\n\020time_remaining_s\030\002 \001(\r\022\030\n\020critica" +
-      "l_battery\030\003 \001(\010\"9\n\017ConnectedDevice\022\023\n\013de" +
-      "vice_name\030\001 \001(\t\022\021\n\tdevice_id\030\002 \001(\005\"\243\001\n\023C" +
-      "arConnectedDevices\022]\n\021connected_devices\030" +
-      "\001 \003(\0132B.com.andrerinas.openheadunit.a" +
-      "ap.protocol.proto.ConnectedDevice\022\023\n\013uns" +
-      "olicited\030\002 \001(\010\022\030\n\nfinal_list\030\003 \001(\010:\004true" +
-      "\"\374\001\n\022UserSwitchResponse\022f\n\006status\030\001 \001(\0162" +
-      "V.com.andrerinas.openheadunit.aap.pro" +
-      "tocol.proto.UserSwitchResponse.UserSwitc" +
-      "hStatus\022[\n\017selected_device\030\002 \001(\0132B.com.a" +
-      "ndrerinas.headunitrevived.aap.protocol.p" +
-      "roto.ConnectedDevice\"!\n\020UserSwitchStatus" +
-      "\022\r\n\tSTATUS_OK\020\000\"0\n\026CallAvailabilityStatu" +
-      "s\022\026\n\016call_available\030\001 \001(\010*\255\007\n\016ControlMsg" +
-      "Type\022\033\n\027MESSAGE_VERSION_REQUEST\020\001\022\034\n\030MES" +
-      "SAGE_VERSION_RESPONSE\020\002\022\034\n\030MESSAGE_ENCAP" +
-      "SULATED_SSL\020\003\022\031\n\025MESSAGE_AUTH_COMPLETE\020\004" +
-      "\022%\n!MESSAGE_SERVICE_DISCOVERY_REQUEST\020\005\022" +
-      "&\n\"MESSAGE_SERVICE_DISCOVERY_RESPONSE\020\006\022" +
-      " \n\034MESSAGE_CHANNEL_OPEN_REQUEST\020\007\022!\n\035MES" +
-      "SAGE_CHANNEL_OPEN_RESPONSE\020\010\022&\n\"MESSAGE_" +
-      "CHANNEL_CLOSE_NOTIFICATION\020\t\022\030\n\024MESSAGE_" +
-      "PING_REQUEST\020\013\022\031\n\025MESSAGE_PING_RESPONSE\020" +
-      "\014\022\035\n\031MESSAGE_NAV_FOCUS_REQUEST\020\r\022\"\n\036MESS" +
-      "AGE_NAV_FOCUS_NOTIFICATION\020\016\022\032\n\026MESSAGE_" +
-      "BYEBYE_REQUEST\020\017\022\033\n\027MESSAGE_BYEBYE_RESPO" +
-      "NSE\020\020\022&\n\"MESSAGE_VOICE_SESSION_NOTIFICAT" +
-      "ION\020\021\022\037\n\033MESSAGE_AUDIO_FOCUS_REQUEST\020\022\022$" +
-      "\n MESSAGE_AUDIO_FOCUS_NOTIFICATION\020\023\022)\n%" +
-      "MESSAGE_CAR_CONNECTED_DEVICES_REQUEST\020\024\022" +
-      "*\n&MESSAGE_CAR_CONNECTED_DEVICES_RESPONS" +
-      "E\020\025\022\037\n\033MESSAGE_USER_SWITCH_REQUEST\020\026\022\'\n#" +
-      "MESSAGE_BATTERY_STATUS_NOTIFICATION\020\027\022$\n" +
-      " MESSAGE_CALL_AVAILABILITY_STATUS\020\030\022 \n\034M" +
-      "ESSAGE_USER_SWITCH_RESPONSE\020\031\022$\n MESSAGE" +
-      "_SERVICE_DISCOVERY_UPDATE\020\032\022\037\n\032MESSAGE_U" +
-      "NEXPECTED_MESSAGE\020\377\001\022\033\n\025MESSAGE_FRAMING_" +
-      "ERROR\020\377\377\003*G\n\026BluetoothPairingMethod\022\014\n\010M" +
-      "ETHOD_1\020\001\022\010\n\004A2DP\020\002\022\014\n\010METHOD_3\020\003\022\007\n\003HFP" +
-      "\020\004*z\n\014ByeByeReason\022\022\n\016USER_SELECTION\020\001\022\021" +
-      "\n\rDEVICE_SWITCH\020\002\022\021\n\rNOT_SUPPORTED\020\003\022\033\n\027" +
-      "NOT_CURRENTLY_SUPPORTED\020\004\022\023\n\017PROBE_SUPPO" +
-      "RTED\020\005*~\n\016DriverPosition\022\030\n\024DRIVER_POSIT" +
-      "ION_LEFT\020\000\022\031\n\025DRIVER_POSITION_RIGHT\020\001\022\032\n" +
-      "\026DRIVER_POSITION_CENTER\020\002\022\033\n\027DRIVER_POSI" +
-      "TION_UNKNOWN\020\003*0\n\014NavFocusType\022\017\n\013NAV_FO" +
-      "CUS_1\020\001\022\017\n\013NAV_FOCUS_2\020\002B\tB\007Control"
+      "ce.TouchConfig\032,\012\013TouchConfig\022\015\012\005width\030\001" +
+      " \002(\015\022\016\012\006height\030\002 \002(\015\032\335\001\012\022MediaSourceServ" +
+      "ice\022L\012\004type\030\001 \002(\0162>.com.andrerinas.openh" +
+      "eadunit.aap.protocol.proto.MediaCodecTyp" +
+      "e\022X\012\014audio_config\030\002 \002(\0132B.com.andrerinas" +
+      ".openheadunit.aap.protocol.proto.AudioCo" +
+      "nfiguration\022\037\012\027available_while_in_call\030\003" +
+      " \001(\010\032\222\001\012\020BluetoothService\022\023\012\013car_address" +
+      "\030\001 \002(\011\022i\012\031supported_pairing_methods\030\002 \003(" +
+      "\0162F.com.andrerinas.openheadunit.aap.prot" +
+      "ocol.proto.BluetoothPairingMethod\032\234\003\012\027Na" +
+      "vigationStatusService\022\033\012\023minimum_interva" +
+      "l_ms\030\001 \002(\015\022i\012\004type\030\002 \002(\0162[.com.andrerina" +
+      "s.openheadunit.aap.protocol.proto.Servic" +
+      "e.NavigationStatusService.ClusterType\022s\012" +
+      "\015image_options\030\003 \001(\0132\\.com.andrerinas.op" +
+      "enheadunit.aap.protocol.proto.Service.Na" +
+      "vigationStatusService.ImageOptions\032G\012\014Im" +
+      "ageOptions\022\015\012\005width\030\001 \002(\005\022\016\012\006height\030\002 \002(" +
+      "\005\022\030\012\020colour_deth_bits\030\003 \002(\005\";\012\013ClusterTy" +
+      "pe\022\030\012\024CustomImageSupported\020\001\022\022\012\016ImageCod" +
+      "esOnly\020\002\032\034\012\032MediaPlaybackStatusService\032\344" +
+      "\001\012\020PhoneStatus_Call\022X\012\005state\030\001 \001(\0162I.com" +
+      ".andrerinas.openheadunit.aap.protocol.pr" +
+      "oto.Service.PhoneStatus_State\022\035\012\025call_du" +
+      "ration_seconds\030\002 \001(\015\022\025\012\015caller_number\030\003 " +
+      "\001(\011\022\021\012\011caller_id\030\004 \001(\011\022\032\012\022caller_number_" +
+      "type\030\005 \001(\011\022\021\012\011thumbnail\030\006 \001(\014\032=\012\021PhoneSt" +
+      "atus_Input\022\025\012\015caller_number\030\001 \001(\011\022\021\012\011cal" +
+      "ler_id\030\002 \001(\011\032\206\001\012\022PhoneStatusService\022W\012\005c" +
+      "alls\030\001 \003(\0132H.com.andrerinas.openheadunit" +
+      ".aap.protocol.proto.Service.PhoneStatus_" +
+      "Call\022\027\012\017signal_strength\030\002 \001(\015\032P\012\026VendorE" +
+      "xtensionService\022\014\012\004name\030\001 \001(\011\022\032\012\022package" +
+      "_white_list\030\002 \003(\011\022\014\012\004data\030\003 \001(\014\032\034\012\032Gener" +
+      "icNotificationService\032/\012\025WifiProjectionS" +
+      "ervice\022\026\012\016car_wifi_bssid\030\001 \001(\011\"d\012\021PhoneS" +
+      "tatus_State\022\012\012\006InCall\020\001\022\012\012\006OnHold\020\002\022\015\012\011H" +
+      "angingUp\020\003\022\014\012\010Incoming\020\004\022\011\012\005Muted\020\005\022\017\012\013C" +
+      "onferenced\020\006\"B\012\027ServiceDiscoveryRequest\022" +
+      "\022\012\012phone_name\030\004 \002(\011\022\023\012\013phone_brand\030\005 \002(\011" +
+      "\"\340\004\012\030ServiceDiscoveryResponse\022I\012\010service" +
+      "s\030\001 \003(\01327.com.andrerinas.openheadunit.aa" +
+      "p.protocol.proto.Service\022\014\012\004make\030\002 \002(\011\022\015" +
+      "\012\005model\030\003 \002(\011\022\014\012\004year\030\004 \002(\011\022\022\012\012vehicle_i" +
+      "d\030\005 \002(\011\022W\012\017driver_position\030\006 \002(\0162>.com.a" +
+      "ndrerinas.openheadunit.aap.protocol.prot" +
+      "o.DriverPosition\022\026\012\016head_unit_make\030\007 \002(\011" +
+      "\022\027\012\017head_unit_model\030\010 \002(\011\022 \012\030head_unit_s" +
+      "oftware_build\030\011 \002(\011\022\"\012\032head_unit_softwar" +
+      "e_version\030\012 \002(\011\022'\012\037can_play_native_media" +
+      "_during_vr\030\013 \002(\010\022\034\012\024hide_projected_clock" +
+      "\030\014 \001(\010\022\035\012\025session_configuration\030\015 \001(\005\022\024\012" +
+      "\014display_name\030\016 \001(\011\022\031\012\021probe_for_support" +
+      "\030\017 \001(\010\022S\012\015headunit_info\030\021 \001(\0132<.com.andr" +
+      "erinas.openheadunit.aap.protocol.proto.H" +
+      "eadUnitInfo\":\012\022ChannelOpenRequest\022\020\012\010pri" +
+      "ority\030\001 \002(\005\022\022\012\012service_id\030\002 \002(\005\"d\012\023Chann" +
+      "elOpenResponse\022M\012\006status\030\001 \002(\0162=.com.and" +
+      "rerinas.openheadunit.aap.protocol.proto." +
+      "MessageStatus\"4\012\013PingRequest\022\021\012\011timestam" +
+      "p\030\001 \002(\003\022\022\012\012bug_report\030\002 \001(\005\"!\012\014PingRespo" +
+      "nse\022\021\012\011timestamp\030\001 \002(\003\"]\012\015ByeByeRequest\022" +
+      "L\012\006reason\030\001 \002(\0162<.com.andrerinas.openhea" +
+      "dunit.aap.protocol.proto.ByeByeReason\"\020\012" +
+      "\016ByeByeResponse\"\314\001\012\030VoiceSessionNotifica" +
+      "tion\022k\012\006status\030\001 \002(\0162[.com.andrerinas.op" +
+      "enheadunit.aap.protocol.proto.VoiceSessi" +
+      "onNotification.VoiceSessionStatus\"C\012\022Voi" +
+      "ceSessionStatus\022\026\012\022VOICE_STATUS_START\020\001\022" +
+      "\025\012\021VOICE_STATUS_STOP\020\002\"\200\002\012\035AudioFocusReq" +
+      "uestNotification\022t\012\007request\030\001 \001(\0162c.com." +
+      "andrerinas.openheadunit.aap.protocol.pro" +
+      "to.AudioFocusRequestNotification.AudioFo" +
+      "cusRequestType\"i\012\025AudioFocusRequestType\022" +
+      "\010\012\004NONE\020\000\022\010\012\004GAIN\020\001\022\022\012\016GAIN_TRANSIENT\020\002\022" +
+      "\033\012\027GAIN_TRANSIENT_MAY_DUCK\020\003\022\013\012\007RELEASE\020" +
+      "\004\"\360\002\012\026AudioFocusNotification\022o\012\013focus_st" +
+      "ate\030\001 \002(\0162Z.com.andrerinas.openheadunit." +
+      "aap.protocol.proto.AudioFocusNotificatio" +
+      "n.AudioFocusStateType\022\023\012\013unsolicited\030\002 \001" +
+      "(\010\"\317\001\012\023AudioFocusStateType\022\016\012\012STATE_GAIN" +
+      "\020\001\022\030\012\024STATE_GAIN_TRANSIENT\020\002\022\016\012\012STATE_LO" +
+      "SS\020\003\022!\012\035STATE_LOSS_TRANSIENT_CAN_DUCK\020\004\022" +
+      "\030\012\024STATE_LOSS_TRANSIENT\020\005\022\031\012\025STATE_GAIN_" +
+      "MEDIA_ONLY\020\006\022&\012\"STATE_GAIN_TRANSIENT_GUI" +
+      "DANCE_ONLY\020\007\"o\012\033NavFocusRequestNotificat" +
+      "ion\022P\012\012focus_type\030\001 \001(\0162<.com.andrerinas" +
+      ".openheadunit.aap.protocol.proto.NavFocu" +
+      "sType\"h\012\024NavFocusNotification\022P\012\012focus_t" +
+      "ype\030\001 \002(\0162<.com.andrerinas.openheadunit." +
+      "aap.protocol.proto.NavFocusType\"f\012\031Batte" +
+      "ryStatusNotification\022\025\012\015battery_level\030\001 " +
+      "\002(\015\022\030\012\020time_remaining_s\030\002 \001(\015\022\030\012\020critica" +
+      "l_battery\030\003 \001(\010\"9\012\017ConnectedDevice\022\023\012\013de" +
+      "vice_name\030\001 \001(\011\022\021\012\011device_id\030\002 \001(\005\"\240\001\012\023C" +
+      "arConnectedDevices\022Z\012\021connected_devices\030" +
+      "\001 \003(\0132?.com.andrerinas.openheadunit.aap." +
+      "protocol.proto.ConnectedDevice\022\023\012\013unsoli" +
+      "cited\030\002 \001(\010\022\030\012\012final_list\030\003 \001(\010:\004true\"\366\001" +
+      "\012\022UserSwitchResponse\022c\012\006status\030\001 \001(\0162S.c" +
+      "om.andrerinas.openheadunit.aap.protocol." +
+      "proto.UserSwitchResponse.UserSwitchStatu" +
+      "s\022X\012\017selected_device\030\002 \001(\0132?.com.andreri" +
+      "nas.openheadunit.aap.protocol.proto.Conn" +
+      "ectedDevice\"!\012\020UserSwitchStatus\022\015\012\011STATU" +
+      "S_OK\020\000\"0\012\026CallAvailabilityStatus\022\026\012\016call" +
+      "_available\030\001 \001(\010*\255\007\012\016ControlMsgType\022\033\012\027M" +
+      "ESSAGE_VERSION_REQUEST\020\001\022\034\012\030MESSAGE_VERS" +
+      "ION_RESPONSE\020\002\022\034\012\030MESSAGE_ENCAPSULATED_S" +
+      "SL\020\003\022\031\012\025MESSAGE_AUTH_COMPLETE\020\004\022%\012!MESSA" +
+      "GE_SERVICE_DISCOVERY_REQUEST\020\005\022&\012\"MESSAG" +
+      "E_SERVICE_DISCOVERY_RESPONSE\020\006\022 \012\034MESSAG" +
+      "E_CHANNEL_OPEN_REQUEST\020\007\022!\012\035MESSAGE_CHAN" +
+      "NEL_OPEN_RESPONSE\020\010\022&\012\"MESSAGE_CHANNEL_C" +
+      "LOSE_NOTIFICATION\020\011\022\030\012\024MESSAGE_PING_REQU" +
+      "EST\020\013\022\031\012\025MESSAGE_PING_RESPONSE\020\014\022\035\012\031MESS" +
+      "AGE_NAV_FOCUS_REQUEST\020\015\022\"\012\036MESSAGE_NAV_F" +
+      "OCUS_NOTIFICATION\020\016\022\032\012\026MESSAGE_BYEBYE_RE" +
+      "QUEST\020\017\022\033\012\027MESSAGE_BYEBYE_RESPONSE\020\020\022&\012\"" +
+      "MESSAGE_VOICE_SESSION_NOTIFICATION\020\021\022\037\012\033" +
+      "MESSAGE_AUDIO_FOCUS_REQUEST\020\022\022$\012 MESSAGE" +
+      "_AUDIO_FOCUS_NOTIFICATION\020\023\022)\012%MESSAGE_C" +
+      "AR_CONNECTED_DEVICES_REQUEST\020\024\022*\012&MESSAG" +
+      "E_CAR_CONNECTED_DEVICES_RESPONSE\020\025\022\037\012\033ME" +
+      "SSAGE_USER_SWITCH_REQUEST\020\026\022'\012#MESSAGE_B" +
+      "ATTERY_STATUS_NOTIFICATION\020\027\022$\012 MESSAGE_" +
+      "CALL_AVAILABILITY_STATUS\020\030\022 \012\034MESSAGE_US" +
+      "ER_SWITCH_RESPONSE\020\031\022$\012 MESSAGE_SERVICE_" +
+      "DISCOVERY_UPDATE\020\032\022\037\012\032MESSAGE_UNEXPECTED" +
+      "_MESSAGE\020\377\001\022\033\012\025MESSAGE_FRAMING_ERROR\020\377\377\003" +
+      "*G\012\026BluetoothPairingMethod\022\014\012\010METHOD_1\020\001" +
+      "\022\010\012\004A2DP\020\002\022\014\012\010METHOD_3\020\003\022\007\012\003HFP\020\004*z\012\014Bye" +
+      "ByeReason\022\022\012\016USER_SELECTION\020\001\022\021\012\015DEVICE_" +
+      "SWITCH\020\002\022\021\012\015NOT_SUPPORTED\020\003\022\033\012\027NOT_CURRE" +
+      "NTLY_SUPPORTED\020\004\022\023\012\017PROBE_SUPPORTED\020\005*~\012" +
+      "\016DriverPosition\022\030\012\024DRIVER_POSITION_LEFT\020" +
+      "\000\022\031\012\025DRIVER_POSITION_RIGHT\020\001\022\032\012\026DRIVER_P" +
+      "OSITION_CENTER\020\002\022\033\012\027DRIVER_POSITION_UNKN" +
+      "OWN\020\003*0\012\014NavFocusType\022\017\012\013NAV_FOCUS_1\020\001\022\017" +
+      "\012\013NAV_FOCUS_2\020\002B\011B\007Control"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -32486,221 +32483,221 @@ public final class Control {
           com.andrerinas.openheadunit.aap.protocol.proto.Media.getDescriptor(),
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.getDescriptor(),
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor,
         new java.lang.String[] { "PhoneStatusService", "Id", "SensorSourceService", "MediaSinkService", "InputSourceService", "MediaSourceService", "BluetoothService", "NavigationStatusService", "MediaPlaybackService", "VendorExtensionService", "GenericNotificationService", "WifiProjectionService", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_descriptor,
         new java.lang.String[] { "Sensors", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_SensorSourceService_Sensor_descriptor,
         new java.lang.String[] { "Type", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(1);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_descriptor,
         new java.lang.String[] { "AvailableType", "AudioType", "AudioConfigs", "VideoConfigs", "AvailableWhileInCall", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSinkService_VideoConfiguration_descriptor,
         new java.lang.String[] { "CodecResolution", "FrameRate", "MarginWidth", "MarginHeight", "Density", "DecoderAdditionalDepth", "PixelAspectRatioE4", "VideoCodecType", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(2);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(2);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_descriptor,
         new java.lang.String[] { "KeycodesSupported", "Touchscreen", "Touchpad", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_InputSourceService_TouchConfig_descriptor,
         new java.lang.String[] { "Width", "Height", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(3);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(3);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaSourceService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaSourceService_descriptor,
         new java.lang.String[] { "Type", "AudioConfig", "AvailableWhileInCall", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(4);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(4);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_BluetoothService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_BluetoothService_descriptor,
         new java.lang.String[] { "CarAddress", "SupportedPairingMethods", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(5);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(5);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_descriptor,
         new java.lang.String[] { "MinimumIntervalMs", "Type", "ImageOptions", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_NavigationStatusService_ImageOptions_descriptor,
         new java.lang.String[] { "Width", "Height", "ColourDethBits", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(6);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(6);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_MediaPlaybackStatusService_descriptor,
         new java.lang.String[] { });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(7);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(7);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Call_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Call_descriptor,
         new java.lang.String[] { "State", "CallDurationSeconds", "CallerNumber", "CallerId", "CallerNumberType", "Thumbnail", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(8);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(8);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatus_Input_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatus_Input_descriptor,
         new java.lang.String[] { "CallerNumber", "CallerId", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(9);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(9);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_PhoneStatusService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_PhoneStatusService_descriptor,
         new java.lang.String[] { "Calls", "SignalStrength", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(10);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(10);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_VendorExtensionService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_VendorExtensionService_descriptor,
         new java.lang.String[] { "Name", "PackageWhiteList", "Data", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(11);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(11);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_GenericNotificationService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_GenericNotificationService_descriptor,
         new java.lang.String[] { });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_descriptor.getNestedTypes().get(12);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_descriptor.getNestedTypes().get(12);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_Service_WifiProjectionService_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_Service_WifiProjectionService_descriptor,
         new java.lang.String[] { "CarWifiBssid", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryRequest_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryRequest_descriptor,
         new java.lang.String[] { "PhoneName", "PhoneBrand", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ServiceDiscoveryResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ServiceDiscoveryResponse_descriptor,
         new java.lang.String[] { "Services", "Make", "Model", "Year", "VehicleId", "DriverPosition", "HeadUnitMake", "HeadUnitModel", "HeadUnitSoftwareBuild", "HeadUnitSoftwareVersion", "CanPlayNativeMediaDuringVr", "HideProjectedClock", "SessionConfiguration", "DisplayName", "ProbeForSupport", "HeadunitInfo", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenRequest_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenRequest_descriptor,
         new java.lang.String[] { "Priority", "ServiceId", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ChannelOpenResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ChannelOpenResponse_descriptor,
         new java.lang.String[] { "Status", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingRequest_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingRequest_descriptor,
         new java.lang.String[] { "Timestamp", "BugReport", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_PingResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_PingResponse_descriptor,
         new java.lang.String[] { "Timestamp", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_descriptor =
       getDescriptor().getMessageTypes().get(7);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeRequest_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeRequest_descriptor,
         new java.lang.String[] { "Reason", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_descriptor =
       getDescriptor().getMessageTypes().get(8);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ByeByeResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ByeByeResponse_descriptor,
         new java.lang.String[] { });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_descriptor =
       getDescriptor().getMessageTypes().get(9);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_VoiceSessionNotification_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_VoiceSessionNotification_descriptor,
         new java.lang.String[] { "Status", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_descriptor =
       getDescriptor().getMessageTypes().get(10);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusRequestNotification_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusRequestNotification_descriptor,
         new java.lang.String[] { "Request", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_descriptor =
       getDescriptor().getMessageTypes().get(11);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_AudioFocusNotification_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_AudioFocusNotification_descriptor,
         new java.lang.String[] { "FocusState", "Unsolicited", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_descriptor =
       getDescriptor().getMessageTypes().get(12);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusRequestNotification_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusRequestNotification_descriptor,
         new java.lang.String[] { "FocusType", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_descriptor =
       getDescriptor().getMessageTypes().get(13);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavFocusNotification_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavFocusNotification_descriptor,
         new java.lang.String[] { "FocusType", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_descriptor =
       getDescriptor().getMessageTypes().get(14);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_BatteryStatusNotification_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_BatteryStatusNotification_descriptor,
         new java.lang.String[] { "BatteryLevel", "TimeRemainingS", "CriticalBattery", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_descriptor =
       getDescriptor().getMessageTypes().get(15);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_ConnectedDevice_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_ConnectedDevice_descriptor,
         new java.lang.String[] { "DeviceName", "DeviceId", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_descriptor =
       getDescriptor().getMessageTypes().get(16);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CarConnectedDevices_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CarConnectedDevices_descriptor,
         new java.lang.String[] { "ConnectedDevices", "Unsolicited", "FinalList", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_descriptor =
       getDescriptor().getMessageTypes().get(17);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_UserSwitchResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_UserSwitchResponse_descriptor,
         new java.lang.String[] { "Status", "SelectedDevice", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_descriptor =
       getDescriptor().getMessageTypes().get(18);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_CallAvailabilityStatus_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_CallAvailabilityStatus_descriptor,
         new java.lang.String[] { "CallAvailable", });
     com.andrerinas.openheadunit.aap.protocol.proto.Common.getDescriptor();
     com.andrerinas.openheadunit.aap.protocol.proto.Media.getDescriptor();

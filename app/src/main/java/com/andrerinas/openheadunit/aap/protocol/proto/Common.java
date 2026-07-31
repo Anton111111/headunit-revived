@@ -553,13 +553,13 @@ public final class Common {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.class, com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.Builder.class);
     }
@@ -1232,13 +1232,13 @@ public final class Common {
         com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.class, com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.Builder.class);
       }
@@ -1271,7 +1271,7 @@ public final class Common {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
       }
 
       @java.lang.Override
@@ -2205,10 +2205,10 @@ public final class Common {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2218,57 +2218,57 @@ public final class Common {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014common.proto\0221com.andrerinas.headunitr" +
-      "evived.aap.protocol.proto\"\304\001\n\014HeadUnitIn" +
-      "fo\022\026\n\016head_unit_make\030\001 \001(\t\022\027\n\017head_unit_" +
-      "model\030\002 \001(\t\022\014\n\004make\030\003 \001(\t\022\r\n\005model\030\004 \001(\t" +
-      "\022\014\n\004year\030\005 \001(\t\022 \n\030head_unit_software_bui" +
-      "ld\030\006 \001(\t\022\022\n\nvehicle_id\030\007 \001(\t\022\"\n\032head_uni" +
-      "t_software_version\030\010 \001(\t*\323\n\n\rMessageStat" +
-      "us\022\022\n\016STATUS_SUCCESS\020\000\022\036\n\032STATUS_UNSOLIC" +
-      "ITED_MESSAGE\020\001\022)\n\034STATUS_NO_COMPATIBLE_V" +
-      "ERSION\020\377\377\377\377\377\377\377\377\377\001\022%\n\030STATUS_CERTIFICATE_" +
-      "ERROR\020\376\377\377\377\377\377\377\377\377\001\022*\n\035STATUS_AUTHENTICATIO" +
-      "N_FAILURE\020\375\377\377\377\377\377\377\377\377\001\022#\n\026STATUS_INVALID_S" +
-      "ERVICE\020\374\377\377\377\377\377\377\377\377\001\022#\n\026STATUS_INVALID_CHAN" +
-      "NEL\020\373\377\377\377\377\377\377\377\377\001\022$\n\027STATUS_INVALID_PRIORIT" +
-      "Y\020\372\377\377\377\377\377\377\377\377\001\022\"\n\025STATUS_INTERNAL_ERROR\020\371\377" +
-      "\377\377\377\377\377\377\377\001\022)\n\034STATUS_MEDIA_CONFIG_MISMATCH" +
-      "\020\370\377\377\377\377\377\377\377\377\001\022\"\n\025STATUS_INVALID_SENSOR\020\367\377\377" +
-      "\377\377\377\377\377\377\001\022-\n STATUS_BLUETOOTH_PAIRING_DELA" +
-      "YED\020\366\377\377\377\377\377\377\377\377\001\022)\n\034STATUS_BLUETOOTH_UNAVA" +
-      "ILABLE\020\365\377\377\377\377\377\377\377\377\001\022-\n STATUS_BLUETOOTH_IN" +
-      "VALID_ADDRESS\020\364\377\377\377\377\377\377\377\377\001\0224\n\'STATUS_BLUET" +
-      "OOTH_INVALID_PAIRING_METHOD\020\363\377\377\377\377\377\377\377\377\001\022/" +
-      "\n\"STATUS_BLUETOOTH_INVALID_AUTH_DATA\020\362\377\377" +
-      "\377\377\377\377\377\377\001\0220\n#STATUS_BLUETOOTH_AUTH_DATA_MI" +
-      "SMATCH\020\361\377\377\377\377\377\377\377\377\001\0224\n\'STATUS_BLUETOOTH_HF" +
-      "P_ANOTHER_CONNECTION\020\360\377\377\377\377\377\377\377\377\001\0224\n\'STATU" +
-      "S_BLUETOOTH_HFP_CONNECTION_FAILURE\020\357\377\377\377\377" +
-      "\377\377\377\377\001\022%\n\030STATUS_KEYCODE_NOT_BOUND\020\356\377\377\377\377\377" +
-      "\377\377\377\001\022)\n\034STATUS_RADIO_INVALID_STATION\020\355\377\377" +
-      "\377\377\377\377\377\377\001\022!\n\024STATUS_INVALID_INPUT\020\354\377\377\377\377\377\377\377" +
-      "\377\001\0227\n*STATUS_RADIO_STATION_PRESETS_NOT_S" +
-      "UPPORTED\020\353\377\377\377\377\377\377\377\377\001\022$\n\027STATUS_RADIO_COMM" +
-      "_ERROR\020\352\377\377\377\377\377\377\377\377\001\022=\n0STATUS_AUTHENTICATI" +
-      "ON_FAILURE_CERT_NOT_YET_VALID\020\351\377\377\377\377\377\377\377\377\001" +
-      "\0227\n*STATUS_AUTHENTICATION_FAILURE_CERT_E" +
-      "XPIRED\020\350\377\377\377\377\377\377\377\377\001\022 \n\023STATUS_PING_TIMEOUT" +
-      "\020\347\377\377\377\377\377\377\377\377\001\022)\n\034STATUS_COMMAND_NOT_SUPPOR" +
-      "TED\020\206\376\377\377\377\377\377\377\377\001\022!\n\024STATUS_FRAMING_ERROR\020\205" +
-      "\376\377\377\377\377\377\377\377\001\022&\n\031STATUS_UNEXPECTED_MESSAGE\020\203" +
-      "\376\377\377\377\377\377\377\377\001\022\030\n\013STATUS_BUSY\020\202\376\377\377\377\377\377\377\377\001\022!\n\024S" +
-      "TATUS_OUT_OF_MEMORY\020\201\376\377\377\377\377\377\377\377\001"
+      "\012\014common.proto\022.com.andrerinas.openheadu" +
+      "nit.aap.protocol.proto\"\304\001\012\014HeadUnitInfo\022" +
+      "\026\012\016head_unit_make\030\001 \001(\011\022\027\012\017head_unit_mod" +
+      "el\030\002 \001(\011\022\014\012\004make\030\003 \001(\011\022\015\012\005model\030\004 \001(\011\022\014\012" +
+      "\004year\030\005 \001(\011\022 \012\030head_unit_software_build\030" +
+      "\006 \001(\011\022\022\012\012vehicle_id\030\007 \001(\011\022\"\012\032head_unit_s" +
+      "oftware_version\030\010 \001(\011*\323\012\012\015MessageStatus\022" +
+      "\022\012\016STATUS_SUCCESS\020\000\022\036\012\032STATUS_UNSOLICITE" +
+      "D_MESSAGE\020\001\022)\012\034STATUS_NO_COMPATIBLE_VERS" +
+      "ION\020\377\377\377\377\377\377\377\377\377\001\022%\012\030STATUS_CERTIFICATE_ERR" +
+      "OR\020\376\377\377\377\377\377\377\377\377\001\022*\012\035STATUS_AUTHENTICATION_F" +
+      "AILURE\020\375\377\377\377\377\377\377\377\377\001\022#\012\026STATUS_INVALID_SERV" +
+      "ICE\020\374\377\377\377\377\377\377\377\377\001\022#\012\026STATUS_INVALID_CHANNEL" +
+      "\020\373\377\377\377\377\377\377\377\377\001\022$\012\027STATUS_INVALID_PRIORITY\020\372" +
+      "\377\377\377\377\377\377\377\377\001\022\"\012\025STATUS_INTERNAL_ERROR\020\371\377\377\377\377" +
+      "\377\377\377\377\001\022)\012\034STATUS_MEDIA_CONFIG_MISMATCH\020\370\377" +
+      "\377\377\377\377\377\377\377\001\022\"\012\025STATUS_INVALID_SENSOR\020\367\377\377\377\377\377" +
+      "\377\377\377\001\022-\012 STATUS_BLUETOOTH_PAIRING_DELAYED" +
+      "\020\366\377\377\377\377\377\377\377\377\001\022)\012\034STATUS_BLUETOOTH_UNAVAILA" +
+      "BLE\020\365\377\377\377\377\377\377\377\377\001\022-\012 STATUS_BLUETOOTH_INVAL" +
+      "ID_ADDRESS\020\364\377\377\377\377\377\377\377\377\001\0224\012'STATUS_BLUETOOT" +
+      "H_INVALID_PAIRING_METHOD\020\363\377\377\377\377\377\377\377\377\001\022/\012\"S" +
+      "TATUS_BLUETOOTH_INVALID_AUTH_DATA\020\362\377\377\377\377\377" +
+      "\377\377\377\001\0220\012#STATUS_BLUETOOTH_AUTH_DATA_MISMA" +
+      "TCH\020\361\377\377\377\377\377\377\377\377\001\0224\012'STATUS_BLUETOOTH_HFP_A" +
+      "NOTHER_CONNECTION\020\360\377\377\377\377\377\377\377\377\001\0224\012'STATUS_B" +
+      "LUETOOTH_HFP_CONNECTION_FAILURE\020\357\377\377\377\377\377\377\377" +
+      "\377\001\022%\012\030STATUS_KEYCODE_NOT_BOUND\020\356\377\377\377\377\377\377\377\377" +
+      "\001\022)\012\034STATUS_RADIO_INVALID_STATION\020\355\377\377\377\377\377" +
+      "\377\377\377\001\022!\012\024STATUS_INVALID_INPUT\020\354\377\377\377\377\377\377\377\377\001\022" +
+      "7\012*STATUS_RADIO_STATION_PRESETS_NOT_SUPP" +
+      "ORTED\020\353\377\377\377\377\377\377\377\377\001\022$\012\027STATUS_RADIO_COMM_ER" +
+      "ROR\020\352\377\377\377\377\377\377\377\377\001\022=\0120STATUS_AUTHENTICATION_" +
+      "FAILURE_CERT_NOT_YET_VALID\020\351\377\377\377\377\377\377\377\377\001\0227\012" +
+      "*STATUS_AUTHENTICATION_FAILURE_CERT_EXPI" +
+      "RED\020\350\377\377\377\377\377\377\377\377\001\022 \012\023STATUS_PING_TIMEOUT\020\347\377" +
+      "\377\377\377\377\377\377\377\001\022)\012\034STATUS_COMMAND_NOT_SUPPORTED" +
+      "\020\206\376\377\377\377\377\377\377\377\001\022!\012\024STATUS_FRAMING_ERROR\020\205\376\377\377" +
+      "\377\377\377\377\377\001\022&\012\031STATUS_UNEXPECTED_MESSAGE\020\203\376\377\377" +
+      "\377\377\377\377\377\001\022\030\012\013STATUS_BUSY\020\202\376\377\377\377\377\377\377\377\001\022!\012\024STAT" +
+      "US_OUT_OF_MEMORY\020\201\376\377\377\377\377\377\377\377\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor,
         new java.lang.String[] { "HeadUnitMake", "HeadUnitModel", "Make", "Model", "Year", "HeadUnitSoftwareBuild", "VehicleId", "HeadUnitSoftwareVersion", });
   }
 
