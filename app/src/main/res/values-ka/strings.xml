@@ -665,4 +665,36 @@
     <string name="onb_vehicle_help_aa">ეს სახელი იგზავნება Android Auto-ში. ის ჩანს ტელეფონის კავშირების ისტორიაში და Android Auto-ს მისალმების ეკრანზე.</string>
     <string name="onb_vehicle_help_advanced">მანქანის დამატებითი დეტალები შეგიძლიათ დააკონფიგუროთ ჩანართში დამატებითი. ჩვენ არ ვიყენებთ ამ მონაცემებს; ისინი იგზავნება მხოლოდ Android Auto-ში, რადგან ის ამას მოითხოვს.</string>
     <string name="onb_summary_vehicle_format">მანქანა: %1$s</string>
+
+    <string name="support">პრობლემის შეტყობინება</string>
+    <string name="support_description">GitHub-ზე ხარვეზების ძებნა ან შეტყობინება</string>
+    <string name="support_title">პრობლემის შეტყობინება</string>
+    <string name="support_help">თუ წაიქეცით ხარვეზში ან პრობლემაში, გთხოვთ, ჯერ მოძებნოთ იგი GitHub-ის საკითხების სიაში. თუ ჯერ არავის შეუტყობინებია ამის შესახებ, გახსენით ახალი საკითხი და აღწერეთ: რა ხდება, რა მონიტორი გაქვთ და როგორ შეიძლება პრობლემის გამეორება.</string>
+    <string name="support_open_issues">GitHub-ის საკითხების გვერდის გახსნა</string>
+    <string name="support_scan_qr">ან დაასკანირეთ ეს QR კოდი, რათა გახსნათ საკითხების სია სხვა მოწყობილობაზე.</string>
+    <string name="support_github_account_warning">შენიშვნა: საკითხის შესაქმნელად საჭიროა უფასო GitHub ანგარიში.</string>
+    <string name="onb_ready_extras_title">დასრულებამდე შეგიძლიათ ასევე გამართოთ:</string>
+    <string name="onb_extra_loading_desc">სახეობრივი სურათი, რომელიც ჩანს მანქანის დაკავშირების დროს</string>
+
+    <string name="support_rules_button">შეტყობინების წესები</string>
+    <string name="support_rules_english_desc">გთხოვთ, პრობლემა ყოველთვის ინგლისურად აღწეროთ. ეს ის ერთი ენაა, რომელსაც პროექტის შემქმნელი და აქ მომხმარეთა უმეტესობა იზიარებს, ხოლო ნაირენოვანი ძაფი სწრაფად გადაიქცევა ბაბილონის გოდოლად, სადაც ვერავინ ვერ ეხმარება ვერავის. არავინ გასამართლებთ — არც თქვენს ინგლისურს, არც ჩაწერის სტილს, ამიტომ ნუ ინერვიულებთ შეცდომებზე. თუ გამოგადგებათ, მთარგმნელი, Google Translate ან DeepL, ან ხელოვნური ინტელექტი, ChatGPT ან Claude, დაგეხმარებათ ინგლისურად გამართულად ჩამოაყალიბოთ გზავნილი.</string>
+    <string name="support_rules_device_title">აღწერეთ, რომელ მოწყობილობაზე მუშაობს აპი</string>
+    <string name="support_rules_device_desc">Android Auto-ს გამომჩენი მოწყობილობის (თქვენი მონიტორის ან ეკრანის) Android ვერსია, ასევე მწარმოებელი და მოდელი, თუ იცით.</string>
+    <string name="support_rules_connection_title">მიუთითეთ, როგორ უკავშირდებით</string>
+    <string name="support_rules_connection_desc">USB კაბელი, USB უსადენო ადაპტერი, WiFi Direct, WiFi (headunit server) ან Self Mode. თუ კავშირი უსადენოა, დაამატეთ ადაპტერის ან დონგლის მოდელი.</string>
+    <string name="support_rules_appversion_title">მიუთითეთ აპის ვერსია</string>
+    <string name="support_rules_appversion_desc">Headunit Revived-ის ვერსია, რომელიც ნაჩვენებია შესახებ ეკრანზე.</string>
+    <string name="support_rules_logs_title">მიამაგრეთ ლოგი — პრობლემის შემდეგ დაუყოვნებლივ</string>
+    <string name="support_rules_logs_desc">გახსენით პარამეტრები, გადადით დამატებითი ჩანართზე, ჩართეთ გამართვის რეჟიმი გამართვა განყოფილებაში, გაიმეორეთ პრობლემა, შემდეგ დაუყოვნებლივ შეეხეთ ლოგების ექსპორტი, რათა ლოგი მოიცავდეს შეცდომის მომენტს და არა მხოლოდ გაშვებას. მიამაგრეთ ეს ფაილი საკითხს.</string>
+    <string name="support_rules_search_title">დუბლიკატები არ გახსნათ</string>
+    <string name="support_rules_search_desc">ჯერ მოძებნეთ არსებულ საკითხებში. თუ ღია საკითხი უკვე აღწერს თქვენს პრობლემას, კომენტარი დაამატეთ იქ ახლის გახსნის ნაცვლად. ახალი გახსენით მხოლოდ იმ შემთხვევაში, თუ არც ერთი არ ემთხვევა.</string>
+    <string name="support_rules_phone_title">ტელეფონიც მნიშვნელოვანია</string>
+    <string name="support_rules_phone_desc">თქვენი ტელეფონის მოდელი, მისი Android ვერსია და ტელეფონზე დაყენებული Android Auto-ს ვერსია. ზოგიერთი პრობლემა კონკრეტული Android Auto-ს გამოშვებით არის გამოწვეული.</string>
+    <string name="support_rules_describe_title">ნათლად აღწერეთ პრობლემა</string>
+    <string name="support_rules_describe_desc">რა გააკეთეთ, რას ელოდეთ და რეალურად რა მოხდა. ეკრანის სურათი ან მოკლე ვიდეო ძალიან გვეხმარება ვიზუალური პრობლემებისთვის.</string>
+    <string name="support_rules_oneissue_title">ერთი საკითხი — ერთი პრობლემა</string>
+    <string name="support_rules_oneissue_desc">ყოველ საკითხს ერთი პრობლემა ეძღვნება, რათა მისი თვალყურის დევნება და გამოსწორება მარტივი იყოს. დაუკავშირებელი პრობლემებისთვის გახსენით ცალკე საკითხები.</string>
+    <string name="support_rules_intro">მხოლოდ ორი რამ არის სავალდებულო. ყველა დანარჩენი სურვილისამებრ, მაგრამ ეს ძალიან აჩქარებს პრობლემის გადაჭრას.</string>
+    <string name="support_rules_section_required">სავალდებულო</string>
+    <string name="support_rules_section_recommend">რეკომენდაციები (სურვილისამებრ)</string>
 </resources>

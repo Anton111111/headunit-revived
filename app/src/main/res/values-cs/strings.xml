@@ -761,4 +761,38 @@
     <string name="onb_dpi_recommended">Doporučeno pro vaši obrazovku: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Ještě jedna věc: nyní můžete nastavit vlastní načítací obrazovku, která se zobrazí při připojování auta.</string>
     <string name="onb_ready_loading_button">Nastavit načítací obrazovku</string>
+
+    <string name="support">Nahlásit chybu</string>
+    <string name="support_description">Hledejte nebo nahlašujte chyby na GitHubu</string>
+    <string name="support_title">Nahlásit chybu</string>
+    <string name="support_help">Pokud narazíte na chybu nebo problém, nejprve ho vyhledejte v seznamu hlášení na GitHubu. Pokud ho ještě nikdo nenahlásil, vytvořte nové hlášení a popište, co se stalo, vaše autorádio a postup, jak chybu zopakovat.</string>
+    <string name="support_open_issues">Otevřít hlášení na GitHubu</string>
+    <string name="support_scan_qr">Nebo naskenujte tento QR kód a otevřete seznam hlášení na jiném zařízení.</string>
+    <string name="support_github_account_warning">Poznámka: k vytvoření hlášení potřebujete bezplatný účet na GitHubu.</string>
+    <string name="onb_ready_extras_title">Než dokončíte, můžete také nastavit:</string>
+    <string name="onb_extra_loading_desc">Vlastní obrázek zobrazený při připojování auta</string>
+
+    <!-- Support / reporting rules -->
+    <string name="support_rules_button">Pravidla hlášení</string>
+    <string name="support_rules_english_desc">Pište prosím vždy anglicky. Angličtina je jediný jazyk, který správce a většina lidí, kteří zde pomáhají, sdílejí, a vlákno v mnoha jazycích se rychle promění v malou babylonskou věž, kde si nikdo nemůže pomoci. Nikdo vás nesoudí — ani vaši angličtinu, ani způsob, jakým píšete, takže si nedělejte starosti s chybami. Pokud to pomůže, překladač jako Google Translate nebo DeepL, nebo AI jako ChatGPT nebo Claude, za vás zprávu v angličtině napíše a upraví.</string>
+    <string name="support_rules_device_title">Řekněte, na čem aplikaci spouštíte</string>
+    <string name="support_rules_device_desc">Verze Androidu zařízení, které promítá Android Auto (vaše autorádio nebo obrazovka), a jeho značka a model, pokud je znáte.</string>
+    <string name="support_rules_connection_title">Řekněte, jak se připojujete</string>
+    <string name="support_rules_connection_desc">USB kabel, bezdrátový USB adaptér, WiFi Direct, WiFi (headunit server) nebo Self Mode. Pokud jde o bezdrátové připojení, uveďte model adaptéru nebo donglu.</string>
+    <string name="support_rules_appversion_title">Uveďte verzi aplikace</string>
+    <string name="support_rules_appversion_desc">Verzi Headunit Revived najdete na obrazovce O aplikaci a podpora.</string>
+    <string name="support_rules_logs_title">Přiložte protokoly, hned po tom, co se to stane</string>
+    <string name="support_rules_logs_desc">V Nastavení přejděte na záložku Pokročilé, v sekci Ladění zapněte Režim ladění, zopakujte problém a hned poté klepněte na Exportovat protokoly, aby protokol zachytil okamžik selhání, a ne jen start. Přiložte tento soubor k hlášení.</string>
+    <string name="support_rules_search_title">Žádné duplicity</string>
+    <string name="support_rules_search_desc">Nejprve prohledejte existující hlášení. Pokud už otevřené hlášení váš problém popisuje, přidejte své podrobnosti jako komentář tam, místo abyste otevírali nové. Nové hlášení otevřete, jen pokud žádné neodpovídá.</string>
+    <string name="support_rules_phone_title">Záleží i na vašem telefonu</string>
+    <string name="support_rules_phone_desc">Model vašeho telefonu, jeho verze Androidu a verze aplikace Android Auto v telefonu. Některé problémy jsou způsobeny konkrétní verzí Android Auto.</string>
+    <string name="support_rules_describe_title">Popište to jasně</string>
+    <string name="support_rules_describe_desc">Co jste udělali, co jste očekávali a co se skutečně stalo. Screenshot nebo krátké video velmi pomáhá u vizuálních problémů.</string>
+    <string name="support_rules_oneissue_title">Jeden problém na jedno hlášení</string>
+    <string name="support_rules_oneissue_desc">Každé hlášení nechte pro jediný problém, aby bylo možné ho sledovat a opravit. Pro nesouvisející problémy otevřete samostatná hlášení.</string>
+
+    <string name="support_rules_intro">Jsou vyžadovány jen dvě věci. Vše ostatní je volitelné, ale pomůže to váš problém vyřešit mnohem rychleji.</string>
+    <string name="support_rules_section_required">Povinné</string>
+    <string name="support_rules_section_recommend">Doporučení (volitelné)</string>
 </resources>

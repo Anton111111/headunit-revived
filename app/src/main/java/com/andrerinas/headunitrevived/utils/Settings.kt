@@ -384,6 +384,38 @@ class Settings(private val context: Context) {
         get() = ConnectionKind.fromInt(prefs.getInt("primary-connection", ConnectionKind.UNSET.value))
         set(value) { prefs.edit().putInt("primary-connection", value.value).apply() }
 
+    /**
+     * The connection types the user actually uses (multi-select). Drives which settings are shown.
+     * Empty = nothing chosen yet, so everything is shown. Migrated once from the legacy
+     * single-choice [primaryConnection].
+     */
+    var connectionModes: Set<ConnectionMode>
+        get() {
+            val stored = prefs.getStringSet("connection-modes", null)
+            if (stored != null) return stored.mapNotNull { ConnectionMode.fromKey(it) }.toSet()
+            val migrated = migrateLegacyConnectionModes()
+            connectionModes = migrated
+            return migrated
+        }
+        set(value) {
+            prefs.edit().putStringSet("connection-modes", value.map { it.key }.toSet()).apply()
+        }
+
+    private fun migrateLegacyConnectionModes(): Set<ConnectionMode> = when (primaryConnection) {
+        ConnectionKind.USB_CABLE, ConnectionKind.USB_WIRELESS_ADAPTER -> setOf(ConnectionMode.USB)
+        ConnectionKind.WIFI, ConnectionKind.NATIVE_AA -> setOf(ConnectionMode.WIFI)
+        ConnectionKind.SELF_MODE -> setOf(ConnectionMode.SELF)
+        ConnectionKind.ALL -> setOf(ConnectionMode.USB, ConnectionMode.WIFI)
+        ConnectionKind.UNSET -> emptySet()
+    }
+
+    /** Whether USB-related settings should be shown (empty selection shows everything). */
+    fun showsUsb(): Boolean = connectionModes.isEmpty() || ConnectionMode.USB in connectionModes
+    /** Whether WiFi/wireless settings should be shown (empty selection shows everything). */
+    fun showsWifi(): Boolean = connectionModes.isEmpty() || ConnectionMode.WIFI in connectionModes
+    /** The external-GPS choice only applies when a phone is connected; false only for Self-only. */
+    fun showsExternalGps(): Boolean = showsUsb() || showsWifi()
+
     var autoConnectLastSession: Boolean
         get() = prefs.getBoolean("auto-connect-last-session", false)
         set(value) { prefs.edit().putBoolean("auto-connect-last-session", value).apply() }
@@ -662,6 +694,15 @@ class Settings(private val context: Context) {
         companion object {
             private val map = values().associateBy(ConnectionKind::value)
             fun fromInt(value: Int) = map[value] ?: UNSET
+        }
+    }
+
+    /** A connection type the user can pick in the multi-select (USB, WiFi or Self Mode). */
+    enum class ConnectionMode(val key: String) {
+        USB("usb"), WIFI("wifi"), SELF("self");
+
+        companion object {
+            fun fromKey(k: String) = values().firstOrNull { it.key == k }
         }
     }
 

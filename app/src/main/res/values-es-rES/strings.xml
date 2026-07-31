@@ -770,4 +770,38 @@
     <string name="onb_dpi_recommended">Recomendado para tu pantalla: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Una cosa más: ahora puedes configurar una pantalla de carga personalizada, que se muestra mientras el coche se conecta.</string>
     <string name="onb_ready_loading_button">Configurar una pantalla de carga</string>
+
+    <!-- Support / bug reporting -->
+    <string name="support">Informar de un problema</string>
+    <string name="support_description">Buscar o informar errores en GitHub</string>
+    <string name="support_title">Informar de un problema</string>
+    <string name="support_help">Si encuentras un error o un problema, busca primero si alguien lo ha reportado en la lista de issues de GitHub. Si nadie lo ha reportado aún, abre un nuevo issue y describe qué ocurre, tu radio y los pasos para reproducirlo.</string>
+    <string name="support_open_issues">Abrir la página de issues de GitHub</string>
+    <string name="support_scan_qr">O escanea este código QR para abrir la lista de issues en otro dispositivo.</string>
+    <string name="support_github_account_warning">Nota: necesitas una cuenta gratuita de GitHub para crear un issue.</string>
+    <string name="onb_ready_extras_title">Antes de terminar, también puedes configurar:</string>
+    <string name="onb_extra_loading_desc">Una imagen personalizada que se muestra mientras el coche se conecta</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Normas para reportar</string>
+    <string name="support_rules_english_desc">Por favor, escribe siempre tu incidencia en inglés. Es el idioma que el mantenedor y la mayoría de las personas que ayudan aquí tienen en común, y un hilo con muchos idiomas se convierte rápidamente en una pequeña torre de Babel donde nadie puede ayudar a nadie. Nadie te juzga por tu nivel de inglés ni por cómo escribes, así que no te preocupes por los errores. Si te ayuda, un traductor como Google Translate o DeepL, o una IA como ChatGPT o Claude, puede escribir y ordenar tu mensaje en inglés por ti.</string>
+    <string name="support_rules_device_title">Di qué ejecuta la app</string>
+    <string name="support_rules_device_desc">La versión de Android del dispositivo que proyecta Android Auto (tu radio o pantalla), y la marca y el modelo si los conoces.</string>
+    <string name="support_rules_connection_title">Di cómo te conectas</string>
+    <string name="support_rules_connection_desc">Cable USB, adaptador inalámbrico USB, WiFi Direct, WiFi (headunit server) o Self Mode. Si es inalámbrico, añade el modelo del adaptador o dongle.</string>
+    <string name="support_rules_appversion_title">Incluye la versión de la app</string>
+    <string name="support_rules_appversion_desc">La versión de Headunit Revived, que aparece en la pantalla Acerca de.</string>
+    <string name="support_rules_logs_title">Adjunta los registros justo cuando ocurra</string>
+    <string name="support_rules_logs_desc">Ve a Ajustes, abre la pestaña Avanzado, activa el Modo depuración en la sección Depuración, reproduce el problema y toca Exportar registros enseguida para que el registro cubra el momento del fallo y no solo el arranque. Adjunta ese archivo a tu incidencia.</string>
+    <string name="support_rules_search_title">Sin duplicados</string>
+    <string name="support_rules_search_desc">Busca primero entre las incidencias existentes. Si ya hay una abierta que describe tu problema, añade tus detalles como comentario en vez de abrir una nueva. Solo abre una incidencia nueva si ninguna coincide.</string>
+    <string name="support_rules_phone_title">Tu móvil también importa</string>
+    <string name="support_rules_phone_desc">El modelo de tu móvil, su versión de Android y la versión de la app Android Auto instalada en el móvil. Algunos problemas vienen de una versión concreta de Android Auto.</string>
+    <string name="support_rules_describe_title">Descríbelo con claridad</string>
+    <string name="support_rules_describe_desc">Qué hiciste, qué esperabas que pasara y qué pasó realmente. Una captura de pantalla o un vídeo corto ayuda mucho en problemas visuales.</string>
+    <string name="support_rules_oneissue_title">Un problema por incidencia</string>
+    <string name="support_rules_oneissue_desc">Limita cada incidencia a un solo problema para poder rastrearlo y resolverlo. Abre incidencias separadas para problemas distintos.</string>
+    <string name="support_rules_intro">Solo se requieren dos cosas. Todo lo demás es opcional, aunque ayuda a resolver tu problema mucho más rápido.</string>
+    <string name="support_rules_section_required">Obligatorio</string>
+    <string name="support_rules_section_recommend">Recomendaciones (opcional)</string>
 </resources>

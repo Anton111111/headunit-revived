@@ -762,4 +762,36 @@
     <string name="onb_dpi_recommended">Zalecane dla Twojego ekranu: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Jeszcze jedno: możesz teraz ustawić niestandardowy ekran ładowania wyświetlany podczas łączenia samochodu.</string>
     <string name="onb_ready_loading_button">Skonfiguruj ekran ładowania</string>
+
+    <string name="support">Zgłoś problem</string>
+    <string name="support_description">Szukaj lub zgłaszaj błędy na GitHub</string>
+    <string name="support_title">Zgłoś problem</string>
+    <string name="support_help">Jeśli napotkasz błąd lub problem, najpierw poszukaj go na liście zgłoszeń GitHub. Jeśli nikt jeszcze go nie zgłosił, otwórz nowe zgłoszenie i opisz, co się dzieje, jakie masz radio samochodowe oraz podaj kroki potrzebne do odtworzenia błędu.</string>
+    <string name="support_open_issues">Otwórz stronę zgłoszeń GitHub</string>
+    <string name="support_scan_qr">Lub zeskanuj ten kod QR, aby otworzyć listę zgłoszeń na innym urządzeniu.</string>
+    <string name="support_github_account_warning">Uwaga: aby utworzyć zgłoszenie, potrzebujesz bezpłatnego konta GitHub.</string>
+    <string name="onb_ready_extras_title">Zanim skończysz, możesz też skonfigurować:</string>
+    <string name="onb_extra_loading_desc">Niestandardowy obraz wyświetlany podczas łączenia samochodu</string>
+
+    <string name="support_rules_button">Zasady zgłaszania</string>
+    <string name="support_rules_english_desc">Prosimy zawsze pisać po angielsku. To jedyny język, który opiekun projektu i większość osób tu pomagających mają wspólny, a wątek w wielu językach zamienia się w małą wieżę Babel, gdzie nikt nikomu nie może pomóc. Nikt nie ocenia Twojego angielskiego ani tego, jak piszesz, więc nie martw się o błędy. Jeśli to pomoże, tłumacz taki jak Google Translate lub DeepL, albo AI jak ChatGPT lub Claude, może napisać i poprawić Twoją wiadomość po angielsku.</string>
+    <string name="support_rules_device_title">Napisz, na czym działa aplikacja</string>
+    <string name="support_rules_device_desc">Wersja Androida urządzenia wyświetlającego Android Auto (Twoje radio samochodowe lub ekran) oraz jego marka i model, jeśli je znasz.</string>
+    <string name="support_rules_connection_title">Napisz, jak się łączysz</string>
+    <string name="support_rules_connection_desc">Kabel USB, bezprzewodowy adapter USB, WiFi Direct, WiFi (headunit server) lub Self Mode. Jeśli połączenie jest bezprzewodowe, podaj model adaptera lub klucza.</string>
+    <string name="support_rules_appversion_title">Podaj wersję aplikacji</string>
+    <string name="support_rules_appversion_desc">Wersja Headunit Revived widoczna na ekranie O aplikacji i Wsparcie.</string>
+    <string name="support_rules_logs_title">Dołącz logi, zaraz po wystąpieniu problemu</string>
+    <string name="support_rules_logs_desc">Przejdź do karty Zaawansowane w Ustawieniach, włącz Tryb debugowania w sekcji Debugowanie, odtwórz problem, a potem od razu naciśnij Eksportuj logi, żeby log obejmował moment awarii, a nie tylko start. Dołącz ten plik do zgłoszenia.</string>
+    <string name="support_rules_search_title">Bez duplikatów</string>
+    <string name="support_rules_search_desc">Najpierw przeszukaj istniejące zgłoszenia. Jeśli otwarte zgłoszenie już opisuje Twój problem, dodaj swoje szczegóły jako komentarz zamiast otwierać nowe. Otwieraj nowe zgłoszenie tylko wtedy, gdy żadne nie pasuje.</string>
+    <string name="support_rules_phone_title">Twój telefon też ma znaczenie</string>
+    <string name="support_rules_phone_desc">Model telefonu, jego wersja Androida i wersja aplikacji Android Auto na telefonie. Niektóre problemy wynikają z konkretnego wydania Android Auto.</string>
+    <string name="support_rules_describe_title">Opisz problem wyraźnie</string>
+    <string name="support_rules_describe_desc">Co zrobiłeś, czego oczekiwałeś i co faktycznie się stało. Zrzut ekranu lub krótkie wideo bardzo pomaga w przypadku problemów wizualnych.</string>
+    <string name="support_rules_oneissue_title">Jeden problem na zgłoszenie</string>
+    <string name="support_rules_oneissue_desc">Każde zgłoszenie powinno dotyczyć jednego problemu, żeby można go było śledzić i naprawić. Niezwiązane problemy zgłaszaj osobno.</string>
+    <string name="support_rules_intro">Wymagane są tylko dwie rzeczy. Wszystko inne jest opcjonalne, ale bardzo przyspiesza rozwiązanie problemu.</string>
+    <string name="support_rules_section_required">Wymagane</string>
+    <string name="support_rules_section_recommend">Zalecenia (opcjonalne)</string>
 </resources>

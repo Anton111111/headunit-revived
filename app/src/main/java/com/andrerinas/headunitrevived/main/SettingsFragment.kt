@@ -70,7 +70,7 @@ class SettingsFragment : Fragment() {
     private val basicSettingIds = setOf(
         // General
         "autoOptimize", "connectionMode", "appLanguage", "uiScale",
-        // Wireless (shown in Basic only when primaryConnection is wireless)
+        // Wireless (shown in Basic only when WiFi is among the selected connection modes)
         "wifiConnectionMode",
         // Dark mode
         "darkModeSettings",
@@ -79,7 +79,7 @@ class SettingsFragment : Fragment() {
         // Navigation
         "gpsNavigation",
         // Graphic
-        "resolution", "dpiPixelDensity", "viewMode", "screenOrientation", "startInFullscreenMode",
+        "resolution", "dpiPixelDensity", "viewMode", "screenOrientation", "startInFullscreenMode", "loadingScreen",
         // Video
         "videoCodec", "fpsLimit",
         // Input
@@ -87,7 +87,7 @@ class SettingsFragment : Fragment() {
         // Audio
         "enableAudioSink", "micSettings", "audioVolumeOffsets",
         // Info
-        "version", "about"
+        "version", "about", "support"
     )
 
     // Local state to hold changes before saving
@@ -643,7 +643,7 @@ class SettingsFragment : Fragment() {
         items.add(SettingItem.SettingEntry(
             stableId = "connectionMode",
             nameResId = R.string.connection_mode,
-            value = connectionKindLabel(settings.primaryConnection),
+            value = connectionModesLabel(),
             onClick = { showConnectionModeDialog() }
         ))
 
@@ -992,17 +992,21 @@ class SettingsFragment : Fragment() {
         // --- Navigation Settings ---
         items.add(SettingItem.CategoryHeader("navigation", R.string.category_navigation))
 
-        items.add(SettingItem.ToggleSettingEntry(
-            stableId = "gpsNavigation",
-            nameResId = R.string.gps_for_navigation,
-            descriptionResId = R.string.gps_for_navigation_description,
-            isChecked = pendingUseGps!!,
-            onCheckedChanged = { isChecked ->
-                pendingUseGps = isChecked
-                checkChanges()
-                updateSettingsList()
-            }
-        ))
+        // The GPS source choice (this device vs the connected phone) only applies when a phone is
+        // connected. With Self Mode as the only connection there is no phone, so hide it.
+        if (settings.showsExternalGps()) {
+            items.add(SettingItem.ToggleSettingEntry(
+                stableId = "gpsNavigation",
+                nameResId = R.string.gps_for_navigation,
+                descriptionResId = R.string.gps_for_navigation_description,
+                isChecked = pendingUseGps!!,
+                onCheckedChanged = { isChecked ->
+                    pendingUseGps = isChecked
+                    checkChanges()
+                    updateSettingsList()
+                }
+            ))
+        }
 
         items.add(SettingItem.ToggleSettingEntry(
             stableId = "showNavigationNotifications",
@@ -1685,6 +1689,19 @@ class SettingsFragment : Fragment() {
         ))
 
         items.add(SettingItem.SettingEntry(
+            stableId = "support",
+            nameResId = R.string.support,
+            value = getString(R.string.support_description),
+            onClick = {
+                try {
+                    findNavController().navigate(R.id.action_settingsFragment_to_supportFragment)
+                } catch (e: Exception) {
+                    // Failover
+                }
+            }
+        ))
+
+        items.add(SettingItem.SettingEntry(
             stableId = "about",
             nameResId = R.string.about,
             value = getString(R.string.about_description),
@@ -1809,9 +1826,8 @@ class SettingsFragment : Fragment() {
     private val HIGH_BANDWIDTH_WIDTH = 2560
 
     private fun isHiddenByConnection(item: SettingItem, categoryId: String?): Boolean {
-        val conn = settings.primaryConnection
-        if (categoryId == "wirelessConnection") return conn.hidesWifi()
-        if (item.stableId in usbScopedIds) return conn.hidesUsb()
+        if (categoryId == "wirelessConnection") return !settings.showsWifi()
+        if (item.stableId in usbScopedIds) return !settings.showsUsb()
         return false
     }
 
@@ -1833,15 +1849,15 @@ class SettingsFragment : Fragment() {
         is SettingItem.CategoryHeader -> getString(item.titleResId)
     }
 
-    private fun connectionKindLabel(kind: Settings.ConnectionKind): String = when (kind) {
-        // USB (direct cable or USB wireless adapter) is presented as a single "USB" option.
-        Settings.ConnectionKind.USB_CABLE,
-        Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
-        Settings.ConnectionKind.WIFI,
-        Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
-        Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
-        Settings.ConnectionKind.ALL -> getString(R.string.connection_kind_all)
-        Settings.ConnectionKind.UNSET -> getString(R.string.connection_kind_unset)
+    /** The chosen connection types as a readable label ("USB, WiFi"); empty shows all. */
+    private fun connectionModesLabel(): String {
+        val modes = settings.connectionModes
+        if (modes.isEmpty()) return getString(R.string.connection_kind_all)
+        val parts = mutableListOf<String>()
+        if (Settings.ConnectionMode.USB in modes) parts.add(getString(R.string.connection_kind_usb))
+        if (Settings.ConnectionMode.WIFI in modes) parts.add(getString(R.string.connection_kind_wifi))
+        if (Settings.ConnectionMode.SELF in modes) parts.add(getString(R.string.self_mode))
+        return parts.joinToString(", ")
     }
 
     private fun showResolutionDialog() {
@@ -1912,25 +1928,23 @@ class SettingsFragment : Fragment() {
     }
 
     private fun showConnectionModeDialog() {
-        val kinds = listOf(
-            Settings.ConnectionKind.USB_CABLE,
-            Settings.ConnectionKind.WIFI,
-            Settings.ConnectionKind.SELF_MODE,
-            Settings.ConnectionKind.ALL
+        val order = listOf(
+            Settings.ConnectionMode.USB,
+            Settings.ConnectionMode.WIFI,
+            Settings.ConnectionMode.SELF
         )
-        val labels = kinds.map { connectionKindLabel(it) }.toTypedArray()
-        // Map any stored USB variant to the single USB option, WiFi/native to WiFi.
-        val current = when (settings.primaryConnection) {
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> 0
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> 1
-            Settings.ConnectionKind.SELF_MODE -> 2
-            Settings.ConnectionKind.ALL -> 3
-            else -> -1
-        }
+        val labels = arrayOf(
+            getString(R.string.connection_kind_usb),
+            getString(R.string.connection_kind_wifi),
+            getString(R.string.self_mode)
+        )
+        val current = settings.connectionModes
+        val checked = BooleanArray(order.size) { order[it] in current }
         MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
             .setTitle(R.string.connection_mode)
-            .setSingleChoiceItems(labels, current) { dialog, which ->
-                settings.primaryConnection = kinds[which]
+            .setMultiChoiceItems(labels, checked) { _, which, isChecked -> checked[which] = isChecked }
+            .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                settings.connectionModes = order.filterIndexed { i, _ -> checked[i] }.toSet()
                 dialog.dismiss()
                 updateSettingsList()
             }

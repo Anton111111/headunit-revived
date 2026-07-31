@@ -387,6 +387,26 @@ class DarkModeFragment : Fragment(), SensorEventListener {
         if (applyAppTheme) App.appThemeManager?.forceRefresh()
     }
 
+    /**
+     * Persists the Location-based dark mode selection right away, so it is not lost when the
+     * fragment is recreated on returning from the places screen or the map. Every control in the
+     * Location group calls this, so setting up a location mode never needs the Save button (the
+     * rest of Dark Mode still does). [applyTheme] should be false right before navigating away,
+     * to avoid an activity recreate in the middle of the navigation.
+     */
+    private fun commitLocationMode(applyTheme: Boolean) {
+        pendingAppTheme?.let { settings.appTheme = it }
+        pendingNightMode?.let { settings.nightMode = it }
+        pendingLocationOutsideNight?.let { settings.locationOutsideNight = it }
+        // Re-send the Android Auto night mode (safe, no activity recreate).
+        requireContext().sendBroadcast(
+            Intent(AapService.ACTION_REQUEST_NIGHT_MODE_UPDATE).setPackage(requireContext().packageName)
+        )
+        if (applyTheme) App.appThemeManager?.forceRefresh()
+        // The selection is saved now, so it no longer counts as a pending change.
+        checkChanges()
+    }
+
     /** Sub-options for "Location (by area)" mode: outside-places appearance + manage places. */
     /**
      * Dedicated "Location" group, shown whenever either selector is set to Location. Its
@@ -431,7 +451,7 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                     .setTitle(R.string.location_outside_label)
                     .setSingleChoiceItems(options, if (pendingLocationOutsideNight == true) 1 else 0) { dialog, which ->
                         pendingLocationOutsideNight = which == 1
-                        checkChanges()
+                        commitLocationMode(applyTheme = true)
                         dialog.dismiss()
                         updateSettingsList()
                     }
@@ -446,7 +466,12 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                 val n = settings.geofenceLocations.size
                 if (n == 0) getString(R.string.geofence_none) else getString(R.string.geofence_count_summary, n)
             },
-            onClick = { _ -> findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment) }
+            onClick = { _ ->
+                // Persist the location mode before leaving, so it survives the fragment being
+                // recreated on return from the places screen.
+                commitLocationMode(applyTheme = false)
+                findNavController().navigate(R.id.action_darkModeFragment_to_locationsFragment)
+            }
         ))
     }
 
@@ -469,7 +494,8 @@ class DarkModeFragment : Fragment(), SensorEventListener {
                 pendingNightMode = Settings.NightMode.LOCATION
             }
         }
-        checkChanges()
+        // Persist the scope right away so it is not lost when opening the places screen or map.
+        commitLocationMode(applyTheme = true)
         updateSettingsList()
     }
 
