@@ -544,6 +544,15 @@ class NativeAaHandshakeManager(
             AppLog.i("  > Target IP:   $ip:5288")
             AppLog.i("  > BSSID:       $bssid")
 
+            // Some Bluetooth stacks report the RFCOMM socket "connected" slightly before the
+            // underlying channel is actually ready to carry data - writing immediately can be
+            // silently dropped on such hardware (a known real class of RFCOMM race: see the
+            // kernel's "Move pending packets from RFCOMM socket to TTY" fix for the same
+            // symptom on the HFP profile). A short delay costs nothing against either side's
+            // timeout budget (phone's own first-message timeout is ~12s, ours is 15s) but gives
+            // a flaky chip a moment to settle before the one message that matters most.
+            delay(300)
+
             AppLog.i("NativeAA: [TX] Sending WifiStartRequest (Type 1)")
             sendWifiStartRequest(output, ip, 5288)
 
