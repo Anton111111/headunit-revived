@@ -795,7 +795,7 @@
     <string name="support_rules_intro">Jsou vyžadovány jen dvě věci. Vše ostatní je volitelné, ale pomůže to váš problém vyřešit mnohem rychleji.</string>
     <string name="support_rules_section_required">Povinné</string>
     <string name="support_rules_section_recommend">Doporučení (volitelné)</string>
-    <string name="rename_notice_title">Nový název, stejná aplikace: %1$s</string>
-    <string name="rename_notice_message">Headunit Revived díky vám hodně vyrostl. Projekt i jeho komunita ušly velký kus cesty, a tak dostává vlastní identitu: %1$s.\n\nStejná aplikace, stejní lidé za ní a všechna vaše nastavení zůstávají přesně tak, jak jsou.</string>
+    <string name="rename_notice_title">Naše jméno se mění na Open Headunit</string>
+    <string name="rename_notice_message">Headunit Revived díky vám roste a stává se z něj něco vlastního: Open Headunit. Nový název zavádíme postupně během dalších aktualizací, takže na některých místech můžete ještě chvíli vidět starý název.\n\nStejná aplikace, stejní lidé za ní a všechna vaše nastavení zůstávají přesně tak, jak jsou.</string>
     <string name="rename_notice_button">Rozumím</string>
 </resources>

@@ -224,11 +224,14 @@ class Settings(private val context: Context) {
             prefs.edit().putBoolean("gesture_hint_shown", value).apply()
         }
 
-    // One-time notice telling users the app was rebranded. Shown once on the home screen.
+    // One-time notice telling users the app is being rebranded. Shown once on the home screen.
+    // The key is versioned on purpose: an earlier build could spend the original flag behind the
+    // onboarding wizard without the notice ever being seen, so a new key lets the corrected
+    // notice reach everyone once, including users who still carry the old flag.
     var renameNoticeShown: Boolean
-        get() = prefs.getBoolean("rename_notice_shown", false)
+        get() = prefs.getBoolean("rename_notice_shown_v2", false)
         set(value) {
-            prefs.edit().putBoolean("rename_notice_shown", value).apply()
+            prefs.edit().putBoolean("rename_notice_shown_v2", value).apply()
         }
 
     // Custom Insets (Screen Margins)

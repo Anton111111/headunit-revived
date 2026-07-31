@@ -772,7 +772,7 @@
     <string name="support_rules_intro">Chỉ cần hai điều bắt buộc. Phần còn lại là tuỳ chọn, nhưng sẽ giúp giải quyết vấn đề của bạn nhanh hơn nhiều.</string>
     <string name="support_rules_section_required">Bắt buộc</string>
     <string name="support_rules_section_recommend">Khuyến nghị (tuỳ chọn)</string>
-    <string name="rename_notice_title">Tên mới, vẫn là ứng dụng đó: %1$s</string>
-    <string name="rename_notice_message">Headunit Revived đã phát triển rất nhiều, nhờ có các bạn. Dự án và cộng đồng đã đi được một chặng đường dài, nên giờ nó có một bản sắc riêng: %1$s.\n\nVẫn ứng dụng đó, vẫn những con người đứng sau, và mọi cài đặt của bạn vẫn giữ nguyên như cũ.</string>
+    <string name="rename_notice_title">Tên của chúng tôi đang đổi thành Open Headunit</string>
+    <string name="rename_notice_message">Headunit Revived đang lớn lên, nhờ có các bạn, và đang trở thành một cái tên của riêng mình: Open Headunit. Chúng tôi sẽ chuyển sang tên mới dần dần qua các bản cập nhật tới, nên bạn có thể vẫn thấy tên cũ ở một vài nơi trong một thời gian.\n\nVẫn ứng dụng đó, vẫn những con người đứng sau, và mọi cài đặt của bạn vẫn giữ nguyên như cũ.</string>
     <string name="rename_notice_button">Đã hiểu</string>
 </resources>

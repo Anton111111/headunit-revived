@@ -171,33 +171,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-        maybeShowRenameNotice(appSettings)
-    }
-
-    // Shows a one-time notice about the app rename. Existing users always get it once,
-    // new installs only during a window after the release. Skipped while an auto-connect
-    // is taking over the screen so it does not flash in front of a launching projection.
-    private fun maybeShowRenameNotice(appSettings: Settings) {
-        if (appSettings.renameNoticeShown) return
-        if (commManager.isConnected) return
-        if (hasAttemptedAutoConnect || hasAutoStarted || hasAttemptedSingleUsbAutoConnect) return
-
-        val firstInstallTime = try {
-            requireContext().packageManager
-                .getPackageInfo(requireContext().packageName, 0).firstInstallTime
-        } catch (e: PackageManager.NameNotFoundException) {
-            0L
-        }
-        if (!RenameNoticePolicy.shouldOffer(firstInstallTime)) return
-
-        appSettings.renameNoticeShown = true
-        activeDialog = MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
-            .setIcon(R.drawable.ic_rename_notice)
-            .setTitle(getString(R.string.rename_notice_title, getString(R.string.app_name)))
-            .setMessage(getString(R.string.rename_notice_message, getString(R.string.app_name)))
-            .setPositiveButton(R.string.rename_notice_button) { dialog, _ -> dialog.dismiss() }
-            .show()
     }
 
     private fun startSelfModeInternal() {
@@ -639,12 +612,14 @@ class HomeFragment : Fragment() {
         updateProjectionButtonText()
         updateButtonStyle()
         updateTextColors()
+        RenameNotice.maybeShow(requireActivity(), App.provide(requireContext()).settings)
     }
 
     override fun onPause() {
         super.onPause()
         activeDialog?.dismiss()
         activeDialog = null
+        RenameNotice.dismiss()
     }
 
     private fun showNativeAaDeviceSelector() {

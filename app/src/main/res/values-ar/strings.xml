@@ -767,7 +767,7 @@
     <string name="support_rules_describe_desc">ما الذي فعلته، وما الذي توقعت حدوثه، وما الذي حدث فعلًا. لقطة شاشة أو مقطع فيديو قصير تساعد كثيرًا في المشكلات المرئية.</string>
     <string name="support_rules_oneissue_title">مشكلة واحدة لكل تقرير</string>
     <string name="support_rules_oneissue_desc">خصص كل تقرير لمشكلة واحدة حتى يمكن تتبعها وإصلاحها. افتح تقارير منفصلة للمشكلات غير المرتبطة ببعضها.</string>
-    <string name="rename_notice_title">اسم جديد، والتطبيق نفسه: %1$s</string>
-    <string name="rename_notice_message">لقد نما Headunit Revived كثيرًا بفضلكم. قطع المشروع ومجتمعه شوطًا طويلًا، ولذلك أصبح له هوية خاصة به: %1$s.\n\nنفس التطبيق، ونفس الأشخاص خلفه، وكل إعداداتك تبقى كما هي تمامًا.</string>
+    <string name="rename_notice_title">اسمنا يتغيّر إلى Open Headunit</string>
+    <string name="rename_notice_message">ينمو Headunit Revived بفضلكم، وهو يتحوّل إلى شيء خاص به: Open Headunit. سنطرح الاسم الجديد تدريجيًا على مدى التحديثات القادمة، لذا قد ترون الاسم القديم في بعض الأماكن لفترة.\n\nنفس التطبيق، ونفس الأشخاص خلفه، وكل إعداداتك تبقى كما هي تمامًا.</string>
     <string name="rename_notice_button">حسنًا</string>
 </resources>
