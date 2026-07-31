@@ -26,4 +26,4 @@ Open Headunit does not integrate any third-party analytics SDKs, advertising net
 4. Contact Us
 
 If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us via our GitHub repository:
-https://github.com/andreknieriem/headunit-revived
+https://github.com/andreknieriem/open-headunit
