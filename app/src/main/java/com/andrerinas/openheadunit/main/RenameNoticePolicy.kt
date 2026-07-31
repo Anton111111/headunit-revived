@@ -1,4 +1,4 @@
-package com.andrerinas.headunitrevived.main
+package com.andrerinas.openheadunit.main
 
 /**
  * Decides who sees the one-time rename notice.
