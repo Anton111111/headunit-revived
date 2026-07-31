@@ -184,13 +184,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStart.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStart.Builder.class);
     }
@@ -350,13 +350,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStartOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStart.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStart.Builder.class);
       }
@@ -380,7 +380,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_descriptor;
       }
 
       @java.lang.Override
@@ -581,13 +581,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStop.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStop.Builder.class);
     }
@@ -747,13 +747,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStopOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStop.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStatusStop.Builder.class);
       }
@@ -777,7 +777,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_descriptor;
       }
 
       @java.lang.Override
@@ -990,13 +990,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationClusterStatus.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationClusterStatus.Builder.class);
     }
@@ -1308,13 +1308,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationClusterStatusOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationClusterStatus.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationClusterStatus.Builder.class);
       }
@@ -1340,7 +1340,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_descriptor;
       }
 
       @java.lang.Override
@@ -1689,13 +1689,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDetail.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDetail.Builder.class);
     }
@@ -2440,13 +2440,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDetailOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDetail.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDetail.Builder.class);
       }
@@ -2477,7 +2477,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_descriptor;
       }
 
       @java.lang.Override
@@ -3106,13 +3106,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDistanceEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDistanceEvent.Builder.class);
     }
@@ -3561,13 +3561,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDistanceEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDistanceEvent.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NextTurnDistanceEvent.Builder.class);
       }
@@ -3596,7 +3596,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
       }
 
       @java.lang.Override
@@ -4072,13 +4072,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationState.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationState.Builder.class);
     }
@@ -4346,13 +4346,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStateOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationState.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationState.Builder.class);
       }
@@ -4391,7 +4391,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_descriptor;
       }
 
       @java.lang.Override
@@ -5248,13 +5248,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStep.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStep.Builder.class);
     }
@@ -5595,13 +5595,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStepOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStep.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStep.Builder.class);
       }
@@ -5657,7 +5657,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_descriptor;
       }
 
       @java.lang.Override
@@ -6603,13 +6603,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationManeuver.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationManeuver.Builder.class);
     }
@@ -7338,13 +7338,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationManeuverOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationManeuver.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationManeuver.Builder.class);
       }
@@ -7372,7 +7372,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_descriptor;
       }
 
       @java.lang.Override
@@ -7773,13 +7773,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCue.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCue.Builder.class);
     }
@@ -7993,13 +7993,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCueOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCue.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCue.Builder.class);
       }
@@ -8026,7 +8026,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_descriptor;
       }
 
       @java.lang.Override
@@ -8388,13 +8388,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.Builder.class);
     }
@@ -8450,13 +8450,13 @@ public final class NavigationStatus {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.LaneDirection.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.LaneDirection.Builder.class);
       }
@@ -8854,13 +8854,13 @@ public final class NavigationStatus {
           com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.LaneDirectionOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.LaneDirection.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.LaneDirection.Builder.class);
         }
@@ -8887,7 +8887,7 @@ public final class NavigationStatus {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
         }
 
         @java.lang.Override
@@ -9390,13 +9390,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLaneOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationLane.Builder.class);
       }
@@ -9428,7 +9428,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_descriptor;
       }
 
       @java.lang.Override
@@ -9945,13 +9945,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestination.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestination.Builder.class);
     }
@@ -10176,13 +10176,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestinationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestination.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestination.Builder.class);
       }
@@ -10208,7 +10208,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_descriptor;
       }
 
       @java.lang.Override
@@ -10566,13 +10566,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCurrentPosition.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCurrentPosition.Builder.class);
     }
@@ -10871,13 +10871,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCurrentPositionOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCurrentPosition.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationCurrentPosition.Builder.class);
       }
@@ -10927,7 +10927,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_descriptor;
       }
 
       @java.lang.Override
@@ -11728,13 +11728,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStepDistance.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStepDistance.Builder.class);
     }
@@ -11973,13 +11973,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStepDistanceOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStepDistance.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationStepDistance.Builder.class);
       }
@@ -12016,7 +12016,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_descriptor;
       }
 
       @java.lang.Override
@@ -12458,13 +12458,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestinationDistance.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestinationDistance.Builder.class);
     }
@@ -12767,13 +12767,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestinationDistanceOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestinationDistance.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDestinationDistance.Builder.class);
       }
@@ -12811,7 +12811,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_descriptor;
       }
 
       @java.lang.Override
@@ -13321,13 +13321,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationRoad.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationRoad.Builder.class);
     }
@@ -13552,13 +13552,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationRoadOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationRoad.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationRoad.Builder.class);
       }
@@ -13584,7 +13584,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_descriptor;
       }
 
       @java.lang.Override
@@ -13928,13 +13928,13 @@ public final class NavigationStatus {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDistance.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDistance.Builder.class);
     }
@@ -14377,13 +14377,13 @@ public final class NavigationStatus {
         com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDistanceOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDistance.class, com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.NavigationDistance.Builder.class);
       }
@@ -14411,7 +14411,7 @@ public final class NavigationStatus {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.NavigationStatus.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_descriptor;
       }
 
       @java.lang.Override
@@ -14800,90 +14800,90 @@ public final class NavigationStatus {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -15020,107 +15020,107 @@ public final class NavigationStatus {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStart_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStart_descriptor,
         new java.lang.String[] { });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStatusStop_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStatusStop_descriptor,
         new java.lang.String[] { });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationClusterStatus_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationClusterStatus_descriptor,
         new java.lang.String[] { "Status", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDetail_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDetail_descriptor,
         new java.lang.String[] { "Road", "Side", "NextTurn", "Image", "TurnNumber", "TurnAngle", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NextTurnDistanceEvent_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NextTurnDistanceEvent_descriptor,
         new java.lang.String[] { "DistanceMeters", "TimeToTurnSeconds", "DisplayDistanceE3", "DisplayDistanceUnit", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationState_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationState_descriptor,
         new java.lang.String[] { "Steps", "Destinations", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStep_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStep_descriptor,
         new java.lang.String[] { "Maneuver", "Road", "Lanes", "Cue", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_descriptor =
       getDescriptor().getMessageTypes().get(7);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationManeuver_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationManeuver_descriptor,
         new java.lang.String[] { "Type", "RoundaboutExitNumber", "RoundaboutExitAngle", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_descriptor =
       getDescriptor().getMessageTypes().get(8);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCue_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCue_descriptor,
         new java.lang.String[] { "AlternateText", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_descriptor =
       getDescriptor().getMessageTypes().get(9);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_descriptor,
         new java.lang.String[] { "LaneDirections", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationLane_LaneDirection_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationLane_LaneDirection_descriptor,
         new java.lang.String[] { "Shape", "IsHighlighted", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_descriptor =
       getDescriptor().getMessageTypes().get(10);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestination_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestination_descriptor,
         new java.lang.String[] { "Address", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_descriptor =
       getDescriptor().getMessageTypes().get(11);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationCurrentPosition_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationCurrentPosition_descriptor,
         new java.lang.String[] { "StepDistance", "DestinationDistances", "CurrentRoad", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_descriptor =
       getDescriptor().getMessageTypes().get(12);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationStepDistance_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationStepDistance_descriptor,
         new java.lang.String[] { "Distance", "TimeToStepSeconds", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_descriptor =
       getDescriptor().getMessageTypes().get(13);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDestinationDistance_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDestinationDistance_descriptor,
         new java.lang.String[] { "Distance", "EstimatedTimeAtArrival", "TimeToArrivalSeconds", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_descriptor =
       getDescriptor().getMessageTypes().get(14);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationRoad_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationRoad_descriptor,
         new java.lang.String[] { "Name", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_descriptor =
       getDescriptor().getMessageTypes().get(15);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_NavigationDistance_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_NavigationDistance_descriptor,
         new java.lang.String[] { "Meters", "DisplayValue", "DisplayUnits", });
   }
 

@@ -1295,13 +1295,13 @@ public final class Sensors {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.Builder.class);
     }
@@ -1411,13 +1411,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LocationData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LocationData.Builder.class);
       }
@@ -1840,13 +1840,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LocationDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LocationData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LocationData.Builder.class);
         }
@@ -1878,7 +1878,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_descriptor;
         }
 
         @java.lang.Override
@@ -2474,13 +2474,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.RpmData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.RpmData.Builder.class);
       }
@@ -2680,13 +2680,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.RpmDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.RpmData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.RpmData.Builder.class);
         }
@@ -2712,7 +2712,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_descriptor;
         }
 
         @java.lang.Override
@@ -3009,13 +3009,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.FuelData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.FuelData.Builder.class);
       }
@@ -3286,13 +3286,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.FuelDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.FuelData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.FuelData.Builder.class);
         }
@@ -3320,7 +3320,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_descriptor;
         }
 
         @java.lang.Override
@@ -3710,13 +3710,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DeadReckoningData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DeadReckoningData.Builder.class);
       }
@@ -3947,13 +3947,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DeadReckoningDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DeadReckoningData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DeadReckoningData.Builder.class);
         }
@@ -3980,7 +3980,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
         }
 
         @java.lang.Override
@@ -4304,13 +4304,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.NightData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.NightData.Builder.class);
       }
@@ -4511,13 +4511,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.NightDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.NightData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.NightData.Builder.class);
         }
@@ -4543,7 +4543,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_descriptor;
         }
 
         @java.lang.Override
@@ -4818,13 +4818,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.ParkingBrakeData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.ParkingBrakeData.Builder.class);
       }
@@ -5025,13 +5025,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.ParkingBrakeDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.ParkingBrakeData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.ParkingBrakeData.Builder.class);
         }
@@ -5057,7 +5057,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
         }
 
         @java.lang.Override
@@ -5332,13 +5332,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DrivingStatusData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DrivingStatusData.Builder.class);
       }
@@ -5735,13 +5735,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DrivingStatusDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DrivingStatusData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DrivingStatusData.Builder.class);
         }
@@ -5767,7 +5767,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
         }
 
         @java.lang.Override
@@ -6078,13 +6078,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.Builder.class);
       }
@@ -6172,13 +6172,13 @@ public final class Sensors {
 
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.GpsSatellite.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.GpsSatellite.Builder.class);
         }
@@ -6515,13 +6515,13 @@ public final class Sensors {
             com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.GpsSatelliteOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
           }
 
           @java.lang.Override
           protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
               internalGetFieldAccessorTable() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable
+            return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
                     com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.GpsSatellite.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.GpsSatellite.Builder.class);
           }
@@ -6551,7 +6551,7 @@ public final class Sensors {
           @java.lang.Override
           public com.google.protobuf.Descriptors.Descriptor
               getDescriptorForType() {
-            return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
+            return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
           }
 
           @java.lang.Override
@@ -7272,13 +7272,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GpsSatelliteData.Builder.class);
         }
@@ -7312,7 +7312,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
         }
 
         @java.lang.Override
@@ -7929,13 +7929,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GearData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GearData.Builder.class);
       }
@@ -8449,13 +8449,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GearDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GearData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GearData.Builder.class);
         }
@@ -8481,7 +8481,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_descriptor;
         }
 
         @java.lang.Override
@@ -8787,13 +8787,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.CompassData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.CompassData.Builder.class);
       }
@@ -9071,13 +9071,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.CompassDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.CompassData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.CompassData.Builder.class);
         }
@@ -9105,7 +9105,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_descriptor;
         }
 
         @java.lang.Override
@@ -9512,13 +9512,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.SpeedData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.SpeedData.Builder.class);
       }
@@ -9790,13 +9790,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.SpeedDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.SpeedData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.SpeedData.Builder.class);
         }
@@ -9824,7 +9824,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
         }
 
         @java.lang.Override
@@ -10214,13 +10214,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.OdometerData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.OdometerData.Builder.class);
       }
@@ -10451,13 +10451,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.OdometerDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.OdometerData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.OdometerData.Builder.class);
         }
@@ -10484,7 +10484,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
         }
 
         @java.lang.Override
@@ -10809,13 +10809,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DiagnosticsData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DiagnosticsData.Builder.class);
       }
@@ -11015,13 +11015,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DiagnosticsDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DiagnosticsData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DiagnosticsData.Builder.class);
         }
@@ -11047,7 +11047,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
         }
 
         @java.lang.Override
@@ -11344,13 +11344,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.EnvironmentData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.EnvironmentData.Builder.class);
       }
@@ -11616,13 +11616,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.EnvironmentDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.EnvironmentData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.EnvironmentData.Builder.class);
         }
@@ -11650,7 +11650,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
         }
 
         @java.lang.Override
@@ -12037,13 +12037,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.HvacData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.HvacData.Builder.class);
       }
@@ -12274,13 +12274,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.HvacDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.HvacData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.HvacData.Builder.class);
         }
@@ -12307,7 +12307,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_descriptor;
         }
 
         @java.lang.Override
@@ -12653,13 +12653,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.AccelerometerData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.AccelerometerData.Builder.class);
       }
@@ -12925,13 +12925,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.AccelerometerDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.AccelerometerData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.AccelerometerData.Builder.class);
         }
@@ -12959,7 +12959,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
         }
 
         @java.lang.Override
@@ -13357,13 +13357,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GyroscopeData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GyroscopeData.Builder.class);
       }
@@ -13629,13 +13629,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GyroscopeDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GyroscopeData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.GyroscopeData.Builder.class);
         }
@@ -13663,7 +13663,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
         }
 
         @java.lang.Override
@@ -14068,13 +14068,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DoorData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DoorData.Builder.class);
       }
@@ -14359,13 +14359,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DoorDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DoorData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.DoorData.Builder.class);
         }
@@ -14393,7 +14393,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_descriptor;
         }
 
         @java.lang.Override
@@ -14869,13 +14869,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LightData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LightData.Builder.class);
       }
@@ -15366,13 +15366,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LightDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LightData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.LightData.Builder.class);
         }
@@ -15400,7 +15400,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_descriptor;
         }
 
         @java.lang.Override
@@ -15794,13 +15794,13 @@ public final class Sensors {
 
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.PassengerData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.PassengerData.Builder.class);
       }
@@ -15997,13 +15997,13 @@ public final class Sensors {
           com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.PassengerDataOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.PassengerData.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.PassengerData.Builder.class);
         }
@@ -16029,7 +16029,7 @@ public final class Sensors {
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
+          return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
         }
 
         @java.lang.Override
@@ -17943,13 +17943,13 @@ public final class Sensors {
         com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatchOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorBatch.Builder.class);
       }
@@ -18114,7 +18114,7 @@ public final class Sensors {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor;
       }
 
       @java.lang.Override
@@ -25531,13 +25531,13 @@ public final class Sensors {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorRequest.Builder.class);
     }
@@ -25775,13 +25775,13 @@ public final class Sensors {
         com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorRequest.Builder.class);
       }
@@ -25808,7 +25808,7 @@ public final class Sensors {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_descriptor;
       }
 
       @java.lang.Override
@@ -26148,13 +26148,13 @@ public final class Sensors {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorResponse.Builder.class);
     }
@@ -26352,13 +26352,13 @@ public final class Sensors {
         com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Sensors.SensorResponse.Builder.class);
       }
@@ -26384,7 +26384,7 @@ public final class Sensors {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Sensors.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_descriptor;
       }
 
       @java.lang.Override
@@ -26630,125 +26630,125 @@ public final class Sensors {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -26889,149 +26889,149 @@ public final class Sensors {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.andrerinas.openheadunit.aap.protocol.proto.Common.getDescriptor(),
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor,
         new java.lang.String[] { "LocationData", "CompassData", "SpeedData", "Rpm", "OdometerData", "FuelData", "ParkingbrakeData", "GearData", "DiagnosticsData", "NightMode", "EnviormentData", "HvacData", "DrivingStatus", "DeadReckoning", "PassengerData", "DoorData", "LightData", "AccelData", "GyroData", "GpsSatelliteData", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LocationData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LocationData_descriptor,
         new java.lang.String[] { "Timestamp", "Latitude", "Longitude", "Accuracy", "Altitude", "Speed", "Bearing", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(1);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_RpmData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_RpmData_descriptor,
         new java.lang.String[] { "Rpm", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(2);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(2);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_FuelData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_FuelData_descriptor,
         new java.lang.String[] { "Fuellevel", "Range", "Lowfuel", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(3);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(3);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DeadReckoningData_descriptor,
         new java.lang.String[] { "SteeringAngel", "WheelSpeed", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(4);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(4);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_NightData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_NightData_descriptor,
         new java.lang.String[] { "IsNightMode", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(5);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(5);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_ParkingBrakeData_descriptor,
         new java.lang.String[] { "IsEngaged", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(6);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(6);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DrivingStatusData_descriptor,
         new java.lang.String[] { "Status", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(7);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(7);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor,
         new java.lang.String[] { "NumberInUse", "NumberInView", "Satellites", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor.getNestedTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_descriptor.getNestedTypes().get(0);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GpsSatelliteData_GpsSatellite_descriptor,
         new java.lang.String[] { "Prn", "SnrE3", "UsedInFix", "AzimuthE3", "ElevationE3", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(8);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(8);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GearData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GearData_descriptor,
         new java.lang.String[] { "Gear", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(9);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(9);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_CompassData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_CompassData_descriptor,
         new java.lang.String[] { "BearingE6", "PitchE6", "RollE6", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(10);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(10);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_SpeedData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_SpeedData_descriptor,
         new java.lang.String[] { "SpeedE6", "CruiseEngaged", "CruiseSetSpeed", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(11);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(11);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_OdometerData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_OdometerData_descriptor,
         new java.lang.String[] { "KmsEl", "TripKmsEl", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(12);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(12);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DiagnosticsData_descriptor,
         new java.lang.String[] { "DiagnosticsByte", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(13);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(13);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_EnvironmentData_descriptor,
         new java.lang.String[] { "TemperatureE3", "PressureE3", "Rain", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(14);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(14);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_HvacData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_HvacData_descriptor,
         new java.lang.String[] { "TargetTemperatureE3", "CurrentTemperatureE3", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(15);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(15);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_AccelerometerData_descriptor,
         new java.lang.String[] { "AccelerationXE3", "AccelerationYE3", "AccelerationZE3", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(16);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(16);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_GyroscopeData_descriptor,
         new java.lang.String[] { "RotationSpeedXE3", "RotationSpeedYE3", "RotationSpeedZE3", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(17);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(17);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_DoorData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_DoorData_descriptor,
         new java.lang.String[] { "HoodOpen", "BootOpen", "DoorOpen", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(18);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(18);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_LightData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_LightData_descriptor,
         new java.lang.String[] { "Headlight", "TurnIndicator", "HazardLightOn", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_descriptor =
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(19);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_descriptor =
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_descriptor.getNestedTypes().get(19);
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorBatch_PassengerData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorBatch_PassengerData_descriptor,
         new java.lang.String[] { "PassengerPresent", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorRequest_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorRequest_descriptor,
         new java.lang.String[] { "Type", "MinUpdatePeriod", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_SensorResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_SensorResponse_descriptor,
         new java.lang.String[] { "Status", });
     com.andrerinas.openheadunit.aap.protocol.proto.Common.getDescriptor();
   }

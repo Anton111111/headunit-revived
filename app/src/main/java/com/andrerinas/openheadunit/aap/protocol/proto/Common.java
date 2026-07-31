@@ -553,13 +553,13 @@ public final class Common {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.class, com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.Builder.class);
     }
@@ -1232,13 +1232,13 @@ public final class Common {
         com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.class, com.andrerinas.openheadunit.aap.protocol.proto.Common.HeadUnitInfo.Builder.class);
       }
@@ -1271,7 +1271,7 @@ public final class Common {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Common.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
       }
 
       @java.lang.Override
@@ -2205,10 +2205,10 @@ public final class Common {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2264,11 +2264,11 @@ public final class Common {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_HeadUnitInfo_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_HeadUnitInfo_descriptor,
         new java.lang.String[] { "HeadUnitMake", "HeadUnitModel", "Make", "Model", "Year", "HeadUnitSoftwareBuild", "VehicleId", "HeadUnitSoftwareVersion", });
   }
 
