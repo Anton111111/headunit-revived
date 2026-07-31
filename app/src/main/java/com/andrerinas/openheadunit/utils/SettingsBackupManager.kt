@@ -16,13 +16,17 @@ import java.util.Date
 import java.util.Locale
 
 object SettingsBackupManager {
-    const val FORMAT = "headunit-revived-settings"
+    const val FORMAT = "open-headunit-settings"
+    // Backups exported before the rename used this format id and file name. Keep accepting
+    // them so users do not lose access to existing backups after updating.
+    const val LEGACY_FORMAT = "headunit-revived-settings"
+    private val SUPPORTED_FORMATS = setOf(FORMAT, LEGACY_FORMAT)
     const val VERSION = 1
     const val MIME_TYPE = "application/json"
     val DOCUMENT_PICKER_MIME_TYPES = arrayOf(MIME_TYPE)
     val IMPORT_MIME_TYPES = arrayOf(MIME_TYPE, "text/json", "text/plain")
 
-    private val backupFileNamePattern = Regex("""headunit-revived-settings-\d{8}-\d{6}\.json""")
+    private val backupFileNamePattern = Regex("""(?:open-headunit|headunit-revived)-settings-\d{8}-\d{6}\.json""")
 
     data class ImportData(
         val values: Map<String, Any>,
@@ -172,7 +176,7 @@ object SettingsBackupManager {
 
     fun defaultFileName(): String {
         val timestamp = SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date())
-        return "headunit-revived-settings-$timestamp.json"
+        return "$FORMAT-$timestamp.json"
     }
 
     fun exportFromContext(context: Context): String {
@@ -206,7 +210,7 @@ object SettingsBackupManager {
 
     fun parseImportJson(json: String): ImportData {
         val root = JSONObject(json)
-        if (root.optString("format") != FORMAT) {
+        if (root.optString("format") !in SUPPORTED_FORMATS) {
             throw IllegalArgumentException("Unsupported settings backup format")
         }
         if (root.optInt("version", VERSION) > VERSION) {
