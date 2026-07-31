@@ -222,13 +222,13 @@ public final class MediaPlayback {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaPlaybackStatus.class, com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaPlaybackStatus.Builder.class);
     }
@@ -734,13 +734,13 @@ public final class MediaPlayback {
         com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaPlaybackStatusOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaPlaybackStatus.class, com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaPlaybackStatus.Builder.class);
       }
@@ -771,7 +771,7 @@ public final class MediaPlayback {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_descriptor;
       }
 
       @java.lang.Override
@@ -1449,13 +1449,13 @@ public final class MediaPlayback {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaMetaData.class, com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaMetaData.Builder.class);
     }
@@ -1977,13 +1977,13 @@ public final class MediaPlayback {
         com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaMetaDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaMetaData.class, com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.MediaMetaData.Builder.class);
       }
@@ -2015,7 +2015,7 @@ public final class MediaPlayback {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.MediaPlayback.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_descriptor;
       }
 
       @java.lang.Override
@@ -2729,15 +2729,15 @@ public final class MediaPlayback {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2747,37 +2747,37 @@ public final class MediaPlayback {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016playback.proto\0221com.andrerinas.headuni" +
-      "trevived.aap.protocol.proto\"\206\002\n\023MediaPla" +
-      "ybackStatus\022[\n\005state\030\001 \001(\0162L.com.andreri" +
-      "nas.headunitrevived.aap.protocol.proto.M" +
-      "ediaPlaybackStatus.State\022\024\n\014media_source" +
-      "\030\002 \001(\t\022\030\n\020playback_seconds\030\003 \001(\r\022\017\n\007shuf" +
-      "fle\030\004 \001(\010\022\016\n\006repeat\030\005 \001(\010\022\022\n\nrepeat_one\030" +
-      "\006 \001(\010\"-\n\005State\022\013\n\007STOPPED\020\001\022\013\n\007PLAYING\020\002" +
-      "\022\n\n\006PAUSED\020\003\"\213\001\n\rMediaMetaData\022\014\n\004song\030\001" +
-      " \001(\t\022\016\n\006artist\030\002 \001(\t\022\r\n\005album\030\003 \001(\t\022\021\n\ta" +
-      "lbum_art\030\004 \001(\014\022\020\n\010playlist\030\005 \001(\t\022\030\n\020dura" +
-      "tion_seconds\030\006 \001(\r\022\016\n\006rating\030\007 \001(\005*j\n\007Ms" +
-      "gType\022\033\n\025MSG_PLAYBACK_METADATA\020\201\200\002\022 \n\032MS" +
-      "G_PLAYBACK_STARTRESPONSE\020\202\200\002\022 \n\032MSG_PLAY" +
-      "BACK_METADATASTART\020\203\200\002B\017B\rMediaPlayback"
+      "\012\016playback.proto\022.com.andrerinas.openhea" +
+      "dunit.aap.protocol.proto\"\203\002\012\023MediaPlayba" +
+      "ckStatus\022X\012\005state\030\001 \001(\0162I.com.andrerinas" +
+      ".openheadunit.aap.protocol.proto.MediaPl" +
+      "aybackStatus.State\022\024\012\014media_source\030\002 \001(\011" +
+      "\022\030\012\020playback_seconds\030\003 \001(\015\022\017\012\007shuffle\030\004 " +
+      "\001(\010\022\016\012\006repeat\030\005 \001(\010\022\022\012\012repeat_one\030\006 \001(\010\"" +
+      "-\012\005State\022\013\012\007STOPPED\020\001\022\013\012\007PLAYING\020\002\022\012\012\006PA" +
+      "USED\020\003\"\213\001\012\015MediaMetaData\022\014\012\004song\030\001 \001(\011\022\016" +
+      "\012\006artist\030\002 \001(\011\022\015\012\005album\030\003 \001(\011\022\021\012\011album_a" +
+      "rt\030\004 \001(\014\022\020\012\010playlist\030\005 \001(\011\022\030\012\020duration_s" +
+      "econds\030\006 \001(\015\022\016\012\006rating\030\007 \001(\005*j\012\007MsgType\022" +
+      "\033\012\025MSG_PLAYBACK_METADATA\020\201\200\002\022 \012\032MSG_PLAY" +
+      "BACK_STARTRESPONSE\020\202\200\002\022 \012\032MSG_PLAYBACK_M" +
+      "ETADATASTART\020\203\200\002B\017B\015MediaPlayback"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaPlaybackStatus_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaPlaybackStatus_descriptor,
         new java.lang.String[] { "State", "MediaSource", "PlaybackSeconds", "Shuffle", "Repeat", "RepeatOne", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_MediaMetaData_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_MediaMetaData_descriptor,
         new java.lang.String[] { "Song", "Artist", "Album", "AlbumArt", "Playlist", "DurationSeconds", "Rating", });
   }
 

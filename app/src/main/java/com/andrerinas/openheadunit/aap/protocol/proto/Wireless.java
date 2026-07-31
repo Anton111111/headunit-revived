@@ -347,13 +347,13 @@ public final class Wireless {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiStartRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiStartRequest.Builder.class);
     }
@@ -656,13 +656,13 @@ public final class Wireless {
         com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiStartRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiStartRequest.class, com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiStartRequest.Builder.class);
       }
@@ -690,7 +690,7 @@ public final class Wireless {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_descriptor;
       }
 
       @java.lang.Override
@@ -1181,13 +1181,13 @@ public final class Wireless {
 
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_descriptor;
+      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable
+      return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiInfoResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiInfoResponse.Builder.class);
     }
@@ -1626,13 +1626,13 @@ public final class Wireless {
         com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiInfoResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable
+        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiInfoResponse.class, com.andrerinas.openheadunit.aap.protocol.proto.Wireless.WifiInfoResponse.Builder.class);
       }
@@ -1662,7 +1662,7 @@ public final class Wireless {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_descriptor;
+        return com.andrerinas.openheadunit.aap.protocol.proto.Wireless.internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_descriptor;
       }
 
       @java.lang.Override
@@ -2263,15 +2263,15 @@ public final class Wireless {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_descriptor;
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable;
+      internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2281,38 +2281,38 @@ public final class Wireless {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016wireless.proto\0221com.andrerinas.headuni" +
-      "trevived.aap.protocol.proto\"D\n\020WifiStart" +
-      "Request\022\022\n\nip_address\030\001 \002(\t\022\014\n\004port\030\002 \002(" +
-      "\005\022\016\n\006status\030\003 \001(\005\"\363\001\n\020WifiInfoResponse\022\014" +
-      "\n\004ssid\030\001 \002(\t\022\013\n\003key\030\002 \002(\t\022\r\n\005bssid\030\003 \002(\t" +
-      "\022V\n\rsecurity_mode\030\004 \002(\0162?.com.andrerinas" +
-      ".headunitrevived.aap.protocol.proto.Secu" +
-      "rityMode\022]\n\021access_point_type\030\005 \002(\0162B.co" +
-      "m.andrerinas.headunitrevived.aap.protoco" +
-      "l.proto.AccessPointType**\n\017AccessPointTy" +
-      "pe\022\n\n\006STATIC\020\000\022\013\n\007DYNAMIC\020\001*\312\001\n\014Security" +
-      "Mode\022\031\n\025UNKNOWN_SECURITY_MODE\020\000\022\010\n\004OPEN\020" +
-      "\001\022\n\n\006WEP_64\020\002\022\013\n\007WEP_128\020\003\022\020\n\014WPA_PERSON" +
-      "AL\020\004\022\021\n\rWPA2_PERSONAL\020\010\022\025\n\021WPA_WPA2_PERS" +
-      "ONAL\020\014\022\022\n\016WPA_ENTERPRISE\020\024\022\023\n\017WPA2_ENTER" +
-      "PRISE\020\030\022\027\n\023WPA_WPA2_ENTERPRISE\020\034"
+      "\012\016wireless.proto\022.com.andrerinas.openhea" +
+      "dunit.aap.protocol.proto\"D\012\020WifiStartReq" +
+      "uest\022\022\012\012ip_address\030\001 \002(\011\022\014\012\004port\030\002 \002(\005\022\016" +
+      "\012\006status\030\003 \001(\005\"\355\001\012\020WifiInfoResponse\022\014\012\004s" +
+      "sid\030\001 \002(\011\022\013\012\003key\030\002 \002(\011\022\015\012\005bssid\030\003 \002(\011\022S\012" +
+      "\015security_mode\030\004 \002(\0162<.com.andrerinas.op" +
+      "enheadunit.aap.protocol.proto.SecurityMo" +
+      "de\022Z\012\021access_point_type\030\005 \002(\0162?.com.andr" +
+      "erinas.openheadunit.aap.protocol.proto.A" +
+      "ccessPointType**\012\017AccessPointType\022\012\012\006STA" +
+      "TIC\020\000\022\013\012\007DYNAMIC\020\001*\312\001\012\014SecurityMode\022\031\012\025U" +
+      "NKNOWN_SECURITY_MODE\020\000\022\010\012\004OPEN\020\001\022\012\012\006WEP_" +
+      "64\020\002\022\013\012\007WEP_128\020\003\022\020\012\014WPA_PERSONAL\020\004\022\021\012\015W" +
+      "PA2_PERSONAL\020\010\022\025\012\021WPA_WPA2_PERSONAL\020\014\022\022\012" +
+      "\016WPA_ENTERPRISE\020\024\022\023\012\017WPA2_ENTERPRISE\020\030\022\027" +
+      "\012\023WPA_WPA2_ENTERPRISE\020\034"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiStartRequest_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiStartRequest_descriptor,
         new java.lang.String[] { "IpAddress", "Port", "Status", });
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_descriptor =
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable = new
+    internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_andrerinas_headunitrevived_aap_protocol_proto_WifiInfoResponse_descriptor,
+        internal_static_com_andrerinas_openheadunit_aap_protocol_proto_WifiInfoResponse_descriptor,
         new java.lang.String[] { "Ssid", "Key", "Bssid", "SecurityMode", "AccessPointType", });
   }
 
