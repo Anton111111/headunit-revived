@@ -175,12 +175,21 @@ class HomeFragment : Fragment() {
         maybeShowRenameNotice(appSettings)
     }
 
-    // Shows a one-time notice about the app rename. Skipped while an auto-connect is
-    // taking over the screen so it does not flash in front of a launching projection.
+    // Shows a one-time notice about the app rename. Existing users always get it once,
+    // new installs only during a window after the release. Skipped while an auto-connect
+    // is taking over the screen so it does not flash in front of a launching projection.
     private fun maybeShowRenameNotice(appSettings: Settings) {
         if (appSettings.renameNoticeShown) return
         if (commManager.isConnected) return
         if (hasAttemptedAutoConnect || hasAutoStarted || hasAttemptedSingleUsbAutoConnect) return
+
+        val firstInstallTime = try {
+            requireContext().packageManager
+                .getPackageInfo(requireContext().packageName, 0).firstInstallTime
+        } catch (e: PackageManager.NameNotFoundException) {
+            0L
+        }
+        if (!RenameNoticePolicy.shouldOffer(firstInstallTime, System.currentTimeMillis())) return
 
         appSettings.renameNoticeShown = true
         activeDialog = MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
