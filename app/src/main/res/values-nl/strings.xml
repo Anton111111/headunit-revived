@@ -761,4 +761,38 @@
     <string name="onb_dpi_recommended">Aanbevolen voor je scherm: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Nog één ding: je kunt nu een aangepast laadscherm instellen, dat wordt getoond terwijl de auto verbinding maakt.</string>
     <string name="onb_ready_loading_button">Een laadscherm instellen</string>
+
+    <!-- Support / Bug report -->
+    <string name="support">Probleem melden</string>
+    <string name="support_description">Zoek of meld bugs op GitHub</string>
+    <string name="support_title">Probleem melden</string>
+    <string name="support_help">Als je een bug of probleem tegenkomt, kijk dan eerst in de lijst met GitHub-issues. Als niemand het al heeft gemeld, open dan een nieuw issue en beschrijf wat er gebeurt, je autoradio en de stappen om het te reproduceren.</string>
+    <string name="support_open_issues">Open de GitHub-issuespagina</string>
+    <string name="support_scan_qr">Of scan deze QR-code om de issueslijst op een ander apparaat te openen.</string>
+    <string name="support_github_account_warning">Let op: je hebt een gratis GitHub-account nodig om een issue aan te maken.</string>
+    <string name="onb_ready_extras_title">Voordat je klaar bent, kun je ook instellen:</string>
+    <string name="onb_extra_loading_desc">Een aangepaste afbeelding die wordt getoond terwijl de auto verbinding maakt</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Meldingsregels</string>
+    <string name="support_rules_english_desc">Schrijf je issue altijd in het Engels. Het is de taal die de beheerder en de meeste mensen hier delen, en een discussie in allerlei talen wordt al snel een kleine toren van Babel waar niemand iemand kan helpen. Niemand beoordeelt je, je niveau van Engels of de manier waarop je schrijft, dus maak je geen zorgen over fouten. Als het helpt, kan een vertaler zoals Google Translate of DeepL, of een AI zoals ChatGPT of Claude, je bericht in het Engels schrijven en oppoetsen.</string>
+    <string name="support_rules_device_title">Zeg wat de app draait</string>
+    <string name="support_rules_device_desc">De Android-versie van het apparaat dat Android Auto projecteert (je autoradio of scherm), en het merk en model als je die weet.</string>
+    <string name="support_rules_connection_title">Zeg hoe je verbindt</string>
+    <string name="support_rules_connection_desc">USB-kabel, draadloze USB-adapter, WiFi Direct, WiFi (headunit server) of Self Mode. Als het draadloos is, voeg dan het model van de adapter of dongle toe.</string>
+    <string name="support_rules_appversion_title">Vermeld de app-versie</string>
+    <string name="support_rules_appversion_desc">De versie van Headunit Revived, te zien op het scherm Over &amp; Support.</string>
+    <string name="support_rules_logs_title">Voeg logs toe, direct nadat het gebeurt</string>
+    <string name="support_rules_logs_desc">Ga naar het tabblad Geavanceerd in Instellingen, zet Debug Modus aan in het gedeelte Debug, reproduceer het probleem en tik daarna meteen op Logs exporteren zodat het logbestand het moment van de fout bevat en niet alleen de start. Voeg dat bestand toe aan je issue.</string>
+    <string name="support_rules_search_title">Geen duplicaten</string>
+    <string name="support_rules_search_desc">Zoek eerst in de bestaande issues. Als er al een open issue is dat je probleem beschrijft, voeg je je gegevens daar als reactie toe in plaats van een nieuw issue te openen. Open alleen een nieuw issue als er geen overeenkomst is.</string>
+    <string name="support_rules_phone_title">Je telefoon telt ook mee</string>
+    <string name="support_rules_phone_desc">Je telefoonmodel, de Android-versie en de versie van de Android Auto-app op de telefoon. Sommige problemen komen van een specifieke Android Auto-release.</string>
+    <string name="support_rules_describe_title">Beschrijf het duidelijk</string>
+    <string name="support_rules_describe_desc">Wat je hebt gedaan, wat je verwachtte en wat er daadwerkelijk gebeurde. Een screenshot of korte video helpt veel bij visuele problemen.</string>
+    <string name="support_rules_oneissue_title">Één probleem per issue</string>
+    <string name="support_rules_oneissue_desc">Houd elk issue beperkt tot één probleem zodat het gevolgd en opgelost kan worden. Open aparte issues voor niet-gerelateerde problemen.</string>
+    <string name="support_rules_intro">Er zijn maar twee dingen verplicht. De rest is optioneel, maar het helpt je probleem veel sneller op te lossen.</string>
+    <string name="support_rules_section_required">Verplicht</string>
+    <string name="support_rules_section_recommend">Aanbevelingen (optioneel)</string>
 </resources>

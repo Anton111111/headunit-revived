@@ -60,14 +60,23 @@ class NativeAaHandshakeManager(
     private var aaServerSocket: BluetoothServerSocket? = null
     private var hfpServerSocket: BluetoothServerSocket? = null
     // Extra RFCOMM listeners opened on secondary Bluetooth radios (dual-Bluetooth head units).
-    private val extraServerSockets = java.util.Collections.synchronizedList(mutableListOf<BluetoothServerSocket>())
+    // Split by UUID so a successful handoff can close just the AA listeners (see
+    // closeAaListeners()) without taking down the HFP ones too.
+    private val extraAaServerSockets = java.util.Collections.synchronizedList(mutableListOf<BluetoothServerSocket>())
+    private val extraHfpServerSockets = java.util.Collections.synchronizedList(mutableListOf<BluetoothServerSocket>())
     private var isRunning = false
+    // Set by closeAaListeners() so the AA accept loops can tell "we closed this on purpose
+    // after a successful handoff" apart from a real socket error, for logging only.
+    @Volatile private var aaListenersClosedForSession = false
 
     private var currentSsid: String? = null
     private var currentPsk: String? = null
     private var currentIp: String? = null
     private var currentBssid: String? = null
     private var pokeJob: Job? = null
+    // True while handleHandshake() runs; lets WifiDirectManager's join watchdog know a real
+    // exchange is in progress. Bounded by handleHandshake()'s own timeouts, so it can't stick true.
+    @Volatile private var handshakeInFlight = false
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -80,7 +89,24 @@ class NativeAaHandshakeManager(
         currentBssid = bssid
     }
 
-    fun isActive(): Boolean = isRunning
+    /** Clears cached credentials so an in-progress wait doesn't hand out stale ones for a group
+     *  that's about to be torn down. */
+    fun invalidateCredentials() {
+        currentSsid = null
+        currentPsk = null
+        currentIp = null
+        currentBssid = null
+    }
+
+    // isRunning alone isn't enough once closeAaListeners() can close the AA_UUID listener while
+    // leaving the manager otherwise running (HFP stays up) — callers like AutoStartReceiver's
+    // BT-reconnect re-arm need to know whether a connection can actually be accepted right now,
+    // not just whether the manager was start()ed. See the "Re-arm on Bluetooth reconnect" fix
+    // this restores the invariant for: isActive() must mean "genuinely able to accept," not
+    // "believed to be running."
+    fun isActive(): Boolean = isRunning && !aaListenersClosedForSession
+
+    fun isHandshakeInFlight(): Boolean = handshakeInFlight
 
     @SuppressLint("MissingPermission")
     fun start() {
@@ -104,25 +130,31 @@ class NativeAaHandshakeManager(
         }
 
         isRunning = true
-        AppLog.i("NativeAA: Starting Bluetooth Handshake Servers...")
+        aaListenersClosedForSession = false
+        // Local Bluetooth radio address; logged on every accept so a dual-radio head unit's logs
+        // show which radio the phone actually reached (compare with the HU MAC in the phone's log).
+        val localAddr = try { adapter.address } catch (e: Exception) { "?" }
+        AppLog.i("NativeAA: Starting Bluetooth Handshake Servers (primary radio [$localAddr])...")
 
         // Start AA RFCOMM Server
         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-RfcommServer")) {
             try {
                 aaServerSocket = adapter.listenUsingRfcommWithServiceRecord("AA BT Listener", AA_UUID)
-                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID ($AA_UUID)... Waiting for phone to connect back!")
+                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID ($AA_UUID) on radio [$localAddr]... Waiting for phone to connect back!")
                 while (isRunning && isActive) {
                     val socket = aaServerSocket?.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: Connection accepted from ${socket.remoteDevice.name}")
+                        AppLog.i("NativeAA: Connection accepted from ${socket.remoteDevice.name} (${socket.remoteDevice.address}) on local radio [$localAddr]")
                         // [FIX] Launch handshake in a separate coroutine so the server can accept the next connection!
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
-                            handleHandshake(socket)
+                            handleHandshake(socket, localAddr)
                         }
                     }
                 }
             } catch (e: Exception) {
-                if (isRunning) {
+                if (aaListenersClosedForSession) {
+                    AppLog.d("NativeAA: AA Server socket closed after successful handoff.")
+                } else if (isRunning) {
                     AppLog.e("NativeAA: AA Server socket error: ${e.message}", e)
                 } else {
                     AppLog.d("NativeAA: AA Server socket closed cleanly.")
@@ -182,26 +214,27 @@ class NativeAaHandshakeManager(
         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-RfcommServer-2")) {
             try {
                 val server = extra.listenUsingRfcommWithServiceRecord("AA BT Listener", AA_UUID)
-                extraServerSockets.add(server)
+                extraAaServerSockets.add(server)
                 AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID on secondary radio [$addr]")
                 while (isRunning && isActive) {
                     val socket = server.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: Connection accepted (secondary radio) from ${socket.remoteDevice.name}")
+                        AppLog.i("NativeAA: Connection accepted (secondary radio [$addr]) from ${socket.remoteDevice.name} (${socket.remoteDevice.address})")
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
-                            handleHandshake(socket)
+                            handleHandshake(socket, addr)
                         }
                     }
                 }
             } catch (e: Exception) {
-                if (isRunning) AppLog.e("NativeAA: Secondary AA server error [$addr]: ${e.message}", e)
+                if (aaListenersClosedForSession) AppLog.d("NativeAA: Secondary AA server closed after successful handoff [$addr].")
+                else if (isRunning) AppLog.e("NativeAA: Secondary AA server error [$addr]: ${e.message}", e)
                 else AppLog.d("NativeAA: Secondary AA server closed cleanly [$addr].")
             }
         }
         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpServer-2")) {
             try {
                 val server = extra.listenUsingRfcommWithServiceRecord("Hands-Free Unit", HFP_UUID)
-                extraServerSockets.add(server)
+                extraHfpServerSockets.add(server)
                 while (isRunning && isActive) {
                     val socket = server.accept()
                     if (socket != null) {
@@ -215,6 +248,24 @@ class NativeAaHandshakeManager(
                 if (isRunning) AppLog.e("NativeAA: Secondary HFP server error [$addr]: ${e.message}", e)
                 else AppLog.d("NativeAA: Secondary HFP server closed cleanly [$addr].")
             }
+        }
+    }
+
+    /**
+     * Stop accepting new AA_UUID connections (primary + any secondary radios) after a
+     * successful handoff to WiFi. Closing just the client socket isn't enough: the phone reads
+     * that as an unexpected drop and immediately retries, and with the listener still up we'd
+     * accept, bail out (already connected), and close again — a tight reconnect storm (confirmed
+     * on-device: hundreds of accept/close cycles a second, indistinguishable from a Bluetooth
+     * pairing loop). HFP listeners are left running. Re-opened the next time start() runs, which
+     * AapService already does on disconnect.
+     */
+    private fun closeAaListeners() {
+        aaListenersClosedForSession = true
+        try { aaServerSocket?.close() } catch (e: Exception) {}
+        synchronized(extraAaServerSockets) {
+            extraAaServerSockets.forEach { try { it.close() } catch (e: Exception) {} }
+            extraAaServerSockets.clear()
         }
     }
 
@@ -374,10 +425,11 @@ class NativeAaHandshakeManager(
         }
     }
 
-    private suspend fun handleHandshake(socket: BluetoothSocket) = withContext(Dispatchers.IO) {
+    private suspend fun handleHandshake(socket: BluetoothSocket, localRadio: String? = null) = withContext(Dispatchers.IO) {
+        handshakeInFlight = true
         try {
             val device = socket.remoteDevice
-            AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address})")
+            AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address}) on local radio [${localRadio ?: "?"}]")
 
             if (commManager.isConnected ||
                 commManager.connectionState.value is CommManager.ConnectionState.Connecting) {
@@ -445,7 +497,7 @@ class NativeAaHandshakeManager(
             // No BluetoothSocket.setSoTimeout(); force-close via watchdog to unblock readFully() on timeout.
             val watchdog = scope.launch(Dispatchers.IO) {
                 delay(HANDSHAKE_RESPONSE_TIMEOUT_MS)
-                AppLog.e("NativeAA: Handshake failed - No response from phone within ${HANDSHAKE_RESPONSE_TIMEOUT_MS / 1000}s of sending WifiStartRequest. Closing socket.")
+                AppLog.e("NativeAA: Handshake failed - No response from phone ${device.name} (${device.address}) on radio [${localRadio ?: "?"}] within ${HANDSHAKE_RESPONSE_TIMEOUT_MS / 1000}s of sending WifiStartRequest. Closing socket.")
                 try { socket.close() } catch (e: Exception) {}
             }
             val response = try {
@@ -461,13 +513,23 @@ class NativeAaHandshakeManager(
                 delay(1000) // [FIX] Increased delay to give phone more processing time
                 sendWifiSecurityResponse(output, ssid, psk, bssid)
                 AppLog.i("NativeAA: Handshake completed successfully on Bluetooth side.")
-                
-                // Keep the socket open to maintain the handshake session
-                AppLog.i("NativeAA: Maintaining Bluetooth session...")
-                while (isRunning && isActive && socket.isConnected) {
-                    delay(5000)
-                }
-                AppLog.i("NativeAA: Handshake session ending (isRunning=$isRunning, isConnected=${socket.isConnected})")
+                // The credential exchange is done; the join watchdog no longer needs to defer
+                // for this handshake.
+                handshakeInFlight = false
+
+                // Release the Bluetooth connection shortly after handoff instead of holding it
+                // indefinitely. The real Android Auto protocol closes Bluetooth right after the
+                // WiFi credential exchange — confirmed via a reference wireless-dongle
+                // implementation (nisargjhaveri/WirelessAndroidAutoDongle#17/#18), where holding
+                // it open caused the same "confusion, especially with phone calls" symptom this
+                // repo has seen reported. Short grace window for the phone to finish reading the
+                // response before we close.
+                delay(3000)
+                AppLog.i("NativeAA: Handshake session ending, releasing Bluetooth connection.")
+                // Stop accepting new AA_UUID connections too, not just this socket — otherwise
+                // the phone's immediate reconnect-retry gets accepted, bounced (already
+                // connected), and retried again in a tight loop. See closeAaListeners() kdoc.
+                closeAaListeners()
             } else {
                 AppLog.w("NativeAA: Handshake failed - Unexpected response type ${response.type}. Expected Type 2.")
             }
@@ -475,6 +537,7 @@ class NativeAaHandshakeManager(
         } catch (e: Exception) {
             AppLog.e("NativeAA: Handshake error: ${e.message}", e)
         } finally {
+            handshakeInFlight = false
             try { socket.close() } catch (e: Exception) {}
             AppLog.i("NativeAA: BT Handshake socket closed.")
         }
@@ -530,9 +593,13 @@ class NativeAaHandshakeManager(
         isRunning = false
         try { aaServerSocket?.close() } catch (e: Exception) {}
         try { hfpServerSocket?.close() } catch (e: Exception) {}
-        synchronized(extraServerSockets) {
-            extraServerSockets.forEach { try { it.close() } catch (e: Exception) {} }
-            extraServerSockets.clear()
+        synchronized(extraAaServerSockets) {
+            extraAaServerSockets.forEach { try { it.close() } catch (e: Exception) {} }
+            extraAaServerSockets.clear()
+        }
+        synchronized(extraHfpServerSockets) {
+            extraHfpServerSockets.forEach { try { it.close() } catch (e: Exception) {} }
+            extraHfpServerSockets.clear()
         }
         aaServerSocket = null
         hfpServerSocket = null

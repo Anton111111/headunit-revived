@@ -730,4 +730,38 @@
     <string name="onb_vehicle_help_advanced">Gelişmiş sekmesinde daha fazla araç ayrıntısını düzenleyebilirsiniz. Bu verileri biz kullanmayız; yalnızca Android Auto gerektirdiği için gönderilir.</string>
     <string name="onb_summary_vehicle_format">Araç: %1$s</string>
     <string name="sunrise_reference_help">Gün doğumu ve gün batımını hesaplamak için kullanılan referans noktası. Konumunuzu bir kez seçin; GPS olmadan çalışır.</string>
+
+    <string name="support">Sorun bildir</string>
+    <string name="support_description">GitHub\'da hata arayın veya bildirin</string>
+    <string name="support_title">Sorun bildir</string>
+    <string name="support_help">Bir hata veya sorunla karşılaşırsanız lütfen önce GitHub Issues listesinde arayın. Henüz kimse bildirmediyse yeni bir konu açın ve ne olduğunu, multimedya sisteminizi ve sorunu yeniden oluşturma adımlarını açıklayın.</string>
+    <string name="support_open_issues">GitHub Issues sayfasını aç</string>
+    <string name="support_scan_qr">Veya Issues listesini başka bir cihazda açmak için bu QR kodunu tarayın.</string>
+    <string name="support_github_account_warning">Not: Konu oluşturmak için ücretsiz bir GitHub hesabına ihtiyacınız var.</string>
+
+    <string name="onb_ready_extras_title">Bitirmeden önce şunları da ayarlayabilirsiniz:</string>
+    <string name="onb_extra_loading_desc">Araç bağlanırken gösterilen özel bir görsel</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_intro">Yalnızca iki şey zorunludur. Diğerleri isteğe bağlıdır, ancak sorununuzun çok daha hızlı çözülmesine yardımcı olur.</string>
+    <string name="support_rules_section_required">Zorunlu</string>
+    <string name="support_rules_section_recommend">Öneriler (isteğe bağlı)</string>
+    <string name="support_rules_button">Bildirme kuralları</string>
+    <string name="support_rules_english_desc">Lütfen sorunuzu her zaman İngilizce yazın. Proje sorumlusu ve yardım eden kişilerin çoğunun ortak dili İngilizce, birçok dilde yazılmış bir konu ise kimsenin kimseye yardım edemediği küçük bir Babil Kulesi\'ne dönüşür. Kimse İngilizcenizi, seviyenizi ya da yazış biçiminizi yargılamaz, hata yapmaktan çekinmeyin. İşe yararsa, Google Translate veya DeepL gibi bir çevirmen ya da ChatGPT veya Claude gibi bir yapay zeka mesajınızı sizin için İngilizce olarak yazıp düzenleyebilir.</string>
+    <string name="support_rules_device_title">Uygulamayı neyin çalıştırdığını belirtin</string>
+    <string name="support_rules_device_desc">Android Auto\'yu yansıtan cihazın (multimedya sisteminiz veya ekranınız) Android sürümünü ve biliyorsanız marka ile modelini yazın.</string>
+    <string name="support_rules_connection_title">Nasıl bağlandığınızı belirtin</string>
+    <string name="support_rules_connection_desc">USB kablo, USB kablosuz adaptör, WiFi Direct, WiFi (headunit sunucusu) veya Self Mode. Kablosuz bağlantı kullanıyorsanız adaptör veya dongle modelini de ekleyin.</string>
+    <string name="support_rules_appversion_title">Uygulama sürümünü ekleyin</string>
+    <string name="support_rules_appversion_desc">Hakkında ekranında gösterilen Headunit Revived sürümü.</string>
+    <string name="support_rules_logs_title">Olduğu anda günlükleri ekleyin</string>
+    <string name="support_rules_logs_desc">Ayarlar\'da Gelişmiş sekmesini açın, Hata Ayıklama bölümünde Hata Ayıklama Modu\'nu etkinleştirin, sorunu yeniden oluşturun ve hemen ardından Günlükleri Dışa Aktar\'a dokunun; böylece günlük yalnızca başlangıcı değil sorunun yaşandığı anı da kapsar. Bu dosyayı konunuza ekleyin.</string>
+    <string name="support_rules_search_title">Mükerrer konu açmayın</string>
+    <string name="support_rules_search_desc">Önce mevcut konuları arayın. Sorununuzu zaten açıklayan açık bir konu varsa, yeni bir tane açmak yerine yorumunuzu oraya ekleyin. Yalnızca eşleşen konu yoksa yeni bir tane açın.</string>
+    <string name="support_rules_phone_title">Telefonunuz da önemli</string>
+    <string name="support_rules_phone_desc">Telefon modeliniz, Android sürümü ve telefondaki Android Auto uygulama sürümü. Bazı sorunlar belirli bir Android Auto sürümünden kaynaklanır.</string>
+    <string name="support_rules_describe_title">Net bir şekilde açıklayın</string>
+    <string name="support_rules_describe_desc">Ne yaptığınızı, ne beklediğinizi ve gerçekte ne olduğunu yazın. Görsel sorunlar için bir ekran görüntüsü veya kısa bir video çok işe yarar.</string>
+    <string name="support_rules_oneissue_title">Konu başına bir sorun</string>
+    <string name="support_rules_oneissue_desc">Her konuyu tek bir sorunla sınırlı tutun ki takip edilip düzeltilebilsin. İlgisiz sorunlar için ayrı konular açın.</string>
 </resources>

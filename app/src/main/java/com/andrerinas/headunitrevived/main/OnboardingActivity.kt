@@ -104,12 +104,19 @@ class OnboardingActivity : BaseActivity() {
         bindSteps()
         bindPermissionsStep()
 
-        // Ready step: offer to jump straight into the loading screen setup (finishes the wizard).
-        findViewById<MaterialButton>(R.id.onb_loading_screen_button).setOnClickListener {
+        // Ready step: optional-extras card. Each row finishes the wizard and jumps straight into
+        // that Settings sub-screen (things the wizard does not already walk you through).
+        findViewById<View>(R.id.onb_extra_loading).setOnClickListener {
             finishOnboardingInto(R.id.loadingScreenFragment)
         }
+        findViewById<View>(R.id.onb_extra_keymap).setOnClickListener {
+            finishOnboardingInto(R.id.keymapFragment)
+        }
+        findViewById<View>(R.id.onb_extra_mic).setOnClickListener {
+            finishOnboardingInto(R.id.micSettingsFragment)
+        }
 
-        backBtn.setOnClickListener { if (step > 0) { step--; render() } }
+        backBtn.setOnClickListener { if (step > 0) goBack() }
         nextBtn.setOnClickListener { onNext() }
         skipBtn.setOnClickListener { onDoItLater() }
 
@@ -128,11 +135,45 @@ class OnboardingActivity : BaseActivity() {
         updateThemeButtonText()
         updateNightButtonText()
         permissionBinder?.rebind()
+        if (step == STEP_DPI) dpiPicker?.startDemo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dpiPicker?.stopDemo()
+    }
+
+    /**
+     * A wizard step that does not apply to the chosen setup and is skipped entirely. The GPS source
+     * choice (this device vs the connected phone) makes no sense in Self Mode, where there is no
+     * separate phone, so it is hidden there.
+     */
+    private fun isStepHidden(s: Int): Boolean =
+        s == STEP_GPS && !settings.showsExternalGps()
+
+    /** The steps actually shown, in order, after removing the ones that do not apply. */
+    private fun visibleSteps(): List<Int> = (0 until STEP_COUNT).filter { !isStepHidden(it) }
+
+    /** Move forward to the next visible step, or finish on the last one. */
+    private fun goForward() {
+        var s = step + 1
+        while (s < STEP_COUNT && isStepHidden(s)) s++
+        if (s >= STEP_COUNT) { finishOnboarding(); return }
+        step = s
+        render()
+    }
+
+    /** Move back to the previous visible step. */
+    private fun goBack() {
+        var s = step - 1
+        while (s > 0 && isStepHidden(s)) s--
+        step = s.coerceAtLeast(0)
+        render()
     }
 
     private fun buildStepperDots() {
         stepper.removeAllViews()
-        for (i in 0 until STEP_COUNT) {
+        repeat(visibleSteps().size) {
             val dot = View(this)
             val h = (5 * resources.displayMetrics.density).toInt()
             val lp = LinearLayout.LayoutParams(h, h)
@@ -143,17 +184,21 @@ class OnboardingActivity : BaseActivity() {
     }
 
     private fun updateStepperDots() {
+        val steps = visibleSteps()
+        // Rebuild if the visible-step count changed (e.g. Self Mode just hid the GPS step).
+        if (stepper.childCount != steps.size) buildStepperDots()
         val density = resources.displayMetrics.density
         val active = resolveAttrColor(com.google.android.material.R.attr.colorPrimary)
         val inactive = 0x33808080
-        for (i in 0 until STEP_COUNT) {
+        val currentPos = steps.indexOf(step).coerceAtLeast(0)
+        for (i in steps.indices) {
             val dot = stepper.getChildAt(i) ?: continue
             val lp = dot.layoutParams as LinearLayout.LayoutParams
-            lp.width = ((if (i == step) 26 else 8) * density).toInt()
+            lp.width = ((if (i == currentPos) 26 else 8) * density).toInt()
             dot.layoutParams = lp
             val bg = android.graphics.drawable.GradientDrawable()
             bg.cornerRadius = 5 * density
-            bg.setColor(if (i <= step) active else inactive)
+            bg.setColor(if (i <= currentPos) active else inactive)
             dot.background = bg
         }
     }
@@ -177,27 +222,27 @@ class OnboardingActivity : BaseActivity() {
             }
         }
 
-        // --- Connection: USB (cable or USB adapter) / WiFi / Self Mode ---
+        // --- Connection: multi-select of USB / WiFi / Self Mode ---
         val connGroup = findViewById<MaterialButtonToggleGroup>(R.id.onb_conn_group)
         isBinding = true
-        when (settings.primaryConnection) {
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> connGroup.check(R.id.onb_conn_wifi)
-            Settings.ConnectionKind.SELF_MODE -> connGroup.check(R.id.onb_conn_self)
-            Settings.ConnectionKind.ALL -> connGroup.check(R.id.onb_conn_all)
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> connGroup.check(R.id.onb_conn_usb)
-            else -> {}
-        }
+        val modes = settings.connectionModes
+        if (Settings.ConnectionMode.USB in modes) connGroup.check(R.id.onb_conn_usb)
+        if (Settings.ConnectionMode.WIFI in modes) connGroup.check(R.id.onb_conn_wifi)
+        if (Settings.ConnectionMode.SELF in modes) connGroup.check(R.id.onb_conn_self)
         isBinding = false
         updateConnectionDetail()
-        connGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (!isChecked || isBinding) return@addOnButtonCheckedListener
-            settings.primaryConnection = when (checkedId) {
-                R.id.onb_conn_wifi -> Settings.ConnectionKind.WIFI
-                R.id.onb_conn_self -> Settings.ConnectionKind.SELF_MODE
-                R.id.onb_conn_all -> Settings.ConnectionKind.ALL
-                else -> Settings.ConnectionKind.USB_CABLE
+        connGroup.addOnButtonCheckedListener { group, _, _ ->
+            if (isBinding) return@addOnButtonCheckedListener
+            val checked = group.checkedButtonIds
+            val selected = buildSet {
+                if (R.id.onb_conn_usb in checked) add(Settings.ConnectionMode.USB)
+                if (R.id.onb_conn_wifi in checked) add(Settings.ConnectionMode.WIFI)
+                if (R.id.onb_conn_self in checked) add(Settings.ConnectionMode.SELF)
             }
+            settings.connectionModes = selected
             updateConnectionDetail()
+            // At least one is required; keep Next in sync while on this step.
+            if (step == STEP_CONNECTION) nextBtn.isEnabled = selected.isNotEmpty()
         }
 
         // --- Display: detected panel + size/orientation, pre-selected from detection ---
@@ -365,13 +410,21 @@ class OnboardingActivity : BaseActivity() {
         // GONE (not INVISIBLE) so its dedicated row collapses on the final step.
         skipBtn.visibility = if (step == STEP_COUNT - 1) View.GONE else View.VISIBLE
         nextBtn.text = getString(if (step == STEP_COUNT - 1) R.string.onb_ready_finish else R.string.onb_next)
-        nextBtn.isEnabled = if (step == STEP_SAFETY)
-            findViewById<MaterialCheckBox>(R.id.onb_safety_accept).isChecked else true
+        nextBtn.isEnabled = when (step) {
+            STEP_SAFETY -> findViewById<MaterialCheckBox>(R.id.onb_safety_accept).isChecked
+            STEP_CONNECTION -> settings.connectionModes.isNotEmpty()
+            else -> true
+        }
         if (step == STEP_READY) findViewById<TextView>(R.id.onb_ready_summary).text = summaryText()
         if (step == STEP_AUTOMATION) applyAutomationVisibility()
         if (step == STEP_PERMISSIONS) permissionBinder?.rebind()
-        if (step == STEP_DPI) findViewById<TextView>(R.id.onb_dpi_recommended).text =
-            getString(R.string.onb_dpi_recommended, recommendedDpi())
+        if (step == STEP_DPI) {
+            findViewById<TextView>(R.id.onb_dpi_recommended).text =
+                getString(R.string.onb_dpi_recommended, recommendedDpi())
+            dpiPicker?.startDemo()
+        } else {
+            dpiPicker?.stopDemo()
+        }
         updateStepperDots()
     }
 
@@ -389,17 +442,13 @@ class OnboardingActivity : BaseActivity() {
     /** Show only the auto-start toggles that match the chosen connection type. Self Mode
      * connects without USB or WiFi, so both groups are hidden. */
     private fun applyAutomationVisibility() {
-        val conn = settings.primaryConnection
-        val isWifi = conn == Settings.ConnectionKind.WIFI || conn == Settings.ConnectionKind.NATIVE_AA
-        val isSelf = conn == Settings.ConnectionKind.SELF_MODE
-        val isAll = conn == Settings.ConnectionKind.ALL
-        val usbVis = if (isAll || (!isWifi && !isSelf)) View.VISIBLE else View.GONE
+        val usbVis = if (settings.showsUsb()) View.VISIBLE else View.GONE
         findViewById<View>(R.id.onb_ac_single_row).visibility = usbVis
         findViewById<View>(R.id.onb_as_usb_row).visibility = usbVis
         findViewById<View>(R.id.onb_reopen_row).visibility = usbVis
         // Auto-start on WiFi is a legacy path that only applies up to Android 12L (API 32).
         findViewById<View>(R.id.onb_as_wifi_row).visibility =
-            if ((isWifi || isAll) && Build.VERSION.SDK_INT <= 32) View.VISIBLE else View.GONE
+            if (settings.showsWifi() && Build.VERSION.SDK_INT <= 32) View.VISIBLE else View.GONE
     }
 
     private fun onNext() {
@@ -418,7 +467,7 @@ class OnboardingActivity : BaseActivity() {
                 settings.headUnitMake = brand
             }
         }
-        if (step == STEP_COUNT - 1) finishOnboarding() else { step++; render() }
+        if (step == STEP_COUNT - 1) finishOnboarding() else goForward()
     }
 
     /**
@@ -439,7 +488,7 @@ class OnboardingActivity : BaseActivity() {
 
     override fun onBackPressed() {
         // Back walks the steps; from the first step it behaves like "Do it later".
-        if (step > 0) { step--; render() } else onDoItLater()
+        if (step > 0) goBack() else onDoItLater()
     }
 
     private fun finishOnboarding() {
@@ -493,24 +542,32 @@ class OnboardingActivity : BaseActivity() {
 
     private fun updateConnectionDetail() {
         val detail = findViewById<TextView>(R.id.onb_conn_detail)
-        detail.text = when (settings.primaryConnection) {
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.onb_connection_wifi_detail)
-            Settings.ConnectionKind.SELF_MODE -> getString(R.string.onb_connection_self_detail)
-            Settings.ConnectionKind.ALL -> getString(R.string.onb_connection_all_detail)
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.onb_connection_usb_detail)
-            else -> ""
-        }
+        detail.text = if (settings.connectionModes.isEmpty()) "" else connectionModesLabel()
+    }
+
+    /** The chosen connection types as a readable label, e.g. "USB, WiFi". */
+    private fun connectionModesLabel(): String {
+        val modes = settings.connectionModes
+        if (modes.isEmpty()) return getString(R.string.connection_kind_unset)
+        val parts = mutableListOf<String>()
+        if (Settings.ConnectionMode.USB in modes) parts.add(getString(R.string.connection_kind_usb))
+        if (Settings.ConnectionMode.WIFI in modes) parts.add(getString(R.string.connection_kind_wifi))
+        if (Settings.ConnectionMode.SELF in modes) parts.add(getString(R.string.self_mode))
+        return parts.joinToString(", ")
     }
 
     // --- Display scan ---
 
     private fun realMetrics(): DisplayMetrics {
         val metrics = DisplayMetrics()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            display?.getRealMetrics(metrics)
-        } else {
-            @Suppress("DEPRECATION")
-            (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getRealMetrics(metrics)
+        @Suppress("DEPRECATION")
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> display?.getRealMetrics(metrics)
+            // getRealMetrics is API 17; on API 16 it does not exist, so fall back to getMetrics.
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ->
+                (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getRealMetrics(metrics)
+            else ->
+                (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getMetrics(metrics)
         }
         return metrics
     }
@@ -605,13 +662,7 @@ class OnboardingActivity : BaseActivity() {
     // --- Ready ---
 
     private fun summaryText(): String {
-        val conn = when (settings.primaryConnection) {
-            Settings.ConnectionKind.WIFI, Settings.ConnectionKind.NATIVE_AA -> getString(R.string.connection_kind_wifi)
-            Settings.ConnectionKind.SELF_MODE -> getString(R.string.self_mode)
-            Settings.ConnectionKind.ALL -> getString(R.string.connection_kind_all)
-            Settings.ConnectionKind.USB_CABLE, Settings.ConnectionKind.USB_WIRELESS_ADAPTER -> getString(R.string.connection_kind_usb)
-            else -> getString(R.string.connection_kind_unset)
-        }
+        val conn = connectionModesLabel()
         val res = getString(
             R.string.resolution_recommended_format,
             Settings.Resolution.fromId(settings.resolutionId)?.resName ?: getString(R.string.auto)
@@ -643,9 +694,11 @@ class OnboardingActivity : BaseActivity() {
         private const val KEY_STEP = "onb_step"
         private const val STEP_COUNT = 11
         private const val STEP_SAFETY = 1
+        private const val STEP_CONNECTION = 2
         private const val STEP_DISPLAY = 3
         private const val STEP_DPI = 4
         private const val STEP_AUTOMATION = 6
+        private const val STEP_GPS = 7
         private const val STEP_VEHICLE = 8
         private const val STEP_PERMISSIONS = 9
         private const val STEP_READY = 10

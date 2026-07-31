@@ -55,6 +55,9 @@
     <string name="onb_summary_permissions_format">Permissions: %1$d of %2$d granted</string>
     <string name="onb_ready_loading_intro">One more thing: you can now set a custom loading screen, shown while the car connects.</string>
     <string name="onb_ready_loading_button">Set up a loading screen</string>
+    <!-- Ready step optional-extras card -->
+    <string name="onb_ready_extras_title">Before you finish, you can also set up:</string>
+    <string name="onb_extra_loading_desc">A custom image shown while the car connects</string>
 
     <!-- Onboarding wizard: permissions step + Settings > Permissions -->
     <string name="onb_permissions_title">Enable permissions</string>
@@ -462,6 +465,41 @@
     <string name="category_info">Info</string>
     <string name="about">About &amp; Support</string>
     <string name="about_description">Get more information about Headunit Revived</string>
+
+    <!-- Support / report a problem screen -->
+    <string name="support">Report a problem</string>
+    <string name="support_description">Search or report bugs on GitHub</string>
+    <string name="support_title">Report a problem</string>
+    <string name="support_help">If you run into a bug or a problem, please first look for it in the GitHub issues list. If no one has reported it yet, open a new issue and describe what happens, your head unit, and the steps to reproduce it.</string>
+    <string name="support_open_issues">Open the GitHub issues page</string>
+    <string name="support_scan_qr">Or scan this QR code to open the issues list on another device.</string>
+    <string name="support_github_account_warning">Note: you need a free GitHub account to create an issue.</string>
+    <string name="github_issues_url" translatable="false">https://github.com/andreknieriem/headunit-revived/issues</string>
+
+    <!-- Reporting rules modal (shown from a button under the QR on the Support screen) -->
+    <string name="support_rules_button">Reporting rules</string>
+    <string name="support_rules_intro">Only two things are required. Everything else is optional, but it helps solve your problem much faster.</string>
+    <string name="support_rules_section_required">Required</string>
+    <string name="support_rules_section_recommend">Recommendations (optional)</string>
+    <!-- This title stays in English in every language on purpose. -->
+    <string name="support_rules_english_title" translatable="false">All posts in English</string>
+    <string name="support_rules_english_desc">Please always write your issue in English. It is the one language the maintainer and most people helping here share, and a thread in many languages just turns into a little Tower of Babel where nobody can help anyone. No one judges you, your level of English or the way you write, so do not worry about mistakes. If it helps, a translator like Google Translate or DeepL, or an AI like ChatGPT or Claude, can write and tidy up your message in English for you.</string>
+    <string name="support_rules_device_title">Say what runs the app</string>
+    <string name="support_rules_device_desc">The Android version of the device projecting Android Auto (your head unit or screen), and its brand and model if you know them.</string>
+    <string name="support_rules_connection_title">Say how you connect</string>
+    <string name="support_rules_connection_desc">USB cable, USB wireless adapter, WiFi Direct, WiFi (headunit server) or Self Mode. If it is wireless, add the adapter or dongle model.</string>
+    <string name="support_rules_appversion_title">Include the app version</string>
+    <string name="support_rules_appversion_desc">The Headunit Revived version, shown on the About screen.</string>
+    <string name="support_rules_logs_title">Attach logs, right after it happens</string>
+    <string name="support_rules_logs_desc">Switch Settings to the Advanced tab, turn on Debug Mode in the Debug section, reproduce the problem, then tap Export Logs right after so the log covers the moment it broke and not just the start. Attach that file to your issue.</string>
+    <string name="support_rules_search_title">No duplicates</string>
+    <string name="support_rules_search_desc">First search the existing issues. If an open issue already describes your problem, add your details as a comment there instead of opening a new one. Only open a new issue if none matches.</string>
+    <string name="support_rules_phone_title">Your phone matters too</string>
+    <string name="support_rules_phone_desc">Your phone model, its Android version and the Android Auto app version on the phone. Some problems come from a specific Android Auto release.</string>
+    <string name="support_rules_describe_title">Describe it clearly</string>
+    <string name="support_rules_describe_desc">What you did, what you expected and what actually happened. A screenshot or a short video helps a lot for visual problems.</string>
+    <string name="support_rules_oneissue_title">One problem per issue</string>
+    <string name="support_rules_oneissue_desc">Keep each issue to a single problem so it can be tracked and fixed. Open separate issues for unrelated problems.</string>
     <string name="version">Version</string>
     <string name="about_title">About Headunit Revived</string>
     <string name="copyright">© 2025-%d André Rinas</string>

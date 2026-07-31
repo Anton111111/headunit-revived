@@ -762,4 +762,38 @@
     <string name="onb_dpi_recommended">Рекомендовано для вашого екрана: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Ще одне: тепер ви можете встановити власний екран завантаження, який відображатиметься під час підключення автомобіля.</string>
     <string name="onb_ready_loading_button">Налаштувати екран завантаження</string>
+
+    <!-- Support / bug reporting -->
+    <string name="support">Повідомити про проблему</string>
+    <string name="support_description">Шукайте або повідомляйте про помилки на GitHub</string>
+    <string name="support_title">Повідомити про проблему</string>
+    <string name="support_help">Якщо ви зіткнулися з помилкою або проблемою, спочатку пошукайте її у списку issues на GitHub. Якщо ніхто ще не повідомляв про неї, відкрийте нове issue та опишіть, що сталося, вашу магнітолу і кроки для відтворення.</string>
+    <string name="support_open_issues">Відкрити список issues на GitHub</string>
+    <string name="support_scan_qr">Або відскануйте цей QR-код, щоб відкрити список issues на іншому пристрої.</string>
+    <string name="support_github_account_warning">Примітка: для створення issue потрібен безкоштовний акаунт GitHub.</string>
+    <string name="onb_ready_extras_title">Перед завершенням ви також можете налаштувати:</string>
+    <string name="onb_extra_loading_desc">Власне зображення, що відображається під час підключення автомобіля</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Правила звернень</string>
+    <string name="support_rules_english_desc">Будь ласка, завжди пишіть своє звернення англійською. Це єдина мова, яку мейнтейнер і більшість помічників розуміють, і тред, де змішано кілька мов, швидко перетворюється на маленьку Вавилонську вежу, де ніхто нікому не може допомогти. Ніхто вас не засуджуватиме — ні за рівень англійської, ні за помилки, тому не переживайте. Якщо це допоможе, перекладач на кшталт Google Translate або DeepL, чи ШІ типу ChatGPT або Claude, може написати й відредагувати ваше повідомлення англійською.</string>
+    <string name="support_rules_device_title">Вкажіть, на чому запущено застосунок</string>
+    <string name="support_rules_device_desc">Версія Android пристрою, що транслює Android Auto (ваша магнітола або екран), а також його марка й модель, якщо відомі.</string>
+    <string name="support_rules_connection_title">Вкажіть спосіб підключення</string>
+    <string name="support_rules_connection_desc">USB-кабель, USB бездротовий адаптер, WiFi Direct, WiFi (headunit server) або Self Mode. Якщо бездротовий — вкажіть модель адаптера чи донгла.</string>
+    <string name="support_rules_appversion_title">Вкажіть версію застосунку</string>
+    <string name="support_rules_appversion_desc">Версію Headunit Revived, яку вказано на екрані «Про застосунок і підтримка».</string>
+    <string name="support_rules_logs_title">Додайте логи одразу після того, як сталася проблема</string>
+    <string name="support_rules_logs_desc">Перейдіть до Налаштувань на вкладку Додатково, увімкніть Режим налагодження в розділі Налагодження, відтворіть проблему, а потім одразу натисніть «Експортувати журнал подій» — щоб лог охопив саме той момент, а не лише запуск. Прикріпіть цей файл до свого звернення.</string>
+    <string name="support_rules_search_title">Без дублікатів</string>
+    <string name="support_rules_search_desc">Спочатку пошукайте серед наявних issues. Якщо відкрите issue вже описує вашу проблему, додайте свої деталі в коментар там, а не відкривайте нове. Відкривайте нове issue лише якщо жодне не підходить.</string>
+    <string name="support_rules_phone_title">Телефон теж має значення</string>
+    <string name="support_rules_phone_desc">Модель телефону, версія Android на ньому та версія застосунку Android Auto. Деякі проблеми пов\'язані з конкретним випуском Android Auto.</string>
+    <string name="support_rules_describe_title">Опишіть проблему чітко</string>
+    <string name="support_rules_describe_desc">Що ви зробили, чого очікували і що сталося насправді. Скріншот або короткий відеозапис дуже допомагають у випадку візуальних проблем.</string>
+    <string name="support_rules_oneissue_title">Одна проблема — одне звернення</string>
+    <string name="support_rules_oneissue_desc">Кожне звернення має стосуватися однієї проблеми, щоб її можна було відстежити й виправити. Для непов\'язаних проблем відкривайте окремі issues.</string>
+    <string name="support_rules_intro">Потрібні лише дві речі. Все інше необов\'язкове, але значно прискорює вирішення проблеми.</string>
+    <string name="support_rules_section_required">Обов\'язково</string>
+    <string name="support_rules_section_recommend">Рекомендації (необов\'язково)</string>
 </resources>

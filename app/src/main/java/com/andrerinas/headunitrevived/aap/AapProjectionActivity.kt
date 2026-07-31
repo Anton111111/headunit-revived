@@ -199,9 +199,13 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             val needsViewRecreate = intent.getBooleanExtra(QuickSettingsFragment.EXTRA_NEEDS_VIEW_RECREATE, false)
             val needsAudioRestart = intent.getBooleanExtra(QuickSettingsFragment.EXTRA_NEEDS_AUDIO_RESTART, false)
             val sensorRefresh = intent.getBooleanExtra(QuickSettingsFragment.EXTRA_SENSOR_REFRESH, false)
+            val applyFullscreen = intent.getBooleanExtra(QuickSettingsFragment.EXTRA_APPLY_FULLSCREEN, false)
 
             if (needsViewRecreate) {
                 recreateProjectionView()
+            }
+            if (applyFullscreen) {
+                setFullscreen()
             }
             if (sensorRefresh) {
                 sendBroadcast(Intent(AapService.ACTION_REFRESH_SENSORS).apply {

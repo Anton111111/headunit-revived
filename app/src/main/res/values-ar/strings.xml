@@ -735,4 +735,36 @@
     <string name="onb_vehicle_help_advanced">يمكنك ضبط المزيد من تفاصيل مركبتك في علامة التبويب المتقدمة. نحن لا نستخدم هذه البيانات؛ تُرسَل فقط إلى Android Auto لأنه يطلبها.</string>
     <string name="onb_summary_vehicle_format">المركبة: %1$s</string>
     <string name="sunrise_reference_help">النقطة المرجعية المستخدمة لحساب وقت الشروق والغروب. اختر موقعك مرة واحدة؛ يعمل بدون نظام تحديد المواقع.</string>
+
+    <string name="support">الإبلاغ عن مشكلة</string>
+    <string name="support_description">ابحث عن الأخطاء أو أبلغ عنها على GitHub</string>
+    <string name="support_title">الإبلاغ عن مشكلة</string>
+    <string name="support_help">إذا صادفت خطأً أو مشكلة، ابحث عنها أولاً في قائمة المشكلات على GitHub. إن لم يُبلِّغ عنها أحد بعد، افتح مشكلة جديدة واذكر فيها ما الذي يحدث، وطراز شاشة سيارتك، والخطوات اللازمة لإعادة تكرار المشكلة.</string>
+    <string name="support_open_issues">فتح صفحة المشكلات على GitHub</string>
+    <string name="support_scan_qr">أو امسح رمز QR هذا لفتح قائمة المشكلات على جهاز آخر.</string>
+    <string name="support_github_account_warning">ملاحظة: تحتاج إلى حساب GitHub مجاني لفتح مشكلة جديدة.</string>
+    <string name="onb_ready_extras_title">قبل أن تنهي، يمكنك أيضًا إعداد:</string>
+    <string name="onb_extra_loading_desc">صورة مخصصة تظهر أثناء اتصال السيارة</string>
+
+    <string name="support_rules_intro">شرطان فقط مطلوبان. ما عداهما اختياري، لكنه يساعد على حل مشكلتك بشكل أسرع.</string>
+    <string name="support_rules_section_required">مطلوب</string>
+    <string name="support_rules_section_recommend">توصيات (اختيارية)</string>
+    <string name="support_rules_button">قواعد الإبلاغ</string>
+    <string name="support_rules_english_desc">يرجى دائمًا كتابة مشكلتك باللغة الإنجليزية. إنها اللغة التي يشترك فيها القائم على المشروع ومعظم المساهمين، والموضوع الذي يخلط لغات كثيرة يتحول سريعًا إلى برج بابل لا يستطيع فيه أحد مساعدة الآخر. لا أحد يحكم عليك أو على مستواك في الإنجليزية أو على أسلوبك في الكتابة، فلا تقلق من الأخطاء. إن أعانك على ذلك، يمكن لمترجم مثل Google Translate أو DeepL، أو لذكاء اصطناعي مثل ChatGPT أو Claude، أن يكتب رسالتك ويصوّغها بالإنجليزية نيابةً عنك.</string>
+    <string name="support_rules_device_title">اذكر الجهاز الذي يشغّل التطبيق</string>
+    <string name="support_rules_device_desc">إصدار Android للجهاز الذي يعرض Android Auto (وحدة الوسائط أو الشاشة)، وماركته وطرازه إن عرفتهما.</string>
+    <string name="support_rules_connection_title">اذكر طريقة الاتصال</string>
+    <string name="support_rules_connection_desc">كابل USB، أو محول USB لاسلكي، أو WiFi Direct، أو WiFi (خادم وحدة الرأس)، أو Self Mode. إن كان الاتصال لاسلكيًا، أضف طراز المحول أو الدونغل.</string>
+    <string name="support_rules_appversion_title">أرفق إصدار التطبيق</string>
+    <string name="support_rules_appversion_desc">إصدار Headunit Revived، المعروض في شاشة حول.</string>
+    <string name="support_rules_logs_title">أرفق السجلات فور حدوث المشكلة</string>
+    <string name="support_rules_logs_desc">انتقل إلى الإعدادات وافتح تبويب متقدم، ثم فعّل وضع التصحيح في قسم تصحيح الأخطاء، وأعد إنتاج المشكلة، ثم اضغط تصدير السجلات مباشرة بعدها حتى يغطي السجل لحظة الخلل لا مجرد بداية التشغيل. أرفق الملف بمشكلتك.</string>
+    <string name="support_rules_search_title">لا تكرار</string>
+    <string name="support_rules_search_desc">ابحث في المشكلات الموجودة أولاً. إن كانت هناك مشكلة مفتوحة تصف ما تواجهه، أضف تفاصيلك كتعليق عليها بدلاً من فتح مشكلة جديدة. لا تفتح مشكلة جديدة إلا إذا لم يكن ثمة مشكلة مطابقة.</string>
+    <string name="support_rules_phone_title">هاتفك مهم أيضًا</string>
+    <string name="support_rules_phone_desc">طراز هاتفك وإصدار Android عليه وإصدار تطبيق Android Auto المثبَّت فيه. بعض المشكلات تنشأ من إصدار بعينه من Android Auto.</string>
+    <string name="support_rules_describe_title">صف المشكلة بوضوح</string>
+    <string name="support_rules_describe_desc">ما الذي فعلته، وما الذي توقعت حدوثه، وما الذي حدث فعلًا. لقطة شاشة أو مقطع فيديو قصير تساعد كثيرًا في المشكلات المرئية.</string>
+    <string name="support_rules_oneissue_title">مشكلة واحدة لكل تقرير</string>
+    <string name="support_rules_oneissue_desc">خصص كل تقرير لمشكلة واحدة حتى يمكن تتبعها وإصلاحها. افتح تقارير منفصلة للمشكلات غير المرتبطة ببعضها.</string>
 </resources>

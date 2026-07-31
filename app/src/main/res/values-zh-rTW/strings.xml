@@ -760,4 +760,38 @@
     <string name="onb_dpi_recommended">您螢幕的建議值：%1$d dpi</string>
     <string name="onb_ready_loading_intro">還有一件事：您現在可以設定自訂載入畫面，在汽車連線時顯示。</string>
     <string name="onb_ready_loading_button">設定載入畫面</string>
+
+    <!-- Support / Bug Report -->
+    <string name="support">回報問題</string>
+    <string name="support_description">在 GitHub 上搜尋或回報 Bug</string>
+    <string name="support_title">回報問題</string>
+    <string name="support_help">若您遇到 Bug 或其他問題，請先在 GitHub 的 Issues 清單中搜尋，確認是否已有人回報過。若尚未有人提出，請開啟新的 Issue，說明發生的狀況、您使用的車機型號，以及重現問題的步驟。</string>
+    <string name="support_open_issues">前往 GitHub Issues 頁面</string>
+    <string name="support_scan_qr">或掃描此 QR 碼，在其他裝置上開啟 Issues 清單。</string>
+    <string name="support_github_account_warning">注意：建立 Issue 需要一個免費的 GitHub 帳號。</string>
+    <string name="onb_ready_extras_title">完成前，您還可以設定：</string>
+    <string name="onb_extra_loading_desc">汽車連線時顯示的自訂圖片</string>
+
+    <!-- Support Rules -->
+    <string name="support_rules_intro">只有兩項是必填的，其餘都是選填，但填得越詳細，問題就越容易被解決。</string>
+    <string name="support_rules_section_required">必填</string>
+    <string name="support_rules_section_recommend">建議（選填）</string>
+    <string name="support_rules_button">回報須知</string>
+    <string name="support_rules_english_desc">請務必以英文描述您的問題。英文是維護者與大多數協助者共同使用的語言，若討論串混雜多種語言，很快就會變成一座巴別塔，讓大家都無法互相幫忙。不必擔心英文程度或拼字，沒有人會在意。如果有需要，可以用 Google Translate 或 DeepL 這類翻譯工具，或是 ChatGPT 或 Claude 這類 AI，幫您把問題寫成英文或潤飾一下。</string>
+    <string name="support_rules_device_title">說明執行應用程式的裝置</string>
+    <string name="support_rules_device_desc">投射 Android Auto 的裝置（您的車機或螢幕）所使用的 Android 版本，以及品牌和型號（如果知道的話）。</string>
+    <string name="support_rules_connection_title">說明連線方式</string>
+    <string name="support_rules_connection_desc">USB 線、USB 無線轉接器、WiFi Direct、WiFi（車機伺服器）或 Self Mode。若為無線連線，請附上轉接器或 Dongle 的型號。</string>
+    <string name="support_rules_appversion_title">附上應用程式版本</string>
+    <string name="support_rules_appversion_desc">Headunit Revived 的版本號，可在關於畫面中查看。</string>
+    <string name="support_rules_logs_title">在問題發生後立即附上日誌</string>
+    <string name="support_rules_logs_desc">請進入設定，切換到進階分頁，在除錯區段開啟除錯模式，重現問題，然後立即點選匯出日誌，確保日誌涵蓋問題發生的當下而非僅有啟動時的紀錄。請將該檔案附至您的 Issue。</string>
+    <string name="support_rules_search_title">不要重複回報</string>
+    <string name="support_rules_search_desc">請先搜尋現有的 Issue。如果已有人回報相同問題，請在那個 Issue 補充您的情況，不要另開新的。只有在找不到相符的 Issue 時，才開一個新的。</string>
+    <string name="support_rules_phone_title">手機資訊也很重要</string>
+    <string name="support_rules_phone_desc">您的手機型號、Android 版本，以及手機上 Android Auto 應用程式的版本。有些問題只在特定版本的 Android Auto 上出現。</string>
+    <string name="support_rules_describe_title">清楚描述問題</string>
+    <string name="support_rules_describe_desc">您做了什麼、預期會發生什麼，以及實際發生了什麼。對於視覺問題，附上截圖或短片會非常有幫助。</string>
+    <string name="support_rules_oneissue_title">一個 Issue 只處理一個問題</string>
+    <string name="support_rules_oneissue_desc">每個 Issue 請聚焦於單一問題，方便追蹤和修復。不相關的問題請另開 Issue。</string>
 </resources>

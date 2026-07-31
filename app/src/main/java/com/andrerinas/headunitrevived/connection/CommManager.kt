@@ -603,6 +603,17 @@ class CommManager(
     }
 
     /**
+     * Suspends until the most recently launched [doDisconnect] coroutine (started by
+     * [disconnect]) has finished — i.e. the ByeByeRequest has actually been sent and the
+     * physical connection actually closed, not just that [connectionState] flipped.
+     * Mirrors the `_disconnectJob?.join()` idiom already used internally by the `connect(...)`
+     * overloads (e.g. line 192).
+     */
+    suspend fun awaitDisconnectComplete() {
+        _disconnectJob?.join()
+    }
+
+    /**
      * Tears down the transport and physical connection.
      *
      * **Null-first pattern**: [_transport] and [_connection] are captured and nulled at the

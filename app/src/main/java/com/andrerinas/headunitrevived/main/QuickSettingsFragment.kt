@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andrerinas.headunitrevived.App
 import com.andrerinas.headunitrevived.R
+import com.andrerinas.headunitrevived.aap.AapService
 import com.andrerinas.headunitrevived.main.settings.SettingItem
 import com.andrerinas.headunitrevived.main.settings.SettingsAdapter
 import com.andrerinas.headunitrevived.utils.Settings
@@ -27,6 +28,7 @@ class QuickSettingsFragment : DialogFragment() {
         const val EXTRA_NEEDS_VIEW_RECREATE = "needs_view_recreate"
         const val EXTRA_NEEDS_AUDIO_RESTART = "needs_audio_restart"
         const val EXTRA_SENSOR_REFRESH = "sensor_refresh"
+        const val EXTRA_APPLY_FULLSCREEN = "apply_fullscreen"
     }
 
     private lateinit var settings: Settings
@@ -102,6 +104,22 @@ class QuickSettingsFragment : DialogFragment() {
             nameResId = R.string.night_mode,
             value = nightModeTitles[settings.nightMode.value],
             onClick = { showNightModeDialog() }
+        ))
+
+        // Screen rotation: a common "pulled over because it came up sideways" fix. Applied live.
+        items.add(SettingItem.SettingEntry(
+            stableId = "screenOrientation",
+            nameResId = R.string.screen_orientation,
+            value = resources.getStringArray(R.array.screen_orientation)[settings.screenOrientation.value],
+            onClick = { showOrientationDialog() }
+        ))
+
+        // System bars handling: fix a nav/status bar covering the projection, without a restart.
+        items.add(SettingItem.SettingEntry(
+            stableId = "fullscreenMode",
+            nameResId = R.string.start_in_fullscreen_mode,
+            value = fullscreenModeLabels()[settings.fullscreenMode.value],
+            onClick = { showFullscreenDialog() }
         ))
 
         items.add(SettingItem.ToggleSettingEntry(
@@ -194,13 +212,53 @@ class QuickSettingsFragment : DialogFragment() {
         settingsAdapter.submitList(items)
     }
 
-    private fun notifyChange(needsViewRecreate: Boolean = false, needsAudioRestart: Boolean = false, sensorRefresh: Boolean = false) {
+    private fun notifyChange(needsViewRecreate: Boolean = false, needsAudioRestart: Boolean = false, sensorRefresh: Boolean = false, applyFullscreen: Boolean = false) {
         val intent = Intent(ACTION_SETTINGS_CHANGED).apply {
             putExtra(EXTRA_NEEDS_VIEW_RECREATE, needsViewRecreate)
             putExtra(EXTRA_NEEDS_AUDIO_RESTART, needsAudioRestart)
             putExtra(EXTRA_SENSOR_REFRESH, sensorRefresh)
+            putExtra(EXTRA_APPLY_FULLSCREEN, applyFullscreen)
         }
         LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
+    }
+
+    private fun fullscreenModeLabels() = arrayOf(
+        getString(R.string.fullscreen_none),
+        getString(R.string.fullscreen_immersive),
+        getString(R.string.fullscreen_status_only),
+        getString(R.string.fullscreen_immersive_avoid_notch)
+    )
+
+    private fun showOrientationDialog() {
+        val options = resources.getStringArray(R.array.screen_orientation)
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.change_screen_orientation)
+            .setSingleChoiceItems(options, settings.screenOrientation.value) { dialog, which ->
+                val newOrientation = Settings.ScreenOrientation.fromInt(which) ?: Settings.ScreenOrientation.SYSTEM
+                settings.screenOrientation = newOrientation
+                settings.commit()
+                // Applied live: the projection activity re-reads the orientation on this broadcast.
+                requireContext().sendBroadcast(Intent(AapService.ACTION_ORIENTATION_CHANGED).apply {
+                    setPackage(requireContext().packageName)
+                })
+                dialog.dismiss()
+                updateSettingsList()
+            }
+            .show()
+    }
+
+    private fun showFullscreenDialog() {
+        MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+            .setTitle(R.string.start_in_fullscreen_mode)
+            .setSingleChoiceItems(fullscreenModeLabels(), settings.fullscreenMode.value) { dialog, which ->
+                val newMode = Settings.FullscreenMode.fromInt(which) ?: Settings.FullscreenMode.NONE
+                settings.fullscreenMode = newMode
+                settings.commit()
+                notifyChange(applyFullscreen = true)
+                dialog.dismiss()
+                updateSettingsList()
+            }
+            .show()
     }
 
     private fun showAudioOffsetsDialog() {

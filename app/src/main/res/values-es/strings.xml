@@ -771,4 +771,36 @@
     <string name="onb_dpi_recommended">Recomendado para tu pantalla: %1$d dpi</string>
     <string name="onb_ready_loading_intro">Una cosa más: ahora puedes establecer una pantalla de carga personalizada, que se muestra mientras el auto se conecta.</string>
     <string name="onb_ready_loading_button">Configurar una pantalla de carga</string>
+    <string name="support">Reportar un problema</string>
+    <string name="support_description">Busca o reporta errores en GitHub</string>
+    <string name="support_title">Reportar un problema</string>
+    <string name="support_help">Si encuentras un error o un problema, búscalo primero en la lista de issues de GitHub. Si nadie lo ha reportado aún, abre un nuevo issue y describe qué ocurre, tu radio y los pasos para reproducirlo.</string>
+    <string name="support_open_issues">Abrir la página de issues de GitHub</string>
+    <string name="support_scan_qr">O escanea este código QR para abrir la lista de issues en otro dispositivo.</string>
+    <string name="support_github_account_warning">Nota: necesitas una cuenta gratuita de GitHub para crear un issue.</string>
+    <string name="onb_ready_extras_title">Antes de terminar, también puedes configurar:</string>
+    <string name="onb_extra_loading_desc">Una imagen personalizada que se muestra mientras el auto se conecta</string>
+
+    <!-- Support rules -->
+    <string name="support_rules_button">Reglas para reportar</string>
+    <string name="support_rules_english_desc">Por favor, escribe siempre tu reporte en inglés. Es el único idioma que el mantenedor y la mayoría de quienes ayudan aquí tienen en común, y un hilo en varios idiomas se convierte rápidamente en una torre de Babel donde nadie puede ayudar a nadie. Nadie te juzga, ni tu nivel de inglés ni cómo escribes, así que no te preocupes por los errores. Si te ayuda, un traductor como Google Translate o DeepL, o una IA como ChatGPT o Claude, puede escribir y ordenar tu mensaje en inglés por ti.</string>
+    <string name="support_rules_device_title">Di qué ejecuta la app</string>
+    <string name="support_rules_device_desc">La versión de Android del dispositivo que proyecta Android Auto (tu radio o pantalla), y su marca y modelo si los conoces.</string>
+    <string name="support_rules_connection_title">Di cómo te conectas</string>
+    <string name="support_rules_connection_desc">Cable USB, adaptador inalámbrico USB, WiFi Direct, WiFi (headunit server) o Self Mode. Si es inalámbrico, agrega el modelo del adaptador o dongle.</string>
+    <string name="support_rules_appversion_title">Incluye la versión de la app</string>
+    <string name="support_rules_appversion_desc">La versión de Headunit Revived, que se muestra en la pantalla de Acerca de.</string>
+    <string name="support_rules_logs_title">Adjunta registros, justo después de que ocurra</string>
+    <string name="support_rules_logs_desc">Ve a Ajustes, abre la pestaña Avanzado, activa el Modo de depuración en la sección Depuración, reproduce el problema y luego toca Exportar registros de inmediato para que el registro cubra el momento exacto del fallo y no solo el inicio. Adjunta ese archivo a tu reporte.</string>
+    <string name="support_rules_search_title">Sin duplicados</string>
+    <string name="support_rules_search_desc">Busca primero en los issues existentes. Si ya hay uno abierto que describe tu problema, añade ahí tus detalles como comentario en lugar de abrir uno nuevo. Solo abre un issue nuevo si ninguno coincide.</string>
+    <string name="support_rules_phone_title">Tu teléfono también importa</string>
+    <string name="support_rules_phone_desc">El modelo de tu teléfono, su versión de Android y la versión de la app Android Auto en el teléfono. Algunos problemas vienen de una versión específica de Android Auto.</string>
+    <string name="support_rules_describe_title">Descríbelo claramente</string>
+    <string name="support_rules_describe_desc">Qué hiciste, qué esperabas y qué pasó en realidad. Una captura de pantalla o un video corto ayuda mucho para problemas visuales.</string>
+    <string name="support_rules_oneissue_title">Un problema por issue</string>
+    <string name="support_rules_oneissue_desc">Mantén cada issue enfocado en un solo problema para que pueda rastrearse y corregirse. Abre issues separados para problemas distintos.</string>
+    <string name="support_rules_intro">Solo se necesitan dos cosas. Todo lo demás es opcional, pero ayuda a resolver tu problema mucho más rápido.</string>
+    <string name="support_rules_section_required">Requerido</string>
+    <string name="support_rules_section_recommend">Recomendaciones (opcional)</string>
 </resources>
