@@ -25,6 +25,7 @@ interface VideoDimensionsListener {
 class VideoDecoder(private val settings: Settings) {
     companion object {
         private const val TIMEOUT_US = 10000L
+        private const val MAX_RESTARTS_WITHOUT_FRAME = 3
 
         /**
          * Checks if H.265 (HEVC) hardware decoding is supported on the current device.
@@ -112,6 +113,17 @@ class VideoDecoder(private val settings: Settings) {
     private var codecConfigured = false
     private var currentCodecType = CodecType.H264
     private var currentCodecName: String? = null
+
+    // Once a codec type has been used to successfully start a decoder this session, it is
+    // "pinned": restarts reuse it directly instead of re-running detectCodecType() on
+    // whatever raw packet happens to be arriving at that instant. detectCodecType()'s NAL-type
+    // heuristic can misclassify an ordinary H.264 slice byte as an HEVC VPS/SPS/PPS NAL
+    // (e.g. nal_unit_type=1/nal_ref_idc=2 -> byte 0x41 -> 0x41 >> 1 == 32), and re-detecting on
+    // every restart let that false positive hijack an otherwise-working H.264 session.
+    private var codecTypePinned = false
+    private var restartsSinceLastFrame = 0
+    private var codecFallbackUsed = false
+    private var decoderPermanentlyFailed = false
 
     // Reuse buffers for older API levels to minimize GC pressure
     private var inputBuffers: Array<ByteBuffer>? = null
@@ -227,6 +239,10 @@ class VideoDecoder(private val settings: Settings) {
                 pps = null
                 mWidth = 0
                 mHeight = 0
+                codecTypePinned = false
+                restartsSinceLastFrame = 0
+                codecFallbackUsed = false
+                decoderPermanentlyFailed = false
             }
             // Keep VPS/SPS/PPS cached so we can re-inject them on restart
             lastFrameRenderedMs = 0L
@@ -252,11 +268,36 @@ class VideoDecoder(private val settings: Settings) {
             // Check if a restart was requested by output thread
             if (decoderNeedsRestart) {
                 AppLog.w("Decoder restart requested: $decoderRestartReason")
+
+                // Track restarts that never produced a single frame for the currently pinned
+                // codec type. A genuinely broken hardware decoder (e.g. an MTK HEVC component
+                // that can't configure at all) will keep failing here forever otherwise.
+                if (codecTypePinned && lastFrameRenderedMs == 0L) {
+                    restartsSinceLastFrame++
+                    if (restartsSinceLastFrame >= MAX_RESTARTS_WITHOUT_FRAME) {
+                        if (!codecFallbackUsed) {
+                            val fallbackType = if (currentCodecType == CodecType.H264) CodecType.H265 else CodecType.H264
+                            AppLog.e("${currentCodecType.displayName} failed $restartsSinceLastFrame times in a row without rendering a frame. Falling back to ${fallbackType.displayName}.")
+                            currentCodecType = fallbackType
+                            codecFallbackUsed = true
+                            restartsSinceLastFrame = 0
+                        } else {
+                            AppLog.e("Both codec types failed to render a frame this session. Giving up to avoid an infinite restart loop.")
+                            decoderPermanentlyFailed = true
+                        }
+                    }
+                } else if (lastFrameRenderedMs != 0L) {
+                    // Decoder was healthy before this restart; don't count it against the pin.
+                    restartsSinceLastFrame = 0
+                }
+
                 stop("restart: $decoderRestartReason")
                 decoderNeedsRestart = false
                 decoderRestartReason = null
                 onDecoderError?.invoke()
             }
+
+            if (decoderPermanentlyFailed) return
 
             // Buffer management for backward compatibility
             // Modern devices (API 21+) use the original buffer with offset/size to avoid GC pressure.
@@ -275,14 +316,21 @@ class VideoDecoder(private val settings: Settings) {
             }
 
 
-            // Initialization phase: detect codec and configuration (SPS/PPS)
+            // Initialization phase: detect codec and configuration (SPS/PPS).
+            // Only runs the detection heuristic on the very first init of the session; once a
+            // codec type is pinned (see codecTypePinned), restarts reuse it directly instead of
+            // re-sniffing arbitrary mid-stream bytes.
             if (codec == null && softwareHevcDecoder == null) {
-                val detectedType = detectCodecType(frameData, frameOffset, size)
-                val requestedType = if (codecName.contains("265")) CodecType.H265 else CodecType.H264
-                val typeToUse = if (requestedType == CodecType.H265) {
-                    CodecType.H265
+                val typeToUse = if (codecTypePinned) {
+                    currentCodecType
                 } else {
-                    detectedType ?: requestedType
+                    val detectedType = detectCodecType(frameData, frameOffset, size)
+                    val requestedType = if (codecName.contains("265")) CodecType.H265 else CodecType.H264
+                    if (requestedType == CodecType.H265) {
+                        CodecType.H265
+                    } else {
+                        detectedType ?: requestedType
+                    }
                 }
                 currentCodecType = typeToUse
 
@@ -374,6 +422,7 @@ class VideoDecoder(private val settings: Settings) {
             currentCodecName = "ffmpeg-hevc"
             running = true
             startTime = System.nanoTime()
+            codecTypePinned = true
             AppLog.i("Bundled FFmpeg HEVC decoder initialized")
         } catch (e: Exception) {
             AppLog.e("Failed to start bundled FFmpeg HEVC decoder", e)
@@ -600,6 +649,7 @@ class VideoDecoder(private val settings: Settings) {
                 outputThreadLoop()
             }.apply { name = "VideoDecoder-Output"; start() }
 
+            codecTypePinned = true
             AppLog.i("Codec initialized: $bestCodec")
         } catch (e: Exception) {
             AppLog.e("Failed to start decoder", e)
