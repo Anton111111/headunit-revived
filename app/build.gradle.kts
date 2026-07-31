@@ -117,7 +117,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.andrerinas.openheadunit"
+        // Keep the original Play Store application id so the app stays the same listing (reviews,
+        // installs, testers) and existing users just get a normal update. Only the display name
+        // changed to Open Headunit. The code package and namespace stay openheadunit, so the
+        // applicationId deliberately differs from the namespace, like com.google.talk for Hangouts.
+        applicationId = "com.andrerinas.headunitrevived"
         minSdk = 16
         targetSdk = 36
         versionCode = 90
