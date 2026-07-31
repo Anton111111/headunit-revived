@@ -16,6 +16,7 @@
 - Fixing mulitiple WiFi-Direct and Native AA connection issues, thanks to @o-jcardenass, @andrecuellar and @notathf
 - Various fixes PR, thanks to @MrEAlderson
 - Selfmode on AA 17.4 now connects to the headunit dev server or opens the AA settings to start it
+- Rename the app to Open Headunit because of confusion with Headunit Reloaded (HUR)
 
 ### v.3.1.1
 - Reduce pressure on sensor events like night and gps and start/stop these events in onConnected, onDisconnect and onDestroy

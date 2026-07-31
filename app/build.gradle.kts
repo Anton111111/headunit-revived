@@ -120,8 +120,8 @@ android {
         applicationId = "com.andrerinas.openheadunit"
         minSdk = 16
         targetSdk = 36
-        versionCode = 89
-        versionName = "3.2.0-beta4"
+        versionCode = 90
+        versionName = "3.2.0-beta5"
         setProperty("archivesBaseName", "${applicationId}_${versionName}")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
