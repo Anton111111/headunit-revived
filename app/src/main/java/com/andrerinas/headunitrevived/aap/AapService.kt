@@ -2412,19 +2412,6 @@ class AapService : Service(), UsbReceiver.Listener {
         }
     }
 
-    private suspend fun isHeadunitServerRunning(): Boolean = withContext(Dispatchers.IO) {
-        try {
-            java.net.Socket().use { socket ->
-                socket.connect(java.net.InetSocketAddress("127.0.0.1", 5277), 500)
-                AppLog.i("SelfMode: Headunit Server socket probe SUCCESS on port 5277!")
-                true
-            }
-        } catch (e: Throwable) {
-            AppLog.w("SelfMode: Headunit Server socket probe failed on port 5277 (${e.javaClass.simpleName}: ${e.message})")
-            false
-        }
-    }
-
     private fun openAaSettings() {
         val intent = Intent().apply {
             setClassName(
@@ -2453,15 +2440,13 @@ class AapService : Service(), UsbReceiver.Listener {
 
         serviceScope.launch(Dispatchers.Main) {
             if (isAaVersion174OrHigher()) {
-                val isRunning = isHeadunitServerRunning()
-                if (isRunning) {
-                    AppLog.i("SelfMode: AA 17.4+ detected and Headunit Server is RUNNING on 127.0.0.1:5277! Connecting directly...")
-                    serviceScope.launch(Dispatchers.IO) {
-                        commManager.connect("127.0.0.1", 5277)
-                    }
-                    return@launch
-                } else {
-                    AppLog.w("SelfMode: AA 17.4+ detected but Headunit Server (127.0.0.1:5277) is NOT running.")
+                AppLog.i("SelfMode: AA 17.4+ detected. Connecting directly to Headunit Server on 127.0.0.1:5277...")
+                val success = withContext(Dispatchers.IO) {
+                    commManager.connect("127.0.0.1", 5277)
+                    commManager.isConnected
+                }
+                if (!success && !commManager.isConnected) {
+                    AppLog.w("SelfMode: Headunit Server (127.0.0.1:5277) is NOT running.")
                     ToastUtils.showToast(
                         this@AapService,
                         "Android Auto 17.4+ detected: Please start 'Headunit Server' in Android Auto Developer Settings!",
@@ -2469,8 +2454,10 @@ class AapService : Service(), UsbReceiver.Listener {
                     )
                     openAaSettings()
                 }
+                return@launch
             }
 
+            AppLog.i("SelfMode: AA < 17.4 detected. Starting WirelessServer on 5288 and running legacy triggers...")
             startWirelessServer()
 
             val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager

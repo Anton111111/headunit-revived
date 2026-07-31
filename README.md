@@ -82,6 +82,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - Recover automatically from post-first-frame video display stalls, thanks to @andrecuellar
 - Settings and Onboarding Wizard redesign for better usability, thanks to @andrecuellar
 - Fixing mulitiple WiFi-Direct and Native AA connection issues, thanks to @o-jcardenass, @andrecuellar and @notathf
+- Selfmode on AA 17.4 now connects to the headunit dev server or opens the AA settings to start it
 
 ### v.3.1.1
 - Reduce pressure on sensor events like night and gps and start/stop these events in onConnected, onDisconnect and onDestroy

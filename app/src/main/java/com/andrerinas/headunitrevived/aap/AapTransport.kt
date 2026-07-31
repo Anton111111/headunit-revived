@@ -19,6 +19,7 @@ import com.andrerinas.headunitrevived.aap.protocol.messages.ScrollWheelEvent
 import com.andrerinas.headunitrevived.aap.protocol.messages.SensorEvent
 import com.andrerinas.headunitrevived.utils.LegacyOptimizer
 import com.andrerinas.headunitrevived.connection.AccessoryConnection
+import com.andrerinas.headunitrevived.connection.SocketAccessoryConnection
 import com.andrerinas.headunitrevived.contract.ProjectionActivityRequest
 import com.andrerinas.headunitrevived.decoder.AudioDecoder
 import com.andrerinas.headunitrevived.decoder.MicRecorder
@@ -273,24 +274,25 @@ class AapTransport(
 
     private fun handshake(connection: AccessoryConnection): Boolean {
         try {
-            // Increased delay for AA 16.4+ stability - skip for Nearby (single message)
-            if (!connection.isSingleMessage) {
+            val isUsb = connection !is SocketAccessoryConnection && !connection.isSingleMessage
+            // Increased delay for AA 16.4+ stability on USB - skip for Sockets
+            if (isUsb) {
                 SystemClock.sleep(500)
             }
 
             val buffer = ByteArray(Messages.DEF_BUFFER_LENGTH)
 
-            // Drain any stale data left in the USB pipe from a previous session
-            // Skip for Nearby (Socket) connections where every byte from the start is important.
+            // Drain any stale data left in the USB pipe from a previous session.
+            // MUST ONLY be run on USB; on TCP Sockets, draining discards initial response bytes!
             var drained = 0
-            if (!connection.isSingleMessage) {
+            if (isUsb) {
                 while (true) {
                     val n = try { connection.recvBlocking(buffer, buffer.size, 50, false) } catch (e: Exception) { -1 }
                     if (n <= 0) break
                     drained += n
                 }
                 if (drained > 0) {
-                    AppLog.i("Handshake: Drained $drained bytes of stale data before version request")
+                    AppLog.i("Handshake: Drained $drained bytes of stale USB data before version request")
                 }
             }
 
