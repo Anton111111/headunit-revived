@@ -766,4 +766,7 @@
     <string name="support_rules_intro">Sunt necesare doar două lucruri. Restul este opțional, dar te ajută să-ți rezolvăm problema mult mai repede.</string>
     <string name="support_rules_section_required">Obligatoriu</string>
     <string name="support_rules_section_recommend">Recomandări (opțional)</string>
+    <string name="rename_notice_title">Nume nou, aceeași aplicație: %1$s</string>
+    <string name="rename_notice_message">Headunit Revived a crescut mult, datorită vouă. Proiectul și comunitatea sa au parcurs un drum lung, așa că își capătă o identitate proprie: %1$s.\n\nAceeași aplicație, aceiași oameni în spatele ei, iar toate setările tale rămân exact așa cum sunt.</string>
+    <string name="rename_notice_button">Am înțeles</string>
 </resources>
