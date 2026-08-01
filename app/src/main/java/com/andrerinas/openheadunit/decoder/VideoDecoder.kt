@@ -383,9 +383,12 @@ class VideoDecoder(private val settings: Settings) {
             val buf = ByteBuffer.wrap(frameData, frameOffset, size)
             while (buf.hasRemaining()) {
                 if (!feedInputBuffer(buf)) {
-                    // Buffer is full. Request keyframe to avoid smearing
-                    AppLog.w("Input buffer full/failed. Requesting keyframe to prevent smearing.")
-                    scheduleRestart("input_buffer_overflow")
+                    // Input queue is transiently full. Drop this frame and request a keyframe
+                    // instead of a full MediaCodec restart, which was causing periodic blinking
+                    // on decoders with a small buffer count (issue #749 follow-up). A truly
+                    // stuck decoder is still caught by outputThreadLoop's sync_stall watchdog.
+                    AppLog.w("Input buffer full. Dropping frame and requesting keyframe to prevent smearing.")
+                    onDecoderError?.invoke()
                     return
                 }
             }
@@ -578,6 +581,10 @@ class VideoDecoder(private val settings: Settings) {
                 format.setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = Real-time priority
                 format.setInteger(MediaFormat.KEY_OPERATING_RATE, settings.fpsLimit)
             }
+            // Some vendor decoders (e.g. MediaTek's OMX.MTK.VIDEO.DECODER.AVC) reject
+            // KEY_OPERATING_RATE outright, so also set the documented fallback frame-rate hint.
+            // KEY_FRAME_RATE predates KEY_OPERATING_RATE (API 16 vs 23), so it's unguarded.
+            format.setInteger(MediaFormat.KEY_FRAME_RATE, settings.fpsLimit)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 format.setInteger(MediaFormat.KEY_MAX_B_FRAMES, 0) // Tell codec not to hold frames -> drastically decreases latency
             }
