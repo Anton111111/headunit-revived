@@ -14,6 +14,7 @@ import com.andrerinas.openheadunit.aap.protocol.proto.Input
 import com.andrerinas.openheadunit.aap.protocol.proto.Media
 import com.andrerinas.openheadunit.aap.protocol.proto.Sensors
 import com.andrerinas.openheadunit.decoder.MicRecorder
+import com.andrerinas.openheadunit.decoder.VideoDecoder
 import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.utils.Settings
 
@@ -109,7 +110,7 @@ internal class AapControlMedia(
     private fun maxUnackedFor(channel: Int): Int {
         if (channel == Channel.ID_VID) {
             val softwareHevc =
-                aapTransport.settings.videoCodec == "H.265" &&
+                aapTransport.settings.videoCodec == VideoDecoder.CodecType.H265.settingsValue &&
                         aapTransport.settings.forceSoftwareDecoding &&
                         aapTransport.settings.softwareVideoDecoder == Settings.SoftwareVideoDecoder.BUNDLED_FFMPEG
             if (softwareHevc) {
