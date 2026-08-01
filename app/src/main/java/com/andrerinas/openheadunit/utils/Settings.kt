@@ -224,11 +224,14 @@ class Settings(private val context: Context) {
             prefs.edit().putBoolean("gesture_hint_shown", value).apply()
         }
 
-    // One-time notice telling users the app was rebranded. Shown once on the home screen.
+    // One-time notice telling users the app is being rebranded. Shown once on the home screen.
+    // The key is versioned on purpose: an earlier build could spend the original flag behind the
+    // onboarding wizard without the notice ever being seen, so a new key lets the corrected
+    // notice reach everyone once, including users who still carry the old flag.
     var renameNoticeShown: Boolean
-        get() = prefs.getBoolean("rename_notice_shown", false)
+        get() = prefs.getBoolean("rename_notice_shown_v2", false)
         set(value) {
-            prefs.edit().putBoolean("rename_notice_shown", value).apply()
+            prefs.edit().putBoolean("rename_notice_shown_v2", value).apply()
         }
 
     // Custom Insets (Screen Margins)
@@ -1193,6 +1196,12 @@ class Settings(private val context: Context) {
     var bluetoothManagerServiceName: String
         get() = prefs.getString("bluetooth-manager-service-name", "bluetooth_manager")!!
         set(value) = prefs.edit().putString("bluetooth-manager-service-name", value).apply()
+
+    // Manual fallback for dual-radio head units whose second radio isn't discoverable via
+    // ServiceManager.listServices() at all. Empty = disabled (rely on automatic discovery only).
+    var manualSecondaryBluetoothServiceName: String
+        get() = prefs.getString("manual-secondary-bt-service-name", "")!!
+        set(value) = prefs.edit().putString("manual-secondary-bt-service-name", value).apply()
 
     var hotspotSsid: String
         get() = prefs.getString("hotspot-ssid", "")!!

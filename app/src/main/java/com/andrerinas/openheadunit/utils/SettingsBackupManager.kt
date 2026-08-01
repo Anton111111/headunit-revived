@@ -146,7 +146,21 @@ object SettingsBackupManager {
         "wait-for-wifi-timeout" to ValueType.INT,
         "helper-connection-strategy" to ValueType.INT,
         "bluetooth-manager-service-name" to ValueType.STRING,
-        "use-libusb" to ValueType.BOOLEAN
+        "use-libusb" to ValueType.BOOLEAN,
+        // Custom loading screen display options. The picked image/video is copied into the app's
+        // private storage, so the media path/type cannot be restored on another install and are not
+        // backed up (only these display preferences are, and apply once the media is added again).
+        "loading-screen-show-text" to ValueType.BOOLEAN,
+        "loading-screen-keep-aspect-ratio" to ValueType.BOOLEAN,
+        "loading-screen-loop-video" to ValueType.BOOLEAN,
+        "loading-screen-scale-percent" to ValueType.INT,
+        // Wireless hotspot host credentials and manual BSSID override.
+        "hotspot-ssid" to ValueType.STRING,
+        "hotspot-password" to ValueType.STRING,
+        "static-bssid" to ValueType.STRING,
+        // Touch calibration fix and toast visibility.
+        "use_measured_touch_surface" to ValueType.BOOLEAN,
+        "show-toast-messages" to ValueType.BOOLEAN
     )
 
     private val projectionRestartKeys = setOf(

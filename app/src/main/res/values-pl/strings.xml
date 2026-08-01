@@ -794,7 +794,7 @@
     <string name="support_rules_intro">Wymagane są tylko dwie rzeczy. Wszystko inne jest opcjonalne, ale bardzo przyspiesza rozwiązanie problemu.</string>
     <string name="support_rules_section_required">Wymagane</string>
     <string name="support_rules_section_recommend">Zalecenia (opcjonalne)</string>
-    <string name="rename_notice_title">Nowa nazwa, ta sama aplikacja: %1$s</string>
-    <string name="rename_notice_message">Headunit Revived bardzo się rozrósł, dzięki wam. Projekt i jego społeczność przeszły długą drogę, więc zyskuje własną tożsamość: %1$s.\n\nTa sama aplikacja, ci sami ludzie za nią, a wszystkie twoje ustawienia pozostają dokładnie takie, jakie są.</string>
+    <string name="rename_notice_title">Nasza nazwa zmienia się na Open Headunit</string>
+    <string name="rename_notice_message">Headunit Revived rośnie, dzięki wam, i staje się czymś własnym: Open Headunit. Nową nazwę wprowadzamy stopniowo w kolejnych aktualizacjach, więc w niektórych miejscach przez pewien czas możesz jeszcze widzieć starą nazwę.\n\nTa sama aplikacja, ci sami ludzie za nią, a wszystkie twoje ustawienia pozostają dokładnie takie, jakie są.</string>
     <string name="rename_notice_button">Rozumiem</string>
 </resources>

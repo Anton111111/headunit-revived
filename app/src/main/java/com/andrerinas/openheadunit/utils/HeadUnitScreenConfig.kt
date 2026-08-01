@@ -351,7 +351,7 @@ object HeadUnitScreenConfig {
 
     private fun canNegotiateHevcHighResolution(): Boolean {
         if (VideoDecoder.isHevcSupported()) return true
-        if (currentSettings.videoCodec != "H.265" || !currentSettings.forceSoftwareDecoding) return false
+        if (currentSettings.videoCodec != VideoDecoder.CodecType.H265.settingsValue || !currentSettings.forceSoftwareDecoding) return false
         return when (currentSettings.softwareVideoDecoder) {
             Settings.SoftwareVideoDecoder.BUNDLED_FFMPEG -> VideoDecoder.isBundledHevcDecoderAvailable()
             Settings.SoftwareVideoDecoder.DEVICE_MEDIACODEC -> VideoDecoder.isHevcDecoderAvailable(includeSoftware = true)

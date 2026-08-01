@@ -794,7 +794,7 @@
     <string name="support_rules_describe_desc">您做了什麼、預期會發生什麼，以及實際發生了什麼。對於視覺問題，附上截圖或短片會非常有幫助。</string>
     <string name="support_rules_oneissue_title">一個 Issue 只處理一個問題</string>
     <string name="support_rules_oneissue_desc">每個 Issue 請聚焦於單一問題，方便追蹤和修復。不相關的問題請另開 Issue。</string>
-    <string name="rename_notice_title">新名字，還是同一個 App：%1$s</string>
-    <string name="rename_notice_message">多虧了大家，Headunit Revived 成長了許多。這個專案和它的社群一路走來，如今要擁有自己的名字了：%1$s。\n\n還是同一個 App，還是同一群人，你的所有設定也都原封不動。</string>
+    <string name="rename_notice_title">我們的名字正在改為 Open Headunit</string>
+    <string name="rename_notice_message">多虧了大家，Headunit Revived 正在成長，並逐漸變成屬於自己的樣子：Open Headunit。我們會在接下來的更新中慢慢換上新名字，所以有些地方你可能還會看到舊名字一陣子。\n\n還是同一個 App，還是同一群人，你的所有設定也都原封不動。</string>
     <string name="rename_notice_button">知道了</string>
 </resources>

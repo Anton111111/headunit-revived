@@ -769,7 +769,7 @@
     <string name="support_rules_intro">두 가지만 필요합니다. 나머지는 선택 사항이지만, 있을수록 훨씬 빠르게 해결할 수 있습니다.</string>
     <string name="support_rules_section_required">필수</string>
     <string name="support_rules_section_recommend">권장 사항 (선택)</string>
-    <string name="rename_notice_title">새 이름, 같은 앱: %1$s</string>
-    <string name="rename_notice_message">Headunit Revived는 여러분 덕분에 많이 성장했습니다. 프로젝트와 커뮤니티가 먼 길을 걸어온 만큼, 이제 고유한 이름을 갖게 되었습니다: %1$s.\n\n같은 앱, 같은 사람들, 그리고 모든 설정은 지금 그대로 유지됩니다.</string>
+    <string name="rename_notice_title">이름이 Open Headunit(으)로 바뀌고 있어요</string>
+    <string name="rename_notice_message">Headunit Revived는 여러분 덕분에 성장하고 있고, 이제 고유한 이름인 Open Headunit(으)로 바뀌어 가고 있습니다. 새 이름은 앞으로의 업데이트에 걸쳐 차차 적용되니, 한동안은 일부 화면에서 예전 이름이 보일 수도 있습니다.\n\n같은 앱, 같은 사람들, 그리고 모든 설정은 지금 그대로 유지됩니다.</string>
     <string name="rename_notice_button">확인</string>
 </resources>
