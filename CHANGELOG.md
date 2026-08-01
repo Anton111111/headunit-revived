@@ -1,5 +1,5 @@
 # Changelog
-### v.3.2.0-beta4
+### v.3.2.0
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
 - Acquire transient audio focus while AA audio plays, thanks to @bnayahu
 - Add GitHub Actions CI (build + unit tests), thanks to @bnayahu

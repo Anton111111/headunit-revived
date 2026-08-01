@@ -9,11 +9,12 @@
     height="200">
 </p>
 
-$\color{Red}\Huge{\textbf{IMPORTANT! - Rebrand of the App}}$
-Discussion: https://github.com/andreknieriem/open-headunit/discussions/729
-
 Open Headunit is an Android app that allows you to turn your Android tablet or phone into an Android Auto receiver. This project is a revived version of the original headunit project by the great Michael Reid. The original project can be found here:
 https://github.com/mikereidis/headunit
+
+## NOTE!
+**Android Auto 17.4 will break nearly every wireless connection with self mode included, which is not native or with the headunit server. So Wireless Helper won't work anymore.
+We hope, that Google will take back these changes in the next Android Auto update, but until then, we have to wait. If you want to use wireless connection, please use the native connection method or the headunit server on your phone or buy a wireless Android Auto USB Dongle.**
 
 ## Screenshots
 <img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/22abbc13-75d5-436f-b0ae-2e92b7648d50" />
@@ -67,7 +68,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - more customization options for the UI and the app itself
 
 ## Changelog
-### v.3.2.0-beta5
+### v.3.2.0
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
 - Acquire transient audio focus while AA audio plays, thanks to @bnayahu
 - Add GitHub Actions CI (build + unit tests), thanks to @bnayahu
