@@ -159,9 +159,9 @@ class VideoDecoder(private val settings: Settings) {
     val videoWidth: Int get() = mWidth
     val videoHeight: Int get() = mHeight
 
-    enum class CodecType(val mimeType: String, val displayName: String) {
-        H264("video/avc", "H.264/AVC"),
-        H265("video/hevc", "H.265/HEVC")
+    enum class CodecType(val mimeType: String, val displayName: String, val settingsValue: String) {
+        H264("video/avc", "H.264/AVC", "H.264"),
+        H265("video/hevc", "H.265/HEVC", "H.265")
     }
 
     /**
