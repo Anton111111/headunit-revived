@@ -2,6 +2,7 @@ package com.andrerinas.openheadunit.connection
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
 import android.content.Context
@@ -30,8 +31,27 @@ class NativeAaHandshakeManager(
     companion object {
         private val AA_UUID = UUID.fromString("4de17a00-52cb-11e6-bdf4-0800200c9a66")
         private val HFP_UUID = UUID.fromString("0000111e-0000-1000-8000-00805f9b34fb")
-        private val A2DP_SOURCE_UUID = UUID.fromString("00001112-0000-1000-8000-00805f9b34fb")
+        // Phone-wake targets, tried HFP then HSP (mirrors openautolink's ConnectProfile
+        // fallback chain). HSP_AG_UUID is the old "A2DP_SOURCE_UUID" - despite that name it was
+        // never A2DP Source (real assigned number 0000110a-...); both UUIDs are confirmed
+        // against nisargjhaveri/WirelessAndroidAutoDongle and mossyhub/openautolink, which use
+        // the same pair for this exact purpose.
+        private val HSP_AG_UUID = UUID.fromString("00001112-0000-1000-8000-00805f9b34fb") // Headset Profile AG
+        private val HFP_AG_UUID = UUID.fromString("0000111f-0000-1000-8000-00805f9b34fb") // Hands-Free Profile AG
         private const val HANDSHAKE_RESPONSE_TIMEOUT_MS = 15_000L
+
+        /** Which of [allServiceNames] are secondary Bluetooth radios, i.e. not [primaryServiceName]
+         *  (dual-Bluetooth-radio head units). Pure and unit-testable: identity is by system
+         *  service name, not MAC address, since BluetoothAdapter.getAddress() returns the fixed
+         *  placeholder "02:00:00:00:00:00" for any non-privileged app on every device since
+         *  Android 6.0 (API 23), so every real adapter instance looks identical by address alone. */
+        internal fun filterSecondaryServiceNames(
+            primaryServiceName: String,
+            allServiceNames: List<String>
+        ): List<String> {
+            val primary = primaryServiceName.ifEmpty { "bluetooth_manager" }
+            return allServiceNames.filter { it != primary }.distinct()
+        }
 
         fun checkCompatibility(context: Context): Boolean {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -131,23 +151,26 @@ class NativeAaHandshakeManager(
 
         isRunning = true
         aaListenersClosedForSession = false
-        // Local Bluetooth radio address; logged on every accept so a dual-radio head unit's logs
-        // show which radio the phone actually reached (compare with the HU MAC in the phone's log).
-        val localAddr = try { adapter.address } catch (e: Exception) { "?" }
-        AppLog.i("NativeAA: Starting Bluetooth Handshake Servers (primary radio [$localAddr])...")
+        // Local Bluetooth radio name; logged on every accept so a dual-radio head unit's logs
+        // show which radio the phone actually reached (compare with the HU name in the phone's
+        // log). Uses adapter.name, not adapter.address: getAddress() returns the fixed masked
+        // placeholder "02:00:00:00:00:00" for any non-privileged app since Android 6.0 (API 23),
+        // but getName() returns the real radio name (confirmed on-device: e.g. "Navegadortz2").
+        val localRadioName = try { adapter.name ?: "?" } catch (e: Exception) { "?" }
+        AppLog.i("NativeAA: Starting Bluetooth Handshake Servers (primary radio [$localRadioName])...")
 
         // Start AA RFCOMM Server
         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-RfcommServer")) {
             try {
                 aaServerSocket = adapter.listenUsingRfcommWithServiceRecord("AA BT Listener", AA_UUID)
-                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID ($AA_UUID) on radio [$localAddr]... Waiting for phone to connect back!")
+                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID ($AA_UUID) on radio [$localRadioName]... Waiting for phone to connect back!")
                 while (isRunning && isActive) {
                     val socket = aaServerSocket?.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: Connection accepted from ${socket.remoteDevice.name} (${socket.remoteDevice.address}) on local radio [$localAddr]")
+                        AppLog.i("NativeAA: Connection accepted from ${socket.remoteDevice.name} (${socket.remoteDevice.address}) on local radio [$localRadioName]")
                         // [FIX] Launch handshake in a separate coroutine so the server can accept the next connection!
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
-                            handleHandshake(socket, localAddr)
+                            handleHandshake(socket, localRadioName)
                         }
                     }
                 }
@@ -184,23 +207,40 @@ class NativeAaHandshakeManager(
             }
         }
 
-        // Experimental: some head units have two Bluetooth radios (e.g. "K706" and "CAR8032").
-        // The phone may be bonded to the one that is not the default, so it never reaches the
-        // listener above. Also open listeners on any other radio with a real, different address.
-        // Strict no-op on the usual single-radio device, and skipped when the address is masked
-        // (API 31+), so it cannot disturb the primary listener.
-        val primaryAddr = try { adapter.address } catch (e: Exception) { null }
-        if (primaryAddr != null && primaryAddr != "02:00:00:00:00:00") {
-            val secondaries = try {
-                BluetoothHelper.getAllBluetoothAdapters(context).filter {
-                    val a = try { it.address } catch (e: Exception) { null }
-                    a != null && a != "02:00:00:00:00:00" && a != primaryAddr
-                }
-            } catch (e: Exception) { emptyList() }
-            if (secondaries.isNotEmpty()) {
-                AppLog.i("NativeAA: Opening AA listeners on ${secondaries.size} secondary Bluetooth radio(s) for dual-radio head units")
-                secondaries.forEach { launchExtraServers(it) }
+        // Some head units have two Bluetooth radios (e.g. "K706" and "CAR8032"). The phone may
+        // be bonded to whichever one isn't the primary, so it never reaches the listener above.
+        // Match radios by system service name, not MAC address: BluetoothAdapter.getAddress()
+        // returns the fixed placeholder "02:00:00:00:00:00" for any non-privileged app since
+        // Android 6.0 (API 23), on every device - primary and secondary always look identical
+        // by address alone (see andreknieriem/headunit-revived#706).
+        val handles = try {
+            BluetoothHelper.getAllBluetoothAdapterHandles(context)
+        } catch (e: Exception) { emptyList() }
+
+        // Manual fallback: some ROMs' second radio isn't discoverable via
+        // ServiceManager.listServices() at all (blocked, or named without "bluetooth"), so
+        // automatic enumeration never finds it. Let the user force it by exact system service
+        // name instead.
+        val manualServiceName = settings.manualSecondaryBluetoothServiceName
+        val allHandles = if (manualServiceName.isNotEmpty() && handles.none { it.serviceName == manualServiceName }) {
+            val manualHandle = try { BluetoothHelper.getAdapterHandleForService(context, manualServiceName) } catch (e: Exception) { null }
+            if (manualHandle != null) {
+                AppLog.i("NativeAA: Manual secondary Bluetooth service '$manualServiceName' resolved successfully.")
+                handles + manualHandle
+            } else {
+                AppLog.w("NativeAA: Manual secondary Bluetooth service '$manualServiceName' could not be resolved to a working adapter.")
+                handles
             }
+        } else handles
+
+        val secondaryNames = filterSecondaryServiceNames(
+            settings.bluetoothManagerServiceName,
+            allHandles.map { it.serviceName }
+        ).toSet()
+        val secondaries = allHandles.filter { it.serviceName in secondaryNames }
+        if (secondaries.isNotEmpty()) {
+            AppLog.i("NativeAA: Opening AA listeners on ${secondaries.size} secondary Bluetooth radio(s) for dual-radio head units: ${secondaries.joinToString { it.serviceName }}")
+            secondaries.forEach { launchExtraServers(it.serviceName, it.adapter) }
         }
     }
 
@@ -209,26 +249,28 @@ class NativeAaHandshakeManager(
      * bonded to that radio (dual-Bluetooth head units) can still reach us. Experimental, and
      * fully guarded so a bad radio cannot affect the primary listener.
      */
-    private fun launchExtraServers(extra: BluetoothAdapter) {
-        val addr = try { extra.address } catch (e: Exception) { "?" }
+    private fun launchExtraServers(serviceName: String, extra: BluetoothAdapter) {
+        // extra.name, not extra.address - see the comment on localRadioName in start(); the
+        // address is always the masked placeholder, the name is the real, useful identifier.
+        val radioName = try { extra.name ?: "?" } catch (e: Exception) { "?" }
         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-RfcommServer-2")) {
             try {
                 val server = extra.listenUsingRfcommWithServiceRecord("AA BT Listener", AA_UUID)
                 extraAaServerSockets.add(server)
-                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID on secondary radio [$addr]")
+                AppLog.i("NativeAA: ACTIVELY LISTENING on Android Auto UUID on secondary radio '$serviceName' [$radioName]")
                 while (isRunning && isActive) {
                     val socket = server.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: Connection accepted (secondary radio [$addr]) from ${socket.remoteDevice.name} (${socket.remoteDevice.address})")
+                        AppLog.i("NativeAA: Connection accepted (secondary radio '$serviceName' [$radioName]) from ${socket.remoteDevice.name} (${socket.remoteDevice.address})")
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
-                            handleHandshake(socket, addr)
+                            handleHandshake(socket, radioName)
                         }
                     }
                 }
             } catch (e: Exception) {
-                if (aaListenersClosedForSession) AppLog.d("NativeAA: Secondary AA server closed after successful handoff [$addr].")
-                else if (isRunning) AppLog.e("NativeAA: Secondary AA server error [$addr]: ${e.message}", e)
-                else AppLog.d("NativeAA: Secondary AA server closed cleanly [$addr].")
+                if (aaListenersClosedForSession) AppLog.d("NativeAA: Secondary AA server closed after successful handoff ['$serviceName' $radioName].")
+                else if (isRunning) AppLog.e("NativeAA: Secondary AA server error ['$serviceName' $radioName]: ${e.message}", e)
+                else AppLog.d("NativeAA: Secondary AA server closed cleanly ['$serviceName' $radioName].")
             }
         }
         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpServer-2")) {
@@ -238,15 +280,15 @@ class NativeAaHandshakeManager(
                 while (isRunning && isActive) {
                     val socket = server.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: HFP connection accepted (secondary radio) from ${socket.remoteDevice.name}.")
+                        AppLog.i("NativeAA: HFP connection accepted (secondary radio '$serviceName') from ${socket.remoteDevice.name}.")
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpResponder-${socket.remoteDevice.address}")) {
                             handleHfp(socket)
                         }
                     }
                 }
             } catch (e: Exception) {
-                if (isRunning) AppLog.e("NativeAA: Secondary HFP server error [$addr]: ${e.message}", e)
-                else AppLog.d("NativeAA: Secondary HFP server closed cleanly [$addr].")
+                if (isRunning) AppLog.e("NativeAA: Secondary HFP server error ['$serviceName' $radioName]: ${e.message}", e)
+                else AppLog.d("NativeAA: Secondary HFP server closed cleanly ['$serviceName' $radioName].")
             }
         }
     }
@@ -320,69 +362,87 @@ class NativeAaHandshakeManager(
     }
 
     /**
-     * Wakes up the phone by attempting a brief connection to the A2DP profile.
-     * This acts as a signal for the phone to start looking for the headunit.
+     * Tries HFP_AG_UUID first, falling back to HSP_AG_UUID, holding whichever connects for
+     * [holdMs]. Returns true if either connected. Mirrors openautolink's ConnectProfile
+     * fallback chain (HFP_AG_UUID -> HSP_AG_UUID).
+     */
+    private suspend fun pokeDevice(device: BluetoothDevice, holdMs: Long): Boolean {
+        for (uuid in listOf(HFP_AG_UUID, HSP_AG_UUID)) {
+            var socket: BluetoothSocket? = null
+            try {
+                socket = device.createRfcommSocketToServiceRecord(uuid)
+                AppLog.i("NativeAA: Calling socket.connect() for ${device.name} via $uuid...")
+                socket.connect()
+                AppLog.i("NativeAA: Successfully poked ${device.name} via $uuid. Holding ${holdMs}ms...")
+                delay(holdMs)
+                return true
+            } catch (e: Exception) {
+                AppLog.d("NativeAA: Poke via $uuid to ${device.name} failed: ${e.message}")
+            } finally {
+                try { socket?.close() } catch (e: Exception) {}
+            }
+        }
+        return false
+    }
+
+    /**
+     * Wakes up the phone by attempting a brief connection to an HFP/HSP profile, signaling it
+     * to start looking for the head unit. Retried every 15s (matching the retry cadence of both
+     * nisargjhaveri/WirelessAndroidAutoDongle and mossyhub/openautolink) until a real handshake
+     * starts or another session (USB/etc.) takes over, instead of giving up after a single pass.
      */
     fun triggerPoke() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) 
+            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT)
                 != PackageManager.PERMISSION_GRANTED) {
                 AppLog.w("NativeAA: Missing BLUETOOTH_CONNECT. Cannot triggerPoke.")
                 return
             }
         }
         val adapter = BluetoothHelper.getBluetoothAdapter(context) ?: return
-        val lastMacs = settings.autoStartBluetoothDeviceMacs
 
         pokeJob?.cancel()
         pokeJob = scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Wakeup")) {
             AppLog.d("NativeAA: triggerPoke() delay starting (2s)...")
             delay(2000) // Small safety delay before connecting
 
-            if (commManager.isConnected ||
-                commManager.connectionState.value is CommManager.ConnectionState.Connecting) {
-                AppLog.i("NativeAA: USB/other session became active during poke delay. Skipping poke.")
-                return@launch
-            }
-
-            val devicesToPoke = if (lastMacs.isNotEmpty()) {
-                lastMacs.mapNotNull { mac ->
-                    try {
-                        adapter.getRemoteDevice(mac)
-                    } catch (e: Exception) {
-                        null
-                    }
-                }
-            } else {
-                AppLog.w("NativeAA: No 'Auto Start BT Device' selected in settings. Poking all paired devices as fallback...")
-                adapter.bondedDevices.toList()
-            }
-
-            if (devicesToPoke.isEmpty()) {
-                AppLog.w("NativeAA: No paired Bluetooth devices found to poke.")
-                return@launch
-            }
-
-            for (device in devicesToPoke) {
-                if (!isRunning || !isActive) break
-                if (commManager.isConnected) {
-                    AppLog.i("NativeAA: USB/other session became active mid-poke. Stopping poke loop.")
+            while (isRunning && isActive && !handshakeInFlight) {
+                if (commManager.isConnected ||
+                    commManager.connectionState.value is CommManager.ConnectionState.Connecting) {
+                    AppLog.i("NativeAA: USB/other session active. Stopping poke retry loop.")
                     break
                 }
-                AppLog.i("NativeAA: Attempting active A2DP poke to device: ${device.name} (${device.address})...")
-                var socket: BluetoothSocket? = null
-                try {
-                    socket = device.createRfcommSocketToServiceRecord(A2DP_SOURCE_UUID)
-                    AppLog.i("NativeAA: Calling socket.connect() for ${device.name}...")
-                    socket.connect()
-                    AppLog.i("NativeAA: Successfully poked ${device.name}. Keeping socket alive for 15s...")
-                    delay(15000)
-                } catch (e: Exception) {
-                    AppLog.d("NativeAA: Poke for ${device.name} failed (normal if device disconnected): ${e.message}")
-                } finally {
-                    try { socket?.close() } catch (e: Exception) {}
-                    AppLog.d("NativeAA: Poke socket for ${device.name} closed in finally.")
+
+                val lastMacs = settings.autoStartBluetoothDeviceMacs
+                val devicesToPoke = if (lastMacs.isNotEmpty()) {
+                    lastMacs.mapNotNull { mac ->
+                        try {
+                            adapter.getRemoteDevice(mac)
+                        } catch (e: Exception) {
+                            null
+                        }
+                    }
+                } else {
+                    AppLog.w("NativeAA: No 'Auto Start BT Device' selected in settings. Poking all paired devices as fallback...")
+                    adapter.bondedDevices.toList()
                 }
+
+                if (devicesToPoke.isEmpty()) {
+                    AppLog.w("NativeAA: No paired Bluetooth devices found to poke.")
+                    return@launch
+                }
+
+                for (device in devicesToPoke) {
+                    if (!isRunning || !isActive || handshakeInFlight) break
+                    if (commManager.isConnected) {
+                        AppLog.i("NativeAA: USB/other session became active mid-poke. Stopping poke loop.")
+                        break
+                    }
+                    AppLog.i("NativeAA: Attempting active poke to device: ${device.name} (${device.address})...")
+                    pokeDevice(device, holdMs = 15000)
+                }
+
+                delay(15000) // retry cadence, matches both reference implementations' 15-20s interval
             }
         }
     }
@@ -405,20 +465,9 @@ class NativeAaHandshakeManager(
             
             pokeJob?.cancel()
             pokeJob = scope.launch(Dispatchers.IO + CoroutineName("NativeAa-ManualWakeup")) {
-                AppLog.i("NativeAA: Attempting manual A2DP poke to ${device.name}...")
-                var socket: BluetoothSocket? = null
-                try {
-                    socket = device.createRfcommSocketToServiceRecord(A2DP_SOURCE_UUID)
-                    AppLog.i("NativeAA: Calling socket.connect() for ${device.name}...")
-                    socket.connect()
-                    AppLog.i("NativeAA: Successfully poked ${device.name}. Keeping socket alive for 20s...")
-                    delay(20000)
-                } catch (e: Exception) {
-                    AppLog.d("NativeAA: Manual poke for ${device.name} failed: ${e.message}")
-                } finally {
-                    try { socket?.close() } catch (e: Exception) {}
-                    AppLog.i("NativeAA: Manual poke socket for ${device.name} closed in finally.")
-                }
+                AppLog.i("NativeAA: Attempting manual poke to ${device.name}...")
+                pokeDevice(device, holdMs = 20000)
+                AppLog.i("NativeAA: Manual poke to ${device.name} finished.")
             }
         } catch (e: Exception) {
             AppLog.e("NativeAA: Manual poke error", e)
@@ -427,6 +476,11 @@ class NativeAaHandshakeManager(
 
     private suspend fun handleHandshake(socket: BluetoothSocket, localRadio: String? = null) = withContext(Dispatchers.IO) {
         handshakeInFlight = true
+        // A real AA_UUID connection just landed - the wake poke (if one is still running) has
+        // done its job and is now just an extra, unnecessary RFCOMM/profile channel held open
+        // on the same physical radio for the remainder of its hold window, competing with this
+        // handshake for radio time. Release it immediately instead of leaving it running.
+        pokeJob?.cancel()
         try {
             val device = socket.remoteDevice
             AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address}) on local radio [${localRadio ?: "?"}]")
@@ -489,6 +543,15 @@ class NativeAaHandshakeManager(
             AppLog.i("  > Target SSID: $ssid")
             AppLog.i("  > Target IP:   $ip:5288")
             AppLog.i("  > BSSID:       $bssid")
+
+            // Some Bluetooth stacks report the RFCOMM socket "connected" slightly before the
+            // underlying channel is actually ready to carry data - writing immediately can be
+            // silently dropped on such hardware (a known real class of RFCOMM race: see the
+            // kernel's "Move pending packets from RFCOMM socket to TTY" fix for the same
+            // symptom on the HFP profile). A short delay costs nothing against either side's
+            // timeout budget (phone's own first-message timeout is ~12s, ours is 15s) but gives
+            // a flaky chip a moment to settle before the one message that matters most.
+            delay(300)
 
             AppLog.i("NativeAA: [TX] Sending WifiStartRequest (Type 1)")
             sendWifiStartRequest(output, ip, 5288)
