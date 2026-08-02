@@ -277,10 +277,18 @@ class VideoDecoder(private val settings: Settings) {
                     if (restartsSinceLastFrame >= MAX_RESTARTS_WITHOUT_FRAME) {
                         if (!codecFallbackUsed) {
                             val fallbackType = if (currentCodecType == CodecType.H264) CodecType.H265 else CodecType.H264
-                            AppLog.e("${currentCodecType.displayName} failed $restartsSinceLastFrame times in a row without rendering a frame. Falling back to ${fallbackType.displayName}.")
-                            currentCodecType = fallbackType
-                            codecFallbackUsed = true
-                            restartsSinceLastFrame = 0
+                            // Don't burn the one-time fallback on a codec type the device has no
+                            // decoder for at all (hw or sw) - e.g. HEVC on a pre-Lollipop device
+                            // with zero HEVC components. That flip is guaranteed to fail again.
+                            if (findBestCodec(fallbackType.mimeType, true) == null) {
+                                AppLog.e("${currentCodecType.displayName} failed $restartsSinceLastFrame times in a row without rendering a frame, and this device has no decoder for ${fallbackType.displayName} either. Giving up to avoid an infinite restart loop.")
+                                decoderPermanentlyFailed = true
+                            } else {
+                                AppLog.e("${currentCodecType.displayName} failed $restartsSinceLastFrame times in a row without rendering a frame. Falling back to ${fallbackType.displayName}.")
+                                currentCodecType = fallbackType
+                                codecFallbackUsed = true
+                                restartsSinceLastFrame = 0
+                            }
                         } else {
                             AppLog.e("Both codec types failed to render a frame this session. Giving up to avoid an infinite restart loop.")
                             decoderPermanentlyFailed = true
@@ -431,6 +439,7 @@ class VideoDecoder(private val settings: Settings) {
             AppLog.e("Failed to start bundled FFmpeg HEVC decoder", e)
             softwareHevcDecoder = null
             running = false
+            scheduleRestart("bundled_hevc_start_failed: ${e.message}")
         }
     }
 
@@ -661,6 +670,7 @@ class VideoDecoder(private val settings: Settings) {
         } catch (e: Exception) {
             AppLog.e("Failed to start decoder", e)
             codec = null; running = false
+            scheduleRestart("decoder_start_failed: ${e.message}")
         }
     }
 
