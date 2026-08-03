@@ -86,18 +86,42 @@ class PermissionRowBinder(
                     normalLauncher.launch(missing.toTypedArray())
                 }
             }
-            AppPermissions.Kind.OVERLAY -> specialLauncher.launch(
-                Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri())
-            )
-            AppPermissions.Kind.WRITE_SETTINGS -> specialLauncher.launch(
-                Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, packageUri())
-            )
+            AppPermissions.Kind.OVERLAY -> {
+                try {
+                    specialLauncher.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, packageUri()))
+                } catch (e: Exception) {
+                    try {
+                        specialLauncher.launch(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+                    } catch (e2: Exception) {
+                        openAppSettings()
+                    }
+                }
+            }
+            AppPermissions.Kind.WRITE_SETTINGS -> {
+                try {
+                    specialLauncher.launch(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, packageUri()))
+                } catch (e: Exception) {
+                    try {
+                        specialLauncher.launch(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS))
+                    } catch (e2: Exception) {
+                        openAppSettings()
+                    }
+                }
+            }
         }
     }
 
-    private fun openAppSettings() = specialLauncher.launch(
-        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageUri())
-    )
+    private fun openAppSettings() {
+        try {
+            specialLauncher.launch(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageUri()))
+        } catch (e: Exception) {
+            try {
+                specialLauncher.launch(Intent(Settings.ACTION_SETTINGS))
+            } catch (e2: Exception) {
+                ToastUtils.showToast(activity, R.string.cannot_open_settings)
+            }
+        }
+    }
 
     private fun packageUri(): Uri = Uri.parse("package:${activity.packageName}")
 }
