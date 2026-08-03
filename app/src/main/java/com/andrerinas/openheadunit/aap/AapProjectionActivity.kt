@@ -395,8 +395,17 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyOrientationSettings()
         super.onCreate(savedInstanceState)
+        // [FIX] applyOrientationSettings() must be called AFTER super.onCreate() so that the
+        // Activity window is fully initialized before we lock the orientation. Calling it before
+        // super.onCreate() caused SCREEN_ORIENTATION_LOCKED to inherit the orientation context
+        // from the launching task (e.g. MainActivity in portrait), resulting in the projection
+        // Activity locking to portrait on a landscape head unit when started via the Self Mode
+        // button in the app. With the long-press shortcut the bug was absent because the Activity
+        // started without an existing task context. Moving this call after super.onCreate()
+        // ensures the window manager has correctly resolved the display's physical orientation
+        // before we lock it.
+        applyOrientationSettings()
 
 
         setContentView(R.layout.activity_headunit)
