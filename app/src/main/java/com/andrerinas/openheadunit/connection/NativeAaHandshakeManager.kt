@@ -94,6 +94,10 @@ class NativeAaHandshakeManager(
     private var currentIp: String? = null
     private var currentBssid: String? = null
     private var pokeJob: Job? = null
+    // Last (ssid, ip, bssid) triggerPoke() restarted for - dedupes redundant restarts when
+    // WifiDirectManager redelivers the same credentials, which was starving the poke before it
+    // could ever finish.
+    private var lastPokeTriggerCredentials: Triple<String, String, String>? = null
     // True while handleHandshake() runs; lets WifiDirectManager's join watchdog know a real
     // exchange is in progress. Bounded by handleHandshake()'s own timeouts, so it can't stick true.
     @Volatile private var handshakeInFlight = false
@@ -407,6 +411,13 @@ class NativeAaHandshakeManager(
         }
         val adapter = BluetoothHelper.getBluetoothAdapter(context) ?: return
 
+        val credentials = Triple(currentSsid ?: "", currentIp ?: "", currentBssid ?: "")
+        if (pokeJob?.isActive == true && credentials == lastPokeTriggerCredentials) {
+            AppLog.d("NativeAA: triggerPoke() called again with unchanged credentials while a poke is already running - not restarting it.")
+            return
+        }
+        lastPokeTriggerCredentials = credentials
+
         pokeJob?.cancel()
         pokeJob = scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Wakeup")) {
             AppLog.d("NativeAA: triggerPoke() delay starting (2s)...")
@@ -678,5 +689,6 @@ class NativeAaHandshakeManager(
         currentBssid = null
         pokeJob?.cancel()
         pokeJob = null
+        lastPokeTriggerCredentials = null
     }
 }

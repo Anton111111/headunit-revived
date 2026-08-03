@@ -736,6 +736,7 @@ class AapService : Service(), UsbReceiver.Listener {
             }
         }
         wifiDirectManager?.setNativeHandshakeStateProvider { nativeAaHandshakeManager?.isHandshakeInFlight() == true }
+        wifiDirectManager?.setNativeSessionConnectedProvider { commManager.isConnected }
         wifiDirectManager?.setNativeGroupInvalidatedListener { nativeAaHandshakeManager?.invalidateCredentials() }
 
 

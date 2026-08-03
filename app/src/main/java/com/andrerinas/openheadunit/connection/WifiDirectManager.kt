@@ -92,6 +92,14 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     private var nativeRecreateCount = 0
     private val nativeJoinWatchdog = Runnable {
         if (isClientConnected) return@Runnable
+        if (isNativeSessionConnected?.invoke() == true) {
+            // Native joins are out-of-band over Bluetooth, not P2P invitation, so clientList (and
+            // isClientConnected) can stay empty forever even on a fully working session.
+            AppLog.i("WifiDirectManager: Native AA join watchdog fired but a session is already connected — cancelling recovery, not tearing down a working connection.")
+            cancelNativeJoinWatchdog()
+            nativeRecreateCount = 0
+            return@Runnable
+        }
         if (isNativeHandshakeInFlight?.invoke() == true) {
             // A handshake is exchanging credentials right now; recreating here would hand out a new SSID mid-exchange.
             AppLog.i("WifiDirectManager: Native AA join watchdog fired but a Bluetooth handshake is in flight — deferring recovery.")
@@ -105,6 +113,9 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     // Set by AapService: whether NativeAaHandshakeManager has a live handshake in progress, so
     // the join watchdog/self-heal never tears the group down mid-exchange.
     private var isNativeHandshakeInFlight: (() -> Boolean)? = null
+    // Set by AapService: whether a real AA session is connected - isClientConnected can't tell
+    // that apart from nobody joining (see nativeJoinWatchdog above).
+    private var isNativeSessionConnected: (() -> Boolean)? = null
     // Set by AapService: called right before a native group is torn down, to invalidate any
     // not-yet-captured credentials in NativeAaHandshakeManager.
     private var onNativeGroupInvalidated: (() -> Unit)? = null
@@ -115,6 +126,10 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
 
     fun setNativeHandshakeStateProvider(provider: () -> Boolean) {
         this.isNativeHandshakeInFlight = provider
+    }
+
+    fun setNativeSessionConnectedProvider(provider: () -> Boolean) {
+        this.isNativeSessionConnected = provider
     }
 
     fun setNativeGroupInvalidatedListener(callback: () -> Unit) {
@@ -1032,6 +1047,11 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     private fun recoverNativeGroup(reason: String) {
         cancelNativeJoinWatchdog()
         if (isClientConnected) return
+        if (isNativeSessionConnected?.invoke() == true) {
+            AppLog.i("WifiDirectManager: recoverNativeGroup() called but a session is already connected — not tearing down a working connection.")
+            nativeRecreateCount = 0
+            return
+        }
         if (nativeRecreateCount >= MAX_NATIVE_JOIN_RECREATES) {
             AppLog.w("WifiDirectManager: Native AA — phone still not connected after $nativeRecreateCount recreations ($reason); giving up until the next start.")
             return
@@ -1046,7 +1066,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
      *  client yet. */
     private fun armNativeJoinWatchdog() {
         handler.removeCallbacks(nativeJoinWatchdog)
-        if (isNativeAaMode() && isGroupOwner && !isClientConnected) {
+        if (isNativeAaMode() && isGroupOwner && !isClientConnected && isNativeSessionConnected?.invoke() != true) {
             handler.postDelayed(nativeJoinWatchdog, NATIVE_JOIN_TIMEOUT_MS)
         }
     }
