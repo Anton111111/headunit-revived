@@ -72,12 +72,24 @@ class WifiAutoStartReceiver : BroadcastReceiver() {
                     AppLog.e("Failed to start AapService from background: ${e.message}")
                 }
 
-                // Attempt to start the UI via FullScreenIntent (Required for Android 10+ background restrictions)
                 val launchIntent = Intent(context, MainActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     putExtra(MainActivity.EXTRA_LAUNCH_SOURCE, "WiFi auto-start")
                 }
 
+                // Android < 10 (API < 29): Direct startActivity works without background restrictions
+                // and prevents opening/locking the system notification shade on Android 6/7 head units.
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                    try {
+                        context.startActivity(launchIntent)
+                        AppLog.i("WifiAutoStartReceiver: Direct startActivity succeeded (API ${Build.VERSION.SDK_INT} < 29).")
+                        return
+                    } catch (e: Exception) {
+                        AppLog.w("WifiAutoStartReceiver: Direct startActivity failed, falling back to notification: ${e.message}")
+                    }
+                }
+
+                // Android 10+ (API 29+): FullScreenIntent notification fallback for OS background restrictions
                 val pendingIntent = PendingIntent.getActivity(
                     context, 0, launchIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT or (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0)
