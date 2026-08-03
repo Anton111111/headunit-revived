@@ -376,6 +376,12 @@ class NativeAaHandshakeManager(
                 AppLog.i("NativeAA: Successfully poked ${device.name} via $uuid. Holding ${holdMs}ms...")
                 delay(holdMs)
                 return true
+            } catch (e: CancellationException) {
+                // Rethrow instead of falling through to the next UUID: a cancelled poke (e.g.
+                // handleHandshake()'s pokeJob?.cancel() once a real handshake lands) must stop
+                // immediately, not fire another real, blocking socket.connect() on the same
+                // physical radio right as the critical WifiStartRequest send is about to happen.
+                throw e
             } catch (e: Exception) {
                 AppLog.d("NativeAA: Poke via $uuid to ${device.name} failed: ${e.message}")
             } finally {
