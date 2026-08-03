@@ -101,6 +101,10 @@ class NativeAaHandshakeManager(
     // True while handleHandshake() runs; lets WifiDirectManager's join watchdog know a real
     // exchange is in progress. Bounded by handleHandshake()'s own timeouts, so it can't stick true.
     @Volatile private var handshakeInFlight = false
+    // True for the duration of a single pokeDevice() attempt (its socket.connect() call itself
+    // can fire an OS-level ACL_CONNECTED broadcast before any real handshake starts) - see
+    // isAttemptInFlight().
+    @Volatile private var pokeAttemptInFlight = false
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -131,6 +135,13 @@ class NativeAaHandshakeManager(
     fun isActive(): Boolean = isRunning && !aaListenersClosedForSession
 
     fun isHandshakeInFlight(): Boolean = handshakeInFlight
+
+    // True while either a wake-up poke's socket.connect() or a real handshake is in progress.
+    // AutoStartReceiver's own poke can generate the ACL_CONNECTED broadcast that re-triggers
+    // AapService's BT auto-start re-arm; callers deciding whether it's safe to force-reinit
+    // (rather than WifiDirectManager's join watchdog, which wants isHandshakeInFlight() alone)
+    // should check this instead of isActive() alone.
+    fun isAttemptInFlight(): Boolean = handshakeInFlight || pokeAttemptInFlight
 
     @SuppressLint("MissingPermission")
     fun start() {
@@ -371,28 +382,33 @@ class NativeAaHandshakeManager(
      * fallback chain (HFP_AG_UUID -> HSP_AG_UUID).
      */
     private suspend fun pokeDevice(device: BluetoothDevice, holdMs: Long): Boolean {
-        for (uuid in listOf(HFP_AG_UUID, HSP_AG_UUID)) {
-            var socket: BluetoothSocket? = null
-            try {
-                socket = device.createRfcommSocketToServiceRecord(uuid)
-                AppLog.i("NativeAA: Calling socket.connect() for ${device.name} via $uuid...")
-                socket.connect()
-                AppLog.i("NativeAA: Successfully poked ${device.name} via $uuid. Holding ${holdMs}ms...")
-                delay(holdMs)
-                return true
-            } catch (e: CancellationException) {
-                // Rethrow instead of falling through to the next UUID: a cancelled poke (e.g.
-                // handleHandshake()'s pokeJob?.cancel() once a real handshake lands) must stop
-                // immediately, not fire another real, blocking socket.connect() on the same
-                // physical radio right as the critical WifiStartRequest send is about to happen.
-                throw e
-            } catch (e: Exception) {
-                AppLog.d("NativeAA: Poke via $uuid to ${device.name} failed: ${e.message}")
-            } finally {
-                try { socket?.close() } catch (e: Exception) {}
+        pokeAttemptInFlight = true
+        try {
+            for (uuid in listOf(HFP_AG_UUID, HSP_AG_UUID)) {
+                var socket: BluetoothSocket? = null
+                try {
+                    socket = device.createRfcommSocketToServiceRecord(uuid)
+                    AppLog.i("NativeAA: Calling socket.connect() for ${device.name} via $uuid...")
+                    socket.connect()
+                    AppLog.i("NativeAA: Successfully poked ${device.name} via $uuid. Holding ${holdMs}ms...")
+                    delay(holdMs)
+                    return true
+                } catch (e: CancellationException) {
+                    // Rethrow instead of falling through to the next UUID: a cancelled poke (e.g.
+                    // handleHandshake()'s pokeJob?.cancel() once a real handshake lands) must stop
+                    // immediately, not fire another real, blocking socket.connect() on the same
+                    // physical radio right as the critical WifiStartRequest send is about to happen.
+                    throw e
+                } catch (e: Exception) {
+                    AppLog.d("NativeAA: Poke via $uuid to ${device.name} failed: ${e.message}")
+                } finally {
+                    try { socket?.close() } catch (e: Exception) {}
+                }
             }
+            return false
+        } finally {
+            pokeAttemptInFlight = false
         }
-        return false
     }
 
     /**

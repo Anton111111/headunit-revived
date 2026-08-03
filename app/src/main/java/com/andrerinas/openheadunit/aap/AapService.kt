@@ -1739,7 +1739,9 @@ class AapService : Service(), UsbReceiver.Listener {
                 // down and recreate the P2P group (new random SSID/passphrase) right as it's
                 // being delivered to the phone.
                 val settings = App.provide(this).settings
-                if (settings.wifiConnectionMode == 3 && nativeAaHandshakeManager?.isActive() != true) {
+                if (settings.wifiConnectionMode == 3 &&
+                    nativeAaHandshakeManager?.isActive() != true &&
+                    nativeAaHandshakeManager?.isAttemptInFlight() != true) {
                     AppLog.i("AapService: Bluetooth auto-start — Native AA handshake manager was stopped, re-arming.")
                     userExitedAA = false
                     userExitCooldownUntil = 0L
