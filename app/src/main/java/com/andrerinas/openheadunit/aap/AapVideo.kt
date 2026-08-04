@@ -136,14 +136,18 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                 // Timestamp Indication (Offset 10)
                 val sc10 = findStartCode(buf, 10)
                 if (len > 10 + sc10 && sc10 > 0) {
-                    videoDecoder.decode(buf, 10, len - 10, settings.forceSoftwareDecoding, settings.videoCodec)
+                    if (!videoDecoder.decode(buf, 10, len - 10, settings.forceSoftwareDecoding, settings.videoCodec)) {
+                        markCorruptAndRequestRecovery()
+                    }
                     return true
                 }
 
                 // Media Indication or Config (Offset 2)
                 val sc2 = findStartCode(buf, 2)
                 if (len > 2 + sc2 && sc2 > 0) {
-                    videoDecoder.decode(buf, 2, len - 2, settings.forceSoftwareDecoding, settings.videoCodec)
+                    if (!videoDecoder.decode(buf, 2, len - 2, settings.forceSoftwareDecoding, settings.videoCodec)) {
+                        markCorruptAndRequestRecovery()
+                    }
                     return true
                 }
                 AppLog.w("AapVideo: Dropped Flag 11 packet. len=$len")
@@ -195,7 +199,7 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                 messageBuffer.flip()
                 val assembledSize = messageBuffer.limit()
 
-                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                val decoded = if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
                     if (legacyAssembledBuffer == null || legacyAssembledBuffer!!.size < assembledSize) {
                         legacyAssembledBuffer = ByteArray(assembledSize + 1024)
                     }
@@ -203,6 +207,9 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                     videoDecoder.decode(legacyAssembledBuffer!!, 0, assembledSize, settings.forceSoftwareDecoding, settings.videoCodec)
                 } else {
                     videoDecoder.decode(messageBuffer.array(), 0, assembledSize, settings.forceSoftwareDecoding, settings.videoCodec)
+                }
+                if (!decoded) {
+                    markCorruptAndRequestRecovery()
                 }
 
                 messageBuffer.clear()
