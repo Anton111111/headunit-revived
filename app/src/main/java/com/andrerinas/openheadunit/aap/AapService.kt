@@ -745,8 +745,15 @@ class AapService : Service(), UsbReceiver.Listener {
 
     /** Enables Android Automotive UI mode so the system uses car-optimised layouts. */
     private fun setupCarMode() {
-        uiModeManager = getSystemService(UI_MODE_SERVICE) as UiModeManager
-        uiModeManager.enableCarMode(0)
+        try {
+            val mgr = getSystemService(UI_MODE_SERVICE) as? UiModeManager
+            if (mgr != null) {
+                uiModeManager = mgr
+                mgr.enableCarMode(0)
+            }
+        } catch (e: Exception) {
+            AppLog.w("AapService: Failed to enable car mode: ${e.message}")
+        }
     }
 
     /** Initialises [NightModeManager] and forwards night-mode changes to Android Auto via AAP. */
@@ -1615,11 +1622,17 @@ class AapService : Service(), UsbReceiver.Listener {
         try { unregisterReceiver(usbReceiver) } catch (_: Exception) {}
         try { unregisterReceiver(mediaButtonReceiver) } catch (_: Exception) {}
         try { unregisterReceiver(wakeDetectReceiver) } catch (_: Exception) {}
-        App.provide(this).carKeysManager.unregisterReceivers()
+        try { App.provide(this).carKeysManager.unregisterReceivers() } catch (e: Exception) { AppLog.w("AapService: Error unregistering carKeysManager: ${e.message}") }
         try { wifiAutoStartReceiver?.let { unregisterReceiver(it) } } catch (_: Exception) {}
-        uiModeManager.disableCarMode(0)
-        serviceScope.cancel()
-        LogExporter.stopCapture()
+        try {
+            if (::uiModeManager.isInitialized) {
+                uiModeManager.disableCarMode(0)
+            }
+        } catch (e: Exception) {
+            AppLog.w("AapService: Error disabling car mode: ${e.message}")
+        }
+        try { serviceScope.cancel() } catch (_: Exception) {}
+        try { LogExporter.stopCapture() } catch (_: Exception) {}
         super.onDestroy()
         if (killProcessOnDestroy) {
             AppLog.i("AapService: killProcessOnDestroy is true. Triggering System.exit(0).")
