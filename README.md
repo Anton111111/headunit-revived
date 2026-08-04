@@ -72,6 +72,7 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - Fixing new welcome screen reappears
 - Fixing screen flicker every 10s
 - Fixing HW decoding on kitkat
+- Fixing 2 Fatal errors shown in play console
 
 ### v.3.2.0
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
