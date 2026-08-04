@@ -7,11 +7,13 @@ import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
 import android.content.Context
 import com.andrerinas.openheadunit.aap.AapService
+import com.andrerinas.openheadunit.aap.NativeHandoffPolicy
 import com.andrerinas.openheadunit.utils.BluetoothHelper
 import com.andrerinas.openheadunit.aap.protocol.proto.Wireless
 import com.andrerinas.openheadunit.utils.AppLog
 import kotlinx.coroutines.*
 import android.os.Build
+import android.os.SystemClock
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import java.io.DataInputStream
@@ -105,6 +107,14 @@ class NativeAaHandshakeManager(
     // can fire an OS-level ACL_CONNECTED broadcast before any real handshake starts) - see
     // isAttemptInFlight().
     @Volatile private var pokeAttemptInFlight = false
+    // elapsedRealtime() when the last WifiInfoResponse (Type 3) went out, or 0 when no handoff is
+    // settling. The phone spends the next several seconds associating, doing WPS and getting a
+    // DHCP lease; see isHandoffSettling() and NativeHandoffPolicy.
+    @Volatile private var handoffSettlingSince = 0L
+    // The socket of the handshake currently being served. Kept so a phone that gives up and
+    // reconnects over Bluetooth during a settle supersedes the stale one instead of running a
+    // second handleHandshake() alongside it.
+    @Volatile private var activeHandshakeSocket: BluetoothSocket? = null
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -136,12 +146,24 @@ class NativeAaHandshakeManager(
 
     fun isHandshakeInFlight(): Boolean = handshakeInFlight
 
-    // True while either a wake-up poke's socket.connect() or a real handshake is in progress.
-    // AutoStartReceiver's own poke can generate the ACL_CONNECTED broadcast that re-triggers
-    // AapService's BT auto-start re-arm; callers deciding whether it's safe to force-reinit
-    // (rather than WifiDirectManager's join watchdog, which wants isHandshakeInFlight() alone)
-    // should check this instead of isActive() alone.
-    fun isAttemptInFlight(): Boolean = handshakeInFlight || pokeAttemptInFlight
+    /**
+     * True between delivering the WiFi credentials (Type 3) and the phone's TCP session actually
+     * landing — the window in which it is still associating, doing WPS and getting a DHCP lease.
+     *
+     * [isHandshakeInFlight] deliberately goes false the instant Type 3 is written, because the
+     * *credential exchange* is done at that point. The phone's work isn't: on the #760 reporter's
+     * hardware it joined the group 0.73 s after Type 3 and was still without an IP 2.4 s later.
+     * Anything that must not disturb the phone mid-join — the wake poke, the BT auto-start
+     * re-arm, WifiDirectManager's join watchdog — has to check this, not isHandshakeInFlight().
+     */
+    fun isHandoffSettling(): Boolean =
+        NativeHandoffPolicy.isSettling(handoffSettlingSince, SystemClock.elapsedRealtime())
+
+    // True while either a wake-up poke's socket.connect() or a real handshake is in progress, or
+    // a delivered handoff is still settling. AutoStartReceiver's own poke can generate the
+    // ACL_CONNECTED broadcast that re-triggers AapService's BT auto-start re-arm; callers
+    // deciding whether it's safe to force-reinit should check this instead of isActive() alone.
+    fun isAttemptInFlight(): Boolean = handshakeInFlight || pokeAttemptInFlight || isHandoffSettling()
 
     @SuppressLint("MissingPermission")
     fun start() {
@@ -416,8 +438,19 @@ class NativeAaHandshakeManager(
      * to start looking for the head unit. Retried every 15s (matching the retry cadence of both
      * nisargjhaveri/WirelessAndroidAutoDongle and mossyhub/openautolink) until a real handshake
      * starts or another session (USB/etc.) takes over, instead of giving up after a single pass.
+     *
+     * Never runs while a handoff is settling: AapService re-invokes this on every credential
+     * re-delivery, and the phone *joining our group* is itself a P2P connection change, hence a
+     * re-delivery. That turned into a real RFCOMM connect() landing in the middle of the phone's
+     * DHCP exchange (#760).
      */
     fun triggerPoke() {
+        if (isHandoffSettling()) {
+            // Info, not debug: this line is the evidence that the #760 fix is doing its job, and
+            // reporter logs default to INFO.
+            AppLog.i("NativeAA: Handoff still settling — not starting a poke that would compete with the phone's WiFi association.")
+            return
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -439,10 +472,15 @@ class NativeAaHandshakeManager(
             AppLog.d("NativeAA: triggerPoke() delay starting (2s)...")
             delay(2000) // Small safety delay before connecting
 
-            while (isRunning && isActive && !handshakeInFlight) {
-                if (commManager.isConnected ||
-                    commManager.connectionState.value is CommManager.ConnectionState.Connecting) {
-                    AppLog.i("NativeAA: USB/other session active. Stopping poke retry loop.")
+            while (isRunning && isActive) {
+                val settling = isHandoffSettling()
+                val sessionUp = commManager.isConnected ||
+                    commManager.connectionState.value is CommManager.ConnectionState.Connecting
+                if (!NativeHandoffPolicy.shouldPoke(settling, handshakeInFlight, sessionUp)) {
+                    AppLog.i(
+                        "NativeAA: Stopping poke retry loop " +
+                            "(settling=$settling, handshake=$handshakeInFlight, session=$sessionUp)."
+                    )
                     break
                 }
 
@@ -466,7 +504,7 @@ class NativeAaHandshakeManager(
                 }
 
                 for (device in devicesToPoke) {
-                    if (!isRunning || !isActive || handshakeInFlight) break
+                    if (!isRunning || !isActive || handshakeInFlight || isHandoffSettling()) break
                     if (commManager.isConnected) {
                         AppLog.i("NativeAA: USB/other session became active mid-poke. Stopping poke loop.")
                         break
@@ -514,6 +552,17 @@ class NativeAaHandshakeManager(
         // on the same physical radio for the remainder of its hold window, competing with this
         // handshake for radio time. Release it immediately instead of leaving it running.
         pokeJob?.cancel()
+        // The listener now stays open across the settling window, so the phone can reconnect over
+        // Bluetooth while an earlier handoff is still settling. That reconnect means the earlier
+        // one failed: retire it rather than serving both from the same manager state.
+        activeHandshakeSocket?.let { previous ->
+            if (previous !== socket) {
+                AppLog.i("NativeAA: A new handshake arrived while one was still settling — closing the previous session.")
+                handoffSettlingSince = 0L
+                try { previous.close() } catch (_: Exception) {}
+            }
+        }
+        activeHandshakeSocket = socket
         try {
             val device = socket.remoteDevice
             AppLog.i("NativeAA: Handling handshake for ${device.name} (${device.address}) on local radio [${localRadio ?: "?"}]")
@@ -609,23 +658,44 @@ class NativeAaHandshakeManager(
                 delay(1000) // [FIX] Increased delay to give phone more processing time
                 sendWifiSecurityResponse(output, ssid, psk, bssid)
                 AppLog.i("NativeAA: Handshake completed successfully on Bluetooth side.")
-                // The credential exchange is done; the join watchdog no longer needs to defer
-                // for this handshake.
+                // The credential exchange is done, but the phone's work has only just started —
+                // it now has to associate, run WPS and get a DHCP lease. See isHandoffSettling().
                 handshakeInFlight = false
+                handoffSettlingSince = SystemClock.elapsedRealtime()
 
-                // Release the Bluetooth connection shortly after handoff instead of holding it
-                // indefinitely. The real Android Auto protocol closes Bluetooth right after the
-                // WiFi credential exchange — confirmed via a reference wireless-dongle
+                // Release the Bluetooth connection once the handoff has actually happened, rather
+                // than holding it indefinitely. The real Android Auto protocol closes Bluetooth
+                // after the WiFi credential exchange — confirmed via a reference wireless-dongle
                 // implementation (nisargjhaveri/WirelessAndroidAutoDongle#17/#18), where holding
                 // it open caused the same "confusion, especially with phone calls" symptom this
-                // repo has seen reported. Short grace window for the phone to finish reading the
-                // response before we close.
-                delay(3000)
-                AppLog.i("NativeAA: Handshake session ending, releasing Bluetooth connection.")
-                // Stop accepting new AA_UUID connections too, not just this socket — otherwise
-                // the phone's immediate reconnect-retry gets accepted, bounced (already
-                // connected), and retried again in a tight loop. See closeAaListeners() kdoc.
-                closeAaListeners()
+                // repo has seen reported.
+                //
+                // [BUG_FIX] #760: this used to be a flat delay(3000). That is a race, not a grace
+                // period — the phone needs however long it needs. In the reporter's logs the
+                // phone joined the group 0.73s after Type 3 and then left it 0.17s after this
+                // close fired at T+3.0s, never having got an IP; on 3.1.1, which never closed
+                // Bluetooth at all, the same phone took 21s to associate and connected fine; on
+                // 3.2.0-beta4 the TCP session landed 110ms before the close and it worked. Wait
+                // for the session instead of guessing at it.
+                val landed = awaitWifiHandoff()
+                handoffSettlingSince = 0L
+                if (landed) {
+                    AppLog.i("NativeAA: WiFi session landed. Handshake session ending, releasing Bluetooth connection.")
+                    // Stop accepting new AA_UUID connections too, not just this socket —
+                    // otherwise the phone's immediate reconnect-retry gets accepted, bounced
+                    // (already connected), and retried again in a tight loop. See
+                    // closeAaListeners() kdoc.
+                    closeAaListeners()
+                } else {
+                    // The handoff never completed, so there is no session for a reconnect to
+                    // collide with — the reconnect storm closeAaListeners() guards against can't
+                    // happen here. Leave the listener up so the phone's own retry can be
+                    // accepted (start() early-returns while isRunning, so a close here would
+                    // strand us until AapService stopped and restarted the manager), and restart
+                    // the poke, which was cancelled when this handshake began.
+                    AppLog.w("NativeAA: No WiFi session within ${NativeHandoffPolicy.SETTLE_TIMEOUT_MS / 1000}s of delivering credentials — keeping the AA listener open and resuming the wake poke.")
+                    triggerPoke()
+                }
             } else {
                 AppLog.w("NativeAA: Handshake failed - Unexpected response type ${response.type}. Expected Type 2.")
             }
@@ -634,9 +704,36 @@ class NativeAaHandshakeManager(
             AppLog.e("NativeAA: Handshake error: ${e.message}", e)
         } finally {
             handshakeInFlight = false
+            // Only clear the settling stamp if this handshake still owns it — a superseding
+            // handshake has already taken over and set its own.
+            if (activeHandshakeSocket === socket) {
+                activeHandshakeSocket = null
+                handoffSettlingSince = 0L
+            }
             try { socket.close() } catch (e: Exception) {}
             AppLog.i("NativeAA: BT Handshake socket closed.")
         }
+    }
+
+    /**
+     * Suspends until the phone's projection session actually reaches us over WiFi, or
+     * [NativeHandoffPolicy.SETTLE_TIMEOUT_MS] elapses. Returns true if it landed.
+     *
+     * [CommManager.isConnected] covers Connected/StartingTransport, and the Connecting state
+     * covers the moment WirelessServer hands an accepted socket over — either is proof the phone
+     * finished associating, which is the only thing we were waiting for.
+     */
+    private suspend fun awaitWifiHandoff(): Boolean {
+        val deadline = SystemClock.elapsedRealtime() + NativeHandoffPolicy.SETTLE_TIMEOUT_MS
+        while (isRunning && SystemClock.elapsedRealtime() < deadline) {
+            if (commManager.isConnected ||
+                commManager.connectionState.value is CommManager.ConnectionState.Connecting) {
+                return true
+            }
+            delay(250)
+        }
+        return commManager.isConnected ||
+            commManager.connectionState.value is CommManager.ConnectionState.Connecting
     }
 
     private fun sendWifiStartRequest(output: OutputStream, ip: String, port: Int) {
@@ -706,5 +803,10 @@ class NativeAaHandshakeManager(
         pokeJob?.cancel()
         pokeJob = null
         lastPokeTriggerCredentials = null
+        // A settle can't outlive the manager: leaving these set would keep isHandoffSettling()
+        // (and so isAttemptInFlight()) true across a restart, blocking the very poke the next
+        // start() needs.
+        handoffSettlingSince = 0L
+        activeHandshakeSocket = null
     }
 }
