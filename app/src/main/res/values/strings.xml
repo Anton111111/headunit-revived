@@ -367,6 +367,7 @@
     <string name="overlay_permission_title">Background Start Permission</string>
     <string name="overlay_permission_description">To allow Open Headunit to open automatically when Bluetooth connects, please enable the "Display over other apps" permission in the next screen.</string>
     <string name="open_settings">Settings</string>
+    <string name="cannot_open_settings">Could not open system settings</string>
     <string name="right_hand_drive">Right-hand drive</string>
     <string name="right_hand_drive_description">Position UI for right-side driving</string>
     <string name="wireless_connection_settings">Wireless Connection</string>

@@ -262,12 +262,12 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     //   - a throughput collapse: several abnormally long frames within a sliding window. On MediaTek
     //     the GL consumer does not fully stop but drops to 2-5fps with single frames taking ~2s, so
     //     a plain "no frame for N seconds" check misses it (issue #650).
-    private val displayFreezeThresholdMs = 3000L
+    private val displayFreezeThresholdMs = 5000L
     private val phoneAliveThresholdMs = 1500L
     private val displayStallRecoveryCooldownMs = 10000L
     private val displayStallRecoveryResetMs = 60000L
     private val maxDisplayStallRecoveries = 4
-    private val collapseLongFrameFloor = 2L
+    private val collapseLongFrameFloor = 10L
     private var displayStallRecoveries = 0
     private var lastDisplayStallRecoveryMs = 0L
     private var firstUndrawnMs = 0L
@@ -290,6 +290,12 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         val now = SystemClock.elapsedRealtime()
         // Only act while the phone is still streaming video.
         if (now - input > phoneAliveThresholdMs) return
+
+        // If the view is actively drawing frames (drawn within the last 2s), DO NOT tear down the surface.
+        // Recreating the view mid-stream causes black screen flashes, EGL disconnection, and touch loss.
+        if (drawn > 0L && (now - drawn < 2000L)) {
+            return
+        }
 
         // Slide the long-frame window (this runs ~every 2s from the reconnecting watchdog).
         val longFrames = projectionView.longFrameEvents()
@@ -334,7 +340,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         if (shouldFallBack) {
             AppLog.w("Display stall ($reason) again on $effectiveMode. Falling back to SurfaceView for this session. See issue #650.")
             forcedViewModeOverride = Settings.ViewMode.SURFACE
-            Toast.makeText(this, R.string.renderer_fallback_surface, Toast.LENGTH_LONG).show()
+            com.andrerinas.openheadunit.utils.ToastUtils.showToast(this, R.string.renderer_fallback_surface, duration = android.widget.Toast.LENGTH_LONG, force = true)
         } else {
             AppLog.w("Display stall ($reason). Rebuilding projection view (attempt $displayStallRecoveries). See issue #650.")
         }
@@ -389,8 +395,17 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyOrientationSettings()
         super.onCreate(savedInstanceState)
+        // [FIX] applyOrientationSettings() must be called AFTER super.onCreate() so that the
+        // Activity window is fully initialized before we lock the orientation. Calling it before
+        // super.onCreate() caused SCREEN_ORIENTATION_LOCKED to inherit the orientation context
+        // from the launching task (e.g. MainActivity in portrait), resulting in the projection
+        // Activity locking to portrait on a landscape head unit when started via the Self Mode
+        // button in the app. With the long-press shortcut the bug was absent because the Activity
+        // started without an existing task context. Moving this call after super.onCreate()
+        // ensures the window manager has correctly resolved the display's physical orientation
+        // before we lock it.
+        applyOrientationSettings()
 
 
         setContentView(R.layout.activity_headunit)
