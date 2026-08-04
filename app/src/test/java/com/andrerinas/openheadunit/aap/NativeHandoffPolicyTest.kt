@@ -7,6 +7,7 @@ import org.junit.Test
 class NativeHandoffPolicyTest {
 
     private val timeout = NativeHandoffPolicy.SETTLE_TIMEOUT_MS
+    private val handshakeTimeout = NativeHandoffPolicy.HANDSHAKE_TIMEOUT_MS
 
     @Test
     fun `no handoff is settling before any credentials go out`() {
@@ -29,6 +30,53 @@ class NativeHandoffPolicyTest {
     @Test
     fun `a clock that went backwards does not count as settling`() {
         assertFalse(NativeHandoffPolicy.isSettling(settlingSinceMs = 10_000L, nowMs = 9_000L))
+    }
+
+    @Test
+    fun `no handshake is in flight before one starts`() {
+        assertFalse(NativeHandoffPolicy.isHandshaking(startedAtMs = 0L, nowMs = 10_000L))
+    }
+
+    @Test
+    fun `handshake counts as in flight for the whole exchange window`() {
+        assertTrue(NativeHandoffPolicy.isHandshaking(startedAtMs = 1_000L, nowMs = 1_000L))
+        assertTrue(
+            NativeHandoffPolicy.isHandshaking(
+                startedAtMs = 1_000L, nowMs = 1_000L + handshakeTimeout / 2
+            )
+        )
+        assertTrue(
+            NativeHandoffPolicy.isHandshaking(
+                startedAtMs = 1_000L, nowMs = 1_000L + handshakeTimeout - 1
+            )
+        )
+    }
+
+    @Test
+    fun `handshake expires so a coroutine that never unwinds cannot latch it true`() {
+        // #706: on that head unit closing the socket does not unblock the pending read, so
+        // handleHandshake()'s cleanup never runs. Without this bound the old boolean stayed true
+        // for the life of the process, stopping the wake poke and the P2P join watchdog.
+        assertFalse(
+            NativeHandoffPolicy.isHandshaking(startedAtMs = 1_000L, nowMs = 1_000L + handshakeTimeout)
+        )
+        assertFalse(
+            NativeHandoffPolicy.isHandshaking(
+                startedAtMs = 1_000L, nowMs = 1_000L + handshakeTimeout * 10
+            )
+        )
+    }
+
+    @Test
+    fun `a clock that went backwards does not count as handshaking`() {
+        assertFalse(NativeHandoffPolicy.isHandshaking(startedAtMs = 10_000L, nowMs = 9_000L))
+    }
+
+    @Test
+    fun `the handshake window outlasts the longest legitimate exchange`() {
+        // 60s waiting for P2P credentials plus 15s waiting for the phone's Type 2, so the bound
+        // must not expire under a slow-but-working handshake.
+        assertTrue(NativeHandoffPolicy.isHandshaking(startedAtMs = 1_000L, nowMs = 1_000L + 75_000L))
     }
 
     @Test
