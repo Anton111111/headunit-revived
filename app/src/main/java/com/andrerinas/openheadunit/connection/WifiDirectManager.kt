@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import com.andrerinas.openheadunit.App
 import com.andrerinas.openheadunit.R
 import com.andrerinas.openheadunit.aap.AapService
+import com.andrerinas.openheadunit.aap.NativeHandoffPolicy
 import com.andrerinas.openheadunit.utils.ToastUtils
 import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.utils.Settings
@@ -101,8 +102,9 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             return@Runnable
         }
         if (isNativeHandshakeInFlight?.invoke() == true) {
-            // A handshake is exchanging credentials right now; recreating here would hand out a new SSID mid-exchange.
-            AppLog.i("WifiDirectManager: Native AA join watchdog fired but a Bluetooth handshake is in flight — deferring recovery.")
+            // A handshake is exchanging credentials right now, or the phone is still joining on
+            // credentials we just handed it; recreating here would hand out a new SSID mid-flight.
+            AppLog.i("WifiDirectManager: Native AA join watchdog fired but a Bluetooth handshake or handoff is in flight — deferring recovery.")
             armNativeJoinWatchdog()
             return@Runnable
         }
@@ -110,8 +112,9 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     }
 
     private var onCredentialsReady: ((ssid: String, psk: String, ip: String, bssid: String) -> Unit)? = null
-    // Set by AapService: whether NativeAaHandshakeManager has a live handshake in progress, so
-    // the join watchdog/self-heal never tears the group down mid-exchange.
+    // Set by AapService: whether NativeAaHandshakeManager has a live handshake in progress *or*
+    // a delivered handoff still settling (the phone associating/doing DHCP after Type 3), so the
+    // join watchdog/self-heal never tears the group down mid-exchange or mid-join.
     private var isNativeHandshakeInFlight: (() -> Boolean)? = null
     // Set by AapService: whether a real AA session is connected - isClientConnected can't tell
     // that apart from nobody joining (see nativeJoinWatchdog above).
@@ -382,8 +385,21 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                     nativeRecreateCount = 0
                 }
                 if (hadClient && !isClientConnected) {
-                    AppLog.i("WifiDirectManager: Client disconnected from P2P group. Restarting discovery loop.")
-                    startDiscoveryLoop()
+                    // [BUG_FIX] #760: never rediscover on the Native AA path. We run a *quiet*
+                    // host there — the phone finds us by SSID from the credentials we handed it
+                    // over Bluetooth, never by discovery — and discoverPeers() takes the group
+                    // owner off-channel every 10s. In the reporter's logs that loop starts the
+                    // moment the phone drops mid-DHCP and then keeps every subsequent retry stuck
+                    // at "Obtaining IP address".
+                    if (NativeHandoffPolicy.shouldRestartDiscovery(
+                            nativeAaMode = isNativeAaMode(),
+                            hadClient = hadClient,
+                            hasClient = isClientConnected)) {
+                        AppLog.i("WifiDirectManager: Client disconnected from P2P group. Restarting discovery loop.")
+                        startDiscoveryLoop()
+                    } else {
+                        AppLog.i("WifiDirectManager: Client left the Native AA group; staying a quiet host instead of rediscovering.")
+                    }
                     if (isNativeAaMode()) armNativeJoinWatchdog()
                 }
             } else {
