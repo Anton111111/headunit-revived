@@ -132,6 +132,14 @@ class NativeAaHandshakeManager(
     // NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack.
     @Volatile private var pokesSinceLastAccept = 0
     @Volatile private var everAcceptedAaConnection = false
+    // [BUG_FIX] #706: handshakes that timed out waiting for Type 2, back to back. Each one strands
+    // a Dispatchers.IO thread forever on a stack where close() does not interrupt a pending read,
+    // so this bounds how many we are willing to strand. See
+    // NativeHandoffPolicy.shouldServeHandshake.
+    @Volatile private var consecutiveHandshakeFailures = 0
+    // Whether the "not serving handshakes" warning has already been logged for the current
+    // backoff, so a phone retrying every ~12 s does not repeat the long explanation each time.
+    @Volatile private var loggedHandshakeBackoff = false
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -223,6 +231,7 @@ class NativeAaHandshakeManager(
                     val socket = aaServerSocket?.accept()
                     if (socket != null) {
                         AppLog.i("NativeAA: Connection accepted from ${socket.remoteDevice.name} (${socket.remoteDevice.address}) on local radio [$localRadioName]")
+                        if (refuseWhileBackedOff(socket)) continue
                         // [FIX] Launch handshake in a separate coroutine so the server can accept the next connection!
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
                             handleHandshake(socket, localRadioName)
@@ -317,6 +326,7 @@ class NativeAaHandshakeManager(
                     val socket = server.accept()
                     if (socket != null) {
                         AppLog.i("NativeAA: Connection accepted (secondary radio '$serviceName' [$radioName]) from ${socket.remoteDevice.name} (${socket.remoteDevice.address})")
+                        if (refuseWhileBackedOff(socket)) continue
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-Handshake-${socket.remoteDevice.address}")) {
                             handleHandshake(socket, radioName)
                         }
@@ -579,6 +589,9 @@ class NativeAaHandshakeManager(
         try {
             val device = adapter.getRemoteDevice(address)
             AppLog.i("NativeAA: Manual poke requested for ${device.name} ($address)")
+            // The user asking to try again is the way out of a handshake backoff — it is the only
+            // gesture the UI offers, and it means they want another attempt whatever we concluded.
+            resetHandshakeBackoff()
             
             pokeJob?.cancel()
             pokeJob = scope.launch(Dispatchers.IO + CoroutineName("NativeAa-ManualWakeup")) {
@@ -589,6 +602,38 @@ class NativeAaHandshakeManager(
         } catch (e: Exception) {
             AppLog.e("NativeAA: Manual poke error", e)
         }
+    }
+
+    /**
+     * Drop an incoming Android Auto connection instead of serving it, once too many handshakes in
+     * a row have timed out waiting for the phone's Type 2. Returns true if the socket was refused.
+     *
+     * Each timed-out handshake strands a thread that cannot be reclaimed (see
+     * [NativeHandoffPolicy.shouldServeHandshake]), so past the limit the only useful thing to do
+     * is stop starting new ones. The phone will keep reconnecting; closing immediately costs it
+     * nothing beyond the retry it was going to make anyway.
+     */
+    private fun refuseWhileBackedOff(socket: BluetoothSocket): Boolean {
+        if (NativeHandoffPolicy.shouldServeHandshake(consecutiveHandshakeFailures)) return false
+        if (!loggedHandshakeBackoff) {
+            loggedHandshakeBackoff = true
+            AppLog.w(
+                "NativeAA: $consecutiveHandshakeFailures handshakes in a row ended with no answer from the phone, " +
+                    "so this connection is being dropped instead of served. Each attempt costs a thread that " +
+                    "cannot be recovered, and this head unit's Bluetooth is not delivering our messages. " +
+                    "Use the manual poke button, or switch Android Auto mode off and on, to try again."
+            )
+        } else {
+            AppLog.d("NativeAA: Dropping Android Auto connection — still backed off after $consecutiveHandshakeFailures failed handshakes.")
+        }
+        try { socket.close() } catch (e: Exception) {}
+        return true
+    }
+
+    /** Clears the handshake backoff. Called wherever the user or the system asks for a fresh try. */
+    private fun resetHandshakeBackoff() {
+        consecutiveHandshakeFailures = 0
+        loggedHandshakeBackoff = false
     }
 
     private suspend fun handleHandshake(socket: BluetoothSocket, localRadio: String? = null) = withContext(Dispatchers.IO) {
@@ -715,9 +760,17 @@ class NativeAaHandshakeManager(
             if (response == null) {
                 AppLog.e("NativeAA: Handshake failed - No response from phone ${device.name} (${device.address}) on radio [${localRadio ?: "?"}] within ${HANDSHAKE_RESPONSE_TIMEOUT_MS / 1000}s of sending WifiStartRequest. Closing socket.")
                 try { socket.close() } catch (e: Exception) {}
+                // Best effort only: on a stack where close() does not interrupt a pending read,
+                // this cannot end `reader` — a blocking JNI read has no suspension point to
+                // cancel at — so its thread is stranded from here on. That is what
+                // consecutiveHandshakeFailures bounds; this is the one path that leaks one.
                 reader.cancel()
+                consecutiveHandshakeFailures++
                 return@withContext
             }
+            // The reader returned, so nothing is stranded and the channel is carrying data in at
+            // least one direction. Whatever the type turns out to be, this was not a silent unit.
+            resetHandshakeBackoff()
             AppLog.i("NativeAA: [RX] Received Type ${response.type} (Payload size: ${response.payload.size})")
 
             if (response.type == 2) {
@@ -885,5 +938,8 @@ class NativeAaHandshakeManager(
         // Only the per-attempt count resets: everAcceptedAaConnection is deliberately kept, so a
         // unit that has connected before is not warned just because the manager was re-armed.
         pokesSinceLastAccept = 0
+        // A mode change or a user exit is a fresh start, so the next start() serves handshakes
+        // again rather than inheriting a backoff the user cannot see.
+        resetHandshakeBackoff()
     }
 }

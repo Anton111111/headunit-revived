@@ -90,6 +90,28 @@ object NativeHandoffPolicy {
             pokesSinceLastAccept > 0 &&
             pokesSinceLastAccept % SILENT_POKE_WARN_INTERVAL == 0
 
+    /** How many handshakes may time out waiting for the phone's Type 2, back to back, before we
+     *  stop serving new ones. Roughly a minute of trying at the phone's ~12 s reconnect cadence. */
+    const val MAX_CONSECUTIVE_HANDSHAKE_FAILURES = 5
+
+    /**
+     * Whether to serve an incoming Android Auto connection at all.
+     *
+     * Exists to bound a leak we cannot otherwise close. The wait for the phone's Type 2 is a
+     * blocking read on a background coroutine, and on a head unit where `close()` does not
+     * interrupt a pending read — #706's does not — that coroutine never returns and its
+     * `Dispatchers.IO` thread is stranded for the life of the process. `cancel()` cannot help:
+     * there is no suspension point inside a blocking JNI read. Since the thread cannot be
+     * reclaimed, the only lever is to stop creating them.
+     *
+     * A hard stop rather than a growing delay, because this failure is not transient: if the
+     * stack drops our write, the 200th attempt fails exactly like the first, and each one costs a
+     * thread and radio time for nothing. The counter resets on a successful handshake, on
+     * stop()/start(), and on a manual poke — so the user's own "try again" is the way back.
+     */
+    fun shouldServeHandshake(consecutiveFailures: Int): Boolean =
+        consecutiveFailures < MAX_CONSECUTIVE_HANDSHAKE_FAILURES
+
     /**
      * Whether a client leaving the P2P group should restart the peer-discovery loop.
      *

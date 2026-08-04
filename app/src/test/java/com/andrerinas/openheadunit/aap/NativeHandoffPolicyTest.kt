@@ -9,6 +9,7 @@ class NativeHandoffPolicyTest {
     private val timeout = NativeHandoffPolicy.SETTLE_TIMEOUT_MS
     private val handshakeTimeout = NativeHandoffPolicy.HANDSHAKE_TIMEOUT_MS
     private val silentPokeInterval = NativeHandoffPolicy.SILENT_POKE_WARN_INTERVAL
+    private val maxFailures = NativeHandoffPolicy.MAX_CONSECUTIVE_HANDSHAKE_FAILURES
 
     @Test
     fun `no handoff is settling before any credentials go out`() {
@@ -163,6 +164,25 @@ class NativeHandoffPolicyTest {
                 pokesSinceLastAccept = silentPokeInterval * 10, everAccepted = true
             )
         )
+    }
+
+    @Test
+    fun `handshakes are served until too many have timed out in a row`() {
+        assertTrue(NativeHandoffPolicy.shouldServeHandshake(consecutiveFailures = 0))
+        assertTrue(NativeHandoffPolicy.shouldServeHandshake(consecutiveFailures = maxFailures - 1))
+    }
+
+    @Test
+    fun `handshakes stop being served once the limit is reached`() {
+        assertFalse(NativeHandoffPolicy.shouldServeHandshake(consecutiveFailures = maxFailures))
+        assertFalse(NativeHandoffPolicy.shouldServeHandshake(consecutiveFailures = maxFailures + 100))
+    }
+
+    @Test
+    fun `the handshake limit leaves room for a phone that needs a few attempts`() {
+        // At the phone's ~12 s reconnect cadence this is about a minute of trying, so a transient
+        // failure recovers on its own rather than tripping the backoff.
+        assertTrue(maxFailures >= 3)
     }
 
     @Test
