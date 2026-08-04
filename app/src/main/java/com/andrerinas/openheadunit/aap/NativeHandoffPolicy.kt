@@ -65,6 +65,31 @@ object NativeHandoffPolicy {
     fun shouldPoke(settling: Boolean, handshakeInFlight: Boolean, sessionConnected: Boolean): Boolean =
         !settling && !handshakeInFlight && !sessionConnected
 
+    /** How many wake pokes the phone may answer without ever opening the Android Auto channel
+     *  before we say so in the log. Three is roughly 45 s of the retry cadence — long enough that
+     *  a phone which is merely slow to react has had its chance. */
+    const val SILENT_POKE_WARN_INTERVAL = 3
+
+    /**
+     * Whether to warn that the phone answers our wake pokes but never connects back.
+     *
+     * That combination has exactly one common cause, and it is not something this app can fix:
+     * the phone's Android Auto is bound to a *different* Bluetooth device that also advertises
+     * the Android Auto service record. On the #706 reporter's unit that was the head unit's own
+     * OEM Bluetooth module ("CAR8032"), a separate chip that Android on the head unit cannot see,
+     * still advertising the service after its OEM app stopped answering on it. Gearhead kept
+     * reconnecting to it every 12 s and discarded every poke from our radio as
+     * `IGNORE_DIFFERENT_BLUETOOTH_DEVICE`. Our own log showed successful pokes and nothing wrong.
+     *
+     * [everAccepted] gates it to units that have never once been reached, so a unit that connects
+     * normally and then has a bad run never sees it. Periodic rather than one-shot so it is still
+     * visible in a log exported long after the trouble started.
+     */
+    fun shouldWarnPhoneNeverCallsBack(pokesSinceLastAccept: Int, everAccepted: Boolean): Boolean =
+        !everAccepted &&
+            pokesSinceLastAccept > 0 &&
+            pokesSinceLastAccept % SILENT_POKE_WARN_INTERVAL == 0
+
     /**
      * Whether a client leaving the P2P group should restart the peer-discovery loop.
      *

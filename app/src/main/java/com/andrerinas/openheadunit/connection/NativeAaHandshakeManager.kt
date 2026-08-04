@@ -121,6 +121,17 @@ class NativeAaHandshakeManager(
     // reconnects over Bluetooth during a settle supersedes the stale one instead of running a
     // second handleHandshake() alongside it.
     @Volatile private var activeHandshakeSocket: BluetoothSocket? = null
+    // Name of the primary Bluetooth radio we listen and poke on, captured in start(). A field
+    // rather than a local so the diagnostic below can name the radio the phone is ignoring.
+    @Volatile private var localRadioName: String = "?"
+    // [BUG_FIX] #706: how many wake pokes the phone has answered without ever opening the AA
+    // channel, and whether it ever has. The pair exists because "poke succeeds, nothing comes
+    // back" produced a head unit log with no sign of trouble at all — successful pokes and
+    // nothing else — while the phone was in fact reconnecting every 12 s to the head unit's own
+    // OEM Bluetooth module, which still advertises the Android Auto service record. See
+    // NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack.
+    @Volatile private var pokesSinceLastAccept = 0
+    @Volatile private var everAcceptedAaConnection = false
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -200,7 +211,7 @@ class NativeAaHandshakeManager(
         // log). Uses adapter.name, not adapter.address: getAddress() returns the fixed masked
         // placeholder "02:00:00:00:00:00" for any non-privileged app since Android 6.0 (API 23),
         // but getName() returns the real radio name (confirmed on-device: e.g. "Navegadortz2").
-        val localRadioName = try { adapter.name ?: "?" } catch (e: Exception) { "?" }
+        localRadioName = try { adapter.name ?: "?" } catch (e: Exception) { "?" }
         AppLog.i("NativeAA: Starting Bluetooth Handshake Servers (primary radio [$localRadioName])...")
 
         // Start AA RFCOMM Server
@@ -420,6 +431,9 @@ class NativeAaHandshakeManager(
                     AppLog.i("NativeAA: Calling socket.connect() for ${device.name} via $uuid...")
                     socket.connect()
                     AppLog.i("NativeAA: Successfully poked ${device.name} via $uuid. Holding ${holdMs}ms...")
+                    // Counted before the hold, so a poke that is cancelled mid-hold still counts:
+                    // the phone answered, which is the whole point of the count.
+                    pokesSinceLastAccept++
                     delay(holdMs)
                     return true
                 } catch (e: CancellationException) {
@@ -521,6 +535,30 @@ class NativeAaHandshakeManager(
                     pokeDevice(device, holdMs = 15000)
                 }
 
+                // [BUG_FIX] #706: say out loud that the phone is answering but never calling back.
+                // Without this the log of a head unit in that state is indistinguishable from a
+                // healthy one waiting for the user — successful pokes and nothing else — which is
+                // what let the reporter's real cause (his phone's Android Auto was bound to the
+                // head unit's own OEM Bluetooth module, still advertising the AA service record
+                // after its OEM app stopped answering) go unnoticed for weeks. Warning, not info,
+                // so it survives a reporter log exported at the default level.
+                if (NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                        pokesSinceLastAccept, everAcceptedAaConnection
+                    )
+                ) {
+                    AppLog.w(
+                        "NativeAA: The phone has answered $pokesSinceLastAccept wake pokes but has " +
+                            "never opened the Android Auto channel on radio [$localRadioName]. Its " +
+                            "Android Auto is most likely bound to a different Bluetooth device that " +
+                            "also advertises the Android Auto service — typically this head unit's " +
+                            "own OEM/factory Bluetooth module (a second name alongside this one in " +
+                            "the phone's paired list), or another car. Remove that device from the " +
+                            "phone's Bluetooth paired list and retry. If this phone has never " +
+                            "projected wirelessly to any head unit, check that it supports wireless " +
+                            "Android Auto first."
+                    )
+                }
+
                 delay(15000) // retry cadence, matches both reference implementations' 15-20s interval
             }
         }
@@ -554,6 +592,11 @@ class NativeAaHandshakeManager(
     }
 
     private suspend fun handleHandshake(socket: BluetoothSocket, localRadio: String? = null) = withContext(Dispatchers.IO) {
+        // The phone reached us. Recorded here rather than at either accept site so both the
+        // primary and the secondary-radio loops are covered by one statement.
+        everAcceptedAaConnection = true
+        pokesSinceLastAccept = 0
+
         // The wake poke is deliberately left running here. It used to be cancelled on entry, on
         // the reasoning that a real AA_UUID connection means the poke has done its job and is now
         // just competing for radio time — but cancelling it closes the HFP/HSP socket, and #706's
@@ -839,5 +882,8 @@ class NativeAaHandshakeManager(
         handshakeStartedAt = 0L
         handoffSettlingSince = 0L
         activeHandshakeSocket = null
+        // Only the per-attempt count resets: everAcceptedAaConnection is deliberately kept, so a
+        // unit that has connected before is not warned just because the manager was re-armed.
+        pokesSinceLastAccept = 0
     }
 }

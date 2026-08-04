@@ -8,6 +8,7 @@ class NativeHandoffPolicyTest {
 
     private val timeout = NativeHandoffPolicy.SETTLE_TIMEOUT_MS
     private val handshakeTimeout = NativeHandoffPolicy.HANDSHAKE_TIMEOUT_MS
+    private val silentPokeInterval = NativeHandoffPolicy.SILENT_POKE_WARN_INTERVAL
 
     @Test
     fun `no handoff is settling before any credentials go out`() {
@@ -109,6 +110,57 @@ class NativeHandoffPolicyTest {
         assertFalse(
             NativeHandoffPolicy.shouldPoke(
                 settling = false, handshakeInFlight = false, sessionConnected = true
+            )
+        )
+    }
+
+    @Test
+    fun `no warning before the phone has ignored enough pokes`() {
+        assertFalse(
+            NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                pokesSinceLastAccept = 0, everAccepted = false
+            )
+        )
+        assertFalse(
+            NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                pokesSinceLastAccept = silentPokeInterval - 1, everAccepted = false
+            )
+        )
+    }
+
+    @Test
+    fun `warns once the phone has answered enough pokes without ever connecting back`() {
+        assertTrue(
+            NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                pokesSinceLastAccept = silentPokeInterval, everAccepted = false
+            )
+        )
+    }
+
+    @Test
+    fun `the warning repeats so it survives into a log exported much later`() {
+        assertTrue(
+            NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                pokesSinceLastAccept = silentPokeInterval * 2, everAccepted = false
+            )
+        )
+        assertFalse(
+            NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                pokesSinceLastAccept = silentPokeInterval * 2 + 1, everAccepted = false
+            )
+        )
+    }
+
+    @Test
+    fun `a unit that has connected before is never warned`() {
+        assertFalse(
+            NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                pokesSinceLastAccept = silentPokeInterval, everAccepted = true
+            )
+        )
+        assertFalse(
+            NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
+                pokesSinceLastAccept = silentPokeInterval * 10, everAccepted = true
             )
         )
     }
