@@ -49,24 +49,23 @@ class SystemOptimizer(private val context: Context) {
 
         val width = metrics.widthPixels.toFloat()
         val height = metrics.heightPixels.toFloat()
-        val densityDpi = metrics.densityDpi
-        val pixelDiagonal = sqrt(width * width + height * height)
         val aspectRatio = if (width > height) width / height else height / width
-        
-        val hasH265 = checkH265HardwareSupport()
-        
-        // 1. Resolution Recommendation
-        val recResId = when {
-            width >= 2560 && hasH265 -> 4
-            // Only recommend 1080p for genuinely >=1920-wide panels. The old rule also fired on
-            // densityDpi >= 320, which mis-set 1080p on small high-DPI head units and made them
-            // downscale every frame (issue #650). Small panels now default to 720p.
-            width >= 1920 -> 3
-            else -> 2
-        }
 
-        // 2. DPI Strategy
-        val calculatedDpi = (pixelDiagonal / sizePreset.diagonalInch) * 1.2f
+        val hasH265 = checkH265HardwareSupport()
+
+        // 1. Resolution: the single "panel ceiling" source of truth (see panelCeiling), so the
+        // recommended resolution, the runtime cap and the DPI below all agree.
+        val panelCeil = panelCeiling(metrics.widthPixels, metrics.heightPixels, hasH265)
+
+        // 2. DPI Strategy. Derive the density from the resolution Android Auto will actually draw
+        // (the panel-capped resolution), not the raw panel pixels: when we downscale a small
+        // high-DPI panel, the surface AA renders is smaller, so using the panel pixels over-reports
+        // the density (issue #767). Diagonal of the effective surface / physical inches, nudged up
+        // a little for the car viewing distance.
+        val effectiveDiagonalPx = sqrt(
+            (panelCeil.width * panelCeil.width + panelCeil.height * panelCeil.height).toFloat()
+        )
+        val calculatedDpi = (effectiveDiagonalPx / sizePreset.diagonalInch) * LEGIBILITY_FACTOR
         var recDpi = calculatedDpi.toInt()
 
         // 3. View Mode Recommendation
@@ -75,14 +74,16 @@ class SystemOptimizer(private val context: Context) {
             // so we recommend TextureView instead.
             Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP -> Settings.ViewMode.TEXTURE
 
-            // 5.0 - 8.1 used to get GLES here, but sampling the hardware decoder's external
-            // texture in-app via GLES forces a per-frame color conversion on some SoCs (notably
-            // MediaTek's MDP), which collapses playback to a few fps (issue #650). When the
-            // device can decode video in hardware, a direct SurfaceView avoids that path. GLES
-            // is only kept for devices without hardware HEVC, which may fall back to the software
-            // YUV sink that GLES provides.
+            // 5.0 - 8.1: start on the safe, observable TextureView rather than forcing SurfaceView
+            // up front. SurfaceView renders directly but is a blind spot for the display-stall
+            // watchdog (it reports no drawn frames), so if it happens to be broken on a device the
+            // user is stranded with no automatic recovery (issue #767). TextureView failures ARE
+            // observable, so on the MediaTek MDP devices where the external-texture path collapses
+            // to a few fps (issue #650) the watchdog detects the stall and escalates to SurfaceView
+            // on its own. GLES is only kept for devices without hardware HEVC, which may fall back
+            // to the software YUV sink that GLES provides.
             Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1 ->
-                if (hasH265) Settings.ViewMode.SURFACE else Settings.ViewMode.GLES
+                if (hasH265) Settings.ViewMode.TEXTURE else Settings.ViewMode.GLES
 
             // Modern devices are usually fine with the default TextureView
             else -> Settings.ViewMode.TEXTURE
@@ -99,7 +100,7 @@ class SystemOptimizer(private val context: Context) {
         recDpi = recDpi.coerceAtLeast(110)
 
         return OptimizationResult(
-            recommendedResolutionId = recResId,
+            recommendedResolutionId = panelCeil.id,
             recommendedDpi = recDpi,
             recommendedVideoCodec = if (hasH265) "H.265" else "H.264",
             recommendedViewMode = recViewMode,
@@ -111,17 +112,42 @@ class SystemOptimizer(private val context: Context) {
 
     companion object {
         /**
-         * The largest standard video resolution that physically fits the panel (no upscaling
-         * waste). Compared in landscape terms (long side x short side). Falls back to 480p.
+         * Small upward nudge on the computed density so the Android Auto UI reads well at the car
+         * viewing distance (the panel is farther from the eyes than a phone). Kept modest so the
+         * result stays near the ~150-170 dpi range that works well on head units instead of the
+         * larger, more cramped UI a raw physical-DPI value would give.
          */
-        fun recommendedResolution(realWidthPx: Int, realHeightPx: Int): Settings.Resolution {
+        private const val LEGIBILITY_FACTOR = 1.1f
+
+        /**
+         * The single source of truth for the largest resolution a physical panel warrants, shared
+         * by the recommended resolution, the runtime resolution cap (HeadUnitScreenConfig) and the
+         * DPI calculation, so all three always agree (issue #767). Bucketed by the panel's real
+         * pixels, in landscape terms (long side x short side); 1440p/4K are gated behind hardware
+         * HEVC on a recent enough Android, matching what the phone will actually stream. Mild
+         * downscaling (e.g. 1080p onto a 1024x600 panel) is allowed on purpose; only genuinely
+         * small panels are dropped to 720p/480p, which avoids the heavy per-frame downscale that
+         * overloads the MediaTek MDP scaler (issue #650).
+         */
+        fun panelCeiling(realWidthPx: Int, realHeightPx: Int, canHevc: Boolean): Settings.Resolution {
             val longSide = maxOf(realWidthPx, realHeightPx)
             val shortSide = minOf(realWidthPx, realHeightPx)
-            if (longSide <= 0) return Settings.Resolution._1280x720
-            return Settings.Resolution.allResolutions
-                .filter { it.width in 1..longSide && it.height in 1..shortSide }
-                .maxByOrNull { it.width }
-                ?: Settings.Resolution._800x480
+            val hevcHiRes = canHevc && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+            return when {
+                longSide <= 0 -> Settings.Resolution._1280x720
+                longSide <= 800 && shortSide <= 480 -> Settings.Resolution._800x480
+                (longSide >= 3840 || shortSide >= 2160) && hevcHiRes -> Settings.Resolution._3840x2160
+                (longSide >= 2560 || shortSide >= 1440) && hevcHiRes -> Settings.Resolution._2560x1440
+                longSide > 1280 || shortSide > 720 -> Settings.Resolution._1920x1080
+                else -> Settings.Resolution._1280x720
+            }
         }
+
+        /**
+         * The resolution the panel warrants. Thin wrapper over [panelCeiling] (the shared source of
+         * truth) so the recommended label, the wizard and the runtime cap never diverge.
+         */
+        fun recommendedResolution(realWidthPx: Int, realHeightPx: Int): Settings.Resolution =
+            panelCeiling(realWidthPx, realHeightPx, com.andrerinas.openheadunit.decoder.VideoDecoder.isHevcSupported())
     }
 }

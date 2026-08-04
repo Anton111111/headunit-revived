@@ -594,6 +594,11 @@
 
     <string name="btn_show_qr">Zobrazit QR kód</string>
     <string name="renderer_fallback_surface">Video se pořád zasekávalo, proto bylo zobrazení pro tuto relaci přepnuto na SurfaceView. Pokud je to stabilní, nastavte Režim zobrazení na SurfaceView v Nastavení.</string>
+    <string name="dpi_resolution_over_panel_warning">Vámi zvolené rozlišení (%1$s) je vyšší než váš panel. Je omezeno na %2$s a DPI se počítá pro tuto hodnotu. Pokud to vypadá špatně, použijte doporučené rozlišení (%2$s).</string>
+    <string name="renderer_confirm_question">Vidíte obrazovku Android Auto?</string>
+    <string name="renderer_confirm_yes">Ano</string>
+    <string name="renderer_confirm_switch">Přepnout vykreslování</string>
+    <string name="renderer_switched_to">Vykreslování: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Chcete-li umožnit spolehlivé spuštění vlastního režimu na pozadí, povolte v další obrazovce oprávnění „Zobrazit nad ostatními aplikacemi“.</string>
 
@@ -719,7 +724,7 @@
     <string name="resolution_recommended_format">%1$s (Doporučeno)</string>
     <string name="resolution_high_bandwidth_format">%1$s · vysoký datový tok</string>
     <string name="resolution_too_high_title">Rozlišení vyšší než obrazovka</string>
-    <string name="resolution_too_high_message">Obrazovka má %1$d x %2$d pixelů. Vyšší rozlišení spotřebuje více dat bez zlepšení kvality, protože panel je nedokáže zobrazit.</string>
+    <string name="resolution_too_high_message">Toto je vyšší, než váš panel podporuje. Obraz je omezen na to, co váš panel dokáže zobrazit (%1$s), takže vyšší rozlišení jen spotřebuje více dat bez zlepšení kvality.</string>
     <string name="resolution_high_bandwidth_title">Potřeba vyšší datový tok</string>
     <string name="resolution_high_bandwidth_message">Toto rozlišení spotřebuje mnohem více dat a vyžaduje silné připojení: kvalitní WiFi 5GHz nebo stabilní USB. Pokud zaznamenáte lagy, zvolte nižší rozlišení.</string>
     <string name="resolution_use_anyway">Přesto použít</string>

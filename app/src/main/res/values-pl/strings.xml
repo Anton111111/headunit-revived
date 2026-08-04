@@ -595,6 +595,11 @@
 
     <string name="btn_show_qr">Pokaż kod QR</string>
     <string name="renderer_fallback_surface">Obraz ciągle się zawieszał, więc wyświetlanie zostało przełączone na SurfaceView na czas tej sesji. Jeśli działa stabilnie, ustaw Tryb widoku na SurfaceView w Ustawieniach.</string>
+    <string name="dpi_resolution_over_panel_warning">Wybrana rozdzielczość (%1$s) jest wyższa niż twój panel. Jest ograniczona do %2$s, a DPI jest dla niej wyliczane. Jeśli wygląda źle, użyj zalecanej rozdzielczości (%2$s).</string>
+    <string name="renderer_confirm_question">Czy widzisz ekran Android Auto?</string>
+    <string name="renderer_confirm_yes">Tak</string>
+    <string name="renderer_confirm_switch">Zmień renderowanie</string>
+    <string name="renderer_switched_to">Renderowanie: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Aby umożliwić niezawodne uruchamianie trybu własnego w tle, włącz uprawnienie \"Wyświetlaj nad innymi aplikacjami\" na następnym ekranie.</string>
 
@@ -720,7 +725,7 @@
     <string name="resolution_recommended_format">%1$s (Zalecana)</string>
     <string name="resolution_high_bandwidth_format">%1$s · duże pasmo</string>
     <string name="resolution_too_high_title">Rozdzielczość wyższa niż ekran</string>
-    <string name="resolution_too_high_message">Twój ekran ma %1$d x %2$d pikseli. Wyższa rozdzielczość zużywa więcej pasma bez poprawy jakości, bo panel nie może jej wyświetlić.</string>
+    <string name="resolution_too_high_message">To więcej, niż obsługuje twój panel. Obraz jest ograniczony do tego, co panel może wyświetlić (%1$s), więc wyższa rozdzielczość tylko zużywa więcej pasma bez poprawy jakości.</string>
     <string name="resolution_high_bandwidth_title">Potrzeba większego pasma</string>
     <string name="resolution_high_bandwidth_message">Ta rozdzielczość zużywa znacznie więcej pasma i wymaga silnego połączenia: dobrego WiFi 5GHz lub stabilnego USB. Jeśli zauważysz lagi, wybierz niższą rozdzielczość.</string>
     <string name="resolution_use_anyway">Użyj mimo to</string>

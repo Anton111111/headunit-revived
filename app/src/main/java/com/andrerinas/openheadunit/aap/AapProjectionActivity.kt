@@ -15,6 +15,7 @@ import android.view.TextureView
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -137,7 +138,9 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             }
             val lastFrame = videoDecoder.lastFrameRenderedMs
             if (lastFrame == 0L) {
-                // First frame hasn't arrived yet — handled by the starting overlay
+                // First frame hasn't arrived yet — handled by the starting overlay. If the phone is
+                // streaming video but nothing draws, offer to switch renderer (issue #767).
+                maybeOfferRendererConfirm()
                 watchdogHandler.postDelayed(this, 2000)
                 return
             }
@@ -279,6 +282,18 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
     // user's chosen viewMode is restored on the next launch.
     private var forcedViewModeOverride: Settings.ViewMode? = null
 
+    // Renderer confirmation banner (issue #767): lets the user escape a wrong/broken renderer that
+    // leaves a black screen while audio keeps working. A broken SurfaceView cannot be detected
+    // automatically (it reports no drawn frames), so we ask the user directly.
+    private var rendererBanner: View? = null
+    private var rendererConfirmResolved = false
+    private var projectionStartMs = 0L
+    private val rendererConfirmNoFrameMs = 6000L
+    // "Phone still streaming" window for the offer. Kept comfortably above the 2s watchdog interval
+    // so a burst of keyframes (~every 2s on the AA logo) doesn't fall outside the window and hide
+    // the offer for a genuinely connected phone.
+    private val rendererConfirmPhoneAliveMs = 4000L
+
     private fun maybeRecoverFromDisplayStall() {
         if (!::projectionView.isInitialized) return
         if (overlayState != OverlayState.HIDDEN) return
@@ -335,6 +350,9 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             AppLog.w("Display stall ($reason) again on $effectiveMode. Falling back to SurfaceView for this session. See issue #650.")
             forcedViewModeOverride = Settings.ViewMode.SURFACE
             Toast.makeText(this, R.string.renderer_fallback_surface, Toast.LENGTH_LONG).show()
+            // SurfaceView can't be observed for stalls (issue #767); if it too shows black, offer the
+            // manual escape so the user isn't stranded on the terminal fallback.
+            showRendererConfirmBanner()
         } else {
             AppLog.w("Display stall ($reason). Rebuilding projection view (attempt $displayStallRecoveries). See issue #650.")
         }
@@ -343,6 +361,99 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         prevLongFrameCount = 0L
         longFrameTickWindow.fill(0L)
         recreateProjectionView()
+    }
+
+    /** Offer the renderer confirmation when the phone is actively streaming video but nothing has
+     * been drawn for a while (the broken-renderer case that cannot be detected automatically). */
+    private fun maybeOfferRendererConfirm() {
+        if (rendererConfirmResolved || rendererBanner != null) return
+        if (videoDecoder.lastFrameRenderedMs > 0L) return
+        val input = videoDecoder.lastInputBytesReceivedMs
+        if (input <= 0L) return
+        val now = SystemClock.elapsedRealtime()
+        if (now - input > rendererConfirmPhoneAliveMs) return
+        if (projectionStartMs == 0L || now - projectionStartMs < rendererConfirmNoFrameMs) return
+        showRendererConfirmBanner()
+    }
+
+    /** A dismissible bottom bar: "Do you see the screen?" with Yes / Switch renderer. */
+    private fun showRendererConfirmBanner() {
+        runOnUiThread {
+            if (rendererBanner != null || rendererConfirmResolved) return@runOnUiThread
+            val container = findViewById<FrameLayout>(R.id.container) ?: return@runOnUiThread
+            fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
+            val bar = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                setBackgroundColor(0xE6000000.toInt())
+                setPadding(dp(16), dp(10), dp(16), dp(10))
+            }
+            val label = TextView(this).apply {
+                text = getString(R.string.renderer_confirm_question)
+                setTextColor(Color.WHITE)
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            }
+            val yes = Button(this).apply {
+                text = getString(R.string.renderer_confirm_yes)
+                setOnClickListener {
+                    settings.pendingRendererConfirm = false
+                    rendererConfirmResolved = true
+                    dismissRendererConfirmBanner()
+                }
+            }
+            val switch = Button(this).apply {
+                text = getString(R.string.renderer_confirm_switch)
+                setOnClickListener { cycleRenderer() }
+            }
+            bar.addView(label)
+            bar.addView(yes)
+            bar.addView(switch)
+            bar.layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.BOTTOM
+            )
+            container.addView(bar)
+            rendererBanner = bar
+            bar.bringToFront()
+            // One-shot: offering the escape once is enough. Clearing the flag here (not only on
+            // "Yes") stops the banner from re-appearing on every future session if the user drives
+            // off without tapping. A genuinely broken renderer still re-offers via the no-frame path.
+            settings.pendingRendererConfirm = false
+        }
+    }
+
+    private fun dismissRendererConfirmBanner() {
+        runOnUiThread {
+            rendererBanner?.let { (it.parent as? FrameLayout)?.removeView(it) }
+            rendererBanner = null
+        }
+    }
+
+    /** Rotate the rendering backend live (TextureView -> SurfaceView -> GLES) and rebuild, so the
+     * user can find one that draws. Clears any stall-recovery override so the manual choice wins. */
+    private fun cycleRenderer() {
+        val order = listOf(Settings.ViewMode.TEXTURE, Settings.ViewMode.SURFACE, Settings.ViewMode.GLES)
+        val current = forcedViewModeOverride ?: settings.viewMode
+        val next = order[(order.indexOf(current).coerceAtLeast(0) + 1) % order.size]
+        forcedViewModeOverride = null
+        settings.viewMode = next
+        settings.commit()
+        // Reset stall recovery so the #650 watchdog does not immediately re-escalate the new backend.
+        displayStallRecoveries = 0
+        lastDisplayStallRecoveryMs = 0L
+        val label = when (next) {
+            Settings.ViewMode.SURFACE -> "SurfaceView"
+            Settings.ViewMode.TEXTURE -> "TextureView"
+            Settings.ViewMode.GLES -> "GLES20"
+        }
+        Toast.makeText(this, getString(R.string.renderer_switched_to, label), Toast.LENGTH_SHORT).show()
+        // Drop the current bar and rebuild on the new backend, then re-offer so the user can keep
+        // cycling if this one is also blank (the new backend may decode frames yet still show black,
+        // which nothing can detect automatically).
+        dismissRendererConfirmBanner()
+        recreateProjectionView()
+        showRendererConfirmBanner()
     }
 
     private val nightModeReceiver = object : BroadcastReceiver() {
@@ -422,6 +533,9 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
                     when (state) {
                         is CommManager.ConnectionState.Disconnected -> {
                             watchdogHandler.removeCallbacksAndMessages(null)
+                            // Don't leave the renderer bar floating over the reconnecting/exit UI;
+                            // if the renderer is still broken after a reconnect it re-offers itself.
+                            dismissRendererConfirmBanner()
                             if (!state.isClean && !state.isUserExit) {
                                 AppLog.w("AapProjectionActivity: Disconnected unexpectedly.")
                                 Toast.makeText(this@AapProjectionActivity, getString(R.string.wifi_disconnect_toast), Toast.LENGTH_LONG).show()
@@ -528,6 +642,12 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         videoDecoder.onFirstFrameListener = {
             runOnUiThread {
                 hideLoadingOverlay(loadingOverlay)
+
+                // The wizard changed the renderer: the picture is up, so ask the user to confirm it
+                // (issue #767). If they don't, the auto-offer above still catches a broken renderer.
+                if (settings.pendingRendererConfirm && !rendererConfirmResolved) {
+                    showRendererConfirmBanner()
+                }
 
                 // Show one-time gesture hint
                 if (!settings.gestureHintShown) {
@@ -1460,6 +1580,8 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
         }
 
         projectionView.addCallback(this)
+        // Baseline for the "no frame drawn while streaming" renderer check (issue #767).
+        projectionStartMs = SystemClock.elapsedRealtime()
     }
 
     private fun setupFpsCounter() {

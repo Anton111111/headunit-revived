@@ -297,6 +297,14 @@
                     android:layout_marginTop="8dp"
                     android:textAppearance="?attr/textAppearanceCaption" />
                 <TextView
+                    android:id="@+id/onb_dpi_over_panel_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="?attr/colorError"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:visibility="gone" />
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"

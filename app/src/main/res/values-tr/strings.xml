@@ -590,6 +590,11 @@
 
     <string name="btn_show_qr">QR Kodunu Göster</string>
     <string name="renderer_fallback_surface">Video sürekli donduğu için görüntü bu oturum boyunca SurfaceView\'e geçirildi. Kararlıysa, Ayarlar\'da Görünüm modunu SurfaceView olarak ayarla.</string>
+    <string name="dpi_resolution_over_panel_warning">Seçtiğiniz çözünürlük (%1$s) panelinizden yüksek. %2$s ile sınırlanıyor ve DPI buna göre hesaplanıyor. Bozuk görünüyorsa önerilen çözünürlüğü (%2$s) kullanın.</string>
+    <string name="renderer_confirm_question">Android Auto ekranını görüyor musunuz?</string>
+    <string name="renderer_confirm_yes">Evet</string>
+    <string name="renderer_confirm_switch">Oluşturucuyu değiştir</string>
+    <string name="renderer_switched_to">Oluşturucu: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Kendi Modunun arka planda güvenilir bir şekilde başlatılabilmesi için lütfen bir sonraki ekranda \"Diğer uygulamaların üzerinde göster\" iznini etkinleştirin.</string>
 
@@ -716,7 +721,7 @@
     <string name="resolution_recommended_format">%1$s (Önerilen)</string>
     <string name="resolution_high_bandwidth_format">%1$s · yüksek bant genişliği</string>
     <string name="resolution_too_high_title">Çözünürlük ekrandan yüksek</string>
-    <string name="resolution_too_high_message">Ekranınız %1$d x %2$d piksel. Daha yüksek çözünürlük, panel gösteremediği için kaliteyi artırmadan daha fazla bant genişliği kullanır.</string>
+    <string name="resolution_too_high_message">Bu, panelinizin desteklediğinden daha yüksek. Görüntü, panelinizin gösterebildiğiyle (%1$s) sınırlıdır, bu yüzden daha yüksek çözünürlük yalnızca kaliteyi artırmadan daha fazla bant genişliği kullanır.</string>
     <string name="resolution_high_bandwidth_title">Daha fazla bant genişliği gerekiyor</string>
     <string name="resolution_high_bandwidth_message">Bu çözünürlük çok daha fazla bant genişliği kullanır ve güçlü bir bağlantı gerektirir: iyi bir 5GHz WiFi veya kararlı bir USB bağlantısı. Takılma fark ederseniz daha düşük bir çözünürlük seçin.</string>
     <string name="resolution_use_anyway">Yine de kullan</string>

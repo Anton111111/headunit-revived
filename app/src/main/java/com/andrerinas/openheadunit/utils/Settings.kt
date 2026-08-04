@@ -392,6 +392,13 @@ class Settings(private val context: Context) {
         }
         set(value) { prefs.edit().putInt("onboarding-version", value).apply() }
 
+    // One-shot: the wizard changed the rendering backend, so on the next projection we ask the user
+    // to confirm the picture is visible (a wrong renderer can leave a black screen while audio still
+    // works, and a broken SurfaceView cannot be detected automatically). See issue #767.
+    var pendingRendererConfirm: Boolean
+        get() = prefs.getBoolean("pending-renderer-confirm", false)
+        set(value) { prefs.edit().putBoolean("pending-renderer-confirm", value).apply() }
+
     // How the user primarily connects. Drives which options are surfaced in the Basic tab
     // (e.g. cable users do not see the Wireless Connection group there). UNSET shows everything.
     var primaryConnection: ConnectionKind

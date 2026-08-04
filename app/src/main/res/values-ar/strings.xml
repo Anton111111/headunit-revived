@@ -594,6 +594,11 @@
 
     <string name="btn_show_qr">عرض رمز QR</string>
     <string name="renderer_fallback_surface">ظل الفيديو يتجمد، لذا تم تبديل العرض إلى SurfaceView لهذه الجلسة. إذا كان مستقرًا، فاضبط وضع العرض على SurfaceView في الإعدادات.</string>
+    <string name="dpi_resolution_over_panel_warning">الدقة التي اخترتها (%1$s) أعلى من شاشتك. لذا تم تحديدها إلى %2$s، ويُحسب DPI على هذا الأساس. إذا بدا العرض غير سليم، فاستخدم الدقة الموصى بها (%2$s).</string>
+    <string name="renderer_confirm_question">هل ترى شاشة Android Auto؟</string>
+    <string name="renderer_confirm_yes">نعم</string>
+    <string name="renderer_confirm_switch">تبديل العارض</string>
+    <string name="renderer_switched_to">العارض: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">للسماح للوضع الذاتي بالبدء بشكل موثوق في الخلفية، يرجى تفعيل إذن \"الظهور فوق التطبيقات الأخرى\" في الشاشة التالية.</string>
 
@@ -721,7 +726,7 @@
     <string name="resolution_recommended_format">%1$s (موصى به)</string>
     <string name="resolution_high_bandwidth_format">%1$s · نطاق ترددي عالٍ</string>
     <string name="resolution_too_high_title">الدقة أعلى من الشاشة</string>
-    <string name="resolution_too_high_message">شاشتك %1$d x %2$d بكسل. الدقة الأعلى تستهلك نطاقًا تردديًا أكبر دون تحسين الجودة، لأن الشاشة لا يمكنها عرضها.</string>
+    <string name="resolution_too_high_message">هذه أعلى مما تدعمه شاشتك. تقتصر الصورة على ما يمكن لشاشتك عرضه (%1$s)، لذا فإن الدقة الأعلى تستهلك نطاقًا تردديًا أكبر فقط دون تحسين الجودة.</string>
     <string name="resolution_high_bandwidth_title">يلزم نطاق ترددي أعلى</string>
     <string name="resolution_high_bandwidth_message">تستهلك هذه الدقة نطاقًا تردديًا أكبر بكثير وتحتاج اتصالًا قويًا: شبكة WiFi جيدة بتردد 5GHz أو اتصال USB مستقر. إذا لاحظت تقطعًا، فاختر دقة أقل.</string>
     <string name="resolution_use_anyway">استخدام على أي حال</string>

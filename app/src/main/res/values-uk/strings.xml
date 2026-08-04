@@ -595,6 +595,11 @@
 
     <string name="btn_show_qr">Показати QR-код</string>
     <string name="renderer_fallback_surface">Відео постійно зависало, тому відображення переключено на SurfaceView на цю сесію. Якщо працює стабільно, встановіть Режим перегляду на SurfaceView у налаштуваннях.</string>
+    <string name="dpi_resolution_over_panel_warning">Обрана роздільність (%1$s) вища за вашу панель. Її обмежено до %2$s, і DPI розраховується для неї. Якщо виглядає неправильно, використайте рекомендовану роздільність (%2$s).</string>
+    <string name="renderer_confirm_question">Ви бачите екран Android Auto?</string>
+    <string name="renderer_confirm_yes">Так</string>
+    <string name="renderer_confirm_switch">Змінити рендерер</string>
+    <string name="renderer_switched_to">Рендерер: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Щоб дозволити автономному режиму надійно запускатися у фоновому режимі, увімкніть дозвіл \"Відображення поверх інших додатків\" на наступному екрані.</string>
 
@@ -721,7 +726,7 @@
     <string name="resolution_recommended_format">%1$s (Рекомендовано)</string>
     <string name="resolution_high_bandwidth_format">%1$s · високий трафік</string>
     <string name="resolution_too_high_title">Роздільність вища за екран</string>
-    <string name="resolution_too_high_message">Екран %1$d x %2$d пікселів. Вища роздільність збільшує трафік без покращення якості, бо панель не може її показати.</string>
+    <string name="resolution_too_high_message">Це вище, ніж підтримує ваша панель. Зображення обмежене тим, що панель може показати (%1$s), тож вища роздільність лише збільшує трафік без покращення якості.</string>
     <string name="resolution_high_bandwidth_title">Потрібен більший трафік</string>
     <string name="resolution_high_bandwidth_message">Ця роздільність споживає набагато більше трафіку й потребує стабільного зʼєднання: хорошого WiFi 5 ГГц або стабільного USB. Якщо помітите лаги, виберіть нижчу роздільність.</string>
     <string name="resolution_use_anyway">Все одно використати</string>

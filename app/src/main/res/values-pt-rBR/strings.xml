@@ -595,6 +595,11 @@
 
     <string name="btn_show_qr">Mostrar código QR</string>
     <string name="renderer_fallback_surface">O vídeo continuava travando, então a exibição foi trocada para SurfaceView nesta sessão. Se ficar estável, defina o Modo de visualização como SurfaceView nas Configurações.</string>
+    <string name="dpi_resolution_over_panel_warning">A resolução escolhida (%1$s) é maior que o seu painel. Ela é limitada a %2$s, e o DPI é calculado para isso. Se ficar estranho, use a resolução recomendada (%2$s).</string>
+    <string name="renderer_confirm_question">Você vê a tela do Android Auto?</string>
+    <string name="renderer_confirm_yes">Sim</string>
+    <string name="renderer_confirm_switch">Trocar renderizador</string>
+    <string name="renderer_switched_to">Renderizador: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Para permitir que o Modo Próprio inicie de forma confiável em segundo plano, ative a permissão \"Sobrepor a outros aplicativos\" na próxima tela.</string>
 
@@ -721,7 +726,7 @@
     <string name="resolution_recommended_format">%1$s (Recomendada)</string>
     <string name="resolution_high_bandwidth_format">%1$s · muita banda</string>
     <string name="resolution_too_high_title">Resolução maior que a tela</string>
-    <string name="resolution_too_high_message">Sua tela é de %1$d x %2$d pixels. Uma resolução maior usa mais banda sem melhorar a qualidade, porque o painel não consegue exibi-la.</string>
+    <string name="resolution_too_high_message">Isto é maior do que o seu painel suporta. A imagem fica limitada ao que o seu painel consegue mostrar (%1$s), então uma resolução maior só usa mais banda sem melhorar a qualidade.</string>
     <string name="resolution_high_bandwidth_title">É necessária mais banda</string>
     <string name="resolution_high_bandwidth_message">Esta resolução usa muito mais banda e precisa de uma conexão forte: um bom WiFi de 5GHz ou uma conexão USB estável. Se notar travamentos, escolha uma resolução menor.</string>
     <string name="resolution_use_anyway">Usar mesmo assim</string>

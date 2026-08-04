@@ -600,6 +600,11 @@
 
     <string name="btn_show_qr">Hiển thị mã QR</string>
     <string name="renderer_fallback_surface">Video liên tục bị đứng, nên màn hình đã chuyển sang SurfaceView cho phiên này. Nếu ổn định, hãy đặt Chế độ hiển thị thành SurfaceView trong Cài đặt.</string>
+    <string name="dpi_resolution_over_panel_warning">Độ phân giải bạn chọn (%1$s) cao hơn màn hình của bạn. Nó bị giới hạn ở %2$s và DPI được tính theo mức đó. Nếu trông không đúng, hãy dùng độ phân giải khuyến nghị (%2$s).</string>
+    <string name="renderer_confirm_question">Bạn có thấy màn hình Android Auto không?</string>
+    <string name="renderer_confirm_yes">Có</string>
+    <string name="renderer_confirm_switch">Đổi bộ dựng hình</string>
+    <string name="renderer_switched_to">Bộ dựng hình: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Để cho phép Chế độ Tự chạy khởi động ổn định từ nền, vui lòng bật quyền \"Hiển thị trên các ứng dụng khác\" trong màn hình tiếp theo.</string>
 
@@ -725,7 +730,7 @@
     <string name="resolution_recommended_format">%1$s (Khuyến nghị)</string>
     <string name="resolution_high_bandwidth_format">%1$s · băng thông cao</string>
     <string name="resolution_too_high_title">Độ phân giải cao hơn màn hình</string>
-    <string name="resolution_too_high_message">Màn hình của bạn là %1$d x %2$d pixel. Độ phân giải cao hơn dùng nhiều băng thông hơn mà không cải thiện chất lượng, vì màn hình không thể hiển thị.</string>
+    <string name="resolution_too_high_message">Đây là mức cao hơn màn hình của bạn hỗ trợ. Hình ảnh bị giới hạn theo những gì màn hình có thể hiển thị (%1$s), nên độ phân giải cao hơn chỉ dùng nhiều băng thông hơn mà không cải thiện chất lượng.</string>
     <string name="resolution_high_bandwidth_title">Cần băng thông cao hơn</string>
     <string name="resolution_high_bandwidth_message">Độ phân giải này dùng nhiều băng thông hơn và cần kết nối mạnh: WiFi 5GHz tốt hoặc kết nối USB ổn định. Nếu thấy giật, hãy chọn độ phân giải thấp hơn.</string>
     <string name="resolution_use_anyway">Vẫn dùng</string>
