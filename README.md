@@ -68,6 +68,11 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - more customization options for the UI and the app itself
 
 ## Changelog
+### v.3.2.1 - upcoming
+- Fixing new welcome screen reappears
+- Fixing screen flicker every 10s
+- Fixing HW decoding on kitkat
+
 ### v.3.2.0
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
 - Acquire transient audio focus while AA audio plays, thanks to @bnayahu
