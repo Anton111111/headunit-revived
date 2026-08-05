@@ -850,25 +850,30 @@ class VideoDecoder(private val settings: Settings) {
                 }
 
                 // Stall detection: if we rendered at least one frame but haven't
-                // produced output in SYNC_STALL_THRESHOLD_MS, the decoder is likely dead-but-active.
-                val stallGap = SystemClock.elapsedRealtime() - lastOutputMs
+                // produced output in SYNC_STALL_THRESHOLD_MS, check if input bytes
+                // are still arriving from the phone. If no input bytes arrived recently,
+                // Android Auto has simply paused the stream (idle/static screen), so
+                // we update lastOutputMs to prevent false-positive restarts and screen flickering.
+                val now = SystemClock.elapsedRealtime()
+                val stallGap = now - lastOutputMs
                 if (stallGap > SYNC_STALL_THRESHOLD_MS) {
-                    val now = SystemClock.elapsedRealtime()
-                    // A device that is merely marginal (renders fine for stretches, then stalls
-                    // under load) never trips restartsSinceLastFrame's cap, since that only counts
-                    // restarts where no frame at all was ever rendered. Cap and cooldown this
-                    // watchdog the same way (issue #742) instead of tearing the MediaCodec down
-                    // every time it fires.
-                    if (syncStallRestartCount > 0 && now - lastSyncStallRestartMs > SYNC_STALL_RESET_MS) {
-                        syncStallRestartCount = 0
-                    }
-                    if (now - lastSyncStallRestartMs >= SYNC_STALL_COOLDOWN_MS &&
-                        syncStallRestartCount < MAX_SYNC_STALL_RESTARTS) {
-                        syncStallRestartCount++
-                        lastSyncStallRestartMs = now
-                        AppLog.w("Decoder stall detected (no output for ${stallGap}ms). Forcing restart ($syncStallRestartCount/$MAX_SYNC_STALL_RESTARTS).")
-                        scheduleRestart("sync_stall")
-                        break
+                    val inputIdleGap = now - lastInputBytesReceivedMs
+                    if (inputIdleGap > SYNC_STALL_THRESHOLD_MS) {
+                        // Stream is idle on the phone side (no new video frames arriving).
+                        lastOutputMs = now
+                    } else {
+                        // Input bytes ARE arriving, but decoder produces no output -> REAL DECODER STALL!
+                        if (syncStallRestartCount > 0 && now - lastSyncStallRestartMs > SYNC_STALL_RESET_MS) {
+                            syncStallRestartCount = 0
+                        }
+                        if (now - lastSyncStallRestartMs >= SYNC_STALL_COOLDOWN_MS &&
+                            syncStallRestartCount < MAX_SYNC_STALL_RESTARTS) {
+                            syncStallRestartCount++
+                            lastSyncStallRestartMs = now
+                            AppLog.w("Decoder stall detected (no output for ${stallGap}ms while receiving input). Forcing restart ($syncStallRestartCount/$MAX_SYNC_STALL_RESTARTS).")
+                            scheduleRestart("sync_stall")
+                            break
+                        }
                     }
                 }
             } catch (e: Exception) {
