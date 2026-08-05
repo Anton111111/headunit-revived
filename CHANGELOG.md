@@ -2,6 +2,7 @@
 ### v.3.2.2-upcoming
 - Fixing location jumping, especially on lower speeds
 - Fixing screen flicker again in video decoder
+- Fix/video throughput telemetry and keyframe lockout, thanks to @o-jcardenass
 
 ### v.3.2.1
 - Fixing new welcome screen, thanks to @andrecuellar
