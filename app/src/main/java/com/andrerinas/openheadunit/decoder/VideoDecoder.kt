@@ -52,6 +52,11 @@ class VideoDecoder(private val settings: Settings) {
         // indistinguishable in the log from one that is running perfectly.
         private const val SYNC_STALL_SUPPRESSED_LOG_INTERVAL_MS = 10000L
 
+        // Widest buffer alignment any decoder pads a picture dimension out to. Used to sanity
+        // check a reported crop rectangle against the buffer geometry: a real crop is at most
+        // this far below the buffer, so anything further off is not describing this stream.
+        private const val MAX_ALIGNMENT_PADDING = 64
+
         /**
          * Checks if H.265 (HEVC) hardware decoding is supported on the current device.
          */
@@ -232,12 +237,21 @@ class VideoDecoder(private val settings: Settings) {
         val cropWidth = if (cropLeft != null && cropRight != null) cropRight - cropLeft + 1 else 0
         val cropHeight = if (cropTop != null && cropBottom != null) cropBottom - cropTop + 1 else 0
 
-        // A crop wider or taller than the buffer means the decoder reported something inconsistent;
-        // the buffer geometry is the safer of the two in that case.
-        val width = if (cropWidth in 1..bufferWidth) cropWidth else bufferWidth
-        val height = if (cropHeight in 1..bufferHeight) cropHeight else bufferHeight
-        return width to height
+        return croppedOr(cropWidth, bufferWidth) to croppedOr(cropHeight, bufferHeight)
     }
+
+    /**
+     * [crop] if it is a plausible visible extent for a buffer of [buffer] pixels, else [buffer].
+     *
+     * Padding only ever rounds a dimension *up* to an alignment boundary, and no decoder aligns
+     * more coarsely than [MAX_ALIGNMENT_PADDING], so a trustworthy crop sits just below the buffer
+     * size. Anything further away is a decoder filling the crop keys with placeholders rather than
+     * describing this stream - zeros are the dangerous case, since a 0..0 crop reads as a legal
+     * 1-pixel extent and would otherwise be propagated as the video size and handed to
+     * MediaCodec on the next restart.
+     */
+    private fun croppedOr(crop: Int, buffer: Int): Int =
+        if (buffer > 0 && crop in (buffer - MAX_ALIGNMENT_PADDING)..buffer) crop else buffer
 
     /**
      * Handles dynamic video dimension changes during the session.
