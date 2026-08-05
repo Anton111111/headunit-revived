@@ -1204,6 +1204,16 @@ class Settings(private val context: Context) {
         get() = prefs.getString("bluetooth-manager-service-name", "bluetooth_manager")!!
         set(value) = prefs.edit().putString("bluetooth-manager-service-name", value).apply()
 
+    // Which network the Native AA mode (wifiConnectionMode 3) puts the phone on.
+    // 0 = WiFi Direct P2P group, 1 = this head unit's own hotspot (experimental).
+    //
+    // Deliberately not folded into helperConnectionStrategy: that setting belongs to mode 2 and
+    // means something different in every one of its five values. A wireless mode that reuses
+    // another mode's selector is how the two call sites of the old usesWifiDirect() drifted apart.
+    var nativeApTransport: Int
+        get() = prefs.getInt("native-ap-transport", 0)
+        set(value) = prefs.edit().putInt("native-ap-transport", value).apply()
+
     // Whether the Native AA handshake opens with a WifiVersionRequest (Type 4), as real head units
     // and the OEM ZLink app do, instead of going straight to WifiStartRequest. On by default:
     // Android Auto 17.4 broke the abbreviated exchange for several reporters, and the version
@@ -1219,6 +1229,19 @@ class Settings(private val context: Context) {
         get() = prefs.getString("manual-secondary-bt-service-name", "")!!
         set(value) = prefs.edit().putString("manual-secondary-bt-service-name", value).apply()
 
+    // Which interface hosts the head unit's access point. Empty = work it out from the interface
+    // list. Worth having because every other implementation of this protocol either creates the AP
+    // itself or is told the name: aa-proxy-rs has an `iface` setting, the Pi dongles pin wlan0 in
+    // hostapd.conf, and ZLink carries an ap_NIC_name field. We are the only one reading an AP we
+    // did not create, so we are the only one that has to guess.
+    var hotspotInterface: String
+        get() = prefs.getString("hotspot-interface", "")!!
+        set(value) = prefs.edit().putString("hotspot-interface", value).apply()
+
+    // Manual override for the head unit's own access point, used first by
+    // SoftApCredentialsProvider when nativeApTransport == 1. Empty = read the system's hotspot
+    // configuration instead. Worth having because getSoftApConfiguration() is reflection over a
+    // non-public API and can simply refuse on a locked-down API 30+ device.
     var hotspotSsid: String
         get() = prefs.getString("hotspot-ssid", "")!!
         set(value) = prefs.edit().putString("hotspot-ssid", value).apply()
