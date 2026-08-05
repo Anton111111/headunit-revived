@@ -39,6 +39,19 @@ class VideoDecoder(private val settings: Settings) {
         private const val SYNC_STALL_RESET_MS = 60000L
         private const val MAX_SYNC_STALL_RESTARTS = 4
 
+        // Interval of the decode/render throughput summary. This exists because a slow picture
+        // is otherwise unattributable from a user-submitted log: the only rendered-frame count
+        // the decoder keeps reaches the opt-in on-screen overlay and never the log, so "the
+        // codec is slow" and "the codec keeps up and the display consumer drops the frames"
+        // produce byte-identical logs. Reporting rendered alongside fed separates the two.
+        private const val THROUGHPUT_LOG_INTERVAL_MS = 5000L
+
+        // Throttle for reporting a stall the watchdog saw but declined to act on. Once the
+        // cooldown or the restart cap below suppresses a restart, that branch takes no action
+        // and would otherwise print nothing, so a decoder degrading past its restart budget is
+        // indistinguishable in the log from one that is running perfectly.
+        private const val SYNC_STALL_SUPPRESSED_LOG_INTERVAL_MS = 10000L
+
         /**
          * Checks if H.265 (HEVC) hardware decoding is supported on the current device.
          */
@@ -140,6 +153,19 @@ class VideoDecoder(private val settings: Settings) {
     // sync_stall cooldown/cap state (issue #742) - see SYNC_STALL_* constants.
     private var syncStallRestartCount = 0
     private var lastSyncStallRestartMs = 0L
+    private var lastSyncStallSuppressedLogMs = 0L
+
+    // Throughput counters for the periodic telemetry tick - see THROUGHPUT_LOG_INTERVAL_MS.
+    // Session-monotonic so each has exactly one writer: framesFed/framesDropped from decode()
+    // (under this object's monitor), framesRendered from the output thread. The output thread
+    // reads all three and keeps its own last-logged snapshots to derive per-interval deltas.
+    @Volatile private var framesFed = 0L
+    @Volatile private var framesDropped = 0L
+    @Volatile private var framesRendered = 0L
+    private var lastThroughputLogMs = 0L
+    private var lastLoggedFramesFed = 0L
+    private var lastLoggedFramesDropped = 0L
+    private var lastLoggedFramesRendered = 0L
 
     // Reuse buffers for older API levels to minimize GC pressure
     private var inputBuffers: Array<ByteBuffer>? = null
@@ -266,6 +292,17 @@ class VideoDecoder(private val settings: Settings) {
             lastFrameRenderedMs = 0L
             syntheticPtsUs = 0L
             loggedFirstSoftwareFrame = false
+            // The FPS window and the throughput counters must not straddle a restart, or the
+            // first sample afterwards is averaged over the whole teardown and reads near zero.
+            frameCount = 0
+            lastFpsLogTime = 0L
+            framesFed = 0L
+            framesDropped = 0L
+            framesRendered = 0L
+            lastThroughputLogMs = 0L
+            lastLoggedFramesFed = 0L
+            lastLoggedFramesDropped = 0L
+            lastLoggedFramesRendered = 0L
             AppLog.i("Decoder stopped: $reason")
         }
     }
@@ -422,9 +459,11 @@ class VideoDecoder(private val settings: Settings) {
                     // (issue #755 follow-up). A truly stuck decoder is still caught by
                     // outputThreadLoop's sync_stall watchdog.
                     AppLog.w("Input buffer full. Dropping frame.")
+                    framesDropped++
                     return false
                 }
             }
+            framesFed++
         }
         return true
     }
@@ -478,6 +517,9 @@ class VideoDecoder(private val settings: Settings) {
         onFirstFrameListener?.let { it(); onFirstFrameListener = null }
 
         frameCount += renderedFrames
+        // The bundled decoder has no output thread, so drive the throughput tick from here.
+        framesRendered += renderedFrames
+        logThroughput()
         val now = System.currentTimeMillis()
         val elapsed = now - lastFpsLogTime
         if (elapsed >= 1000) {
@@ -803,6 +845,43 @@ class VideoDecoder(private val settings: Settings) {
     }
 
     /**
+     * Periodic decode/render throughput summary.
+     *
+     * `rendered` counts buffers actually handed to the surface and `fed` counts frames accepted
+     * into the codec's input queue, so the two together locate a slow picture: `fed` high with
+     * `rendered` low is a slow codec, both high is a display consumer that cannot keep up with
+     * one, and `dropped` rising is input-queue backpressure.
+     *
+     * Called from the output thread on every loop iteration. That loop turns over at least every
+     * 10ms (dequeueOutputBuffer's timeout) whether or not a frame came out, so the tick still
+     * fires while nothing is rendering - which is the case most worth reporting.
+     */
+    private fun logThroughput() {
+        val now = SystemClock.elapsedRealtime()
+        if (lastThroughputLogMs == 0L) {
+            lastThroughputLogMs = now
+            return
+        }
+        val elapsed = now - lastThroughputLogMs
+        if (elapsed < THROUGHPUT_LOG_INTERVAL_MS) return
+
+        val rendered = framesRendered - lastLoggedFramesRendered
+        val fed = framesFed - lastLoggedFramesFed
+        val dropped = framesDropped - lastLoggedFramesDropped
+        lastThroughputLogMs = now
+        lastLoggedFramesRendered = framesRendered
+        lastLoggedFramesFed = framesFed
+        lastLoggedFramesDropped = framesDropped
+
+        val renderedFps = rendered * 1000 / elapsed
+        val fedFps = fed * 1000 / elapsed
+        AppLog.i(
+            "Throughput over ${elapsed}ms: rendered=$rendered (${renderedFps}fps), " +
+                "fed=$fed (${fedFps}fps), dropped=$dropped, codec=$currentCodecName"
+        )
+    }
+
+    /**
      * Dedicated thread to pull decoded frames and render them to the surface.
      */
     private fun outputThreadLoop() {
@@ -828,6 +907,7 @@ class VideoDecoder(private val settings: Settings) {
                     onFirstFrameListener?.let { it(); onFirstFrameListener = null }
 
                     frameCount++
+                    framesRendered++
 
                     val now = System.currentTimeMillis()
                     val elapsed = now - lastFpsLogTime
@@ -842,6 +922,8 @@ class VideoDecoder(private val settings: Settings) {
                 } else if (outputIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
                     handleOutputFormatChange(currentCodec.outputFormat)
                 }
+
+                logThroughput()
 
                 // Stall detection: if we rendered at least one frame but haven't
                 // produced output in SYNC_STALL_THRESHOLD_MS, the decoder is likely dead-but-active.
@@ -863,6 +945,14 @@ class VideoDecoder(private val settings: Settings) {
                         AppLog.w("Decoder stall detected (no output for ${stallGap}ms). Forcing restart ($syncStallRestartCount/$MAX_SYNC_STALL_RESTARTS).")
                         scheduleRestart("sync_stall")
                         break
+                    }
+                    // Suppressed by the cooldown or the cap. Report it, throttled: the branch
+                    // above is the only thing that ever mentions a stall, so once it stops
+                    // firing a decoder that has exhausted its restart budget keeps stalling
+                    // with an entirely clean log and reads as healthy.
+                    if (now - lastSyncStallSuppressedLogMs >= SYNC_STALL_SUPPRESSED_LOG_INTERVAL_MS) {
+                        lastSyncStallSuppressedLogMs = now
+                        AppLog.w("Decoder stall detected (no output for ${stallGap}ms) but restart suppressed ($syncStallRestartCount/$MAX_SYNC_STALL_RESTARTS used, ${SYNC_STALL_COOLDOWN_MS}ms cooldown). Still spinning on output.")
                     }
                 }
             } catch (e: Exception) {
