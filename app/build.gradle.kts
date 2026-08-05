@@ -112,15 +112,38 @@ android {
             // keyPassword = property("HEADUNIT_KEYSTORE_PASSWORD") as String
         }
         create("release") {
+            val defaultStoreFile = when {
+                rootProject.file("headunit-release-key.jks").exists() -> rootProject.file("headunit-release-key.jks")
+                file("../headunit-release-key.jks").exists() -> file("../headunit-release-key.jks")
+                else -> null
+            }
+            if (defaultStoreFile != null) {
+                storeFile = defaultStoreFile
+            }
+            keyAlias = "headunit-revived"
+
             val keyfile = rootProject.file("key.properties")
+            val signingPropsFile = rootProject.file("secrets.properties")
+
             if (keyfile.exists()) {
                 val keyprops = Properties()
                 keyprops.load(FileInputStream(keyfile))
 
-                storeFile = file(keyprops.getProperty("storeFile"))
-                storePassword = keyprops.getProperty("storePassword")
-                keyAlias = keyprops.getProperty("keyAlias")
-                keyPassword = keyprops.getProperty("keyPassword")
+                if (keyprops.containsKey("storeFile")) storeFile = file(keyprops.getProperty("storeFile"))
+                if (keyprops.containsKey("storePassword")) storePassword = keyprops.getProperty("storePassword")
+                if (keyprops.containsKey("keyAlias")) keyAlias = keyprops.getProperty("keyAlias")
+                if (keyprops.containsKey("keyPassword")) keyPassword = keyprops.getProperty("keyPassword")
+            } else if (signingPropsFile.exists()) {
+                val props = Properties()
+                props.load(FileInputStream(signingPropsFile))
+
+                storePassword = props.getProperty("HEADUNIT_KEYSTORE_PASSWORD")
+                keyPassword = props.getProperty("HEADUNIT_KEY_PASSWORD")
+            } else {
+                val envStorePass = System.getenv("HEADUNIT_KEYSTORE_PASSWORD") ?: (project.findProperty("HEADUNIT_KEYSTORE_PASSWORD") as? String)
+                val envKeyPass = System.getenv("HEADUNIT_KEY_PASSWORD") ?: (project.findProperty("HEADUNIT_KEY_PASSWORD") as? String)
+                if (envStorePass != null) storePassword = envStorePass
+                if (envKeyPass != null) keyPassword = envKeyPass
             }
         }
     }
@@ -134,9 +157,9 @@ android {
                 "proguard-project.txt"
             )
 
-            val isSigningConfigExists = rootProject.file("key.properties").exists()
-            if(isSigningConfigExists) {
-                signingConfig = signingConfigs.getByName("release")
+            val relConfig = signingConfigs.getByName("release")
+            if (relConfig.storeFile != null && relConfig.storeFile!!.exists()) {
+                signingConfig = relConfig
             }
         }
 

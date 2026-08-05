@@ -42,6 +42,7 @@ import com.andrerinas.openheadunit.view.GlProjectionView
 import com.andrerinas.openheadunit.view.ProjectionView
 import com.andrerinas.openheadunit.view.TextureProjectionView
 import com.andrerinas.openheadunit.utils.Settings
+import com.andrerinas.openheadunit.utils.ToastUtils
 import com.andrerinas.openheadunit.view.OverlayTouchView
 import com.andrerinas.openheadunit.utils.HeadUnitScreenConfig
 import com.andrerinas.openheadunit.utils.SystemUI
@@ -453,7 +454,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
             Settings.ViewMode.TEXTURE -> "TextureView"
             Settings.ViewMode.GLES -> "GLES20"
         }
-        Toast.makeText(this, getString(R.string.renderer_switched_to, label), Toast.LENGTH_SHORT).show()
+        ToastUtils.showToast(this, getString(R.string.renderer_switched_to, label), Toast.LENGTH_SHORT)
         // Drop the current bar and rebuild on the new backend, then re-offer so the user can keep
         // cycling if this one is also blank (the new backend may decode frames yet still show black,
         // which nothing can detect automatically).
@@ -553,7 +554,7 @@ class AapProjectionActivity : SurfaceActivity(), IProjectionView.Callbacks, Vide
                             dismissRendererConfirmBanner()
                             if (!state.isClean && !state.isUserExit) {
                                 AppLog.w("AapProjectionActivity: Disconnected unexpectedly.")
-                                Toast.makeText(this@AapProjectionActivity, getString(R.string.wifi_disconnect_toast), Toast.LENGTH_LONG).show()
+                                ToastUtils.showToast(this@AapProjectionActivity, getString(R.string.wifi_disconnect_toast), Toast.LENGTH_LONG)
                             }
                             // Only finish immediately if the user explicitly exited, it was a clean close, or killOnDisconnect is enabled.
                             if (state.isUserExit || state.isClean || settings.killOnDisconnect) {
