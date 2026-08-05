@@ -207,12 +207,44 @@ class VideoDecoder(private val settings: Settings) {
     }
 
     /**
+     * The visible picture size described by a decoder output format.
+     *
+     * KEY_WIDTH/KEY_HEIGHT carry the buffer geometry, which vendors are free to pad out to their
+     * macroblock alignment - Intel's AVC component reports 736 for a 720-line stream. Taking that
+     * verbatim propagates a video size the stream does not have: the projection view scales to an
+     * aspect ratio that is off by the padding, and a later restart reconfigures MediaCodec for the
+     * padded height. The crop rectangle is the authoritative visible region, so prefer it and fall
+     * back to the buffer geometry only where a decoder omits it.
+     */
+    private fun displaySizeOf(format: MediaFormat): Pair<Int, Int> {
+        fun key(name: String): Int? =
+            try { if (format.containsKey(name)) format.getInteger(name) else null } catch (e: Exception) { null }
+
+        val bufferWidth = key(MediaFormat.KEY_WIDTH) ?: mWidth
+        val bufferHeight = key(MediaFormat.KEY_HEIGHT) ?: mHeight
+
+        // Inclusive bounds, so the visible extent is right - left + 1.
+        val cropLeft = key("crop-left")
+        val cropRight = key("crop-right")
+        val cropTop = key("crop-top")
+        val cropBottom = key("crop-bottom")
+
+        val cropWidth = if (cropLeft != null && cropRight != null) cropRight - cropLeft + 1 else 0
+        val cropHeight = if (cropTop != null && cropBottom != null) cropBottom - cropTop + 1 else 0
+
+        // A crop wider or taller than the buffer means the decoder reported something inconsistent;
+        // the buffer geometry is the safer of the two in that case.
+        val width = if (cropWidth in 1..bufferWidth) cropWidth else bufferWidth
+        val height = if (cropHeight in 1..bufferHeight) cropHeight else bufferHeight
+        return width to height
+    }
+
+    /**
      * Handles dynamic video dimension changes during the session.
      */
     private fun handleOutputFormatChange(format: MediaFormat) {
         AppLog.i("Output Format Changed: $format")
-        val newWidth = try { format.getInteger(MediaFormat.KEY_WIDTH) } catch (e: Exception) { mWidth }
-        val newHeight = try { format.getInteger(MediaFormat.KEY_HEIGHT) } catch (e: Exception) { mHeight }
+        val (newWidth, newHeight) = displaySizeOf(format)
         if (mWidth != newWidth || mHeight != newHeight) {
             AppLog.i("Video dimensions changed via format: ${newWidth}x$newHeight")
             mWidth = newWidth
