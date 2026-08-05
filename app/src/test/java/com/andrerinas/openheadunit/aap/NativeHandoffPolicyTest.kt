@@ -1,5 +1,6 @@
 package com.andrerinas.openheadunit.aap
 
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -10,6 +11,20 @@ class NativeHandoffPolicyTest {
     private val handshakeTimeout = NativeHandoffPolicy.HANDSHAKE_TIMEOUT_MS
     private val silentPokeInterval = NativeHandoffPolicy.SILENT_POKE_WARN_INTERVAL
     private val maxFailures = NativeHandoffPolicy.MAX_CONSECUTIVE_HANDSHAKE_FAILURES
+
+    @Test
+    fun `the settle cap leaves room for extensions but is not open-ended`() {
+        // The phone's own progress reports (WifiConnectStatus) push the settling deadline out in
+        // SETTLE_EXTENSION_MS steps. The cap has to be reachable in whole steps from the base
+        // window — otherwise the last extension is silently refused at an arbitrary point — and it
+        // has to be finite, so a phone that keeps saying "still joining" and never arrives cannot
+        // hold Bluetooth open and the wake poke suppressed forever.
+        assertTrue(NativeHandoffPolicy.MAX_SETTLE_MS > timeout)
+        assertEquals(
+            0L,
+            (NativeHandoffPolicy.MAX_SETTLE_MS - timeout) % WppHandshakeSession.SETTLE_EXTENSION_MS
+        )
+    }
 
     @Test
     fun `no handoff is settling before any credentials go out`() {

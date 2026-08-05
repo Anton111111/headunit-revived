@@ -129,6 +129,7 @@ class SettingsFragment : Fragment() {
     private var pendingWaitForWifiTimeout: Int? = null
     private var pendingBluetoothManagerServiceName: String? = null
     private var pendingManualSecondaryBluetoothServiceName: String? = null
+    private var pendingNativeWifiVersionExchange: Boolean? = null
 
     // Flag to determine if the projection should stretch to fill the screen
     private var pendingStretchToFill: Boolean? = null
@@ -254,6 +255,7 @@ class SettingsFragment : Fragment() {
         pendingWaitForWifiTimeout = settings.waitForWifiTimeout
         pendingBluetoothManagerServiceName = settings.bluetoothManagerServiceName
         pendingManualSecondaryBluetoothServiceName = settings.manualSecondaryBluetoothServiceName
+        pendingNativeWifiVersionExchange = settings.nativeWifiVersionExchange
 
         pendingInsetLeft = settings.insetLeft
         pendingInsetTop = settings.insetTop
@@ -354,6 +356,7 @@ class SettingsFragment : Fragment() {
         pendingWaitForWifiTimeout = settings.waitForWifiTimeout
         pendingBluetoothManagerServiceName = settings.bluetoothManagerServiceName
         pendingManualSecondaryBluetoothServiceName = settings.manualSecondaryBluetoothServiceName
+        pendingNativeWifiVersionExchange = settings.nativeWifiVersionExchange
         pendingInsetLeft = settings.insetLeft
         pendingInsetTop = settings.insetTop
         pendingInsetRight = settings.insetRight
@@ -483,6 +486,7 @@ class SettingsFragment : Fragment() {
         pendingWaitForWifiTimeout?.let { settings.waitForWifiTimeout = it }
         pendingBluetoothManagerServiceName?.let { settings.bluetoothManagerServiceName = it }
         pendingManualSecondaryBluetoothServiceName?.let { settings.manualSecondaryBluetoothServiceName = it }
+        pendingNativeWifiVersionExchange?.let { settings.nativeWifiVersionExchange = it }
 
         pendingInsetLeft?.let { settings.insetLeft = it }
         pendingInsetTop?.let { settings.insetTop = it }
@@ -587,6 +591,7 @@ class SettingsFragment : Fragment() {
                         pendingWaitForWifiTimeout != settings.waitForWifiTimeout ||
                         pendingBluetoothManagerServiceName != settings.bluetoothManagerServiceName ||
                         pendingManualSecondaryBluetoothServiceName != settings.manualSecondaryBluetoothServiceName ||
+                        pendingNativeWifiVersionExchange != settings.nativeWifiVersionExchange ||
                         pendingUseLibusb != settings.useLibusb
 
         hasChanges = anyChange
@@ -835,6 +840,18 @@ class SettingsFragment : Fragment() {
                             updateSettingsList()
                         }
                     )
+                }
+            ))
+
+            items.add(SettingItem.ToggleSettingEntry(
+                stableId = "nativeWifiVersionExchange",
+                nameResId = R.string.native_wifi_version_exchange,
+                descriptionResId = R.string.native_wifi_version_exchange_description,
+                isChecked = pendingNativeWifiVersionExchange ?: true,
+                onCheckedChanged = { isChecked ->
+                    pendingNativeWifiVersionExchange = isChecked
+                    checkChanges()
+                    updateSettingsList()
                 }
             ))
         }

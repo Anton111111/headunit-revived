@@ -1204,6 +1204,15 @@ class Settings(private val context: Context) {
         get() = prefs.getString("bluetooth-manager-service-name", "bluetooth_manager")!!
         set(value) = prefs.edit().putString("bluetooth-manager-service-name", value).apply()
 
+    // Whether the Native AA handshake opens with a WifiVersionRequest (Type 4), as real head units
+    // and the OEM ZLink app do, instead of going straight to WifiStartRequest. On by default:
+    // Android Auto 17.4 broke the abbreviated exchange for several reporters, and the version
+    // exchange is the documented difference. Turning it off restores the exact wire behaviour that
+    // shipped in 3.2.1, which is the escape hatch if a unit regresses on it.
+    var nativeWifiVersionExchange: Boolean
+        get() = prefs.getBoolean("native-wifi-version-exchange", true)
+        set(value) = prefs.edit().putBoolean("native-wifi-version-exchange", value).apply()
+
     // Manual fallback for dual-radio head units whose second radio isn't discoverable via
     // ServiceManager.listServices() at all. Empty = disabled (rely on automatic discovery only).
     var manualSecondaryBluetoothServiceName: String

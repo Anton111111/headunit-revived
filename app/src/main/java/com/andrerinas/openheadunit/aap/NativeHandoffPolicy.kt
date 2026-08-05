@@ -21,6 +21,12 @@ object NativeHandoffPolicy {
      *  long is one slow retry, the cost of waiting too little is a dead connection. */
     const val SETTLE_TIMEOUT_MS = 45_000L
 
+    /** Hard ceiling on the settling window once the phone's own progress reports
+     *  ([com.andrerinas.openheadunit.aap.WppAction.ExtendSettle]) have extended it. Without a cap,
+     *  a phone that keeps saying "still joining" and never arrives holds the Bluetooth channel
+     *  open and the wake poke suppressed indefinitely. Three 15 s extensions past the base window. */
+    const val MAX_SETTLE_MS = 90_000L
+
     /** Longest a single credential exchange can legitimately take: the up-to-60 s wait for the
      *  P2P group's credentials, plus the 15 s wait for the phone's Type 2, plus slack. Past this
      *  the exchange is over however it ended, so treating it as live only suppresses recovery. */
