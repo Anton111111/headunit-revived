@@ -1,5 +1,5 @@
 # Changelog
-### v.3.2.1-beta1
+### v.3.2.1
 - Fixing new welcome screen, thanks to @andrecuellar
 - Fixing screen flicker every 10s thanks to @o-jcardenass
 - Fixing HW decoding on kitkat thanks to @o-jcardenass
