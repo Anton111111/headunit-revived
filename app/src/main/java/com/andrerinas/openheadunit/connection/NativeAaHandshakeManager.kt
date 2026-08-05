@@ -7,7 +7,10 @@ import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
 import android.content.Context
 import com.andrerinas.openheadunit.aap.AapService
+import com.andrerinas.openheadunit.aap.NativeCredentialsPolicy
 import com.andrerinas.openheadunit.aap.NativeHandoffPolicy
+import com.andrerinas.openheadunit.aap.NativeTransport
+import com.andrerinas.openheadunit.aap.UnusableBssidAction
 import com.andrerinas.openheadunit.aap.WppAction
 import com.andrerinas.openheadunit.aap.WppEvent
 import com.andrerinas.openheadunit.aap.WppFraming
@@ -703,6 +706,8 @@ class NativeAaHandshakeManager(
         // whether this attempt counts against consecutiveHandshakeFailures.
         var spokeToPhone = false
         var abortedLocally = false
+        // Captured once, so a settings change mid-exchange cannot split it across two rulesets.
+        val transport = NativeTransport.fromSetting(settings.nativeApTransport)
         val session = WppHandshakeSession(settings.nativeWifiVersionExchange)
         // Everything the phone sends, in order. Replaces the single bounded read this used to do:
         // types 6 and 7 arrive *after* the credentials go out, so a one-shot read could never see
@@ -776,7 +781,7 @@ class NativeAaHandshakeManager(
                         AppLog.i("NativeAA: Phone ready for WiFi association. Delivering credentials...")
                         AppLog.i("NativeAA: [TX] Sending WifiInfoResponse (Type 3) with full credentials in 1000ms...")
                         delay(1000) // [FIX] Increased delay to give phone more processing time
-                        sendWifiSecurityResponse(output, credSsid, credPsk, credBssid)
+                        sendWifiSecurityResponse(output, credSsid, credPsk, credBssid, transport)
                         AppLog.i("NativeAA: Handshake completed successfully on Bluetooth side.")
                         ifOwner(socket) {
                             // The exchange is done; the phone's work is not — it still has to
@@ -948,15 +953,26 @@ class NativeAaHandshakeManager(
             credBssid = (currentBssid ?: "").uppercase()
 
             // [FIX] Ensure BSSID is uppercase and not zeroed if possible
-            if (credBssid.isEmpty() || credBssid == "00:00:00:00:00:00" || credBssid == "02:00:00:00:00:00") {
-                AppLog.e("NativeAA: BSSID is still masked/empty ($credBssid) at Type 3 time — phone WILL reject these credentials. Aborting handshake. PLEASE CHECK IF LOCATION (GPS) IS ENABLED ON THIS DEVICE!")
-                // Triggering a P2P refresh so the next attempt has a valid BSSID
-                context.triggerWifiDirectRefresh()
-                // Not fed to the session as CredentialsUnavailable: its failure reason would say
-                // the credentials never arrived, when in fact they arrived unusable, and the line
-                // above is the one the reporter needs to act on.
-                abortedLocally = true
-                return@withContext
+            if (!NativeCredentialsPolicy.isUsableBssid(credBssid)) {
+                when (NativeCredentialsPolicy.onUnusableBssid(transport)) {
+                    UnusableBssidAction.ABORT -> {
+                        AppLog.e("NativeAA: BSSID is still masked/empty ($credBssid) at Type 3 time — phone WILL reject these credentials. Aborting handshake. PLEASE CHECK IF LOCATION (GPS) IS ENABLED ON THIS DEVICE!")
+                        // Triggering a P2P refresh so the next attempt has a valid BSSID
+                        context.triggerWifiDirectRefresh()
+                        // Not fed to the session as CredentialsUnavailable: its failure reason
+                        // would say the credentials never arrived, when in fact they arrived
+                        // unusable, and the line above is the one the reporter needs to act on.
+                        abortedLocally = true
+                        return@withContext
+                    }
+                    UnusableBssidAction.OMIT_AND_CONTINUE -> {
+                        // Deliberate on this route: an ordinary AP is identified by SSID, and both
+                        // aa-proxy-rs and ZLink omit the field. Loud anyway — if the phone refuses
+                        // the credentials, this line is the first thing to look at.
+                        AppLog.w("NativeAA: No usable BSSID for this access point — sending the credentials without one. If the phone refuses to join, set a BSSID by hand in Advanced settings.")
+                        credBssid = ""
+                    }
+                }
             }
 
             AppLog.i("NativeAA: Starting Handshake Exchange:")
@@ -1076,13 +1092,27 @@ class NativeAaHandshakeManager(
         sendProtobuf(output, request.toByteArray(), WppMessageType.VERSION_REQUEST)
     }
 
-    private fun sendWifiSecurityResponse(output: OutputStream, ssid: String, key: String, bssid: String) {
+    /**
+     * Sends the credentials. A null or empty [bssid] leaves the field out of the message, as
+     * aa-proxy-rs does when it has no real address. [transport] picks the access-point type:
+     * DYNAMIC for a hotspot, STATIC for a WiFi Direct group as before.
+     */
+    private fun sendWifiSecurityResponse(
+        output: OutputStream,
+        ssid: String,
+        key: String,
+        bssid: String?,
+        transport: NativeTransport
+    ) {
         val response = Wireless.WifiInfoResponse.newBuilder()
             .setSsid(ssid)
             .setKey(key)
-            .setBssid(bssid)
             .setSecurityMode(Wireless.SecurityMode.WPA2_PERSONAL)
-            .setAccessPointType(Wireless.AccessPointType.STATIC)
+            .setAccessPointType(
+                if (transport == NativeTransport.HOTSPOT) Wireless.AccessPointType.DYNAMIC
+                else Wireless.AccessPointType.STATIC
+            )
+            .apply { if (!bssid.isNullOrEmpty()) setBssid(bssid) }
             .build()
         sendProtobuf(output, response.toByteArray(), WppMessageType.INFO_RESPONSE)
     }

@@ -71,8 +71,13 @@ class SettingsFragment : Fragment() {
     private val basicSettingIds = setOf(
         // General
         "autoOptimize", "connectionMode", "appLanguage", "uiScale",
-        // Wireless (shown in Basic only when WiFi is among the selected connection modes)
+        // Wireless (shown in Basic only when WiFi is among the selected connection modes).
+        // The hotspot entries come along with the transport choice: they only render once Hotspot
+        // is picked, and on a device that will not let an app read its hotspot configuration the
+        // manual name is the only way to finish setting the route up.
         "wifiConnectionMode",
+        "nativeApTransport", "nativeApTransportHint", "hotspotSsidOverride", "hotspotPasswordOverride",
+        "hotspotInterfaceOverride",
         // Dark mode
         "darkModeSettings",
         // Automation
@@ -130,6 +135,10 @@ class SettingsFragment : Fragment() {
     private var pendingBluetoothManagerServiceName: String? = null
     private var pendingManualSecondaryBluetoothServiceName: String? = null
     private var pendingNativeWifiVersionExchange: Boolean? = null
+    private var pendingNativeApTransport: Int? = null
+    private var pendingHotspotSsid: String? = null
+    private var pendingHotspotPassword: String? = null
+    private var pendingHotspotInterface: String? = null
 
     // Flag to determine if the projection should stretch to fill the screen
     private var pendingStretchToFill: Boolean? = null
@@ -256,6 +265,10 @@ class SettingsFragment : Fragment() {
         pendingBluetoothManagerServiceName = settings.bluetoothManagerServiceName
         pendingManualSecondaryBluetoothServiceName = settings.manualSecondaryBluetoothServiceName
         pendingNativeWifiVersionExchange = settings.nativeWifiVersionExchange
+        pendingNativeApTransport = settings.nativeApTransport
+        pendingHotspotSsid = settings.hotspotSsid
+        pendingHotspotPassword = settings.hotspotPassword
+        pendingHotspotInterface = settings.hotspotInterface
 
         pendingInsetLeft = settings.insetLeft
         pendingInsetTop = settings.insetTop
@@ -357,6 +370,10 @@ class SettingsFragment : Fragment() {
         pendingBluetoothManagerServiceName = settings.bluetoothManagerServiceName
         pendingManualSecondaryBluetoothServiceName = settings.manualSecondaryBluetoothServiceName
         pendingNativeWifiVersionExchange = settings.nativeWifiVersionExchange
+        pendingNativeApTransport = settings.nativeApTransport
+        pendingHotspotSsid = settings.hotspotSsid
+        pendingHotspotPassword = settings.hotspotPassword
+        pendingHotspotInterface = settings.hotspotInterface
         pendingInsetLeft = settings.insetLeft
         pendingInsetTop = settings.insetTop
         pendingInsetRight = settings.insetRight
@@ -487,6 +504,10 @@ class SettingsFragment : Fragment() {
         pendingBluetoothManagerServiceName?.let { settings.bluetoothManagerServiceName = it }
         pendingManualSecondaryBluetoothServiceName?.let { settings.manualSecondaryBluetoothServiceName = it }
         pendingNativeWifiVersionExchange?.let { settings.nativeWifiVersionExchange = it }
+        pendingNativeApTransport?.let { settings.nativeApTransport = it }
+        pendingHotspotSsid?.let { settings.hotspotSsid = it }
+        pendingHotspotPassword?.let { settings.hotspotPassword = it }
+        pendingHotspotInterface?.let { settings.hotspotInterface = it }
 
         pendingInsetLeft?.let { settings.insetLeft = it }
         pendingInsetTop?.let { settings.insetTop = it }
@@ -592,6 +613,10 @@ class SettingsFragment : Fragment() {
                         pendingBluetoothManagerServiceName != settings.bluetoothManagerServiceName ||
                         pendingManualSecondaryBluetoothServiceName != settings.manualSecondaryBluetoothServiceName ||
                         pendingNativeWifiVersionExchange != settings.nativeWifiVersionExchange ||
+                        pendingNativeApTransport != settings.nativeApTransport ||
+                        pendingHotspotSsid != settings.hotspotSsid ||
+                        pendingHotspotPassword != settings.hotspotPassword ||
+                        pendingHotspotInterface != settings.hotspotInterface ||
                         pendingUseLibusb != settings.useLibusb
 
         hasChanges = anyChange
@@ -797,6 +822,91 @@ class SettingsFragment : Fragment() {
         ))
 
         if (pendingWifiConnectionMode == 3) {
+            items.add(SettingItem.SegmentedButtonSettingEntry(
+                stableId = "nativeApTransport",
+                nameResId = R.string.native_ap_transport,
+                options = listOf(
+                    getString(R.string.native_ap_transport_wifi_direct),
+                    getString(R.string.native_ap_transport_hotspot)
+                ),
+                selectedIndex = if ((pendingNativeApTransport ?: 0) == 1) 1 else 0,
+                onOptionSelected = { index ->
+                    pendingNativeApTransport = index
+                    checkChanges()
+                    updateSettingsList()
+                }
+            ))
+
+            if ((pendingNativeApTransport ?: 0) == 1) {
+                items.add(SettingItem.InfoBanner(
+                    stableId = "nativeApTransportHint",
+                    textResId = R.string.native_ap_transport_hint
+                ))
+
+                // The automatic read goes through the same non-public API that a locked-down
+                // device refuses outright, so on those units this override is the only way the
+                // route can learn the network name at all.
+                val manualSsid = pendingHotspotSsid.orEmpty()
+                items.add(SettingItem.SettingEntry(
+                    stableId = "hotspotSsidOverride",
+                    nameResId = R.string.hotspot_ssid_override,
+                    value = manualSsid.ifEmpty { getString(R.string.auto) },
+                    onClick = { _ ->
+                        DialogUtils.showTextInputDialogWithMessage(
+                            requireContext(),
+                            R.string.hotspot_ssid_override,
+                            R.string.hotspot_ssid_override_message,
+                            manualSsid,
+                            { newVal ->
+                                pendingHotspotSsid = newVal.trim()
+                                checkChanges()
+                                updateSettingsList()
+                            }
+                        )
+                    }
+                ))
+
+                val manualPassword = pendingHotspotPassword.orEmpty()
+                items.add(SettingItem.SettingEntry(
+                    stableId = "hotspotPasswordOverride",
+                    nameResId = R.string.hotspot_password_override,
+                    value = if (manualPassword.isEmpty()) getString(R.string.auto) else "\u2022".repeat(manualPassword.length),
+                    onClick = { _ ->
+                        DialogUtils.showTextInputDialogWithMessage(
+                            requireContext(),
+                            R.string.hotspot_password_override,
+                            R.string.hotspot_password_override_message,
+                            manualPassword,
+                            { newVal ->
+                                pendingHotspotPassword = newVal.trim()
+                                checkChanges()
+                                updateSettingsList()
+                            }
+                        )
+                    }
+                ))
+
+                val manualInterface = pendingHotspotInterface.orEmpty()
+                items.add(SettingItem.SettingEntry(
+                    stableId = "hotspotInterfaceOverride",
+                    nameResId = R.string.hotspot_interface_override,
+                    value = manualInterface.ifEmpty { getString(R.string.auto) },
+                    onClick = { _ ->
+                        DialogUtils.showTextInputDialogWithMessage(
+                            requireContext(),
+                            R.string.hotspot_interface_override,
+                            R.string.hotspot_interface_override_message,
+                            manualInterface,
+                            { newVal ->
+                                pendingHotspotInterface = newVal.trim()
+                                checkChanges()
+                                updateSettingsList()
+                            }
+                        )
+                    }
+                ))
+            }
+
             val currentServiceName = pendingBluetoothManagerServiceName ?: "bluetooth_manager"
             items.add(SettingItem.SettingEntry(
                 stableId = "bluetoothAdapterServiceName",
