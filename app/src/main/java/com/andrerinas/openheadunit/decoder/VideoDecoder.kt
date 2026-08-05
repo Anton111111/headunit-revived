@@ -27,13 +27,12 @@ class VideoDecoder(private val settings: Settings) {
         private const val TIMEOUT_US = 10000L
         private const val MAX_RESTARTS_WITHOUT_FRAME = 3
 
-        // sync_stall watchdog tuning (issue #742). A decoder that is merely intermittently slow
-        // (renders a frame every so often, just not within SYNC_STALL_THRESHOLD_MS) is not caught
-        // by restartsSinceLastFrame's "never produced a frame" cap, since that resets to zero the
-        // moment any frame renders. Without its own cooldown/cap this watchdog could otherwise
-        // tear the MediaCodec down and rebuild it indefinitely on marginal hardware, mirroring the
-        // same failure mode AapProjectionActivity.maybeRecoverFromDisplayStall() was hardened
-        // against for issue #650.
+        // sync_stall watchdog tuning. An intermittently slow decoder — one that renders, just not
+        // within SYNC_STALL_THRESHOLD_MS — escapes restartsSinceLastFrame's cap, which counts only
+        // restarts that produced no frame at all and resets the moment one renders. Without its own
+        // cooldown and cap this watchdog would rebuild the MediaCodec indefinitely on marginal
+        // hardware, the same failure mode
+        // AapProjectionActivity.maybeRecoverFromDisplayStall() was hardened against.
         private const val SYNC_STALL_THRESHOLD_MS = 2000L
         private const val SYNC_STALL_COOLDOWN_MS = 8000L
         private const val SYNC_STALL_RESET_MS = 60000L
@@ -161,7 +160,7 @@ class VideoDecoder(private val settings: Settings) {
     private var codecFallbackUsed = false
     private var decoderPermanentlyFailed = false
 
-    // sync_stall cooldown/cap state (issue #742) - see SYNC_STALL_* constants.
+    // sync_stall cooldown/cap state - see SYNC_STALL_* constants.
     private var syncStallRestartCount = 0
     private var lastSyncStallRestartMs = 0L
     private var lastSyncStallSuppressedLogMs = 0L
@@ -194,8 +193,7 @@ class VideoDecoder(private val settings: Settings) {
 
     // elapsedRealtime() of the last encoded video bytes received from the phone (input side),
     // as opposed to lastFrameRenderedMs (output side). Lets the projection watchdog tell a
-    // phone-side pause (no input) apart from a local display stall (input flowing, nothing
-    // drawn). See issue #650.
+    // phone-side pause (no input) apart from a local display stall (input flowing, nothing drawn).
     @Volatile var lastInputBytesReceivedMs: Long = 0L
 
     // True while the bundled software HEVC decoder is active. That path renders through the
@@ -370,11 +368,11 @@ class VideoDecoder(private val settings: Settings) {
      * Returns false when the frame was dropped because the codec's input queue was transiently
      * full, so the caller (AapVideo) can route recovery through its own throttled
      * markCorruptAndRequestRecovery() instead of every drop firing an independent, unthrottled
-     * keyframe request (issue #755 follow-up).
+     * keyframe request.
      */
     fun decode(buffer: ByteArray, offset: Int, size: Int, forceSoftware: Boolean, codecName: String): Boolean {
         synchronized(this) {
-            // Input-side liveness: bytes are arriving from the phone right now (issue #650).
+            // Input-side liveness: bytes are arriving from the phone right now.
             lastInputBytesReceivedMs = SystemClock.elapsedRealtime()
 
             // Check if a restart was requested by output thread
@@ -507,9 +505,9 @@ class VideoDecoder(private val settings: Settings) {
                     // (AapVideo.markCorruptAndRequestRecovery) decide whether/when to request a
                     // keyframe, instead of firing an unthrottled recovery here - on decoders with
                     // a small, fixed buffer count this can recur every few seconds during normal
-                    // playback and each one was an independent, unthrottled focus-cycle blink
-                    // (issue #755 follow-up). A truly stuck decoder is still caught by
-                    // outputThreadLoop's sync_stall watchdog.
+                    // playback, and each one was an independent, unthrottled focus-cycle blink. A
+                    // truly stuck decoder is still caught by outputThreadLoop's sync_stall
+                    // watchdog.
                     AppLog.w("Input buffer full. Dropping frame.")
                     framesDropped++
                     return false
@@ -991,6 +989,11 @@ class VideoDecoder(private val settings: Settings) {
                         lastOutputMs = now
                     } else {
                         // Input bytes ARE arriving, but decoder produces no output -> REAL DECODER STALL!
+                        // A device that is merely marginal — renders fine for stretches, then
+                        // stalls under load — never trips restartsSinceLastFrame's cap, since that
+                        // counts only restarts where no frame at all was rendered. Cap and cooldown
+                        // this watchdog the same way rather than rebuilding the MediaCodec every
+                        // time it fires.
                         if (syncStallRestartCount > 0 && now - lastSyncStallRestartMs > SYNC_STALL_RESET_MS) {
                             syncStallRestartCount = 0
                         }

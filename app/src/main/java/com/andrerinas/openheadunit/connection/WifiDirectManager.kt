@@ -385,12 +385,11 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                     nativeRecreateCount = 0
                 }
                 if (hadClient && !isClientConnected) {
-                    // [BUG_FIX] #760: never rediscover on the Native AA path. We run a *quiet*
-                    // host there — the phone finds us by SSID from the credentials we handed it
-                    // over Bluetooth, never by discovery — and discoverPeers() takes the group
-                    // owner off-channel every 10s. In the reporter's logs that loop starts the
-                    // moment the phone drops mid-DHCP and then keeps every subsequent retry stuck
-                    // at "Obtaining IP address".
+                    // [BUG_FIX] Never rediscover on the Native AA path: it is a *quiet* host, the
+                    // phone finds us by SSID from the credentials handed over Bluetooth, and
+                    // discoverPeers() takes the group owner off-channel every 10 s. Starting that
+                    // loop when a phone drops mid-DHCP leaves every retry stuck at "Obtaining IP
+                    // address".
                     if (NativeHandoffPolicy.shouldRestartDiscovery(
                             nativeAaMode = isNativeAaMode(),
                             hadClient = hadClient,
@@ -1034,9 +1033,8 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
      * Tear down any current P2P group and create a fresh native quiet-host group.
      * [forceStandard] skips the 5GHz attempt, for phones that can't join a 5GHz group owner.
      *
-     * Used to also call deletePersistentGroup() here, mirroring #730's Helper-mode fix, but
-     * that's rejected outright on-device for every netId — likely a permission this app lacks.
-     * Dropped.
+     * Used to also call deletePersistentGroup() here, as the Helper mode path does, but on-device
+     * that is rejected for every netId — likely a permission this app lacks. Dropped.
      */
     @SuppressLint("MissingPermission")
     private fun recreateNativeGroup(forceStandard: Boolean) {

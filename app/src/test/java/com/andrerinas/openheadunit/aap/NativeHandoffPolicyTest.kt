@@ -56,9 +56,9 @@ class NativeHandoffPolicyTest {
 
     @Test
     fun `handshake expires so a coroutine that never unwinds cannot latch it true`() {
-        // #706: on that head unit closing the socket does not unblock the pending read, so
-        // handleHandshake()'s cleanup never runs. Without this bound the old boolean stayed true
-        // for the life of the process, stopping the wake poke and the P2P join watchdog.
+        // Where closing the socket does not unblock the pending read, handleHandshake()'s cleanup
+        // never runs. Unbounded, the old boolean stayed true for the life of the process and took
+        // the wake poke and the P2P join watchdog down with it.
         assertFalse(
             NativeHandoffPolicy.isHandshaking(startedAtMs = 1_000L, nowMs = 1_000L + handshakeTimeout)
         )
@@ -92,8 +92,8 @@ class NativeHandoffPolicyTest {
 
     @Test
     fun `poke is blocked while a handoff is settling`() {
-        // The #760 case: the phone joining the group re-delivers credentials, which re-invokes
-        // triggerPoke() straight into the phone's DHCP exchange.
+        // The phone joining the group re-delivers credentials, which re-invokes triggerPoke()
+        // straight into the phone's DHCP exchange.
         assertFalse(
             NativeHandoffPolicy.shouldPoke(
                 settling = true, handshakeInFlight = false, sessionConnected = false

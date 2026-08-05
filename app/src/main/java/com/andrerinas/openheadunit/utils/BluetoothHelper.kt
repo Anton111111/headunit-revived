@@ -94,8 +94,8 @@ object BluetoothHelper {
      *  user supplies a service name automatic discovery (listBluetoothServices()) didn't find.
      *  Forgiving of the AIDL interface descriptor `adb shell service list` prints in brackets
      *  (e.g. "com.qf.btsdk.IBTBinderPool") in place of the actual service name before the colon
-     *  (e.g. "btBinderPool") - confirmed via andreknieriem/headunit-revived#706 that users copy
-     *  the bracketed part since it's the more distinctive-looking of the two. */
+     *  (e.g. "btBinderPool"): users copy the bracketed part, it being the more distinctive-looking
+     *  of the two. */
     fun getAdapterHandleForService(context: Context, serviceName: String): BluetoothAdapterHandle? {
         val input = serviceName.trim().removePrefix("[").removeSuffix("]").trim()
         if (input.isEmpty()) return null

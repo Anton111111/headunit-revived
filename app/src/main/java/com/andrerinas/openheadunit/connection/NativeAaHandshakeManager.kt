@@ -103,11 +103,11 @@ class NativeAaHandshakeManager(
     // elapsedRealtime() when handleHandshake() started, or 0 when no exchange is running; lets
     // WifiDirectManager's join watchdog know a real exchange is in progress.
     //
-    // [BUG_FIX] #706: a stamp rather than a boolean because handleHandshake() cannot be relied on
-    // to clear it. On the reporter's ROCO K706 the socket close that is supposed to unblock the
-    // wait for Type 2 does not, so the coroutine never reaches its finally — three failed
-    // handshakes produced zero "BT Handshake socket closed." lines and left the old boolean true
-    // for the rest of the process. See NativeHandoffPolicy.isHandshaking.
+    // [BUG_FIX] A stamp rather than a boolean, because handleHandshake() cannot be relied on to
+    // clear it: on stacks where closing the socket does not unblock the wait for Type 2, the
+    // coroutine never reaches its finally. Seen as three failed handshakes and zero "BT Handshake
+    // socket closed." lines, with the old boolean stuck true for the rest of the process. See
+    // NativeHandoffPolicy.isHandshaking.
     @Volatile private var handshakeStartedAt = 0L
     // True for the duration of a single pokeDevice() attempt (its socket.connect() call itself
     // can fire an OS-level ACL_CONNECTED broadcast before any real handshake starts) - see
@@ -124,18 +124,16 @@ class NativeAaHandshakeManager(
     // Name of the primary Bluetooth radio we listen and poke on, captured in start(). A field
     // rather than a local so the diagnostic below can name the radio the phone is ignoring.
     @Volatile private var localRadioName: String = "?"
-    // [BUG_FIX] #706: how many wake pokes the phone has answered without ever opening the AA
-    // channel, and whether it ever has. The pair exists because "poke succeeds, nothing comes
-    // back" produced a head unit log with no sign of trouble at all — successful pokes and
-    // nothing else — while the phone was in fact reconnecting every 12 s to the head unit's own
-    // OEM Bluetooth module, which still advertises the Android Auto service record. See
-    // NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack.
+    // [BUG_FIX] How many wake pokes the phone has answered without ever opening the AA channel,
+    // and whether it ever has. The pair exists because "poke succeeds, nothing comes back" makes a
+    // broken unit's log identical to a healthy one waiting for the user, while the phone is in
+    // fact reconnecting every 12 s to the unit's own OEM Bluetooth module, which advertises the
+    // same service record. See NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack.
     @Volatile private var pokesSinceLastAccept = 0
     @Volatile private var everAcceptedAaConnection = false
-    // [BUG_FIX] #706: handshakes that timed out waiting for Type 2, back to back. Each one strands
-    // a Dispatchers.IO thread forever on a stack where close() does not interrupt a pending read,
-    // so this bounds how many we are willing to strand. See
-    // NativeHandoffPolicy.shouldServeHandshake.
+    // [BUG_FIX] Handshakes that timed out waiting for Type 2, back to back. Where close() does not
+    // interrupt a pending read each one strands a Dispatchers.IO thread forever, so this bounds
+    // how many we are willing to strand. See NativeHandoffPolicy.shouldServeHandshake.
     @Volatile private var consecutiveHandshakeFailures = 0
     // Whether the "not serving handshakes" warning has already been logged for the current
     // backoff, so a phone retrying every ~12 s does not repeat the long explanation each time.
@@ -177,10 +175,10 @@ class NativeAaHandshakeManager(
      * landing — the window in which it is still associating, doing WPS and getting a DHCP lease.
      *
      * [isHandshakeInFlight] deliberately goes false the instant Type 3 is written, because the
-     * *credential exchange* is done at that point. The phone's work isn't: on the #760 reporter's
-     * hardware it joined the group 0.73 s after Type 3 and was still without an IP 2.4 s later.
-     * Anything that must not disturb the phone mid-join — the wake poke, the BT auto-start
-     * re-arm, WifiDirectManager's join watchdog — has to check this, not isHandshakeInFlight().
+     * *credential exchange* is done at that point. The phone's work is not: measured joining the
+     * group 0.73 s after Type 3 and still without an IP 2.4 s later. Anything that must not disturb
+     * the phone mid-join — the wake poke, the BT auto-start re-arm, WifiDirectManager's join
+     * watchdog — has to check this, not isHandshakeInFlight().
      */
     fun isHandoffSettling(): Boolean =
         NativeHandoffPolicy.isSettling(handoffSettlingSince, SystemClock.elapsedRealtime())
@@ -276,7 +274,7 @@ class NativeAaHandshakeManager(
         // Match radios by system service name, not MAC address: BluetoothAdapter.getAddress()
         // returns the fixed placeholder "02:00:00:00:00:00" for any non-privileged app since
         // Android 6.0 (API 23), on every device - primary and secondary always look identical
-        // by address alone (see andreknieriem/headunit-revived#706).
+        // by address alone.
         val handles = try {
             BluetoothHelper.getAllBluetoothAdapterHandles(context)
         } catch (e: Exception) { emptyList() }
@@ -472,13 +470,12 @@ class NativeAaHandshakeManager(
      *
      * Never runs while a handoff is settling: AapService re-invokes this on every credential
      * re-delivery, and the phone *joining our group* is itself a P2P connection change, hence a
-     * re-delivery. That turned into a real RFCOMM connect() landing in the middle of the phone's
-     * DHCP exchange (#760).
+     * re-delivery. That put a real RFCOMM connect() in the middle of the phone's DHCP exchange.
      */
     fun triggerPoke() {
         if (isHandoffSettling()) {
-            // Info, not debug: this line is the evidence that the #760 fix is doing its job, and
-            // reporter logs default to INFO.
+            // Info, not debug: this line is the evidence the suppression is working, and reporter
+            // logs default to INFO.
             AppLog.i("NativeAA: Handoff still settling — not starting a poke that would compete with the phone's WiFi association.")
             return
         }
@@ -545,13 +542,12 @@ class NativeAaHandshakeManager(
                     pokeDevice(device, holdMs = 15000)
                 }
 
-                // [BUG_FIX] #706: say out loud that the phone is answering but never calling back.
-                // Without this the log of a head unit in that state is indistinguishable from a
-                // healthy one waiting for the user — successful pokes and nothing else — which is
-                // what let the reporter's real cause (his phone's Android Auto was bound to the
-                // head unit's own OEM Bluetooth module, still advertising the AA service record
-                // after its OEM app stopped answering) go unnoticed for weeks. Warning, not info,
-                // so it survives a reporter log exported at the default level.
+                // [BUG_FIX] Say out loud that the phone answers but never calls back. Untold, that
+                // unit's log is indistinguishable from a healthy one waiting for the user, which is
+                // what hid the real cause — Android Auto bound to the head unit's own OEM Bluetooth
+                // module, still advertising the AA service record after its OEM app stopped
+                // answering. Warning, not info, so it survives a log exported at the default
+                // level.
                 if (NativeHandoffPolicy.shouldWarnPhoneNeverCallsBack(
                         pokesSinceLastAccept, everAcceptedAaConnection
                     )
@@ -644,8 +640,8 @@ class NativeAaHandshakeManager(
 
         // The wake poke is deliberately left running here. It used to be cancelled on entry, on
         // the reasoning that a real AA_UUID connection means the poke has done its job and is now
-        // just competing for radio time — but cancelling it closes the HFP/HSP socket, and #706's
-        // phone-side Gearhead log shows the phone reacting to that within milliseconds:
+        // just competing for radio time — but cancelling it closes the HFP/HSP socket, and a
+        // phone-side Gearhead log shows the phone reacting within milliseconds:
         //   GH.BtConnectionTracker: profile connection removed
         //   GH.CurrentCarTracker:   current car bluetooth connection is lost / is gone
         //   ...WIRELESS_SETUP_CAR_BLUETOOTH_DISAPPEAR
@@ -747,14 +743,13 @@ class NativeAaHandshakeManager(
             // There is no BluetoothSocket.setSoTimeout(), so the read has to be bounded from the
             // outside. This used to be a watchdog that closed the socket to unblock readFully().
             //
-            // [BUG_FIX] #706: that only works on stacks where close() actually interrupts a
-            // pending read, and the reporter's does not — his log has three "No response from
-            // phone" lines and not one "BT Handshake socket closed.", i.e. this function never
-            // unwound. Everything downstream of it stalled with it: the wake poke stopped
-            // retrying and the P2P join watchdog deferred recovery for the rest of the session.
-            // Time out the wait instead of the socket, by running the blocking read in its own
-            // coroutine and awaiting it — that resumes on schedule whether or not the read ever
-            // returns. The close is still attempted, for the stacks where it does help.
+            // [BUG_FIX] That only works where close() actually interrupts a pending read, and on
+            // some stacks it does not: three "No response from phone" lines and not one "BT
+            // Handshake socket closed." means this function never unwound, taking the wake poke
+            // and the P2P join watchdog down with it for the rest of the session. Time out the
+            // wait instead of the socket, by running the blocking read on its own coroutine, which
+            // resumes on schedule whether or not the read returns. The close is still attempted,
+            // for the stacks where it helps.
             val reader = scope.async(Dispatchers.IO) { readProtobuf(input) }
             val response = withTimeoutOrNull(HANDSHAKE_RESPONSE_TIMEOUT_MS) { reader.await() }
             if (response == null) {
@@ -785,8 +780,8 @@ class NativeAaHandshakeManager(
                 handoffSettlingSince = SystemClock.elapsedRealtime()
                 // The phone has what it needs, so the wake poke held open since before this
                 // handshake has nothing left to wake. Release it now — it is an RFCOMM channel on
-                // the same physical radio the phone is about to associate over, and #760 is what
-                // happens when Bluetooth work overlaps the join.
+                // the radio the phone is about to associate over, and Bluetooth work across the
+                // join strands it on "Obtaining IP address".
                 pokeJob?.cancel()
 
                 // Release the Bluetooth connection once the handoff has actually happened, rather
@@ -796,13 +791,11 @@ class NativeAaHandshakeManager(
                 // it open caused the same "confusion, especially with phone calls" symptom this
                 // repo has seen reported.
                 //
-                // [BUG_FIX] #760: this used to be a flat delay(3000). That is a race, not a grace
-                // period — the phone needs however long it needs. In the reporter's logs the
-                // phone joined the group 0.73s after Type 3 and then left it 0.17s after this
-                // close fired at T+3.0s, never having got an IP; on 3.1.1, which never closed
-                // Bluetooth at all, the same phone took 21s to associate and connected fine; on
-                // 3.2.0-beta4 the TCP session landed 110ms before the close and it worked. Wait
-                // for the session instead of guessing at it.
+                // [BUG_FIX] This used to be a flat delay(3000) — a race, not a grace period, since
+                // the phone needs however long it needs. Measured: joined 0.73s after Type 3, left
+                // 0.17s after the close fired at T+3.0s, never got an IP. A build that never closed
+                // Bluetooth gave the same phone 21s and it connected fine. Wait for the session
+                // instead of guessing at it.
                 val landed = awaitWifiHandoff()
                 handoffSettlingSince = 0L
                 if (landed) {
