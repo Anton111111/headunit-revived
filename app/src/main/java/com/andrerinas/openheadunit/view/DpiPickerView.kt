@@ -93,6 +93,9 @@ class DpiPickerView @JvmOverloads constructor(
         get() = if (demoAnimator != null) committedDpi else slider.value.toInt()
         set(value) = applyDpi(value, fromSlider = false, silent = true)
 
+    val hasUserInteracted: Boolean
+        get() = userInteracted
+
     fun setOnDpiChanged(cb: (Int) -> Unit) { onDpiChanged = cb }
 
     fun setPanelResolution(widthPx: Int, heightPx: Int) = preview.setPanelResolution(widthPx, heightPx)

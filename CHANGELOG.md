@@ -1,9 +1,11 @@
 # Changelog
-### v.3.2.1 - upcoming
-- Fixing new welcome screen reappears
-- Fixing screen flicker every 10s
-- Fixing HW decoding on kitkat
+### v.3.2.1-beta1
+- Fixing new welcome screen, thanks to @andrecuellar
+- Fixing screen flicker every 10s thanks to @o-jcardenass
+- Fixing HW decoding on kitkat thanks to @o-jcardenass
 - Fixing 2 Fatal errors shown in play console
+- fix: move mic timestamp inside encrypted payload (byte 4), thanks to @bruno303
+- making native mode work better and on more devices, thanks to @o-jcardenass
 
 ### v.3.2.0
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
