@@ -273,6 +273,7 @@ class OnboardingActivity : BaseActivity() {
             setPanelResolution(m.widthPixels, m.heightPixels)
             dpi = settings.dpiPixelDensity.takeIf { it != 0 } ?: recommendedDpi()
         }
+        updateDpiOverPanelWarning()
 
         // --- Appearance: full theme + night-mode pickers; more options live in Settings ---
         updateThemeButtonText()
@@ -603,18 +604,55 @@ class OnboardingActivity : BaseActivity() {
     private fun recommendedDpi(): Int =
         SystemOptimizer(this).calculateOptimalSettings(selectedSize, selectedPortrait).recommendedDpi
 
+    /** Warn (in red) when the current resolution is higher than the panel: the DPI is computed for
+     * the capped resolution the device actually projects (issue #767). Relevant mainly for
+     * upgraders who forced a resolution above their panel; fresh installs get a fitted value. */
+    private fun updateDpiOverPanelWarning() {
+        val warn = findViewById<TextView>(R.id.onb_dpi_over_panel_warning) ?: return
+        val m = realMetrics()
+        val ceiling = SystemOptimizer.recommendedResolution(m.widthPixels, m.heightPixels)
+        val chosen = Settings.Resolution.fromId(settings.resolutionId)
+        val over = m.widthPixels > 0 && chosen != null && chosen != Settings.Resolution.AUTO &&
+            (chosen.width > ceiling.width || chosen.height > ceiling.height)
+        if (over) {
+            warn.text = getString(R.string.dpi_resolution_over_panel_warning, chosen!!.resName, ceiling.resName)
+            warn.visibility = View.VISIBLE
+        } else {
+            warn.visibility = View.GONE
+        }
+    }
+
+    /**
+     * True for users who already ran the app before this wizard version (finished the old wizard,
+     * or an earlier onboarding). Their display settings are a working config we must not overwrite.
+     */
+    private fun isUpgrader(): Boolean =
+        settings.hasCompletedSetupWizard ||
+            settings.onboardingVersion in 1 until CURRENT_ONBOARDING_VERSION
+
     /** Writes the recommended display settings plus the DPI chosen in the picker. Called when
      * leaving the Display and Android Auto size steps, so no separate Apply tap is needed. */
     private fun applyDisplaySettings() {
         val result = SystemOptimizer(this).calculateOptimalSettings(selectedSize, selectedPortrait)
-        // Cap the applied resolution to what the physical panel supports (no upscaling waste).
         val panel = realMetrics()
-        settings.resolutionId = SystemOptimizer.recommendedResolution(panel.widthPixels, panel.heightPixels).id
-        settings.videoCodec = result.recommendedVideoCodec
-        settings.viewMode = result.recommendedViewMode
+        // Only auto-apply the video setup on a genuinely fresh install. Upgraders already have a
+        // working config (view mode, codec, resolution, orientation), and silently overwriting it
+        // has stranded users on a black screen (issue #767), so we leave those untouched and only
+        // apply the DPI the user set in the picker.
+        if (!isUpgrader()) {
+            val previousViewMode = settings.viewMode
+            // Set the resolution the panel warrants (the shared panel ceiling; mild downscaling of a
+            // slightly-larger standard resolution is allowed, heavy downscaling is not — see panelCeiling).
+            settings.resolutionId = SystemOptimizer.recommendedResolution(panel.widthPixels, panel.heightPixels).id
+            settings.videoCodec = result.recommendedVideoCodec
+            settings.viewMode = result.recommendedViewMode
+            settings.screenOrientation = result.suggestedOrientation
+            // If we changed the renderer, confirm the picture on the first projection.
+            if (settings.viewMode != previousViewMode) settings.pendingRendererConfirm = true
+        }
         settings.dpiPixelDensity = dpiPicker?.dpi ?: result.recommendedDpi
-        settings.screenOrientation = result.suggestedOrientation
         settings.commit()
+        updateDpiOverPanelWarning()
     }
 
     // --- Appearance (reuse the same option arrays as the settings screen) ---

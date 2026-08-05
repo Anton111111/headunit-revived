@@ -127,11 +127,18 @@
     <string name="resolution_recommended_format">%1$s (Recommended)</string>
     <string name="resolution_high_bandwidth_format">%1$s · high bandwidth</string>
     <string name="resolution_too_high_title">Resolution higher than the screen</string>
-    <string name="resolution_too_high_message">Your screen is %1$d x %2$d pixels. A higher resolution uses more bandwidth without improving quality, because the panel cannot display it.</string>
+    <string name="resolution_too_high_message">This is higher than your panel supports. The image is limited to what your panel can show (%1$s), so a higher resolution only uses more bandwidth without improving quality.</string>
     <string name="resolution_high_bandwidth_title">Higher bandwidth needed</string>
     <string name="resolution_high_bandwidth_message">This resolution uses much more bandwidth and needs a strong connection: a good 5GHz WiFi, or a stable USB connection. If you notice lag, choose a lower resolution.</string>
     <string name="resolution_use_anyway">Use anyway</string>
     <string name="resolution_use_recommended">Use recommended</string>
+    <!-- DPI: warning when the chosen resolution is higher than the panel supports -->
+    <string name="dpi_resolution_over_panel_warning">Your chosen resolution (%1$s) is higher than your panel. It is limited to %2$s, and the DPI is calculated for that. If it looks off, use the recommended resolution (%2$s).</string>
+    <!-- First-projection renderer confirmation (issue #767) -->
+    <string name="renderer_confirm_question">Do you see the Android Auto screen?</string>
+    <string name="renderer_confirm_yes">Yes</string>
+    <string name="renderer_confirm_switch">Switch renderer</string>
+    <string name="renderer_switched_to">Renderer: %1$s</string>
     <string name="onb_connection_all_detail">Shows both the USB and WiFi settings.</string>
     <string name="onb_connection_warning">Choosing a connection type hides the settings that do not apply to it, in both Basic and Advanced. To see them again, pick a different mode in the connection settings later.</string>
     <string name="onb_more_appearance">More appearance settings</string>

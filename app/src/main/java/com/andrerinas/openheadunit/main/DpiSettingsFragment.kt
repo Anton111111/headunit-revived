@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.andrerinas.openheadunit.App
 import com.andrerinas.openheadunit.R
+import com.andrerinas.openheadunit.utils.Settings
+import com.andrerinas.openheadunit.utils.SystemOptimizer
 import com.andrerinas.openheadunit.view.DpiPickerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
@@ -35,6 +37,7 @@ class DpiSettingsFragment : Fragment() {
     private lateinit var picker: DpiPickerView
     private lateinit var autoSwitch: SwitchMaterial
     private lateinit var autoDesc: TextView
+    private lateinit var overPanelWarning: TextView
     private var saveButton: MaterialButton? = null
 
     private var initialValue = 0
@@ -50,12 +53,17 @@ class DpiSettingsFragment : Fragment() {
         picker = view.findViewById(R.id.dpi_picker)
         autoSwitch = view.findViewById(R.id.dpi_auto_switch)
         autoDesc = view.findViewById(R.id.dpi_auto_desc)
+        overPanelWarning = view.findViewById(R.id.dpi_over_panel_warning)
 
         setupToolbar()
 
         // Show which DPI "Automatic" actually uses (the device's own density).
         val detected = detectedDensityDpi()
         autoDesc.text = getString(R.string.dpi_automatic_desc_format, detected)
+
+        // If the chosen resolution exceeds the panel, the DPI is computed for the capped resolution
+        // the device will actually project, so flag it (issue #767).
+        updateOverPanelWarning()
 
         initialValue = settings.dpiPixelDensity
         val auto = initialValue == 0
@@ -134,6 +142,11 @@ class DpiSettingsFragment : Fragment() {
     }
 
     private fun detectedDensityDpi(): Int {
+        val m = realMetrics()
+        return if (m.densityDpi > 0) m.densityDpi else 160
+    }
+
+    private fun realMetrics(): DisplayMetrics {
         val m = DisplayMetrics()
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -144,7 +157,24 @@ class DpiSettingsFragment : Fragment() {
             }
         } catch (_: Exception) {
         }
-        return if (m.densityDpi > 0) m.densityDpi else 160
+        return m
+    }
+
+    /** Warn (in red) when the chosen resolution is higher than the panel: the DPI is then computed
+     * for the capped resolution the device actually projects, not the one the user picked. */
+    private fun updateOverPanelWarning() {
+        val m = realMetrics()
+        val ceiling = SystemOptimizer.recommendedResolution(m.widthPixels, m.heightPixels)
+        val chosen = Settings.Resolution.fromId(settings.resolutionId)
+        val over = m.widthPixels > 0 && chosen != null && chosen != Settings.Resolution.AUTO &&
+            (chosen.width > ceiling.width || chosen.height > ceiling.height)
+        if (over) {
+            overPanelWarning.text =
+                getString(R.string.dpi_resolution_over_panel_warning, chosen!!.resName, ceiling.resName)
+            overPanelWarning.visibility = View.VISIBLE
+        } else {
+            overPanelWarning.visibility = View.GONE
+        }
     }
 
     companion object {

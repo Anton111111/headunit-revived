@@ -187,29 +187,37 @@ object HeadUnitScreenConfig {
 
     // Native standard resolution for a given panel size, mirroring the AUTO selection so the
     // resolution cap never advertises more than the panel warrants (issue #650).
+    /** Map a resolution class to the proto type for the current orientation (shared by the manual
+     * selection path and the panel cap, so both agree). */
+    private fun protoForResolution(
+        res: Settings.Resolution,
+        portrait: Boolean
+    ): Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType {
+        val landscape = res.codec
+            ?: Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._800x480
+        if (!portrait) return landscape
+        return when (res) {
+            Settings.Resolution._800x480 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._720x1280
+            Settings.Resolution._1280x720 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._720x1280
+            Settings.Resolution._1920x1080 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1080x1920
+            Settings.Resolution._2560x1440 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1440x2560
+            Settings.Resolution._3840x2160 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._2160x3840
+            else -> landscape
+        }
+    }
+
+    /**
+     * The proto resolution the physical panel warrants, in the display's orientation. Delegates to
+     * SystemOptimizer.panelCeiling (the shared source of truth) so the runtime cap agrees with the
+     * settings "too high" warning and the DPI calculation (issue #767).
+     */
     private fun autoResolutionForPanel(
         w: Int,
         h: Int,
         portrait: Boolean,
         canHevc: Boolean
     ): Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType {
-        return if (portrait) {
-            if (w > 720 || h > 1280) {
-                Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1080x1920
-            } else {
-                Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._720x1280
-            }
-        } else {
-            when {
-                w <= 800 && h <= 480 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._800x480
-                (w >= 3840 || h >= 2160) && VideoDecoder.isHevcSupported() && Build.VERSION.SDK_INT >= 24 ->
-                    Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._3840x2160
-                (w >= 2560 || h >= 1440) && canHevc && Build.VERSION.SDK_INT >= 24 ->
-                    Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._2560x1440
-                w > 1280 || h > 720 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1920x1080
-                else -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1280x720
-            }
-        }
+        return protoForResolution(SystemOptimizer.panelCeiling(w, h, canHevc), portrait)
     }
 
     private fun pixelsOf(type: Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType): Long {
@@ -268,20 +276,10 @@ object HeadUnitScreenConfig {
                 }
             }
         } else {
-            // Manual selection: Map to correct orientation
-            val codec = selectedResolution?.codec ?: Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._800x480
-            negotiatedResolutionType = if (isPortraitDisplay) {
-                when (selectedResolution) {
-                    Settings.Resolution._800x480 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._720x1280
-                    Settings.Resolution._1280x720 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._720x1280
-                    Settings.Resolution._1920x1080 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1080x1920
-                    Settings.Resolution._2560x1440 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._1440x2560
-                    Settings.Resolution._3840x2160 -> Control.Service.MediaSinkService.VideoConfiguration.VideoCodecResolutionType._2160x3840
-                    else -> codec
-                }
-            } else {
-                codec
-            }
+            // Manual selection: map to the correct orientation via the shared helper.
+            negotiatedResolutionType = protoForResolution(
+                selectedResolution ?: Settings.Resolution._800x480, isPortraitDisplay
+            )
         }
 
         // Cap the negotiated resolution to what the physical panel warrants, so we never ask the

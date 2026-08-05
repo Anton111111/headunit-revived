@@ -581,6 +581,11 @@
 
     <string name="btn_show_qr">QR კოდის ჩვენება</string>
     <string name="renderer_fallback_surface">ვიდეო მუდმივად იყინებოდა, ამიტომ ამ სესიისთვის ჩვენება გადაერთო SurfaceView-ზე. თუ სტაბილურია, პარამეტრებში დააყენეთ ხედვის რეჟიმი SurfaceView-ზე.</string>
+    <string name="dpi_resolution_over_panel_warning">თქვენ მიერ არჩეული გარჩევადობა (%1$s) თქვენს პანელზე მაღალია. ის შეზღუდულია %2$s-მდე და DPI სწორედ ამისთვის გამოითვლება. თუ ცუდად გამოიყურება, გამოიყენეთ რეკომენდებული გარჩევადობა (%2$s).</string>
+    <string name="renderer_confirm_question">ხედავთ Android Auto-ს ეკრანს?</string>
+    <string name="renderer_confirm_yes">დიახ</string>
+    <string name="renderer_confirm_switch">რენდერერის შეცვლა</string>
+    <string name="renderer_switched_to">რენდერერი: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">ავტონომიური რეჟიმის ფონურ რეჟიმში საიმედოდ გასაშვებად, გთხოვთ, შემდეგ ეკრანზე ჩართოთ ნებართვა „სხვა აპებზე ჩვენება“.</string>
 
@@ -652,7 +657,7 @@
     <string name="resolution_recommended_format">%1$s (რეკომენდებული)</string>
     <string name="resolution_high_bandwidth_format">%1$s · მაღალი გამტარუნარიანობა</string>
     <string name="resolution_too_high_title">გარჩევადობა ეკრანზე მაღალია</string>
-    <string name="resolution_too_high_message">თქვენი ეკრანი %1$d x %2$d პიქსელია. უფრო მაღალი გარჩევადობა მეტ გამტარუნარიანობას ხარჯავს ხარისხის გაუმჯობესების გარეშე, რადგან პანელი მას ვერ აჩვენებს.</string>
+    <string name="resolution_too_high_message">ეს თქვენს პანელზე მხარდაჭერილ მაჩვენებელზე მაღალია. გამოსახულება შეზღუდულია იმით, რისი ჩვენებაც თქვენს პანელს შეუძლია (%1$s), ამიტომ უფრო მაღალი გარჩევადობა მხოლოდ მეტ გამტარუნარიანობას ხარჯავს ხარისხის გაუმჯობესების გარეშე.</string>
     <string name="resolution_high_bandwidth_title">საჭიროა მეტი გამტარუნარიანობა</string>
     <string name="resolution_high_bandwidth_message">ეს გარჩევადობა გაცილებით მეტ გამტარუნარიანობას ხარჯავს და საჭიროებს მდგრад კავშირს: კარგ 5GHz WiFi-ს ან სტაბილურ USB-ს. თუ შეფერხებას შეამჩნევთ, აირჩიეთ დაბალი გარჩევადობა.</string>
     <string name="resolution_use_anyway">მაინც გამოყენება</string>

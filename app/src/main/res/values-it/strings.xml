@@ -601,6 +601,11 @@
 
     <string name="btn_show_qr">Mostra codice QR</string>
     <string name="renderer_fallback_surface">Il video continuava a bloccarsi, quindi la visualizzazione è passata a SurfaceView per questa sessione. Se è stabile, imposta la Modalità visualizzazione su SurfaceView nelle Impostazioni.</string>
+    <string name="dpi_resolution_over_panel_warning">La risoluzione scelta (%1$s) è più alta del tuo pannello. È limitata a %2$s e il DPI è calcolato per quella. Se sembra sbagliata, usa la risoluzione consigliata (%2$s).</string>
+    <string name="renderer_confirm_question">Vedi la schermata di Android Auto?</string>
+    <string name="renderer_confirm_yes">Sì</string>
+    <string name="renderer_confirm_switch">Cambia renderer</string>
+    <string name="renderer_switched_to">Renderer: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Per consentire l\'avvio affidabile della Modalità Personale in background, abilita l\'autorizzazione \"Mostra sopra altre app\" nella schermata successiva.</string>
 
@@ -726,7 +731,7 @@
     <string name="resolution_recommended_format">%1$s (Consigliata)</string>
     <string name="resolution_high_bandwidth_format">%1$s · banda elevata</string>
     <string name="resolution_too_high_title">Risoluzione superiore allo schermo</string>
-    <string name="resolution_too_high_message">Il tuo schermo è %1$d x %2$d pixel. Una risoluzione più alta consuma più banda senza migliorare la qualità, perché il pannello non può mostrarla.</string>
+    <string name="resolution_too_high_message">Questa è più alta di quanto supporti il tuo pannello. L\'immagine è limitata a ciò che il tuo pannello può mostrare (%1$s), quindi una risoluzione più alta usa solo più banda senza migliorare la qualità.</string>
     <string name="resolution_high_bandwidth_title">Serve più banda</string>
     <string name="resolution_high_bandwidth_message">Questa risoluzione consuma molta più banda e richiede una connessione forte: un buon WiFi a 5GHz o una connessione USB stabile. Se noti lag, scegli una risoluzione più bassa.</string>
     <string name="resolution_use_anyway">Usa comunque</string>

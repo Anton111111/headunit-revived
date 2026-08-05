@@ -602,6 +602,11 @@
 
     <string name="btn_show_qr">QRコードを表示</string>
     <string name="renderer_fallback_surface">映像がフリーズし続けたため、このセッションでは表示を SurfaceView に切り替えました。安定している場合は、設定でビューモードを SurfaceView に設定してください。</string>
+    <string name="dpi_resolution_over_panel_warning">選択した解像度 (%1$s) はパネルより高いため、%2$s に制限され、DPI もそれに合わせて計算されます。表示がおかしい場合は推奨解像度 (%2$s) を使用してください。</string>
+    <string name="renderer_confirm_question">Android Auto の画面が表示されていますか？</string>
+    <string name="renderer_confirm_yes">はい</string>
+    <string name="renderer_confirm_switch">レンダラーを切り替える</string>
+    <string name="renderer_switched_to">レンダラー: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">単独モードをバックグラウンドから安定して起動できるようにするため、次の画面で「他のアプリの上に重ねて表示」の権限を有効にしてください。</string>
     <string name="delete">削除</string>
@@ -726,7 +731,7 @@
     <string name="resolution_recommended_format">%1$s（推奨）</string>
     <string name="resolution_high_bandwidth_format">%1$s · 高帯域</string>
     <string name="resolution_too_high_title">画面より高い解像度</string>
-    <string name="resolution_too_high_message">画面は %1$d x %2$d ピクセルです。これより高い解像度は帯域を多く使うだけで、パネルが表示できないため画質は向上しません。</string>
+    <string name="resolution_too_high_message">これはパネルが対応する解像度より高い設定です。表示はパネルが表示できる範囲 (%1$s) に制限されるため、これより高い解像度は帯域を多く使うだけで画質は向上しません。</string>
     <string name="resolution_high_bandwidth_title">より高い帯域が必要</string>
     <string name="resolution_high_bandwidth_message">この解像度は帯域を大幅に消費し、安定した接続（良好な 5GHz WiFi または安定した USB 接続）が必要です。遅延が出たら低い解像度を選んでください。</string>
     <string name="resolution_use_anyway">そのまま使用</string>

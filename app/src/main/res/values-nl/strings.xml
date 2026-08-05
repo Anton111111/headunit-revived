@@ -594,6 +594,11 @@
 
     <string name="btn_show_qr">QR-code tonen</string>
     <string name="renderer_fallback_surface">De video bleef bevriezen, daarom is de weergave voor deze sessie overgeschakeld naar SurfaceView. Als het stabiel is, stel View modes in op SurfaceView in Instellingen.</string>
+    <string name="dpi_resolution_over_panel_warning">De gekozen resolutie (%1$s) is hoger dan je scherm. Deze is beperkt tot %2$s en de DPI wordt daarvoor berekend. Als het er verkeerd uitziet, gebruik dan de aanbevolen resolutie (%2$s).</string>
+    <string name="renderer_confirm_question">Zie je het Android Auto-scherm?</string>
+    <string name="renderer_confirm_yes">Ja</string>
+    <string name="renderer_confirm_switch">Renderer wisselen</string>
+    <string name="renderer_switched_to">Renderer: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Om de Self-modus betrouwbaar op de achtergrond te laten starten, schakelt u de machtiging \"Weergeven over andere apps\" in op het volgende scherm.</string>
 
@@ -719,7 +724,7 @@
     <string name="resolution_recommended_format">%1$s (Aanbevolen)</string>
     <string name="resolution_high_bandwidth_format">%1$s · veel bandbreedte</string>
     <string name="resolution_too_high_title">Resolutie hoger dan het scherm</string>
-    <string name="resolution_too_high_message">Je scherm is %1$d x %2$d pixels. Een hogere resolutie gebruikt meer bandbreedte zonder betere kwaliteit, omdat het scherm het niet kan tonen.</string>
+    <string name="resolution_too_high_message">Dit is hoger dan je scherm ondersteunt. Het beeld is beperkt tot wat je scherm kan tonen (%1$s), dus een hogere resolutie gebruikt alleen meer bandbreedte zonder betere kwaliteit.</string>
     <string name="resolution_high_bandwidth_title">Meer bandbreedte nodig</string>
     <string name="resolution_high_bandwidth_message">Deze resolutie gebruikt veel meer bandbreedte en heeft een sterke verbinding nodig: een goede 5GHz-WiFi of een stabiele USB-verbinding. Bij haperingen kies je een lagere resolutie.</string>
     <string name="resolution_use_anyway">Toch gebruiken</string>

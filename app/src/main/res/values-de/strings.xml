@@ -603,6 +603,11 @@
 
     <string name="btn_show_qr">QR-Code anzeigen</string>
     <string name="renderer_fallback_surface">Das Video ist immer wieder eingefroren, daher wurde die Anzeige für diese Sitzung auf SurfaceView umgestellt. Wenn es stabil läuft, stelle den View-Modus in den Einstellungen auf SurfaceView.</string>
+    <string name="dpi_resolution_over_panel_warning">Die gewählte Auflösung (%1$s) ist höher als dein Panel. Sie wird auf %2$s begrenzt, und die DPI wird dafür berechnet. Wenn es falsch aussieht, verwende die empfohlene Auflösung (%2$s).</string>
+    <string name="renderer_confirm_question">Siehst du den Android-Auto-Bildschirm?</string>
+    <string name="renderer_confirm_yes">Ja</string>
+    <string name="renderer_confirm_switch">Renderer wechseln</string>
+    <string name="renderer_switched_to">Renderer: %1$s</string>
     <string name="su_needed_keymaps_warning">Warnung: Dein Headunit muss entweder gerooted sein oder Shizuku installiert haben. Falls das der Fall ist, musst du die SU-Privilegien erlauben, sobald danach gefragt wird. Lenkradtasten werden keine Funktion haben, solange dies nicht behoben ist.</string>
 
     <string name="self_mode_overlay_permission_description">Damit der Self Mode zuverlässig im Hintergrund starten kann, aktivieren Sie bitte die Berechtigung \"Über anderen Apps einblenden\" im nächsten Bildschirm.</string>
@@ -729,7 +734,7 @@
     <string name="resolution_recommended_format">%1$s (Empfohlen)</string>
     <string name="resolution_high_bandwidth_format">%1$s · hohe Bandbreite</string>
     <string name="resolution_too_high_title">Auflösung höher als der Bildschirm</string>
-    <string name="resolution_too_high_message">Dein Bildschirm hat %1$d x %2$d Pixel. Eine höhere Auflösung verbraucht mehr Bandbreite ohne Qualitätsgewinn, da das Panel sie nicht darstellen kann.</string>
+    <string name="resolution_too_high_message">Das ist höher als von deinem Panel unterstützt. Das Bild ist auf das begrenzt, was dein Panel anzeigen kann (%1$s), eine höhere Auflösung verbraucht also nur mehr Bandbreite ohne bessere Qualität.</string>
     <string name="resolution_high_bandwidth_title">Mehr Bandbreite nötig</string>
     <string name="resolution_high_bandwidth_message">Diese Auflösung verbraucht viel mehr Bandbreite und braucht eine starke Verbindung: ein gutes 5GHz-WiFi oder eine stabile USB-Verbindung. Bei Rucklern wähle eine niedrigere Auflösung.</string>
     <string name="resolution_use_anyway">Trotzdem verwenden</string>

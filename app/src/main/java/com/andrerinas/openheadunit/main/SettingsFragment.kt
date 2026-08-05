@@ -1919,11 +1919,14 @@ class SettingsFragment : Fragment() {
             .setSingleChoiceItems(labels, pendingResolution ?: 0) { dialog, which ->
                 dialog.dismiss()
                 val picked = Settings.Resolution.fromId(which)
-                val longSide = maxOf(pw, ph)
+                val panelKnown = pw > 0 && ph > 0
                 when {
-                    picked == null -> {}
-                    picked.width > 0 && longSide > 0 && picked.width > longSide ->
-                        showResolutionTooHighDialog(which, recommended.id, longSide, minOf(pw, ph))
+                    picked == null || picked == Settings.Resolution.AUTO -> applyResolution(which)
+                    // "Higher than the panel" now means the same thing everywhere: it exceeds the
+                    // shared panel ceiling (recommended), which is also what the runtime cap and the
+                    // DPI use (issue #767).
+                    panelKnown && (picked.width > recommended.width || picked.height > recommended.height) ->
+                        showResolutionTooHighDialog(which, recommended.id, recommended.resName)
                     picked.width >= HIGH_BANDWIDTH_WIDTH ->
                         showResolutionBandwidthDialog(which, recommended.id)
                     else -> applyResolution(which)
@@ -1932,10 +1935,10 @@ class SettingsFragment : Fragment() {
             .show()
     }
 
-    private fun showResolutionTooHighDialog(pickedId: Int, recommendedId: Int, panelLong: Int, panelShort: Int) {
+    private fun showResolutionTooHighDialog(pickedId: Int, recommendedId: Int, recommendedName: String) {
         MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
             .setTitle(R.string.resolution_too_high_title)
-            .setMessage(getString(R.string.resolution_too_high_message, panelLong, panelShort))
+            .setMessage(getString(R.string.resolution_too_high_message, recommendedName))
             .setPositiveButton(R.string.resolution_use_recommended) { _, _ -> applyResolution(recommendedId) }
             .setNegativeButton(R.string.resolution_use_anyway) { _, _ -> applyResolution(pickedId) }
             .show()

@@ -602,6 +602,11 @@
 
     <string name="btn_show_qr">Mostrar código QR</string>
     <string name="renderer_fallback_surface">El vídeo se seguía congelando, así que la pantalla se cambió a SurfaceView durante esta sesión. Si va estable, pon el Modo de vista en SurfaceView en Ajustes.</string>
+    <string name="dpi_resolution_over_panel_warning">La resolución elegida (%1$s) es más alta que tu panel. Se limita a %2$s y el DPI se calcula para eso. Si se ve mal, usa la resolución recomendada (%2$s).</string>
+    <string name="renderer_confirm_question">¿Ves la pantalla de Android Auto?</string>
+    <string name="renderer_confirm_yes">Sí</string>
+    <string name="renderer_confirm_switch">Cambiar renderizador</string>
+    <string name="renderer_switched_to">Renderizador: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Para permitir que el Modo autónomo se inicie de manera confiable en segundo plano, active el permiso \"Mostrar sobre outras aplicaciones\" en la siguiente pantalla.</string>
 
@@ -728,7 +733,7 @@
     <string name="resolution_recommended_format">%1$s (Recomendada)</string>
     <string name="resolution_high_bandwidth_format">%1$s · mucho ancho de banda</string>
     <string name="resolution_too_high_title">Resolución mayor que la pantalla</string>
-    <string name="resolution_too_high_message">Tu pantalla es de %1$d x %2$d píxeles. Una resolución mayor consume más ancho de banda sin mejorar la calidad, porque el panel no puede mostrarla.</string>
+    <string name="resolution_too_high_message">Esto es más de lo que admite tu panel. La imagen se limita a lo que tu panel puede mostrar (%1$s), así que una resolución mayor solo usa más ancho de banda sin mejorar la calidad.</string>
     <string name="resolution_high_bandwidth_title">Se necesita más ancho de banda</string>
     <string name="resolution_high_bandwidth_message">Esta resolución consume mucho más ancho de banda y necesita una conexión fuerte: un buen WiFi de 5GHz o una conexión USB estable. Si notas lags, elige una resolución más baja.</string>
     <string name="resolution_use_anyway">Usar de todas formas</string>

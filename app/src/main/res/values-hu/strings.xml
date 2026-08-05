@@ -593,6 +593,11 @@
 
     <string name="btn_show_qr">QR-kód megjelenítése</string>
     <string name="renderer_fallback_surface">A videó folyamatosan lefagyott, ezért a megjelenítés erre a munkamenetre SurfaceView-ra váltott. Ha stabil, állítsd a Megjelenítési módot SurfaceView-ra a Beállításokban.</string>
+    <string name="dpi_resolution_over_panel_warning">A választott felbontás (%1$s) magasabb, mint a paneled. %2$s értékre korlátozódik, és a DPI ehhez van kiszámítva. Ha rosszul néz ki, használd az ajánlott felbontást (%2$s).</string>
+    <string name="renderer_confirm_question">Látod az Android Auto képernyőt?</string>
+    <string name="renderer_confirm_yes">Igen</string>
+    <string name="renderer_confirm_switch">Megjelenítő váltása</string>
+    <string name="renderer_switched_to">Megjelenítő: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">A Saját mód háttérben történő megbízható indításához engedélyezze a „Megjelenítés más alkalmazások felett” jogosultságot a következő képernyőn.</string>
 
@@ -718,7 +723,7 @@
     <string name="resolution_recommended_format">%1$s (Ajánlott)</string>
     <string name="resolution_high_bandwidth_format">%1$s · nagy sávszélesség</string>
     <string name="resolution_too_high_title">A képernyőnél nagyobb felbontás</string>
-    <string name="resolution_too_high_message">A képernyőd %1$d x %2$d pixel. A nagyobb felbontás több sávszélességet használ minőségjavulás nélkül, mert a panel nem tudja megjeleníteni.</string>
+    <string name="resolution_too_high_message">Ez magasabb, mint amit a paneled támogat. A kép arra korlátozódik, amit a paneled meg tud jeleníteni (%1$s), így a magasabb felbontás csak több sávszélességet használ minőségjavulás nélkül.</string>
     <string name="resolution_high_bandwidth_title">Nagyobb sávszélesség szükséges</string>
     <string name="resolution_high_bandwidth_message">Ez a felbontás sokkal több sávszélességet használ, és erős kapcsolatot igényel: jó 5GHz-es WiFi vagy stabil USB. Ha akadozást tapasztalsz, válassz alacsonyabb felbontást.</string>
     <string name="resolution_use_anyway">Mégis használ</string>

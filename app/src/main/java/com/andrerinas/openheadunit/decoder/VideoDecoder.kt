@@ -71,8 +71,14 @@ class VideoDecoder(private val settings: Settings) {
          * Checks if ANY H.265 (HEVC) hardware decoding is present, regardless of reliability.
          * Used for MANUAL codec selection (User override).
          */
+        // Hardware HEVC support is fixed for a device, but the check scans the whole MediaCodecList,
+        // so cache it: this is called on UI-thread paths (resolution/DPI recommendation).
+        @Volatile
+        private var cachedHwHevcSupported: Boolean? = null
+
         fun isHevcSupported(): Boolean {
-            return isHevcDecoderAvailable(includeSoftware = false)
+            cachedHwHevcSupported?.let { return it }
+            return isHevcDecoderAvailable(includeSoftware = false).also { cachedHwHevcSupported = it }
         }
 
         /**

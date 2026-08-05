@@ -595,6 +595,11 @@
 
     <string name="btn_show_qr">Afișează codul QR</string>
     <string name="renderer_fallback_surface">Videoclipul continua să se blocheze, așa că afișarea a fost comutată pe SurfaceView pentru această sesiune. Dacă este stabil, setează Mod de vizualizare pe SurfaceView în Setări.</string>
+    <string name="dpi_resolution_over_panel_warning">Rezoluția aleasă (%1$s) este mai mare decât panoul tău. Este limitată la %2$s, iar DPI este calculat pentru aceasta. Dacă arată greșit, folosește rezoluția recomandată (%2$s).</string>
+    <string name="renderer_confirm_question">Vezi ecranul Android Auto?</string>
+    <string name="renderer_confirm_yes">Da</string>
+    <string name="renderer_confirm_switch">Schimbă randarea</string>
+    <string name="renderer_switched_to">Randare: %1$s</string>
 
     <string name="self_mode_overlay_permission_description">Pentru a permite Modului Personal să pornească fiabil în fundal, activați permisiunea „Afișare peste alte aplicații” în ecranul următor.</string>
 
@@ -720,7 +725,7 @@
     <string name="resolution_recommended_format">%1$s (Recomandat)</string>
     <string name="resolution_high_bandwidth_format">%1$s · lățime de bandă mare</string>
     <string name="resolution_too_high_title">Rezoluție mai mare decât ecranul</string>
-    <string name="resolution_too_high_message">Ecranul tău are %1$d x %2$d pixeli. O rezoluție mai mare folosește mai multă lățime de bandă fără a îmbunătăți calitatea, deoarece panoul nu o poate afișa.</string>
+    <string name="resolution_too_high_message">Aceasta este mai mare decât acceptă panoul tău. Imaginea este limitată la ceea ce poate afișa panoul (%1$s), așa că o rezoluție mai mare folosește doar mai multă lățime de bandă fără a îmbunătăți calitatea.</string>
     <string name="resolution_high_bandwidth_title">Este nevoie de mai multă lățime de bandă</string>
     <string name="resolution_high_bandwidth_message">Această rezoluție folosește mult mai multă lățime de bandă și necesită o conexiune puternică: un WiFi 5GHz bun sau o conexiune USB stabilă. Dacă observi întreruperi, alege o rezoluție mai mică.</string>
     <string name="resolution_use_anyway">Folosește oricum</string>

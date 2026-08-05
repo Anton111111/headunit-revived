@@ -600,6 +600,11 @@
     <string name="use_libusb_description">USB 통신에 libusb를 사용합니다. 비활성화 시 Android 표준 USB API를 사용합니다.</string>
     <string name="btn_show_qr">QR 코드 표시</string>
     <string name="renderer_fallback_surface">영상이 계속 멈춰서 이번 세션 동안 화면을 SurfaceView로 전환했습니다. 안정적이면 설정에서 뷰 모드를 SurfaceView로 지정하세요.</string>
+    <string name="dpi_resolution_over_panel_warning">선택한 해상도(%1$s)가 패널보다 높습니다. %2$s로 제한되며 DPI도 이에 맞춰 계산됩니다. 화면이 이상하면 권장 해상도(%2$s)를 사용하세요.</string>
+    <string name="renderer_confirm_question">Android Auto 화면이 보이나요?</string>
+    <string name="renderer_confirm_yes">예</string>
+    <string name="renderer_confirm_switch">렌더러 전환</string>
+    <string name="renderer_switched_to">렌더러: %1$s</string>
     <string name="self_mode_overlay_permission_description">단독 모드가 백그라운드에서 안정적으로 시작되도록 하려면 다음 화면에서 \"다른 앱 위에 표시\" 권한을 허용해 주세요.</string>
     <string name="delete">삭제</string>
     <string name="night_mode_coordinates">좌표</string>
@@ -723,7 +728,7 @@
     <string name="resolution_recommended_format">%1$s (권장)</string>
     <string name="resolution_high_bandwidth_format">%1$s · 높은 대역폭</string>
     <string name="resolution_too_high_title">화면보다 높은 해상도</string>
-    <string name="resolution_too_high_message">화면은 %1$d x %2$d 픽셀입니다. 더 높은 해상도는 대역폭만 더 쓰고 화질은 좋아지지 않습니다. 패널이 표시할 수 없기 때문입니다.</string>
+    <string name="resolution_too_high_message">이 값은 패널이 지원하는 것보다 높습니다. 화면은 패널이 표시할 수 있는 범위(%1$s)로 제한되므로, 더 높은 해상도는 대역폭만 더 쓰고 화질은 좋아지지 않습니다.</string>
     <string name="resolution_high_bandwidth_title">더 높은 대역폭 필요</string>
     <string name="resolution_high_bandwidth_message">이 해상도는 훨씬 많은 대역폭을 사용하며 안정적인 연결(양호한 5GHz WiFi 또는 안정적인 USB)이 필요합니다. 지연이 있으면 더 낮은 해상도를 선택하세요.</string>
     <string name="resolution_use_anyway">그래도 사용</string>
