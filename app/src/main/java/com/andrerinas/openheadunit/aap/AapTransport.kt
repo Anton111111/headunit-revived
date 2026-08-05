@@ -454,12 +454,13 @@ class AapTransport(
 
     override fun onMicDataAvailable(mic_buf: ByteArray, mic_audio_len: Int) {
         if (mic_audio_len > 64) {  // If we read at least 64 bytes of audio data
-            val length = mic_audio_len + 10
+            val length = mic_audio_len + 12  // 4 header + 8 timestamp + PCM
             val data = ByteArray(length)
             data[0] = Channel.ID_MIC.toByte()
             data[1] = 0x0b
-            Utils.put_time(2, data, SystemClock.elapsedRealtime())
-            System.arraycopy(mic_buf, 0, data, 10, mic_audio_len)
+            // Timestamp at byte 4 so the full 8 bytes are inside the encrypted payload (HEADER_SIZE=4)
+            Utils.put_time(4, data, SystemClock.elapsedRealtime())
+            System.arraycopy(mic_buf, 0, data, 12, mic_audio_len)
             send(AapMessage(Channel.ID_MIC, 0x0b.toByte(), -1, 2, length, data))
         }
     }
