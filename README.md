@@ -68,8 +68,9 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 - more customization options for the UI and the app itself
 
 ## Changelog
-### v.3.2.2
+### v.3.2.2-upcoming
 - Fixing location jumping, especially on lower speeds
+- Fixing screen flicker again in video decoder
 
 ### v.3.2.1
 - Fixing new welcome screen reappears, thanks to @andrecuellar

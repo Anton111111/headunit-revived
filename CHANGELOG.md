@@ -1,10 +1,10 @@
 # Changelog
-### v.3.2.2
+### v.3.2.2-upcoming
 - Fixing location jumping, especially on lower speeds
+- Fixing screen flicker again in video decoder
 
 ### v.3.2.1
 - Fixing new welcome screen, thanks to @andrecuellar
-- Fixing screen flicker every 10s thanks to @o-jcardenass
 - Fixing HW decoding on kitkat thanks to @o-jcardenass
 - Fixing 2 Fatal errors shown in play console
 - fix: move mic timestamp inside encrypted payload (byte 4), thanks to @bruno303
