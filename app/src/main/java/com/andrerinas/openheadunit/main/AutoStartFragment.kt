@@ -396,6 +396,7 @@ class AutoStartFragment : Fragment() {
             var disabled = false
             if (settings.autoStartOnBoot) {
                 settings.autoStartOnBoot = false
+                Settings.syncAutoStartOnBootToDeviceStorage(requireContext(), false)
                 pendingAutoStartOnBoot = false
                 disabled = true
             }
@@ -407,6 +408,7 @@ class AutoStartFragment : Fragment() {
             }
             if (settings.autoStartOnUsb) {
                 settings.autoStartOnUsb = false
+                Settings.syncAutoStartOnUsbToDeviceStorage(requireContext(), false)
                 pendingAutoStartOnUsb = false
                 disabled = true
             }
