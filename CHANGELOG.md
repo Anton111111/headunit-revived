@@ -1,4 +1,7 @@
 # Changelog
+### v.3.2.2
+- Fixing location jumping, especially on lower speeds
+
 ### v.3.2.1
 - Fixing new welcome screen, thanks to @andrecuellar
 - Fixing screen flicker every 10s thanks to @o-jcardenass
