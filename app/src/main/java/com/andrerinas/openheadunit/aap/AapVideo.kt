@@ -21,15 +21,47 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
     private var isAssemblingFrame = false
     private var waitingForKeyframe = false
 
+    // Set when a P-frame lockout was armed while the throttle refused the keyframe request that
+    // ends it. See sendDeferredKeyframeRequestIfDue().
+    private var deferredKeyframeRequest = false
+
     private fun markCorruptAndRequestRecovery() {
         isFrameCorrupt = true
         waitingForKeyframe = true // Lock out P-Frames until an I-Frame arrives
         val now = android.os.SystemClock.elapsedRealtime()
-        if (now - lastKeyframeRequestMs > 1000) {
+        if (VideoRecoveryPolicy.canRequestKeyframe(now, lastKeyframeRequestMs)) {
             lastKeyframeRequestMs = now
+            deferredKeyframeRequest = false
             AppLog.w("AapVideo: Frame corrupted, requesting keyframe to recover stream")
             onFrameCorrupted()
+        } else {
+            // The throttle covers the request but not the lockout above, which drops every
+            // frame until a keyframe arrives. Nothing else asks for one, so the lockout would
+            // sit until the phone happens to send a keyframe on its own - the whole interval is
+            // discarded video. Record the debt and pay it in process() once the throttle allows.
+            deferredKeyframeRequest = true
         }
+    }
+
+    /**
+     * Sends a keyframe request that [markCorruptAndRequestRecovery] had to defer.
+     *
+     * Called per incoming video packet, so the request lands within a frame or two of the
+     * throttle expiring without needing a scheduler on this thread.
+     */
+    private fun sendDeferredKeyframeRequestIfDue() {
+        if (!deferredKeyframeRequest) return
+        if (!waitingForKeyframe) {
+            // The stream recovered on a keyframe the phone sent anyway; nothing left to ask for.
+            deferredKeyframeRequest = false
+            return
+        }
+        val now = android.os.SystemClock.elapsedRealtime()
+        if (!VideoRecoveryPolicy.isDeferredRequestDue(now, lastKeyframeRequestMs, true)) return
+        lastKeyframeRequestMs = now
+        deferredKeyframeRequest = false
+        AppLog.w("AapVideo: Still waiting for a keyframe, sending the deferred recovery request")
+        onFrameCorrupted()
     }
 
     private fun checkKeyframe(message: AapMessage): Boolean {
@@ -76,6 +108,7 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
             AppLog.i("AapVideo: Keyframe received, resuming stream.")
             waitingForKeyframe = false
             isFrameCorrupt = false
+            deferredKeyframeRequest = false
         } else {
             return true // Drop this P-Frame, we are still waiting for a Keyframe!
         }
@@ -118,6 +151,7 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
     }
 
     fun process(message: AapMessage): Boolean {
+        sendDeferredKeyframeRequestIfDue()
         // Fix smearing happening after some while
         checkFragmentState(message)
         if (checkKeyframe(message))
