@@ -483,6 +483,7 @@ class OnboardingActivity : BaseActivity() {
             return
         }
         deferredThisSession = true
+        settings.onboardingVersion = CURRENT_ONBOARDING_VERSION
         settings.commit()
         finish()
     }

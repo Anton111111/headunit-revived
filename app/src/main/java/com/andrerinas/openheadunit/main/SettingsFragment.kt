@@ -128,6 +128,7 @@ class SettingsFragment : Fragment() {
     private var pendingWaitForWifi: Boolean? = null
     private var pendingWaitForWifiTimeout: Int? = null
     private var pendingBluetoothManagerServiceName: String? = null
+    private var pendingManualSecondaryBluetoothServiceName: String? = null
 
     // Flag to determine if the projection should stretch to fill the screen
     private var pendingStretchToFill: Boolean? = null
@@ -252,6 +253,7 @@ class SettingsFragment : Fragment() {
         pendingWaitForWifi = settings.waitForWifiBeforeWifiDirect
         pendingWaitForWifiTimeout = settings.waitForWifiTimeout
         pendingBluetoothManagerServiceName = settings.bluetoothManagerServiceName
+        pendingManualSecondaryBluetoothServiceName = settings.manualSecondaryBluetoothServiceName
 
         pendingInsetLeft = settings.insetLeft
         pendingInsetTop = settings.insetTop
@@ -351,6 +353,7 @@ class SettingsFragment : Fragment() {
         pendingWaitForWifi = settings.waitForWifiBeforeWifiDirect
         pendingWaitForWifiTimeout = settings.waitForWifiTimeout
         pendingBluetoothManagerServiceName = settings.bluetoothManagerServiceName
+        pendingManualSecondaryBluetoothServiceName = settings.manualSecondaryBluetoothServiceName
         pendingInsetLeft = settings.insetLeft
         pendingInsetTop = settings.insetTop
         pendingInsetRight = settings.insetRight
@@ -479,6 +482,7 @@ class SettingsFragment : Fragment() {
         pendingWaitForWifi?.let { settings.waitForWifiBeforeWifiDirect = it }
         pendingWaitForWifiTimeout?.let { settings.waitForWifiTimeout = it }
         pendingBluetoothManagerServiceName?.let { settings.bluetoothManagerServiceName = it }
+        pendingManualSecondaryBluetoothServiceName?.let { settings.manualSecondaryBluetoothServiceName = it }
 
         pendingInsetLeft?.let { settings.insetLeft = it }
         pendingInsetTop?.let { settings.insetTop = it }
@@ -582,6 +586,7 @@ class SettingsFragment : Fragment() {
                         pendingWaitForWifi != settings.waitForWifiBeforeWifiDirect ||
                         pendingWaitForWifiTimeout != settings.waitForWifiTimeout ||
                         pendingBluetoothManagerServiceName != settings.bluetoothManagerServiceName ||
+                        pendingManualSecondaryBluetoothServiceName != settings.manualSecondaryBluetoothServiceName ||
                         pendingUseLibusb != settings.useLibusb
 
         hasChanges = anyChange
@@ -809,6 +814,27 @@ class SettingsFragment : Fragment() {
                             updateSettingsList()
                         }
                         .show()
+                }
+            ))
+
+            val manualSecondary = pendingManualSecondaryBluetoothServiceName
+            items.add(SettingItem.SettingEntry(
+                stableId = "manualSecondaryBluetoothService",
+                nameResId = R.string.manual_secondary_bt_service_title,
+                value = if (manualSecondary.isNullOrEmpty()) getString(R.string.auto)
+                         else BluetoothHelper.getAdapterDescription(requireContext(), manualSecondary),
+                onClick = { _ ->
+                    DialogUtils.showTextInputDialogWithMessage(
+                        requireContext(),
+                        R.string.manual_secondary_bt_service_title,
+                        R.string.manual_secondary_bt_service_message,
+                        manualSecondary ?: "",
+                        { newVal ->
+                            pendingManualSecondaryBluetoothServiceName = newVal.trim()
+                            checkChanges()
+                            updateSettingsList()
+                        }
+                    )
                 }
             ))
         }
@@ -2468,10 +2494,22 @@ class SettingsFragment : Fragment() {
             .setTitle(R.string.hotspot_permission_title)
             .setMessage(R.string.hotspot_permission_message)
             .setPositiveButton(R.string.open_settings) { dialog, _ ->
-                val intent = Intent(SystemSettings.ACTION_MANAGE_WRITE_SETTINGS).apply {
-                    data = Uri.parse("package:${requireContext().packageName}")
+                try {
+                    val intent = Intent(SystemSettings.ACTION_MANAGE_WRITE_SETTINGS).apply {
+                        data = Uri.parse("package:${requireContext().packageName}")
+                    }
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    try {
+                        startActivity(Intent(SystemSettings.ACTION_MANAGE_WRITE_SETTINGS))
+                    } catch (e2: Exception) {
+                        try {
+                            startActivity(Intent(SystemSettings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                data = Uri.parse("package:${requireContext().packageName}")
+                            })
+                        } catch (_: Exception) {}
+                    }
                 }
-                startActivity(intent)
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { _, _ ->
@@ -2813,10 +2851,22 @@ class SettingsFragment : Fragment() {
             .setTitle(R.string.hotspot_permission_title)
             .setMessage(R.string.hotspot_permission_message)
             .setPositiveButton(R.string.open_settings) { dialog, _ ->
-                val intent = Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS).apply {
-                    data = Uri.parse("package:${requireContext().packageName}")
+                try {
+                    val intent = Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS).apply {
+                        data = Uri.parse("package:${requireContext().packageName}")
+                    }
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    try {
+                        startActivity(Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS))
+                    } catch (e2: Exception) {
+                        try {
+                            startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                data = Uri.parse("package:${requireContext().packageName}")
+                            })
+                        } catch (_: Exception) {}
+                    }
                 }
-                startActivity(intent)
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { _, _ ->

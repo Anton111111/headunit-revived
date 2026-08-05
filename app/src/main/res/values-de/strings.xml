@@ -202,6 +202,7 @@
     <string name="overlay_permission_title">Hintergrund-Start Berechtigung</string>
     <string name="overlay_permission_description">Damit Open Headunit automatisch starten kann, wenn Bluetooth verbindet, aktivieren Sie bitte die Berechtigung \"Über anderen Apps einblenden\" im nächsten Bildschirm.</string>
     <string name="open_settings">Einstellungen</string>
+    <string name="cannot_open_settings">System-Einstellungen konnten nicht geöffnet werden</string>
     <string name="right_hand_drive">Rechtslenker</string>
     <string name="right_hand_drive_description">Benutzeroberfläche für Rechtsverkehr ausrichten</string>
     <string name="wireless_connection_settings">Kabellose Verbindung</string>

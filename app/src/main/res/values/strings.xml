@@ -374,6 +374,7 @@
     <string name="overlay_permission_title">Background Start Permission</string>
     <string name="overlay_permission_description">To allow Open Headunit to open automatically when Bluetooth connects, please enable the "Display over other apps" permission in the next screen.</string>
     <string name="open_settings">Settings</string>
+    <string name="cannot_open_settings">Could not open system settings</string>
     <string name="right_hand_drive">Right-hand drive</string>
     <string name="right_hand_drive_description">Position UI for right-side driving</string>
     <string name="wireless_connection_settings">Wireless Connection</string>
@@ -798,6 +799,8 @@
     <string name="bluetooth_adapter_label">Bluetooth Adapter</string>
     <string name="bluetooth_adapter_description">Select the Bluetooth adapter/controller to use for the handshake. Useful for dual Bluetooth systems.</string>
     <string name="select_bt_adapter">Select Bluetooth Adapter</string>
+    <string name="manual_secondary_bt_service_title">Manual Secondary Radio</string>
+    <string name="manual_secondary_bt_service_message">Advanced: force an extra Bluetooth radio, for dual-radio units whose second radio isn\'t found automatically. Find it via \"adb shell service list\" (look for a Bluetooth-sounding entry besides bluetooth_manager) or an engineering menu, then paste either the name before the colon or the interface shown in brackets - both work. Not guaranteed to help on every unit: some head units run a customized Bluetooth stack that this can\'t bridge to no matter what you enter here. Leave blank to disable.</string>
     <!-- QR Code Generator -->
     <string name="share_hotspot_qr_title">Configure Wireless Helper</string>
     <string name="share_hotspot_qr_desc">Show QR Code for phone auto-connection</string>

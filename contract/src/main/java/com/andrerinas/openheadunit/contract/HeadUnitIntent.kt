@@ -12,7 +12,7 @@ import android.view.KeyEvent
  */
 
 object HeadUnit {
-    const val packageName = "com.andrerinas.openheadunit"
+    const val packageName = "com.andrerinas.headunitrevived"
 }
 
 class ConnectedIntent: Intent(action) {

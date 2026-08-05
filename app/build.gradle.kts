@@ -9,59 +9,9 @@ plugins {
     kotlin("kapt")
 }
 
-dependencies {
-    // Conscrypt
-    implementation("org.conscrypt:conscrypt-android:2.5.3")
-
-    implementation("com.google.protobuf:protobuf-java:3.25.1")
-    implementation("androidx.activity:activity-ktx:1.8.2")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
-    implementation("androidx.media:media:1.6.0")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("com.google.android.material:material:1.10.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.startup:startup-runtime:1.1.1")
-    implementation("com.google.android.gms:play-services-nearby:19.3.0")
-    // ViewModel and LiveData
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    kapt("androidx.lifecycle:lifecycle-compiler:2.6.2")
-
-    // KTX
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-ktx:1.8.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-
-    testImplementation("junit:junit:4.13.2")
-
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0")
-    implementation(project(":contract"))
-
-    // Multidex
-    implementation("androidx.multidex:multidex:2.0.1")
-
-    // Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
-
-    // DexMaker for runtime subclassing (Hotspot Fix)
-    implementation("com.linkedin.dexmaker:dexmaker:2.28.3")
-
-    // Glide for image/GIF loading (custom loading screen)
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    kapt("com.github.bumptech.glide:compiler:4.16.0")
-
-    // ZXing for QR Code generation
-    implementation("com.google.zxing:core:3.5.3")
-
-    // Shizuku for root / shell access
-    implementation("dev.rikka.shizuku:api:13.1.5")
-    implementation("dev.rikka.shizuku:provider:13.1.5")
-    implementation("com.github.topjohnwu.libsu:core:6.0.0")
-}
-
 android {
     compileSdk = 36
-    ndkVersion = "27.0.12077973"
+    ndkVersion = "29.0.14206865"
     namespace = "com.andrerinas.openheadunit"
 
     buildFeatures {
@@ -124,8 +74,8 @@ android {
         applicationId = "com.andrerinas.headunitrevived"
         minSdk = 16
         targetSdk = 36
-        versionCode = 90
-        versionName = "3.2.0-beta5"
+        versionCode = 92
+        versionName = "3.2.1-beta"
         setProperty("archivesBaseName", "${applicationId}_${versionName}")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
@@ -158,24 +108,19 @@ android {
         getByName("debug") {
             // storeFile = file("../keystore.jkc")
             // storePassword = property("HEADUNIT_KEYSTORE_PASSWORD") as String
-            // keyAlias = property("HEADUNIT_KEY_ALIAS") as String
-            // keyPassword = property("HEADUNIT_KEY_PASSWORD") as String
+            // keyAlias = property("HEADUNIT_KEYSTORE_ALIAS") as String
+            // keyPassword = property("HEADUNIT_KEYSTORE_PASSWORD") as String
         }
-
         create("release") {
-            storeFile = file("../headunit-release-key.jks") // Use your new keystore file name
-            keyAlias = "headunit-revived" // Replace with your key alias
-            val signingPropsFile = rootProject.file("secrets.properties")
-            if (signingPropsFile.exists()) {
-                val props = Properties()
-                props.load(FileInputStream(signingPropsFile))
+            val keyfile = rootProject.file("key.properties")
+            if (keyfile.exists()) {
+                val keyprops = Properties()
+                keyprops.load(FileInputStream(keyfile))
 
-                storePassword = props.getProperty("HEADUNIT_KEYSTORE_PASSWORD")
-                keyPassword = props.getProperty("HEADUNIT_KEY_PASSWORD")
-            }
-            else {
-                storePassword = System.getenv("HEADUNIT_KEYSTORE_PASSWORD")
-                keyPassword = System.getenv("HEADUNIT_KEY_PASSWORD")
+                storeFile = file(keyprops.getProperty("storeFile"))
+                storePassword = keyprops.getProperty("storePassword")
+                keyAlias = keyprops.getProperty("keyAlias")
+                keyPassword = keyprops.getProperty("keyPassword")
             }
         }
     }
@@ -183,16 +128,34 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-project.txt")
-            if (signingConfigs.getByName("release").storeFile != null) {
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-project.txt"
+            )
+
+            val isSigningConfigExists = rootProject.file("key.properties").exists()
+            if(isSigningConfigExists) {
                 signingConfig = signingConfigs.getByName("release")
             }
-            multiDexKeepProguard = file("multidex-config.pro")
         }
+
         getByName("debug") {
-            isDebuggable = true
-            isJniDebuggable = true
-            multiDexKeepProguard = file("multidex-config.pro")
+            // debugging setup
+        }
+    }
+
+    packaging {
+        resources {
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/LICENSE"
+            excludes += "META-INF/LICENSE.txt"
+            excludes += "META-INF/license.txt"
+            excludes += "META-INF/NOTICE"
+            excludes += "META-INF/NOTICE.txt"
+            excludes += "META-INF/notice.txt"
+            excludes += "META-INF/ASL2.0"
+            excludes += "META-INF/*.kotlin_module"
         }
     }
 
@@ -225,4 +188,55 @@ android {
                 output.outputFileName = outputFileName
             }
     }
+}
+
+dependencies {
+    // Conscrypt (Flavor specific: 2.6.1 for Playstore 16KB alignment; 2.5.3 for Github minSdk 16)
+    "playstoreImplementation"("org.conscrypt:conscrypt-android:2.6.1")
+    "githubImplementation"("org.conscrypt:conscrypt-android:2.5.3")
+
+    implementation("com.google.protobuf:protobuf-java:3.25.1")
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.media:media:1.6.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("com.google.android.material:material:1.10.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.startup:startup-runtime:1.1.1")
+    implementation("com.google.android.gms:play-services-nearby:19.3.0")
+    // ViewModel and LiveData
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    kapt("androidx.lifecycle:lifecycle-compiler:2.6.2")
+
+    // KTX
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+    testImplementation("junit:junit:4.13.2")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0")
+    implementation(project(":contract"))
+
+    // Multidex
+    implementation("androidx.multidex:multidex:2.0.1")
+
+    // Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+
+    // DexMaker for runtime subclassing (Hotspot Fix)
+    implementation("com.linkedin.dexmaker:dexmaker:2.28.3")
+
+    // Glide for image/GIF loading (custom loading screen)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
+
+    // ZXing for QR Code generation
+    implementation("com.google.zxing:core:3.5.3")
+
+    // Shizuku for root / shell access
+    implementation("dev.rikka.shizuku:api:13.1.5")
+    implementation("dev.rikka.shizuku:provider:13.1.5")
+    implementation("com.github.topjohnwu.libsu:core:6.0.0")
 }

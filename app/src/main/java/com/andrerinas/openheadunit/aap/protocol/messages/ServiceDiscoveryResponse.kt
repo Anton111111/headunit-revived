@@ -10,6 +10,7 @@ import com.andrerinas.openheadunit.aap.protocol.Channel
 import com.andrerinas.openheadunit.aap.protocol.proto.Control
 import com.andrerinas.openheadunit.aap.protocol.proto.Media
 import com.andrerinas.openheadunit.aap.protocol.proto.Sensors
+import com.andrerinas.openheadunit.decoder.VideoDecoder
 import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.utils.HeadUnitScreenConfig
 import com.google.protobuf.Message
@@ -46,7 +47,7 @@ class ServiceDiscoveryResponse(private val context: Context)
                 service.id = Channel.ID_VID
                 service.mediaSinkService = Control.Service.MediaSinkService.newBuilder().also { mediaSinkServiceBuilder ->
                     val explicitSoftwareHevc =
-                        settings.videoCodec == "H.265" &&
+                        settings.videoCodec == VideoDecoder.CodecType.H265.settingsValue &&
                                 settings.forceSoftwareDecoding &&
                                 when (settings.softwareVideoDecoder) {
                                     com.andrerinas.openheadunit.utils.Settings.SoftwareVideoDecoder.BUNDLED_FFMPEG ->

@@ -612,7 +612,11 @@ class HomeFragment : Fragment() {
         updateProjectionButtonText()
         updateButtonStyle()
         updateTextColors()
-        RenameNotice.maybeShow(requireActivity(), App.provide(requireContext()).settings)
+        activity?.let { act ->
+            if (!act.isFinishing && !act.isDestroyed) {
+                RenameNotice.maybeShow(act, App.provide(requireContext()).settings)
+            }
+        }
     }
 
     override fun onPause() {

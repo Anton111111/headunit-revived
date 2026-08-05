@@ -25,6 +25,19 @@ interface VideoDimensionsListener {
 class VideoDecoder(private val settings: Settings) {
     companion object {
         private const val TIMEOUT_US = 10000L
+        private const val MAX_RESTARTS_WITHOUT_FRAME = 3
+
+        // sync_stall watchdog tuning (issue #742). A decoder that is merely intermittently slow
+        // (renders a frame every so often, just not within SYNC_STALL_THRESHOLD_MS) is not caught
+        // by restartsSinceLastFrame's "never produced a frame" cap, since that resets to zero the
+        // moment any frame renders. Without its own cooldown/cap this watchdog could otherwise
+        // tear the MediaCodec down and rebuild it indefinitely on marginal hardware, mirroring the
+        // same failure mode AapProjectionActivity.maybeRecoverFromDisplayStall() was hardened
+        // against for issue #650.
+        private const val SYNC_STALL_THRESHOLD_MS = 2000L
+        private const val SYNC_STALL_COOLDOWN_MS = 8000L
+        private const val SYNC_STALL_RESET_MS = 60000L
+        private const val MAX_SYNC_STALL_RESTARTS = 4
 
         /**
          * Checks if H.265 (HEVC) hardware decoding is supported on the current device.
@@ -119,6 +132,21 @@ class VideoDecoder(private val settings: Settings) {
     private var currentCodecType = CodecType.H264
     private var currentCodecName: String? = null
 
+    // Once a codec type has been used to successfully start a decoder this session, it is
+    // "pinned": restarts reuse it directly instead of re-running detectCodecType() on
+    // whatever raw packet happens to be arriving at that instant. detectCodecType()'s NAL-type
+    // heuristic can misclassify an ordinary H.264 slice byte as an HEVC VPS/SPS/PPS NAL
+    // (e.g. nal_unit_type=1/nal_ref_idc=2 -> byte 0x41 -> 0x41 >> 1 == 32), and re-detecting on
+    // every restart let that false positive hijack an otherwise-working H.264 session.
+    private var codecTypePinned = false
+    private var restartsSinceLastFrame = 0
+    private var codecFallbackUsed = false
+    private var decoderPermanentlyFailed = false
+
+    // sync_stall cooldown/cap state (issue #742) - see SYNC_STALL_* constants.
+    private var syncStallRestartCount = 0
+    private var lastSyncStallRestartMs = 0L
+
     // Reuse buffers for older API levels to minimize GC pressure
     private var inputBuffers: Array<ByteBuffer>? = null
     private var legacyFrameBuffer: ByteArray? = null
@@ -153,9 +181,9 @@ class VideoDecoder(private val settings: Settings) {
     val videoWidth: Int get() = mWidth
     val videoHeight: Int get() = mHeight
 
-    enum class CodecType(val mimeType: String, val displayName: String) {
-        H264("video/avc", "H.264/AVC"),
-        H265("video/hevc", "H.265/HEVC")
+    enum class CodecType(val mimeType: String, val displayName: String, val settingsValue: String) {
+        H264("video/avc", "H.264/AVC", "H.264"),
+        H265("video/hevc", "H.265/HEVC", "H.265")
     }
 
     /**
@@ -233,6 +261,12 @@ class VideoDecoder(private val settings: Settings) {
                 pps = null
                 mWidth = 0
                 mHeight = 0
+                codecTypePinned = false
+                restartsSinceLastFrame = 0
+                codecFallbackUsed = false
+                decoderPermanentlyFailed = false
+                syncStallRestartCount = 0
+                lastSyncStallRestartMs = 0L
             }
             // Keep VPS/SPS/PPS cached so we can re-inject them on restart
             lastFrameRenderedMs = 0L
@@ -249,8 +283,13 @@ class VideoDecoder(private val settings: Settings) {
 
     /**
      * Main entry point for decoding a video/control packet.
+     *
+     * Returns false when the frame was dropped because the codec's input queue was transiently
+     * full, so the caller (AapVideo) can route recovery through its own throttled
+     * markCorruptAndRequestRecovery() instead of every drop firing an independent, unthrottled
+     * keyframe request (issue #755 follow-up).
      */
-    fun decode(buffer: ByteArray, offset: Int, size: Int, forceSoftware: Boolean, codecName: String) {
+    fun decode(buffer: ByteArray, offset: Int, size: Int, forceSoftware: Boolean, codecName: String): Boolean {
         synchronized(this) {
             // Input-side liveness: bytes are arriving from the phone right now (issue #650).
             lastInputBytesReceivedMs = SystemClock.elapsedRealtime()
@@ -258,11 +297,44 @@ class VideoDecoder(private val settings: Settings) {
             // Check if a restart was requested by output thread
             if (decoderNeedsRestart) {
                 AppLog.w("Decoder restart requested: $decoderRestartReason")
+
+                // Track restarts that never produced a single frame for the currently pinned
+                // codec type. A genuinely broken hardware decoder (e.g. an MTK HEVC component
+                // that can't configure at all) will keep failing here forever otherwise.
+                if (codecTypePinned && lastFrameRenderedMs == 0L) {
+                    restartsSinceLastFrame++
+                    if (restartsSinceLastFrame >= MAX_RESTARTS_WITHOUT_FRAME) {
+                        if (!codecFallbackUsed) {
+                            val fallbackType = if (currentCodecType == CodecType.H264) CodecType.H265 else CodecType.H264
+                            // Don't burn the one-time fallback on a codec type the device has no
+                            // decoder for at all (hw or sw) - e.g. HEVC on a pre-Lollipop device
+                            // with zero HEVC components. That flip is guaranteed to fail again.
+                            if (findBestCodec(fallbackType.mimeType, true) == null) {
+                                AppLog.e("${currentCodecType.displayName} failed $restartsSinceLastFrame times in a row without rendering a frame, and this device has no decoder for ${fallbackType.displayName} either. Giving up to avoid an infinite restart loop.")
+                                decoderPermanentlyFailed = true
+                            } else {
+                                AppLog.e("${currentCodecType.displayName} failed $restartsSinceLastFrame times in a row without rendering a frame. Falling back to ${fallbackType.displayName}.")
+                                currentCodecType = fallbackType
+                                codecFallbackUsed = true
+                                restartsSinceLastFrame = 0
+                            }
+                        } else {
+                            AppLog.e("Both codec types failed to render a frame this session. Giving up to avoid an infinite restart loop.")
+                            decoderPermanentlyFailed = true
+                        }
+                    }
+                } else if (lastFrameRenderedMs != 0L) {
+                    // Decoder was healthy before this restart; don't count it against the pin.
+                    restartsSinceLastFrame = 0
+                }
+
                 stop("restart: $decoderRestartReason")
                 decoderNeedsRestart = false
                 decoderRestartReason = null
                 onDecoderError?.invoke()
             }
+
+            if (decoderPermanentlyFailed) return true
 
             // Buffer management for backward compatibility
             // Modern devices (API 21+) use the original buffer with offset/size to avoid GC pressure.
@@ -281,14 +353,21 @@ class VideoDecoder(private val settings: Settings) {
             }
 
 
-            // Initialization phase: detect codec and configuration (SPS/PPS)
+            // Initialization phase: detect codec and configuration (SPS/PPS).
+            // Only runs the detection heuristic on the very first init of the session; once a
+            // codec type is pinned (see codecTypePinned), restarts reuse it directly instead of
+            // re-sniffing arbitrary mid-stream bytes.
             if (codec == null && softwareHevcDecoder == null) {
-                val detectedType = detectCodecType(frameData, frameOffset, size)
-                val requestedType = if (codecName.contains("265")) CodecType.H265 else CodecType.H264
-                val typeToUse = if (requestedType == CodecType.H265) {
-                    CodecType.H265
+                val typeToUse = if (codecTypePinned) {
+                    currentCodecType
                 } else {
-                    detectedType ?: requestedType
+                    val detectedType = detectCodecType(frameData, frameOffset, size)
+                    val requestedType = if (codecName.contains("265")) CodecType.H265 else CodecType.H264
+                    if (requestedType == CodecType.H265) {
+                        CodecType.H265
+                    } else {
+                        detectedType ?: requestedType
+                    }
                 }
                 currentCodecType = typeToUse
 
@@ -308,8 +387,8 @@ class VideoDecoder(private val settings: Settings) {
                     }
                 }
 
-                if (mSurface == null || !mSurface!!.isValid) return
-                if (mWidth == 0 || mHeight == 0) return
+                if (mSurface == null || !mSurface!!.isValid) return true
+                if (mWidth == 0 || mHeight == 0) return true
 
                 if (shouldUseBundledHevc(typeToUse, settings.forceSoftwareDecoding || forceSoftware)) {
                     startBundledHevc(mWidth, mHeight)
@@ -326,10 +405,10 @@ class VideoDecoder(private val settings: Settings) {
                     AppLog.e("Bundled HEVC decoder failed with code $renderedFrames")
                     scheduleRestart("software_hevc_error_$renderedFrames")
                 }
-                return
+                return true
             }
 
-            if (codec == null) return
+            if (codec == null) return true
 
             if (pendingKeyframeRequest) {
                 pendingKeyframeRequest = false
@@ -341,13 +420,19 @@ class VideoDecoder(private val settings: Settings) {
             val buf = ByteBuffer.wrap(frameData, frameOffset, size)
             while (buf.hasRemaining()) {
                 if (!feedInputBuffer(buf)) {
-                    // Buffer is full. Request keyframe to avoid smearing
-                    AppLog.w("Input buffer full/failed. Requesting keyframe to prevent smearing.")
-                    scheduleRestart("input_buffer_overflow")
-                    return
+                    // Input queue is transiently full. Drop this frame and let the caller
+                    // (AapVideo.markCorruptAndRequestRecovery) decide whether/when to request a
+                    // keyframe, instead of firing an unthrottled recovery here - on decoders with
+                    // a small, fixed buffer count this can recur every few seconds during normal
+                    // playback and each one was an independent, unthrottled focus-cycle blink
+                    // (issue #755 follow-up). A truly stuck decoder is still caught by
+                    // outputThreadLoop's sync_stall watchdog.
+                    AppLog.w("Input buffer full. Dropping frame.")
+                    return false
                 }
             }
         }
+        return true
     }
 
     private fun shouldUseBundledHevc(type: CodecType, forceSoftware: Boolean): Boolean {
@@ -380,11 +465,13 @@ class VideoDecoder(private val settings: Settings) {
             currentCodecName = "ffmpeg-hevc"
             running = true
             startTime = System.nanoTime()
+            codecTypePinned = true
             AppLog.i("Bundled FFmpeg HEVC decoder initialized")
         } catch (e: Exception) {
             AppLog.e("Failed to start bundled FFmpeg HEVC decoder", e)
             softwareHevcDecoder = null
             running = false
+            scheduleRestart("bundled_hevc_start_failed: ${e.message}")
         }
     }
 
@@ -535,6 +622,10 @@ class VideoDecoder(private val settings: Settings) {
                 format.setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = Real-time priority
                 format.setInteger(MediaFormat.KEY_OPERATING_RATE, settings.fpsLimit)
             }
+            // Some vendor decoders (e.g. MediaTek's OMX.MTK.VIDEO.DECODER.AVC) reject
+            // KEY_OPERATING_RATE outright, so also set the documented fallback frame-rate hint.
+            // KEY_FRAME_RATE predates KEY_OPERATING_RATE (API 16 vs 23), so it's unguarded.
+            format.setInteger(MediaFormat.KEY_FRAME_RATE, settings.fpsLimit)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 format.setInteger(MediaFormat.KEY_MAX_B_FRAMES, 0) // Tell codec not to hold frames -> drastically decreases latency
             }
@@ -606,10 +697,12 @@ class VideoDecoder(private val settings: Settings) {
                 outputThreadLoop()
             }.apply { name = "VideoDecoder-Output"; start() }
 
+            codecTypePinned = true
             AppLog.i("Codec initialized: $bestCodec")
         } catch (e: Exception) {
             AppLog.e("Failed to start decoder", e)
             codec = null; running = false
+            scheduleRestart("decoder_start_failed: ${e.message}")
         }
     }
 
@@ -757,12 +850,26 @@ class VideoDecoder(private val settings: Settings) {
                 }
 
                 // Stall detection: if we rendered at least one frame but haven't
-                // produced output in 3 seconds, the decoder is likely dead-but-active.
+                // produced output in SYNC_STALL_THRESHOLD_MS, the decoder is likely dead-but-active.
                 val stallGap = SystemClock.elapsedRealtime() - lastOutputMs
-                if (stallGap > 2000L) {
-                    AppLog.w("Decoder stall detected (no output for ${stallGap}ms). Forcing restart.")
-                    scheduleRestart("sync_stall")
-                    break
+                if (stallGap > SYNC_STALL_THRESHOLD_MS) {
+                    val now = SystemClock.elapsedRealtime()
+                    // A device that is merely marginal (renders fine for stretches, then stalls
+                    // under load) never trips restartsSinceLastFrame's cap, since that only counts
+                    // restarts where no frame at all was ever rendered. Cap and cooldown this
+                    // watchdog the same way (issue #742) instead of tearing the MediaCodec down
+                    // every time it fires.
+                    if (syncStallRestartCount > 0 && now - lastSyncStallRestartMs > SYNC_STALL_RESET_MS) {
+                        syncStallRestartCount = 0
+                    }
+                    if (now - lastSyncStallRestartMs >= SYNC_STALL_COOLDOWN_MS &&
+                        syncStallRestartCount < MAX_SYNC_STALL_RESTARTS) {
+                        syncStallRestartCount++
+                        lastSyncStallRestartMs = now
+                        AppLog.w("Decoder stall detected (no output for ${stallGap}ms). Forcing restart ($syncStallRestartCount/$MAX_SYNC_STALL_RESTARTS).")
+                        scheduleRestart("sync_stall")
+                        break
+                    }
                 }
             } catch (e: Exception) {
                 if (running) {

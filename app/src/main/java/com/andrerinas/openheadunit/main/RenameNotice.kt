@@ -2,8 +2,10 @@ package com.andrerinas.openheadunit.main
 
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import com.andrerinas.openheadunit.R
+import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.utils.Settings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -20,7 +22,8 @@ object RenameNotice {
 
     private var dialog: AlertDialog? = null
 
-    fun maybeShow(activity: Activity, settings: Settings) {
+    fun maybeShow(activity: Activity?, settings: Settings) {
+        if (activity == null || activity.isFinishing || activity.isDestroyed) return
         if (settings.renameNoticeShown) return
         if (dialog?.isShowing == true) return
         if (settings.onboardingVersion < OnboardingActivity.CURRENT_ONBOARDING_VERSION) return
@@ -32,21 +35,34 @@ object RenameNotice {
         }
         if (!RenameNoticePolicy.shouldOffer(firstInstallTime)) return
 
-        dialog = MaterialAlertDialogBuilder(activity, R.style.DarkAlertDialog)
-            .setIcon(R.drawable.ic_rename_notice)
-            .setTitle(R.string.rename_notice_title)
-            .setMessage(R.string.rename_notice_message)
-            .setCancelable(false)
-            .setPositiveButton(R.string.rename_notice_button) { d, _ ->
-                // Consume the one-time flag only once the user has actually acknowledged it.
-                settings.renameNoticeShown = true
-                d.dismiss()
-            }
-            .show()
+        try {
+            dialog = MaterialAlertDialogBuilder(activity, R.style.DarkAlertDialog)
+                .setIcon(R.drawable.ic_rename_notice)
+                .setTitle(R.string.rename_notice_title)
+                .setMessage(R.string.rename_notice_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.rename_notice_button) { d, _ ->
+                    // Consume the one-time flag only once the user has actually acknowledged it.
+                    settings.renameNoticeShown = true
+                    d.dismiss()
+                }
+                .show()
+        } catch (e: WindowManager.BadTokenException) {
+            AppLog.w("RenameNotice: Window token invalid when showing dialog (activity state changed): ${e.message}")
+        } catch (e: Exception) {
+            AppLog.e("RenameNotice: Failed to show dialog: ${e.message}")
+        }
     }
 
     fun dismiss() {
-        dialog?.dismiss()
-        dialog = null
+        try {
+            if (dialog?.isShowing == true) {
+                dialog?.dismiss()
+            }
+        } catch (e: Exception) {
+            AppLog.w("RenameNotice: Error dismissing dialog: ${e.message}")
+        } finally {
+            dialog = null
+        }
     }
 }

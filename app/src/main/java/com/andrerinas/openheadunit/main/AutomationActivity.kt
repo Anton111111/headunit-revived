@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.andrerinas.openheadunit.App
+import com.andrerinas.openheadunit.aap.AapProjectionActivity
 import com.andrerinas.openheadunit.aap.AapService
 import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.utils.Settings
@@ -96,6 +97,27 @@ class AutomationActivity : AppCompatActivity() {
                     this.action = AapService.ACTION_START_SELF_MODE
                 }
                 ContextCompat.startForegroundService(this, selfIntent)
+
+                // [FIX] Launch AapProjectionActivity NOW, while AutomationActivity is
+                // still in the foreground. This is critical on Android 10+ where
+                // background activity launches are silently blocked: by the time
+                // AapService finishes the Self Mode handshake and calls
+                // launchAapProjectionActivity(), the app has no foreground window and
+                // the launch often fails, leaving the user at the launcher.
+                //
+                // Starting AapProjectionActivity from this foreground context is always
+                // allowed. Its loading overlay will display while Self Mode negotiates;
+                // once the handshake completes AapService will reorder it to front
+                // (it's already there) and start streaming.
+                try {
+                    startActivity(
+                        AapProjectionActivity.intent(this).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                        }
+                    )
+                } catch (e: Exception) {
+                    AppLog.w("AutomationActivity: Could not pre-launch AapProjectionActivity: ${e.message}")
+                }
             }
             "com.andrerinas.openheadunit.ACTION_STOP_SERVICE",
             "com.andrerinas.openheadunit.ACTION_EXIT" -> {

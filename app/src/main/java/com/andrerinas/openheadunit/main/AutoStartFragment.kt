@@ -214,11 +214,23 @@ class AutoStartFragment : Fragment() {
                     .setTitle(R.string.overlay_permission_title)
                     .setMessage(R.string.overlay_permission_description)
                     .setPositiveButton(R.string.open_settings) { _, _ ->
-                        val intent = Intent(
-                            android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            android.net.Uri.parse("package:${requireContext().packageName}")
-                        )
-                        startActivity(intent)
+                        try {
+                            val intent = Intent(
+                                android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                android.net.Uri.parse("package:${requireContext().packageName}")
+                            )
+                            startActivity(intent)
+                        } catch (e: Exception) {
+                            try {
+                                startActivity(Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+                            } catch (e2: Exception) {
+                                try {
+                                    startActivity(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                        data = android.net.Uri.parse("package:${requireContext().packageName}")
+                                    })
+                                } catch (_: Exception) {}
+                            }
+                        }
                     }
                     .setNegativeButton(R.string.cancel, null)
                     .show()
@@ -384,6 +396,7 @@ class AutoStartFragment : Fragment() {
             var disabled = false
             if (settings.autoStartOnBoot) {
                 settings.autoStartOnBoot = false
+                Settings.syncAutoStartOnBootToDeviceStorage(requireContext(), false)
                 pendingAutoStartOnBoot = false
                 disabled = true
             }
@@ -395,6 +408,7 @@ class AutoStartFragment : Fragment() {
             }
             if (settings.autoStartOnUsb) {
                 settings.autoStartOnUsb = false
+                Settings.syncAutoStartOnUsbToDeviceStorage(requireContext(), false)
                 pendingAutoStartOnUsb = false
                 disabled = true
             }
@@ -543,11 +557,17 @@ class AutoStartFragment : Fragment() {
             .setTitle(R.string.bt_permission_denied_title)
             .setMessage(R.string.bt_permission_denied_message)
             .setPositiveButton(R.string.open_settings) { _, _ ->
-                val intent = Intent(
-                    android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    android.net.Uri.parse("package:${requireContext().packageName}")
-                )
-                startActivity(intent)
+                try {
+                    val intent = Intent(
+                        android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        android.net.Uri.parse("package:${requireContext().packageName}")
+                    )
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    try {
+                        startActivity(Intent(android.provider.Settings.ACTION_SETTINGS))
+                    } catch (_: Exception) {}
+                }
             }
             .setNegativeButton(R.string.cancel, null)
             .show()

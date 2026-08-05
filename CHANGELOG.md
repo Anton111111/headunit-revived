@@ -1,5 +1,11 @@
 # Changelog
-### v.3.2.0-beta4
+### v.3.2.1 - upcoming
+- Fixing new welcome screen reappears
+- Fixing screen flicker every 10s
+- Fixing HW decoding on kitkat
+- Fixing 2 Fatal errors shown in play console
+
+### v.3.2.0
 - Don't grab audio focus on connect in dynamic mode, thanks to @bnayahu
 - Acquire transient audio focus while AA audio plays, thanks to @bnayahu
 - Add GitHub Actions CI (build + unit tests), thanks to @bnayahu

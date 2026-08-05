@@ -9,7 +9,7 @@ import java.nio.ByteBuffer
 internal class AapVideo(private val videoDecoder: VideoDecoder, private val settings: Settings, private val onFrameCorrupted: () -> Unit) {
 
     private val messageBuffer = ByteBuffer.allocate(
-        if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+        if (settings.videoCodec == VideoDecoder.CodecType.H265.settingsValue) {
             Messages.DEF_BUFFER_LENGTH * 64 // ~8MB for H.265 support
         } else {
             Messages.DEF_BUFFER_LENGTH * 16 // ~2MB for H.264 legacy support
@@ -59,14 +59,14 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
         if (scLen <= 0 || scOffset + scLen >= len)
             return true
 
-        val nalType = if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+        val nalType = if (settings.videoCodec == VideoDecoder.CodecType.H265.settingsValue) {
             (buf[scOffset + scLen].toInt() and 0x7E) shr 1 // H.265 NAL
         } else {
             buf[scOffset + scLen].toInt() and 0x1F // H.264 NAL
         }
 
         // Check if it's an I-Frame or VPS/SPS/PPS (types that can start a clean stream)
-        val isKeyframe = if (settings.videoCodec == VideoDecoder.CodecType.H265.mimeType) {
+        val isKeyframe = if (settings.videoCodec == VideoDecoder.CodecType.H265.settingsValue) {
             nalType in 16..21 || nalType in 32..34
         } else {
             nalType == 5 || nalType == 7 || nalType == 8
@@ -136,14 +136,18 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                 // Timestamp Indication (Offset 10)
                 val sc10 = findStartCode(buf, 10)
                 if (len > 10 + sc10 && sc10 > 0) {
-                    videoDecoder.decode(buf, 10, len - 10, settings.forceSoftwareDecoding, settings.videoCodec)
+                    if (!videoDecoder.decode(buf, 10, len - 10, settings.forceSoftwareDecoding, settings.videoCodec)) {
+                        markCorruptAndRequestRecovery()
+                    }
                     return true
                 }
 
                 // Media Indication or Config (Offset 2)
                 val sc2 = findStartCode(buf, 2)
                 if (len > 2 + sc2 && sc2 > 0) {
-                    videoDecoder.decode(buf, 2, len - 2, settings.forceSoftwareDecoding, settings.videoCodec)
+                    if (!videoDecoder.decode(buf, 2, len - 2, settings.forceSoftwareDecoding, settings.videoCodec)) {
+                        markCorruptAndRequestRecovery()
+                    }
                     return true
                 }
                 AppLog.w("AapVideo: Dropped Flag 11 packet. len=$len")
@@ -195,7 +199,7 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                 messageBuffer.flip()
                 val assembledSize = messageBuffer.limit()
 
-                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                val decoded = if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
                     if (legacyAssembledBuffer == null || legacyAssembledBuffer!!.size < assembledSize) {
                         legacyAssembledBuffer = ByteArray(assembledSize + 1024)
                     }
@@ -203,6 +207,9 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                     videoDecoder.decode(legacyAssembledBuffer!!, 0, assembledSize, settings.forceSoftwareDecoding, settings.videoCodec)
                 } else {
                     videoDecoder.decode(messageBuffer.array(), 0, assembledSize, settings.forceSoftwareDecoding, settings.videoCodec)
+                }
+                if (!decoded) {
+                    markCorruptAndRequestRecovery()
                 }
 
                 messageBuffer.clear()

@@ -735,7 +735,14 @@ class AapService : Service(), UsbReceiver.Listener {
                 AppLog.d("AapService: WiFi credentials received, but not in Native AA mode. Skipping HandshakeManager update.")
             }
         }
-        wifiDirectManager?.setNativeHandshakeStateProvider { nativeAaHandshakeManager?.isHandshakeInFlight() == true }
+        // Settling counts as in-flight here: isHandshakeInFlight() goes false the instant Type 3
+        // is written, but the phone still has to associate, do WPS and get a DHCP lease, and
+        // recreating the group in that window hands it an SSID it can no longer join.
+        wifiDirectManager?.setNativeHandshakeStateProvider {
+            nativeAaHandshakeManager?.isHandshakeInFlight() == true ||
+                nativeAaHandshakeManager?.isHandoffSettling() == true
+        }
+        wifiDirectManager?.setNativeSessionConnectedProvider { commManager.isConnected }
         wifiDirectManager?.setNativeGroupInvalidatedListener { nativeAaHandshakeManager?.invalidateCredentials() }
 
 
@@ -745,8 +752,15 @@ class AapService : Service(), UsbReceiver.Listener {
 
     /** Enables Android Automotive UI mode so the system uses car-optimised layouts. */
     private fun setupCarMode() {
-        uiModeManager = getSystemService(UI_MODE_SERVICE) as UiModeManager
-        uiModeManager.enableCarMode(0)
+        try {
+            val mgr = getSystemService(UI_MODE_SERVICE) as? UiModeManager
+            if (mgr != null) {
+                uiModeManager = mgr
+                mgr.enableCarMode(0)
+            }
+        } catch (e: Exception) {
+            AppLog.w("AapService: Failed to enable car mode: ${e.message}")
+        }
     }
 
     /** Initialises [NightModeManager] and forwards night-mode changes to Android Auto via AAP. */
@@ -1615,11 +1629,17 @@ class AapService : Service(), UsbReceiver.Listener {
         try { unregisterReceiver(usbReceiver) } catch (_: Exception) {}
         try { unregisterReceiver(mediaButtonReceiver) } catch (_: Exception) {}
         try { unregisterReceiver(wakeDetectReceiver) } catch (_: Exception) {}
-        App.provide(this).carKeysManager.unregisterReceivers()
+        try { App.provide(this).carKeysManager.unregisterReceivers() } catch (e: Exception) { AppLog.w("AapService: Error unregistering carKeysManager: ${e.message}") }
         try { wifiAutoStartReceiver?.let { unregisterReceiver(it) } } catch (_: Exception) {}
-        uiModeManager.disableCarMode(0)
-        serviceScope.cancel()
-        LogExporter.stopCapture()
+        try {
+            if (::uiModeManager.isInitialized) {
+                uiModeManager.disableCarMode(0)
+            }
+        } catch (e: Exception) {
+            AppLog.w("AapService: Error disabling car mode: ${e.message}")
+        }
+        try { serviceScope.cancel() } catch (_: Exception) {}
+        try { LogExporter.stopCapture() } catch (_: Exception) {}
         super.onDestroy()
         if (killProcessOnDestroy) {
             AppLog.i("AapService: killProcessOnDestroy is true. Triggering System.exit(0).")
@@ -1737,8 +1757,16 @@ class AapService : Service(), UsbReceiver.Listener {
                 // onCreate() already armed everything moments ago and re-running would tear
                 // down and recreate the P2P group (new random SSID/passphrase) right as it's
                 // being delivered to the phone.
+                // A successful handoff closes the AA listeners, so isActive() is false for the
+                // whole life of a working session — without the connection check below, any
+                // later ACL_CONNECTED (the phone's own Bluetooth profiles reconnecting, or one
+                // of our pokes) would tear down a session that is projecting fine.
                 val settings = App.provide(this).settings
-                if (settings.wifiConnectionMode == 3 && nativeAaHandshakeManager?.isActive() != true) {
+                val sessionUp = commManager.isConnected ||
+                    commManager.connectionState.value is CommManager.ConnectionState.Connecting
+                if (settings.wifiConnectionMode == 3 && !sessionUp &&
+                    nativeAaHandshakeManager?.isActive() != true &&
+                    nativeAaHandshakeManager?.isAttemptInFlight() != true) {
                     AppLog.i("AapService: Bluetooth auto-start — Native AA handshake manager was stopped, re-arming.")
                     userExitedAA = false
                     userExitCooldownUntil = 0L
