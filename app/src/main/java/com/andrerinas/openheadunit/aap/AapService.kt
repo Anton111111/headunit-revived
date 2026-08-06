@@ -1002,6 +1002,10 @@ class AapService : Service(), UsbReceiver.Listener {
     private fun setupMediaSession() {
         val mbr = ComponentName(this, MediaButtonReceiver::class.java)
         mediaSession = MediaSessionCompat(this, "HeadunitRevived", mbr, null).apply {
+            setFlags(
+                MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS or
+                MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS
+            )
             setCallback(object : MediaSessionCompat.Callback() {
                 override fun onMediaButtonEvent(mediaButtonEvent: Intent?): Boolean {
                     val keyEvent = mediaButtonEvent?.let { IntentCompat.getParcelableExtra(it, Intent.EXTRA_KEY_EVENT, android.view.KeyEvent::class.java) }

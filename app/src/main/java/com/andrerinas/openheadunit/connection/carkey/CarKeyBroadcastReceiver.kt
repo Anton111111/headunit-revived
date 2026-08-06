@@ -93,6 +93,22 @@ class CarKeyBroadcastReceiver : BroadcastReceiver(), CarKeyReceiver {
                 } else if (event.action == KeyEvent.ACTION_UP) {
                     handleKey(context, event.keyCode, false)
                 }
+            } else {
+                val cmd = intent.getStringExtra("command") ?: intent.getStringExtra("cmd")
+                val key = intent.getIntExtra("keycode", -1).takeIf { it > 0 }
+                    ?: intent.getIntExtra("key_code", -1).takeIf { it > 0 }
+
+                if (cmd != null) {
+                    when (cmd.lowercase()) {
+                        "next", "skip_next", "skip" -> handleClick(context, KeyEvent.KEYCODE_MEDIA_NEXT)
+                        "previous", "skip_previous", "prev" -> handleClick(context, KeyEvent.KEYCODE_MEDIA_PREVIOUS)
+                        "play", "start" -> handleClick(context, KeyEvent.KEYCODE_MEDIA_PLAY)
+                        "pause" -> handleClick(context, KeyEvent.KEYCODE_MEDIA_PAUSE)
+                        "togglepause", "playpause" -> handleClick(context, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE)
+                    }
+                } else if (key != null) {
+                    handleClick(context, key)
+                }
             }
             return
         }
