@@ -25,37 +25,12 @@ class VideoRecoveryPolicyTest {
     }
 
     @Test
-    fun `a deferred request stays pending until the throttle expires`() {
-        val last = 10_000L
-        assertFalse(
-            VideoRecoveryPolicy.isDeferredRequestDue(last + 500L, last, deferred = true)
-        )
-        assertTrue(
-            VideoRecoveryPolicy.isDeferredRequestDue(
-                last + KEYFRAME_REQUEST_THROTTLE_MS + 1, last, deferred = true
-            )
-        )
-    }
-
-    @Test
-    fun `nothing is due when no request was deferred`() {
-        val last = 10_000L
-        assertFalse(
-            VideoRecoveryPolicy.isDeferredRequestDue(
-                last + KEYFRAME_REQUEST_THROTTLE_MS + 1, last, deferred = false
-            )
-        )
-    }
-
-    @Test
-    fun `a deferred request never overtakes the throttle it was deferred by`() {
-        // The pairing that matters: whenever a request is suppressed, the deferred check must
-        // agree it is not yet due, so no path can send two requests inside one throttle window.
+    fun `no request is allowed anywhere inside one throttle window`() {
+        // A burst of corrupt frames must produce at most one focus cycle: the phone rebuilds the
+        // stream on each one, so several inside a second costs more picture than it recovers.
         val last = 10_000L
         for (offset in 0L..KEYFRAME_REQUEST_THROTTLE_MS) {
-            val now = last + offset
-            assertFalse(VideoRecoveryPolicy.canRequestKeyframe(now, last))
-            assertFalse(VideoRecoveryPolicy.isDeferredRequestDue(now, last, deferred = true))
+            assertFalse(VideoRecoveryPolicy.canRequestKeyframe(last + offset, last))
         }
     }
 }
