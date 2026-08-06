@@ -46,6 +46,16 @@ enum class UnusableBssidAction {
  * - **Hotspot** omits the field and sends. aa-proxy-rs and ZLink both ship without one, so an
  *   ordinary AP is identified by SSID; aborting would kill the route on every device with a
  *   masked AP MAC, which is most of them.
+ *
+ * That last justification is now known to be too strong. A current Gearhead joins with a
+ * `WifiNetworkSpecifier`, which matches SSID *and* BSSID under a full `ff:ff:ff:ff:ff:ff` mask: it
+ * answered credentials with no BSSID with `WIFI_INVALID_BSSID` and a type 6 `status=-3`, every
+ * attempt, and never fell back to matching on the name. Measured 2026-08-05, phone-to-phone.
+ *
+ * Sending anyway is still the better of the two, and deliberately kept: the field is optional in the
+ * protocol, other clients do accept it missing, and a rejection arrives as a message we can explain
+ * — where aborting produces nothing to read at all. What changed is that the omission is now the
+ * first suspect when the phone refuses, so the handshake says so rather than leaving it implied.
  */
 object NativeCredentialsPolicy {
 

@@ -764,6 +764,9 @@ class NativeAaHandshakeManager(
             var credPsk = ""
             var credIp = ""
             var credBssid = ""
+            // Whether the credentials went out with no BSSID at all. A join failure means something
+            // different when they did — see the Fail action below.
+            var bssidOmitted = false
 
             suspend fun runAction(action: WppAction, source: ProtobufMessage?) {
                 when (action) {
@@ -818,7 +821,21 @@ class NativeAaHandshakeManager(
                             closeAaListeners()
                         }
                     }
-                    is WppAction.Fail -> AppLog.w("NativeAA: Handshake failed — ${action.reason}.")
+                    is WppAction.Fail -> {
+                        AppLog.w("NativeAA: Handshake failed — ${action.reason}.")
+                        // Measured against a current Gearhead: it joins with a WifiNetworkSpecifier,
+                        // which matches SSID *and* BSSID under a full ff:ff:ff:ff:ff:ff mask, and
+                        // refuses credentials carrying no BSSID outright. So on this route a join
+                        // failure right after we omitted the field is that omission, not the
+                        // network — and the retry will fail the same way until an address exists.
+                        if (bssidOmitted) {
+                            AppLog.e(
+                                "NativeAA: These credentials carried no BSSID, which this phone may " +
+                                    "have refused for that reason alone. Read the access point's MAC " +
+                                    "and set it as the static BSSID in Advanced settings."
+                            )
+                        }
+                    }
                     WppAction.ResumePoke -> ifOwner(socket) {
                         // Clear the settling stamp first: triggerPoke() refuses to start while a
                         // handoff is settling, which is the whole point of that guard.
@@ -957,6 +974,12 @@ class NativeAaHandshakeManager(
                 when (NativeCredentialsPolicy.onUnusableBssid(transport)) {
                     UnusableBssidAction.ABORT -> {
                         AppLog.e("NativeAA: BSSID is still masked/empty ($credBssid) at Type 3 time — phone WILL reject these credentials. Aborting handshake. PLEASE CHECK IF LOCATION (GPS) IS ENABLED ON THIS DEVICE!")
+                        // Location is the usual cause and the one worth naming first, but it is not
+                        // the only one: where this head unit is an ordinary phone rather than
+                        // purpose-built hardware, every source in the chain is blocked by permission
+                        // and no setting will unblock them. Say so, or the log sends the reader back
+                        // to a location toggle that is already on.
+                        AppLog.e("NativeAA: If location is already on, this device cannot read its own WiFi Direct MAC at all. Read it from the system (P2P device address) and set it as the static BSSID in Advanced settings.")
                         // Triggering a P2P refresh so the next attempt has a valid BSSID
                         context.triggerWifiDirectRefresh()
                         // Not fed to the session as CredentialsUnavailable: its failure reason
@@ -971,6 +994,7 @@ class NativeAaHandshakeManager(
                         // the credentials, this line is the first thing to look at.
                         AppLog.w("NativeAA: No usable BSSID for this access point — sending the credentials without one. If the phone refuses to join, set a BSSID by hand in Advanced settings.")
                         credBssid = ""
+                        bssidOmitted = true
                     }
                 }
             }
