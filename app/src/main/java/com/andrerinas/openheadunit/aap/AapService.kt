@@ -722,7 +722,14 @@ class AapService : Service(), UsbReceiver.Listener {
             }
         }
 
-        initWifiModeWithOptionalWait()
+        // Decided here as well as inside initWifiMode() so a paused start skips the wait-for-WiFi
+        // machinery entirely rather than setting it up and being turned away at the end of it.
+        if (applyBootLoopGuard()) {
+            AppLog.w("AapService: Wireless bring-up paused by the boot-loop guard. USB and the rest of the app are unaffected.")
+        } else {
+            initWifiModeWithOptionalWait()
+        }
+        scheduleBootLoopStrikeClear()
         wifiDirectManager?.setCredentialsListener { ssid, psk, ip, bssid ->
             onNativeCredentials(ssid, psk, ip, bssid)
         }
@@ -1433,6 +1440,15 @@ class AapService : Service(), UsbReceiver.Listener {
 
     /** Starts [WirelessServer] if the user has configured server WiFi mode. */
     private fun initWifiMode(force: Boolean = false) {
+        // Every automatic entry point lands here, including the Bluetooth auto-start that fires
+        // when the phone comes into range — which on a looping unit would walk straight back into
+        // the crash the guard was set to avoid. Explicit user actions release the pause first, so
+        // this only ever blocks a start nobody asked for.
+        if (Settings.isWirelessPausedByBootLoop(this)) {
+            AppLog.w("AapService: Wireless bring-up requested, but it is paused by the boot-loop guard. Open the app to re-enable it.")
+            return
+        }
+
         val settings = App.provide(this).settings
         val mode = settings.wifiConnectionMode
         val strategy = settings.helperConnectionStrategy
@@ -1702,7 +1718,12 @@ class AapService : Service(), UsbReceiver.Listener {
 
         when (intent?.action) {
             ACTION_START_SELF_MODE       -> startSelfMode()
-            ACTION_START_WIRELESS        -> initWifiMode()
+            ACTION_START_WIRELESS        -> {
+                // Asked for from the UI, so the user is present: release the boot-loop pause
+                // rather than silently ignoring them.
+                Settings.clearBootLoopState(this)
+                initWifiMode()
+            }
             ACTION_START_WIRELESS_SCAN   -> {
                 val settings = App.provide(this).settings
                 val mode = settings.wifiConnectionMode
@@ -1711,6 +1732,7 @@ class AapService : Service(), UsbReceiver.Listener {
                 // [FIX] Reset exit flags on manual scan start
                 userExitedAA = false
                 userExitCooldownUntil = 0L
+                Settings.clearBootLoopState(this)
                 initWifiMode(force = true)
 
                 if (mode == 2 && strategy == 2) {
@@ -2445,6 +2467,93 @@ class AapService : Service(), UsbReceiver.Listener {
     }
 
     // -------------------------------------------------------------------------
+    // Boot-loop guard
+    // -------------------------------------------------------------------------
+
+    /**
+     * Whether to skip wireless bring-up because starting it appears to be crashing the device, and
+     * posts the notice explaining that if so.
+     *
+     * See [BootLoopPolicy]. The decision is taken from the strike count the receiver has already
+     * written, so it needs nothing from the start intent and can run here in onCreate.
+     */
+    private fun applyBootLoopGuard(): Boolean {
+        if (Settings.isWirelessPausedByBootLoop(this)) {
+            AppLog.w("AapService: Wireless is still paused from an earlier boot loop. Open the app to re-enable it.")
+            notifyBootLoopPause()
+            return true
+        }
+        val strikes = Settings.getBootLoopStrikes(this)
+        if (!BootLoopPolicy.shouldPauseWireless(strikes)) return false
+
+        AppLog.w(
+            "AapService: $strikes boot-started runs in a row ended before " +
+                "${BootLoopPolicy.HEALTHY_RUN_MS / 1000}s. Pausing wireless bring-up — on some head units " +
+                "the WiFi stack takes the whole system down when a phone joins, and auto-start then " +
+                "repeats it forever."
+        )
+        Settings.setWirelessPausedByBootLoop(this, true)
+        notifyBootLoopPause()
+        return true
+    }
+
+    /**
+     * Clears the strikes once this run has lasted long enough to count as healthy.
+     *
+     * Deliberately time-based rather than hung off a successful connection: on the head unit this
+     * guard was written for, one cycle reached a complete projection session with audio playing and
+     * the system died anyway, so a connection-based signal would reset the count every pass.
+     */
+    private fun scheduleBootLoopStrikeClear() {
+        if (Settings.getBootLoopStrikes(this) == 0) return
+        serviceScope.launch {
+            delay(BootLoopPolicy.HEALTHY_RUN_MS)
+            AppLog.i("AapService: This run has lasted ${BootLoopPolicy.HEALTHY_RUN_MS / 1000}s. Clearing the boot-loop strikes.")
+            Settings.setBootLoopStrikes(this@AapService, 0)
+        }
+    }
+
+    /**
+     * Tells the user wireless was left off and what to do about it. Names the WiFi Direct join when
+     * that is the configuration, because on the units this happens to, switching the Native AA
+     * transport to the head unit's own hotspot avoids the P2P path altogether.
+     */
+    private fun notifyBootLoopPause() {
+        val settings = App.provide(this).settings
+        val onNativeWifiDirect = settings.wifiConnectionMode == 3 &&
+            NativeTransport.fromSetting(settings.nativeApTransport) == NativeTransport.WIFI_DIRECT
+        val text = getString(
+            if (onNativeWifiDirect) R.string.boot_loop_paused_native_wifi_direct
+            else R.string.boot_loop_paused_generic
+        )
+
+        val launchIntent = Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            putExtra(MainActivity.EXTRA_LAUNCH_SOURCE, "Boot-loop guard")
+        }
+        val piFlags = PendingIntent.FLAG_UPDATE_CURRENT or
+            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0)
+        val pi = PendingIntent.getActivity(this, 201, launchIntent, piFlags)
+
+        val notification = NotificationCompat.Builder(this, App.bootStartChannel)
+            .setSmallIcon(R.drawable.ic_stat_aa)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentTitle(getString(R.string.boot_loop_paused_title))
+            .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
+            .setContentIntent(pi)
+            .setAutoCancel(true)
+            .build()
+
+        try {
+            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
+                .notify(BOOT_LOOP_NOTIFICATION_ID, notification)
+        } catch (e: Exception) {
+            AppLog.w("AapService: Could not post the boot-loop notice: ${e.message}")
+        }
+    }
+
+    // -------------------------------------------------------------------------
     // Self Mode
     // -------------------------------------------------------------------------
 
@@ -2781,6 +2890,7 @@ class AapService : Service(), UsbReceiver.Listener {
         val scanningState = MutableStateFlow(false)
 
         private const val BOOT_START_NOTIFICATION_ID = 42
+        private const val BOOT_LOOP_NOTIFICATION_ID = 43
         private const val PROJECTION_LAUNCH_NOTIFICATION_ID = 43
 
         // Service action strings used with startService() and sendBroadcast()
