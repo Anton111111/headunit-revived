@@ -468,7 +468,9 @@ class NativeAaHandshakeManager(
                     // physical radio right as the critical WifiStartRequest send is about to happen.
                     throw e
                 } catch (e: Exception) {
-                    AppLog.d("NativeAA: Poke via $uuid to ${device.name} failed: ${e.message}")
+                    // Address as well as name: getName() is null for an unbonded device, and a log line
+                    // reading "to null" names nothing at all for the reader of a bug report.
+                    AppLog.d("NativeAA: Poke via $uuid to ${device.name ?: "unnamed"} (${device.address}) failed: ${e.message}")
                 } finally {
                     try { socket?.close() } catch (e: Exception) {}
                 }

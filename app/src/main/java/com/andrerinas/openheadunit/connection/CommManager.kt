@@ -5,6 +5,7 @@ import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import com.andrerinas.openheadunit.aap.AapSslContext
 import com.andrerinas.openheadunit.aap.AapTransport
+import com.andrerinas.openheadunit.aap.VideoStarvationPolicy
 import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.main.BackgroundNotification
 import com.andrerinas.openheadunit.ssl.SingleKeyKeyManager
@@ -137,6 +138,11 @@ class CommManager(
      * device is fully closed before `openDevice()` is called on it again.
      */
     @Volatile private var _disconnectJob: kotlinx.coroutines.Job? = null
+
+    // Whether the session now ending ever completed its handshake, and how many sessions in a row
+    // have completed one and then carried no video at all. See VideoStarvationPolicy.
+    @Volatile private var sessionReachedHandshake = false
+    @Volatile private var starvedSessionStreak = 0
 
     private val _backgroundNotification = BackgroundNotification(context)
 
@@ -328,6 +334,9 @@ class CommManager(
                     _transport!!.onUpdateUiConfigReplyReceived = { onUpdateUiConfigReplyReceived?.invoke() }
                 }
                 if (_transport?.startHandshake(_connection!!) == true) {
+                    // A session that got this far had a working link to carry video on. See
+                    // VideoStarvationPolicy for what it means when one ends without carrying any.
+                    sessionReachedHandshake = true
                     _connectionState.emit(ConnectionState.HandshakeComplete)
                 } else {
                     _connectionState.emit(ConnectionState.Error("Handshake failed"))
@@ -636,6 +645,10 @@ class CommManager(
         _connection = null
         lastKeyEvents.clear()
         keyStates.clear()
+        // Read before stopping the decoder, which clears the stamp. Self-guarding against the
+        // re-entrant second call described above: the flag is consumed here, so the second pass
+        // sees a session that never reached the handshake and counts nothing.
+        noteSessionEnded(renderedAnyFrame = videoDecoder.lastFrameRenderedMs > 0L)
         try {
             // Only send ByeByeRequest when we are initiating the disconnect (e.g. user pressed
             // disconnect). When the transport self-quit (read error, soTimeout), the connection
@@ -653,6 +666,30 @@ class CommManager(
             if (_connectionState.value !is ConnectionState.Disconnected) {
                 _connectionState.value = ConnectionState.Disconnected()
             }
+        }
+    }
+
+    /**
+     * Counts a finished session against [VideoStarvationPolicy] and, on a long enough run of
+     * sessions that carried no video at all, says what that means and what to do about it.
+     *
+     * The phone gives no reason we can see — it closes the socket and our read reports a plain EOF
+     * — so without this the log shows nothing but a healthy connection repeating forever.
+     */
+    private fun noteSessionEnded(renderedAnyFrame: Boolean) {
+        val reachedHandshake = sessionReachedHandshake
+        sessionReachedHandshake = false
+        starvedSessionStreak = VideoStarvationPolicy.nextStreak(
+            starvedSessionStreak, reachedHandshake, renderedAnyFrame
+        )
+        if (VideoStarvationPolicy.shouldAdvise(starvedSessionStreak)) {
+            AppLog.w(
+                "CommManager: $starvedSessionStreak sessions in a row ended without a single video " +
+                    "frame arriving. The phone is connecting and then giving up on the video stream, " +
+                    "which is what a WiFi link too slow to carry it looks like. Measured on a 2.4 GHz " +
+                    "access point at 1080p/60, where the same link held 800x480/30 indefinitely: move " +
+                    "the access point to 5 GHz, or lower the resolution and frame rate in Video settings."
+            )
         }
     }
 
