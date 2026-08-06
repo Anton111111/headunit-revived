@@ -191,6 +191,13 @@ class VideoDecoder(private val settings: Settings) {
     @Volatile var lastFrameRenderedMs: Long = 0L
     private var syntheticPtsUs = 0L
 
+    // Frames rendered since whoever owns the session last zeroed this. Deliberately *not* cleared
+    // by stop(): the surface goes away and comes back within a single session (leaving projection,
+    // screen off, a config change), and lastFrameRenderedMs is zeroed every time it does. Reading
+    // that field to ask "did this session ever show video" answers no for a session that showed
+    // plenty. See CommManager.noteSessionEnded.
+    @Volatile var framesRenderedThisSession: Long = 0L
+
     // elapsedRealtime() of the last encoded video bytes received from the phone (input side),
     // as opposed to lastFrameRenderedMs (output side). Lets the projection watchdog tell a
     // phone-side pause (no input) apart from a local display stall (input flowing, nothing drawn).
@@ -560,6 +567,7 @@ class VideoDecoder(private val settings: Settings) {
 
     private fun onSoftwareFramesRendered(renderedFrames: Int) {
         lastFrameRenderedMs = SystemClock.elapsedRealtime()
+        framesRenderedThisSession++
         if (!loggedFirstSoftwareFrame) {
             loggedFirstSoftwareFrame = true
             AppLog.i("First bundled software HEVC frame rendered")
@@ -953,6 +961,7 @@ class VideoDecoder(private val settings: Settings) {
                     currentCodec.releaseOutputBuffer(outputIndex, true)
                     lastFrameRenderedMs = SystemClock.elapsedRealtime()
                     lastOutputMs = lastFrameRenderedMs
+                    framesRenderedThisSession++
                     consecutiveErrors = 0
                     onFirstFrameListener?.let { it(); onFirstFrameListener = null }
 

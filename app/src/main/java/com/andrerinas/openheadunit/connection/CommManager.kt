@@ -337,6 +337,7 @@ class CommManager(
                     // A session that got this far had a working link to carry video on. See
                     // VideoStarvationPolicy for what it means when one ends without carrying any.
                     sessionReachedHandshake = true
+                    videoDecoder.framesRenderedThisSession = 0L
                     _connectionState.emit(ConnectionState.HandshakeComplete)
                 } else {
                     _connectionState.emit(ConnectionState.Error("Handshake failed"))
@@ -645,10 +646,13 @@ class CommManager(
         _connection = null
         lastKeyEvents.clear()
         keyStates.clear()
-        // Read before stopping the decoder, which clears the stamp. Self-guarding against the
-        // re-entrant second call described above: the flag is consumed here, so the second pass
-        // sees a session that never reached the handshake and counts nothing.
-        noteSessionEnded(renderedAnyFrame = videoDecoder.lastFrameRenderedMs > 0L)
+        // Counts frames over the whole session rather than reading lastFrameRenderedMs, which the
+        // decoder zeroes every time the projection surface goes away — leaving projection before
+        // disconnecting is normal, and would otherwise make every such session look starved.
+        // Self-guarding against the re-entrant second call described above: the flag is consumed
+        // here, so the second pass sees a session that never reached the handshake and counts
+        // nothing.
+        noteSessionEnded(renderedAnyFrame = videoDecoder.framesRenderedThisSession > 0L)
         try {
             // Only send ByeByeRequest when we are initiating the disconnect (e.g. user pressed
             // disconnect). When the transport self-quit (read error, soTimeout), the connection
