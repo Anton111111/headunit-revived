@@ -8,13 +8,26 @@ import java.nio.ByteBuffer
 
 internal class AapVideo(private val videoDecoder: VideoDecoder, private val settings: Settings, private val onFrameCorrupted: () -> Unit) {
 
-    private val messageBuffer = ByteBuffer.allocate(
-        if (settings.videoCodec == VideoDecoder.CodecType.H265.settingsValue) {
-            Messages.DEF_BUFFER_LENGTH * 64 // ~8MB for H.265 support
-        } else {
-            Messages.DEF_BUFFER_LENGTH * 16 // ~2MB for H.264 legacy support
-        }
-    )
+    companion object {
+        /** Enough for H.264 at the resolutions most head units negotiate. ~2MB. */
+        private const val INITIAL_BUFFER_BYTES = Messages.DEF_BUFFER_LENGTH * 16
+
+        /** Ceiling for [ensureCapacity]. ~8MB, which covers H.265 at 4K. */
+        private const val MAX_BUFFER_BYTES = Messages.DEF_BUFFER_LENGTH * 64
+    }
+
+    /**
+     * Reassembly buffer for fragmented frames. Grows on demand.
+     *
+     * It used to be sized up front from settings.videoCodec, which is the user's preference and
+     * not the codec the session runs: ServiceDiscoveryResponse negotiates H.265 at 1440p and 4K
+     * whatever that setting says, and falls back to H.264 when the user asked for H.265 on a
+     * device with no HEVC decoder. Either mismatch handed an H.265 stream the 2MB H.264 buffer and
+     * turned every large frame into a fragment overflow. The real answer is also not available
+     * here - AapVideo is constructed with the transport, before the phone has negotiated anything
+     * - so start small and let a frame that does not fit be the thing that asks for more.
+     */
+    private var messageBuffer = ByteBuffer.allocate(INITIAL_BUFFER_BYTES)
     private var legacyAssembledBuffer: ByteArray? = null
     private var isFrameCorrupt = false
     private var lastKeyframeRequestMs = 0L
@@ -64,6 +77,26 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                 }
             }
         }
+    }
+
+    /**
+     * Makes room for [additionalBytes] more of the frame being assembled, growing [messageBuffer]
+     * if it has to. Returns false only at [MAX_BUFFER_BYTES], where the frame is genuinely too
+     * large to be one we can decode and the caller should invalidate it.
+     */
+    private fun ensureCapacity(additionalBytes: Int): Boolean {
+        if (messageBuffer.remaining() >= additionalBytes) return true
+
+        val needed = messageBuffer.position() + additionalBytes
+        if (needed > MAX_BUFFER_BYTES) return false
+
+        var capacity = messageBuffer.capacity()
+        while (capacity < needed) capacity *= 2
+        val grown = ByteBuffer.allocate(capacity.coerceAtMost(MAX_BUFFER_BYTES))
+        grown.put(messageBuffer.array(), 0, messageBuffer.position())
+        messageBuffer = grown
+        AppLog.i("AapVideo: Reassembly buffer grown to ${grown.capacity() / 1024}KB")
+        return true
     }
 
     private fun findStartCode(buf: ByteArray, offset: Int): Int {
@@ -126,10 +159,10 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                 if (isFrameCorrupt) return true // Skip fragments of an already corrupt frame
 
                 // Middle fragment - append to buffer with overflow detection
-                if (messageBuffer.remaining() >= message.size) {
+                if (ensureCapacity(message.size)) {
                     messageBuffer.put(message.data, 0, message.size)
                 } else {
-                    AppLog.e("AapVideo: Fragment overflow (Flag 8)! Size ${message.size} exceeds remaining ${messageBuffer.remaining()}. Invalidating frame.")
+                    AppLog.e("AapVideo: Fragment overflow (Flag 8)! Size ${message.size} on top of ${messageBuffer.position()} exceeds the ${MAX_BUFFER_BYTES / 1024}KB cap. Invalidating frame.")
                     markCorruptAndRequestRecovery()
                     messageBuffer.clear()
                 }
@@ -139,10 +172,10 @@ internal class AapVideo(private val videoDecoder: VideoDecoder, private val sett
                 if (isFrameCorrupt) return true // Skip fragments of an already corrupt frame
 
                 // Last fragment - append, assemble, and decode
-                if (messageBuffer.remaining() >= message.size) {
+                if (ensureCapacity(message.size)) {
                     messageBuffer.put(message.data, 0, message.size)
                 } else {
-                    AppLog.e("AapVideo: Final fragment overflow (Flag 10)! Invalidating frame.")
+                    AppLog.e("AapVideo: Final fragment overflow (Flag 10)! Frame exceeds the ${MAX_BUFFER_BYTES / 1024}KB cap. Invalidating frame.")
                     markCorruptAndRequestRecovery()
                     messageBuffer.clear()
                     return true
