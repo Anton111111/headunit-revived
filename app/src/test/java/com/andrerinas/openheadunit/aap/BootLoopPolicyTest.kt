@@ -45,12 +45,27 @@ class BootLoopPolicyTest {
     }
 
     @Test
-    fun `the reported crash loop trips the guard`() {
-        // Process lifetimes measured from the #774 logs: the first cycle reached a full session
-        // with audio before the system died, the rest never got that far.
-        assertTrue(BootLoopPolicy.shouldPauseWireless(strikesAfter(173_000, 8_000, 9_000, 15_000)))
-        // Same unit on 3.2.1, three cycles.
-        assertTrue(BootLoopPolicy.shouldPauseWireless(strikesAfter(48_000, 10_000, 15_000)))
+    fun `the reported crash loop pauses wireless on the fourth boot`() {
+        // Process lifetimes measured from HUR_Log_20260804: 173.3 s, which reached a complete
+        // projection session with audio before the system died, then 7.8 s and 9.2 s. The guard
+        // is read at the start of a run, so the fourth process is the one that comes up paused.
+        val beforeFourthBoot = strikesAfter(173_300, 7_800, 9_200)
+
+        assertEquals(2, beforeFourthBoot)
+        assertTrue(BootLoopPolicy.shouldPauseWireless(BootLoopPolicy.nextStrikes(beforeFourthBoot)))
+    }
+
+    @Test
+    fun `the 3 2 1 log ends one cycle short of the guard`() {
+        // HUR_Log_20260805, same unit: 48.1 s, 9.8 s, 15.2 s, and there the reporter stopped
+        // recording. The 48 s run clears, so the export runs out two strikes in. Recorded as
+        // measured rather than padded to a trip — the third failure is not in the log, and this
+        // test exists to replay what was observed.
+        val atEndOfLog = strikesAfter(48_100, 9_800, 15_200)
+
+        assertEquals(2, atEndOfLog)
+        assertFalse(BootLoopPolicy.shouldPauseWireless(atEndOfLog))
+        assertTrue(BootLoopPolicy.shouldPauseWireless(BootLoopPolicy.nextStrikes(atEndOfLog)))
     }
 
     @Test
