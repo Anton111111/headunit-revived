@@ -71,6 +71,9 @@ class SoftApCredentialsProvider(
     /** Whether *we* turned the hotspot on, and so may turn it back on if it drops. */
     @Volatile private var autoEnabled = false
 
+    /** So the once-per-second poll reports "nothing here" once, not thirty times. */
+    @Volatile private var reportedNoInterface = false
+
     private val apStateReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.getIntExtra(EXTRA_WIFI_AP_STATE, -1) != WIFI_AP_STATE_DISABLED) return
@@ -139,6 +142,7 @@ class SoftApCredentialsProvider(
 
     private fun beginResolve() {
         resolveJob?.cancel()
+        reportedNoInterface = false
         resolveJob = scope.launch(Dispatchers.IO + CoroutineName("SoftApCredentials-Resolve")) {
             val deadline = System.currentTimeMillis() + RESOLVE_BUDGET_MS
             var triedAutoEnable = false
@@ -221,7 +225,20 @@ class SoftApCredentialsProvider(
 
         val stationIpv4 = NetworkAddresses.stationIpv4(context)
         val eligible = SoftApNetworkPolicy.eligible(candidates, stationIpv4)
-        val picked = SoftApNetworkPolicy.pickApInterface(candidates, stationIpv4) ?: return null
+        val picked = SoftApNetworkPolicy.pickApInterface(candidates, stationIpv4) ?: run {
+            // Rejecting everything is the correct answer when no hotspot is up, but saying nothing
+            // for the whole 30s budget reads as a hang. Name what was there so the reader can pick
+            // one for the override if the access point is on an interface we did not recognise.
+            if (!reportedNoInterface) {
+                reportedNoInterface = true
+                AppLog.i(
+                    "SoftApCredentials: No interface looks like an access point; waiting for one. " +
+                        "Present: " + candidates.filter { it.isUp && !it.isLoopback }
+                        .joinToString { "${it.name} (${it.siteLocalIpv4 ?: "no private address"})" }
+                )
+            }
+            return null
+        }
         if (eligible.size > 1) {
             // More than one survivor means the name decided it, which is a guess. Nothing else
             // reports having guessed, and picking wrong hands the phone an unreachable address.
