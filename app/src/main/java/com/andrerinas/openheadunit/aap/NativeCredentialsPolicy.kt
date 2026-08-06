@@ -32,8 +32,8 @@ enum class UnusableBssidAction {
     /** Do not send them at all. */
     ABORT,
 
-    /** Send them with the BSSID field left out entirely. */
-    OMIT_AND_CONTINUE
+    /** Send them with the BSSID field present but empty — never absent. See [NativeCredentialsPolicy]. */
+    SEND_WITH_EMPTY_BSSID
 }
 
 /**
@@ -43,19 +43,27 @@ enum class UnusableBssidAction {
  * - **WiFi Direct** aborts. Measured, not cautious: a masked BSSID there means the phone rejects
  *   the credentials anyway, and the usual cause (location services off) is fixable once the log
  *   says so rather than showing a healthy-looking handshake and a phone that never arrives.
- * - **Hotspot** omits the field and sends. aa-proxy-rs and ZLink both ship without one, so an
- *   ordinary AP is identified by SSID; aborting would kill the route on every device with a
- *   masked AP MAC, which is most of them.
+ * - **Hotspot** sends anyway, with the field empty. Not because an empty one works — it does not —
+ *   but because the phone's refusal is a message we can explain, where aborting leaves nothing to
+ *   read, and because the route stays open for any client that is less strict than the one measured.
  *
- * That last justification is now known to be too strong. A current Gearhead joins with a
- * `WifiNetworkSpecifier`, which matches SSID *and* BSSID under a full `ff:ff:ff:ff:ff:ff` mask: it
- * answered credentials with no BSSID with `WIFI_INVALID_BSSID` and a type 6 `status=-3`, every
- * attempt, and never fell back to matching on the name. Measured 2026-08-05, phone-to-phone.
+ * The justification this used to carry — that aa-proxy-rs and ZLink ship without a BSSID, so an
+ * ordinary AP is identified by SSID — was wrong, and it is worth recording how wrong. Both reference
+ * implementations declare `required string bssid = 3` in a byte-identical proto2 schema, and both
+ * read it from the access point's own interface: aa-proxy-rs takes `mac_address_by_name(iface)` and
+ * **fails to start** with "No MAC address found" if it cannot, and WirelessAndroidAutoDongle
+ * defaults it to `getMacAddress("wlan0")`. Neither has a no-BSSID mode. The one aa-proxy-rs path
+ * that has no address to hand sets an empty string, precisely because `required` forbids dropping
+ * the field, with a comment anticipating that phones may need a real one.
  *
- * Sending anyway is still the better of the two, and deliberately kept: the field is optional in the
- * protocol, other clients do accept it missing, and a rejection arrives as a message we can explain
- * — where aborting produces nothing to read at all. What changed is that the omission is now the
- * first suspect when the phone refuses, so the handshake says so rather than leaving it implied.
+ * The phone side agrees. A current Gearhead joins with a `WifiNetworkSpecifier`, which matches SSID
+ * *and* BSSID under a full `ff:ff:ff:ff:ff:ff` mask: credentials with no BSSID drew
+ * `WIFI_INVALID_BSSID` and a type 6 `status=-3` on every attempt, with no fallback to matching on
+ * the name. Measured 2026-08-05, phone-to-phone.
+ *
+ * So a missing BSSID is a failure everywhere it has been looked at, and the static BSSID setting is
+ * the fix rather than a workaround. What this policy still buys is the *shape* of the failure: one
+ * explained refusal instead of a silent abort.
  */
 object NativeCredentialsPolicy {
 
@@ -65,7 +73,7 @@ object NativeCredentialsPolicy {
     /** What to do when [isUsableBssid] said no. */
     fun onUnusableBssid(transport: NativeTransport): UnusableBssidAction = when (transport) {
         NativeTransport.WIFI_DIRECT -> UnusableBssidAction.ABORT
-        NativeTransport.HOTSPOT -> UnusableBssidAction.OMIT_AND_CONTINUE
+        NativeTransport.HOTSPOT -> UnusableBssidAction.SEND_WITH_EMPTY_BSSID
     }
 
     /**

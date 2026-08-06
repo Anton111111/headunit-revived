@@ -42,10 +42,16 @@ message WifiInfoRequest {
 
 // Type 3, head unit -> phone. The credentials themselves.
 //
-// bssid, security_mode and access_point_type were required. Optional now because a hotspot
-// cannot always resolve a real BSSID, and aa-proxy-rs omits the field outright when it has none.
-// Wire-compatible: proto2 encodes optional and required identically for a field that is set, so
-// this only drops a build()-time assertion.
+// bssid, security_mode and access_point_type are `required` in the schema every other
+// implementation uses — aa-proxy-rs and WirelessAndroidAutoDongle ship byte-identical copies of it.
+// Relaxed to optional here so a truncated or future message still parses rather than throwing, and
+// that is the only reason. Wire-compatible either way: proto2 encodes optional and required
+// identically for a field that is set.
+//
+// It does not license leaving one out. Send all five, always — an empty bssid where there is no
+// real one, as aa-proxy-rs does on the one path where it has none. A field the reference schema
+// calls required is one a strict parser on the phone may refuse the whole message over, and that
+// failure would look nothing like the credentials being wrong.
 message WifiInfoResponse {
     required string ssid = 1;
     required string key = 2;

@@ -35,7 +35,7 @@ class NativeCredentialsPolicyTest {
         // an ordinary access point is identified by SSID. Aborting here would make the route
         // unusable on every device whose AP MAC is masked, which is most of them.
         assertEquals(
-            UnusableBssidAction.OMIT_AND_CONTINUE,
+            UnusableBssidAction.SEND_WITH_EMPTY_BSSID,
             NativeCredentialsPolicy.onUnusableBssid(NativeTransport.HOTSPOT)
         )
     }

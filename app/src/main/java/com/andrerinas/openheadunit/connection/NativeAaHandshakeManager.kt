@@ -988,11 +988,12 @@ class NativeAaHandshakeManager(
                         abortedLocally = true
                         return@withContext
                     }
-                    UnusableBssidAction.OMIT_AND_CONTINUE -> {
-                        // Deliberate on this route: an ordinary AP is identified by SSID, and both
-                        // aa-proxy-rs and ZLink omit the field. Loud anyway — if the phone refuses
-                        // the credentials, this line is the first thing to look at.
-                        AppLog.w("NativeAA: No usable BSSID for this access point — sending the credentials without one. If the phone refuses to join, set a BSSID by hand in Advanced settings.")
+                    UnusableBssidAction.SEND_WITH_EMPTY_BSSID -> {
+                        // Sending is worth a try rather than expected to work — no implementation
+                        // ships without a real BSSID, see NativeCredentialsPolicy. The point is that
+                        // a refusal is a message we can explain; this line is the first to look at
+                        // when one arrives.
+                        AppLog.w("NativeAA: No usable BSSID for this access point — sending the credentials without one, which most phones refuse. Set a BSSID by hand in Advanced settings if the phone does not join.")
                         credBssid = ""
                         bssidOmitted = true
                     }
@@ -1117,9 +1118,16 @@ class NativeAaHandshakeManager(
     }
 
     /**
-     * Sends the credentials. A null or empty [bssid] leaves the field out of the message, as
-     * aa-proxy-rs does when it has no real address. [transport] picks the access-point type:
-     * DYNAMIC for a hotspot, STATIC for a WiFi Direct group as before.
+     * Sends the credentials.
+     *
+     * All five fields go out every time, including an empty [bssid] where we have no real address:
+     * the schema the other implementations use marks bssid, security_mode and access_point_type
+     * `required`, and aa-proxy-rs sets an empty string on the one path where it has no MAC rather
+     * than dropping the field. Omitting it risks a strict parser rejecting the whole message, which
+     * would surface as silence rather than as the specific refusal an empty one produces.
+     *
+     * [transport] picks the access-point type: DYNAMIC for a hotspot, matching both reference
+     * implementations, and STATIC for a WiFi Direct group as before.
      */
     private fun sendWifiSecurityResponse(
         output: OutputStream,
@@ -1136,7 +1144,7 @@ class NativeAaHandshakeManager(
                 if (transport == NativeTransport.HOTSPOT) Wireless.AccessPointType.DYNAMIC
                 else Wireless.AccessPointType.STATIC
             )
-            .apply { if (!bssid.isNullOrEmpty()) setBssid(bssid) }
+            .setBssid(bssid.orEmpty())
             .build()
         sendProtobuf(output, response.toByteArray(), WppMessageType.INFO_RESPONSE)
     }
