@@ -61,8 +61,9 @@ message WifiInfoResponse {
 }
 
 // Type 4, head unit -> phone. Opens the modern handshake by declaring our protocol version. Real
-// head units send this first, aa-proxy-rs's dongle does not, hence the setting. Only major/minor
-// are defined — the rest is revision dependent and we never have to read one.
+// head units send this first, aa-proxy-rs's dongle does not, hence the setting — which is off by
+// default, the version below being a guess. Only major/minor are defined; the rest is revision
+// dependent and we never have to read one.
 message WifiVersionRequest {
     optional int32 major = 1;
     optional int32 minor = 2;

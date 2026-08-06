@@ -1215,12 +1215,17 @@ class Settings(private val context: Context) {
         set(value) = prefs.edit().putInt("native-ap-transport", value).apply()
 
     // Whether the Native AA handshake opens with a WifiVersionRequest (Type 4), as real head units
-    // and the OEM ZLink app do, instead of going straight to WifiStartRequest. On by default:
-    // Android Auto 17.4 broke the abbreviated exchange for several reporters, and the version
-    // exchange is the documented difference. Turning it off restores the exact wire behaviour that
-    // shipped in 3.2.1, which is the escape hatch if a unit regresses on it.
+    // and the OEM ZLink app do, instead of going straight to WifiStartRequest.
+    //
+    // Off by default, deliberately: this is the only change on this route that alters what a unit
+    // with a working setup puts on the wire, and the version it announces is a guess — no capture
+    // of a real head unit's Type 4 has been decoded. A phone under test answered that guess with
+    // status=-8 and completed the handshake anyway, so the exchange is survivable on at least one
+    // Gearhead, but "survivable on one" is not a default. Left as an opt-in until a reporter whose
+    // unit broke on Android Auto 17.4 confirms it helps, since fixing that is the only reason to
+    // send it at all.
     var nativeWifiVersionExchange: Boolean
-        get() = prefs.getBoolean("native-wifi-version-exchange", true)
+        get() = prefs.getBoolean("native-wifi-version-exchange", false)
         set(value) = prefs.edit().putBoolean("native-wifi-version-exchange", value).apply()
 
     // Manual fallback for dual-radio head units whose second radio isn't discoverable via

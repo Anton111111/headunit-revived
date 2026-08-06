@@ -146,8 +146,8 @@ object SettingsBackupManager {
         "wait-for-wifi-timeout" to ValueType.INT,
         "helper-connection-strategy" to ValueType.INT,
         "bluetooth-manager-service-name" to ValueType.STRING,
-        // The Native AA handshake escape hatch: a reporter who has to turn this off wants it
-        // to survive a reinstall, which is exactly when they are asked to export their settings.
+        // The Native AA handshake opt-in: a reporter who found they need it wants it to survive a
+        // reinstall, which is exactly when they are asked to export their settings.
         "native-wifi-version-exchange" to ValueType.BOOLEAN,
         // Selectable from the Android Auto mode block now that the route is wired.
         "native-ap-transport" to ValueType.INT,

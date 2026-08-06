@@ -957,7 +957,7 @@ class SettingsFragment : Fragment() {
                 stableId = "nativeWifiVersionExchange",
                 nameResId = R.string.native_wifi_version_exchange,
                 descriptionResId = R.string.native_wifi_version_exchange_description,
-                isChecked = pendingNativeWifiVersionExchange ?: true,
+                isChecked = pendingNativeWifiVersionExchange ?: false,
                 onCheckedChanged = { isChecked ->
                     pendingNativeWifiVersionExchange = isChecked
                     checkChanges()

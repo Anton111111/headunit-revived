@@ -130,8 +130,8 @@ class WppHandshakeSession(private val versionExchangeEnabled: Boolean) {
         /** How much longer to wait each time the phone says it is still joining. */
         const val SETTLE_EXTENSION_MS = 15_000L
 
-        /** Our protocol version. A guess — no capture has been decoded yet — bounded by the
-         *  setting, which turns the whole exchange off if it proves wrong. */
+        /** Our protocol version. A guess — no capture of a real head unit's Type 4 has been
+         *  decoded — which is why the setting that sends it is off by default. */
         const val WPP_VERSION_MAJOR = 1
         const val WPP_VERSION_MINOR = 1
     }
