@@ -885,6 +885,69 @@ class Settings(private val context: Context) {
             }
         }
 
+        private const val KEY_BOOT_LOOP_STRIKES = "boot-loop-strikes"
+        private const val KEY_WIRELESS_PAUSED_BY_BOOT_LOOP = "wireless-paused-by-boot-loop"
+
+        /**
+         * The device-protected store, which is readable at LOCKED_BOOT_COMPLETED — before the user
+         * has unlocked, and so before ordinary preferences exist. The boot-loop counters have to
+         * live here for the same reason the auto-start flags do: they are read and written by
+         * [com.andrerinas.openheadunit.app.BootCompleteReceiver] on a device that has just booted.
+         */
+        private fun bootPrefs(context: Context) =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                context.createDeviceProtectedStorageContext()
+                    .getSharedPreferences(DEVICE_PREFS_NAME, Context.MODE_PRIVATE)
+            } else {
+                context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            }
+
+        /** Consecutive boot-started runs that did not last. See `aap/BootLoopPolicy`. */
+        fun getBootLoopStrikes(context: Context): Int = try {
+            bootPrefs(context).getInt(KEY_BOOT_LOOP_STRIKES, 0)
+        } catch (e: Exception) {
+            AppLog.d("Settings: Could not read the boot-loop strike count: ${e.message}")
+            0
+        }
+
+        fun setBootLoopStrikes(context: Context, strikes: Int) {
+            try {
+                bootPrefs(context).edit().putInt(KEY_BOOT_LOOP_STRIKES, strikes).apply()
+            } catch (e: Exception) {
+                AppLog.d("Settings: Could not store the boot-loop strike count: ${e.message}")
+            }
+        }
+
+        /**
+         * Whether wireless bring-up is currently paused because it looked like it was crashing the
+         * device. Sticky on purpose: cleared when the user opens the app, not by surviving a run,
+         * so the cycle ends outright instead of resuming every few boots.
+         */
+        fun isWirelessPausedByBootLoop(context: Context): Boolean = try {
+            bootPrefs(context).getBoolean(KEY_WIRELESS_PAUSED_BY_BOOT_LOOP, false)
+        } catch (e: Exception) {
+            AppLog.d("Settings: Could not read the boot-loop pause flag: ${e.message}")
+            false
+        }
+
+        fun setWirelessPausedByBootLoop(context: Context, paused: Boolean) {
+            try {
+                bootPrefs(context).edit()
+                    .putBoolean(KEY_WIRELESS_PAUSED_BY_BOOT_LOOP, paused)
+                    .apply()
+            } catch (e: Exception) {
+                AppLog.d("Settings: Could not store the boot-loop pause flag: ${e.message}")
+            }
+        }
+
+        /** Both counters back to their defaults, for when the user is present and can act. */
+        fun clearBootLoopState(context: Context) {
+            if (getBootLoopStrikes(context) == 0 && !isWirelessPausedByBootLoop(context)) return
+            AppLog.i("Settings: Clearing the boot-loop guard — the app was opened by hand.")
+            setBootLoopStrikes(context, 0)
+            setWirelessPausedByBootLoop(context, false)
+        }
+
         private const val KEY_AUTO_START_ON_SCREEN_ON = "auto-start-on-screen-on"
 
         /**
@@ -1204,12 +1267,49 @@ class Settings(private val context: Context) {
         get() = prefs.getString("bluetooth-manager-service-name", "bluetooth_manager")!!
         set(value) = prefs.edit().putString("bluetooth-manager-service-name", value).apply()
 
+    // Which network the Native AA mode (wifiConnectionMode 3) puts the phone on.
+    // 0 = WiFi Direct P2P group, 1 = this head unit's own hotspot (experimental).
+    //
+    // Deliberately not folded into helperConnectionStrategy: that setting belongs to mode 2 and
+    // means something different in every one of its five values. A wireless mode that reuses
+    // another mode's selector is how the two call sites of the old usesWifiDirect() drifted apart.
+    var nativeApTransport: Int
+        get() = prefs.getInt("native-ap-transport", 0)
+        set(value) = prefs.edit().putInt("native-ap-transport", value).apply()
+
+    // Whether the Native AA handshake opens with a WifiVersionRequest (Type 4), as real head units
+    // and the OEM ZLink app do, instead of going straight to WifiStartRequest.
+    //
+    // Off by default, deliberately: this is the only change on this route that alters what a unit
+    // with a working setup puts on the wire, and the version it announces is a guess — no capture
+    // of a real head unit's Type 4 has been decoded. A phone under test answered that guess with
+    // status=-8 and completed the handshake anyway, so the exchange is survivable on at least one
+    // Gearhead, but "survivable on one" is not a default. Left as an opt-in until a reporter whose
+    // unit broke on Android Auto 17.4 confirms it helps, since fixing that is the only reason to
+    // send it at all.
+    var nativeWifiVersionExchange: Boolean
+        get() = prefs.getBoolean("native-wifi-version-exchange", false)
+        set(value) = prefs.edit().putBoolean("native-wifi-version-exchange", value).apply()
+
     // Manual fallback for dual-radio head units whose second radio isn't discoverable via
     // ServiceManager.listServices() at all. Empty = disabled (rely on automatic discovery only).
     var manualSecondaryBluetoothServiceName: String
         get() = prefs.getString("manual-secondary-bt-service-name", "")!!
         set(value) = prefs.edit().putString("manual-secondary-bt-service-name", value).apply()
 
+    // Which interface hosts the head unit's access point. Empty = work it out from the interface
+    // list. Worth having because every other implementation of this protocol either creates the AP
+    // itself or is told the name: aa-proxy-rs has an `iface` setting, the Pi dongles pin wlan0 in
+    // hostapd.conf, and ZLink carries an ap_NIC_name field. We are the only one reading an AP we
+    // did not create, so we are the only one that has to guess.
+    var hotspotInterface: String
+        get() = prefs.getString("hotspot-interface", "")!!
+        set(value) = prefs.edit().putString("hotspot-interface", value).apply()
+
+    // Manual override for the head unit's own access point, used first by
+    // SoftApCredentialsProvider when nativeApTransport == 1. Empty = read the system's hotspot
+    // configuration instead. Worth having because getSoftApConfiguration() is reflection over a
+    // non-public API and can simply refuse on a locked-down API 30+ device.
     var hotspotSsid: String
         get() = prefs.getString("hotspot-ssid", "")!!
         set(value) = prefs.edit().putString("hotspot-ssid", value).apply()
