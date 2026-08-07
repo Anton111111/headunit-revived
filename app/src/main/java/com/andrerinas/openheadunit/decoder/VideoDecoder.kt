@@ -166,16 +166,24 @@ class VideoDecoder(private val settings: Settings) {
     private var lastSyncStallSuppressedLogMs = 0L
 
     // Throughput counters for the periodic telemetry tick - see THROUGHPUT_LOG_INTERVAL_MS.
-    // Session-monotonic so each has exactly one writer: framesFed/framesDropped from decode()
-    // (under this object's monitor), framesRendered from the output thread. The output thread
-    // reads all three and keeps its own last-logged snapshots to derive per-interval deltas.
+    // Session-monotonic so each has exactly one writer: framesFed/framesDropped/inputWaitMs from
+    // decode() (under this object's monitor), framesRendered from the output thread. The output
+    // thread reads them all and keeps its own last-logged snapshots to derive per-interval deltas.
     @Volatile private var framesFed = 0L
     @Volatile private var framesDropped = 0L
     @Volatile private var framesRendered = 0L
+    // Milliseconds spent waiting for a free input buffer. AapVideo.process() runs on the transport's
+    // Poll thread, which also carries audio and control, so this wait is time those cannot be
+    // dispatched - and it is otherwise invisible, since a frame that waits some of its attempts logs
+    // nothing and "Input buffer full" only fires when every attempt is exhausted. Near zero while
+    // the frame rate is low means the frames were never sent; high means the decoder is the
+    // bottleneck and the attempt budget is being paid for in audio latency.
+    @Volatile private var inputWaitMs = 0L
     private var lastThroughputLogMs = 0L
     private var lastLoggedFramesFed = 0L
     private var lastLoggedFramesDropped = 0L
     private var lastLoggedFramesRendered = 0L
+    private var lastLoggedInputWaitMs = 0L
 
     // Reuse buffers for older API levels to minimize GC pressure
     private var inputBuffers: Array<ByteBuffer>? = null
@@ -363,10 +371,12 @@ class VideoDecoder(private val settings: Settings) {
             framesFed = 0L
             framesDropped = 0L
             framesRendered = 0L
+            inputWaitMs = 0L
             lastThroughputLogMs = 0L
             lastLoggedFramesFed = 0L
             lastLoggedFramesDropped = 0L
             lastLoggedFramesRendered = 0L
+            lastLoggedInputWaitMs = 0L
             AppLog.i("Decoder stopped: $reason")
         }
     }
@@ -851,11 +861,16 @@ class VideoDecoder(private val settings: Settings) {
             // at 30ms this reported a full input queue within a second of every decoder start,
             // before the component had drained its first buffers, on hardware that then went on to
             // decode at full rate.
+            //
+            // The whole dequeue is timed, not just the retries: the first call blocks for up to
+            // TIMEOUT_US on its own, and what holds up audio behind us is the total.
+            val waitStart = SystemClock.elapsedRealtime()
             while (attempts < 30) {
                 inputIndex = currentCodec.dequeueInputBuffer(TIMEOUT_US)
                 if (inputIndex >= 0) break
                 attempts++
             }
+            inputWaitMs += SystemClock.elapsedRealtime() - waitStart
 
             if (inputIndex < 0) {
                 AppLog.e("Input buffer feed failed (full)")
@@ -927,16 +942,19 @@ class VideoDecoder(private val settings: Settings) {
         val rendered = framesRendered - lastLoggedFramesRendered
         val fed = framesFed - lastLoggedFramesFed
         val dropped = framesDropped - lastLoggedFramesDropped
+        val inputWait = inputWaitMs - lastLoggedInputWaitMs
         lastThroughputLogMs = now
         lastLoggedFramesRendered = framesRendered
         lastLoggedFramesFed = framesFed
         lastLoggedFramesDropped = framesDropped
+        lastLoggedInputWaitMs = inputWaitMs
 
         val renderedFps = rendered * 1000 / elapsed
         val fedFps = fed * 1000 / elapsed
         AppLog.i(
             "Throughput over ${elapsed}ms: rendered=$rendered (${renderedFps}fps), " +
-                "fed=$fed (${fedFps}fps), dropped=$dropped, codec=$currentCodecName"
+                "fed=$fed (${fedFps}fps), dropped=$dropped, inputWait=${inputWait}ms, " +
+                "codec=$currentCodecName"
         )
     }
 
