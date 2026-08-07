@@ -15,7 +15,7 @@ jobs:
       - name: "Run AI Code Review"
         uses: petarzarkov/gemini-code-review-action@latest
         with:
-          model: gemini-2.5-flash
+          model: gemini-3.5-flash-lite
           skip_draft_prs: false
           language: English
         env:

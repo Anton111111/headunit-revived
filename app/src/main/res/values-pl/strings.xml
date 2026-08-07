@@ -359,6 +359,9 @@
     <string name="log_source">Źródło logów</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Bezpośrednio do pliku</string>
+    <string name="log_location">Lokalizacja zapisów logów</string>
+    <string name="log_location_default">Domyślna (Pamięć aplikacji)</string>
+    <string name="log_location_downloads">Folder Pobrane</string>
     <string name="start_log_capture">Rozpocznij przechwytywanie logów</string>
     <string name="start_log_capture_description">Rozpoczyna zapisywanie logów systemowych do pliku.</string>
     <string name="start_log_capture_in_applog_file">Wiadomości Log są zapisywane do pliku tylko podczas aktywnego nagrywania</string>

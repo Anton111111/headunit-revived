@@ -122,6 +122,9 @@
     <string name="log_source">Günlük kaynağı</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Doğrudan dosyaya</string>
+    <string name="log_location">Log Kayıt Konumu</string>
+    <string name="log_location_default">Varsayılan (Uygulama Depolaması)</string>
+    <string name="log_location_downloads">İndirilenler Klasörü</string>
     <string name="start_log_capture">Günlük Kaydını Başlat</string>
     <string name="start_log_capture_description">Hata ayıklama için tam günlükleri kaydetmeye başla</string>
     <string name="start_log_capture_in_applog_file">Log mesajları yalnızca yakalama etkin olduğunda bir dosyaya yazılır</string>

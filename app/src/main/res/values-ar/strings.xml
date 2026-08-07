@@ -361,6 +361,9 @@
     <string name="log_source">مصدر السجلات</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">مباشرة إلى الملف</string>
+    <string name="log_location">موقع حفظ السجلات</string>
+    <string name="log_location_default">الافتراضي (تخزين التطبيق)</string>
+    <string name="log_location_downloads">مجلد التنزيلات</string>
     <string name="start_log_capture">بدء التقاط السجل</string>
     <string name="start_log_capture_description">يبدأ تسجيل سجلات النظام في ملف.</string>
     <string name="start_log_capture_in_applog_file">تُكتب رسائل Log في ملف فقط أثناء تنشيط الالتقاط</string>

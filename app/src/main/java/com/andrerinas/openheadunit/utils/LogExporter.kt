@@ -56,7 +56,8 @@ object LogExporter {
         }
 
         stopCapture()
-        val logDir = LogFilesHelper.resolveLogDirectory(context, allowInternalFallback = false) ?: return
+        val settings = Settings(context)
+        val logDir = LogFilesHelper.resolveLogDirectory(context, settings, allowInternalFallback = false) ?: return
         LogFilesHelper.rotateLogs(logDir)
 
         val file = LogFilesHelper.createTimestampedLogFile(logDir)
@@ -123,7 +124,8 @@ object LogExporter {
                 ?.takeIf { it.exists() && it.length() > 0 }
         }
 
-        val logDir = LogFilesHelper.resolveLogDirectory(context, allowInternalFallback = false) ?: return null
+        val settings = Settings(context)
+        val logDir = LogFilesHelper.resolveLogDirectory(context, settings, allowInternalFallback = false) ?: return null
         LogFilesHelper.ensureDirectory(logDir)
 
         val source = captureFile

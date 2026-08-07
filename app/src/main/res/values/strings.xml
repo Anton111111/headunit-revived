@@ -297,6 +297,9 @@
     <string name="log_source">Log Source</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Direct to file</string>
+    <string name="log_location">Log Storage Location</string>
+    <string name="log_location_default">Default (App Storage)</string>
+    <string name="log_location_downloads">Downloads Folder</string>
     <string name="start_log_capture">Start Capturing Logs</string>
     <string name="start_log_capture_description">Begin recording full logs for debugging</string>
     <string name="start_log_capture_in_applog_file">Log messages are written to a file only while capture is active</string>

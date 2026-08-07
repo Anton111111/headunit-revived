@@ -104,7 +104,7 @@ object AppLog {
             return
         }
 
-        val logDir = LogFilesHelper.resolveLogDirectory(appContext) ?: appContext.filesDir
+        val logDir = LogFilesHelper.resolveLogDirectory(appContext, settings) ?: appContext.filesDir
         LogFilesHelper.rotateLogs(logDir)
 
         val logFile = LogFilesHelper.createTimestampedLogFile(logDir)

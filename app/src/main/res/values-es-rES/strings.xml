@@ -361,6 +361,9 @@
     <string name="log_source">Fuente de registro</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Directo a archivo</string>
+    <string name="log_location">Ubicación de registros</string>
+    <string name="log_location_default">Predeterminado (Almacenamiento de app)</string>
+    <string name="log_location_downloads">Carpeta de Descargas</string>
     <string name="start_log_capture">Iniciar captura de log</string>
     <string name="start_log_capture_description">Comienza a registrar los logs del sistema en un archivo.</string>
     <string name="start_log_capture_in_applog_file">Los mensajes de Log se escriben en un archivo solo mientras la captura está activa</string>

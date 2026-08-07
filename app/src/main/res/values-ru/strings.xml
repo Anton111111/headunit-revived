@@ -362,6 +362,9 @@
     <string name="log_source">Источник логов</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Направить в файл</string>
+    <string name="log_location">Место сохранения логов</string>
+    <string name="log_location_default">По умолчанию (Память приложения)</string>
+    <string name="log_location_downloads">Папка Загрузки</string>
     <string name="start_log_capture">Начать запись лога</string>
     <string name="start_log_capture_description">Начинает запись системных логов в файл.</string>
     <string name="start_log_capture_in_applog_file">Сообщения записываются в файл только во время активной записи</string>

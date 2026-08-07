@@ -358,6 +358,9 @@
     <string name="log_source">Logbron</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Rechtstreeks naar bestand</string>
+    <string name="log_location">Log-opslaglocatie</string>
+    <string name="log_location_default">Standaard (App-opslag)</string>
+    <string name="log_location_downloads">Map Downloads</string>
     <string name="start_log_capture">Logboekregistratie starten</string>
     <string name="start_log_capture_description">Begint met het opnemen van systeemlogs in een bestand.</string>
     <string name="start_log_capture_in_applog_file">Log-berichten worden alleen tijdens actieve opname naar een bestand geschreven</string>
