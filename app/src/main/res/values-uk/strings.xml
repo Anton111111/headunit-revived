@@ -359,6 +359,9 @@
     <string name="log_source">Джерело логів</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Безпосередньо у файл</string>
+<string name="log_location">Місце збереження логів</string>
+    <string name="log_location_default">За замовчуванням (Пам\'ять програми)</string>
+    <string name="log_location_downloads">Папка Завантаження</string>
     <string name="start_log_capture">Почати запис лога</string>
     <string name="start_log_capture_description">Починає запис системних логів у файл.</string>
     <string name="start_log_capture_in_applog_file">Повідомлення Log записуються у файл лише під час активного запису</string>

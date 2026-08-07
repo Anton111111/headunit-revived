@@ -361,6 +361,9 @@
     <string name="log_source">Zdroj logů</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Přímo do souboru</string>
+<string name="log_location">Uložiště protokolů</string>
+    <string name="log_location_default">Výchozí (Úložiště aplikace)</string>
+    <string name="log_location_downloads">Složka Ke stažení</string>
     <string name="start_log_capture">Spustit záznam protokolu</string>
     <string name="start_log_capture_description">Spustí nahrávání systémových protokolů do souboru.</string>
     <string name="start_log_capture_in_applog_file">Zprávy Log se zapisují do souboru pouze během aktivního záznamu</string>

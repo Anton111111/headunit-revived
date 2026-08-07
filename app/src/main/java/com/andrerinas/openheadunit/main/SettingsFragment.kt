@@ -1773,6 +1773,44 @@ class SettingsFragment : Fragment() {
             }
         ))
 
+        val logLocations = Settings.LogLocation.entries
+        val logLocationNames = logLocations.map {
+            when (it) {
+                Settings.LogLocation.DEFAULT -> getString(R.string.log_location_default)
+                Settings.LogLocation.DOWNLOADS -> getString(R.string.log_location_downloads)
+            }
+        }.toTypedArray()
+        items.add(SettingItem.SettingEntry(
+            stableId = "logLocation",
+            nameResId = R.string.log_location,
+            value = when (settings.logLocation) {
+                Settings.LogLocation.DEFAULT -> getString(R.string.log_location_default)
+                Settings.LogLocation.DOWNLOADS -> getString(R.string.log_location_downloads)
+            },
+            onClick = {
+                val currentIndex = logLocations.indexOf(settings.logLocation)
+                MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+                    .setTitle(R.string.log_location)
+                    .setSingleChoiceItems(logLocationNames, currentIndex) { dialog, which ->
+                        val newLocation = logLocations[which]
+                        val applyLocation: () -> Unit = {
+                            settings.logLocation = newLocation
+                            if (settings.logSource == Settings.LogSource.APPLOG_FILE) {
+                                AppLog.init(settings, requireContext().applicationContext)
+                            }
+                            dialog.dismiss()
+                            updateSettingsList()
+                        }
+                        if (newLocation == Settings.LogLocation.DOWNLOADS) {
+                            runWithDownloadsStoragePermission(applyLocation)
+                        } else {
+                            applyLocation()
+                        }
+                    }
+                    .show()
+            }
+        ))
+
         items.add(SettingItem.SettingEntry(
             stableId = "captureLog",
             nameResId = if (if (settings.logSource == Settings.LogSource.APPLOG_FILE) AppLog.isCapturing else LogExporter.isCapturing) R.string.stop_log_capture else R.string.start_log_capture,

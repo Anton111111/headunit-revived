@@ -13,7 +13,24 @@ object LogFilesHelper {
     const val DEFAULT_MAX_LOG_FILES = 10
     const val DEFAULT_MAX_TOTAL_SIZE = 50L * 1024 * 1024 // 50 MB
 
-    fun resolveLogDirectory(context: Context, allowInternalFallback: Boolean = true): File? {
+    fun resolveLogDirectory(
+        context: Context,
+        settings: Settings? = null,
+        allowInternalFallback: Boolean = true
+    ): File? {
+        val activeSettings = settings ?: try { Settings(context) } catch (_: Exception) { null }
+        if (activeSettings?.logLocation == Settings.LogLocation.DOWNLOADS) {
+            val downloadsDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS)
+            if (downloadsDir != null) {
+                val openHeadunitDir = File(downloadsDir, "OpenHeadunitLogs")
+                if (openHeadunitDir.exists() || openHeadunitDir.mkdirs()) {
+                    return openHeadunitDir
+                }
+                if (downloadsDir.exists() || downloadsDir.mkdirs()) {
+                    return downloadsDir
+                }
+            }
+        }
         return context.getExternalFilesDir(null) ?: if (allowInternalFallback) context.filesDir else null
     }
 

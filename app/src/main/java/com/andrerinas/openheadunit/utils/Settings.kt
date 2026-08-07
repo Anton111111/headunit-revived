@@ -166,9 +166,18 @@ class Settings(private val context: Context) {
         APPLOG_FILE
     }
 
+    enum class LogLocation {
+        DEFAULT,
+        DOWNLOADS
+    }
+
     var logSource: LogSource
         get() = LogSource.entries.getOrElse(prefs.getInt(KEY_LOG_SOURCE, LogSource.LOGCAT.ordinal)) { LogSource.LOGCAT }
         set(value) { prefs.edit().putInt(KEY_LOG_SOURCE, value.ordinal).apply() }
+
+    var logLocation: LogLocation
+        get() = LogLocation.entries.getOrElse(prefs.getInt(KEY_LOG_LOCATION, LogLocation.DEFAULT.ordinal)) { LogLocation.DEFAULT }
+        set(value) { prefs.edit().putInt(KEY_LOG_LOCATION, value.ordinal).apply() }
 
     /** Whether log capture should be active across restarts. Default: false (disabled). */
     var exporterCaptureEnabled: Boolean
@@ -836,6 +845,7 @@ class Settings(private val context: Context) {
         /** SharedPreferences key; also used by [AapService] for change listener. */
         const val KEY_LOG_LEVEL = "log-level"
         const val KEY_LOG_SOURCE = "log-source"
+        const val KEY_LOG_LOCATION = "log-location"
         /** Persist whether log capture should be active across restarts. */
         const val KEY_LOG_CAPTURE_ENABLED = "log-capture-enabled"
 

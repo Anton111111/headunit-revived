@@ -126,6 +126,9 @@
     <string name="log_source">ლოგის წყარო</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">პირდაპირ ფაილში</string>
+<string name="log_location">ჟურნალის შენახვის ადგილი</string>
+    <string name="log_location_default">ნაგულისხმევი (აპლიკაციის მეხსიერება)</string>
+    <string name="log_location_downloads">ჩამოტვირთვების საქაღალდე</string>
     <string name="start_log_capture">ლოგების ჩაწერის დაწყება</string>
     <string name="start_log_capture_description">გამართვისთვის სრული ლოგების ჩაწერის დაწყება</string>
     <string name="start_log_capture_in_applog_file">ლოგები იწერება ფაილში მხოლოდ მაშინ, როცა ჩაწერა აქტიურია</string>

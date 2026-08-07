@@ -360,6 +360,9 @@
     <string name="log_source">Naplóforrás</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Közvetlenül fájlba</string>
+<string name="log_location">Napló mentési helye</string>
+    <string name="log_location_default">Alapértelmezett (Alkalmazás tárhely)</string>
+    <string name="log_location_downloads">Letöltések mappa</string>
     <string name="start_log_capture">Naplózás indítása</string>
     <string name="start_log_capture_description">Rögzíti a rendszernaplókat egy helyi fájlba a hibaelhárításhoz.</string>
     <string name="start_log_capture_in_applog_file">Az Log üzenetek csak aktív rögzítés közben íródnak fájlba</string>

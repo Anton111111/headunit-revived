@@ -123,6 +123,9 @@
     <string name="log_source">Logquelle</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Direkt in Datei</string>
+    <string name="log_location">Log-Speicherort</string>
+    <string name="log_location_default">Standard (App-Speicher)</string>
+    <string name="log_location_downloads">Downloads-Ordner</string>
     <string name="start_log_capture">Log-Aufzeichnung starten</string>
     <string name="start_log_capture_description">Startet das Mitschreiben von System-Logs für Debugging</string>
     <string name="start_log_capture_in_applog_file">Log-Meldungen werden nur bei aktiver Aufzeichnung in eine Datei geschrieben</string>
