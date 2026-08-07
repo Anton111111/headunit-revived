@@ -359,7 +359,7 @@
     <string name="log_source">Fonte de logs</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Direto para arquivo</string>
-<string name="log_location">Local de Armazenamento de Logs</string>
+    <string name="log_location">Local de Armazenamento de Logs</string>
     <string name="log_location_default">Padrão (Armazenamento do App)</string>
     <string name="log_location_downloads">Pasta Downloads</string>
     <string name="start_log_capture">Iniciar captura de log</string>

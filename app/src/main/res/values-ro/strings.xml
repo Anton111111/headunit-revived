@@ -117,7 +117,7 @@
     <string name="log_source">Sursă de jurnalizare</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">Direct în fișier</string>
-<string name="log_location">Locație salvare jurnale</string>
+    <string name="log_location">Locație salvare jurnale</string>
     <string name="log_location_default">Implicit (Stocare aplicație)</string>
     <string name="log_location_downloads">Dosar Descărcări</string>
     <string name="start_log_capture">Începe capturarea logurilor</string>

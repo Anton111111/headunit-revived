@@ -1,6 +1,8 @@
 package com.andrerinas.openheadunit.utils
 
 import android.content.Context
+import android.os.Build
+import android.os.Environment
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -18,9 +20,21 @@ object LogFilesHelper {
         settings: Settings? = null,
         allowInternalFallback: Boolean = true
     ): File? {
-        val activeSettings = settings ?: try { Settings(context) } catch (_: Exception) { null }
-        if (activeSettings?.logLocation == Settings.LogLocation.DOWNLOADS) {
-            val downloadsDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS)
+        val location = settings?.logLocation ?: try {
+            Settings(context).logLocation
+        } catch (_: Exception) {
+            Settings.LogLocation.DEFAULT
+        }
+
+        if (location == Settings.LogLocation.DOWNLOADS) {
+            val downloadsDir = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+                    ?: @Suppress("DEPRECATION") Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            } else {
+                @Suppress("DEPRECATION")
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            }
+
             if (downloadsDir != null) {
                 val openHeadunitDir = File(downloadsDir, "OpenHeadunitLogs")
                 if (openHeadunitDir.exists() || openHeadunitDir.mkdirs()) {

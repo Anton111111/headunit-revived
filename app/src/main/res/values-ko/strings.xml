@@ -125,7 +125,7 @@
     <string name="log_source">로그 수집 방식</string>
     <string name="log_source_logcat">Logcat</string>
     <string name="log_source_applog_file">앱 로그 파일</string>
-<string name="log_location">로그 저장 위치</string>
+    <string name="log_location">로그 저장 위치</string>
     <string name="log_location_default">기본값 (앱 저장소)</string>
     <string name="log_location_downloads">다운로드 폴더</string>
     <string name="start_log_capture">로그 기록 시작</string>
