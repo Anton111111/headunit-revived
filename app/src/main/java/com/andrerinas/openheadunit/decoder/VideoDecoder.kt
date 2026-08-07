@@ -291,7 +291,7 @@ class VideoDecoder(private val settings: Settings) {
 
             AppLog.i("New surface set: $surface")
             if (codec != null || softwareHevcDecoder != null) {
-                stop("New surface")
+                stop(DecoderStopPolicy.REASON_NEW_SURFACE)
             }
             mSurface = surface
             lastFrameRenderedMs = 0L
@@ -333,18 +333,25 @@ class VideoDecoder(private val settings: Settings) {
             legacyFrameBuffer = null
             codecBufferInfo = null
             codecConfigured = false
-            if (!reason.startsWith("restart")) {
+            if (!DecoderStopPolicy.isDecoderRestart(reason)) {
                 vps = null
                 sps = null
                 pps = null
                 mWidth = 0
                 mHeight = 0
-                codecTypePinned = false
                 restartsSinceLastFrame = 0
                 codecFallbackUsed = false
                 decoderPermanentlyFailed = false
                 syncStallRestartCount = 0
                 lastSyncStallRestartMs = 0L
+            }
+            // The pinned codec type describes the stream, not the decoder instance, so it has to
+            // outlive a surface teardown: the phone keeps sending the same codec while the view is
+            // rebuilt, and re-detecting on whatever packet lands mid-teardown can misread an
+            // ordinary H.264 P-slice as HEVC and configure the wrong decoder for the rest of the
+            // session. Only a real disconnect can change what the phone is sending.
+            if (DecoderStopPolicy.endsSession(reason)) {
+                codecTypePinned = false
             }
             // Keep VPS/SPS/PPS cached so we can re-inject them on restart
             lastFrameRenderedMs = 0L
