@@ -1,5 +1,9 @@
 # Changelog
-### v.3.2.2-upcoming
+### v.3.2.3
+- Adding custom log location (App folder or Download folder)
+- additional fixing for the fps/freeze problems. Thanks to @o-jcardenass and @andrecuellar for helping
+
+### v.3.2.2
 - Fixing location jumping, especially on lower speeds
 - Fixing screen flicker again in video decoder
 - Fix/video throughput telemetry and keyframe lockout, thanks to @o-jcardenass
