@@ -4,10 +4,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.andrerinas.openheadunit.R
 import com.andrerinas.openheadunit.aap.ApInterfaceCandidate
 import com.andrerinas.openheadunit.aap.SoftApBssidPolicy
 import com.andrerinas.openheadunit.aap.NativeCredentialsPolicy
+import com.andrerinas.openheadunit.aap.SoftApCredentials
+import com.andrerinas.openheadunit.aap.SoftApCredentialsAttempt
+import com.andrerinas.openheadunit.aap.SoftApCredentialsPolicy
 import com.andrerinas.openheadunit.aap.SoftApNetworkPolicy
 import com.andrerinas.openheadunit.aap.SoftApState
 import com.andrerinas.openheadunit.utils.AppLog
@@ -17,6 +24,7 @@ import com.andrerinas.openheadunit.utils.InterfaceMacReader
 import com.andrerinas.openheadunit.utils.NetworkAddresses
 import com.andrerinas.openheadunit.utils.Settings
 import com.andrerinas.openheadunit.utils.SoftApStateReader
+import com.andrerinas.openheadunit.utils.ToastUtils
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -71,8 +79,40 @@ class SoftApCredentialsProvider(
     /** Whether *we* turned the hotspot on, and so may turn it back on if it drops. */
     @Volatile private var autoEnabled = false
 
+    /**
+     * Whether switching the hotspot on has already been tried since [start].
+     *
+     * A field rather than a local in [beginResolve], because [refresh] restarts that loop and the
+     * handshake calls it every time it has been waiting too long — which used to re-arm auto-enable
+     * on each one, so a slow access point got a second start sweep on top of the first, racing it
+     * band for band. One attempt per run is the whole of the best effort on offer.
+     */
+    @Volatile private var triedAutoEnable = false
+
     /** So the once-per-second poll reports "nothing here" once, not thirty times. */
     @Volatile private var reportedNoInterface = false
+
+    /**
+     * When [start] was called, so the budget below measures the run rather than one look.
+     *
+     * [beginResolve] used to stamp its own deadline, and [refresh] restarts it — which the handshake
+     * calls every ~10 s while it waits. A budget of 30 s restarted every 10 s never expires, so the
+     * line that tells the user no access point could be found was unreachable in exactly the case it
+     * was written for. Measured: an access point down for 3.5 minutes, the resolve polling the whole
+     * time, and nothing said.
+     */
+    @Volatile private var runStartedAt = 0L
+
+    /** So that budget is reported once per run, not once per [refresh]. */
+    @Volatile private var reportedBudgetExhausted = false
+
+    /**
+     * Same idea for the unreadable-configuration dead end, but latched for the whole run rather
+     * than per resolve: the handshake calls [refresh] every time it has been waiting too long, and
+     * the phone redials every few seconds, so this would otherwise be said once per attempt for as
+     * long as the user keeps trying. It is one instruction and it does not change.
+     */
+    @Volatile private var reportedConfigUnreadable = false
 
     private val apStateReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -106,6 +146,10 @@ class SoftApCredentialsProvider(
             return
         }
         isRunning = true
+        runStartedAt = System.currentTimeMillis()
+        triedAutoEnable = false
+        reportedConfigUnreadable = false
+        reportedBudgetExhausted = false
         if (!isReceiverRegistered) {
             try {
                 // A system broadcast, so EXPORTED: NOT_EXPORTED silently never fires on API 34+.
@@ -132,6 +176,9 @@ class SoftApCredentialsProvider(
         resolveJob?.cancel()
         resolveJob = null
         autoEnabled = false
+        triedAutoEnable = false
+        reportedConfigUnreadable = false
+        reportedBudgetExhausted = false
         if (isReceiverRegistered) {
             // Reset even if unregister throws: a flag set in only one direction is how a
             // long-lived manager ends up unable to re-arm.
@@ -140,42 +187,101 @@ class SoftApCredentialsProvider(
         }
     }
 
+    /**
+     * The one failure on this route the user can actually fix, so it is worth interrupting them
+     * for: without it the whole symptom is a phone that connects over Bluetooth and then does
+     * nothing, with the reason only in a log they have no reason to read.
+     *
+     * Forced past the toast preference, because a silent dead end is worse than an unwanted toast.
+     * Posted to the main thread rather than switched to it with withContext: the resolve loop is
+     * cancelled by [refresh] and by [stop], and a suspending hop would let that cancellation
+     * swallow the message after the once-per-run latch had already been set.
+     */
+    private fun showConfigUnreadableToast() {
+        Handler(Looper.getMainLooper()).post {
+            ToastUtils.showToast(
+                context,
+                R.string.hotspot_config_unreadable_toast,
+                Toast.LENGTH_LONG,
+                force = true
+            )
+        }
+    }
+
     private fun beginResolve() {
         resolveJob?.cancel()
         reportedNoInterface = false
         resolveJob = scope.launch(Dispatchers.IO + CoroutineName("SoftApCredentials-Resolve")) {
             val deadline = System.currentTimeMillis() + RESOLVE_BUDGET_MS
-            var triedAutoEnable = false
-            val startedAt = System.currentTimeMillis()
 
             while (isActive && isRunning && System.currentTimeMillis() < deadline) {
                 val chosen = pickApInterface()
-                if (chosen != null && publish(chosen)) return@launch
+                val apName = chosen?.iface?.name ?: "the access point"
+                when (if (chosen == null) SoftApCredentialsAttempt.NO_AP_YET else publish(chosen)) {
+                    SoftApCredentialsAttempt.PUBLISHED -> return@launch
 
-                // Reaching here means nothing was published, whether because no interface looked
-                // like an access point or because the one that did turned out not to be running.
-                // Both are "there is no hotspot yet", which is what auto-enable is for.
-                val waited = System.currentTimeMillis() - startedAt
-                if (!triedAutoEnable && waited >= AUTO_ENABLE_AFTER_MS && settings.autoEnableHotspot) {
-                    triedAutoEnable = true
-                    AppLog.i("SoftApCredentials: No access point after ${waited / 1000}s — trying to switch this device's hotspot on.")
-                    // Best effort; most unrooted units lack the permission. Keep polling anyway,
-                    // since the user may switch it on by hand.
-                    autoEnabled = HotspotManager.setHotspotEnabled(context, true)
+                    SoftApCredentialsAttempt.CONFIG_UNREADABLE -> {
+                        // Waiting cannot help and the budget would be spent in silence, so stop and
+                        // say the one thing that does. Observed on a unit whose hotspot was up and
+                        // found the whole time: the resolve loop read "could not read its name" as
+                        // "there is no hotspot", switched on an access point that was already on,
+                        // and repeated the same line once a second until it gave up.
+                        if (!reportedConfigUnreadable) {
+                            reportedConfigUnreadable = true
+                            AppLog.e(
+                                "SoftApCredentials: The access point on $apName is up, but this " +
+                                    "device will not let apps read its name, so there is nothing to hand the " +
+                                    "phone. Waiting will not change that. Set 'Hotspot name (manual)' and " +
+                                    "'Hotspot password (manual)' in Settings to this device's own hotspot name " +
+                                    "and password, then connect again."
+                            )
+                            showConfigUnreadableToast()
+                        }
+                        onInvalidated?.invoke()
+                        return@launch
+                    }
+
+                    SoftApCredentialsAttempt.NO_AP_YET -> {
+                        // Nothing on air yet, which is exactly what auto-enable is for. Reached only
+                        // here, so an access point that is up but unreadable never triggers it.
+                        val waited = System.currentTimeMillis() - runStartedAt
+                        reportBudgetExhaustedOnce(waited)
+                        if (!triedAutoEnable && waited >= AUTO_ENABLE_AFTER_MS && settings.autoEnableHotspot) {
+                            triedAutoEnable = true
+                            AppLog.i("SoftApCredentials: No access point after ${waited / 1000}s — trying to switch this device's hotspot on.")
+                            // Best effort; most unrooted units lack the permission. Keep polling
+                            // anyway, since the user may switch it on by hand.
+                            autoEnabled = HotspotManager.setHotspotEnabled(context, true)
+                        }
+                    }
                 }
                 delay(POLL_INTERVAL_MS)
             }
 
             if (isActive && isRunning) {
-                AppLog.e(
-                    "SoftApCredentials: No usable access point after ${RESOLVE_BUDGET_MS / 1000}s. " +
-                        "Turn this device's hotspot on before connecting — 5 GHz is strongly " +
-                        "recommended, Android Auto video is poor over 2.4 GHz — or switch the " +
-                        "Android Auto network transport back to WiFi Direct."
-                )
+                reportBudgetExhaustedOnce(System.currentTimeMillis() - runStartedAt, force = true)
                 onInvalidated?.invoke()
             }
         }
+    }
+
+    /**
+     * Says once per run that this has been going on too long to be a hotspot still coming up.
+     *
+     * Reported rather than acted on: the polling continues, because the user switching the hotspot
+     * on by hand is a real recovery and the only one left on a device where auto-enable cannot. What
+     * this replaces is silence — the old message was tied to a deadline [beginResolve] restamped on
+     * every [refresh], so on the path that needed it most it never printed at all.
+     */
+    private fun reportBudgetExhaustedOnce(waited: Long, force: Boolean = false) {
+        if (reportedBudgetExhausted || (!force && waited < RESOLVE_BUDGET_MS)) return
+        reportedBudgetExhausted = true
+        AppLog.e(
+            "SoftApCredentials: No usable access point after ${waited / 1000}s. " +
+                "Turn this device's hotspot on before connecting — 5 GHz is strongly " +
+                "recommended, Android Auto video is poor over 2.4 GHz — or switch the " +
+                "Android Auto network transport back to WiFi Direct."
+        )
     }
 
     /** The interface we settled on, and whether the user named it rather than us guessing. */
@@ -251,26 +357,25 @@ class SoftApCredentialsProvider(
         return ChosenInterface(picked, namedByUser = false)
     }
 
-    /** Resolves the rest of the credentials for [iface] and hands them over. True if it worked. */
-    private fun publish(chosen: ChosenInterface): Boolean {
+    /** Resolves the rest of the credentials for [iface] and hands them over. */
+    private fun publish(chosen: ChosenInterface): SoftApCredentialsAttempt {
         val iface = chosen.iface
-        val ip = iface.siteLocalIpv4 ?: return false
+        val ip = iface.siteLocalIpv4 ?: return SoftApCredentialsAttempt.NO_AP_YET
 
         // User's override first, then the system's own configuration: getSoftApConfiguration() is
-        // reflection over a non-public API and can simply refuse on a locked-down device.
+        // reflection over a non-public API and can simply refuse on a locked-down device. What the
+        // two of them add up to is SoftApCredentialsPolicy's question, not this method's — the
+        // device it matters on is not one we can test against, so the rule lives where a test can
+        // reach it.
         val manualSsid = settings.hotspotSsid
-        val systemConfig = if (manualSsid.isEmpty()) HotspotConfigReader.getSystemHotspotConfig(context) else null
-        val ssid = manualSsid.ifEmpty { systemConfig?.first.orEmpty() }
-        val psk = settings.hotspotPassword.ifEmpty { systemConfig?.second.orEmpty() }
+        val systemConfig = if (manualSsid.isEmpty()) {
+            HotspotConfigReader.getSystemHotspotConfig(context)?.let { SoftApCredentials(it.first, it.second) }
+        } else null
 
-        if (ssid.isEmpty()) {
-            AppLog.w(
-                "SoftApCredentials: Found an access point on ${iface.name} ($ip) but could not read " +
-                    "its name. This device does not let apps read the hotspot configuration — set " +
-                    "the name and password by hand in the Android Auto settings."
-            )
-            return false
-        }
+        val attempt = SoftApCredentialsPolicy.decide(manualSsid, settings.hotspotPassword, systemConfig, ip)
+        if (attempt != SoftApCredentialsAttempt.PUBLISHED) return attempt
+        val (ssid, psk) = SoftApCredentialsPolicy.resolve(manualSsid, settings.hotspotPassword, systemConfig)
+
         if (psk.isEmpty()) {
             AppLog.w("SoftApCredentials: No passphrase for '$ssid'. An open network will be refused by the phone; set one by hand if this fails.")
         }
@@ -283,7 +388,7 @@ class SoftApCredentialsProvider(
                     "like this. Not handing the phone a network that is not on air. Switch the " +
                     "hotspot on, or name the interface by hand if you know it is up."
             )
-            return false
+            return SoftApCredentialsAttempt.NO_AP_YET
         }
         if (apState == SoftApState.UNKNOWN) {
             AppLog.i("SoftApCredentials: This device does not let apps read the hotspot state; proceeding without confirming the access point is up.")
@@ -301,7 +406,7 @@ class SoftApCredentialsProvider(
 
         AppLog.i("SoftApCredentials: SUCCESS - Providing credentials from ${iface.name}: SSID=$ssid, IP=$ip, BSSID=${bssid.ifEmpty { "<none>" }}")
         onCredentialsReady?.invoke(ssid, psk, ip, bssid)
-        return true
+        return SoftApCredentialsAttempt.PUBLISHED
     }
 
     private fun hardwareAddressOf(name: String): String? = try {

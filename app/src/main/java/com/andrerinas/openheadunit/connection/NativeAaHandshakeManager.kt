@@ -54,6 +54,9 @@ class NativeAaHandshakeManager(
          *  a handshake. P2P group creation is the slow case. */
         private const val CREDENTIALS_WAIT_MS = 60_000L
 
+        /** How long to wait for the AAP TCP port to be bound before giving up on a handshake. */
+        private const val PORT_WAIT_MS = 3_000L
+
         /** Which of [allServiceNames] are secondary Bluetooth radios, i.e. not [primaryServiceName]
          *  (dual-Bluetooth-radio head units). Pure and unit-testable: identity is by system
          *  service name, not MAC address, since BluetoothAdapter.getAddress() returns the fixed
@@ -67,7 +70,36 @@ class NativeAaHandshakeManager(
             return allServiceNames.filter { it != primary }.distinct()
         }
 
+        /**
+         * The one-line explanation to log and show when this unit's Bluetooth is an external
+         * module, or null when it isn't. Kept here so the handshake manager and the settings
+         * compatibility probe say exactly the same thing.
+         */
+        fun externalBtDiagnostic(): String? = BluetoothHelper.externalBtEvidence?.let { evidence ->
+            "NativeAA: external Bluetooth module detected ($evidence) — the phone is bonded to " +
+                "the head unit's own Bluetooth chip, not the one Android exposes, so nothing we " +
+                "write over RFCOMM reaches it. Bluetooth-based wireless cannot work on this unit; " +
+                "use USB, or one of the WiFi modes that does not need the Bluetooth handshake."
+        }
+
+        /**
+         * Whether to run the Bluetooth route anyway on a unit [externalBtDiagnostic] flagged.
+         *
+         * A manually configured secondary Bluetooth service is the user telling us which radio to
+         * use, having found one automatic enumeration missed. That is exactly the case the
+         * detection cannot see, so it must not be the one case we refuse to try — the diagnostic
+         * still goes in the log either way.
+         */
+        fun externalBtOverridden(context: Context): Boolean =
+            com.andrerinas.openheadunit.App.provide(context)
+                .settings.manualSecondaryBluetoothServiceName.isNotEmpty()
+
         fun checkCompatibility(context: Context): Boolean {
+            externalBtDiagnostic()?.let {
+                AppLog.w(it)
+                if (!externalBtOverridden(context)) return false
+                AppLog.w("NativeAA: continuing anyway — a secondary Bluetooth service is configured manually.")
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) 
                     != PackageManager.PERMISSION_GRANTED) {
@@ -156,6 +188,16 @@ class NativeAaHandshakeManager(
     // backoff, so a phone retrying every ~12 s does not repeat the long explanation each time.
     @Volatile private var loggedHandshakeBackoff = false
 
+    /** Polls until the AAP TCP port is bound, or [timeoutMs] passes. */
+    private suspend fun awaitWirelessServerListening(timeoutMs: Long): Boolean {
+        val deadline = SystemClock.elapsedRealtime() + timeoutMs
+        while (true) {
+            if (context.isWirelessServerListening()) return true
+            if (SystemClock.elapsedRealtime() >= deadline) return false
+            delay(250)
+        }
+    }
+
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
      */
@@ -209,6 +251,17 @@ class NativeAaHandshakeManager(
     @SuppressLint("MissingPermission")
     fun start() {
         if (isRunning) return
+
+        // Leave isRunning false, like the "adapter disabled" case below: isActive() callers must
+        // see this as genuinely stopped. Nothing here is retryable, but a listener that was never
+        // opened must not be reported as up.
+        externalBtDiagnostic()?.let {
+            if (!externalBtOverridden(context)) {
+                AppLog.e(it)
+                return
+            }
+            AppLog.w("$it\nNativeAA: starting anyway — a secondary Bluetooth service is configured manually.")
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) 
@@ -557,6 +610,19 @@ class NativeAaHandshakeManager(
                         AppLog.i("NativeAA: USB/other session became active mid-poke. Stopping poke loop.")
                         break
                     }
+
+                    // Pre-flight: Ensure WiFi credentials (SSID/IP) are ready before connecting RFCOMM to phone.
+                    // If RFCOMM connects before WiFi credentials exist, the phone times out after 10s waiting for WifiStartRequest.
+                    if (currentSsid.isNullOrEmpty() || currentIp.isNullOrEmpty()) {
+                        AppLog.i("NativeAA: WiFi credentials not ready before poke. Requesting WiFi refresh...")
+                        (context as? AapService)?.triggerWifiDirectRefresh()
+                        var waitedMs = 0
+                        while ((currentSsid.isNullOrEmpty() || currentIp.isNullOrEmpty()) && waitedMs < 4000 && isRunning && isActive) {
+                            delay(200)
+                            waitedMs += 200
+                        }
+                    }
+
                     AppLog.i("NativeAA: Attempting active poke to device: ${device.name} (${device.address})...")
                     pokeDevice(device, holdMs = 15000)
                 }
@@ -610,6 +676,18 @@ class NativeAaHandshakeManager(
             
             pokeJob?.cancel()
             pokeJob = scope.launch(Dispatchers.IO + CoroutineName("NativeAa-ManualWakeup")) {
+                // Pre-flight: Ensure WiFi credentials (SSID/IP) are ready before connecting RFCOMM to phone.
+                if (currentSsid.isNullOrEmpty() || currentIp.isNullOrEmpty()) {
+                    AppLog.i("NativeAA: WiFi credentials not ready before manual poke. Requesting WiFi refresh...")
+                    (context as? AapService)?.triggerWifiDirectRefresh()
+                    var waitedMs = 0
+                    while ((currentSsid.isNullOrEmpty() || currentIp.isNullOrEmpty()) && waitedMs < 4000 && isRunning && isActive) {
+                        delay(200)
+                        waitedMs += 200
+                    }
+                    AppLog.i("NativeAA: Pre-poke credential wait completed. SSID=$currentSsid, IP=$currentIp (waited ${waitedMs}ms)")
+                }
+
                 AppLog.i("NativeAA: Attempting manual poke to ${device.name}...")
                 pokeDevice(device, holdMs = 20000)
                 AppLog.i("NativeAA: Manual poke to ${device.name} finished.")
@@ -1000,6 +1078,19 @@ class NativeAaHandshakeManager(
                         bssidOmitted = true
                     }
                 }
+            }
+
+            // The port the credentials point at must be bound before they go out. The phone's next
+            // move after Type 3 is to join the network and dial it; if nothing is listening it
+            // gets a refusal, and the log reads as a perfect handshake followed by nothing at all.
+            // Short wait rather than none: start() binds the port at service start, so being here
+            // with it unbound means a genuine failure, not a race — but a session torn down and
+            // rebuilt a moment ago can still be releasing it.
+            if (!awaitWirelessServerListening(PORT_WAIT_MS)) {
+                AppLog.e("NativeAA: Handshake aborted — nothing is listening on port 5288 after ${PORT_WAIT_MS / 1000}s, so the phone would join the network and find no head unit. Restart the app if this persists.")
+                abortedLocally = true
+                feed(WppEvent.CredentialsUnavailable)
+                return@withContext
             }
 
             AppLog.i("NativeAA: Starting Handshake Exchange:")

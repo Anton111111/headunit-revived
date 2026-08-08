@@ -13,7 +13,9 @@ import java.lang.reflect.Method
 import java.net.Inet4Address
 import java.net.NetworkInterface
 import com.andrerinas.openheadunit.utils.SoftApConfigCompat
+import com.andrerinas.openheadunit.aap.ApBand
 import com.andrerinas.openheadunit.aap.ApInterfaceCandidate
+import com.andrerinas.openheadunit.aap.SoftApBandPolicy
 import com.andrerinas.openheadunit.aap.SoftApNetworkPolicy
 import com.andrerinas.openheadunit.aap.SoftApState
 
@@ -27,20 +29,98 @@ object HotspotManager {
     /** How long to give the framework to actually bring an access point up. */
     private const val AP_STATE_TIMEOUT_MS = 6_000L
 
+    /** How long to leave the access point down so a joined client notices it has gone. */
+    private const val RESTART_SETTLE_MS = 2_000L
+
     /** TetheringManager.TETHERING_WIFI. */
     private const val TETHERING_WIFI = 0
 
     private var cachedCallbackClass: Class<*>? = null
 
+    /**
+     * Whether a start is already running. Bringing an access point up takes up to
+     * [AP_STATE_TIMEOUT_MS] per band, and more than one caller asks for it: the credentials
+     * provider auto-enables, and every "still waiting for credentials" refresh can ask again. Two
+     * overlapping sweeps race each other's bands and end with a log claiming the access point came
+     * up twice, on both of them.
+     */
+    @Volatile private var startInFlight = false
+
+    /**
+     * Takes the access point down and brings it straight back up.
+     *
+     * Removing the network is the only way this app can put a phone off it — nothing in the public
+     * API disconnects a client from your own access point, and the one thing that comes close,
+     * `SoftApConfiguration`'s blocked-client list, needs the same `setSoftApConfiguration()` call
+     * that head units routinely refuse outright. So the network has to go; it does not have to stay
+     * gone. Bringing it back here costs seconds nobody is waiting through, where leaving it down
+     * charges the same seconds to the next connection, with the phone waiting.
+     *
+     * Putting it back is the part that is not free, and it is asked for **once** — measured rather
+     * than assumed. Tearing an access point down and asking for it again is the sequence some
+     * drivers handle worst: hostapd begins its channel scan before the interface is back, the scan
+     * returns `ENODEV`, and it aborts instead of starting. Asking again at this layer does not beat
+     * that. Across three runs, **nine** asks spaced ~12.5 s apart failed with that same signature
+     * and not one recovered; the single bring-up that did succeed came from a start posted **127 ms**
+     * behind a failed one — 270 ms in an earlier capture — landing in a window open for a few hundred
+     * milliseconds and shut long before this layer can ask again. Where the hardware handles a
+     * stop/start cleanly one ask is all that was ever needed; where it does not, the access point
+     * stays down and the next connection's auto-enable brings it back, which is the cost this
+     * restart exists to avoid, paid only on hardware that will not cooperate — rather than that same
+     * cost plus half a minute of asking that never works.
+     *
+     * There is also a window this cannot close. Between the two calls the access point is genuinely
+     * down, and a process killed outright in that window — `am force-stop`, or the system reclaiming
+     * the app — runs none of the code below, so the hotspot stays off. Measured, and bounded rather
+     * than fixed: the next connection's `SoftApCredentialsProvider` auto-enable switches it back on,
+     * which is the same cost the restart exists to avoid paying, not a permanent break. Shrinking
+     * [RESTART_SETTLE_MS] narrows the window; nothing removes it.
+     */
+    fun restart(context: Context): Boolean {
+        AppLog.i("HotspotManager: Restarting the hotspot so any joined client is put off it.")
+        setHotspotEnabled(context, false)
+        try {
+            Thread.sleep(RESTART_SETTLE_MS)
+        } catch (e: InterruptedException) {
+            // Interrupted with the access point already down, which is the one state this method
+            // must not leave behind: switching one back on is best effort, and on a unit without
+            // WRITE_SETTINGS nothing else can. Put it back before unwinding, then restore the flag
+            // so whatever cancelled us still sees it.
+            AppLog.w("HotspotManager: Interrupted while the hotspot was down; bringing it back before giving up.")
+            val restored = setHotspotEnabled(context, true)
+            Thread.currentThread().interrupt()
+            return restored
+        }
+
+        if (setHotspotEnabled(context, true)) return true
+
+        AppLog.e("HotspotManager: The hotspot was taken down to put the phone off the network and would not come back up. It is off now, and this app cannot force it: switch it on in system settings, or just connect again — the app switches it back on itself at the start of a connection.")
+        return false
+    }
+
     fun setHotspotEnabled(context: Context, enabled: Boolean): Boolean {
         AppLog.i("HotspotManager: Setting hotspot enabled=$enabled (API ${Build.VERSION.SDK_INT}, canWriteSettings=${AppPermissions.isWriteSettingsGranted(context)})")
+
+        // Disabling has no band to choose and nothing to confirm afterwards, and never collides
+        // with a start: only one caller ever asks for it.
+        if (!enabled) return startOnBand(context, enabled = false, band = ApBand.BAND_5GHZ).attempted
+
+        // Claimed before anything slow runs, or the WiFi-disable sleep below is long enough for a
+        // second caller to walk straight past the check.
+        synchronized(this) {
+            if (startInFlight) {
+                AppLog.i("HotspotManager: A hotspot start is already running; letting it finish rather than starting a second one.")
+                return isApUp(context)
+            }
+            startInFlight = true
+        }
 
         // On Android 8+, WiFi must be disabled before tethering can start. Ask, then say what
         // actually happened: setWifiEnabled() is a no-op for apps targeting API 29+ and this app
         // targets well past that, so on most devices the request is silently ignored and the
         // framework drops the station itself when it needs the radio. Announcing the attempt as if
         // it worked is how the radio state ends up being read as ours.
-        if (enabled) {
+        try {
             try {
                 val wm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
                 if (wm.isWifiEnabled) {
@@ -56,16 +136,82 @@ object HotspotManager {
             } catch (e: Exception) {
                 AppLog.w("HotspotManager: Failed to disable WiFi: ${e.message}")
             }
+
+            // 5 GHz first, 2.4 GHz only if the radio will not host an access point on it. See
+            // SoftApBandPolicy for why the order is not a preference.
+            var attemptedAny = false
+            for ((index, band) in SoftApBandPolicy.attemptOrder().withIndex()) {
+                if (index > 0) {
+                    AppLog.w("HotspotManager: no access point on ${SoftApBandPolicy.describe(SoftApBandPolicy.attemptOrder()[index - 1])}; retrying on ${SoftApBandPolicy.describe(band)}. Android Auto is known to drop within seconds on 2.4 GHz — if the projection dies shortly after connecting, this line is why.")
+                }
+                val outcome = startOnBand(context, enabled = true, band = band)
+                attemptedAny = attemptedAny || outcome.attempted
+                if (outcome.up) {
+                    AppLog.i(describeApUp(outcome.configured, band))
+                    return true
+                }
+                if (!outcome.configured) {
+                    // The band never reached the framework, so the next one would post the same
+                    // request against the same stored configuration and start the same access
+                    // point again. Measured on a unit that refuses setSoftApConfiguration(): three
+                    // start requests, all `channels {3=0}`, two of them tearing down an access
+                    // point the previous one had just brought up.
+                    AppLog.w("HotspotManager: This device would not take a band request, so trying ${SoftApBandPolicy.describe(SoftApBandPolicy.attemptOrder().last())} would start the same access point again. Leaving the band to the device.")
+                    break
+                }
+            }
+
+            // A request the framework accepted late still brings an access point up, after the band
+            // it belonged to has been written off. Look once more before reporting failure: saying
+            // no here is what makes a caller start a second, overlapping sweep.
+            if (attemptedAny && awaitApUp(context)) {
+                AppLog.i("HotspotManager: An access point came up after its band's window had expired; taking it. Which band it chose is not something this app can read.")
+                return true
+            }
+
+            if (attemptedAny) {
+                AppLog.w("HotspotManager: Every start path was tried on every band and no access point came up within ${AP_STATE_TIMEOUT_MS / 1000}s each. On a non-privileged install this usually cannot be done from an app — switch the hotspot on in system settings instead.")
+            } else {
+                AppLog.w("HotspotManager: All hotspot attempts failed.")
+            }
+            warnIfRadioLeftDown(context)
+            return false
+        } finally {
+            startInFlight = false
+        }
+    }
+
+    /**
+     * What one band's worth of start attempts achieved: whether anything was tried, whether an
+     * access point actually came up, and whether the band we asked for ever reached the framework.
+     */
+    private data class BandOutcome(val attempted: Boolean, val up: Boolean, val configured: Boolean)
+
+    /**
+     * What to say about an access point that is up, given whether the band request was accepted.
+     *
+     * Naming a band we only *asked* for is how a log ends up contradicting the radio. Measured on a
+     * unit that refuses `setSoftApConfiguration()`: this said 2.4 GHz while the access point that
+     * came up 8.7 s later was on 5745 MHz, so a reader with only the log would have concluded the
+     * exact opposite of what happened. The band is not readable from an ordinary app — `SoftApInfo`
+     * arrives on a callback that needs NETWORK_SETTINGS — so the honest line names what was
+     * requested and what became of the request, and nothing else.
+     */
+    private fun describeApUp(configured: Boolean, band: ApBand): String =
+        if (configured) {
+            "HotspotManager: Hotspot is up, and this device accepted the request for ${SoftApBandPolicy.describe(band)}."
+        } else {
+            "HotspotManager: Hotspot is up, but this device refused the request for ${SoftApBandPolicy.describe(band)} — the band is whatever it already had configured, which this app cannot read. If the projection dies seconds after connecting, check the hotspot's channel: Android Auto is known to drop on 2.4 GHz."
         }
 
+    private fun startOnBand(context: Context, enabled: Boolean, band: ApBand): BandOutcome {
         // [BUG_FIX] Must fall through, not return. enableHotspot() only calls
         // setSoftApConfiguration() — it configures an access point, it does not start one — yet
         // its `true` used to short-circuit the whole function, so on API 30+ we wrote the SSID and
         // passphrase, reported success, and ran no start path at all. The hotspot stayed off.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (SoftApConfigCompat.enableHotspot(context, enabled)) {
-                AppLog.i("HotspotManager: SoftAp configuration applied; now starting the hotspot.")
-            }
+        val configured = SoftApConfigCompat.enableHotspot(context, enabled, band)
+        if (configured) {
+            AppLog.i("HotspotManager: SoftAp configuration applied; now starting the hotspot.")
         }
         // Newer API: TetheringManager (official) before ConnectivityManager fallback
         var attempted = false
@@ -82,23 +228,15 @@ object HotspotManager {
             AppLog.w("HotspotManager: Cannot enable the hotspot without the \"Modify system settings\" permission (WRITE_SETTINGS). Grant it in the setup wizard or Settings > Permissions.")
         }
 
+        if (!enabled) return BandOutcome(attempted, up = false, configured = configured)
+
         // [BUG_FIX] Confirm the access point instead of trusting the call that asked for it. Every
         // start path here is reflection over an API whose real answer arrives later on a callback
         // we cannot construct, so `invoke()` returning tells us only that the request was posted:
         // on one head unit the framework refused it a millisecond later ("Tethering is already
         // active or in recovering") while this method reported success and logged nothing at all.
         // Only "an access point is up" is worth reporting as success.
-        if (!enabled) return attempted
-        val up = awaitApUp(context)
-        if (up) {
-            AppLog.i("HotspotManager: Hotspot is up.")
-        } else if (attempted) {
-            AppLog.w("HotspotManager: Every start path was tried and no access point came up within ${AP_STATE_TIMEOUT_MS / 1000}s. On a non-privileged install this usually cannot be done from an app — switch the hotspot on in system settings instead.")
-        } else {
-            AppLog.w("HotspotManager: All hotspot attempts failed.")
-        }
-        if (!up) warnIfRadioLeftDown(context)
-        return up
+        return BandOutcome(attempted, up = awaitApUp(context), configured = configured)
     }
 
     /**
