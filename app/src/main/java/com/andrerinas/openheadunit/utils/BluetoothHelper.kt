@@ -2,6 +2,7 @@ package com.andrerinas.openheadunit.utils
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothProfile
 import android.content.Context
 import android.os.Build
 import android.os.IBinder
@@ -89,6 +90,59 @@ object BluetoothHelper {
     /** All distinct, enabled Bluetooth adapters exposed by the system. See [getAllBluetoothAdapterHandles]. */
     fun getAllBluetoothAdapters(context: Context): List<BluetoothAdapter> =
         getAllBluetoothAdapterHandles(context).map { it.adapter }
+
+    /**
+     * `BluetoothProfile.A2DP_SINK`. Hidden from the SDK, but [BluetoothAdapter.getProfileConnectionState]
+     * takes a plain profile int and answers for it, and the sink role is the one a head unit plays:
+     * the phone is the source, we render its audio.
+     */
+    private const val PROFILE_A2DP_SINK = 11
+
+    /**
+     * Whether a Bluetooth media link to this head unit is up, in either role.
+     *
+     * Used to decide against taking system audio focus for Android Auto playback: when the phone is
+     * also our A2DP source, the sink service answers our focus grab with an AVRCP pause aimed at
+     * that same phone, which stops the stream we are trying to play. Callers treat an unknown
+     * answer as "a link may be up", so this returns true when the state cannot be read — a car
+     * radio playing over AA is an annoyance, silence is a broken app.
+     */
+    fun isA2dpMediaLinkActive(context: Context): Boolean {
+        // The configured adapter only, never getAllBluetoothAdapterHandles(): this is called on the
+        // AAP transport thread every time a track starts, and enumerating the system service list
+        // by reflection there would stall video alongside audio.
+        val adapter = try {
+            getBluetoothAdapter(context)
+        } catch (e: Exception) {
+            AppLog.w("BluetoothHelper: could not resolve an adapter for the A2DP check: ${e.message}")
+            return true
+        }
+        if (adapter == null) return false
+        // An adapter that will not say whether it is on is treated as on, same as an unreadable
+        // profile state below.
+        val enabled = try { adapter.isEnabled } catch (e: Exception) { true }
+        if (!enabled) return false
+
+        var readAnyState = false
+        for (profile in intArrayOf(BluetoothProfile.A2DP, PROFILE_A2DP_SINK)) {
+            val state = try {
+                adapter.getProfileConnectionState(profile)
+            } catch (e: Exception) {
+                // SecurityException without BLUETOOTH_CONNECT, or an adapter that rejects the
+                // hidden sink profile. Try the other one before giving up.
+                continue
+            }
+            readAnyState = true
+            if (state == BluetoothProfile.STATE_CONNECTED || state == BluetoothProfile.STATE_CONNECTING) {
+                return true
+            }
+        }
+        if (!readAnyState) {
+            AppLog.w("BluetoothHelper: the adapter would not report its A2DP state; assuming a media link is up")
+            return true
+        }
+        return false
+    }
 
     /** Resolve a single, arbitrary system service name to a BluetoothAdapterHandle, if it backs a
      *  real, enabled adapter. Used for the manual secondary-radio override in Settings, where the

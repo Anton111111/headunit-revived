@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
+import com.andrerinas.openheadunit.aap.PlaybackFocusPolicy
 import com.andrerinas.openheadunit.aap.protocol.proto.Control
 import com.andrerinas.openheadunit.app.UsbAttachedActivity
 import com.andrerinas.openheadunit.connection.UsbDeviceCompat
@@ -485,6 +486,16 @@ class Settings(private val context: Context) {
     var staticAudioFocus: Boolean
         get() = prefs.getBoolean("static-audio-focus", false)
         set(value) { prefs.edit().putBoolean("static-audio-focus", value).apply() }
+
+    // Whether AA playback takes system audio focus, so another local player (typically the car
+    // radio) pauses while it runs. AUTO skips it when a Bluetooth media link is up, because the
+    // A2DP sink answers our focus grab by pausing the phone that is feeding us. See
+    // PlaybackFocusPolicy for the whole story; ALWAYS and NEVER are the manual overrides.
+    var playbackFocusMode: PlaybackFocusPolicy.Mode
+        get() = PlaybackFocusPolicy.Mode.fromInt(
+            prefs.getInt("playback-focus-mode", PlaybackFocusPolicy.Mode.AUTO.value)
+        )
+        set(value) { prefs.edit().putInt("playback-focus-mode", value.value).apply() }
 
     var separateAudioStreams: Boolean
         get() = prefs.getBoolean("separate-audio-streams", false)
