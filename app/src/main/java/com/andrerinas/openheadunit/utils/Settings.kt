@@ -1328,6 +1328,15 @@ class Settings(private val context: Context) {
         get() = prefs.getString("hotspot-password", "")!!
         set(value) = prefs.edit().putString("hotspot-password", value).apply()
 
+    // Set once this device has failed to bring its own access point back up after the app took it
+    // down, which is the only way to find out that it cannot — no API answers the question in
+    // advance. From then on a user exit leaves the hotspot alone; see UserExitHotspotPolicy.
+    // Persisted rather than kept in memory because the answer is a property of the hardware and does
+    // not change between runs, and the price of re-learning it is somebody's hotspot each time.
+    var hotspotTeardownProvenUnsafe: Boolean
+        get() = prefs.getBoolean("hotspot-teardown-proven-unsafe", false)
+        set(value) = prefs.edit().putBoolean("hotspot-teardown-proven-unsafe", value).apply()
+
     var useLibusb: Boolean
         get() = prefs.getBoolean("use-libusb", false)
         set(value) = prefs.edit().putBoolean("use-libusb", value).apply()

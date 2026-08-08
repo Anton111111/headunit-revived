@@ -54,6 +54,9 @@ class NativeAaHandshakeManager(
          *  a handshake. P2P group creation is the slow case. */
         private const val CREDENTIALS_WAIT_MS = 60_000L
 
+        /** How long to wait for the AAP TCP port to be bound before giving up on a handshake. */
+        private const val PORT_WAIT_MS = 3_000L
+
         /** Which of [allServiceNames] are secondary Bluetooth radios, i.e. not [primaryServiceName]
          *  (dual-Bluetooth-radio head units). Pure and unit-testable: identity is by system
          *  service name, not MAC address, since BluetoothAdapter.getAddress() returns the fixed
@@ -184,6 +187,16 @@ class NativeAaHandshakeManager(
     // Whether the "not serving handshakes" warning has already been logged for the current
     // backoff, so a phone retrying every ~12 s does not repeat the long explanation each time.
     @Volatile private var loggedHandshakeBackoff = false
+
+    /** Polls until the AAP TCP port is bound, or [timeoutMs] passes. */
+    private suspend fun awaitWirelessServerListening(timeoutMs: Long): Boolean {
+        val deadline = SystemClock.elapsedRealtime() + timeoutMs
+        while (true) {
+            if (context.isWirelessServerListening()) return true
+            if (SystemClock.elapsedRealtime() >= deadline) return false
+            delay(250)
+        }
+    }
 
     /**
      * Updates the WiFi credentials that will be sent to the phone during the next handshake.
@@ -1065,6 +1078,19 @@ class NativeAaHandshakeManager(
                         bssidOmitted = true
                     }
                 }
+            }
+
+            // The port the credentials point at must be bound before they go out. The phone's next
+            // move after Type 3 is to join the network and dial it; if nothing is listening it
+            // gets a refusal, and the log reads as a perfect handshake followed by nothing at all.
+            // Short wait rather than none: start() binds the port at service start, so being here
+            // with it unbound means a genuine failure, not a race — but a session torn down and
+            // rebuilt a moment ago can still be releasing it.
+            if (!awaitWirelessServerListening(PORT_WAIT_MS)) {
+                AppLog.e("NativeAA: Handshake aborted — nothing is listening on port 5288 after ${PORT_WAIT_MS / 1000}s, so the phone would join the network and find no head unit. Restart the app if this persists.")
+                abortedLocally = true
+                feed(WppEvent.CredentialsUnavailable)
+                return@withContext
             }
 
             AppLog.i("NativeAA: Starting Handshake Exchange:")

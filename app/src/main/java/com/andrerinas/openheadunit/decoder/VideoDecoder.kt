@@ -187,6 +187,7 @@ class VideoDecoder(private val settings: Settings) {
     private var frameCount = 0
     private var lastFpsLogTime = 0L
     private var loggedFirstSoftwareFrame = false
+    private var loggedFirstHardwareFrame = false
     @Volatile var onFirstFrameListener: (() -> Unit)? = null
     @Volatile var lastFrameRenderedMs: Long = 0L
     private var syntheticPtsUs = 0L
@@ -351,6 +352,7 @@ class VideoDecoder(private val settings: Settings) {
             lastFrameRenderedMs = 0L
             syntheticPtsUs = 0L
             loggedFirstSoftwareFrame = false
+            loggedFirstHardwareFrame = false
             // The FPS window and the throughput counters must not straddle a restart, or the
             // first sample afterwards is averaged over the whole teardown and reads near zero.
             frameCount = 0
@@ -965,6 +967,14 @@ class VideoDecoder(private val settings: Settings) {
                     lastOutputMs = lastFrameRenderedMs
                     framesRenderedThisSession++
                     consecutiveErrors = 0
+                    // The one landmark that says video actually reached the screen on the path
+                    // almost every unit runs. Driven by its own flag rather than the listener
+                    // below, which only exists while the projection activity is up — the sessions
+                    // worth timing are exactly the ones where it might not be.
+                    if (!loggedFirstHardwareFrame) {
+                        loggedFirstHardwareFrame = true
+                        AppLog.i("First frame rendered (hardware decode)")
+                    }
                     onFirstFrameListener?.let { it(); onFirstFrameListener = null }
 
                     frameCount++
