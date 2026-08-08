@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Build
 import android.os.IBinder
 import com.andrerinas.openheadunit.App
+import com.andrerinas.openheadunit.aap.ExternalBtPolicy
 import java.lang.reflect.Constructor
 
 object BluetoothHelper {
@@ -189,6 +190,22 @@ object BluetoothHelper {
         }
 
         return null
+    }
+
+    /**
+     * Evidence that this head unit's Bluetooth is an external module on a serial link rather than
+     * the radio behind `android.bluetooth`, or null when it is a normal built-in radio. See
+     * [ExternalBtPolicy] for what the evidence means and why it decides whether Bluetooth-based
+     * wireless can work here at all.
+     *
+     * Cached: the answer is a property of the hardware and cannot change within a process, and
+     * this is consulted on every handshake start.
+     */
+    val externalBtEvidence: String? by lazy {
+        ExternalBtPolicy.detect(
+            nodeExists = { path -> try { java.io.File(path).exists() } catch (e: Exception) { false } },
+            property = { key -> SystemProperties.get(key, "") }
+        )
     }
 
     private fun isValidMacAddress(mac: String): Boolean {

@@ -1519,19 +1519,29 @@ class AapService : Service(), UsbReceiver.Listener {
 
             // Mode 3: Native AA Wireless
             if (mode == 3) {
-                if (nativeTransport() == NativeTransport.HOTSPOT) {
-                    // Read this device's own access point instead of hosting a P2P group. The AP
-                    // itself is the user's to switch on; the provider only resolves and watches it.
-                    AppLog.i("AapService: Native AA on the head unit hotspot — resolving access point credentials.")
-                    softApCredentialsProvider?.start()
-                } else {
-                    // Start WiFi Direct as a "quiet host" (P2P Group for phone to join)
-                    // We let WifiDirectManager handle the WiFi state (enabling if needed)
-                    wifiDirectManager?.startNativeAaQuietHost()
-                }
+                // Skip the whole route, not just the handshake, when the Bluetooth this unit's
+                // phone is bonded to isn't reachable from here: with no Bluetooth channel there is
+                // nobody to hand the credentials to, so hosting a P2P group or holding the hotspot
+                // open would only churn the WiFi stack for nothing.
+                val externalBt = NativeAaHandshakeManager.externalBtDiagnostic()
+                if (externalBt != null) AppLog.e(externalBt)
+                val blockedByExternalBt =
+                    externalBt != null && !NativeAaHandshakeManager.externalBtOverridden(this)
+                if (!blockedByExternalBt) {
+                    if (nativeTransport() == NativeTransport.HOTSPOT) {
+                        // Read this device's own access point instead of hosting a P2P group. The AP
+                        // itself is the user's to switch on; the provider only resolves and watches it.
+                        AppLog.i("AapService: Native AA on the head unit hotspot — resolving access point credentials.")
+                        softApCredentialsProvider?.start()
+                    } else {
+                        // Start WiFi Direct as a "quiet host" (P2P Group for phone to join)
+                        // We let WifiDirectManager handle the WiFi state (enabling if needed)
+                        wifiDirectManager?.startNativeAaQuietHost()
+                    }
 
-                // Start the official Bluetooth handshake servers
-                nativeAaHandshakeManager?.start()
+                    // Start the official Bluetooth handshake servers
+                    nativeAaHandshakeManager?.start()
+                }
             }
         }
 

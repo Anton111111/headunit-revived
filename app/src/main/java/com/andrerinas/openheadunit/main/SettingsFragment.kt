@@ -3188,6 +3188,27 @@ class SettingsFragment : Fragment() {
     }
 
     private fun handleNativeAaSelection() {
+        // An external Bluetooth module is not a "might not work" — the phone is bonded to a chip
+        // this app cannot write to, so say so plainly and name the evidence instead of offering
+        // the generic "try it anyway".
+        val externalBtEvidence = BluetoothHelper.externalBtEvidence
+        if (externalBtEvidence != null) {
+            MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
+                .setTitle(R.string.external_bt_nativeaa)
+                .setMessage(getString(R.string.external_bt_nativeaa_desc, externalBtEvidence))
+                // Selecting the mode is still allowed: on a unit with a second, reachable radio
+                // the user can name it under the secondary-Bluetooth setting, and Native mode
+                // will then run. Without that it stays switched off, and the log says why.
+                .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                    pendingWifiConnectionMode = 3
+                    checkChanges()
+                    updateSettingsList()
+                    dialog.dismiss()
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
+            return
+        }
         if (NativeAaHandshakeManager.checkCompatibility(requireContext())) {
             MaterialAlertDialogBuilder(requireContext(), R.style.DarkAlertDialog)
                 .setTitle(R.string.supported_nativeaa)

@@ -67,7 +67,36 @@ class NativeAaHandshakeManager(
             return allServiceNames.filter { it != primary }.distinct()
         }
 
+        /**
+         * The one-line explanation to log and show when this unit's Bluetooth is an external
+         * module, or null when it isn't. Kept here so the handshake manager and the settings
+         * compatibility probe say exactly the same thing.
+         */
+        fun externalBtDiagnostic(): String? = BluetoothHelper.externalBtEvidence?.let { evidence ->
+            "NativeAA: external Bluetooth module detected ($evidence) — the phone is bonded to " +
+                "the head unit's own Bluetooth chip, not the one Android exposes, so nothing we " +
+                "write over RFCOMM reaches it. Bluetooth-based wireless cannot work on this unit; " +
+                "use USB, or one of the WiFi modes that does not need the Bluetooth handshake."
+        }
+
+        /**
+         * Whether to run the Bluetooth route anyway on a unit [externalBtDiagnostic] flagged.
+         *
+         * A manually configured secondary Bluetooth service is the user telling us which radio to
+         * use, having found one automatic enumeration missed. That is exactly the case the
+         * detection cannot see, so it must not be the one case we refuse to try — the diagnostic
+         * still goes in the log either way.
+         */
+        fun externalBtOverridden(context: Context): Boolean =
+            com.andrerinas.openheadunit.App.provide(context)
+                .settings.manualSecondaryBluetoothServiceName.isNotEmpty()
+
         fun checkCompatibility(context: Context): Boolean {
+            externalBtDiagnostic()?.let {
+                AppLog.w(it)
+                if (!externalBtOverridden(context)) return false
+                AppLog.w("NativeAA: continuing anyway — a secondary Bluetooth service is configured manually.")
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) 
                     != PackageManager.PERMISSION_GRANTED) {
@@ -209,6 +238,17 @@ class NativeAaHandshakeManager(
     @SuppressLint("MissingPermission")
     fun start() {
         if (isRunning) return
+
+        // Leave isRunning false, like the "adapter disabled" case below: isActive() callers must
+        // see this as genuinely stopped. Nothing here is retryable, but a listener that was never
+        // opened must not be reported as up.
+        externalBtDiagnostic()?.let {
+            if (!externalBtOverridden(context)) {
+                AppLog.e(it)
+                return
+            }
+            AppLog.w("$it\nNativeAA: starting anyway — a secondary Bluetooth service is configured manually.")
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) 
