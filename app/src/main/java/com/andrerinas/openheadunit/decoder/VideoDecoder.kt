@@ -166,16 +166,24 @@ class VideoDecoder(private val settings: Settings) {
     private var lastSyncStallSuppressedLogMs = 0L
 
     // Throughput counters for the periodic telemetry tick - see THROUGHPUT_LOG_INTERVAL_MS.
-    // Session-monotonic so each has exactly one writer: framesFed/framesDropped from decode()
-    // (under this object's monitor), framesRendered from the output thread. The output thread
-    // reads all three and keeps its own last-logged snapshots to derive per-interval deltas.
+    // Session-monotonic so each has exactly one writer: framesFed/framesDropped/inputWaitMs from
+    // decode() (under this object's monitor), framesRendered from the output thread. The output
+    // thread reads them all and keeps its own last-logged snapshots to derive per-interval deltas.
     @Volatile private var framesFed = 0L
     @Volatile private var framesDropped = 0L
     @Volatile private var framesRendered = 0L
+    // Milliseconds spent waiting for a free input buffer. AapVideo.process() runs on the transport's
+    // Poll thread, which also carries audio and control, so this wait is time those cannot be
+    // dispatched - and it is otherwise invisible, since a frame that waits some of its attempts logs
+    // nothing and "Input buffer full" only fires when every attempt is exhausted. Near zero while
+    // the frame rate is low means the frames were never sent; high means the decoder is the
+    // bottleneck and the attempt budget is being paid for in audio latency.
+    @Volatile private var inputWaitMs = 0L
     private var lastThroughputLogMs = 0L
     private var lastLoggedFramesFed = 0L
     private var lastLoggedFramesDropped = 0L
     private var lastLoggedFramesRendered = 0L
+    private var lastLoggedInputWaitMs = 0L
 
     // Reuse buffers for older API levels to minimize GC pressure
     private var inputBuffers: Array<ByteBuffer>? = null
@@ -189,7 +197,6 @@ class VideoDecoder(private val settings: Settings) {
     private var loggedFirstSoftwareFrame = false
     @Volatile var onFirstFrameListener: (() -> Unit)? = null
     @Volatile var lastFrameRenderedMs: Long = 0L
-    private var syntheticPtsUs = 0L
 
     // Frames rendered since whoever owns the session last zeroed this. Deliberately *not* cleared
     // by stop(), which is what separates it from framesRendered above: that one is a throughput
@@ -292,7 +299,7 @@ class VideoDecoder(private val settings: Settings) {
 
             AppLog.i("New surface set: $surface")
             if (codec != null || softwareHevcDecoder != null) {
-                stop("New surface")
+                stop(DecoderStopPolicy.REASON_NEW_SURFACE)
             }
             mSurface = surface
             lastFrameRenderedMs = 0L
@@ -334,22 +341,28 @@ class VideoDecoder(private val settings: Settings) {
             legacyFrameBuffer = null
             codecBufferInfo = null
             codecConfigured = false
-            if (!reason.startsWith("restart")) {
+            if (!DecoderStopPolicy.isDecoderRestart(reason)) {
                 vps = null
                 sps = null
                 pps = null
                 mWidth = 0
                 mHeight = 0
-                codecTypePinned = false
                 restartsSinceLastFrame = 0
                 codecFallbackUsed = false
                 decoderPermanentlyFailed = false
                 syncStallRestartCount = 0
                 lastSyncStallRestartMs = 0L
             }
+            // The pinned codec type describes the stream, not the decoder instance, so it has to
+            // outlive a surface teardown: the phone keeps sending the same codec while the view is
+            // rebuilt, and re-detecting on whatever packet lands mid-teardown can misread an
+            // ordinary H.264 P-slice as HEVC and configure the wrong decoder for the rest of the
+            // session. Only a real disconnect can change what the phone is sending.
+            if (DecoderStopPolicy.endsSession(reason)) {
+                codecTypePinned = false
+            }
             // Keep VPS/SPS/PPS cached so we can re-inject them on restart
             lastFrameRenderedMs = 0L
-            syntheticPtsUs = 0L
             loggedFirstSoftwareFrame = false
             // The FPS window and the throughput counters must not straddle a restart, or the
             // first sample afterwards is averaged over the whole teardown and reads near zero.
@@ -358,10 +371,12 @@ class VideoDecoder(private val settings: Settings) {
             framesFed = 0L
             framesDropped = 0L
             framesRendered = 0L
+            inputWaitMs = 0L
             lastThroughputLogMs = 0L
             lastLoggedFramesFed = 0L
             lastLoggedFramesDropped = 0L
             lastLoggedFramesRendered = 0L
+            lastLoggedInputWaitMs = 0L
             AppLog.i("Decoder stopped: $reason")
         }
     }
@@ -374,12 +389,12 @@ class VideoDecoder(private val settings: Settings) {
     /**
      * Main entry point for decoding a video/control packet.
      *
-     * Returns false when the frame was dropped because the codec's input queue was transiently
-     * full, so the caller (AapVideo) can route recovery through its own throttled
-     * markCorruptAndRequestRecovery() instead of every drop firing an independent, unthrottled
-     * keyframe request.
+     * Reports nothing back to the caller. A frame this cannot place into the codec's input queue
+     * is simply lost, which the stream heals from on the phone's next keyframe; treating it as
+     * stream corruption instead put a keyframe request and a video-focus cycle behind an event
+     * that fires within a second of the decoder starting on ordinary hardware.
      */
-    fun decode(buffer: ByteArray, offset: Int, size: Int, forceSoftware: Boolean, codecName: String): Boolean {
+    fun decode(buffer: ByteArray, offset: Int, size: Int, forceSoftware: Boolean, codecName: String) {
         synchronized(this) {
             // Input-side liveness: bytes are arriving from the phone right now.
             lastInputBytesReceivedMs = SystemClock.elapsedRealtime()
@@ -424,7 +439,7 @@ class VideoDecoder(private val settings: Settings) {
                 onDecoderError?.invoke()
             }
 
-            if (decoderPermanentlyFailed) return true
+            if (decoderPermanentlyFailed) return
 
             // Buffer management for backward compatibility
             // Modern devices (API 21+) use the original buffer with offset/size to avoid GC pressure.
@@ -477,8 +492,8 @@ class VideoDecoder(private val settings: Settings) {
                     }
                 }
 
-                if (mSurface == null || !mSurface!!.isValid) return true
-                if (mWidth == 0 || mHeight == 0) return true
+                if (mSurface == null || !mSurface!!.isValid) return
+                if (mWidth == 0 || mHeight == 0) return
 
                 if (shouldUseBundledHevc(typeToUse, settings.forceSoftwareDecoding || forceSoftware)) {
                     startBundledHevc(mWidth, mHeight)
@@ -495,10 +510,10 @@ class VideoDecoder(private val settings: Settings) {
                     AppLog.e("Bundled HEVC decoder failed with code $renderedFrames")
                     scheduleRestart("software_hevc_error_$renderedFrames")
                 }
-                return true
+                return
             }
 
-            if (codec == null) return true
+            if (codec == null) return
 
             if (pendingKeyframeRequest) {
                 pendingKeyframeRequest = false
@@ -510,21 +525,20 @@ class VideoDecoder(private val settings: Settings) {
             val buf = ByteBuffer.wrap(frameData, frameOffset, size)
             while (buf.hasRemaining()) {
                 if (!feedInputBuffer(buf)) {
-                    // Input queue is transiently full. Drop this frame and let the caller
-                    // (AapVideo.markCorruptAndRequestRecovery) decide whether/when to request a
-                    // keyframe, instead of firing an unthrottled recovery here - on decoders with
-                    // a small, fixed buffer count this can recur every few seconds during normal
-                    // playback, and each one was an independent, unthrottled focus-cycle blink. A
-                    // truly stuck decoder is still caught by outputThreadLoop's sync_stall
-                    // watchdog.
+                    // The codec had no free input buffer for the whole wait. Drop what is left of
+                    // this frame and carry on: the next keyframe repairs the picture, and the
+                    // decoders this happens on are the ones least able to afford the alternative.
+                    // Routing it into the recovery path instead cost a keyframe request and a
+                    // video-focus cycle for an event that fires within a second of the decoder
+                    // starting on ordinary hardware. A decoder that is genuinely stuck rather than
+                    // busy is still caught by outputThreadLoop's sync_stall watchdog.
                     AppLog.w("Input buffer full. Dropping frame.")
                     framesDropped++
-                    return false
+                    return
                 }
             }
             framesFed++
         }
-        return true
     }
 
     private fun shouldUseBundledHevc(type: CodecType, forceSoftware: Boolean): Boolean {
@@ -713,18 +727,14 @@ class VideoDecoder(private val settings: Settings) {
 
             val format = MediaFormat.createVideoFormat(mimeType, width, height)
 
-            // Add hardware prioritization and low-latency hints
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                format.setInteger(MediaFormat.KEY_PRIORITY, 0) // 0 = Real-time priority
-                format.setInteger(MediaFormat.KEY_OPERATING_RATE, settings.fpsLimit)
-            }
-            // Some vendor decoders (e.g. MediaTek's OMX.MTK.VIDEO.DECODER.AVC) reject
-            // KEY_OPERATING_RATE outright, so also set the documented fallback frame-rate hint.
-            // KEY_FRAME_RATE predates KEY_OPERATING_RATE (API 16 vs 23), so it's unguarded.
-            format.setInteger(MediaFormat.KEY_FRAME_RATE, settings.fpsLimit)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                format.setInteger(MediaFormat.KEY_MAX_B_FRAMES, 0) // Tell codec not to hold frames -> drastically decreases latency
-            }
+            // Deliberately no KEY_PRIORITY / KEY_OPERATING_RATE / KEY_FRAME_RATE / KEY_MAX_B_FRAMES
+            // here. They were added as latency hints and measured to do nothing: the OMX components
+            // on the head units they were meant to help answer with
+            // "codec does not support config priority (err -1010)" and the same for the operating
+            // rate. The frame-rate keys are worse than inert, because the only frame rate this
+            // class knows is settings.fpsLimit - the user's cap, not the rate the phone negotiated
+            // - and KEY_MAX_B_FRAMES is an encoder key. Any replacement needs a log from a device
+            // where the codec actually accepts it.
 
             // Apply Codec Specific Data (CSD) from parsed SPS/PPS/VPS
             if (mimeType == CodecType.H265.mimeType) {
@@ -847,11 +857,20 @@ class VideoDecoder(private val settings: Settings) {
         try {
             var inputIndex = -1
             var attempts = 0
-            while (attempts < 3) { // do not set attempts to high, otherwise there is a strong hiccup
+            // ~300ms of patience. Anything much shorter gives up while the codec is merely busy:
+            // at 30ms this reported a full input queue within a second of every decoder start,
+            // before the component had drained its first buffers, on hardware that then went on to
+            // decode at full rate.
+            //
+            // The whole dequeue is timed, not just the retries: the first call blocks for up to
+            // TIMEOUT_US on its own, and what holds up audio behind us is the total.
+            val waitStart = SystemClock.elapsedRealtime()
+            while (attempts < 30) {
                 inputIndex = currentCodec.dequeueInputBuffer(TIMEOUT_US)
                 if (inputIndex >= 0) break
                 attempts++
             }
+            inputWaitMs += SystemClock.elapsedRealtime() - waitStart
 
             if (inputIndex < 0) {
                 AppLog.e("Input buffer feed failed (full)")
@@ -889,12 +908,7 @@ class VideoDecoder(private val settings: Settings) {
 
             inputBuffer.flip()
 
-            // Force a perfectly smooth timestamp (60 FPS = 16,666 microseconds per frame)
-            // This prevents network jitter from causing "catch-up" fast-forwards
-            if (flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG == 0) {
-                syntheticPtsUs += 1000000L/settings.fpsLimit
-            }
-            val pts = syntheticPtsUs
+            val pts = (System.nanoTime() - startTime) / 1000
 
             currentCodec.queueInputBuffer(inputIndex, 0, inputBuffer.limit(), pts, flags)
             return true
@@ -928,16 +942,19 @@ class VideoDecoder(private val settings: Settings) {
         val rendered = framesRendered - lastLoggedFramesRendered
         val fed = framesFed - lastLoggedFramesFed
         val dropped = framesDropped - lastLoggedFramesDropped
+        val inputWait = inputWaitMs - lastLoggedInputWaitMs
         lastThroughputLogMs = now
         lastLoggedFramesRendered = framesRendered
         lastLoggedFramesFed = framesFed
         lastLoggedFramesDropped = framesDropped
+        lastLoggedInputWaitMs = inputWaitMs
 
         val renderedFps = rendered * 1000 / elapsed
         val fedFps = fed * 1000 / elapsed
         AppLog.i(
             "Throughput over ${elapsed}ms: rendered=$rendered (${renderedFps}fps), " +
-                "fed=$fed (${fedFps}fps), dropped=$dropped, codec=$currentCodecName"
+                "fed=$fed (${fedFps}fps), dropped=$dropped, inputWait=${inputWait}ms, " +
+                "codec=$currentCodecName"
         )
     }
 

@@ -1,15 +1,16 @@
 package com.andrerinas.openheadunit.aap
 
 /**
- * Pacing rules for [AapVideo]'s stream recovery.
+ * Pacing rule for [AapVideo]'s stream recovery.
  *
- * Recovering from a corrupt or dropped frame means asking the phone for a fresh keyframe, which
+ * Recovering from a corrupt frame means asking the phone for a fresh keyframe, which
  * [AapTransport] implements as a video-focus loss/regain cycle. That is expensive and briefly
- * visible, so requests are rate limited. But the same recovery also locks out every P-frame until
- * a keyframe arrives, and a lockout with no request behind it can only end on the phone's own
- * keyframe cadence - seconds of discarded video. These two rules keep the throttle from stranding
- * a lockout: one decides when a request may go out, the other when a request the throttle
- * suppressed has become due.
+ * visible on screen, and the phone reacts to it by rebuilding the stream, so a burst of requests
+ * costs far more picture than the single frame that triggered the first one. Rate limit them.
+ *
+ * Suppressing a request is safe to do silently: a corrupt frame is scoped to itself and the stream
+ * resumes on the next one either way, so a suppressed request only means recovery waits for the
+ * phone's own keyframe cadence rather than being brought forward.
  */
 object VideoRecoveryPolicy {
 
@@ -19,13 +20,4 @@ object VideoRecoveryPolicy {
     /** Whether enough time has passed since [lastRequestMs] to send another keyframe request. */
     fun canRequestKeyframe(nowMs: Long, lastRequestMs: Long): Boolean =
         nowMs - lastRequestMs > KEYFRAME_REQUEST_THROTTLE_MS
-
-    /**
-     * Whether a request that [canRequestKeyframe] previously suppressed should now be sent.
-     *
-     * [deferred] is the caller's record that it armed a P-frame lockout without being allowed to
-     * ask for the keyframe that ends it.
-     */
-    fun isDeferredRequestDue(nowMs: Long, lastRequestMs: Long, deferred: Boolean): Boolean =
-        deferred && canRequestKeyframe(nowMs, lastRequestMs)
 }
