@@ -20,6 +20,7 @@ import com.andrerinas.openheadunit.App
 import com.andrerinas.openheadunit.R
 import com.andrerinas.openheadunit.aap.AapService
 import com.andrerinas.openheadunit.aap.NativeHandoffPolicy
+import com.andrerinas.openheadunit.aap.P2pChannelPolicy
 import com.andrerinas.openheadunit.utils.ToastUtils
 import com.andrerinas.openheadunit.utils.AppLog
 import com.andrerinas.openheadunit.utils.Settings
@@ -86,6 +87,17 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
     private var discoveredInterface: String? = null
     private var nativeGroupCreationMode = NATIVE_GROUP_MODE_UNKNOWN
     private var native5GhzBandMismatchRetries = 0
+
+    /**
+     * SSID of the last group reported as being on a channel most phones cannot join, so the several
+     * [onGroupInfoAvailable] callbacks a single group produces are said once.
+     *
+     * The SSID and not the interface or the BSSID: Android generates a fresh DIRECT-xy-… per group,
+     * it is populated on the very first callback, and it is never privacy-masked. `interface` is
+     * null until an IP is up and the BSSID is often 02:00:00:00:00:00 here, so either would both
+     * split one group across two identities and merge two groups into one.
+     */
+    private var lastUnfriendlyChannelSsid: String? = null
     private var lastNativeGroupStatusMessage: String? = null
 
     // Native AA join recovery state. The watchdog fires if the phone never joins our quiet-host
@@ -515,7 +527,8 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
             }
 
             val band = if (frequency > 4000) "5GHz" else if (frequency > 0) "2.4GHz" else "unknown"
-            AppLog.i("WifiDirectManager: onGroupInfoAvailable: SSID: $ssid, BSSID: $bssid, GO: $isOwner, IFACE: ${iface ?: "null"}, Freq: $frequency MHz ($band)")
+            val channelLabel = if (P2pChannelPolicy.is24GHz(frequency)) ", ${P2pChannelPolicy.describe(frequency)}" else ""
+            AppLog.i("WifiDirectManager: onGroupInfoAvailable: SSID: $ssid, BSSID: $bssid, GO: $isOwner, IFACE: ${iface ?: "null"}, Freq: $frequency MHz ($band$channelLabel)")
 
             if (isNativeAaMode() && isOwner) {
                 if (frequency > 4000) {
@@ -526,6 +539,26 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
                     showToast("Native AA WiFi Direct started on $band. Retrying 5GHz...")
                     removeGroupAndRetryNative5Ghz()
                     return
+                }
+
+                // A group above channel 11 is up and beaconing and still invisible to most phones:
+                // a client in the FCC domain associates on channels 1-11 only and will not even
+                // list the SSID in a scan, so the phone reports nothing worse than "can't find the
+                // network". Report it and carry on — recreating the group does not help, because
+                // the channel is picked when the WiFi radio comes up, not when the group is made:
+                // measured on a unit where this failed as six recreates, 2467 MHz every time. Only
+                // a WiFi restart, or a country code the driver will honour, moves it.
+                //
+                // Said once per group, not once per callback: requestGroupInfo() is issued from
+                // several places, so this runs three or four times for one group.
+                if (P2pChannelPolicy.isClientUnfriendly(frequency)) {
+                    if (ssid != lastUnfriendlyChannelSsid) {
+                        lastUnfriendlyChannelSsid = ssid
+                        AppLog.e("WifiDirectManager: Native AA group came up on ${P2pChannelPolicy.describe(frequency)} ($frequency MHz). Carrying on, but a phone limited to channels 1-11 will not find this network — it will scan and never see the SSID. Restarting this unit's WiFi, or giving it a WiFi country code, is what moves the group off channel 12/13.")
+                        showToast("Native AA is on ${P2pChannelPolicy.describe(frequency)}, which most phones cannot join. Restart WiFi and try again.")
+                    }
+                } else if (frequency > 0) {
+                    lastUnfriendlyChannelSsid = null
                 }
                 notifyNativeGroupStarted(ssid, frequency, band)
                 // The group is up. If no phone joins within the window, recover (recreate fresh).
@@ -882,6 +915,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         nativeGroupCreationMode = NATIVE_GROUP_MODE_UNKNOWN
         lastNativeGroupStatusMessage = null
         native5GhzBandMismatchRetries = 0
+        lastUnfriendlyChannelSsid = null
         nativeRecreateCount = 0
         cancelNativeJoinWatchdog()
         recreateNativeGroup(forceStandard = false)
@@ -1202,6 +1236,7 @@ class WifiDirectManager(private val context: Context) : WifiP2pManager.Connectio
         isClientConnected = false
         nativeGroupCreationMode = NATIVE_GROUP_MODE_UNKNOWN
         native5GhzBandMismatchRetries = 0
+        lastUnfriendlyChannelSsid = null
         nativeRecreateCount = 0
         lastNativeGroupStatusMessage = null
         AapService.scanningState.value = false
