@@ -71,6 +71,8 @@ adb shell am start -a android.intent.action.VIEW -d "headunit://connect?ip=192.1
 ### v.3.2.3
 - Adding custom log location (App folder or Download folder)
 - additional fixing for the fps/freeze problems. Thanks to @o-jcardenass and @andrecuellar for helping
+- Fix/hotspot unreadable config
+- NativeAA: show when a P2P group that lands on channel 12 or 13
 
 ### v.3.2.2
 - Fixing location jumping, especially on lower speeds
