@@ -88,6 +88,7 @@
     <string name="onb_vehicle_title">Your car</string>
     <string name="onb_vehicle_input_hint">Brand or name</string>
     <string name="onb_vehicle_help_aa">This name is sent to Android Auto. It shows in your phone\'s connection history and on the Android Auto welcome screen.</string>
+    <string name="onb_vehicle_help_sideload">Picking a real car brand also shows that brand\'s logo on the Android Auto exit button, but Android Auto then stops listing apps you installed from outside the Play Store. Keep \"Google\" or \"Open Headunit\" if you use those apps.</string>
     <string name="onb_vehicle_help_advanced">You can fine-tune your vehicle details in the Advanced tab. We do not use this data; it is only sent to Android Auto because it requires it.</string>
     <string-array name="vehicle_brands">
         <item>Google</item>
@@ -715,7 +716,8 @@
     <string name="vehicle_id_description">Internal identifier only. Changing this will cause your phone to treat this as a different vehicle, resetting your Android Auto preferences for this car.</string>
     <string name="head_unit_make_label">Make</string>
     <string name="head_unit_make_description">Head unit manufacturer</string>
-    <string name="head_unit_make_hint">Your phone shows this name in Android Auto settings.</string>
+    <string name="head_unit_make_hint">Your phone shows this name in Android Auto settings.\n\nA real car brand shows that brand\'s logo on the Android Auto exit button, but Android Auto then stops listing apps installed from outside the Play Store. Set it back to \"Google\" to get those apps listed again.</string>
+    <string name="vehicle_make_hint">A real car brand shows that brand\'s logo on the Android Auto exit button, but Android Auto then stops listing apps installed from outside the Play Store. Set it back to \"Google\" to get those apps listed again.</string>
     <string name="head_unit_model_label">Model</string>
     <string name="head_unit_model_description">Head unit model</string>
     <string name="vehicle_year_error_invalid">Enter a valid year</string>
