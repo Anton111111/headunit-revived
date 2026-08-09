@@ -2,6 +2,7 @@ package com.andrerinas.openheadunit.utils
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothProfile
 import android.content.Context
 import android.os.Build
 import android.os.IBinder
@@ -89,6 +90,56 @@ object BluetoothHelper {
     /** All distinct, enabled Bluetooth adapters exposed by the system. See [getAllBluetoothAdapterHandles]. */
     fun getAllBluetoothAdapters(context: Context): List<BluetoothAdapter> =
         getAllBluetoothAdapterHandles(context).map { it.adapter }
+
+    /**
+     * `BluetoothProfile.HEADSET_CLIENT`. Hidden from the SDK, but
+     * [BluetoothAdapter.getProfileConnectionState] takes a plain profile int and answers for it, and
+     * this is the hands-free role a head unit plays: the phone is the audio gateway, the unit is the
+     * hands-free device that carries the call.
+     */
+    private const val PROFILE_HEADSET_CLIENT = 16
+
+    /**
+     * Whether this head unit currently holds a Bluetooth hands-free link, in either role.
+     *
+     * Null when the adapter will not say. Callers must treat that as "no link known" rather than
+     * "no link", because the only decision hanging off this is whether to skip an action that is
+     * load-bearing elsewhere.
+     *
+     * Both roles are read. `HEADSET_CLIENT` is the one a head unit normally plays and the one the
+     * wake poke was measured destroying; `HEADSET` is checked too because some OEM stacks report a
+     * hands-free connection under the gateway role instead, and for this decision a false "yes" only
+     * costs a skipped poke while a false "no" costs the user their calls.
+     *
+     * Profile-wide, not per-device: `getProfileConnectionState` answers for the adapter, and the
+     * per-device equivalents are system-only. On a head unit paired with one phone that distinction
+     * does not arise; where it does, this errs toward reporting a link.
+     */
+    fun handsFreeLinkState(context: Context): Boolean? {
+        val resolved = try {
+            getBluetoothAdapter(context)
+        } catch (e: Exception) {
+            AppLog.w("BluetoothHelper: could not resolve an adapter for the hands-free check: ${e.message}")
+            return null
+        }
+        val adapter = resolved ?: return false
+        val enabled = try { adapter.isEnabled } catch (e: Exception) { null }
+        if (enabled == false) return false
+
+        var readAnyState = false
+        for (profile in intArrayOf(PROFILE_HEADSET_CLIENT, BluetoothProfile.HEADSET)) {
+            val state = try {
+                adapter.getProfileConnectionState(profile)
+            } catch (e: Exception) {
+                // SecurityException without BLUETOOTH_CONNECT, or an adapter that rejects the
+                // hidden client profile. Try the other role before giving up.
+                continue
+            }
+            readAnyState = true
+            if (state == BluetoothProfile.STATE_CONNECTED) return true
+        }
+        return if (readAnyState) false else null
+    }
 
     /** Resolve a single, arbitrary system service name to a BluetoothAdapterHandle, if it backs a
      *  real, enabled adapter. Used for the manual secondary-radio override in Settings, where the

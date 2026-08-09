@@ -130,6 +130,10 @@ class NativeAaHandshakeManager(
     // Set by closeAaListeners() so the AA accept loops can tell "we closed this on purpose
     // after a successful handoff" apart from a real socket error, for logging only.
     @Volatile private var aaListenersClosedForSession = false
+    // Whether the "already have a hands-free link, not poking" line has been said at info level for
+    // the current run of skips. Cleared as soon as a poke does go ahead, so a later skip says so
+    // again rather than hiding behind a line from minutes earlier.
+    @Volatile private var handsFreeSkipLogged = false
 
     private var currentSsid: String? = null
     private var currentPsk: String? = null
@@ -507,10 +511,38 @@ class NativeAaHandshakeManager(
     }
 
     /**
+     * Say once per run of skips that the poke stood down. Info first so it survives a log exported
+     * at the default level, then debug: the retry loop asks again every ~30 s, and a line per
+     * half-minute for a whole session buries everything around it.
+     */
+    private fun noteHandsFreePokeSkip(device: BluetoothDevice) {
+        val message = "NativeAA: Not poking ${device.name ?: "unnamed"} (${device.address}) — this " +
+                "head unit already holds a Bluetooth hands-free link, which a poke would take over " +
+                "and leave disconnected. That link is itself the connection a poke exists to create."
+        if (!handsFreeSkipLogged) {
+            handsFreeSkipLogged = true
+            AppLog.i(message)
+        } else {
+            AppLog.d(message)
+        }
+    }
+
+    /**
      * Tries each of [BluetoothWakePolicy.POKE_TARGETS] in turn, holding whichever connects for
-     * [holdMs]. Returns true if any of them did.
+     * [holdMs]. Returns true if any of them did, false without opening anything if this unit
+     * already holds a hands-free link. Both poke entry points come through here, so one check
+     * covers the retry loop and the manual poke alike.
      */
     private suspend fun pokeDevice(device: BluetoothDevice, holdMs: Long): Boolean {
+        // A poke that connects takes the phone's single hands-free slot, and this unit's own client
+        // is dropped to make room. See BluetoothWakePolicy for the measurement.
+        val handsFreeLink = BluetoothWakePolicy.HandsFreeLink.of(BluetoothHelper.handsFreeLinkState(context))
+        if (!BluetoothWakePolicy.shouldPoke(handsFreeLink)) {
+            noteHandsFreePokeSkip(device)
+            return false
+        }
+        handsFreeSkipLogged = false
+
         pokeAttemptInFlight = true
         try {
             for (uuid in BluetoothWakePolicy.POKE_TARGETS) {

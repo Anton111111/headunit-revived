@@ -17,7 +17,8 @@ class BluetoothWakePolicyTest {
 
     /**
      * The poke is load-bearing on some head units — they never connect without it — so the list may
-     * never be emptied to disable it.
+     * never be emptied to disable it. Standing a poke down is [BluetoothWakePolicy.shouldPoke]'s
+     * decision, taken per attempt, and not this list's.
      */
     @Test
     fun `hands-free is tried first, headset second, and neither is ever dropped`() {
@@ -37,5 +38,44 @@ class BluetoothWakePolicyTest {
     fun `an unknown uuid still prints as itself`() {
         val other = java.util.UUID.fromString("4de17a00-52cb-11e6-bdf4-0800200c9a66")
         assertEquals(other.toString(), BluetoothWakePolicy.profileName(other))
+    }
+
+    // --- the guard: never poke a link we would destroy ---
+
+    /**
+     * The measured failure: a poke that connects takes the phone's one hands-free slot, this unit's
+     * own client is dropped 4 ms later, and it does not come back without a Bluetooth adapter cycle.
+     */
+    @Test
+    fun `a live hands-free link is never poked`() {
+        assertFalse(BluetoothWakePolicy.shouldPoke(BluetoothWakePolicy.HandsFreeLink.CONNECTED))
+    }
+
+    @Test
+    fun `no hands-free link means there is nothing to destroy, so poke`() {
+        assertTrue(BluetoothWakePolicy.shouldPoke(BluetoothWakePolicy.HandsFreeLink.ABSENT))
+    }
+
+    /**
+     * An adapter that will not report its profiles must not silently disable a mechanism some head
+     * units cannot connect without. Those units keep today's behaviour.
+     */
+    @Test
+    fun `an unreadable adapter still pokes`() {
+        assertTrue(BluetoothWakePolicy.shouldPoke(BluetoothWakePolicy.HandsFreeLink.UNREADABLE))
+    }
+
+    @Test
+    fun `the three-valued profile read maps onto the three states`() {
+        assertEquals(BluetoothWakePolicy.HandsFreeLink.CONNECTED, BluetoothWakePolicy.HandsFreeLink.of(true))
+        assertEquals(BluetoothWakePolicy.HandsFreeLink.ABSENT, BluetoothWakePolicy.HandsFreeLink.of(false))
+        assertEquals(BluetoothWakePolicy.HandsFreeLink.UNREADABLE, BluetoothWakePolicy.HandsFreeLink.of(null))
+    }
+
+    /** Exactly one state suppresses the poke; if a fourth is ever added it has to choose out loud. */
+    @Test
+    fun `only a connected link suppresses the poke`() {
+        val suppressed = BluetoothWakePolicy.HandsFreeLink.values().filterNot { BluetoothWakePolicy.shouldPoke(it) }
+        assertEquals(listOf(BluetoothWakePolicy.HandsFreeLink.CONNECTED), suppressed)
     }
 }
