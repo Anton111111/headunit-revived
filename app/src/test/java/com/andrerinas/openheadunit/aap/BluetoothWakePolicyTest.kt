@@ -78,4 +78,60 @@ class BluetoothWakePolicyTest {
         val suppressed = BluetoothWakePolicy.HandsFreeLink.values().filterNot { BluetoothWakePolicy.shouldPoke(it) }
         assertEquals(listOf(BluetoothWakePolicy.HandsFreeLink.CONNECTED), suppressed)
     }
+
+    // --- pairing: strict about poking, lenient about forgetting ---
+
+    private val BONDED = BluetoothWakePolicy.BondReading.BONDED
+    private val NOT_BONDED = BluetoothWakePolicy.BondReading.NOT_BONDED
+    private val MALFORMED = BluetoothWakePolicy.BondReading.MALFORMED
+    private val UNREADABLE = BluetoothWakePolicy.BondReading.UNREADABLE
+
+    @Test
+    fun `only a confirmed pairing may be poked`() {
+        assertTrue(BluetoothWakePolicy.mayPoke(BONDED))
+        for (reading in BluetoothWakePolicy.BondReading.values().filterNot { it == BONDED }) {
+            assertFalse("$reading should not be poked", BluetoothWakePolicy.mayPoke(reading))
+        }
+    }
+
+    /**
+     * The one that matters: `getBondState()` answers BOND_NONE when the Bluetooth service is
+     * unavailable, so an adapter that is off looks exactly like a phone the user unpaired. Forgetting
+     * is permanent and written through to device-protected storage, so it needs a real answer.
+     */
+    @Test
+    fun `an unreadable state is never forgotten`() {
+        assertFalse(BluetoothWakePolicy.shouldForget(UNREADABLE))
+    }
+
+    @Test
+    fun `a paired device is never forgotten`() {
+        assertFalse(BluetoothWakePolicy.shouldForget(BONDED))
+    }
+
+    @Test
+    fun `a positive not-paired answer is forgotten`() {
+        assertTrue(BluetoothWakePolicy.shouldForget(NOT_BONDED))
+    }
+
+    /** An address that is not a Bluetooth address can never become one. */
+    @Test
+    fun `a malformed address is forgotten`() {
+        assertTrue(BluetoothWakePolicy.shouldForget(MALFORMED))
+    }
+
+    /**
+     * The asymmetry is the design: refusing to poke costs a retry seconds later, forgetting costs
+     * the user their configured device with nothing to restore it. So nothing may ever be forgotten
+     * that was also considered pokeable, and the two rules must never both be lenient.
+     */
+    @Test
+    fun `nothing pokeable is ever forgotten`() {
+        for (reading in BluetoothWakePolicy.BondReading.values()) {
+            assertFalse(
+                "$reading was both poked and forgotten",
+                BluetoothWakePolicy.mayPoke(reading) && BluetoothWakePolicy.shouldForget(reading)
+            )
+        }
+    }
 }

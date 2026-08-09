@@ -3,8 +3,8 @@ package com.andrerinas.openheadunit.aap
 import java.util.UUID
 
 /**
- * Rules for the Native AA wake poke: which of the phone's Bluetooth records it may reach for, and
- * when it may connect at all.
+ * Rules for the Native AA wake poke: which of the phone's Bluetooth records it may reach for, when
+ * it may connect at all, and which stored MACs are worth keeping.
  *
  * The poke raises an ACL connection so the phone notices a wireless-capable head unit. It is
  * load-bearing — some units never connect without it — so nothing here switches it off. What the
@@ -78,4 +78,46 @@ object BluetoothWakePolicy {
      * its profiles must not silently disable a mechanism some units cannot connect without.
      */
     fun shouldPoke(handsFreeLink: HandsFreeLink): Boolean = handsFreeLink != HandsFreeLink.CONNECTED
+
+    /** What a stored Auto Start MAC's pairing state read as, when the poke went looking for it. */
+    enum class BondReading {
+        /** Paired. Safe to poke. */
+        BONDED,
+
+        /** A positive not-paired answer, taken from a working adapter. */
+        NOT_BONDED,
+
+        /** Not a Bluetooth address at all, so it can never become valid. */
+        MALFORMED,
+
+        /** The adapter is off, or would not answer. Says nothing about the device. */
+        UNREADABLE
+    }
+
+    /**
+     * Whether a poke may open a socket to a device in this state.
+     *
+     * Only a confirmed pairing. A poke is a raw RFCOMM `connect()` to a device we assume already
+     * trusts us; against an unpaired one the OS starts a new pairing negotiation as a side effect,
+     * which the user sees as the head unit asking to pair every time the phone's radio comes back.
+     *
+     * Strict where [shouldForget] is lenient: refusing to poke costs a retry seconds later.
+     */
+    fun mayPoke(reading: BondReading): Boolean = reading == BondReading.BONDED
+
+    /**
+     * Whether a stored MAC should be dropped from the Auto Start list.
+     *
+     * Only on evidence the device is genuinely gone. **Never on [BondReading.UNREADABLE]** —
+     * `getBondState()` answers "not bonded" when the Bluetooth service is merely unavailable, so
+     * treating that as unpaired would delete the user's configured device on any poke round that
+     * landed while the adapter was off. This head unit's Bluetooth is known to cycle itself, so that
+     * window is reachable, and the deletion is written straight through to device-protected storage
+     * where nothing would restore it.
+     *
+     * Lenient where [mayPoke] is strict: a MAC kept one round too long costs nothing, because
+     * [mayPoke] will not poke it.
+     */
+    fun shouldForget(reading: BondReading): Boolean =
+        reading == BondReading.NOT_BONDED || reading == BondReading.MALFORMED
 }

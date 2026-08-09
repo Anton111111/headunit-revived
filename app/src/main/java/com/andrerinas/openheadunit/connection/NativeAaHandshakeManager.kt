@@ -511,6 +511,45 @@ class NativeAaHandshakeManager(
     }
 
     /**
+     * Read a device's pairing state, keeping "not paired" and "could not tell" apart.
+     *
+     * `getBondState()` answers `BOND_NONE` when the Bluetooth service is unavailable rather than
+     * saying it does not know, so an adapter that is off would otherwise look exactly like a phone
+     * the user unpaired. Everything that cannot be established reads as
+     * [BluetoothWakePolicy.BondReading.UNREADABLE], and the policy decides what each is worth.
+     */
+    private fun bondReadingFor(device: BluetoothDevice): BluetoothWakePolicy.BondReading {
+        val adapter = try {
+            BluetoothHelper.getBluetoothAdapter(context)
+        } catch (e: Exception) {
+            null
+        } ?: return BluetoothWakePolicy.BondReading.UNREADABLE
+        val enabled = try { adapter.isEnabled } catch (e: Exception) { false }
+        if (!enabled) return BluetoothWakePolicy.BondReading.UNREADABLE
+        val state = try {
+            device.bondState
+        } catch (e: Exception) {
+            return BluetoothWakePolicy.BondReading.UNREADABLE
+        }
+        return if (state == BluetoothDevice.BOND_BONDED) BluetoothWakePolicy.BondReading.BONDED
+        else BluetoothWakePolicy.BondReading.NOT_BONDED
+    }
+
+    /** As [bondReadingFor], for a MAC that has not been resolved to a device yet. */
+    private fun bondReadingFor(adapter: BluetoothAdapter, mac: String): BluetoothWakePolicy.BondReading {
+        val device = try {
+            adapter.getRemoteDevice(mac)
+        } catch (e: IllegalArgumentException) {
+            // Not a Bluetooth address. It can never become one, so this is the one reading that is
+            // safe to forget without the adapter having said anything.
+            return BluetoothWakePolicy.BondReading.MALFORMED
+        } catch (e: Exception) {
+            return BluetoothWakePolicy.BondReading.UNREADABLE
+        }
+        return bondReadingFor(device)
+    }
+
+    /**
      * Say once per run of skips that the poke stood down. Info first so it survives a log exported
      * at the default level, then debug: the retry loop asks again every ~30 s, and a line per
      * half-minute for a whole session buries everything around it.
@@ -529,9 +568,9 @@ class NativeAaHandshakeManager(
 
     /**
      * Tries each of [BluetoothWakePolicy.POKE_TARGETS] in turn, holding whichever connects for
-     * [holdMs]. Returns true if any of them did, false without opening anything if this unit
-     * already holds a hands-free link. Both poke entry points come through here, so one check
-     * covers the retry loop and the manual poke alike.
+     * [holdMs]. Returns true if any of them did, false without opening anything if either guard
+     * below stands the poke down. Both poke entry points come through here, so one check covers
+     * the retry loop and the manual poke alike.
      */
     private suspend fun pokeDevice(device: BluetoothDevice, holdMs: Long): Boolean {
         // A poke that connects takes the phone's single hands-free slot, and this unit's own client
@@ -542,6 +581,15 @@ class NativeAaHandshakeManager(
             return false
         }
         handsFreeSkipLogged = false
+
+        // connect() against an unpaired device makes the OS solicit pairing as a side effect, and
+        // the user meant "wake my phone", not "ask to pair with it again".
+        if (!BluetoothWakePolicy.mayPoke(bondReadingFor(device))) {
+            AppLog.w("NativeAA: Not poking ${device.name ?: "unnamed"} (${device.address}) — it is not " +
+                    "currently paired with this head unit, and connecting to an unpaired device would " +
+                    "ask the user to pair rather than wake anything.")
+            return false
+        }
 
         pokeAttemptInFlight = true
         try {
@@ -633,13 +681,25 @@ class NativeAaHandshakeManager(
 
                 val lastMacs = settings.autoStartBluetoothDeviceMacs
                 val devicesToPoke = if (lastMacs.isNotEmpty()) {
-                    lastMacs.mapNotNull { mac ->
-                        try {
-                            adapter.getRemoteDevice(mac)
-                        } catch (e: Exception) {
-                            null
+                    // Two questions, two answers. Skipping a poke is retried seconds later;
+                    // forgetting a MAC is permanent, so it needs evidence the device is really gone
+                    // rather than an adapter that happened to be off. Both rules are in the policy.
+                    val bonded = mutableListOf<BluetoothDevice>()
+                    val staleMacs = mutableSetOf<String>()
+                    lastMacs.forEach { mac ->
+                        val reading = bondReadingFor(adapter, mac)
+                        if (BluetoothWakePolicy.mayPoke(reading)) {
+                            try { bonded.add(adapter.getRemoteDevice(mac)) } catch (e: Exception) {}
                         }
+                        if (BluetoothWakePolicy.shouldForget(reading)) staleMacs.add(mac)
                     }
+                    if (staleMacs.isNotEmpty()) {
+                        AppLog.w("NativeAA: Dropping Auto Start BT MAC(s) no longer paired: $staleMacs")
+                        val remaining = lastMacs - staleMacs
+                        settings.autoStartBluetoothDeviceMacs = remaining
+                        com.andrerinas.openheadunit.utils.Settings.syncAutoStartBtMacsToDeviceStorage(context, remaining)
+                    }
+                    bonded
                 } else {
                     AppLog.w("NativeAA: No 'Auto Start BT Device' selected in settings. Poking all paired devices as fallback...")
                     adapter.bondedDevices.toList()
