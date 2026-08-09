@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
 import android.content.Context
 import com.andrerinas.openheadunit.aap.AapService
+import com.andrerinas.openheadunit.aap.BluetoothWakePolicy
 import com.andrerinas.openheadunit.aap.NativeCredentialsPolicy
 import com.andrerinas.openheadunit.aap.NativeHandoffPolicy
 import com.andrerinas.openheadunit.aap.NativeTransport
@@ -42,13 +43,8 @@ class NativeAaHandshakeManager(
     companion object {
         private val AA_UUID = UUID.fromString("4de17a00-52cb-11e6-bdf4-0800200c9a66")
         private val HFP_UUID = UUID.fromString("0000111e-0000-1000-8000-00805f9b34fb")
-        // Phone-wake targets, tried HFP then HSP (mirrors openautolink's ConnectProfile
-        // fallback chain). HSP_AG_UUID is the old "A2DP_SOURCE_UUID" - despite that name it was
-        // never A2DP Source (real assigned number 0000110a-...); both UUIDs are confirmed
-        // against nisargjhaveri/WirelessAndroidAutoDongle and mossyhub/openautolink, which use
-        // the same pair for this exact purpose.
-        private val HSP_AG_UUID = UUID.fromString("00001112-0000-1000-8000-00805f9b34fb") // Headset Profile AG
-        private val HFP_AG_UUID = UUID.fromString("0000111f-0000-1000-8000-00805f9b34fb") // Hands-Free Profile AG
+        // The phone-wake targets, and the rules for when a poke may run at all, live in
+        // BluetoothWakePolicy — one of those records is also the one a phone call rides on.
 
         /** How long to wait for this head unit's own WiFi network to come up before giving up on
          *  a handshake. P2P group creation is the slow case. */
@@ -324,7 +320,7 @@ class NativeAaHandshakeManager(
                 while (isRunning && isActive) {
                     val socket = hfpServerSocket?.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: HFP connection accepted from ${socket.remoteDevice.name}. Starting responder.")
+                        logHfpAccept(socket, localRadioName)
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpResponder-${socket.remoteDevice.address}")) {
                             handleHfp(socket)
                         }
@@ -413,7 +409,7 @@ class NativeAaHandshakeManager(
                 while (isRunning && isActive) {
                     val socket = server.accept()
                     if (socket != null) {
-                        AppLog.i("NativeAA: HFP connection accepted (secondary radio '$serviceName') from ${socket.remoteDevice.name}.")
+                        logHfpAccept(socket, "$serviceName $radioName")
                         scope.launch(Dispatchers.IO + CoroutineName("NativeAa-HfpResponder-${socket.remoteDevice.address}")) {
                             handleHfp(socket)
                         }
@@ -442,6 +438,22 @@ class NativeAaHandshakeManager(
             extraAaServerSockets.forEach { try { it.close() } catch (e: Exception) {} }
             extraAaServerSockets.clear()
         }
+    }
+
+    /**
+     * Says what an accepted hands-free connection means, not only that it happened. On its own it
+     * reads like success; it is the phone attaching its hands-free link to this app rather than to
+     * the head unit's own Bluetooth stack, and the responder below can never carry call audio —
+     * it answers OK to everything and negotiates neither a codec nor a SCO link.
+     *
+     * Whether it ever fires is still open: five rig rounds and every reporter log so far, no
+     * accepts. Address as well as name, because getName() is null for an unbonded device.
+     */
+    private fun logHfpAccept(socket: BluetoothSocket, radio: String) {
+        val device = socket.remoteDevice
+        AppLog.i("NativeAA: HFP connection accepted from ${device.name ?: "unnamed"} (${device.address}) " +
+                "on radio [$radio] — the phone's hands-free link now terminates in this app, " +
+                "which cannot carry call audio. If calls are not heard on this unit, look here first.")
     }
 
     /**
@@ -495,20 +507,22 @@ class NativeAaHandshakeManager(
     }
 
     /**
-     * Tries HFP_AG_UUID first, falling back to HSP_AG_UUID, holding whichever connects for
-     * [holdMs]. Returns true if either connected. Mirrors openautolink's ConnectProfile
-     * fallback chain (HFP_AG_UUID -> HSP_AG_UUID).
+     * Tries each of [BluetoothWakePolicy.POKE_TARGETS] in turn, holding whichever connects for
+     * [holdMs]. Returns true if any of them did.
      */
     private suspend fun pokeDevice(device: BluetoothDevice, holdMs: Long): Boolean {
         pokeAttemptInFlight = true
         try {
-            for (uuid in listOf(HFP_AG_UUID, HSP_AG_UUID)) {
+            for (uuid in BluetoothWakePolicy.POKE_TARGETS) {
+                val profile = BluetoothWakePolicy.profileName(uuid)
                 var socket: BluetoothSocket? = null
                 try {
                     socket = device.createRfcommSocketToServiceRecord(uuid)
-                    AppLog.i("NativeAA: Calling socket.connect() for ${device.name} via $uuid...")
+                    AppLog.i("NativeAA: Calling socket.connect() for ${device.name} via $profile ($uuid)...")
                     socket.connect()
-                    AppLog.i("NativeAA: Successfully poked ${device.name} via $uuid. Holding ${holdMs}ms...")
+                    // Named, not just the UUID: which record we ended up on is the first thing to
+                    // check when a reporter's calls come out of the phone instead of the car.
+                    AppLog.i("NativeAA: Successfully poked ${device.name} via $profile. Holding ${holdMs}ms...")
                     // Counted before the hold, so a poke that is cancelled mid-hold still counts:
                     // the phone answered, which is the whole point of the count.
                     pokesSinceLastAccept++
@@ -523,7 +537,7 @@ class NativeAaHandshakeManager(
                 } catch (e: Exception) {
                     // Address as well as name: getName() is null for an unbonded device, and a log line
                     // reading "to null" names nothing at all for the reader of a bug report.
-                    AppLog.d("NativeAA: Poke via $uuid to ${device.name ?: "unnamed"} (${device.address}) failed: ${e.message}")
+                    AppLog.d("NativeAA: Poke via $profile to ${device.name ?: "unnamed"} (${device.address}) failed: ${e.message}")
                 } finally {
                     try { socket?.close() } catch (e: Exception) {}
                 }
