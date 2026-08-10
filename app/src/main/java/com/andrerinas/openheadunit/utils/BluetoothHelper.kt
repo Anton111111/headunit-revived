@@ -92,53 +92,56 @@ object BluetoothHelper {
         getAllBluetoothAdapterHandles(context).map { it.adapter }
 
     /**
-     * `BluetoothProfile.HEADSET_CLIENT`. Hidden from the SDK, but
-     * [BluetoothAdapter.getProfileConnectionState] takes a plain profile int and answers for it, and
-     * this is the hands-free role a head unit plays: the phone is the audio gateway, the unit is the
-     * hands-free device that carries the call.
+     * `BluetoothProfile.A2DP_SINK`. Hidden from the SDK, but [BluetoothAdapter.getProfileConnectionState]
+     * takes a plain profile int and answers for it, and the sink role is the one a head unit plays:
+     * the phone is the source, we render its audio.
      */
-    private const val PROFILE_HEADSET_CLIENT = 16
+    private const val PROFILE_A2DP_SINK = 11
 
     /**
-     * Whether this head unit currently holds a Bluetooth hands-free link, in either role.
+     * Whether a Bluetooth media link to this head unit is up, in either role.
      *
-     * Null when the adapter will not say. Callers must treat that as "no link known" rather than
-     * "no link", because the only decision hanging off this is whether to skip an action that is
-     * load-bearing elsewhere.
-     *
-     * Both roles are read. `HEADSET_CLIENT` is the one a head unit normally plays and the one the
-     * wake poke was measured destroying; `HEADSET` is checked too because some OEM stacks report a
-     * hands-free connection under the gateway role instead, and for this decision a false "yes" only
-     * costs a skipped poke while a false "no" costs the user their calls.
-     *
-     * Profile-wide, not per-device: `getProfileConnectionState` answers for the adapter, and the
-     * per-device equivalents are system-only. On a head unit paired with one phone that distinction
-     * does not arise; where it does, this errs toward reporting a link.
+     * Used to decide against taking system audio focus for Android Auto playback: when the phone is
+     * also our A2DP source, the sink service answers our focus grab with an AVRCP pause aimed at
+     * that same phone, which stops the stream we are trying to play. Callers treat an unknown
+     * answer as "a link may be up", so this returns true when the state cannot be read — a car
+     * radio playing over AA is an annoyance, silence is a broken app.
      */
-    fun handsFreeLinkState(context: Context): Boolean? {
-        val resolved = try {
+    fun isA2dpMediaLinkActive(context: Context): Boolean {
+        // The configured adapter only, never getAllBluetoothAdapterHandles(): this is called on the
+        // AAP transport thread every time a track starts, and enumerating the system service list
+        // by reflection there would stall video alongside audio.
+        val adapter = try {
             getBluetoothAdapter(context)
         } catch (e: Exception) {
-            AppLog.w("BluetoothHelper: could not resolve an adapter for the hands-free check: ${e.message}")
-            return null
+            AppLog.w("BluetoothHelper: could not resolve an adapter for the A2DP check: ${e.message}")
+            return true
         }
-        val adapter = resolved ?: return false
-        val enabled = try { adapter.isEnabled } catch (e: Exception) { null }
-        if (enabled == false) return false
+        if (adapter == null) return false
+        // An adapter that will not say whether it is on is treated as on, same as an unreadable
+        // profile state below.
+        val enabled = try { adapter.isEnabled } catch (e: Exception) { true }
+        if (!enabled) return false
 
         var readAnyState = false
-        for (profile in intArrayOf(PROFILE_HEADSET_CLIENT, BluetoothProfile.HEADSET)) {
+        for (profile in intArrayOf(BluetoothProfile.A2DP, PROFILE_A2DP_SINK)) {
             val state = try {
                 adapter.getProfileConnectionState(profile)
             } catch (e: Exception) {
                 // SecurityException without BLUETOOTH_CONNECT, or an adapter that rejects the
-                // hidden client profile. Try the other role before giving up.
+                // hidden sink profile. Try the other one before giving up.
                 continue
             }
             readAnyState = true
-            if (state == BluetoothProfile.STATE_CONNECTED) return true
+            if (state == BluetoothProfile.STATE_CONNECTED || state == BluetoothProfile.STATE_CONNECTING) {
+                return true
+            }
         }
-        return if (readAnyState) false else null
+        if (!readAnyState) {
+            AppLog.w("BluetoothHelper: the adapter would not report its A2DP state; assuming a media link is up")
+            return true
+        }
+        return false
     }
 
     /** Resolve a single, arbitrary system service name to a BluetoothAdapterHandle, if it backs a
