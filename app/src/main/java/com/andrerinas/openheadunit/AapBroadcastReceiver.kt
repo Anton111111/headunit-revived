@@ -56,7 +56,9 @@ class AapBroadcastReceiver : BroadcastReceiver() {
                 intent.getParcelableExtra(KeyIntent.extraEvent)
             }
             event?.let {
-                component.commManager.sendKey(it.keyCode, it.action == KeyEvent.ACTION_DOWN)
+                component.commManager.sendKey(
+                    it.keyCode, it.action == KeyEvent.ACTION_DOWN, it.downTime, "media-key-intent"
+                )
             }
         } else if (intent.action == ProjectionActivityRequest.action){
             if (component.commManager.connectionState.value is CommManager.ConnectionState.TransportStarted) {

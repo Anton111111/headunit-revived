@@ -65,32 +65,32 @@ class RemoteControlReceiver : BroadcastReceiver() {
 
             when (command) {
                 "next", "skip_next", "skip", "forward", "skip_forward" -> {
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_NEXT, true)
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_NEXT, false)
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_NEXT, true, null, "remote-command")
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_NEXT, false, null, "remote-command")
                 }
                 "previous", "skip_previous", "prev", "rewind", "back", "skip_back", "skip_backward" -> {
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS, true)
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS, false)
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS, true, null, "remote-command")
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS, false, null, "remote-command")
                 }
                 "play", "start", "resume" -> {
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY, true)
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY, false)
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY, true, null, "remote-command")
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY, false, null, "remote-command")
                 }
                 "pause", "stop" -> {
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PAUSE, true)
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PAUSE, false)
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PAUSE, true, null, "remote-command")
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PAUSE, false, null, "remote-command")
                 }
                 "togglepause", "playpause", "play_pause", "media_play_pause" -> {
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, true)
-                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, false)
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, true, null, "remote-command")
+                    commManager.sendKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, false, null, "remote-command")
                 }
                 "mute", "volume_mute" -> {
-                    commManager.sendKey(KeyEvent.KEYCODE_VOLUME_MUTE, true)
-                    commManager.sendKey(KeyEvent.KEYCODE_VOLUME_MUTE, false)
+                    commManager.sendKey(KeyEvent.KEYCODE_VOLUME_MUTE, true, null, "remote-command")
+                    commManager.sendKey(KeyEvent.KEYCODE_VOLUME_MUTE, false, null, "remote-command")
                 }
                 "voice", "mic", "microphone", "search" -> {
-                    commManager.sendKey(KeyEvent.KEYCODE_SEARCH, true)
-                    commManager.sendKey(KeyEvent.KEYCODE_SEARCH, false)
+                    commManager.sendKey(KeyEvent.KEYCODE_SEARCH, true, null, "remote-command")
+                    commManager.sendKey(KeyEvent.KEYCODE_SEARCH, false, null, "remote-command")
                 }
                 else -> {
                     // Some headunits send a raw keycode as an int extra
@@ -99,8 +99,8 @@ class RemoteControlReceiver : BroadcastReceiver() {
                         ?: intent.getIntExtra("key_code", -1).takeIf { it > 0 }
                     if (extraKeyCode != null) {
                         AppLog.i("RemoteControlReceiver: raw keycode=$extraKeyCode from command=$command")
-                        commManager.sendKey(extraKeyCode, true)
-                        commManager.sendKey(extraKeyCode, false)
+                        commManager.sendKey(extraKeyCode, true, null, "remote-command")
+                        commManager.sendKey(extraKeyCode, false, null, "remote-command")
                     } else {
                         AppLog.i("RemoteControlReceiver: Unknown command='$command' from action='$action'")
                     }

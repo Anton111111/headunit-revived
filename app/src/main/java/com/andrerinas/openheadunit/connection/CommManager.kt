@@ -5,6 +5,8 @@ import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import com.andrerinas.openheadunit.aap.AapSslContext
 import com.andrerinas.openheadunit.aap.AapTransport
+import com.andrerinas.openheadunit.aap.KeyDebouncePolicy
+import com.andrerinas.openheadunit.aap.MediaKeyRoutingPolicy
 import com.andrerinas.openheadunit.aap.PlaybackFocusPolicy
 import com.andrerinas.openheadunit.aap.VideoStarvationPolicy
 import com.andrerinas.openheadunit.utils.AppLog
@@ -117,7 +119,10 @@ class CommManager(
      *  failing child from cancelling the rest. */
     private val _scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    private val lastKeyEvents = mutableMapOf<Int, Long>()
+    /** Cached answer of the Bluetooth media probe used by media-key routing, and when it was taken. */
+    private var btMediaLinkCached: Boolean? = null
+    private var btMediaLinkCheckedAt: Long? = null
+    private val BT_MEDIA_LINK_CACHE_MS = 2_000L
 
     private val _connectionState = MutableStateFlow<ConnectionState>(ConnectionState.Disconnected())
 
@@ -446,13 +451,21 @@ class CommManager(
     // send() overloads — fire-and-forget; silently dropped if not TransportStarted
     // -----------------------------------------------------------------------------------------
 
-    private val keyStates = mutableMapOf<Int, Boolean>()
+    private val keyStates = mutableMapOf<Int, KeyDebouncePolicy.KeyState>()
 
     /**
      * Sends a key press or release event to the phone with remapping and de-duplication.
      * This is the single entry point for all key events in the application.
+     *
+     * @param downTime `KeyEvent.getDownTime()` when the caller has a real event. It identifies the
+     *                 physical press, so [KeyDebouncePolicy] can tell one press arriving by several
+     *                 routes from two presses in quick succession. Callers holding only a keycode —
+     *                 the proprietary OEM broadcasts — leave it null and get the time window.
+     * @param source   where this delivery came from, for the log. One press reaching several
+     *                 sources is the normal case on these head units, and naming them is what makes
+     *                 a user's log readable.
      */
-    fun sendKey(keyCode: Int, isPress: Boolean) {
+    fun sendKey(keyCode: Int, isPress: Boolean, downTime: Long? = null, source: String = "unknown") {
         if (_connectionState.value !is ConnectionState.TransportStarted) {
             return
         }
@@ -477,32 +490,66 @@ class CommManager(
             logicalCode = KeyEvent.KEYCODE_DPAD_CENTER
         }
 
-        // 3. State Tracking & De-duplication
-        // Prevent sending the same state twice (e.g. two consecutive DOWNs)
-        val isCurrentlyDown = keyStates[logicalCode] ?: false
-        if (isPress == isCurrentlyDown) {
-            return
-        }
-        keyStates[logicalCode] = isPress
+        val isMedia = isMediaKey(logicalCode)
 
-        // 4. Time-based Debouncing
-        val now = SystemClock.elapsedRealtime()
-        if (isPress) {
-            val lastPressTime = lastKeyEvents[logicalCode] ?: 0L
-
-            // Media keys often trigger multiple redundant intents on China headunits.
-            // Use a longer debounce (600ms) for media actions, 300ms for others.
-            val debounceMs = if (isMediaKey(logicalCode)) 600L else 300L
-
-            if (now - lastPressTime < debounceMs) {
-                AppLog.i("CommManager: Debouncing logical key $logicalCode (DOWN) - dropped duplicate trigger within ${now - lastPressTime}ms")
+        // 3. Routing: a media button the head unit's own Bluetooth side is already acting on must
+        // not be sent again, or one press performs the action twice. See MediaKeyRoutingPolicy.
+        // Only media keys can be held back, so nothing else pays for the Bluetooth probe.
+        if (isMedia) {
+            val routing = settings.mediaKeyRouting
+            if (!MediaKeyRoutingPolicy.shouldForward(routing, true, btMediaLinkForKeys())) {
+                AppLog.v("CommManager: Not sending media key $logicalCode to Android Auto " +
+                        "(routing=$routing, src=$source)")
                 return
             }
-            lastKeyEvents[logicalCode] = now
         }
 
-        AppLog.i("CommManager: TX Key -> AA=$logicalCode (isPress=$isPress)")
+        // 4. De-duplication: one press reaches us from several delivery paths at once.
+        val state = keyStates[logicalCode] ?: KeyDebouncePolicy.KeyState()
+        val decision = KeyDebouncePolicy.decide(
+            state = state,
+            isPress = isPress,
+            downTime = downTime,
+            isMediaKey = isMedia,
+            now = SystemClock.elapsedRealtime()
+        )
+        keyStates[logicalCode] = decision.state
+
+        if (!decision.forward) {
+            AppLog.v("CommManager: Dropping key $logicalCode (isPress=$isPress, src=$source) - ${decision.dropReason}")
+            return
+        }
+
+        if (decision.releaseFirst) {
+            AppLog.i("CommManager: Key $logicalCode was still held from an earlier press with no release - releasing it first")
+            _transport?.send(logicalCode, false)
+        }
+
+        AppLog.i("CommManager: TX Key -> AA=$logicalCode (isPress=$isPress) src=$source")
         _transport?.send(logicalCode, isPress)
+    }
+
+    /**
+     * Whether a Bluetooth media link is up, for [MediaKeyRoutingPolicy]. Null when the adapter would
+     * not say.
+     *
+     * Cached briefly rather than probed per press: `getProfileConnectionState` is a binder call and
+     * this runs on the main thread, from the projection activity's key dispatch. The window is short
+     * enough that toggling media audio on the phone's Bluetooth entry takes effect without
+     * reconnecting, which is how this gets tested.
+     */
+    private fun btMediaLinkForKeys(): Boolean? {
+        val now = SystemClock.elapsedRealtime()
+        // Nullable rather than a zero stamp: a head unit that starts projecting seconds after boot
+        // has an elapsedRealtime small enough to look like a fresh cache entry.
+        btMediaLinkCheckedAt?.let { if (now - it < BT_MEDIA_LINK_CACHE_MS) return btMediaLinkCached }
+        btMediaLinkCheckedAt = now
+        val state = BluetoothHelper.a2dpMediaLinkState(context)
+        if (state != btMediaLinkCached) {
+            AppLog.i("CommManager: Bluetooth media link state for key routing: $state")
+            btMediaLinkCached = state
+        }
+        return state
     }
 
     private fun isMediaKey(code: Int): Boolean {
@@ -548,14 +595,14 @@ class CommManager(
 
         // close
         if (transport.isAssistantActive) {
-            sendKey(KeyEvent.KEYCODE_BACK, true)
-            sendKey(KeyEvent.KEYCODE_BACK, false)
+            sendKey(KeyEvent.KEYCODE_BACK, true, null, "assistant")
+            sendKey(KeyEvent.KEYCODE_BACK, false, null, "assistant")
             loseFocus() // otherwise button stays marked
 
         // open
         } else {
-            sendKey(KeyEvent.KEYCODE_SEARCH, false) // up/down must be reversed
-            sendKey(KeyEvent.KEYCODE_SEARCH, true)
+            sendKey(KeyEvent.KEYCODE_SEARCH, false, null, "assistant") // up/down must be reversed
+            sendKey(KeyEvent.KEYCODE_SEARCH, true, null, "assistant")
         }
     }
 
@@ -660,8 +707,9 @@ class CommManager(
         val connection = _connection
         _transport = null
         _connection = null
-        lastKeyEvents.clear()
         keyStates.clear()
+        btMediaLinkCached = null
+        btMediaLinkCheckedAt = null
         // Counts frames over the whole session rather than reading lastFrameRenderedMs, which the
         // decoder zeroes every time the projection surface goes away — leaving projection before
         // disconnecting is normal, and would otherwise make every such session look starved.
