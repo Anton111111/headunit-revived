@@ -1,4 +1,14 @@
 # Changelog
+### v.3.3.0-alpha
+- Begin for theming of the App.
+- Refactor WiFi-Code from AapService into their own classes for better maintenance, thanks to @MrEAlderson
+- USB-Blacklist Filter to prevent the app from asking for non Android phones
+
+### v.3.2.4-beta1
+- Fix: Video and audio never catch up after a wireless link stall, thanks to @o-jcardenass
+- Fix: Native AA wake poke takes down the head unit's own hands-free link, thanks to @o-jcardenass
+- Stop the setup wizard from overwriting the reported manufacturer, thanks to @o-jcardenass
+
 ### v.3.2.3
 - Adding custom log location (App folder or Download folder)
 - additional fixing for the fps/freeze problems. Thanks to @o-jcardenass and @andrecuellar for helping
