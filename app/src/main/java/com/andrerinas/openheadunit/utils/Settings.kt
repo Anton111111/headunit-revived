@@ -512,8 +512,19 @@ class Settings(private val context: Context) {
         get() = prefs.getInt("audio-latency-multiplier", 8)
         set(value) { prefs.edit().putInt("audio-latency-multiplier", value).apply() }
 
+    // Chunks the audio thread may hold before it starts dropping, or 0 for no limit. Bounded by
+    // default: with no limit a link that stalls for a few hundred milliseconds hands over the
+    // backlog in one burst and every chunk of it is played, so audio ends up running that far
+    // behind the picture and never catches up. Dropping instead costs a moment of sound and keeps
+    // the two together. 0 remains selectable for anyone who prefers the gap-free audio.
+    //
+    // The bound has to clear the window we hand the phone, or we drop sound the protocol told it
+    // to send: AapControl advertises max_unacked 30 for wireless audio, so a burst that size is
+    // legal and must fit. A chunk is one AAP message and its duration follows the channel's
+    // config: around 20ms on 48kHz stereo media, several times that on the 16kHz mono guidance
+    // channel, so this cannot be stated in milliseconds from here.
     var audioQueueCapacity: Int
-        get() = prefs.getInt("audio-queue-capacity", 0)
+        get() = prefs.getInt("audio-queue-capacity", 50)
         set(value) { prefs.edit().putInt("audio-queue-capacity", value).apply() }
 
     var useAacAudio: Boolean

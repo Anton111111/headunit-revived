@@ -118,6 +118,12 @@ internal class AapControlMedia(
                 // backlog turn into visible input lag when 2K HEVC is decoded in software.
                 return if (aapTransport.isWireless) 6 else 8
             }
+            // Left wide for hardware decode, deliberately. The window is counted in messages, not
+            // frames, and a keyframe fragments into a dozen or more of them, so narrowing it makes
+            // the phone stall mid-keyframe and caps throughput at window/RTT, worst on exactly the
+            // congested links where the backlog it would be trying to bound shows up. The backlog
+            // is bounded where it costs nothing instead: the decoder discards decoded frames it is
+            // behind on rather than having the phone send fewer.
             return if (aapTransport.isWireless) 12 else 16
         }
 
