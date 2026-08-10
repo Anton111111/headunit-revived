@@ -141,7 +141,7 @@ class AapTransport(
 
     init {
         micRecorder.listener = this
-        aapAudio = AapAudio(audioDecoder, audioManager, settings)
+        aapAudio = AapAudio(audioDecoder, audioManager, settings, context)
         aapVideo = AapVideo(videoDecoder, settings) {
             triggerFocusCycleRecovery()
         }

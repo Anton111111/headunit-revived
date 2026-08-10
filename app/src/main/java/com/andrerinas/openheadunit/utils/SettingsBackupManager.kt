@@ -101,6 +101,9 @@ object SettingsBackupManager {
         "auto-connect-single-usb" to ValueType.BOOLEAN,
         "enable-audio-sink" to ValueType.BOOLEAN,
         "static-audio-focus" to ValueType.BOOLEAN,
+        // Enum-backed, but INT is safe: Settings.playbackFocusMode reads it through
+        // PlaybackFocusPolicy.Mode.fromInt, which falls back to AUTO for anything out of range.
+        "playback-focus-mode" to ValueType.INT,
         "separate-audio-streams" to ValueType.BOOLEAN,
         "mic-input-source" to ValueType.INT,
         "audio-latency-multiplier" to ValueType.INT,
@@ -180,6 +183,7 @@ object SettingsBackupManager {
         "enable-rotary",
         "enable-audio-sink",
         "static-audio-focus",
+        "playback-focus-mode",
         "separate-audio-streams",
         "use-aac-audio",
         "attach_hw_dsp_equalizer",

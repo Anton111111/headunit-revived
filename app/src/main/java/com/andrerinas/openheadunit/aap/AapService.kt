@@ -827,6 +827,10 @@ class AapService : Service(), UsbReceiver.Listener {
      * (AapControl.audioFocusRequest -> AapAudio.requestFocusChange), so grabbing a
      * permanent gain here would needlessly evict other media (e.g. the car radio) the
      * moment the phone connects, before AA plays anything.
+     *
+     * Whether to take it at all is PlaybackFocusPolicy's call, the same as for the dynamic path:
+     * on a head unit that is also the phone's Bluetooth A2DP sink, evicting the sink makes it
+     * AVRCP-pause that same phone, so the session starts with the projected audio stopped.
      */
     private fun requestPermanentAudioFocus() {
         if (!settings.enableAudioSink) {
@@ -837,6 +841,22 @@ class AapService : Service(), UsbReceiver.Listener {
             AppLog.d("Static Audio Focus disabled - skipping permanent audio focus request; focus will be acquired on demand.")
             return
         }
+
+        // One probe at connect is enough: the sink only pauses on a focus-loss *event*, so a
+        // Bluetooth link that comes up later in the session never sees one.
+        val mode = settings.playbackFocusMode
+        val btMediaLinkActive = BluetoothHelper.isA2dpMediaLinkActive(this)
+        if (!PlaybackFocusPolicy.shouldAcquirePermanent(
+                mode = mode,
+                staticAudioFocus = true,
+                audioSinkEnabled = true,
+                btMediaLinkActive = btMediaLinkActive)) {
+            AppLog.i("AapService: Static Audio Focus - leaving system audio focus alone " +
+                    "(mode=$mode, bluetoothMedia=$btMediaLinkActive)")
+            return
+        }
+        AppLog.i("AapService: Static Audio Focus - acquiring permanent system audio focus " +
+                "(mode=$mode, bluetoothMedia=$btMediaLinkActive)")
 
         try {
             val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager

@@ -5,8 +5,10 @@ import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import com.andrerinas.openheadunit.aap.AapSslContext
 import com.andrerinas.openheadunit.aap.AapTransport
+import com.andrerinas.openheadunit.aap.PlaybackFocusPolicy
 import com.andrerinas.openheadunit.aap.VideoStarvationPolicy
 import com.andrerinas.openheadunit.utils.AppLog
+import com.andrerinas.openheadunit.utils.BluetoothHelper
 import com.andrerinas.openheadunit.main.BackgroundNotification
 import com.andrerinas.openheadunit.ssl.SingleKeyKeyManager
 import com.andrerinas.openheadunit.utils.Settings
@@ -378,12 +380,26 @@ class CommManager(
             // In the default (dynamic) mode focus is acquired on demand via the AA protocol, so
             // an unconditional grab here would evict other media (e.g. the car radio) the moment
             // the phone connects, before AA plays anything.
+            //
+            // And even in static mode, not when the player we would evict is the head unit's own
+            // A2DP sink: it answers by AVRCP-pausing the phone that is about to project to us.
             if (settings.enableAudioSink && settings.staticAudioFocus) {
-                transport.aapAudio?.requestFocusChange(
-                    AudioManager.STREAM_MUSIC,
-                    AudioManager.AUDIOFOCUS_GAIN,
-                    AudioManager.OnAudioFocusChangeListener { }
-                )
+                val mode = settings.playbackFocusMode
+                val btMediaLinkActive = BluetoothHelper.isA2dpMediaLinkActive(context)
+                if (PlaybackFocusPolicy.shouldAcquirePermanent(
+                        mode = mode,
+                        staticAudioFocus = true,
+                        audioSinkEnabled = true,
+                        btMediaLinkActive = btMediaLinkActive)) {
+                    transport.aapAudio?.requestFocusChange(
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.AUDIOFOCUS_GAIN,
+                        AudioManager.OnAudioFocusChangeListener { }
+                    )
+                } else {
+                    AppLog.i("CommManager: Static Audio Focus - leaving system audio focus alone " +
+                            "(mode=$mode, bluetoothMedia=$btMediaLinkActive)")
+                }
             }
             transport.startReading()
             _connectionState.emit(ConnectionState.TransportStarted)

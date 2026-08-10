@@ -445,6 +445,14 @@
     <string name="enable_audio_sink_description">If disabled, the headunit will not receive audio. Sound will play from the phone.</string>
     <string name="static_audio_focus">Static Audio Focus</string>
     <string name="static_audio_focus_description">Force the phone to believe audio focus is always held, preventing audio routing losses on generic headunits. Also performs software ducking during navigation voice prompts.</string>
+    <string name="playback_focus_mode">Pause Other Audio During Playback</string>
+    <string name="playback_focus_mode_auto">Automatic</string>
+    <string name="playback_focus_mode_always">Always</string>
+    <string name="playback_focus_mode_never">Never</string>
+    <string name="playback_focus_mode_auto_hint">Pauses another player on the headunit (for example the radio) while Android Auto audio plays, but not while a Bluetooth audio link is connected — that link is usually the same phone, and pausing it would stop Android Auto\'s own sound.</string>
+    <string name="playback_focus_mode_always_hint">Always pauses other audio while Android Auto plays. If your music stops after a second or two whenever Bluetooth is on, switch back to Automatic.</string>
+    <string name="playback_focus_mode_never_hint">Never touches system audio focus. Other audio on the headunit may keep playing over Android Auto.</string>
+    <string name="playback_focus_mode_static_hint">With Static Audio Focus on, this applies from the moment the phone connects and lasts the whole session, rather than only while audio is playing.</string>
     <string name="separate_audio_streams">Separate Audio Streams</string>
     <string name="separate_audio_streams_description">Separate audio channels for music, calls, and notifications instead of a single multimedia stream (may not work correctly on some devices).</string>
     <string name="use_aac_audio">Use AAC Audio</string>
