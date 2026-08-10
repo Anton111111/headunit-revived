@@ -327,6 +327,9 @@ class Settings(private val context: Context) {
 
     // Vehicle info settings (sent to phone during Android Auto handshake)
     var vehicleDisplayName: String
+        // Cosmetic: the phone shows this in its connection history and on the Android Auto
+        // welcome screen. It is not the reported manufacturer, which stays "Google" unless
+        // the user picks a real car brand — see the car step in OnboardingActivity.
         get() = prefs.getString("vehicle-display-name", "Open Headunit")!!
         set(value) { prefs.edit().putString("vehicle-display-name", value).apply() }
 
