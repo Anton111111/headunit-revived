@@ -784,4 +784,107 @@
     <string name="rename_notice_title">Unser Name wird zu Open Headunit</string>
     <string name="rename_notice_message">Headunit Revived wächst, dank euch, und wird zu etwas Eigenem: Open Headunit. Wir führen den neuen Namen über die nächsten Updates hinweg ein, daher siehst du an manchen Stellen vielleicht noch eine Weile den alten Namen.\n\nGleiche App, dieselben Leute dahinter, und all deine Einstellungen bleiben genau so, wie sie sind.</string>
     <string name="rename_notice_button">Verstanden</string>
+<string name="media_key_routing">Medientasten an Android Auto senden</string>
+    <string name="media_key_routing_always">Immer</string>
+    <string name="media_key_routing_auto">Automatisch</string>
+    <string name="media_key_routing_never">Nie</string>
+    <string name="media_key_routing_always_hint">Weiter, Zurück und Play/Pause werden immer an Android Auto gesendet. Verwende dies, außer ein Tastendruck überspringt zwei Titel.</string>
+    <string name="media_key_routing_auto_hint">Stoppt das Senden, während eine Bluetooth-Medienverbindung zum Smartphone besteht, da diese Verbindung die Aktion bereits ausführt. Wähle dies, wenn ein Druck zwei Titel überspringt und das Smartphone mit der Headunit gekoppelt ist.</string>
+    <string name="media_key_routing_never_hint">Sendet die Medientasten nie und überlässt sie dem Bluetooth-System des Fahrzeugs. Wähle dies, wenn das Handy mit dem Fahrzeugsystem statt der Headunit gekoppelt ist.</string>
+    <string name="media_key_routing_hint_common">Betrifft nur Medientasten. Drehregler, Steuerkreuz, Zurück und Enter erreichen Android Auto weiterhin immer.</string>
+    <string name="playback_focus_mode">Andere Wiedergabe bei Ton stoppen</string>
+    <string name="playback_focus_mode_auto">Automatisch</string>
+    <string name="playback_focus_mode_always">Immer</string>
+    <string name="playback_focus_mode_never">Nie</string>
+    <string name="playback_focus_mode_auto_hint">Pausiert andere Player auf der Headunit (z. B. das Radio), während Android Auto Audio abspielt, jedoch nicht bei aktiver Bluetooth-Audioverbindung zum selben Smartphone.</string>
+    <string name="playback_focus_mode_always_hint">Pausiert andere Audioquellen immer, wenn Android Auto wiedergibt. Wenn die Musik bei aktivem Bluetooth nach ein paar Sekunden stoppt, auf Automatisch zurückstellen.</string>
+    <string name="playback_focus_mode_never_hint">Greift nicht in den Audio-Fokus des Systems ein. Andere Medien auf der Headunit laufen parallel weiter.</string>
+    <string name="playback_focus_mode_static_hint">Bei aktivem Statischen Audio-Fokus gilt dies ab der Verbindung für die gesamte Sitzung.</string>
+    <string name="support">Problem melden</string>
+    <string name="support_title">Problem melden</string>
+    <string name="support_description">Fehler auf GitHub suchen oder melden</string>
+    <string name="support_help">Bei Problemen suche bitte zuerst in den GitHub Issues. Wenn das Problem noch nicht gemeldet wurde, erstelle ein neues Issue mit Fehlerbeschreibung, Headunit-Modell und Schritten zur Reproduktion.</string>
+    <string name="support_open_issues">GitHub Issues-Seite öffnen</string>
+    <string name="support_scan_qr">Oder scanne diesen QR-Code, um die Issues-Liste auf einem anderen Gerät zu öffnen.</string>
+    <string name="support_github_account_warning">Hinweis: Für das Erstellen eines Issues wird ein kostenloser GitHub-Account benötigt.</string>
+    <string name="github_issues_url">https://github.com/andreknieriem/open-headunit/issues</string>
+    <string name="support_rules_button">Regeln für Meldungen</string>
+    <string name="support_rules_intro">Nur zwei Dinge sind erforderlich. Alles andere ist optional, hilft aber bei einer schnelleren Lösung.</string>
+    <string name="support_rules_section_required">Erforderlich</string>
+    <string name="support_rules_section_recommend">Empfehlungen (optional)</string>
+    <string name="support_rules_english_title">Alle Beiträge auf Englisch</string>
+    <string name="support_rules_english_desc">Bitte verfasse das Issue auf Englisch, damit Entwickler und Community problemlos helfen können. Fehler im Englisch sind überhaupt kein Problem! Übersetzer wie DeepL oder Google Translate helfen dir gerne.</string>
+    <string name="support_rules_device_title">Geräteinformationen</string>
+    <string name="support_rules_device_desc">Android-Version der Headunit/des Bildschirms sowie Marke und Modell, falls bekannt.</string>
+    <string name="support_rules_connection_title">Verbindungsart</string>
+    <string name="support_rules_connection_desc">USB-Kabel, USB-Wireless-Adapter, WiFi Direct, WiFi Hotspot oder Self Mode. Bei Wireless bitte Adaptermodell angeben.</string>
+    <string name="support_rules_appversion_title">App-Version angeben</string>
+    <string name="support_rules_appversion_desc">Die Open Headunit Version (siehe Über-Bildschirm).</string>
+    <string name="support_rules_logs_title">Logs direkt nach dem Fehler anhängen</string>
+    <string name="support_rules_logs_desc">Aktiviere den Debug-Modus in den erweiterten Einstellungen, reproduziere den Fehler und klicke direkt danach auf Logs exportieren.</string>
+    <string name="support_rules_search_title">Keine Duplikate</string>
+    <string name="support_rules_search_desc">Durchsuche zuerst bestehende Issues. Wenn dein Problem bereits existiert, ergänze dort einen Kommentar statt ein neues Issue zu öffnen.</string>
+    <string name="support_rules_phone_title">Smartphone-Details</string>
+    <string name="support_rules_phone_desc">Smartphone-Modell, Android-Version und Android Auto App-Version auf dem Handy.</string>
+    <string name="support_rules_describe_title">Klar beschreiben</string>
+    <string name="support_rules_describe_desc">Was du getan hast, was du erwartet hast und was passiert ist. Ein Screenshot oder Video hilft enorm.</string>
+    <string name="support_rules_oneissue_title">Ein Problem pro Issue</string>
+    <string name="support_rules_oneissue_desc">Erstelle für jedes unzusammenhängende Problem ein separates Issue.</string>
+    <string name="boot_loop_paused_title">Wireless-Start pausiert</string>
+    <string name="boot_loop_paused_generic">Das Gerät hat dreimal in Folge kurz nach dem Wireless-Start neu gestartet. Wireless wurde daher vorübergehend deaktiviert. USB funktioniert weiterhin. Öffne die App, um es wieder zu aktivieren.</string>
+    <string name="boot_loop_paused_native_wifi_direct">Das Gerät hat mehrfach kurz nach dem Wireless-Start neu gestartet. Bei einigen Headunits überlastet der WiFi-Chip bei WiFi Direct Verbindungen. Versuche auf den Headunit-Hotspot-Modus zu wechseln. USB funktioniert weiterhin.</string>
+    <string name="vehicle_make_hint">Eine echte Automarke zeigt deren Logo auf dem Beenden-Button von Android Auto. Android Auto blendet dann jedoch Apps aus, die nicht aus dem Play Store stammen. Setze es auf \"Google\" zurück, um diese wieder anzuzeigen.</string>
+    <string name="external_bt_nativeaa">Natives Wireless auf dieser Headunit nicht möglich</string>
+    <string name="external_bt_nativeaa_desc">Diese Headunit nutzt ein eigenes Bluetooth-Modul (%1$s), das Android nicht für Apps bereitstellt. Das Handy koppelt sich mit diesem Modul, wodurch Bluetooth-Handshake-Daten die App nicht erreichen. Bitte nutze USB, Wireless Helper oder den Headunit Server Modus.</string>
+    <string name="manual_secondary_bt_service_title">Manuelles zweites Bluetooth-Modul</string>
+    <string name="manual_secondary_bt_service_message">Fortgeschritten: Erzwingt ein zusätzliches Bluetooth-Radio bei Dual-Radio-Geräten. Leer lassen zum Deaktivieren.</string>
+    <string name="native_ap_transport">Netzwerk-Transport</string>
+    <string name="native_ap_transport_wifi_direct">WiFi Direct</string>
+    <string name="native_ap_transport_hotspot">Hotspot</string>
+    <string name="native_ap_transport_hint">Experimentell. Das Smartphone verbindet sich mit dem Hotspot dieses Geräts statt einer WiFi Direct Gruppe. Aktiviere den Hotspot vor dem Verbinden (am besten 5 GHz).</string>
+    <string name="hotspot_interface_override">Hotspot-Netzwerkschnittstelle</string>
+    <string name="hotspot_interface_override_message">Leer lassen für automatische Erkennung. Typische Namen: ap0, wlan0, wlan1, softap0.</string>
+    <string name="hotspot_ssid_override">Hotspot-Name (Manuell)</string>
+    <string name="hotspot_ssid_override_message">Leer lassen zum automatischen Auslesen. Falls das Auslesen fehlschlägt, gib hier den genauen Hotspot-Namen ein.</string>
+    <string name="hotspot_password_override">Hotspot-Passwort (Manuell)</string>
+    <string name="hotspot_password_override_message">Leer lassen zum automatischen Auslesen. Das Passwort wird dem Smartphone zur Verbindung übergeben.</string>
+    <string name="hotspot_config_unreadable_toast">Hotspot-Name konnte nicht ausgelesen werden. Bitte manuell in den Einstellungen eintragen.</string>
+    <string name="native_wifi_version_exchange">Moderner Handshake (Versionsaustausch)</string>
+    <string name="native_wifi_version_exchange_description">Öffnet den Bluetooth-Handshake mit Übermittlung der Protokollversion (wie Werks-Headunits). Standardmäßig AUS. Versuchen, wenn Wireless nach einem Android Auto Update fehlschlägt.</string>
+<string name="onb_ready_extras_title">Bevor du fertig bist, kannst du noch einrichten:</string>
+    <string name="onb_extra_loading_desc">Ein eigenes Bild anzeigen, während sich das Auto verbindet</string>
+    <string name="onb_vehicle_help_sideload">Die Auswahl einer echten Automarke zeigt deren Logo auf dem Beenden-Button von Android Auto. Android Auto blendet dann jedoch Apps aus, die nicht aus dem Play Store stammen. Behalte \"Google\" oder \"Open Headunit\", wenn du solche Apps nutzt.</string>
+    <string name="dpi_size_s">S</string>
+    <string name="dpi_size_m">M</string>
+    <string name="dpi_size_l">L</string>
+    <string name="dpi_size_xl">XL</string>
+    <string name="dpi_value_format">%1$d DPI</string>
+    <string name="use_measured_touch_surface">Experimentelle Fixierung für Touch-Ausrichtung</string>
+    <string name="use_measured_touch_surface_description">Normalisiert Touch-Eingaben über dem gemessenen Projektionsbereich. Hilft, wenn kleine Android Auto Bedienelemente versetzt wirken.</string>
+
+    <string-array name="vehicle_brands">
+        <item>Google</item>
+        <item>Android</item>
+        <item>Audi</item>
+        <item>BMW</item>
+        <item>Chevrolet</item>
+        <item>Chrysler</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>Honda</item>
+        <item>Hyundai</item>
+        <item>Jeep</item>
+        <item>Kia</item>
+        <item>Mazda</item>
+        <item>Mercedes-Benz</item>
+        <item>Nissan</item>
+        <item>Peugeot</item>
+        <item>Renault</item>
+        <item>Subaru</item>
+        <item>Suzuki</item>
+        <item>Tesla</item>
+        <item>Toyota</item>
+        <item>Volkswagen</item>
+        <item>Volvo</item>
+    </string-array>
 </resources>
