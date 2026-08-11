@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andrerinas.openheadunit.App
 import com.andrerinas.openheadunit.R
 import com.andrerinas.openheadunit.aap.AapService
+import com.andrerinas.openheadunit.aap.MediaKeyRoutingPolicy
 import com.andrerinas.openheadunit.aap.PlaybackFocusPolicy
 import com.andrerinas.openheadunit.main.settings.SettingItem
 import com.andrerinas.openheadunit.main.settings.SettingsAdapter
@@ -120,6 +121,7 @@ class SettingsFragment : Fragment() {
     private var pendingAttachHwDspEqualizer: Boolean? = null
     private var pendingMicInputSource: Int? = null
     private var pendingEnableRotary: Boolean? = null
+    private var pendingMediaKeyRouting: MediaKeyRoutingPolicy.Mode? = null
     private var pendingAudioLatencyMultiplier: Int? = null
     private var pendingUseLibusb: Boolean? = null
     private var pendingAudioQueueCapacity: Int? = null
@@ -243,6 +245,7 @@ class SettingsFragment : Fragment() {
         pendingAttachHwDspEqualizer = settings.attachHwDspEqualizer
         pendingMicInputSource = settings.micInputSource
         pendingEnableRotary = settings.enableRotary
+        pendingMediaKeyRouting = settings.mediaKeyRouting
         pendingAudioLatencyMultiplier = settings.audioLatencyMultiplier
         pendingAudioQueueCapacity = settings.audioQueueCapacity
         pendingShowFpsCounter = settings.showFpsCounter
@@ -353,6 +356,7 @@ class SettingsFragment : Fragment() {
         pendingUseAacAudio = settings.useAacAudio
         pendingAttachHwDspEqualizer = settings.attachHwDspEqualizer
         pendingEnableRotary = settings.enableRotary
+        pendingMediaKeyRouting = settings.mediaKeyRouting
         pendingAudioLatencyMultiplier = settings.audioLatencyMultiplier
         pendingAudioQueueCapacity = settings.audioQueueCapacity
         pendingShowFpsCounter = settings.showFpsCounter
@@ -475,6 +479,7 @@ class SettingsFragment : Fragment() {
         pendingAttachHwDspEqualizer?.let { settings.attachHwDspEqualizer = it }
         pendingMicInputSource?.let { settings.micInputSource = it }
         pendingEnableRotary?.let { settings.enableRotary = it }
+        pendingMediaKeyRouting?.let { settings.mediaKeyRouting = it }
         pendingAudioLatencyMultiplier?.let { settings.audioLatencyMultiplier = it }
         pendingAudioQueueCapacity?.let { settings.audioQueueCapacity = it }
         pendingShowFpsCounter?.let { settings.showFpsCounter = it }
@@ -592,6 +597,7 @@ class SettingsFragment : Fragment() {
                         pendingAttachHwDspEqualizer != settings.attachHwDspEqualizer ||
                         pendingMicInputSource != settings.micInputSource ||
                         pendingEnableRotary != settings.enableRotary ||
+                        pendingMediaKeyRouting != settings.mediaKeyRouting ||
                         pendingAudioLatencyMultiplier != settings.audioLatencyMultiplier ||
                         pendingAudioQueueCapacity != settings.audioQueueCapacity ||
                         pendingShowFpsCounter != settings.showFpsCounter ||
@@ -1523,6 +1529,49 @@ class SettingsFragment : Fragment() {
                 updateSettingsList()
             }
         ))
+
+        // Media buttons only. The rotary controller, D-pad and the rest are never affected by this,
+        // which is the point: the head unit's Bluetooth side competes for the transport controls
+        // and for nothing else.
+        val mediaKeyModes = listOf(
+            MediaKeyRoutingPolicy.Mode.ALWAYS,
+            MediaKeyRoutingPolicy.Mode.AUTO,
+            MediaKeyRoutingPolicy.Mode.NEVER
+        )
+        val currentMediaKeyMode = pendingMediaKeyRouting ?: MediaKeyRoutingPolicy.Mode.ALWAYS
+        items.add(SettingItem.SegmentedButtonSettingEntry(
+            stableId = "mediaKeyRouting",
+            nameResId = R.string.media_key_routing,
+            options = listOf(
+                getString(R.string.media_key_routing_always),
+                getString(R.string.media_key_routing_auto),
+                getString(R.string.media_key_routing_never)
+            ),
+            selectedIndex = mediaKeyModes.indexOf(currentMediaKeyMode).coerceAtLeast(0),
+            onOptionSelected = { index ->
+                pendingMediaKeyRouting = mediaKeyModes.getOrElse(index) { MediaKeyRoutingPolicy.Mode.ALWAYS }
+                checkChanges()
+                updateSettingsList()
+            }
+        ))
+
+        items.add(SettingItem.InfoBanner(
+            stableId = "mediaKeyRoutingHint",
+            textResId = when (currentMediaKeyMode) {
+                MediaKeyRoutingPolicy.Mode.AUTO -> R.string.media_key_routing_auto_hint
+                MediaKeyRoutingPolicy.Mode.NEVER -> R.string.media_key_routing_never_hint
+                else -> R.string.media_key_routing_always_hint
+            }
+        ))
+
+        // Only worth saying once the setting is actually holding something back: the reason to reach
+        // for this is a doubled track skip, and the fear it raises is losing the rotary with it.
+        if (currentMediaKeyMode != MediaKeyRoutingPolicy.Mode.ALWAYS) {
+            items.add(SettingItem.InfoBanner(
+                stableId = "mediaKeyRoutingScopeHint",
+                textResId = R.string.media_key_routing_hint_common
+            ))
+        }
 
         // --- Audio Settings ---
         items.add(SettingItem.CategoryHeader("audio", R.string.category_audio))

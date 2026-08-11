@@ -47,7 +47,7 @@ interface CarKeyReceiver {
                 )
             },
         )
-        commManager.sendKey(keyCode, isDown)
+        commManager.sendKey(keyCode, isDown, null, "carkey")
     }
 
     fun handleKey(context: Context, keyCode: Int, isDown: Boolean) {

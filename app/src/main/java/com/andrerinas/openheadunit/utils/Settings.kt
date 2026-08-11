@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
+import com.andrerinas.openheadunit.aap.MediaKeyRoutingPolicy
 import com.andrerinas.openheadunit.aap.PlaybackFocusPolicy
 import com.andrerinas.openheadunit.aap.protocol.proto.Control
 import com.andrerinas.openheadunit.app.UsbAttachedActivity
@@ -499,6 +500,16 @@ class Settings(private val context: Context) {
             prefs.getInt("playback-focus-mode", PlaybackFocusPolicy.Mode.AUTO.value)
         )
         set(value) { prefs.edit().putInt("playback-focus-mode", value.value).apply() }
+
+    // Whether the physical media buttons reach Android Auto, or are left to the Bluetooth side that
+    // may already act on the same press — two consumers of one button skip two tracks. See
+    // MediaKeyRoutingPolicy. ALWAYS is the stored zero value so an unset preference keeps the
+    // behaviour every existing install has.
+    var mediaKeyRouting: MediaKeyRoutingPolicy.Mode
+        get() = MediaKeyRoutingPolicy.Mode.fromInt(
+            prefs.getInt("media-key-routing", MediaKeyRoutingPolicy.Mode.ALWAYS.value)
+        )
+        set(value) { prefs.edit().putInt("media-key-routing", value.value).apply() }
 
     var separateAudioStreams: Boolean
         get() = prefs.getBoolean("separate-audio-streams", false)

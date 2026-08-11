@@ -104,6 +104,9 @@ object SettingsBackupManager {
         // Enum-backed, but INT is safe: Settings.playbackFocusMode reads it through
         // PlaybackFocusPolicy.Mode.fromInt, which falls back to AUTO for anything out of range.
         "playback-focus-mode" to ValueType.INT,
+        // Same reasoning: read through MediaKeyRoutingPolicy.Mode.fromInt, which falls back to
+        // ALWAYS for anything out of range.
+        "media-key-routing" to ValueType.INT,
         "separate-audio-streams" to ValueType.BOOLEAN,
         "mic-input-source" to ValueType.INT,
         "audio-latency-multiplier" to ValueType.INT,

@@ -157,7 +157,19 @@ object BluetoothHelper {
      * answer as "a link may be up", so this returns true when the state cannot be read — a car
      * radio playing over AA is an annoyance, silence is a broken app.
      */
-    fun isA2dpMediaLinkActive(context: Context): Boolean {
+    fun isA2dpMediaLinkActive(context: Context): Boolean = a2dpMediaLinkState(context) ?: true
+
+    /**
+     * The same probe as [isA2dpMediaLinkActive], but saying so when it does not know: null means no
+     * profile state could be read at all, rather than "no link".
+     *
+     * The two callers want opposite things from that answer. Audio focus treats unknown as a link
+     * being up, because a car radio playing over Android Auto is an annoyance and silence is a
+     * broken app. Media-key routing treats unknown as no link, because a doubled track skip is an
+     * annoyance and buttons that quietly do nothing are a broken app. Neither default is right for
+     * both, so the resolution belongs to the caller.
+     */
+    fun a2dpMediaLinkState(context: Context): Boolean? {
         // The configured adapter only, never getAllBluetoothAdapterHandles(): this is called on the
         // AAP transport thread every time a track starts, and enumerating the system service list
         // by reflection there would stall video alongside audio.
@@ -165,11 +177,11 @@ object BluetoothHelper {
             getBluetoothAdapter(context)
         } catch (e: Exception) {
             AppLog.w("BluetoothHelper: could not resolve an adapter for the A2DP check: ${e.message}")
-            return true
+            return null
         }
         if (adapter == null) return false
-        // An adapter that will not say whether it is on is treated as on, same as an unreadable
-        // profile state below.
+        // An adapter that will not say whether it is on is treated as on, and left to the profile
+        // probe below to decide.
         val enabled = try { adapter.isEnabled } catch (e: Exception) { true }
         if (!enabled) return false
 
@@ -188,8 +200,8 @@ object BluetoothHelper {
             }
         }
         if (!readAnyState) {
-            AppLog.w("BluetoothHelper: the adapter would not report its A2DP state; assuming a media link is up")
-            return true
+            AppLog.w("BluetoothHelper: the adapter would not report its A2DP state")
+            return null
         }
         return false
     }
