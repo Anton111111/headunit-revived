@@ -4,10 +4,11 @@
 - Refactor WiFi-Code from AapService into their own classes for better maintenance, thanks to @MrEAlderson
 - USB-Blacklist Filter to prevent the app from asking for non Android phones
 
-### v.3.2.4-beta1
+### v.3.2.4
 - Fix: Video and audio never catch up after a wireless link stall, thanks to @o-jcardenass
 - Fix: Native AA wake poke takes down the head unit's own hands-free link, thanks to @o-jcardenass
 - Stop the setup wizard from overwriting the reported manufacturer, thanks to @o-jcardenass
+- Added: Let the Bluetooth side keep the media buttons,  thanks to @o-jcardenass
 
 ### v.3.2.3
 - Adding custom log location (App folder or Download folder)
